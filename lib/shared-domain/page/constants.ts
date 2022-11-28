@@ -1,4 +1,0 @@
-export const HEADER_HEIGHT = '81px';
-export const REVALIDATE_ON_FAILURE_TIME_IN_SECONDS = 10;
-export const REVALIDATE_ON_SUCCESS_IN_SECONDS = 600;
-export const SERVER_FETCHING_ERROR = 'server error';

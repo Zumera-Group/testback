@@ -1,5 +1,0 @@
-## Story link
-
-## Changes
-
-## Screenshots
