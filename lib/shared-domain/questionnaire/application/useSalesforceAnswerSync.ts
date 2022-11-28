@@ -1,0 +1,46 @@
+import { SalesforceFacade } from '../../salesforce/infrastructure/salesforce.facade';
+import { useValuationStore } from '../store';
+import { useSendQuestionnaireToAnalytics } from './ueSendQuestionnaireToAnalytics';
+
+export const useSalesforceAnswerSync = () => {
+  const facade = new SalesforceFacade();
+  const {
+    answers,
+    setAnswers,
+    industryId,
+    sectorId,
+    setIndustryId,
+    setSectorId,
+    sectorSheetName,
+    industrySheetName,
+    setIndustrySheetName,
+    setSectorSheetName,
+  } = useValuationStore();
+  const { sendQuestionnaireToAnalytics } = useSendQuestionnaireToAnalytics();
+
+  return {
+    syncCurrentAnswersToSalesforce: async (
+      uniqueId: string,
+      currentSalesforceId: string,
+    ) => {
+      sendQuestionnaireToAnalytics(currentSalesforceId);
+
+      await facade.createOrUpdateLeadEntry(
+        uniqueId,
+        answers,
+        industryId,
+        sectorId,
+        industrySheetName,
+        sectorSheetName,
+      );
+    },
+    syncCurrentAnswersFromSalesforce: async (uniqueId: string) => {
+      const answers = await facade.getLeadEntry(uniqueId);
+      setAnswers(answers);
+      setIndustryId(answers?.industry_id);
+      setSectorId(answers?.sector_id);
+      setSectorSheetName(answers?.sector_sheet_name);
+      setIndustrySheetName(answers?.industry_sheet_name);
+    },
+  };
+};

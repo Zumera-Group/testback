@@ -1,0 +1,125 @@
+{
+  "header": {
+    "mobileTitle": "Schritt {{current}} von {{max}}",
+    "SaveForLater": "Für später speichern",
+    "quitModal": {
+      "title": "Sind Sie sich sicher, dass die aufhören möchten?",
+      "description": "Sie können das Formular jederzeit weiter ausfüllen, wenn Sie Saxenhammer.co besuchen, oder wir können Sie per E-Mail daran erinnern.",
+      "input": {
+        "placeholder": "E-Mail-Adresse",
+        "button": "Submit"
+      }
+    }
+  },
+  "timeEstimation": {
+    "title": "Es dauert nur 3 Minuten, das Formular auszufüllen."
+  },
+  "sidebar": {
+    "sectorSpecificCategory": "Sektorspezifische Kategorie",
+    "results": "Ergebnisse"
+  },
+  "sectorSpecificEntry": {
+    "questionText": "Sie haben sich bis jetzt gut geschlagen, haben Sie noch ein paar Minuten Zeit?",
+    "subtitle": "Beantworten Sie einige unserer sektorspezifischen Fragen, um eine detailliertere Bewertung zu erhalten.",
+    "step1": "Allgemeine Informationen",
+    "step2": "Spezifische Angaben zum Unternehmen",
+    "step3": "Besonderheiten des Sektors",
+    "step4": "Saxenhammer Bewertung",
+    "firstButtonText": "Gehe zu spezifischen Fragen in deinem Sektor ({{industry}})",
+    "secondButtonText": "Ich werde hier aufhören"
+  },
+  "boxSelector": {
+    "whichSector": "In welchem Sektor ist Ihr Unternehmen tätig?",
+    "whichIndustry": "In welcher Branche ist Ihr Unternehmen tätig?",
+    "automotive": "Automobilindustrie",
+    "chemicals&Polymers": "Chemikalien und Polymere",
+    "food&Beverage": "Lebensmittel und Getränke",
+    "healthcare": "Gesundheitswesen",
+    "industrial": "Industrie",
+    "media&Advertising": "Medien und Werbung",
+    "logistics": "Logistik",
+    "infrastructure": "Infrastruktur",
+    "moreIndustries": "Weitere Industrien"
+  },
+  "answerTypes": {
+    "textInput": {
+      "basePlaceholder": "Hier eingeben"
+    },
+    "slider": {
+      "inputLabel": "Alternativ eingeben"
+    },
+    "boxSelector": {
+      "buttonText": "+ Mehr anzeigen"
+    }
+  },
+  "question": {
+    "nextBtn": "weiter",
+    "skipBtn": "überspringen",
+    "required": "Eine Antwort wird benötigt"
+  },
+  "result": {
+    "loading": {
+      "error": "Bei der Berechnung des Scores ist etwas schief gelaufen.",
+      "title": "Großartig, wir sind fertig. Wir berechnen Ihren Unternehmenswert.",
+      "progress": {
+        "generalInformation": "Allgemeine Informationen",
+        "companySpecifics": "Besonderheiten des Unternehmens",
+        "sectorSpecifics": "Besonderheiten des Sektors",
+        "evaluation": "Saxenhammer Bewertung"
+      }
+    },
+    "evaluation": {
+      "title": "Holen Sie sich ihre kostenlose Expertenbewertung.",
+      "description": "Um eine fundierte Einschätzung der Unternehmenswertes zu erhalten, wird ein Berater die Eingaben prüfen und Sie kontaktieren.",
+      "resultBox": {
+        "title": "Ihr vorläufiges Ergebnis",
+        "points": "{{points}} Pkt.",
+        "betterThen": "Besser als {{percentage}}% im Sektorvergleich."
+      },
+      "form": {
+        "name": {
+          "label": "Name*",
+          "placeholder": "Name",
+          "error": "Name ist erforderlich"
+        },
+        "email": {
+          "label": "E-Mail*",
+          "placeholder": "E-Mail",
+          "requiredError": "E-Mail ist erforderlich",
+          "invalidError": "Die E-Mail ist ungültig"
+        },
+        "phoneNumber": {
+          "label": "Telefonnummer*",
+          "placeholder": "Telefonnummer",
+          "error": "Telefonnummer ist erforderlich"
+        },
+        "checkbox": {
+          "first": "Hiermit stimme ich, ",
+          "second": "gemäß unserer Datenschutzerklärung",
+          "third": ", der Verarbeitung meiner Daten zu.",
+          "link": "/de/datenschutzerklarung/"
+        },
+        "checkboxError": "Dies ist erforderlich",
+        "button": "Senden"
+      }
+    },
+    "appointment": {
+      "title": "Es gibt keinen Ersatz für ein persönliches Gespräch.",
+      "description": "Vielen Dank, Sie sind bereit!",
+      "calendlyCustomAnswers": {
+        "a1": "Zum ausgewählten Termin erreichbar unter:"
+      }
+    },
+    "logoTitle": "Beratung beim Verkauf, Kauf oder Finanzierung von über 270 Unternehmen im europäischen Mittelstand."
+  },
+  "VTLanding": {
+    "questionText": "Welchen Zweck soll die Bewertung erfüllen?",
+    "questionSubtitle": "Bewertung starten:",
+
+    "boxContent": {
+      "1": "Verkauf des Unternehmens",
+      "2": "Kapitalerhöhung",
+      "3": "Reine Neugierde"
+    }
+  }
+}
