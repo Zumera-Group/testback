@@ -1,0 +1,77 @@
+import React, { useState } from 'react';
+import { VStack } from '@chakra-ui/react';
+import useBreakpointValue from 'lib/shared-domain/useBreakpoint';
+import { Input } from 'components/Inputs';
+import { getTranslateByScope } from 'translation/i18n';
+import { Question } from '../../../domain/index';
+import { useAnswers } from 'lib/shared-domain/questionnaire/application/useAnswers';
+import { QuestionText } from '../../Question/QuestionText';
+import { QuestionButtons } from '../../Question/QuestionButtons';
+import { P } from '../../../../../../components/Typography/P';
+import { useEffect } from 'react';
+import { QuestionAnimation } from '../../Question/QuestionAnimation';
+
+const t = getTranslateByScope('answerTypes.textInput');
+const placeholder = t('basePlaceholder');
+
+export const MultiTextInput: React.FC<{
+  question: Question;
+  onNextQuestion: () => void;
+}> = ({ question, onNextQuestion }) => {
+  const { getAnswer, setAnswer } = useAnswers(question);
+  const NUMBER_OF_ANSWERS = question.answerSelector.multiTextInput?.length;
+  const [answers, setAnswers] = useState<string[]>(
+    new Array(NUMBER_OF_ANSWERS).fill(''),
+  );
+
+  const isMobile = useBreakpointValue({ base: true, lg: false });
+
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>, index: number) =>
+    setAnswers((prevAnswers) => {
+      const newAnswers = [...prevAnswers];
+      newAnswers[index] = e.target.value;
+      return newAnswers;
+    });
+
+  useEffect(() => {
+    const persistedAnswers = getAnswer()?.split?.(';');
+    setAnswers(persistedAnswers || '');
+  }, []);
+
+  useEffect(() => {
+    setAnswer(answers?.join?.(';'));
+  }, [answers]);
+
+  return (
+    <>
+      <QuestionText title={question.questionText} />
+
+      <QuestionAnimation>
+        <VStack
+          maxW={400}
+          mx="auto"
+          align="stretch"
+          spacing={2}
+          mb={!isMobile && 5}
+        >
+          {question.answerSelector.multiTextInput?.map((field, index) => (
+            <VStack key={index} align="stretch">
+              <P variant="multiTextInputP">{field.fieldTitle}</P>
+              <Input
+                value={answers[index]}
+                onChange={(e) => onChange(e, index)}
+                placeholder={field.fieldPlaceholder || placeholder}
+              />
+            </VStack>
+          ))}
+        </VStack>
+      </QuestionAnimation>
+
+      <QuestionButtons
+        onNextQuestion={onNextQuestion}
+        isAnswered
+        isRequired={false}
+      />
+    </>
+  );
+};

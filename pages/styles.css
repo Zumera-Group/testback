@@ -1,0 +1,202 @@
+.sanity-block-content p {
+  min-height: 24px;
+}
+
+.sanity-block-h3 p {
+  font-size: 18px;
+}
+
+.no-scroll {
+  overflow: hidden;
+}
+
+.heroDescriptionWorkaround,
+.heroDescriptionWorkaroundDarker,
+.heroTitleWorkaround,
+.heroTitleWorkaroundDarker {
+  width: 60%;
+}
+
+.heroDescriptionWorkaround,
+.heroDescriptionWorkaround * {
+  font-size: 20px !important;
+  font-family: Inter !important;
+  color: #cacaca !important;
+}
+
+.heroDescriptionWorkaroundDarker,
+.heroDescriptionWorkaroundDarker * {
+  font-size: 20px !important;
+  font-family: Inter !important;
+  color: #595959 !important;
+}
+
+.heroTitleWorkaround,
+.heroTitleWorkaround * {
+  font-size: 50px !important;
+  font-family: Condor !important;
+  color: #ffffff !important;
+  line-height: 60px !important;
+}
+
+.heroTitleWorkaroundDarker,
+.heroTitleWorkaroundDarker * {
+  font-size: 50px !important;
+  font-family: Condor, Inter, serif !important;
+  line-height: 60px !important;
+  color: #000000 !important;
+}
+
+.slotMachineHeading {
+  font-size: 50px !important;
+  font-family: Condor !important;
+  line-height: 60px !important;
+}
+
+.titleWithSubtitleAndDescriptionHeading {
+  font-size: 50px !important;
+  font-family: Condor !important;
+  line-height: 60px !important;
+  min-width: 450px;
+}
+
+.slotMachineWrapper {
+  width: 65%;
+  height: 70px;
+}
+
+.sectionContainer {
+  padding-left: 48px !important;
+  padding-right: 48px !important;
+}
+
+.showDesktop {
+  display: block;
+}
+
+.showMobile {
+  display: none;
+}
+
+@media only screen and (max-width: 768px) {
+  html .pageHeader {
+    opacity: 0;
+    will-change: opacity;
+    transition: opacity 0.1s ease-in-out;
+  }
+
+  html.mobileLoaded .pageHeader {
+    opacity: 1;
+    will-change: opacity;
+  }
+
+  .showDesktop {
+    display: none;
+  }
+
+  .showMobile {
+    display: block;
+  }
+
+  .heroTitleWorkaround,
+  .heroTitleWorkaround *,
+  .heroTitleWorkaroundDarker,
+  .heroTitleWorkaroundDarker *,
+  .slotMachineHeading,
+  .titleWithSubtitleAndDescriptionHeading {
+    font-size: 35px !important;
+    line-height: 48px !important;
+  }
+
+  .slotMachineWrapper {
+    width: 100%;
+    height: 65px;
+  }
+
+  .sectionContainer {
+    padding-top: 48px !important;
+    padding-bottom: 48px !important;
+    padding-left: 24px !important;
+    padding-right: 24px !important;
+  }
+}
+
+@media only screen and (max-width: 325px) {
+  .vtLandingHeader {
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .heroDescriptionWorkaround,
+  .heroDescriptionWorkaroundDarker,
+  .heroTitleWorkaround,
+  .heroTitleWorkaroundDarker {
+    width: 100%;
+  }
+
+  .titleWithSubtitleAndDescriptionHeading {
+    min-width: 100%;
+  }
+}
+
+body {
+  background-color: white !important;
+}
+
+.rec-slider-container {
+  margin: 0 !important;
+}
+
+.employee-carousel * {
+  opacity: 1 !important;
+}
+
+.employee-carousel div:nth-child(2) img {
+  cursor: pointer;
+}
+
+:root {
+  --shadow-1: 0px 15px 40px rgba(12, 78, 64, 0.35);
+  --section-top: 0rem;
+  /* question type: slider  */
+  --margin-slider-container: 12px;
+  --margin-slider-container-large: 24px;
+  --margin-negative-question-text: -24px;
+}
+
+@media only screen and (min-width: 1024px) {
+  :root {
+    --section-top: 7.5rem;
+  }
+}
+
+@media only screen and (min-width: 704px) and (max-width: 1024px) {
+  :root {
+    --section-top: 7.5rem;
+  }
+}
+
+.bp-desktop {
+  display: none;
+}
+
+@media only screen and (min-width: 1201px) {
+  .bp-desktop {
+    display: block;
+  }
+
+  .bp-mobile {
+    display: none;
+  }
+}
+
+.vlLandingHeader {
+  padding: 2rem;
+}
+
+.logoMobile {
+  /* to override image logo padding */
+  margin-left: -4px;
+}

@@ -1,0 +1,13 @@
+<svg width="91" height="91" viewBox="0 0 91 91" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g style="mix-blend-mode:overlay">
+<circle cx="45.5" cy="45.5" r="45.5" fill="url(#paint0_radial)"/>
+</g>
+<defs>
+<radialGradient id="paint0_radial" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(45.5 45.5) rotate(90) scale(45.5)">
+<stop stop-color="white"/>
+<stop offset="0.130208" stop-color="#F7F7E6"/>
+<stop offset="0.453125" stop-color="#3DDFBA"/>
+<stop offset="1" stop-color="#17AA8B" stop-opacity="0"/>
+</radialGradient>
+</defs>
+</svg>
