@@ -11,6 +11,9 @@
     "test:watch": "jest --watch=true",
     "prettier:fix": "prettier --write  \"{lib, component, pages}/**/*.ts\""
   },
+  "engines": {
+    "node": "^18.2.0"
+  },
   "dependencies": {
     "@bugsnag/js": "^7.11.0",
     "@bugsnag/plugin-react": "^7.11.0",
