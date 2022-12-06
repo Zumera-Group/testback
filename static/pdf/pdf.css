@@ -2,25 +2,25 @@
   font-family: 'Condor';
   font-weight: normal;
   font-display: swap;
-  src: url('https://saxenhammer-frontend-staging.herokuapp.com/static/pdf/Condor-Regular-Testing.otf');
+  src: url('https://zumera-frontend-staging.herokuapp.com/static/pdf/Condor-Regular-Testing.otf');
 }
 @font-face {
   font-family: 'Inter';
   font-weight: normal;
   font-display: swap;
-  src: url('https://saxenhammer-frontend-staging.herokuapp.com/static/pdf/Inter-Regular.ttf');
+  src: url('https://zumera-frontend-staging.herokuapp.com/static/pdf/Inter-Regular.ttf');
 }
 @font-face {
   font-family: 'Inter';
   font-weight: 500;
   font-display: swap;
-  src: url('https://saxenhammer-frontend-staging.herokuapp.com/static/pdf/Inter-SemiBold.ttf');
+  src: url('https://zumera-frontend-staging.herokuapp.com/static/pdf/Inter-SemiBold.ttf');
 }
 @font-face {
   font-family: 'Inter';
   font-weight: 600;
   font-display: swap;
-  src: url('https://saxenhammer-frontend-staging.herokuapp.com/static/pdf/Inter-Bold.ttf');
+  src: url('https://zumera-frontend-staging.herokuapp.com/static/pdf/Inter-Bold.ttf');
 }
 
 html {

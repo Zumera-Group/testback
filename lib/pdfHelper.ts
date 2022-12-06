@@ -30,7 +30,7 @@ export const componentToPDFBuffer = (component) => {
 };
 
 const BASE_URL =
-  'https://saxenhammer-frontend-staging.herokuapp.com/static/pdf/';
+  'https://zumera-frontend-staging.herokuapp.com/static/pdf/';
 // const BASE_URL = 'http://localhost:3000/static/pdf/';
 
 export const getPDFUrl = (url: string) => `${BASE_URL}${url}`;
