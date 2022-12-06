@@ -1,6 +1,6 @@
 import React from 'react';
 
-// eslint-disable-next-line @typescript-eslint/ban-types
+// eslint-disable-next-line
 function createCtx<A extends {} | null>() {
   const ctx = React.createContext<A | undefined>(undefined);
   function useCtx() {
