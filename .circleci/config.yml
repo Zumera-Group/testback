@@ -33,12 +33,12 @@ jobs:
     machine:
       enabled: true
     steps:
-      - run: heroku config --app saxenhammer-frontend-prod
+      - run: heroku config --app zumera-frontend-prod
       - checkout
       - run:
           name: Deploy Production
           command: |
-            git push https://heroku:$HEROKU_API_KEY@git.heroku.com/saxenhammer-frontend-prod.git master
+            git push https://heroku:$HEROKU_API_KEY@git.heroku.com/zumera-frontend-prod.git master
 
 workflows:
   version: 2
