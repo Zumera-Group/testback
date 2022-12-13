@@ -51,6 +51,7 @@
     "react-spring-3d-carousel": "^1.2.1",
     "react-tiny-popover": "^7.0.1",
     "react-use-intercom": "^1.4.0",
+    "sass": "^1.56.2",
     "sharp": "^0.29.1",
     "styled-components": "^5.3.3",
     "ts-node": "^10.3.0",
