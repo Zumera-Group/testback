@@ -1,0 +1,47 @@
+@font-face {
+  font-family: 'Yellix';
+  src: url('./Yellix-Light.woff2') format('woff2'), url('./Yellix-Light.woff') format('woff');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Yellix';
+  src: url('./Yellix-LightItalic.woff2') format('woff2'), url('./Yellix-LightItalic.woff') format('woff');
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Yellix';
+  src: url('./Yellix-Medium.woff2') format('woff2'), url('./Yellix-Medium.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Yellix';
+  src: url('./Yellix-MediumItalic.woff2') format('woff2'), url('./Yellix-MediumItalic.woff') format('woff');
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Yellix';
+  src: url('./Yellix-Bold.woff2') format('woff2'), url('./Yellix-Bold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Yellix';
+  src: url('./Yellix-BoldItalic.woff2') format('woff2'), url('./Yellix-BoldItalic.woff') format('woff');
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
