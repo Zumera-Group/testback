@@ -1,0 +1,19 @@
+$beam-colors: (
+  'white': $white,
+  'primary': $primary,
+  'secondary': $secondary,
+  'tertiary': $tertiary,
+  'accent': $accent,
+);
+
+.beam {
+  display: block;
+  @each $name, $color in $beam-colors {
+    &__#{$name} {
+      fill: $color;
+    }
+  }
+  &__glow {
+    filter: drop-shadow(0 0 1.75rem rgba($white, 0.75));
+  }
+}
