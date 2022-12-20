@@ -1,0 +1,73 @@
+.header {
+  $this: &;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: var(--header-height);
+  transition: $header-transition;
+  z-index: $zindex-header;
+
+  background-color: rgba($header-bg, 0);
+  color: $white;
+
+  &:not(#{$this}__light) {
+    .container {
+      @include divider(bottom, $white);
+    }
+  }
+
+  &__light {
+    .container {
+      @include divider(bottom, $primary);
+    }
+  }
+
+  &__scrolled {
+    .container {
+      border-color: transparent;
+    }
+  }
+
+  &__light,
+  &__scrolled {
+    background-color: rgba($header-bg, 1);
+    color: $primary;
+  }
+}
+
+.container {
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: border-color $timing-sm $ease-out;
+}
+
+.logoWrapper,
+.actionsWrapper {
+  display: flex;
+  align-items: center;
+  // min-width: 8.5rem;
+}
+
+.logoWrapper {
+  justify-content: flex-start;
+}
+
+.actionsWrapper {
+  justify-content: flex-end;
+}
+
+.languageSelector {
+  opacity: 1;
+  margin-right: $gutter * .5;
+  transition: color $timing-sm $ease-out, opacity $timing-md $ease-out;
+  @include hover-state() {
+    color: inherit;
+    opacity: .75;
+  }
+  @include breakpoint-down(md) {
+    display: none;
+  }
+}
