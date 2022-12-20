@@ -1,5 +1,4 @@
 .header {
-  $this: &;
   position: fixed;
   position: sticky;
   position: -webkit-sticky;
@@ -9,25 +8,12 @@
   height: var(--header-height);
   transition: $header-transition;
   z-index: $zindex-header;
-
   background-color: rgba($header-bg, 0);
   color: $white;
 
-  &:not(#{$this}__light) {
+  &:not(&__light):not(&__scrolled) {
     .container {
       @include divider(bottom, $white);
-    }
-  }
-
-  &__light {
-    .container {
-      @include divider(bottom, $primary);
-    }
-  }
-
-  &__scrolled {
-    .container {
-      border-color: transparent;
     }
   }
 
@@ -35,6 +21,9 @@
   &__scrolled {
     background-color: rgba($header-bg, 1);
     color: $primary;
+    .container {
+      @include divider(bottom, $primary);
+    }
   }
 }
 
