@@ -1,0 +1,18 @@
+// Create flex column utility classnames
+// Usage:
+//  • Parent element needs a --column variable e.g.
+//    --column: calc(100% / 12);
+//  • Use $breakpoints to determine the size names
+//    See styles/variables.scss / $breakpoints
+//  • See components/Grid/GridColumn
+
+@mixin make-cols(
+  $size: sm,
+  $cols: 12) {
+  @for $i from 1 through $cols {
+    &__#{$size}_#{$i} {
+      flex: 0 0 calc(var(--column) * #{$i});
+      max-width: calc(var(--column) * #{$i});
+    }
+  }
+}

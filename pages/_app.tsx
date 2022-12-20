@@ -7,7 +7,7 @@ import Script from 'next/script';
 import { IntercomProvider } from 'react-use-intercom';
 import theme from '../styles/theme';
 import Head from 'next/head';
-import './styles.css';
+import '../styles/globals.scss';
 
 const INTERCOM_APP_ID = 'lwrptr1h';
 
@@ -57,8 +57,8 @@ function MyApp({ Component, pageProps }) {
         }}
       />
 
-      <CacheProvider value={emotionCache}>
-        <ChakraProvider resetCSS theme={theme}>
+      {/* <CacheProvider value={emotionCache}>
+        <ChakraProvider resetCSS theme={theme}> */}
           <IntercomProvider
             initializeDelay={10000}
             appId={INTERCOM_APP_ID}
@@ -67,8 +67,8 @@ function MyApp({ Component, pageProps }) {
           >
             <Component {...pageProps} />
           </IntercomProvider>
-        </ChakraProvider>
-      </CacheProvider>
+        {/* </ChakraProvider>
+      </CacheProvider> */}
     </>
   );
 }

@@ -1,0 +1,38 @@
+// Uppercase headings
+@mixin headline() {
+  text-transform: uppercase;
+  font-weight: $font-weight-bold;
+  & > span,
+  & > em {
+    display: block;
+    font-style: normal;
+    font-weight: $font-weight-light;
+  }
+};
+
+// Top level menu items
+@mixin menu-item-text() {
+  font-size: 0.875rem;
+  letter-spacing: $letter-spacing-heading;
+  text-transform: uppercase;
+  text-decoration: none !important;
+}
+
+// 'Faux' bold effect.
+// Prevents layout from shifting when font weight changes on interaction
+%faux-bold-base {
+  display: block;
+  height: 0;
+  overflow: hidden;
+  visibility: hidden;
+  color: transparent;
+  font-size: inherit;
+}
+
+@mixin faux-bold($data-attr, $font-weight: $font-weight-bold) {
+  &:before {
+    content: attr($data-attr);
+    font-weight: $font-weight-bold;
+    @extend %faux-bold-base;
+  }
+}

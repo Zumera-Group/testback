@@ -1,0 +1,17 @@
+// Custom Zumera 'print' divider line
+%divider-base {
+  border-style: solid;
+  border-width: 0;
+}
+
+@mixin divider($border-side: top, $color: $white) {
+  $sides: (top, bottom, left, right);
+  $gradient-angle: if($border-side == left or $border-side == right, 180deg, 90deg);
+  @extend %divider-base;
+  @each $side in $sides {
+    @if ($border-side == $side) {
+      border-#{$border-side}-width: $border-width;
+      border-image: linear-gradient($gradient-angle, rgba($color, 0) 0%, $color 50%, rgba($color, 0) 100%) 1;
+    }
+  }
+}

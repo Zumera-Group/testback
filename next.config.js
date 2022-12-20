@@ -1,4 +1,11 @@
 // eslint-disable-next-line no-undef
+const { join } = require('path');
+
+const sassOptions = {
+  prependData: `@use "sass:math"; @import "styles/_variables.scss"; @import "styles/_functions.scss"; @import "styles/_mixins.scss";`,
+  includePaths: [join(__dirname, 'src', 'styles')],
+};
+
 module.exports = {
   i18n: {
     locales: ['en', 'de', 'catchAll'],
@@ -7,6 +14,7 @@ module.exports = {
   images: {
     domains: ['cdn.sanity.io'],
   },
+  sassOptions,
   trailingSlash: true,
   async redirects() {
     return [

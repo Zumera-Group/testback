@@ -1,0 +1,9 @@
+// Unit converter
+@function set-unit($val) {
+  @return if(unitless($val), $val * 1px, $val);
+}
+
+// String interpolation to convert a color to a string (URL encoded form of # for SVG use)
+@function url-friendly-color($color) {
+  @return '%23' + str-slice('#{$color}', 2, -1);
+}

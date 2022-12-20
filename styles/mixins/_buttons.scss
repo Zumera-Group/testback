@@ -1,0 +1,53 @@
+@mixin button-variant(
+  $background: $secondary,
+  $border: $secondary,
+  $color: $white,
+  $box-shadow: $btn-box-shadow,
+  $hover-background: $primary,
+  $hover-border: $primary,
+  $hover-color: $color,
+  $hover-box-shadow: $btn-hover-box-shadow,
+  $active-background: darken($hover-background, 5%),
+  $active-border: darken($border, 5%),
+  $active-color: $hover-color,
+  $active-box-shadow: $btn-active-box-shadow,
+  $disabled-background: $black,
+  $disabled-border: $black,
+  $disabled-color: $white,
+  $disabled-box-shadow: none,
+) {
+  @include make-css-var(btn-bg, $background);
+  @include make-css-var(btn-border, $border);
+  @include make-css-var(btn-color, $color);
+  @include make-css-var(btn-box-shadow, $box-shadow);
+  @include make-css-var(btn-hover-bg, $hover-background);
+  @include make-css-var(btn-hover-border, $hover-border);
+  @include make-css-var(btn-hover-color, $hover-color);
+  @include make-css-var(btn-hover-box-shadow, $hover-box-shadow);
+  @include make-css-var(btn-active-bg, $active-background);
+  @include make-css-var(btn-active-border, $active-border);
+  @include make-css-var(btn-active-color, $active-color);
+  @include make-css-var(btn-active-box-shadow, $active-box-shadow);
+  @include make-css-var(btn-disabled-bg, $disabled-background);
+  @include make-css-var(btn-disabled-border, $disabled-border);
+  @include make-css-var(btn-disabled-color, $disabled-color);
+  @include make-css-var(btn-disabled-box-shadow, $disabled-box-shadow);
+}
+
+// Reset styles on a button element
+@mixin reset-button() {
+  background: transparent;
+  border: none;
+  line-height: 1;
+  cursor: pointer;
+  -webkit-appearance: none;
+  padding: 0;
+  &:focus,
+  &:focus-visible {
+    outline: $focus-outline-style;
+    outline-offset: $focus-outline-offset;
+  }
+  &:focus:not(:focus-visible) {
+    outline: 0;
+  }
+}
