@@ -13,6 +13,7 @@
     --sidebar-padding-y: #{$gutter * 2};
     --sidebar-padding-x: #{$gutter * 1.5};
   }
+
   position: static;
   width: 100%;
   max-width: var(--sidebar-width);
