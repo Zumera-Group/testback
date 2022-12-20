@@ -1,0 +1,15 @@
+.logo {
+  position: relative;
+  display: inline-flex;
+  justify-content: flex-start;
+  align-items: center;
+  height: 28px;
+  width: 112px;
+  @include breakpoint-up(lg) {
+    width: 134px;
+  }
+}
+
+.logo, .logo * {
+  cursor: pointer;
+}
