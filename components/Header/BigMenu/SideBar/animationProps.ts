@@ -1,4 +1,4 @@
-import { eases, durations } from 'lib/utils/animationConstants';
+import { eases, durations } from 'lib/animationConstants';
 
 export const animationProps = {
   initial: {
