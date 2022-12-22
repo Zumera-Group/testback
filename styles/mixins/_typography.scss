@@ -10,6 +10,14 @@
   }
 };
 
+// Subheading
+@mixin sub-heading() {
+  text-transform: uppercase;
+  letter-spacing: $letter-spacing-heading;
+  font-weight: $font-weight-base;
+  font-size: $font-size-small;
+}
+
 // Top level menu items
 @mixin menu-item-text() {
   font-size: 0.875rem;

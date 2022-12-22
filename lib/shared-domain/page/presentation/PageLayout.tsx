@@ -1,5 +1,4 @@
 import React from 'react';
-import { Box } from '@chakra-ui/react';
 import dynamic from 'next/dynamic';
 import { Page, Sector, Service, SiteSettings } from '../domain/index';
 import { ContentModule } from '../domain/contentModule';
@@ -33,7 +32,7 @@ const PageLayout: React.FC<{
     }`;
 
   return (
-    <Box minHeight="100vh" overflowY="visible">
+    <>
       <SEO
         seoTitle={page.seoTitle}
         seoDescription={page.seoDescription}
@@ -47,18 +46,20 @@ const PageLayout: React.FC<{
         hideHeader={page.isHeaderRoutesHidden}
       />
       <PageTransition slug={page.slug?.current}>
-        {contentModules &&
-          contentModules.map((c) => {
-            return (
-              <Box key={c._key}>
-                {getContentForContentModule(c, sharedContent)}
-              </Box>
-            );
-          })}
+        <main id="main">
+          {contentModules &&
+            contentModules.map((c) => {
+              return (
+                <React.Fragment key={c._key}>
+                  {getContentForContentModule(c, sharedContent)}
+                </React.Fragment>
+              );
+            })}
+        </main>
       </PageTransition>
 
       {!page.isFooterHidden ? <PageFooter siteSettings={siteSettings} /> : null}
-    </Box>
+    </>
   );
 };
 
