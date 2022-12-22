@@ -68,13 +68,13 @@ $font-family-sans-serif:                    'Yellix', $font-family-base;
 $font-family:                               $font-family-sans-serif;
 // Font-sizes
 $font-size-base:                            16px;
-$h1-font-size:                              clamp(2.5rem, -0.5203rem + 6.9444vw, 6rem);
+$h1-font-size:                              clamp(2.5rem, -0.5203rem + 6.9444vw, 5.44rem);
 $h2-font-size:                              clamp(2rem, -0.5203rem + 6.9444vw, 3.125rem);
 $h3-font-size:                              clamp(1.375rem, -0.5203rem + 6.9444vw, 1.875rem);
 $h4-font-size:                              clamp(1.125rem, -0.5203rem + 6.9444vw, 1.313rem);
 $h5-font-size:                              clamp(1rem, -0.5203rem + 6.9444vw, 1.125rem);
 $h6-font-size:                              clamp(1rem, -0.5203rem + 6.9444vw, 1.125rem);
-$font-size-normal:                          clamp(1rem, -0.5203rem + 2.666vw, 1.33rem);
+$font-size-normal:                          clamp(1rem, -0.5203rem + 2.666vw, 1.125rem);
 $font-size-small:                           clamp(0.8rem, -0.5203rem + 6.9444vw, 1rem);
 $font-size-tiny:                            clamp(0.75rem, -0.5203rem + 6.9444vw, 0.9rem);
 // Font weights
@@ -96,8 +96,6 @@ $line-height-heading:                       1;
 
 
 // * Breakpoints
-// Access these via map-get()
-// e.g. map-get($breakpoints, sm)
 $breakpoints: (
   xs:                                       0,
   sm:                                       576px,
@@ -105,6 +103,26 @@ $breakpoints: (
   lg:                                       992px,
   xl:                                       1200px,
   xxl:                                      1400px,
+);
+
+// * Sections
+$section-sizes: (
+  sm:                                       $gutter * 3,
+  md:                                       $gutter * 5,
+  lg:                                       $gutter * 7,
+  xl:                                       $gutter * 9,
+);
+$section-colors: (
+  'primary':                                $primary,
+  'secondary':                              $secondary,
+  'white':                                  $white,
+);
+$section-bgs: (
+  'gradient':                               $primary,
+  'primary':                                $primary,
+  'secondary':                              $secondary,
+  'tertiary':                               $tertiary,
+  'light':                                  $light,
 );
 
 
