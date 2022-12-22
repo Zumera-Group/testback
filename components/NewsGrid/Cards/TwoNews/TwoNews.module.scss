@@ -1,0 +1,46 @@
+.twoNews {
+  display: block;
+  width: 100%;
+}
+
+.link {
+  display: block;
+  padding: 0 0 $gutter * 1.5 0;
+  @include divider(bottom, $primary);
+  svg {
+    color: $accent;
+    transform: scale(1);
+    transform-origin: 50% 50%;
+    transition: color $timing-lg $ease-out, transform $timing-lg $ease-out;
+    backface-visibility: hidden;
+  }
+  @include hover-state() {
+    color: inherit;
+    .title,
+    .date,
+    svg {
+      color: $tertiary;
+    }
+    svg {
+      transform: scale(0.96)
+    }
+  }
+}
+
+.date,
+.title {
+  display: block;
+  color: inherit;
+  font-size: $h5-font-size;
+  transition: color $timing-lg $ease-out;
+}
+
+.date {
+  @include sub-heading();
+  margin: 0 0 0.5rem 0;
+}
+
+.title {
+  line-height: $line-height-base;
+  margin: 0 0 1.25rem 0;
+}

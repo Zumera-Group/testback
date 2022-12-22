@@ -1,0 +1,53 @@
+import Link from 'next/link';
+import Image from 'next/image';
+
+import { Icon } from 'components/Icon';
+
+import { links } from 'lib/links';
+import { getEmployeeFullName } from 'lib/shared-domain/employees/domain/getEmployeeFullName';
+import { sanityImageUrlFor } from 'lib/sanity';
+
+import styles from './Employee.module.scss';
+
+export const Employee = ({ article }) => {
+  if (!article) return null;
+  const name = getEmployeeFullName(article);
+  const jobTitle = article.jobTitle;
+  const imageUrl = article.newsGridPicture?.picture?.asset?.url;
+  const image = sanityImageUrlFor(imageUrl).height(800).auto('format').url();
+  const href = links().employees(article);
+
+  return (
+    <article className={styles.employee}>
+      <Link
+        passHref
+        href={href}>
+          <a className={styles.link}>
+            <div className={styles.imageWrapper}>
+              <Image
+                unoptimized
+                src={image}
+                alt={name}
+                objectFit={'cover'}
+                objectPosition={'center center'}
+                layout="fill"
+                className={styles.image}
+              />
+            </div>
+            <div className={styles.body}>
+              {jobTitle && <h4 className={styles.jobTitle}>{jobTitle}</h4>}
+              {name && <h3 className={styles.name}>{name}</h3>}
+              <Icon
+                iconName={'arrow-circle'}
+                viewBox={'0 0 32 32'}
+                width={24}
+                height={24}
+              />
+            </div>
+          </a>
+      </Link>
+    </article>
+  );
+};
+
+export default Employee;

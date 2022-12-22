@@ -1,0 +1,29 @@
+.cards {
+  --gutter: #{$container-padding-x};
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-column-gap: var(--gutter);
+  grid-row-gap: var(--gutter);
+  @include breakpoint-up(lg) {
+    grid-template-columns: 1.4fr 1fr;
+  }
+  & ~ .cards {
+    margin-top: var(--gutter);
+  }
+}
+
+// Two News columns support
+// CardType.TwoNews
+.twoNewsRow {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gutter);
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.twoNewsCol {
+  // flex: 1;
+  width: 100%;
+}
