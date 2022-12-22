@@ -5,7 +5,7 @@ import { AnimatePresence } from 'framer-motion';
 import { useRouter } from 'next/router';
 
 import { Logo } from 'components/Logo';
-import { Container } from 'components/Layout/Container';
+import { Container } from 'components/Layout';
 import { Hamburger, Menu, BigMenu, LanguageSwitcher } from 'components/Header';
 
 import { useLinkWithCurrentLocale } from 'lib/shared-domain/useLinkWithCurrentLocale';
@@ -25,7 +25,7 @@ export const Header = ({
   const [bigMenuOpen, setBigMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
-  const { headerMenu } = siteSettings;
+  const { headerMenu, siteName } = siteSettings;
 
   const router = useRouter();
   const linkWithCurrentLocale = useLinkWithCurrentLocale();
@@ -85,15 +85,16 @@ export const Header = ({
       id="header"
       className={[
         styles.header,
-        isLightPage() && styles.header__light,
-        isScrolled && styles.header__scrolled,
+        isLightPage() ? styles.header__light : '',
+        isScrolled ? styles.header__scrolled : '',
       ].join(' ')}
     >
       <Container classes={styles.container}>
         <div className={styles.logoWrapper}>
           <Logo
-            slug={linkWithCurrentLocale(homeSlug)}
+            slug={homeSlug}
             src={getLogoAsset()}
+            title={siteName}
           />
         </div>
         {!hideHeader && <Menu navigation={headerMenu} />}
@@ -114,7 +115,7 @@ export const Header = ({
             siteSettings={siteSettings}
             services={services}
             sectors={sectors}
-            logo={<Logo slug={linkWithCurrentLocale(homeSlug)} src={siteSettings?.logo?.asset?.url} />}
+            logo={<Logo slug={homeSlug} src={siteSettings?.logo?.asset?.url} title={siteName} />}
             closeBigMenu={() => setBigMenuOpen(false)}
             otherLangSlug={otherLangSlug}
           />

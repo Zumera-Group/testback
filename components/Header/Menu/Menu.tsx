@@ -16,7 +16,7 @@ export const Menu = ({ navigation }) => {
   return (
     <nav className={styles.menu}>
       <ul className={styles.items}>
-        {navigation.map(({ _key, _type, name, page  }, index) => (
+        {navigation.map(({ _key, name, page }, index: number) => (
             <li key={`${_key}-${index}`} className={styles.item}>
               <Link
                 passHref
@@ -25,7 +25,7 @@ export const Menu = ({ navigation }) => {
                 <a
                   className={[
                     styles.link,
-                    isActive(page.slug?.current) && styles.link__active
+                    isActive(page.slug?.current) ? styles.link__active : ''
                   ].join(' ')}
                   data-title={name}
                 >
