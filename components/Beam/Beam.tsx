@@ -18,7 +18,7 @@ export const Beam: React.FC<Props> = ({ color, glow, classes }) => {
       className={[
         styles.beam,
         beamColor,
-        glow && styles.beam__glow,
+        glow ? styles.beam__glow : '',
         classes ?? ''
       ].join(' ')}
     >
