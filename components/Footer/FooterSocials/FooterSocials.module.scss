@@ -1,0 +1,23 @@
+.socials {
+  list-style: none;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.socialItem {
+  margin-top: var(--spacing-y);
+  &:not(:last-child) {
+    margin-right: $gutter * 0.5;
+  }
+}
+
+.link {
+  opacity: 1;
+  transition: opacity $timing-lg $ease-out;
+  @include hover-state() {
+    opacity: 0.75;
+  }
+}

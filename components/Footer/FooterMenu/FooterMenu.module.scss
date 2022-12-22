@@ -1,0 +1,47 @@
+.title,
+.mobileMenuToggle {
+  color: inherit;
+  margin: 0 0 $gutter 0;
+}
+
+.title {
+  color: inherit;
+  font-size: $h5-font-size;
+}
+
+.mobileMenuToggle {
+  @include reset-button();
+  width: 100%;
+  text-align: left;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  & > .title {
+    margin-bottom: 0;
+    margin-right: $gutter;
+  }
+  svg {
+    color: $accent;
+    transform-origin: 50% 50%;
+  }
+}
+
+.menu {
+  list-style: none;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: block;
+  padding-bottom: $gutter * 1.5;
+  @include breakpoint-up(sm) {
+    padding-bottom: $gutter * 3;
+  }
+}
+
+.item {
+  display: block;
+  margin: 0 0 $gutter * 0.5 0;
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
