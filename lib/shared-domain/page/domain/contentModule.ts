@@ -522,8 +522,6 @@ export class HeroSectionModule extends BaseModule {
   description: any[];
   type:
     | 'home'
-    | 'level1'
-    | 'level2'
     | 'about-us'
     | 'sector'
     | 'transaction'
