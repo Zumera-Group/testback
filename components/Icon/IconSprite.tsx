@@ -14,8 +14,14 @@ export const IconSprite = () => {
       <symbol id="icon-cross" viewBox="0 0 24 21" stroke="none">
         <path d="m14.84 11.48 5.99-5.73c.57-.59.97-1.33 1.07-2.13.06-.5.02-1.01-.12-1.51L21.15 0l-9.16 8.75L2.83.01l-.59 1.88a3.95 3.95 0 0 0-.15 1.67c.11.9.57 1.72 1.24 2.36l5.82 5.56L0 20.26l1.97.57c.57.17 1.16.21 1.74.14.94-.11 1.8-.55 2.47-1.18l5.81-5.57 5.99 5.73c.62.55 1.39.93 2.23 1.03.52.06 1.06.02 1.58-.12l2.21-.6-9.16-8.78Z" />
       </symbol>
-      <symbol id="icon-arrow" viewBox="0 0 120 120">
+      <symbol id="icon-arrow" viewBox="0 0 120 120" stroke="none">
         <path d="M120 0H30.89v21.6h52.24L0 104.73 15.27 120 98.4 36.87v52.24H120V0Z" />
+      </symbol>
+      <symbol id="icon-plus" viewBox="0 0 32 32" stroke="none">
+        <path d="M32 13.52H18.49V0h-4.97v13.52H0v4.97h13.52v13.52h4.97V18.5h13.52v-4.97Z" />
+      </symbol>
+      <symbol id="icon-chevron-down" viewBox="0 0 52 32" stroke="none">
+        <path d="M32.3 25.76 52 6.24 45.7 0 26 19.52l-4.46-4.42L6.3 0 0 6.24l25.03 24.8.97.96 5.83-5.77.47-.47Z" />
       </symbol>
     </svg>
   );
