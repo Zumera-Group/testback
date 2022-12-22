@@ -56,19 +56,20 @@ export const SectionContainerWithoutPyAndPb: React.FC<{
   pt?: Space;
   pb?: Space;
 }> = ({ children, py, pt, pb }) => {
-  const isMobile = useBreakpointValue({ base: true, md: false });
-  const PADDING_X = isMobile ? paddingForSpaceX.xs : paddingForSpaceX.sm;
+  // const isMobile = useBreakpointValue({ base: true, md: false });
+  // const PADDING_X = isMobile ? paddingForSpaceX.xs : paddingForSpaceX.sm;
   return (
-    <Box
-      mx="auto"
-      width="100%"
-      maxWidth="1240px"
-      py={isMobile ? null : paddingForSpaceY[py]}
-      pt={isMobile ? paddingForSpaceX.xs : paddingForSpaceX[pt]}
-      px={PADDING_X}
-      height="100%"
-    >
-      {children}
-    </Box>
+    <></>
+    // <Box
+    //   mx="auto"
+    //   width="100%"
+    //   maxWidth="1240px"
+    //   py={isMobile ? null : paddingForSpaceY[py]}
+    //   pt={isMobile ? paddingForSpaceX.xs : paddingForSpaceX[pt]}
+    //   px={PADDING_X}
+    //   height="100%"
+    // >
+    //   {children}
+    // </Box>
   );
 };

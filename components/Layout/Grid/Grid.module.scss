@@ -1,22 +1,26 @@
 .grid {
-  width: 100%;
-  max-width: 100%;
-}
-
-.row {
-  --column: calc(100% / 12);
   --gutter: #{$container-padding-x};
 
-  display: flex;
-  flex-wrap: wrap;
-  margin-left: auto;
-  margin-right: auto;
+  @include push-auto-x();
+  padding-left: var(--gutter);
+  padding-right: var(--gutter);
   width: 100%;
   max-width: $container-max-width;
 
   &__fullWidth {
     max-width: 100%;
+    padding-left: 0;
+    padding-right: 0;
   }
+}
+
+.row {
+  --column: calc(100% / 12);
+
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: calc(var(--gutter) * -1);
+  margin-right: calc(var(--gutter) * -1);
 }
 
 .column {

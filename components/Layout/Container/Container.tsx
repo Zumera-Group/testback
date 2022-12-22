@@ -1,8 +1,22 @@
 import styles from './Container.module.scss';
 
-export const Container: React.FC<{ classes?: string }> = ({ children, classes }) => {
+interface Props {
+  paddingX?: boolean;
+  classes?: string;
+};
+
+export const Container: React.FC<Props> = ({
+  paddingX = true,
+  classes,
+  children
+}) => {
   return (
-    <div className={[styles.container, classes ?? ''].join(' ')}>
+    <div
+      className={[
+        styles.container,
+        !paddingX ? styles.container__noPaddingX : '',
+        classes ?? ''
+      ].join(' ')}>
       {children}
     </div>
   );

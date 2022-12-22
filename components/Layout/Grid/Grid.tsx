@@ -27,8 +27,15 @@ export const Grid: React.FC<Props> = ({
   };
 
   return (
-    <Component className={[styles.grid, className].join(' ')} {...rest}>
-      <div className={[styles.row, fullWidth && styles.row__fullWidth].join(' ')} {...stylesToApply}>
+    <Component
+      className={[
+        styles.grid,
+        fullWidth ? styles.grid__fullWidth : '',
+        className
+      ].join(' ')}
+      {...rest}
+    >
+      <div className={styles.row} {...stylesToApply}>
         {children}
       </div>
     </Component>
