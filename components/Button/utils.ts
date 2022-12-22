@@ -1,19 +1,19 @@
 import styles from './Button.module.scss';
 
-export const generateButtonVariant  = ({ type, onDark }) => {
+export const generateButtonVariant  = ({ variant, onDark }) => {
   const classes: string[] = [];
 
-  if (type === 'primary' && !onDark) classes.push(styles.button__primary);
-  if (type === 'primary' && onDark) classes.push(styles.button__primaryOnDark);
+  if (variant === 'primary' && !onDark) classes.push(styles.button__primary);
+  if (variant === 'primary' && onDark) classes.push(styles.button__primaryOnDark);
 
-  if (type === 'secondary' && !onDark) classes.push(styles.button__secondary);
-  if (type === 'secondary' && onDark) classes.push(styles.button__secondaryOnDark);
+  if (variant === 'secondary' && !onDark) classes.push(styles.button__secondary);
+  if (variant === 'secondary' && onDark) classes.push(styles.button__secondaryOnDark);
 
-  if (type === 'tertiary' && !onDark) classes.push(styles.button__tertiary);
-  if (type === 'tertiary' && onDark) classes.push(styles.button__tertiaryOnDark);
+  if (variant === 'tertiary' && !onDark) classes.push(styles.button__tertiary);
+  if (variant === 'tertiary' && onDark) classes.push(styles.button__tertiaryOnDark);
 
-  if (type === 'link' && !onDark) classes.push(styles.button__link);
-  if (type === 'link' && onDark) classes.push(styles.button__linkOnDark);
+  if (variant === 'link' && !onDark) classes.push(styles.button__link);
+  if (variant === 'link' && onDark) classes.push(styles.button__linkOnDark);
 
   return classes.join(' ');
 }

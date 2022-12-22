@@ -8,40 +8,46 @@ import { generateButtonVariant } from './utils';
 
 interface Props {
   title?: string;
-  type: 'primary' | 'secondary' | 'tertiary' | 'link';
+  variant: 'primary' | 'secondary' | 'tertiary' | 'link';
   onDark?: boolean;
+  icon?: string;
+  hideIcon?: boolean;
   id?: string;
   classes?: string;
   link?: any;
   externalUrl?: string | null;
+  disabled?: boolean;
   callBack?: (event: React.MouseEvent<HTMLButtonElement>) => void;
   children: any;
 }
 
 export const Button: React.FC<Props> = ({
   title,
-  type,
+  variant,
   onDark,
+  icon,
+  hideIcon,
   id,
   classes,
   link,
   externalUrl,
+  disabled,
   callBack,
   children,
   ...rest
 }) => {
 
   const isLink = externalUrl || link?.slug?.current;
-  const variant = generateButtonVariant({ type, onDark });
+  const btnVariant = generateButtonVariant({ variant, onDark });
 
   const ButtonIcon = () => {
-    if (type === 'primary' || type === 'secondary') {
-      return <Icon iconName='arrow' width={10} height={10} />
-    } else if (type === 'tertiary') {
-      return <Icon iconName='arrow-circle' width={32} height={32} />
-    } else {
-      return null;
+    if (hideIcon) return null;
+    if (variant === 'primary' || variant === 'secondary') {
+      return <Icon iconName={icon || 'arrow'} width={10} height={10} />
+    } else if (variant === 'tertiary') {
+      return <Icon iconName={icon || 'arrow-circle'} width={32} height={32} />
     }
+    return null;
   }
 
   return isLink ? (
@@ -49,7 +55,7 @@ export const Button: React.FC<Props> = ({
       <a
         id={id}
         title={title}
-        className={[styles.button, variant, classes ?? ''].join(' ')}
+        className={[styles.button, btnVariant, classes ?? ''].join(' ')}
         target={externalUrl ? '_blank' : undefined}
         rel={externalUrl ? 'noopener noreferrer' : undefined}
         {...rest}
@@ -62,9 +68,10 @@ export const Button: React.FC<Props> = ({
     <button
       id={id}
       title={title}
-      className={[styles.button, variant, classes ?? ''].join(' ')}
+      className={[styles.button, btnVariant, classes ?? ''].join(' ')}
       onClick={callBack}
       role="button"
+      disabled={disabled}
       name={typeof children === 'string' ? children : undefined}
       {...rest}
     >
