@@ -69,9 +69,9 @@ $font-family:                               $font-family-sans-serif;
 // Font-sizes
 $font-size-base:                            16px;
 $h1-font-size:                              clamp(2.5rem, -0.5203rem + 6.9444vw, 5.44rem);
-$h2-font-size:                              clamp(2rem, -0.5203rem + 6.9444vw, 3.125rem);
-$h3-font-size:                              clamp(1.375rem, -0.5203rem + 6.9444vw, 1.875rem);
-$h4-font-size:                              clamp(1.125rem, -0.5203rem + 6.9444vw, 1.313rem);
+$h2-font-size:                              clamp(2rem, -0.5203rem + 6.9444vw, 3.66rem);
+$h3-font-size:                              clamp(1.8rem, -0.5203rem + 6.9444vw, 2.66rem);
+$h4-font-size:                              clamp(1.125rem, -0.5203rem + 6.9444vw, 1.88rem);
 $h5-font-size:                              clamp(1rem, -0.5203rem + 6.9444vw, 1.125rem);
 $h6-font-size:                              clamp(1rem, -0.5203rem + 6.9444vw, 1.125rem);
 $font-size-normal:                          clamp(1rem, -0.5203rem + 2.666vw, 1.125rem);
@@ -171,3 +171,4 @@ $focus-outline-offset:                      2px;
 
 // * Z-index
 $zindex-header:                             999;
+$zindex-chat-btn:                           998;
