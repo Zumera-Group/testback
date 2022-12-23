@@ -1,5 +1,6 @@
 import React from 'react';
 import dynamic from 'next/dynamic';
+
 import { Page, Sector, Service, SiteSettings } from '../domain/index';
 import { ContentModule } from '../domain/contentModule';
 import { getContentForContentModule } from './contentModules';
@@ -39,13 +40,13 @@ const PageLayout: React.FC<{
         seoImage={page.seoImage}
         siteSettings={siteSettings}
       />
-      <PageHeader
-        contentModules={contentModules}
-        siteSettings={siteSettings}
-        otherLangSlug={otherLangSlug}
-        hideHeader={page.isHeaderRoutesHidden}
-      />
       <PageTransition slug={page.slug?.current}>
+        <PageHeader
+          contentModules={contentModules}
+          siteSettings={siteSettings}
+          otherLangSlug={otherLangSlug}
+          hideHeader={page.isHeaderRoutesHidden}
+        />
         <main id="main">
           {contentModules &&
             contentModules.map((c) => {
@@ -56,9 +57,8 @@ const PageLayout: React.FC<{
               );
             })}
         </main>
+        {!page.isFooterHidden ? <PageFooter siteSettings={siteSettings} /> : null}
       </PageTransition>
-
-      {!page.isFooterHidden ? <PageFooter siteSettings={siteSettings} /> : null}
     </>
   );
 };
