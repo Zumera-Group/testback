@@ -24,15 +24,17 @@ export const Employee = ({ article }) => {
         href={href}>
           <a className={styles.link}>
             <div className={styles.imageWrapper}>
-              <Image
-                unoptimized
-                src={image}
-                alt={name}
-                objectFit={'cover'}
-                objectPosition={'center center'}
-                layout="fill"
-                className={styles.image}
-              />
+              <div className={styles.imageWrapper_inner}>
+                <Image
+                  unoptimized
+                  src={image}
+                  alt={name}
+                  objectFit={'cover'}
+                  objectPosition={'center center'}
+                  layout="fill"
+                  className={styles.image}
+                />
+              </div>
             </div>
             <div className={styles.body}>
               {jobTitle && <h4 className={styles.jobTitle}>{jobTitle}</h4>}
