@@ -14,7 +14,7 @@
   min-height: var(--hero-min-height);
   max-height: var(--hero-max-height);
   padding-top: calc(var(--header-height) / 2);
-  // margin-top: calc(var(--header-height) * -1);
+  margin-top: calc(var(--header-height) * -1);
   background-color: $primary;
   color: $white;
   z-index: 1;
