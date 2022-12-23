@@ -23,6 +23,9 @@ export const IconSprite = () => {
       <symbol id="icon-chevron-down" viewBox="0 0 52 32" stroke="none">
         <path d="M32.3 25.76 52 6.24 45.7 0 26 19.52l-4.46-4.42L6.3 0 0 6.24l25.03 24.8.97.96 5.83-5.77.47-.47Z" />
       </symbol>
+      <symbol id="icon-user" viewBox="0 0 16 16" stroke="none">
+        <path d="M8 8C10.21 8 12 6.21 12 4C12 1.79 10.21 0 8 0C5.79 0 4 1.79 4 4C4 6.21 5.79 8 8 8ZM8 10C5.33 10 0 11.34 0 14V16H16V14C16 11.34 10.67 10 8 10Z" />
+      </symbol>
     </svg>
   );
 };
