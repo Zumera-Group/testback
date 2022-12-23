@@ -334,6 +334,12 @@ export const contentModulesQuery = (
     },
     transactions[]-> {
       ...,
+      coverImage {
+        asset->{
+          url,
+          altText
+        },
+      },
       companyLogo1 {
         asset->{
           url
@@ -347,6 +353,12 @@ export const contentModulesQuery = (
     },
     transaction-> {
       ...,
+      coverImage {
+        asset->{
+          url,
+          altText
+        },
+      },
       companyLogo1 {
         asset->{
           url

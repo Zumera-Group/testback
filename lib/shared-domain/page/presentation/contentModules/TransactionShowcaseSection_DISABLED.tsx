@@ -2,16 +2,21 @@ import React from 'react';
 
 import { TransactionShowcaseSectionModule } from '../../domain/contentModule';
 
-import TransactionShowCase from 'components/TransactionShowcase';
+import { TransactionShowcase } from 'lib/shared-domain/transactions/presentation/TransactionShowcase';
 
 export const TransactionShowcaseSection: React.FC<{
   specificContentModule: TransactionShowcaseSectionModule;
   sharedContent?: any;
 }> = ({ specificContentModule, sharedContent }) => {
   return (
-    <TransactionShowCase
+    <TransactionShowcase
       {...specificContentModule}
-      {...sharedContent}
+      sharedContent={sharedContent}
+      transactionLinkText={specificContentModule.linkText}
+      viewAllButton={{
+        href: specificContentModule?.link?.page?.slug?.current,
+        title: specificContentModule?.link?.title,
+      }}
     />
   );
 };
