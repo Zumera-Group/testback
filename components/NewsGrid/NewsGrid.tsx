@@ -114,7 +114,7 @@ export const NewsGrid: React.FC<Props> = ({
           const numN = numOfNewsDisplayed;
           return (
             <Cards
-              key={i}
+              key={`newsGridCards-${i}`}
               transactions={transactions?.slice(i * numT, numT + i * numT)}
               employee={employees?.[i]}
               news={news?.slice(i * numN, numN + i * numN)}
