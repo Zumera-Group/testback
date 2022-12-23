@@ -28,7 +28,9 @@
   padding-left: var(--gutter);
   padding-right: var(--gutter);
 
-  @include make-cols(xs, 12);
+  flex: 0 0 calc(var(--column) * 12);
+  max-width: calc(var(--column) * 12);
+
   @each $breakpoint, $_ in $breakpoints {
     @include breakpoint-up($breakpoint) {
       @include make-cols($breakpoint, 12)
