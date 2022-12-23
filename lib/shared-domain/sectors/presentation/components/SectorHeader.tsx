@@ -15,7 +15,8 @@ export const SectorHeader: React.FC<{
   subtitle?: string;
   linkText: string;
 }> = ({ sector, subtitle, linkText }) => {
-  const isMobile = useBreakpointValue({ base: true, md: false });
+  // const isMobile = useBreakpointValue({ base: true, md: false });
+  const isMobile = false;
 
   if (!sector) return null;
 

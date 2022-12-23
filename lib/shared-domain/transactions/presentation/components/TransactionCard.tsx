@@ -175,7 +175,7 @@ export const TransactionCard: React.FC<{
   const sharedContent = useSharedContentContext();
   const format = useFormatDate();
   const [ref, isHovered] = useHover();
-  const isMobile = useBreakpointValue({ base: true, md: false });
+  // const isMobile = useBreakpointValue({ base: true, md: false });
   const getDate = (transaction) =>
     transaction.date ? format(new Date(transaction.date)) : '';
 
@@ -305,17 +305,17 @@ export const TransactionCard: React.FC<{
         as="a"
         cursor="pointer"
         ref={ref}
-        style={
-          isMobile
-            ? styles
-            : {
-                ...styles,
-                transition: 'all 0.3s ease',
-              }
-        }
-        _hover={
-          isMobile ? {} : { boxShadow: colors.transactionsCardBoxShadowStrong }
-        }
+        // style={
+        //   isMobile
+        //     ? styles
+        //     : {
+        //         ...styles,
+        //         transition: 'all 0.3s ease',
+        //       }
+        // }
+        // _hover={
+        //   isMobile ? {} : { boxShadow: colors.transactionsCardBoxShadowStrong }
+        // }
       >
         <FlexCol flex={1.3} bg="white">
           <FlexRow
@@ -335,10 +335,10 @@ export const TransactionCard: React.FC<{
               flex={0.2}
               flexShrink={0}
               transformOrigin="center"
-              transform={
-                isHovered && !isMobile ? 'rotate(45deg)' : 'rotate(0deg)'
-              }
-              transition={isMobile ? 'none' : '.2s ease-in all'}
+              // transform={
+              //   isHovered && !isMobile ? 'rotate(45deg)' : 'rotate(0deg)'
+              // }
+              // transition={isMobile ? 'none' : '.2s ease-in all'}
               mx={2}
               width={24}
               alignItems="center"

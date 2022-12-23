@@ -21,15 +21,15 @@ export const NewsGridSection: React.FC<{
   const router = useRouter();
 
   useEffect(() => {
-      fetchTransactions(router.locale as any).then((t) => {
-        setTransactions(t);
-      });
-      fetchNewsArticles(router.locale as any).then((t) => {
-        setNews(t);
-      });
-      fetchEmployees(router.locale as any).then((t) => {
-        setEmployees(t);
-      });
+    fetchTransactions(router.locale as any).then((t) => {
+      setTransactions(t);
+    });
+    fetchNewsArticles(router.locale as any).then((t) => {
+      setNews(t);
+    });
+    fetchEmployees(router.locale as any).then((t) => {
+      setEmployees(t);
+    });
   }, [router.locale]);
 
   return (

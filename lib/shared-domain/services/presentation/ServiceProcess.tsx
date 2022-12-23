@@ -16,7 +16,8 @@ const NumberWithText: React.FC<{ number: number; text: string }> = ({
   number,
   text,
 }) => {
-  const isMobile = useBreakpointValue({ base: true, lg: false });
+  // const isMobile = useBreakpointValue({ base: true, lg: false });
+  const isMobile = false;
   const variant = isMobile ? 'mobileWebsiteH1' : 'websiteH1';
 
   return (

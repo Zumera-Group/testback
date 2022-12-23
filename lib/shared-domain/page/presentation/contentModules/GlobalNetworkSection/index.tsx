@@ -98,7 +98,8 @@ export const GlobalNetworkSection: React.FC<{
 }> = ({ specificContentModule }) => {
   const offices = useFetchOffices();
   const { continents, continentsWithCDIOffices } = useGlobalNetwork(offices);
-  const isMobile = useBreakpointValue({ base: true, md: false });
+  // const isMobile = useBreakpointValue({ base: true, md: false });
+  const isMobile = false;
   return (
     <SectionContainer pt="md" pb="xs">
       <Box mb={8} width={{ base: '100%', lg: '50%' }}>

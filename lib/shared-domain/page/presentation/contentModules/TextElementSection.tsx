@@ -12,7 +12,8 @@ export const TextElementSection: React.FC<{
 }> = ({ specificContentModule }) => {
   const firstBlock = specificContentModule.firstBlock[0].children[0].text;
   const secondBlock = specificContentModule.secondBlock[0].children[0].text;
-  const isMobile = useBreakpointValue({ base: true, lg: false });
+  // const isMobile = useBreakpointValue({ base: true, lg: false });
+  const isMobile = false;
   const TEXT_VARIANT = isMobile
     ? 'mobileTextElementSectionFirstBlockP'
     : 'textElementSectionFirstBlockP';

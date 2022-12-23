@@ -18,7 +18,8 @@ export const FactCard: React.FC<{
   borderTop?: string;
   isFirstIndex?: boolean;
 }> = ({ fact, borderTop, isFirstIndex }) => {
-  const isMobile = useBreakpointValue({ base: true, lg: false });
+  // const isMobile = useBreakpointValue({ base: true, lg: false });
+  const isMobile = false;
 
   const BORDER_TOP = borderTop || 'none';
   return (
@@ -62,7 +63,8 @@ export const FactCard: React.FC<{
 export const FactsAndFiguresSection: React.FC<{
   specificContentModule: FactsAndFiguresSectionModule;
 }> = ({ specificContentModule }) => {
-  const isMobile = useBreakpointValue({ base: true, lg: false });
+  // const isMobile = useBreakpointValue({ base: true, lg: false });
+  const isMobile = false;
 
   return (
     <FlexCol

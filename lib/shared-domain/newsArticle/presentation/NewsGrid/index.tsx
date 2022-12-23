@@ -30,7 +30,7 @@ const CardGrid = ({
   isDownloadVisible,
   isAfterSecondBlock,
 }): any => {
-  const isMobile = useBreakpointValue({ base: true, md: false });
+  // const isMobile = useBreakpointValue({ base: true, md: false });
   const widthSizes = useNewsGridWidthSizes();
   const { downloadButtonContent } = useSharedContentContext();
 
@@ -103,17 +103,17 @@ const CardGrid = ({
     if (isLast || isAfterSecondBlock) {
       width = '50%';
     }
-    if (isMobile) {
-      width = '100%';
-    }
+    // if (isMobile) {
+    //   width = '100%';
+    // }
 
     return (
       <div
         key={i}
         style={{
           width,
-          paddingLeft: !isMobile ? '16px' : '0',
-          paddingRight: !isMobile ? '16px' : '0',
+          // paddingLeft: !isMobile ? '16px' : '0',
+          // paddingRight: !isMobile ? '16px' : '0',
           paddingTop: '16px',
           paddingBottom: '16px',
           minHeight: sharedStyle.minHeight,
@@ -164,7 +164,7 @@ export const NewsGrid: React.FC<{
   shouldHidePeopleUpdates,
   initialNumberOfRepetitions = 1,
 }) => {
-  const isMobile = useBreakpointValue({ base: true, md: false });
+  // const isMobile = useBreakpointValue({ base: true, md: false });
   const [numberOfRepetitions, setNumberOfRepetitions] = React.useState(
     initialNumberOfRepetitions,
   );
@@ -225,7 +225,7 @@ export const NewsGrid: React.FC<{
 
   return (
     <SectionContainer py="md">
-      <Box mb={8} width={isMobile ? '100%' : '50%'}>
+      <Box mb={8} width={'100%'}>
         <TitleWithSubtitleAndDescription
           title={title}
           subtitle={subtitle}
@@ -256,7 +256,7 @@ export const NewsGrid: React.FC<{
         })}
       </div>
 
-      {hasMoreDataToLoad ? (
+      {/* {hasMoreDataToLoad ? (
         <Flex justify="center" align="center" mt={isMobile ? 4 : 7}>
           <P
             onClick={() => setNumberOfRepetitions(numberOfRepetitions + 1)}
@@ -276,7 +276,7 @@ export const NewsGrid: React.FC<{
             {allNewsLinkText || loadMoreText}
           </P>
         </Flex>
-      ) : null}
+      ) : null} */}
     </SectionContainer>
   );
 };

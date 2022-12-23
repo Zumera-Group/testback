@@ -43,9 +43,11 @@ export const SectorHero: React.FC<{ sector: Sector; content: any }> = ({
   const contributorsAsText = sector.contributors
     ?.map((c) => getEmployeeFullName(c))
     .join(', ');
-  const displayLogo = useBreakpointValue({ base: false, lg: true });
+  // const displayLogo = useBreakpointValue({ base: false, lg: true });
+  const displayLogo = false;
   const t = (item) => content?.[item];
-  const isMobile = useBreakpointValue({ base: true, md: false });
+  // const isMobile = useBreakpointValue({ base: true, md: false });
+  const isMobile = false;
 
   return (
     <FlexCol

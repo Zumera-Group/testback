@@ -81,7 +81,8 @@ export const DropdownMenu: React.FC<{
   handleSector(sectorName: string, s: Sector): void;
   handleService(serviceName: string): void;
 }> = ({ sectors, services, handleSector, handleService }) => {
-  const isMobile = useBreakpointValue({ base: true, lg: false });
+  // const isMobile = useBreakpointValue({ base: true, lg: false });
+  const isMobile = false;
   return (
     <>
       <Dropdown

@@ -24,7 +24,8 @@ export const SectorCard: React.FC<{
   sector: Sector;
   index: number;
 }> = ({ sector, index }) => {
-  const isMobile = useBreakpointValue({ base: true, md: false });
+  // const isMobile = useBreakpointValue({ base: true, md: false });
+  const isMobile = false;
   const { height, width } =
     sector?.graph?.iconImage?.asset?.metadata?.dimensions || {};
   const graphHeight = isMobile ? '60%' : height;

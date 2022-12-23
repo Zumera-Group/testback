@@ -16,7 +16,8 @@ import useBreakpointValue from 'lib/shared-domain/useBreakpoint';
 const t = getTranslateByScope('website.sectorDetails.team');
 
 export const SectorTeam: React.FC<{ sector: Sector }> = ({ sector }) => {
-  const isMobile = useBreakpointValue({ base: true, lg: false });
+  // const isMobile = useBreakpointValue({ base: true, lg: false });
+  const isMobile = false;
   if (
     !sector.contributors ||
     sector.contributors.length === 0 ||

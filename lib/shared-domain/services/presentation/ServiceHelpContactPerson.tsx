@@ -14,7 +14,8 @@ import backgroundImage2 from '../../../../public/serviceDetail/hero-bg-2.png';
 export const ServiceHelpContactPersonSection: React.FC<{
   helpContactPerson: ServiceHelpContactSection | any;
 }> = ({ helpContactPerson }) => {
-  const isMobile = useBreakpointValue({ base: true, md: false });
+  // const isMobile = useBreakpointValue({ base: true, md: false });
+  const isMobile = false;
 
   return (
     <FlexCol

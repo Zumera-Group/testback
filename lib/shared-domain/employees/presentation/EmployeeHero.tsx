@@ -44,7 +44,8 @@ export const EmployeeHero: React.FC<{ employee: Employee; content: any }> = ({
   const comaSeparatedSectors = employee?.sectors?.map((s) => {
     return s.name;
   });
-  const isMobile = useBreakpointValue({ base: true, md: false });
+  // const isMobile = useBreakpointValue({ base: true, md: false });
+  const isMobile = false;
 
   return (
     <FlexCol

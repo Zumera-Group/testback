@@ -12,7 +12,8 @@ export const SectorMoreDetails: React.FC<{ sector: Sector; content: any }> = ({
   sector,
   content,
 }) => {
-  const isMobile = useBreakpointValue({ base: true, md: false });
+  // const isMobile = useBreakpointValue({ base: true, md: false });
+  const isMobile = false;
 
   if (!sector.moreDetailsSection) return null;
   const contentFullImage =

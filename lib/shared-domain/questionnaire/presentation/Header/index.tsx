@@ -13,7 +13,7 @@ import { getTranslateByScope } from 'translation/i18n';
 import { useValuationStore } from '../../store';
 import { Modals } from '../Modal';
 import { colors } from '../../../../../styles/foundations/colors';
-import { ChatButton } from 'components/Buttons/ChatButton';
+import { ChatButton } from 'components/ChatButton';
 import { fontWeights, fontSizes } from 'styles/foundations/fontStyles';
 import React, { useLayoutEffect, useState } from 'react';
 import useBreakpointValue from 'lib/shared-domain/useBreakpoint';

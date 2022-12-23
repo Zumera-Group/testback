@@ -17,7 +17,8 @@ export const SectorTransactions: React.FC<{
   sector: Sector;
   content: any;
 }> = ({ transactions, sector, content }) => {
-  const isMobile = useBreakpointValue({ base: true, lg: false });
+  // const isMobile = useBreakpointValue({ base: true, lg: false });
+  const isMobile = false;
   if (!transactions || transactions.length === 0) return null;
   const t = (item) => content?.[item];
 

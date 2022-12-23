@@ -12,7 +12,8 @@ import { CardDownload } from 'lib/shared-domain/newsArticle/presentation/newsCar
 export const EmployeeReportDownload: React.FC<{
   employee: Employee;
 }> = ({ employee }) => {
-  const isMobile = useBreakpointValue({ base: true, lg: false });
+  // const isMobile = useBreakpointValue({ base: true, lg: false });
+  const isMobile = false;
 
   if (
     !employee?.reportDownloadSection?.title &&

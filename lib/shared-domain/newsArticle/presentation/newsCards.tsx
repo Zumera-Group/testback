@@ -51,51 +51,51 @@ const SmallNewsCard: React.FC<
   newsGridWithAdditionalPaddingForImage,
   ...props
 }) => {
-  const isMobile = useBreakpointValue({ base: true, md: false });
+  // const isMobile = useBreakpointValue({ base: true, md: false });
 
-  if (isMobile) {
-    return (
-      <Link passHref href={props.href}>
-        <FlexCol
-          as="a"
-          cursor="pointer"
-          backgroundImage={`url(${sanityImageUrlFor(bgImage)
-            ?.height(250)
-            ?.auto('format')
-            ?.url()}), linear-gradient(264.95deg, #E0C6B7 -2.77%, #F8F8E6 62.17%)`}
-          backgroundPosition="center"
-          backgroundSize="contain"
-          backgroundRepeat="no-repeat"
-          flexBasis="50%"
-          m={newsGridWithAdditionalPaddingForImage ? 2.5 : 0}
-        >
-          <FlexCol justifyContent="space-between" p={3}>
-            <FlexCol>
-              <P noOfLines={2} color="black" fontSize={fontSizes.tiny}>
-                {props.subtitle}
-              </P>
-              <P
-                noOfLines={2}
-                fontWeight={fontWeights.semiBold}
-                color="black"
-                mt={1}
-                mb={3}
-              >
-                {props.title}
-              </P>
-            </FlexCol>
-            <Box>
-              <LinkWithArrow
-                color="black"
-                title={props.linkText || 'Read More'}
-                href={props.href}
-              />
-            </Box>
-          </FlexCol>
-        </FlexCol>
-      </Link>
-    );
-  }
+  // if (isMobile) {
+  //   return (
+  //     <Link passHref href={props.href}>
+  //       <FlexCol
+  //         as="a"
+  //         cursor="pointer"
+  //         backgroundImage={`url(${sanityImageUrlFor(bgImage)
+  //           ?.height(250)
+  //           ?.auto('format')
+  //           ?.url()}), linear-gradient(264.95deg, #E0C6B7 -2.77%, #F8F8E6 62.17%)`}
+  //         backgroundPosition="center"
+  //         backgroundSize="contain"
+  //         backgroundRepeat="no-repeat"
+  //         flexBasis="50%"
+  //         m={newsGridWithAdditionalPaddingForImage ? 2.5 : 0}
+  //       >
+  //         <FlexCol justifyContent="space-between" p={3}>
+  //           <FlexCol>
+  //             <P noOfLines={2} color="black" fontSize={fontSizes.tiny}>
+  //               {props.subtitle}
+  //             </P>
+  //             <P
+  //               noOfLines={2}
+  //               fontWeight={fontWeights.semiBold}
+  //               color="black"
+  //               mt={1}
+  //               mb={3}
+  //             >
+  //               {props.title}
+  //             </P>
+  //           </FlexCol>
+  //           <Box>
+  //             <LinkWithArrow
+  //               color="black"
+  //               title={props.linkText || 'Read More'}
+  //               href={props.href}
+  //             />
+  //           </Box>
+  //         </FlexCol>
+  //       </FlexCol>
+  //     </Link>
+  //   );
+  // }
 
   return (
     <Link passHref href={props.href}>

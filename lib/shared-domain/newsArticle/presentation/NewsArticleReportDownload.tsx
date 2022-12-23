@@ -12,7 +12,8 @@ import { CardDownload } from './newsCards';
 export const NewsArticleReportDownload: React.FC<{
   newsArticle: NewsArticle;
 }> = ({ newsArticle }) => {
-  const isMobile = useBreakpointValue({ base: true, lg: false });
+  // const isMobile = useBreakpointValue({ base: true, lg: false });
+  const isMobile = false;
 
   if (
     !newsArticle?.reportDownloadSection?.title &&

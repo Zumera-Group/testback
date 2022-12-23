@@ -16,7 +16,8 @@ export const LeadershipTeamSection: React.FC<{
   specificContentModule: LeadershipTeamSectionModule;
 }> = ({ specificContentModule }) => {
   const employees = useFetchEmployees();
-  const isMobile = useBreakpointValue({ base: true, md: false });
+  // const isMobile = useBreakpointValue({ base: true, md: false });
+  const isMobile = false;
   const leadershipTeamMembers =
     employees?.filter(
       (e) =>

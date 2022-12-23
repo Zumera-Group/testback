@@ -11,7 +11,8 @@ import { Service } from '../../page/domain/index';
 import { colors } from 'styles/foundations/colors';
 
 export const ServiceHero: React.FC<{ service: Service }> = ({ service }) => {
-  const isMobile = useBreakpointValue({ base: true, md: false });
+  // const isMobile = useBreakpointValue({ base: true, md: false });
+  const isMobile = false;
 
   return (
     <>
