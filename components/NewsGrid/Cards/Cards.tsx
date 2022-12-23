@@ -1,3 +1,4 @@
+import React from 'react';
 import {
   Employee,
   TwoNews,
@@ -67,10 +68,10 @@ export const Cards = ({
 
   return (
     <div className={styles.cards}>
-      {items?.map((item) => (
-        <>
+      {items?.map((item, i) => (
+        <React.Fragment key={`newsGridCards-item-${i}`}>
           {item}
-        </>
+        </React.Fragment>
       ))}
     </div>
   );
