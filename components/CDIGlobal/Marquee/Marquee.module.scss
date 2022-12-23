@@ -1,0 +1,36 @@
+.marquee {
+  --marquee-font-size: #{$font-size-normal};
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+  user-select: none;
+  height: calc(var(--marquee-font-size) + 0.25em);
+  user-select: none;
+  line-height: 1;
+  margin: $gutter * 3 0 0 0;
+}
+
+.scroller {
+  list-style: none;
+  list-style-type: none;
+  position: absolute;
+  white-space: nowrap;
+  margin: 0;
+  padding: 0;
+  min-width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: nowrap;
+  line-height: 1;
+}
+
+.item {
+  line-height: 1;
+  white-space: nowrap;
+  font-size: var(--marquee-font-size);
+  font-weight: $font-weight-medium;
+  color: $tertiary;
+  margin-right: $gutter * 3;
+}
