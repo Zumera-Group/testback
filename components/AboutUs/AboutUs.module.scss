@@ -1,0 +1,9 @@
+.btnWrapper {
+  margin-top: $btn-wrapper-margin-top;
+}
+
+.description {
+  @include breakpoint-up(md) {
+    margin-top: $gutter;
+  }
+}

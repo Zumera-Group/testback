@@ -1,0 +1,19 @@
+.wrapper {
+  --spacing-y: #{map-get($section-sizes, md) * .5};
+  @include breakpoint-up(md) {
+    --spacing-y: #{map-get($section-sizes, md) * .75};
+  }
+  margin-top: var(--spacing-y);
+  padding-top: var(--spacing-y);
+  @include divider(top, $primary);
+}
+
+.title {
+  font-size: $h4-font-size;
+}
+
+.items {
+  @include bullet-list();
+  font-size: $font-size-normal;
+  margin: 0;
+}
