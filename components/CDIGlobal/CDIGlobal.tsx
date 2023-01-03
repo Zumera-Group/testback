@@ -5,7 +5,16 @@ import { Marquee } from './Marquee';
 
 import styles from './CDIGlobal.module.scss';
 
-export const CDIGlobal = ({ ...rest }) => {
+interface Props {
+  title?: string;
+  subtitle?: string;
+  description?: any;
+  button?: any;
+  locations?: Array<string>;
+  sectionType?: string;
+}
+
+export const CDIGlobal: React.FC<Props> = ({ ...rest }) => {
 
   const {
     title,

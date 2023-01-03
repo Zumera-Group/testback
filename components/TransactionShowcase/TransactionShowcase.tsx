@@ -5,7 +5,15 @@ import { TransactionCard } from './TransactionCard';
 
 import styles from './TransactionShowcase.module.scss';
 
-export const TransactionShowcase = ({ ...rest }) => {
+interface Props {
+  title?: string;
+  subtitle?: string;
+  description?: any;
+  link?: any;
+  transaction?: any;
+}
+
+export const TransactionShowcase: React.FC<Props> = ({ ...rest }) => {
 
   const {
     title,

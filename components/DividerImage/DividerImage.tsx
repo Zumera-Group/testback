@@ -5,7 +5,11 @@ import { useInView } from 'react-intersection-observer';
 
 import styles from './DividerImage.module.scss';
 
-export const DividerImage = ({ ...rest }) => {
+interface Props {
+  dividerImage?: string;
+}
+
+export const DividerImage: React.FC<Props> = ({ ...rest }) => {
 
   const { dividerImage } = rest;
   const { ref, inView } = useInView();
