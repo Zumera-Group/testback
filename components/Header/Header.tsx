@@ -109,7 +109,7 @@ export const Header = ({
           />
         </div>
       </Container>
-      <AnimatePresence>
+      <AnimatePresence exitBeforeEnter>
         {bigMenuOpen && (
           <BigMenu
             siteSettings={siteSettings}
