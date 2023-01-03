@@ -19,6 +19,7 @@ interface Props {
   disabled?: boolean;
   callBack?: (event: React.MouseEvent<HTMLButtonElement>) => void;
   children: any;
+  type?: 'button' | 'submit' | 'reset';
 }
 
 export const Button: React.FC<Props> = ({
@@ -34,6 +35,7 @@ export const Button: React.FC<Props> = ({
   disabled,
   callBack,
   children,
+  type,
   ...rest
 }) => {
 
@@ -72,6 +74,7 @@ export const Button: React.FC<Props> = ({
       onClick={callBack}
       role="button"
       disabled={disabled}
+      type={type}
       name={typeof children === 'string' ? children : undefined}
       {...rest}
     >
