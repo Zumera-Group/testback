@@ -1,3 +1,5 @@
+@import './functions';
+
 // * Root
 $root-prefix:                               'zma';
 
@@ -36,7 +38,7 @@ $zumera-gradient-front:                     $accent;
 $zumera-gradient-middle-front:              $tertiary;
 $zumera-gradient-middle-back:               $primary-alt;
 $zumera-gradient-back:                      $primary;
-$zumera-gradient-size:                      120vmin;
+$zumera-gradient-size:                      100vmin;
 
 
 // * Easings
@@ -148,8 +150,53 @@ $btn-hover-box-shadow:                      0 0 1.25rem rgba($btn-box-shadow-col
 $btn-active-box-shadow:                     0 0 0.75rem rgba($btn-box-shadow-color, 0.62);
 $btn-disabled-opacity:                      0.5;
 $btn-border-width:                          $border-width;
-$btn-transition:                            color $timing-md $ease-out, background-color $timing-md $ease-out, border-color $timing-md $ease-out, box-shadow $timing-md $ease-out;
-$btn-transition-active:                     color $timing-sm $ease-out, background-color $timing-sm $ease-out, border-color $timing-sm $ease-out, box-shadow $timing-sm $ease-out;
+$btn-transition:                            color $timing-md $ease-out, background-color $timing-md $ease-out, border-color $timing-md $ease-out, box-shadow $timing-md $ease-out, opacity $timing-md $ease-out;
+$btn-transition-active:                     color $timing-sm $ease-out, background-color $timing-sm $ease-out, border-color $timing-sm $ease-out, box-shadow $timing-sm $ease-out, opacity $timing-sm $ease-out;
+
+
+// * Forms
+$form-group-margin-bottom:                  $gutter * 2;
+// Labels
+$label-font-size:                           $font-size-tiny;
+$label-font-weight:                         $font-weight-base;
+$label-margin-bottom:                       $gutter * 0.5;
+$label-required-mark-color:                 $accent;
+// Inputs
+$input-padding-x:                           $btn-padding-x;
+$input-padding-y:                           $btn-padding-y;
+$input-font-size:                           $btn-font-size;
+$input-font-weight:                         $font-weight-base;
+$input-line-height:                         1.5;
+$input-bg:                                  transparent;
+$input-color:                               $white;
+$input-placeholder-color:                   rgba($input-color, 0.5);
+$input-border-radius:                       $border-radius-lg;
+$input-border-width:                        $border-width;
+$input-border-color:                        $white;
+$input-focus-bg:                            $input-bg;
+$input-focus-color:                         $input-color;
+$input-focus-border-color:                  $accent;
+$input-disabled-opacity:                    $btn-disabled-opacity;
+$input-transition:                          $btn-transition;
+$input-description-font-size:               $label-font-size;
+$input-description-color:                   $white;
+// Textarea
+$textarea-border-radius:                    $border-radius;
+// Selects
+$select-arrow-color:                        url-friendly-color($input-color);
+$select-arrow-icon:                         "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 52 32'%3E%3Cpath fill='#{$select-arrow-color}' d='M32.3 25.76 52 6.24 45.7 0 26 19.52l-4.46-4.42L6.3 0 0 6.24l25.03 24.8.97.96 5.83-5.77.47-.47Z' /%3E%3C/svg%3E";
+$select-arrow-icon-size:                    16px 12px;
+// Checkbox & Radios
+$checkbox-border-color:                     $input-border-color;
+$checkbox-bg:                               transparent;
+$checkbox-size:                             32px;
+$checkbox-icon-size:                        $checkbox-size / 2;
+$checkbox-border-radius:                    $checkbox-size * 0.125;
+$checkbox-checked-color:                    url-friendly-color($white);
+$checkbox-checked-icon:                     "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 34 24'%3E%3Cpath fill='#{$checkbox-checked-color}' d='M12.56 18.03 3.05 8.69 0 11.68l9.52 9.33L12.57 24l3.05-2.99L34 2.98 30.95 0 12.56 18.03Z'/%3E%3C/svg%3E";
+$checkbox-checked-icon-size:                $checkbox-icon-size $checkbox-icon-size / 0.7;
+$checkbox-checked-bg:                       $accent;
+$checkbox-checked-border-color:             $checkbox-checked-bg;
 
 
 // * Header & Menus

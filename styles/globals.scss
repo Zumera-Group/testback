@@ -1,8 +1,8 @@
 @import '/fonts/stylesheet.css';
-@import 'root';
-@import 'reboot';
-@import 'variables';
-@import 'typography';
+@import './root';
+@import './reboot';
+@import './variables';
+@import './typography';
 
 *:focus,
 *:focus-visible {
