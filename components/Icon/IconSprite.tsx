@@ -26,6 +26,9 @@ export const IconSprite = () => {
       <symbol id="icon-user" viewBox="0 0 16 16" stroke="none">
         <path d="M8 8C10.21 8 12 6.21 12 4C12 1.79 10.21 0 8 0C5.79 0 4 1.79 4 4C4 6.21 5.79 8 8 8ZM8 10C5.33 10 0 11.34 0 14V16H16V14C16 11.34 10.67 10 8 10Z" />
       </symbol>
+      <symbol id="icon-check" viewBox="0 0 34 24" stroke="none">
+        <path d="M12.56 18.03 3.05 8.69 0 11.68l9.52 9.33L12.57 24l3.05-2.99L34 2.98 30.95 0 12.56 18.03Z" />
+      </symbol>
     </svg>
   );
 };
