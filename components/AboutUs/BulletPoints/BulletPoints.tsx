@@ -1,7 +1,7 @@
 import styles from './BulletPoints.module.scss';
 
 export const BulletPoints = ({ bulletPoints }) => {
-  if (!bulletPoints.length) return null;
+  if (!bulletPoints?.length) return null;
 
   return (    
     bulletPoints?.map(({ title, texts, _key }, index: number) => (
