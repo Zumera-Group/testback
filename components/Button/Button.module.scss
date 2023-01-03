@@ -23,6 +23,16 @@
   color: css-var(btn-color);
   box-shadow: css-var(btn-box-shadow);
 
+  &:focus,
+  &:focus-visible {
+    outline: $focus-outline-style;
+    outline-offset: $focus-outline-offset;
+  }
+  
+  &:focus:not(:focus-visible) {
+    outline: 0;
+  }
+
   svg {
     fill: currentColor;
     margin-left: $gutter * .75;
