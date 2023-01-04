@@ -10,3 +10,4 @@ export const SCREEN_SIZE_MD = '768px';
 export const SCREEN_SIZE_LG = '992px';
 export const SCREEN_SIZE_XL = '1200px';
 export const SCREEN_SIZE_XXL = '1400px';
+export const CONTAINER_PADDING_X = '16px';
