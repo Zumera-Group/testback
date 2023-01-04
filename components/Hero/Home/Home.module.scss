@@ -4,11 +4,9 @@
   --hero-min-height: 536px;
   --hero-max-height: calc(var(--hero-min-height) * 1.5);
 
-  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
   overflow-x: hidden;
   height: var(--hero-height);
   min-height: var(--hero-min-height);
@@ -22,14 +20,7 @@
   @include breakpoint-up(sm) {
     --hero-min-height: 648px;
   }
-
-  h1, p {
-    margin: 0;
-  }
-
   p {
-    margin-top: $headings-margin-bottom;
-    width: 100%;
     max-width: 70%;
     @include breakpoint-up(md) {
       max-width: 48%;
@@ -56,11 +47,6 @@
   height: 100%;
   user-select: none;
   z-index: -1;
-}
-
-.btnWrapper {
-  display: block;
-  margin: $btn-wrapper-margin-top 0 0 0;
 }
 
 .beam {
