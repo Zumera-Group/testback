@@ -1,5 +1,5 @@
 .grid {
-  --gutter: #{$container-padding-x};
+  --gutter: #{$container-padding-x / 2};
 
   @include push-auto-x();
   padding-left: var(--gutter);
