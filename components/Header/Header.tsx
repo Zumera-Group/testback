@@ -38,7 +38,11 @@ export const Header = ({
     });
     if (darkBg) return false;
     if (!hasHeroSection) return true;
-    return (hasHeroSection.specificContentModule as HeroSectionModule).type !== 'home';
+    return (
+      (hasHeroSection.specificContentModule as HeroSectionModule).type !== 'home'
+      &&
+      (hasHeroSection.specificContentModule as HeroSectionModule).type !== 'primary'
+    )
   }
 
   const getLogoAsset = () => {
