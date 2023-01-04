@@ -1,5 +1,6 @@
 .sectors {
   margin-top: $gutter * 2;
+  --gutter: #{$container-padding-x / 2};
 }
 
 .sectorWrapper {
