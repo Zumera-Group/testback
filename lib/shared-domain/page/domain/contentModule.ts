@@ -522,6 +522,7 @@ export class HeroSectionModule extends BaseModule {
   description: any[];
   type:
     | 'home'
+    | 'primary'
     | 'about-us'
     | 'sector'
     | 'transaction'
@@ -551,7 +552,6 @@ export class HeroSectionModule extends BaseModule {
     if (this.type === 'home') return sectionImages.homeBgSection[screen].src;
     if (this.type === 'job-landing')
       return sectionImages.jobLandingBgSection[screen].src;
-    if (this.type === 'level1') return sectionImages.level1BgImage.src;
     if (this.type === 'about-us') {
       return sectionImages.aboutUsBgSection[screen].src;
     }
