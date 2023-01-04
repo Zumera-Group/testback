@@ -1,0 +1,5 @@
+.wrapper {
+  & > * {
+    padding-left: calc((100vw - #{$container-max-width}) / 2);
+  }
+}
