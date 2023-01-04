@@ -8,6 +8,7 @@
   @include breakpoint-up(lg) {
     grid-template-columns: 1.4fr 1fr;
   }
+  margin-top: $gutter * 3;
   & ~ .cards {
     margin-top: var(--gutter);
   }
