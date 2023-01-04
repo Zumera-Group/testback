@@ -1,0 +1,13 @@
+.teamGrid {
+  --gutter: #{$container-padding-x / 2};
+  margin-top: $gutter * 2.5;
+}
+
+.teamColumn {
+  margin-top: var(--gutter);
+  margin-bottom: var(--gutter);
+  & > * {
+    height: 100%;
+    aspect-ratio: 1 / 1;
+  }
+}
