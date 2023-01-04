@@ -523,7 +523,6 @@ export class HeroSectionModule extends BaseModule {
   type:
     | 'home'
     | 'primary'
-    | 'about-us'
     | 'sector'
     | 'transaction'
     | 'news'
