@@ -9,11 +9,9 @@
 }
 
 // Purple callout box
-// If nesting a Grid component,
-// set $child-is-grid: true to compensate for GridColumn X spacing
-@mixin callout-box($child-is-grid: false) {
-  background-color: $secondary;
-  color: $white;
+@mixin callout-box($bg: $secondary, $color: $white) {
+  background-color: $bg;
+  color: $color;
   padding: $gutter * 2;
   @include breakpoint-up(lg) {
     padding: $gutter * 3
