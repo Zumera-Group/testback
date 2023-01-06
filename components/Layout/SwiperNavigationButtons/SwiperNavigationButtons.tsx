@@ -2,14 +2,14 @@ import { forwardRef } from "react";
 
 import { Icon } from 'components/Icon';
 
-import styles from './NavigationButtons.module.scss';
+import styles from './SwiperNavigationButtons.module.scss';
 
 interface ButtonProps {
   type: 'prev' | 'next';
   ref: any;
 };
 
-const NavigationButtonComponent: React.ForwardRefRenderFunction<HTMLButtonElement, ButtonProps> = ({ type }, ref) => {
+const SwiperNavigationButtonComponent: React.ForwardRefRenderFunction<HTMLButtonElement, ButtonProps> = ({ type }, ref) => {
   
   const buttonType = () => {
     let title: string, icon: string;
@@ -42,15 +42,15 @@ const NavigationButtonComponent: React.ForwardRefRenderFunction<HTMLButtonElemen
   );
 };
 
-const NavigationButton = forwardRef(NavigationButtonComponent);
+const SwiperNavigationButton = forwardRef(SwiperNavigationButtonComponent);
 
-export const NavigationButtons = ({ prev, next }) => {
+export const SwiperNavigationButtons = ({ prev, next }) => {
   return (
     <div className={styles.navigationButtons}>
-      <NavigationButton type={'prev'} ref={prev} />
-      <NavigationButton type={'next'} ref={next} />
+      <SwiperNavigationButton type={'prev'} ref={prev} />
+      <SwiperNavigationButton type={'next'} ref={next} />
     </div>
   );
 }
 
-export default NavigationButtons;
+export default SwiperNavigationButtons;
