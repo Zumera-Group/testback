@@ -1,0 +1,24 @@
+.loader {
+  display: block;
+  text-align: center;
+  & > span {
+    display: block;
+    margin: $gutter * 3 auto;
+    width: 1.66rem;
+    height: 1.66rem;
+    border: 3px solid $secondary;
+    border-right-color: transparent;
+    border-radius: 50%;
+    transform-origin: 50% 50%;
+    animation-name: loader;
+    animation-duration: 1.25s;
+    animation-iteration-count: infinite;
+    animation-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1.000); /* easeInOutCubic */
+  }
+}
+
+@keyframes loader {
+  100% {
+    transform: rotate(1080deg);
+  }
+}
