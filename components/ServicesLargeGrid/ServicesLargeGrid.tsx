@@ -27,7 +27,7 @@ export const ServicesLargeGrid = ({ ...rest }) => {
                 headingType={'h3'}
                 align={'left'} />
             </GridColumn>
-            {services?.length > 0 && (
+            {Array.isArray(services) && services?.length > 0 && (
               <GridColumn sm={12} md={8} lg={7}>
                 <Services services={services} linkText={linkText} />
               </GridColumn>
