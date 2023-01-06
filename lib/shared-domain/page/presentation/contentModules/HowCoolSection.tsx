@@ -19,16 +19,7 @@ export const HowCoolSection: React.FC<{
 }> = ({ specificContentModule }) => {
   const isMobile = useBreakpointValue({ base: true, lg: false });
   return (
-    <FlexCol
-      backgroundImage={
-        isMobile
-          ? `url(${specificContentModule.getBackgroundImage('bgMobile')})`
-          : `url(${specificContentModule.getBackgroundImage('bg')})`
-      }
-      backgroundPosition="center"
-      backgroundSize="cover"
-      backgroundRepeat="no-repeat"
-    >
+    <FlexCol>
       <SectionContainer py={isMobile ? 'sm' : 'lg'}>
         <Flex direction={{ base: 'column', lg: 'row' }}>
           <Box width={{ base: '100%', lg: '45%' }} mr={5} mt={isMobile ? 0 : 3}>
@@ -62,7 +53,7 @@ export const HowCoolSection: React.FC<{
             justify="flex-start"
             width={{ base: '100%', lg: '50%' }}
           >
-            <FlexRow position="relative" mr={1} mb={5} height="80px">
+            {/* <FlexRow position="relative" mr={1} mb={5} height="80px">
               <Box position="absolute" height="80px" width="100px" right={5}>
                 <Image unoptimized
                   loading="lazy"
@@ -72,7 +63,7 @@ export const HowCoolSection: React.FC<{
                   width="100px"
                 />
               </Box>
-            </FlexRow>
+            </FlexRow> */}
             <P
               variant="howCoolQuoteP"
               color={colors.text.light}

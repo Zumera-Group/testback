@@ -21,13 +21,7 @@ export const AboutUsSection: React.FC<{
 
   return (
     <></>
-    // <FlexCol
-    //   backgroundImage={`url(${specificContentModule.getBackgroundImage()})`}
-    //   backgroundPosition="center"
-    //   backgroundSize="cover"
-    //   backgroundRepeat="no-repeat"
-    //   backgroundAttachment={!isMobile && 'fixed'}
-    // >
+    // <FlexCol>
     //   <SectionContainer py="md">
     //     <Box width={{ base: '100%', lg: '50%' }}>
     //       <TitleWithSubtitleAndDescription

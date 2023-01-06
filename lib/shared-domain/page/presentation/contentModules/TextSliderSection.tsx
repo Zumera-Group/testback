@@ -92,10 +92,6 @@ export const TextSliderSection: React.FC<{
               <Box
                 boxShadow="3px 5px 20px rgba(0, 29, 26, 0.25)"
                 height={{ base: '350px', md: '300px' }}
-                backgroundImage={`url(${specificContentModule.getBackgroundImage()})`}
-                backgroundPosition="center"
-                backgroundSize="cover"
-                backgroundRepeat="no-repeat"
                 key={index}
                 position="relative"
                 width="100%"

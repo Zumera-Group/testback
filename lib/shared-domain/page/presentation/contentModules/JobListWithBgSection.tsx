@@ -75,11 +75,6 @@ export const JobListWithBgSection: React.FC<{
     <FlexCol
       width="100%"
       justifyContent="center"
-      backgroundImage={`url(${specificContentModule.getBackgroundImage()})`}
-      backgroundPosition="center"
-      backgroundSize="cover"
-      backgroundRepeat="no-repeat"
-      backgroundAttachment={!isMobile && 'fixed'}
     >
       <SectionContainer py="lg">
         <Box mb={6} textAlign="center" maxWidth="700px" mx="auto">

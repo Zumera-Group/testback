@@ -17,15 +17,6 @@ export const HeadlineWithBackgroundSection: React.FC<{
     <FlexCol
       width="100%"
       justifyContent="center"
-      backgroundImage={
-        specificContentModule?.image?.asset?.url
-          ? specificContentModule?.image?.asset?.url
-          : `url(${specificContentModule.getBackgroundImage()})`
-      }
-      backgroundPosition="center"
-      backgroundSize="cover"
-      backgroundRepeat="no-repeat"
-      backgroundAttachment={!isMobile && 'fixed'}
     >
       <SectionContainer py="xl">
         <Box py={{ base: 4, lg: 0 }} textAlign="center">

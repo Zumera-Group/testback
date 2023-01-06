@@ -11,12 +11,7 @@ export const FactsAndNumbersCDISection: React.FC<{
   specificContentModule: FactsAndNumbersCDISectionModule;
 }> = ({ specificContentModule }) => {
   return (
-    <FlexCol
-      backgroundImage={`url(${specificContentModule.getBackgroundImage()})`}
-      backgroundPosition={{ base: 'left', md: 'center' }}
-      backgroundSize="cover"
-      backgroundRepeat="no-repeat"
-    >
+    <FlexCol>
       <SectionContainer py="md">
         <Box mb={8} width={{ base: '100%', lg: '50%' }}>
           <TitleWithSubtitleAndDescription {...specificContentModule} />
