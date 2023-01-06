@@ -23,13 +23,7 @@ export const TrustSection: React.FC<{
 
   return (
     <></>
-    // <FlexCol
-    //   backgroundImage={`url(${specificContentModule.getBackgroundImage()})`}
-    //   backgroundPosition="center"
-    //   backgroundSize="cover"
-    //   backgroundRepeat="no-repeat"
-    //   backgroundAttachment={!isMobile && 'fixed'}
-    // >
+    // <FlexCol>
     //   <SectionContainer py="md" px="md">
     //     <Flex direction={{ base: 'column', md: 'row' }}>
     //       {specificContentModule.textElements.map((t, index) => (
