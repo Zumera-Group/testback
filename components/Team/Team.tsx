@@ -1,10 +1,16 @@
 import { useRef } from 'react';
 
-import { Section, Container, Grid, GridColumn } from 'components/Layout';
+import {
+  Section,
+  Container,
+  Grid,
+  GridColumn,
+  SwiperPeople,
+  SwiperNavigationButtons
+} from 'components/Layout';
 import { SectionHeading } from 'components/SectionHeading';
 import { Employee } from 'components/NewsGrid';
 
-import { SwiperPeople, NavigationButtons } from 'components/Layout/SwiperPeople';
 import { SwiperSlide } from 'swiper/react';
 
 import { useFetchEmployees } from 'lib/shared-domain/employees/application/useGetEmployees';
@@ -43,7 +49,8 @@ export const Team: React.FC<Props> = ({ ...rest }) => {
         <Grid
           fullWidth={true}
           justifyContent={'space-between'}
-          alignItems={'end'}>
+          alignItems={'end'}
+        >
           <GridColumn xs={12} sm={6} md={6} lg={6}>
             <SectionHeading
               title={title}
@@ -52,9 +59,10 @@ export const Team: React.FC<Props> = ({ ...rest }) => {
             />
           </GridColumn>
           <GridColumn xs={12} sm={6} md={6} lg={6} className={styles.navigationColumn}>
-            <NavigationButtons
+            <SwiperNavigationButtons
               prev={swiperPrevRef}
-              next={swiperNextRef} />
+              next={swiperNextRef}
+            />
           </GridColumn>
         </Grid>
       </Container>
