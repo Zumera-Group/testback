@@ -1,0 +1,23 @@
+.carousel {
+  margin-top: $gutter * 2;
+}
+
+.slide {
+  height: auto;
+  align-self: stretch;
+  & > * {
+    height: 100%;
+  }
+}
+
+.navigationColumn {
+  display: flex;
+  justify-content: flex-start;
+  margin-top: $gutter;
+  margin-bottom: 0;
+  @include breakpoint-up(sm) {
+    justify-content: flex-end;
+    margin-top: 0;
+    margin-bottom: $paragraphs-margin-bottom;
+  }
+}
