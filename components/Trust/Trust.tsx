@@ -20,8 +20,8 @@ export const Trust = ({ ...rest }) => {
   return (
     <Section
       size={'sm'}
-      bg={'light'}
-      color={'primary'}
+      bg={'secondary'}
+      color={'white'}
     >
       <Container>
         <Grid

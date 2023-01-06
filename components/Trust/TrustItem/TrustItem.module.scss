@@ -1,17 +1,15 @@
 .trustItem {
   $spacing: $gutter;
-
   position: relative;
   padding: $spacing;
   padding-top: $spacing * 2;
-  @include divider(left, $primary);
+  @include divider(left, $white);
   margin-top: $spacing * 0.5;
   margin-bottom: $spacing * 0.5;
   @include breakpoint-up(md) {
     margin-top: $spacing * 1.5;
     margin-bottom: $spacing * 1.5;
   }
-
   &:before {
     content: '';
     position: absolute;
@@ -19,13 +17,16 @@
     left: -$spacing;
     height: $border-width;
     width: 100%;
-    @include divider(top, $primary);
+    @include divider(top, $white);
   }
 }
 
 .title {
   margin: 0;
-  font-size: $h2-font-size;
+  font-size: $h1-font-size;
+  @include breakpoint-up(md) {
+    font-size: $h2-font-size;
+  }
   font-weight: $font-weight-light;
 }
 
