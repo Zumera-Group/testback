@@ -1,12 +1,5 @@
 .textElement {
-  --padding: #{$gutter * 2};
-  @include breakpoint-up(lg) {
-    --padding: #{$gutter * 3};
-  }
-  background-color: $secondary;
-  color: $white;
-
-  padding: var(--padding);
+  @include callout-box();
 }
 
 .textColumn {
