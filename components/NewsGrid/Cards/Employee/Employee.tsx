@@ -13,8 +13,8 @@ export const Employee = ({ article }) => {
   if (!article) return null;
   const name = getEmployeeFullName(article);
   const jobTitle = article.jobTitle;
-  const imageUrl = article.newsGridPicture?.picture?.asset?.url;
-  const image = sanityImageUrlFor(imageUrl).height(800).auto('format').url();
+  const imageUrl = article.newsGridPicture?.picture?.asset?.url || article.cardPicture?.asset?.url;
+  const image = sanityImageUrlFor(imageUrl)?.height(800).auto('format').url();
   const href = links().employees(article);
 
   return (
@@ -24,16 +24,21 @@ export const Employee = ({ article }) => {
         href={href}>
           <a className={styles.link}>
             <div className={styles.imageWrapper}>
-              <div className={styles.imageWrapper_inner}>
-                <Image
-                  unoptimized
-                  src={image}
-                  alt={name}
-                  objectFit={'cover'}
-                  objectPosition={'center center'}
-                  layout="fill"
-                  className={styles.image}
-                />
+              <div className={[
+                styles.imageWrapper_inner,
+                !image ? styles.imageWrapper_inner__noImage : '',
+              ].join(' ')}>
+                {image && (
+                  <Image
+                    unoptimized
+                    src={image}
+                    alt={name}
+                    objectFit={'cover'}
+                    objectPosition={'center center'}
+                    layout="fill"
+                    className={styles.image}
+                  />
+                )}
               </div>
             </div>
             <div className={styles.body}>
