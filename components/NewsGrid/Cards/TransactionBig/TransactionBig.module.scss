@@ -23,7 +23,9 @@
   @include hover-state() {
     color: inherit;
     .title,
-    .date,
+    .date {
+      opacity: 0.75;
+    }
     svg:not(.beam) {
       color: $tertiary;
     }
@@ -44,6 +46,7 @@
   text-align: center;
   padding: $gutter * 1.5;
   min-height: calc(7rem + 3vw);
+  user-select: none;
   @media screen and (min-width: $container-max-width) {
     min-height: 10rem;
   }
@@ -72,8 +75,8 @@
     padding: $gutter * 1.5;
   }
   flex: 1;
-  background-color: $white;
-  color: $primary;
+  background-color: $secondary;
+  color: $white;
   svg {
     margin-top: auto;
   }
@@ -84,7 +87,7 @@
   display: block;
   color: inherit;
   font-size: $h5-font-size;
-  transition: color $timing-lg $ease-out;
+  transition: opacity $timing-lg $ease-out;
 }
 
 .date {
