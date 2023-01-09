@@ -39,6 +39,7 @@
 }
 
 .logosCover {
+  position: relative;
   background-color: $white;
   display: flex;
   justify-content: center;
@@ -49,6 +50,25 @@
   user-select: none;
   @media screen and (min-width: $container-max-width) {
     min-height: 10rem;
+  }
+  &:before,
+  &:after {
+    content: '';
+    position: absolute;
+  }
+  &:before {
+    top: -$gutter;
+    left: 0;
+    height: calc(100% + #{$gutter});
+    width: $border-width;
+    @include divider(left, $primary, true);
+  }
+  &:after {
+    top: 0;
+    left: -$gutter;
+    height: $border-width;
+    width: calc(100% + #{$gutter});
+    @include divider(top, $primary, true);
   }
 }
 

@@ -12,7 +12,6 @@ export const SwiperTransactions = ({ prevButton, nextButton, maxSlidesToShow, cl
   
   const breakpoint_LG = parseInt(SCREEN_SIZE_LG);
   const breakpoint_SM = parseInt(SCREEN_SIZE_SM);
-  const containerPaddingX = parseInt(CONTAINER_PADDING_X);
 
   useEffect(() => {
     if (!swiper || !prevButton.current || !nextButton.current) return;
@@ -27,7 +26,7 @@ export const SwiperTransactions = ({ prevButton, nextButton, maxSlidesToShow, cl
     observer: true,
     observeParents: true,
     onSwiper: setSwiper,
-    spaceBetween: containerPaddingX,
+    spaceBetween: 0,
     slidesPerView: 1,
     breakpoints: {
       [breakpoint_SM]: {

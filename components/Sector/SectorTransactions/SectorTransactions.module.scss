@@ -10,6 +10,7 @@
   align-self: stretch;
   & > * {
     height: 100%;
+    padding: $gutter;
   }
 }
 

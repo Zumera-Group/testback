@@ -4,14 +4,18 @@
   border-width: 0;
 }
 
-@mixin divider($border-side: top, $color: $white) {
+@mixin divider($border-side: top, $color: $white, $is-transaction: false) {
   $sides: (top, bottom, left, right);
   $gradient-angle: if($border-side == left or $border-side == right, 180deg, 90deg);
   @extend %divider-base;
   @each $side in $sides {
     @if ($border-side == $side) {
       border-#{$border-side}-width: $border-width;
-      border-image: linear-gradient($gradient-angle, rgba($color, 0) 0%, $color 50%, rgba($color, 0) 100%) 1;
+      @if ($is-transaction) {
+        border-image: linear-gradient($gradient-angle, rgba($color, 0) 0%, $color 15%, $color 30%, rgba($color, 0) 100%) 1;
+      } @else {
+        border-image: linear-gradient($gradient-angle, rgba($color, 0) 0%, $color 50%, rgba($color, 0) 100%) 1;
+      }
     }
   }
 }
