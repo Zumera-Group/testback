@@ -37,7 +37,7 @@ export const SectionHeading: React.FC<Props> = ({
       {Array.isArray(description) ? (
         <SanityBlockContent text={description} />
       ) : (
-        <p>{description}</p>
+        <p className={styles.textDescription}>{description}</p>
       )}
     </div>
   );
