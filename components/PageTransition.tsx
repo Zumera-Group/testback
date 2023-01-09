@@ -15,3 +15,5 @@ export const PageTransition: React.FC<{ slug: string }> = ({ slug, children }) =
     </>
   );
 };
+
+export default PageTransition;

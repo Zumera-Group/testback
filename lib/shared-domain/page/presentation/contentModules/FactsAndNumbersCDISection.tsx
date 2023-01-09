@@ -4,7 +4,7 @@ import { FlexCol, Box } from '../../../../../components/Layout/Flex/Flex';
 import { SectionContainer } from 'components/Layout/SectionContainer';
 import { TitleWithSubtitleAndDescription } from '../components/TitleWithSubtitleAndDescription';
 import { SimpleGrid } from '@chakra-ui/react';
-import { FactCard } from './FactsAndFiguresSection';
+import { FactCard } from './FactsAndFiguresSection_DISABLED';
 import { colors } from 'styles/foundations/colors';
 
 export const FactsAndNumbersCDISection: React.FC<{
