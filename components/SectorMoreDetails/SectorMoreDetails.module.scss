@@ -1,0 +1,27 @@
+.calloutBox {
+  @include callout-box();
+  margin-top: var(--section-spacing);
+
+  section,
+  *[class^="Container"] {
+    padding: 0 !important;
+    background-color: transparent !important;
+    color: inherit !important;
+  }
+
+  &+* {
+    margin-top: var(--section-spacing);
+  }
+}
+
+.imageWrapper {
+  --spacing-y: #{$gutter};
+
+  @include breakpoint-down(md) {
+    margin-top: var(--spacing-y);
+  }
+
+  img {
+    max-width: 100%;
+  }
+}
