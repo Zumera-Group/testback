@@ -66,7 +66,8 @@ export const Gradient = ({ parent }) => {
 
     // Mouse / tilt controls
     const handleMouseMove = (event) => setMousePosition(getCursorPosition(event, parentEl));
-    const handleOrientation = (event) => setMousePosition(getTiltPosition(event, isPortrait));
+    // const handleOrientation = (event) => setMousePosition(getTiltPosition(event, isPortrait));
+    const handleOrientation = (event) => setMousePosition(getTiltPosition(event, true));
     window.addEventListener('mousemove', handleMouseMove, true);
     window.addEventListener('deviceorientation', handleOrientation, true);
 
