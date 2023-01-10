@@ -57,6 +57,7 @@ export const AllTransactionsCarousel = ({ ...rest }) => {
         prevButton={swiperPrevRef}
         nextButton={swiperNextRef}
         classes={styles.carousel}
+        maxSlidesToShow={3}
       >
         {transactions
           ?.slice(0, 50)

@@ -2,7 +2,7 @@ import { AllTransactionsCarouselSectionModule } from 'lib/shared-domain/page/dom
 import { Transaction } from 'lib/shared-domain/transactions/domain';
 
 export const filterTransactions = (
-  specificContentModule: AllTransactionsCarouselSectionModule,
+  specificContentModule: AllTransactionsCarouselSectionModule | any,
   transactions: Transaction[],
 ) => {
   try {
