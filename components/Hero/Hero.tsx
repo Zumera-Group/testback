@@ -4,11 +4,7 @@ interface Props {}
 
 const Hero: React.FC<Props> = ({ ...rest }) => {
   console.log(rest, 'rest');
-  return (
-    <div className={styles.heroContainer}>
-      this is our hero!!
-    </div>
-  );
+  return <div className={styles.heroContainer}>STAGING TEST</div>;
 };
 
 export default Hero;
