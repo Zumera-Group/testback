@@ -14,10 +14,10 @@ export const staggerChildrenAnimationProps = {
 
 export const verticalLineAnimationProps = {
   initial: {
-    scaleY: 0,
+    // scaleY: 0,
   },
   animate: {
-    scaleY: 1,
+    // scaleY: 1,
     originY: '100%',
     originX: '50%',
     transition: {

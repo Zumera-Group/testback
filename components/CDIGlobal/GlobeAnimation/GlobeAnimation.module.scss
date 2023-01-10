@@ -33,7 +33,7 @@
 
 .locationPoints {
   fill: var(--fill-dots);
-  circle, path {
-    filter: drop-shadow(0px 0px 0.33rem var(--glow-color));
-  }
+  // circle, path {
+  //   filter: drop-shadow(0px 0px 0.33rem var(--glow-color));
+  // }
 }
