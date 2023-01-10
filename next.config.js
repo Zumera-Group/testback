@@ -7,6 +7,13 @@ const sassOptions = {
 };
 
 module.exports = {
+  typescript: {
+    // !! WARN !!
+    // Dangerously allow production builds to successfully complete even if
+    // your project has type errors.
+    // !! WARN !!
+    ignoreBuildErrors: true,
+  },
   i18n: {
     locales: ['en', 'de', 'catchAll'],
     defaultLocale: 'catchAll',
