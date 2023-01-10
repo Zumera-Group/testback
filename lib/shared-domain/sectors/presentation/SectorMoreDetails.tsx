@@ -8,7 +8,6 @@ export const SectorMoreDetails: React.FC<{ sector: Sector }> = ({
   sector,
 }) => {
   if (!sector.moreDetailsSection) return null;
-  console.log(sector, 'sector')
   return (
     <SectorMoreDetailsWrapper {...sector.moreDetailsSection} />
   );
