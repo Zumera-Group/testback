@@ -1,21 +1,16 @@
 import React, { useEffect } from 'react';
-import { ChakraProvider } from '@chakra-ui/react';
-import { CacheProvider } from '@emotion/react';
-import emotionCache from 'lib/emotion.cache';
 import { MarketingParamsService } from 'lib/shared-domain/salesforce/application/marketingParamsService';
 import Script from 'next/script';
 import { IntercomProvider } from 'react-use-intercom';
-import theme from '../styles/theme';
 import Head from 'next/head';
-import './styles.css';
+import '../styles/globals.scss';
 
 const INTERCOM_APP_ID = 'lwrptr1h';
 
-function MyApp({ Component, pageProps }) {
+function MyApp({ Component, pageProps, router }) {
   useEffect(() => {
     const element = document.querySelector('html');
     element.classList.add('mobileLoaded');
-    localStorage.removeItem('chakra-ui-color-mode');
   }, []);
   MarketingParamsService.useSaveOnMount();
 
@@ -56,19 +51,14 @@ function MyApp({ Component, pageProps }) {
     ga('send', 'pageview');`,
         }}
       />
-
-      <CacheProvider value={emotionCache}>
-        <ChakraProvider resetCSS theme={theme}>
-          <IntercomProvider
-            initializeDelay={10000}
-            appId={INTERCOM_APP_ID}
-            autoBoot
-            autoBootProps={{ hideDefaultLauncher: true }}
-          >
-            <Component {...pageProps} />
-          </IntercomProvider>
-        </ChakraProvider>
-      </CacheProvider>
+      <IntercomProvider
+        initializeDelay={10000}
+        appId={INTERCOM_APP_ID}
+        autoBoot
+        autoBootProps={{ hideDefaultLauncher: true }}
+      >
+        <Component {...pageProps} key={router.pathname} />
+      </IntercomProvider>
     </>
   );
 }

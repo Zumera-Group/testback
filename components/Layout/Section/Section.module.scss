@@ -1,0 +1,44 @@
+.section {
+  display: block;
+  position: relative;
+  width: 100%;
+  @each $name, $size in $section-sizes {
+    &.size-#{$name} {
+      --section-size: #{$size * .75};
+      @include breakpoint-up(lg) {
+        --section-size: #{$size};
+      }
+      padding-top: var(--section-size);
+      padding-bottom: var(--section-size);
+    }
+  }
+  @each $name, $bg in $section-bgs {
+    &.bg-#{$name} {
+      @if ($name == 'gradient') {
+        @include zumera-gradient(100%, 0%);
+      } @else {
+        background-color: $bg;
+      }
+      &:not(.divider) + &.bg-#{$name} {
+        padding-top: calc(var(--section-size) / 2);
+      }
+    }
+  }
+  @each $name, $color in $section-colors {
+    &.color-#{$name} {
+      color: $color;
+      &.divider:after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100%;
+        max-width: calc(#{$container-max-width} - #{$container-padding-x * 2});
+        height: $border-width;
+        @include divider(bottom, $color);
+      }
+    }
+  }
+}
+

@@ -49,7 +49,8 @@ const QuestionTeaserItem: React.FC<{ urlToTool: string; text: string }> = ({
   text,
 }) => {
   const [ref, isHover] = useHover();
-  const isMobile = useBreakpointValue({ base: true, md: false });
+  // const isMobile = useBreakpointValue({ base: true, md: false });
+  const isMobile = false;
 
   const fontWeight = isHover ? fontWeights.highlight : fontWeights.regular;
   const color = isHover ? colors.white : colors.white;
@@ -113,8 +114,10 @@ const QuestionTeaser: React.FC<{ urlToTool: string; question: Question }> = ({
   question,
 }) => {
   const BOX_SHADOW = '0px 20px 40px rgba(12, 78, 64, 0.35)';
-  const isMobile = useBreakpointValue({ base: true, lg: false });
-  const isColumn = useBreakpointValue({ base: true, md: false });
+  // const isMobile = useBreakpointValue({ base: true, lg: false });
+  // const isColumn = useBreakpointValue({ base: true, md: false });
+  const isMobile = false;
+  const isColumn = false;
   const FlexRowOrColumnWrapper = isColumn ? FlexCol : FlexRow;
 
   const renderQuestion = () => {
@@ -177,7 +180,8 @@ const QuestionTeaser: React.FC<{ urlToTool: string; question: Question }> = ({
 export const VTLandingHero: React.FC<{ landing: VTLanding }> = ({
   landing,
 }) => {
-  const isMobile = useBreakpointValue({ base: true, lg: false });
+  // const isMobile = useBreakpointValue({ base: true, lg: false });
+  const isMobile = false;
   const urlToTool = links().questionnaires(landing?.questionnaire as any);
 
   return (

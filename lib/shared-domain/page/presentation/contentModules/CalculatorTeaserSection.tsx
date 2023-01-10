@@ -7,14 +7,7 @@ export const CalculatorTeaserSection: React.FC<{
   specificContentModule: CalculatorTeaserSectionModule;
 }> = ({ specificContentModule }) => {
   return (
-    <FlexCol
-      backgroundImage={
-        `url(${specificContentModule.getBackgroundImage()})` || ''
-      }
-      backgroundPosition="center"
-      backgroundSize="cover"
-      backgroundRepeat="no-repeat"
-    >
+    <FlexCol>
       <CalculatorTeaser
         {...specificContentModule}
         questionnaireSlug={specificContentModule.questionnaireSlug}

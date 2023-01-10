@@ -69,10 +69,6 @@ export class IndustryReportSectionModule extends BaseModule {
 
     this.industryReport = fields.industryReport;
   }
-
-  getBackgroundImage(imageSrc: string): string {
-    return sectionImages.industryReportSection[imageSrc].src;
-  }
 }
 
 export class DisclaimerSectionModule extends BaseModule {
@@ -148,10 +144,6 @@ export class HowCoolSectionModule extends BaseModule {
     this.bulletPoints = fields.bulletPoints;
     this.quote = fields.quote;
   }
-
-  getBackgroundImage(imageSrc: string): string {
-    return sectionImages.howCoolSection[imageSrc].src;
-  }
 }
 
 export class AboutTheToolSectionModule extends BaseModule {
@@ -173,10 +165,6 @@ export class AboutTheToolSectionModule extends BaseModule {
     this.buttonText = fields.buttonText;
     this.linkUrl = fields.linkUrl;
     this.facts = fields.facts;
-  }
-
-  getBackgroundImage(): string {
-    return sectionImages.aboutTheToolBgImage.src;
   }
 }
 
@@ -289,11 +277,6 @@ export class CalculatorTeaserSectionModule extends BaseModule {
 
   get questionnaireSlug(): string {
     return this.goToQuestionnaire?.questionnaireSlug?.current;
-  }
-
-  getBackgroundImage(): string {
-    if (!this.hasBackgroundImage) return;
-    return sectionImages.calculatorTeaserBgImg.src;
   }
 }
 
@@ -419,10 +402,6 @@ export class FactsAndFiguresSectionModule extends BaseModule {
     this.description = fields.description;
     this.facts = fields.facts;
   }
-
-  getBackgroundImage(): string {
-    return sectionImages.factsAndFiguresSectionBgImage.src;
-  }
 }
 
 export class TitleAndDescriptionItemsGridModule extends BaseModule {
@@ -452,10 +431,6 @@ export class FactsAndNumbersCDISectionModule extends BaseModule {
     this.subtitle = fields.subtitle;
     this.description = fields.description;
     this.facts = fields.facts;
-  }
-
-  getBackgroundImage(): string {
-    return sectionImages.factsAndNumbersCDISectionBgImage.src;
   }
 }
 
@@ -522,12 +497,9 @@ export class HeroSectionModule extends BaseModule {
   description: any[];
   type:
     | 'home'
-    | 'level1'
-    | 'level2'
-    | 'about-us'
+    | 'primary'
     | 'sector'
     | 'transaction'
-    | 'news'
     | 'career'
     | 'job-landing'
     | 'termsAndConditions';
@@ -545,30 +517,6 @@ export class HeroSectionModule extends BaseModule {
     type: 'normal' | 'underline';
   };
 
-  getBackgroundImage(screen?: string): string | null {
-    if ((screen === 'bg' || !screen) && this.heroBgImage)
-      return this.heroBgImage.asset.url;
-    if (screen === 'bgMobile' && this.heroMobileBgImage)
-      return this.heroMobileBgImage.asset.url;
-    if (this.type === 'home') return sectionImages.homeBgSection[screen].src;
-    if (this.type === 'job-landing')
-      return sectionImages.jobLandingBgSection[screen].src;
-    if (this.type === 'level1') return sectionImages.level1BgImage.src;
-    if (this.type === 'about-us') {
-      return sectionImages.aboutUsBgSection[screen].src;
-    }
-    if (this.type === 'career') {
-      return sectionImages.careerSection[screen]?.src;
-    }
-    if (this.type === 'sector') return sectionImages.sectorBgImage.src;
-    if (this.type === 'transaction')
-      return sectionImages.transactionBgImage.src;
-    if (this.type === 'news') return sectionImages.newsBgImage.src;
-    if (this.type === 'termsAndConditions')
-      return sectionImages.termsAndConditionsBg.src;
-    return null;
-  }
-
   constructor(fields: Record<string, any>) {
     super();
     this.title = fields.title;
@@ -576,8 +524,6 @@ export class HeroSectionModule extends BaseModule {
     this.description = fields.description;
     this.type = fields.type;
     this.button = fields.button;
-    this.heroBgImage = fields.heroBgImage;
-    this.heroMobileBgImage = fields.heroMobileBgImage;
   }
 }
 
@@ -618,10 +564,6 @@ export class ServicesLargeGridSectionModule extends BaseModule {
 
 export class TrustSectionModule extends BaseModule {
   textElements: { title: string; subtitle: string }[];
-
-  getBackgroundImage(): string {
-    return sectionImages.trustSectionBgImage.src;
-  }
 
   constructor(fields: Record<string, any>) {
     super();
@@ -670,10 +612,6 @@ export class AboutUsSectionModule extends BaseModule {
     };
   };
   bulletPoints: { title: string; texts: string[] }[];
-
-  getBackgroundImage(): string {
-    return sectionImages.aboutUsSectionBgImage.src;
-  }
 
   constructor(fields: Record<string, any>) {
     super();
@@ -798,10 +736,6 @@ export class HeadlineWithBackgroundSectionModule extends BaseModule {
     };
   };
 
-  getBackgroundImage(): string {
-    return sectionImages.headlineWithBackgroundSectionBg.src;
-  }
-
   constructor(fields: Record<string, any>) {
     super();
 
@@ -831,10 +765,6 @@ export class JobListWithBgSectionModule extends BaseModule {
   title: { text: string; color: string }[];
   description: string;
   unit: 'saxco' | 'digital' | 'all';
-
-  getBackgroundImage(): string {
-    return sectionImages.jobListWithBgSectionBg.src;
-  }
 
   constructor(fields: Record<string, any>) {
     super();
@@ -885,10 +815,6 @@ export class TextSliderSectionModule extends BaseModule {
   image: {
     asset: { url: string };
   };
-
-  getBackgroundImage(): string {
-    return sectionImages.textSliderSectionBg.src;
-  }
 
   constructor(fields: Record<string, any>) {
     super();

@@ -1,0 +1,21 @@
+.title {
+  @include sub-heading();
+}
+
+.subtitle {
+  font-size: $font-size-normal;
+  margin: 0 0 $gutter 0;
+}
+
+.content {
+  font-size: $font-size-normal;
+  margin: 0;
+  margin-bottom: var(--gutter);
+  padding-bottom: var(--gutter);
+  @include divider(bottom, $white);
+  @include breakpoint-up(lg) {
+    border: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+}

@@ -1,0 +1,73 @@
+@import '/fonts/stylesheet.css';
+@import './root';
+@import './reboot';
+@import './variables';
+@import './typography';
+
+*:focus,
+*:focus-visible {
+  outline: $focus-outline-style;
+  outline-offset: $focus-outline-offset;
+}
+
+*:focus:not(:focus-visible) {
+  outline: 0;
+}
+
+html, body {
+  font-family: $font-family;
+  font-weight: $font-weight-base;
+  width: 100%;
+}
+
+html {
+  margin: 0;
+  font-size: $font-size-base;
+  @if ($enable-font-smoothing) {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+body {
+  background-color: $body-bg;
+  color: $body-color;
+  line-height: $line-height-base;
+  &.no-scroll {
+    overflow-y: hidden;
+  }
+}
+
+::selection {
+  background: $accent;
+  color: $white;
+}
+
+::-moz-selection {
+  background: $accent;
+  color: $white;
+}
+
+a {
+  color: inherit;
+  text-decoration: none !important;
+}
+
+img {
+  height: auto;
+}
+
+#__next {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  width: 100%;
+  max-width: 100%;
+  min-height: 100vh;
+}
+
+#main {
+  flex: 1;
+  flex-grow: 1;
+  padding-top: var(--header-height);
+}

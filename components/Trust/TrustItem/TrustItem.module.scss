@@ -1,0 +1,38 @@
+.trustItem {
+  $spacing: $gutter;
+  position: relative;
+  padding: $spacing;
+  padding-top: $spacing * 2;
+  @include divider(left, $white);
+  margin-top: $spacing * 0.5;
+  margin-bottom: $spacing * 0.5;
+  @include breakpoint-up(md) {
+    margin-top: $spacing * 1.5;
+    margin-bottom: $spacing * 1.5;
+  }
+  &:before {
+    content: '';
+    position: absolute;
+    top: $spacing;
+    left: -$spacing;
+    height: $border-width;
+    width: 100%;
+    @include divider(top, $white);
+  }
+}
+
+.title {
+  margin: 0;
+  font-size: $h1-font-size;
+  @include breakpoint-up(md) {
+    font-size: $h2-font-size;
+  }
+  font-weight: $font-weight-light;
+}
+
+.subtitle {
+  margin: $gutter * 0.5 0 0 0;
+  font-size: $font-size-normal;
+  font-weight: $font-weight-medium;
+  text-transform: lowercase;
+}

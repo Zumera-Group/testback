@@ -1,0 +1,8 @@
+@mixin make-container($max-width: $container-max-width, $padding-x: $container-padding-x) {
+  position: relative;
+  width: 100%;
+  @include push-auto-x();
+  max-width: $max-width;
+  padding-left: $padding-x;
+  padding-right: $padding-x;
+}

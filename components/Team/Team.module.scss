@@ -1,0 +1,19 @@
+.swiperWrapper {
+  margin-top: $gutter * 2;
+  article {
+    aspect-ratio: 1 / 1;
+    max-width: 100%;
+  }
+}
+
+.navigationColumn {
+  display: flex;
+  justify-content: flex-start;
+  margin-top: $gutter;
+  margin-bottom: 0;
+  @include breakpoint-up(sm) {
+    justify-content: flex-end;
+    margin-top: 0;
+    margin-bottom: $paragraphs-margin-bottom;
+  }
+}

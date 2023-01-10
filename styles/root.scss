@@ -1,0 +1,12 @@
+:root {
+  @each $name, $color in $colors {
+    @include make-css-var($name, $color);
+  }
+  @include make-css-var('header-height', $header-height-desktop, false);
+}
+
+@include breakpoint-down(md) {
+  :root {
+    @include make-css-var('header-height', $header-height-mobile, false);
+  }
+}

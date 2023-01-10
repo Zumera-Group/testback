@@ -1,0 +1,48 @@
+.officials,
+.policies {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  @include breakpoint-down(sm) {
+    flex-direction: column;
+    align-items: flex-start !important;
+  }
+}
+
+.officials {
+  --spacing-y: #{$gutter};
+
+  justify-content: space-between;
+  align-items: center;
+  margin: calc(var(--spacing-y) * 2) 0 0 0;
+  padding: var(--spacing-y) 0 0 0;
+  @include divider(top, $white);
+  & > * {
+    margin-top: calc(var(--spacing-y) / 2);
+  }
+}
+
+.policies {
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding-right: calc(var(--spacing-y));
+  margin-right: auto;
+  & > * {
+    display: inline-block;
+    font-size: $font-size-small;
+    margin-top: calc(var(--spacing-y) / 2);
+    &:not(:last-child) {
+      @include breakpoint-up(sm) {
+        margin-right: calc(var(--spacing-y) * 2);
+      }
+    }
+  }
+}
+
+.logo {
+  width: 100%;
+  max-width: 6.4rem;
+  @include breakpoint-up(sm) {
+    margin-right: calc(var(--spacing-y) * 3);
+  }
+}

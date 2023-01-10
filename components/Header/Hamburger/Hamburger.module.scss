@@ -1,0 +1,13 @@
+.hamburger {
+  @include reset-button();
+  color: inherit;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: $container-padding-x;
+  margin-right: -$container-padding-x;
+  & > svg {
+    transition: color $timing-sm $ease-out;
+    fill: currentColor;
+  }
+}

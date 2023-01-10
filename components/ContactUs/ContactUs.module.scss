@@ -1,0 +1,13 @@
+.contactUs {
+  &:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    height: $border-width;
+    width: 100%;
+    max-width: calc(#{$container-max-width} - #{$container-padding-x * 2});
+    @include divider(top, $white);
+  }
+}

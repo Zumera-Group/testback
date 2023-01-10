@@ -36,7 +36,8 @@ export const TimelineSection: React.FC<{
   specificContentModule: TimelineSectionModule;
 }> = ({ specificContentModule }) => {
   const { linkText, services } = specificContentModule;
-  const isMobile = useBreakpointValue({ base: true, md: false });
+  // const isMobile = useBreakpointValue({ base: true, md: false });
+  const isMobile = false;
 
   return (
     <Box position="relative" my={10}>

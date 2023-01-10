@@ -1,0 +1,21 @@
+.message {
+  display: block;
+  padding: $gutter * 2;
+  font-size: $font-size-normal;
+  text-align: center;
+  border-radius: $border-radius-sm;
+  border-style: solid;
+  border-width: $border-width;
+  border-color: $white;
+  color: $white;
+  &__success {
+    border-color: $secondary;
+    background-color: $secondary;
+    box-shadow: $btn-box-shadow;
+  }
+  &__error {
+    border-color: $accent;
+    background-color: $accent;
+    box-shadow: $btn-box-shadow;
+  }
+}

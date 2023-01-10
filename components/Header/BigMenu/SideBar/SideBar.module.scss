@@ -1,0 +1,89 @@
+.sideBar {
+  --sidebar-bg: #{$primary};
+  --sidebar-color: #{$white};
+  --sidebar-padding-y: #{$gutter * 1.5};
+  --sidebar-padding-x: #{$container-padding-x};
+  --sidebar-link-padding-y: 1.33em;
+  --sidebar-width: 100%;
+  @include breakpoint-up(md) {
+    --sidebar-width: 20rem;
+  }
+  @include breakpoint-up(lg) {
+    --sidebar-width: 26rem;
+    --sidebar-padding-y: #{$gutter * 2};
+    --sidebar-padding-x: #{$gutter * 1.5};
+  }
+
+  position: static;
+  width: 100%;
+  max-width: var(--sidebar-width);
+  background-color: var(--sidebar-bg);
+  color: var(--sidebar-color);
+  height: 100%;
+  overflow-y: auto;
+  @include custom-scrollbar($accent, var(--sidebar-bg));
+  @include breakpoint-up(md) {
+    padding: var(--sidebar-padding-y) 0;
+  }
+}
+
+.logo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: calc(100% - calc(var(--sidebar-padding-x) * 2));
+  height: var(--header-height);
+  @include push-auto-x();
+  @include divider(bottom, $white);
+  @include breakpoint-up(md) {
+    height: auto;
+    padding: 0 0 var(--sidebar-padding-y) 0;
+  }
+}
+
+.navigation {
+  list-style: none;
+  list-style-type: none;
+  padding: 0;
+  margin: var(--sidebar-padding-y) 0 0 0;
+}
+
+.item {
+  margin: 0;
+  &__divider {
+    margin-top: var(--sidebar-link-padding-y);
+    @include divider(top, $white);
+  }
+}
+
+.link {
+  @include reset-button();
+  @include menu-item-text();
+  padding: var(--sidebar-link-padding-y) var(--sidebar-padding-x);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  color: var(--sidebar-color) !important;
+  background-color: rgba(0, 0, 0, 0);
+  transition: $btn-transition;
+  &:not(&__active) {
+    @include hover-state() {
+      background-color: rgba(0, 0, 0, 0.33);
+    }
+  }
+  @include active-state() {
+    transition: $btn-transition-active;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+  &__active {
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+  & > svg {
+    margin-left: $gutter;
+  }
+  &__languageSelector {
+    margin-top: var(--sidebar-link-padding-y);
+  }
+}

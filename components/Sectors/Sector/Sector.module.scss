@@ -1,0 +1,69 @@
+.sector {
+  $sector-bg-base: $accent;
+  $sector-bg: rgba($sector-bg-base, 0);
+  $sector-bg-hover: rgba($sector-bg-base, 1);
+  $sector-color: $primary;
+  $sector-color-hover: $white;
+  $sector-border-color: $sector-color;
+  $sector-border-color-hover: $sector-bg-base;
+  $sector-border-radius: $border-radius;
+  $sector-box-shadow: none;
+  $sector-box-shadow-hover: $btn-box-shadow;
+
+  --padding: #{$gutter};
+  @include breakpoint-up(md) {
+    --padding: #{$gutter * 1.5};
+  }
+  @include breakpoint-up(lg) {
+    --padding: #{$gutter * 2};
+  }
+
+  aspect-ratio: 1 / 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  padding: var(--padding);
+  transition: background-color $timing-md $ease-out,
+              color $timing-md $ease-out,
+              border-color $timing-md $ease-out,
+              box-shadow $timing-md $ease-out;
+
+  background-color: $sector-bg;
+  color: $sector-color;
+  border-width: $border-width;
+  border-style: solid;
+  border-color: $sector-border-color;
+  border-radius: $sector-border-radius;
+  box-shadow: $sector-box-shadow;
+  @include hover-state() {
+    background-color: $sector-bg-hover;
+    color: $sector-color-hover;
+    border-color: $sector-border-color-hover;
+    box-shadow: $sector-box-shadow-hover;
+    .imageWrapper {
+      filter: brightness(0) invert(1);
+    }
+  }
+}
+
+.imageWrapper {
+  position: relative;
+  flex: 1;
+  width: 100%;
+  height: 100%;
+  margin-bottom: var(--padding);
+  will-change: filter;
+  filter: brightness(1) invert(0);
+  transition: filter $timing-md $ease-out;
+}
+
+.name {
+  font-weight: $font-weight-base;
+  font-size: $font-size-normal;
+  line-height: $line-height-sm;
+  letter-spacing: $letter-spacing-body;
+  margin: 0 auto;
+  color: inherit;
+}

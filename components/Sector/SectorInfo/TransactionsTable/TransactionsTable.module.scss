@@ -1,0 +1,35 @@
+.title {
+  @include sub-heading();
+}
+
+.transactionsTable {
+  * {
+    font-size: $font-size-normal;
+    font-style: normal;
+  }
+  dt,
+  dd {
+    display: block;
+    margin: 0;
+  }
+  dt {
+    font-weight: $font-weight-bold;
+    margin-bottom: $gutter * 0.5;
+  }
+  dd {
+    &:not(:last-of-type) {
+      margin-bottom: $gutter * 2;
+    }
+  }
+  ul {
+    list-style: none;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+  li:not(:last-child) {
+    padding-bottom: $gutter * 0.5;
+    margin-bottom: $gutter * 0.5;
+    @include divider(bottom, $white);
+  }
+}

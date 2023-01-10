@@ -1,0 +1,31 @@
+.button {
+  @include reset-button();
+  color: $primary;
+  transition: $btn-transition;
+  svg {
+    transform: scale(1);
+    transform-origin: 50% 50%;
+    will-change: transform;
+    backface-visibility: hidden;
+    transition: transform $timing-sm $ease-out;
+  }
+  @include hover-state() {
+    color: $accent;
+  }
+  @include active-state() {
+    transition: $btn-transition-active;
+    svg {
+      transform: scale(0.96);
+    }
+  }
+  &:disabled {
+    pointer-events: none;
+    opacity: $btn-disabled-opacity;
+  }
+}
+
+.navigationButtons {
+  display: inline-flex;
+  align-items: center;
+  gap: $gutter / 3;
+}

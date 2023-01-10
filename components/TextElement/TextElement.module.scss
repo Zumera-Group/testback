@@ -1,0 +1,23 @@
+.textElement {
+  @include callout-box();
+}
+
+.textColumn {
+  @include breakpoint-down(md) {
+    & ~ .textColumn {
+      margin-top: var(--padding);
+    }
+  }
+}
+
+.textElementContent {
+  * {
+    color: inherit;
+  }
+  h3, h4, h5 {
+    font-weight: $font-weight-medium;
+  }
+  & > *:last-child {
+    margin-bottom: 0;
+  }
+}

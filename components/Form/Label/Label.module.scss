@@ -1,0 +1,7 @@
+.label {
+  @include label();
+}
+
+.requiredMark {
+  color: $label-required-mark-color;
+}

@@ -1,0 +1,53 @@
+.sectorInfo {
+  --section-spacing: #{map-get($section-sizes, md) * 0.75};
+  @include breakpoint-up(lg) {
+    --section-spacing: #{map-get($section-sizes, md)};
+  }
+  margin-bottom: calc(var(--section-spacing) / 2);
+  &:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: calc(#{$container-max-width} - #{$container-padding-x * 2});
+    height: $border-width;
+    @include divider(top, $primary);
+  }
+}
+
+.calloutBox {
+  @include callout-box();
+  margin-top: var(--section-spacing);
+
+  section,
+  *[class^="Container"] {
+    padding: 0 !important;
+    background-color: transparent !important;
+    color: inherit !important;
+  }
+
+  & + * {
+    margin-top: var(--section-spacing);
+  }
+}
+
+.calloutGrid {
+  --gutter: #{$gutter * 2};
+  position: relative;
+  margin-top: var(--gutter);
+  &:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: $border-width;
+    height: 100%;
+    @include divider(left, $white);
+    @include breakpoint-down(lg) {
+      display: none;
+    }
+  }
+}

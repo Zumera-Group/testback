@@ -1,0 +1,33 @@
+.close {
+  @include reset-button();
+  padding: $container-padding-x;
+  & > svg {
+    transition: color $timing-sm $ease-out;
+    fill: currentColor;
+  }
+  @include hover-state() {
+    color: $accent;
+  }
+
+  &__mobile {
+    color: $white;
+    margin-right: -$container-padding-x;
+    @include breakpoint-up(md) {
+      display: none;
+    }
+  }
+
+  &__desktop {
+    color: $primary;
+    position: absolute;
+    top: calc(var(--header-height) / 2);
+    right: 0;
+    transform: translateY(-50%);
+    @media screen and (min-width: $container-max-width) {
+      right: calc((100vw - #{$container-max-width}) / 2);
+    }
+    @include breakpoint-down(md) {
+      display: none;
+    }
+  }
+}

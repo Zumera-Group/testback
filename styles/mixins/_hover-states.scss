@@ -1,0 +1,12 @@
+@mixin hover-state() {
+  &:hover,
+  &:focus-visible {
+    @content;
+  }
+}
+
+@mixin active-state() {
+  &:active {
+    @content;
+  }
+}

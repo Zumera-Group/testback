@@ -7,13 +7,9 @@ import Document, {
   DocumentContext,
 } from 'next/document';
 import TagManager from 'react-gtm-module';
+import { IconSprite } from 'components/Icon';
 
-import { ColorModeScript } from '@chakra-ui/react';
-import createEmotionServer from '@emotion/server/create-instance';
-import emotionCache from 'lib/emotion.cache';
 import { EnvironmentService } from 'environment.service';
-
-const { extractCritical } = createEmotionServer(emotionCache);
 
 const tagManagerArgs = {
   gtmId: 'GTM-PXQZLHF',
@@ -23,33 +19,11 @@ if (process.browser && EnvironmentService.isProduction()) {
   TagManager.initialize(tagManagerArgs);
 }
 
-export const FontFaceWorkaround = () => (
-  <style
-    dangerouslySetInnerHTML={{
-      __html: `
-            @font-face {
-                font-family: "Condor";
-                font-weight: normal;
-                font-display: swap;
-                src: url("/fonts/Condor-Regular-Testing.otf");
-            }`,
-    }}
-  />
-);
 export default class MyDocument extends Document {
   static async getInitialProps(ctx: DocumentContext) {
     const initialProps = await Document?.getInitialProps(ctx);
-    const styles = extractCritical(initialProps.html);
     return {
       ...initialProps,
-      styles: [
-        initialProps.styles,
-        <style
-          key="emotion-css"
-          dangerouslySetInnerHTML={{ __html: styles.css }}
-          data-emotion-css={styles.ids.join(' ')}
-        />,
-      ],
     };
   }
 
@@ -64,8 +38,6 @@ export default class MyDocument extends Document {
             name="viewport"
             content="width=device-width, initial-scale=1, shrink-to-fit=no"
           />
-          <link rel="preconnect" href="https://fonts.googleapis.com" />
-          <link rel="preconnect" href="https://fonts.gstatic.com" />
           <link rel="preconnect" href="https://cdn.sanity.io" />
           <link rel="dns-prefetch" href="https://cdn.sanity.io" />
           <link rel="dns-prefetch" href="https://consent.cookiefirst.com" />
@@ -73,14 +45,44 @@ export default class MyDocument extends Document {
             crossOrigin="anonymous"
             rel="preload"
             as="font"
-            type="font/otf"
-            href="/fonts/Condor-Regular-Testing.otf"
+            type="font/woff2"
+            href="/fonts/Yellix-Bold.woff2"
           />
           <link
-            rel="stylesheet"
-            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap"
+            crossOrigin="anonymous"
+            rel="preload"
+            as="font"
+            type="font/woff2"
+            href="/fonts/Yellix-BoldItalic.woff2"
           />
-          <FontFaceWorkaround />
+          <link
+            crossOrigin="anonymous"
+            rel="preload"
+            as="font"
+            type="font/woff2"
+            href="/fonts/Yellix-Light.woff2"
+          />
+          <link
+            crossOrigin="anonymous"
+            rel="preload"
+            as="font"
+            type="font/woff2"
+            href="/fonts/Yellix-LightItalic.woff2"
+          />
+          <link
+            crossOrigin="anonymous"
+            rel="preload"
+            as="font"
+            type="font/woff2"
+            href="/fonts/Yellix-Medium.woff2"
+          />
+          <link
+            crossOrigin="anonymous"
+            rel="preload"
+            as="font"
+            type="font/woff2"
+            href="/fonts/Yellix-MediumItalic.woff2"
+          />
           <link rel="shortcut icon" href="/favicon.ico" />
 
           {EnvironmentService.isProduction() && (
@@ -129,8 +131,7 @@ h.end=i=function(){s.className=s.className.replace(RegExp(' ?'+y),'')};
               }}
             ></noscript>
           )}
-
-          <ColorModeScript initialColorMode="light" />
+          <IconSprite />
           <Main />
           <NextScript />
         </body>

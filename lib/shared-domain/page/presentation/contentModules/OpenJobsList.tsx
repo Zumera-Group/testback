@@ -20,7 +20,8 @@ export const OpenJobsList: React.FC<{
   specificContentModule: OpenJobsListModule;
 }> = ({ specificContentModule }) => {
   const jobs = useFetchJobs();
-  const isMobile = useBreakpointValue({ base: true, md: false });
+  // const isMobile = useBreakpointValue({ base: true, md: false });
+  const isMobile = false;
   const [color, setColor] = useState<Record<number, string>>({});
   const jobSectionRef = useRef<HTMLDivElement>(null);
   const { setSectionRef } = useCareerRef();

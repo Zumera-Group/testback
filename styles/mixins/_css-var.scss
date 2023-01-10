@@ -1,0 +1,15 @@
+@mixin make-css-var($name, $val, $prefix: true) {
+  @if ($prefix) {
+    --#{$root-prefix}-#{$name}: #{$val};
+  } @else {
+    --#{$name}: #{$val};
+  }
+}
+
+@function css-var($name, $prefix: true) {
+  @if ($prefix) {
+    @return var(--#{$root-prefix}-#{$name});
+  } @else {
+    @return var(--#{$name});
+  }
+}

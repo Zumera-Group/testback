@@ -31,7 +31,7 @@ export const gridItemsConfig = ({ isDownloadVisible }) => [
 ];
 
 export const useNewsGridWidthSizes = () => {
-  const isMobile = useBreakpointValue({ base: true, md: false });
+  // const isMobile = useBreakpointValue({ base: true, md: false });
   let items = [
     '45%',
     '55%',
@@ -49,9 +49,9 @@ export const useNewsGridWidthSizes = () => {
     '55%',
   ];
 
-  if (isMobile) {
-    items = items.map(() => '100%');
-  }
+  // if (isMobile) {
+  //   items = items.map(() => '100%');
+  // }
 
   return items;
 };

@@ -47,52 +47,56 @@ export const SectorDetailLayout: React.FC<{
     );
 
   return (
-    <Box minHeight="100vh" overflowX="hidden">
+    <>
       <SEO
         seoTitle={sector.name}
         seoDescription={sector.description}
         siteSettings={siteSettings}
         seoImage={sector?.graph?.iconImage}
       />
-      <PageHeader
-        contentModules={[]}
-        siteSettings={siteSettings}
-        otherLangSlug={otherLangSlug}
-      />
       <PageTransition slug={sector._id}>
-        <SectorHero sector={sector} content={content?.heroSectionContent} />
-
-        <SectorInfoSection
+        <PageHeader
+          contentModules={[]}
           siteSettings={siteSettings}
-          sectorTransactions={filteredTransactions}
-          sector={sector}
-          content={content?.infoSectionContent}
-          sharedContent={sharedContent}
+          otherLangSlug={otherLangSlug}
         />
-        {sector?.industryReportSection && (
-          <IndustryReportSection
-            specificContentModule={sector.industryReportSection}
+        <main id="main">
+          <SectorHero
+            sector={sector}
+            content={content?.heroSectionContent}
           />
-        )}
-        <SectorTeam sector={sector} />
-        <SectorMoreDetails sector={sector} content={content} />
-        <SectorNews
-          newsArticles={filteredNewsArticles}
-          employees={employees}
-          transactions={filteredTransactions}
-          sector={sector}
-          content={content?.newsSectionContent}
-        />
-        <SectorTransactions
-          sector={sector}
-          transactions={filteredTransactions}
-          content={content?.sectorTransactionsContent}
-        />
-        {sector.calculatorTeaserSection && (
-          <ServiceQuestionnaire section={sector.calculatorTeaserSection} />
-        )}
+          <SectorInfoSection
+            siteSettings={siteSettings}
+            sectorTransactions={filteredTransactions}
+            sector={sector}
+            content={content?.infoSectionContent}
+            sharedContent={sharedContent}
+          />
+          {/* {sector?.industryReportSection && (
+            <IndustryReportSection
+              specificContentModule={sector.industryReportSection}
+            />
+          )} */}
+          <SectorTeam sector={sector} />
+          <SectorMoreDetails sector={sector} content={content} />
+          <SectorNews
+            newsArticles={filteredNewsArticles}
+            employees={employees}
+            transactions={filteredTransactions}
+            sector={sector}
+            content={content?.newsSectionContent}
+          />
+          <SectorTransactions
+            sector={sector}
+            transactions={filteredTransactions}
+            content={content?.sectorTransactionsContent}
+          />
+          {sector.calculatorTeaserSection && (
+            <ServiceQuestionnaire section={sector.calculatorTeaserSection} />
+          )}
+        </main>
       </PageTransition>
       <PageFooter siteSettings={siteSettings} />
-    </Box>
+    </>
   );
 };

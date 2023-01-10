@@ -1,6 +1,6 @@
 import React from 'react';
-import { Box } from '@chakra-ui/react';
 import dynamic from 'next/dynamic';
+
 import { Page, Sector, Service, SiteSettings } from '../domain/index';
 import { ContentModule } from '../domain/contentModule';
 import { getContentForContentModule } from './contentModules';
@@ -33,32 +33,33 @@ const PageLayout: React.FC<{
     }`;
 
   return (
-    <Box minHeight="100vh" overflowY="visible">
+    <>
       <SEO
         seoTitle={page.seoTitle}
         seoDescription={page.seoDescription}
         seoImage={page.seoImage}
         siteSettings={siteSettings}
       />
-      <PageHeader
-        contentModules={contentModules}
-        siteSettings={siteSettings}
-        otherLangSlug={otherLangSlug}
-        hideHeader={page.isHeaderRoutesHidden}
-      />
       <PageTransition slug={page.slug?.current}>
-        {contentModules &&
-          contentModules.map((c) => {
-            return (
-              <Box key={c._key}>
-                {getContentForContentModule(c, sharedContent)}
-              </Box>
-            );
-          })}
+        <PageHeader
+          contentModules={contentModules}
+          siteSettings={siteSettings}
+          otherLangSlug={otherLangSlug}
+          hideHeader={page.isHeaderRoutesHidden}
+        />
+        <main id="main">
+          {contentModules &&
+            contentModules.map((c) => {
+              return (
+                <React.Fragment key={c._key}>
+                  {getContentForContentModule(c, sharedContent)}
+                </React.Fragment>
+              );
+            })}
+        </main>
+        {!page.isFooterHidden ? <PageFooter siteSettings={siteSettings} /> : null}
       </PageTransition>
-
-      {!page.isFooterHidden ? <PageFooter siteSettings={siteSettings} /> : null}
-    </Box>
+    </>
   );
 };
 

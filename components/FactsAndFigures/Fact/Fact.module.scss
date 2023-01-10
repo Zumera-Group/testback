@@ -1,0 +1,30 @@
+.fact {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 100%;
+  padding-bottom: var(--gutter) !important;
+  @include divider(bottom, $white);
+  & > *:last-child {
+    margin-bottom: 0;
+  }
+  p {
+    font-size: $font-size-small;
+  }
+}
+
+.title {
+  font-size: $h2-font-size;
+  font-weight: $font-weight-light;
+  margin: 0;
+}
+
+.subtitle {
+  font-size: $h5-font-size;
+  font-weight: $font-weight-bold;
+  margin: $paragraphs-margin-bottom / 2 0 0 0;
+  & + * {
+    margin-top: $paragraphs-margin-bottom;
+  }
+}

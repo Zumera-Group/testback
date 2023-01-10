@@ -1,0 +1,7 @@
+.link {
+  display: inline-block;
+  transition: color $timing-md $ease-out;
+  @include hover-state() {
+    color: $accent;
+  }
+}

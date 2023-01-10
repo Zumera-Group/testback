@@ -25,7 +25,8 @@ export const VTLandingHeader: React.FC<{
   landing: VTLanding;
 }> = ({ siteSettings, contentModules, landing }) => {
   const [showStickyBg, setShowStickyBg] = React.useState(false);
-  const isLogoMobile = useBreakpointValue({ base: true, lg: false });
+  // const isLogoMobile = useBreakpointValue({ base: true, lg: false });
+  const isLogoMobile = false;
   const linkWithCurrentLocale = useLinkWithCurrentLocale();
 
   React.useEffect(() => {
@@ -88,7 +89,7 @@ export const VTLandingHeader: React.FC<{
             justifyContent="space-between"
           >
             <FlexRow alignItems="center">
-              <FlexCol cursor="pointer">
+              {/* <FlexCol cursor="pointer">
                 {isPageWithLightBg() || showStickyBg ? (
                   <Logo
                     isMobile={isLogoMobile}
@@ -102,7 +103,7 @@ export const VTLandingHeader: React.FC<{
                     src={logo}
                   />
                 )}
-              </FlexCol>
+              </FlexCol> */}
             </FlexRow>
 
             {(landing?.questionnaire || landing?.externalButtonUrl) &&

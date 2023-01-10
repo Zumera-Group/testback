@@ -38,7 +38,8 @@ export const CostumedCarousel: React.FC<{
 }> = ({ children, iconLeft, iconRight, description }) => {
   const reference = useRef<any>();
   const [previousVisible, setPreviousVisible] = useState(false);
-  const isMobile = useBreakpointValue({ base: true, md: false });
+  // const isMobile = useBreakpointValue({ base: true, md: false });
+  const isMobile = false;
   const [nextVisible, setNextVisible] = useState(true);
 
   const onChange = () => {

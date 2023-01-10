@@ -1,0 +1,75 @@
+.radioWrapper {
+  position: relative;
+  min-height: $checkbox-size;
+  &__disabled {
+    pointer-events: none;
+    opacity: $input-disabled-opacity;
+  }
+  & + .radioWrapper {
+    margin-top: $form-group-margin-bottom * 0.5;
+  }
+}
+
+.radio {
+  // Hide the default radio
+    position: absolute;
+    clip: rect(0,0,0,0);
+    pointer-events: none;
+  //
+  &:focus,
+  &:focus-visible {
+    & ~ .radioLabel {
+      outline: $focus-outline-style;
+      outline-offset: $focus-outline-offset;
+    }
+  }
+  &:focus:not(:focus-visible) {
+    & ~ .radioLabel {
+      outline: 0;
+    }
+  }
+  &:checked ~ .radioLabel {
+    &:before {
+      background-color: $checkbox-checked-bg;
+      border-color: $checkbox-checked-border-color;
+    }
+    &:after {
+      opacity: 1;
+      transform: scale(0.4);
+    }
+  }
+}
+
+.radioLabel {
+  @include label();
+  cursor: pointer;
+  margin: 0 !important;
+  padding-left: calc(#{$input-padding-x / 1.5} + #{$checkbox-size});
+  padding-top: $checkbox-size / 8;
+  min-height: $checkbox-size;
+  &:before,
+  &:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: $checkbox-size;
+    height: $checkbox-size;
+    border-radius: 50%;
+  }
+  &:before {
+    border-style: solid;
+    border-width: $input-border-width;
+    border-color: $checkbox-border-color;
+    background-color: $checkbox-bg;
+    transition: background-color $timing-sm $ease-out, border-color $timing-sm $ease-out;
+  }
+  &:after {
+    background-color: $input-border-color;
+    opacity: 0;
+    transform: scale(0.2);
+    transform-origin: 50% 50%;
+    backface-visibility: hidden;
+    transition: transform $timing-sm $ease-out, opacity $timing-sm $ease-out;
+  }
+}

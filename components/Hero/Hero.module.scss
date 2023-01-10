@@ -1,8 +1,17 @@
-.heroContainer {
-  background-color: rgb(78, 30, 78);
-  color: white;
-  height: 300px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+// Hero base / shared styles
+.hero {
+  position: relative;
+  width: 100%;
+  h1, p {
+    margin: 0;
+  }
+  p {
+    margin-top: $headings-margin-bottom;
+    width: 100%;
+  }
+}
+
+.btnWrapper {
+  display: block;
+  margin: $btn-wrapper-margin-top 0 0 0;
 }

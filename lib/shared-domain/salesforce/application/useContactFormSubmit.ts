@@ -11,7 +11,6 @@ export const useContactFormSubmit = () => {
   const [name, setName] = React.useState('');
   const [phone, setPhone] = React.useState('');
   const [message, setMessage] = React.useState('');
-  const [subject, setSubject] = React.useState('');
 
   const [isSuccess, setIsSuccess] = React.useState(false);
   const [isError, setIsError] = React.useState(false);
@@ -27,7 +26,6 @@ export const useContactFormSubmit = () => {
     setName('');
     setPhone('');
     setMessage('');
-    setSubject('');
     setNameTouched(false);
     setEmailTouched(false);
     setPhoneTouched(false);
@@ -65,11 +63,6 @@ export const useContactFormSubmit = () => {
       value: message,
       onChange: (e) => setMessage(e.target.value),
     },
-    subject: {
-      isInvalid: false,
-      value: subject,
-      onChange: (e) => setSubject(e.target.value),
-    },
     submit: async () => {
       setEmailTouched(true);
       setNameTouched(true);
@@ -82,7 +75,7 @@ export const useContactFormSubmit = () => {
           phone: phone,
           firstName: firstName || '',
           lastName: lastName || firstName,
-          message: subject + ': ' + message,
+          message: message,
         });
         resetForm();
         setIsError(false);

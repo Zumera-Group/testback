@@ -1,0 +1,31 @@
+.chatButton {
+  --size: 48px;
+  --offset: #{$gutter};
+  @include breakpoint-up(md) {
+    --size: 64px;
+    --offset: #{$gutter * 1.5};
+  }
+
+  @include reset-button();
+  position: fixed;
+  bottom: var(--offset);
+  right: var(--offset);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: $zindex-chat-btn;
+  width: var(--size);
+  height: var(--size);
+  border-radius: 50%;
+  color: $white;
+  @include zumera-gradient($radial-size: 175%);
+  box-shadow: $btn-box-shadow;
+  transition: $btn-transition;
+  @include hover-state() {
+    box-shadow: $btn-hover-box-shadow;
+  }
+  @include active-state() {
+    box-shadow: $btn-active-box-shadow;
+    transition: $btn-transition-active;
+  }
+}
