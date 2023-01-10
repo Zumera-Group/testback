@@ -45,7 +45,7 @@ export const SectorMoreDetails: React.FC<Props> = ({
             {hasImage && (
               <GridColumn sm={12} md={6} lg={6}>
                 <div className={styles.imageWrapper}>
-                  <img src={sectorMoreDetailsPicture?.asset?.url} />
+                  <img src={sectorMoreDetailsPicture?.asset?.url} alt={title} />
                 </div>
               </GridColumn>
             )}
