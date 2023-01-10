@@ -9,7 +9,7 @@ import { Container } from 'components/Layout';
 import { Hamburger, Menu, BigMenu, LanguageSwitcher } from 'components/Header';
 
 import { useLinkWithCurrentLocale } from 'lib/shared-domain/useLinkWithCurrentLocale';
-import { HeroSectionModule } from 'lib/shared-domain/page/domain/contentModule';
+import { HeroSectionModule, CDIGlobalSectionModule } from 'lib/shared-domain/page/domain/contentModule';
 
 import styles from './Header.module.scss';
 
@@ -36,7 +36,9 @@ export const Header = ({
     const hasHeroSection = contentModules.find((module) => {
       return module.specificContentModule instanceof HeroSectionModule
     });
+    const CDIGlobalIsHero = contentModules[0]?.specificContentModule instanceof CDIGlobalSectionModule
     if (darkBg) return false;
+    if (CDIGlobalIsHero) return false;
     if (!hasHeroSection) return true;
     return (
       (hasHeroSection.specificContentModule as HeroSectionModule).type !== 'home'
