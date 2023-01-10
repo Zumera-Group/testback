@@ -1,4 +1,7 @@
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+
+import { useInView } from 'react-intersection-observer';
 
 import { linearGradients } from './linearGraidents';
 import { locationPoints } from './locationPoints';
@@ -14,6 +17,16 @@ import {
 import styles from './GlobeAnimation.module.scss';
 
 export const GlobeAnimation = ({ onDark }) => {
+  const { ref, inView } = useInView();
+  const [animateOnce, setAnimateOnce] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  useEffect(() => {
+    if (inView && !animateOnce) {
+      setIsPlaying(true);
+      setAnimateOnce(true);
+    }
+  }, [inView, animateOnce]);
 
   const LinearGradients = () => {
     return (
@@ -51,8 +64,9 @@ export const GlobeAnimation = ({ onDark }) => {
         styles.globe,
         onDark ? styles.globe__onDark : '',
       ].join(' ')}
+      ref={ref}
       initial="initial"
-      whileInView="animate"
+      animate={isPlaying ? 'animate' : 'initial'}
       viewport={{ once: true, amount: 0.8 }}
     >
       <g style={{opacity: '.6'}}>
