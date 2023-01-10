@@ -1,3 +1,53 @@
+.section {
+  overflow-x: hidden;
+  &__isHeader {
+    margin-top: calc(var(--header-height) * -1);
+    .container {
+      margin-top: var(--header-height);
+      @include breakpoint-up(md) {
+        margin-top: calc(var(--header-height) / 2);
+      }
+    }
+    h1 {
+      font-size: $h2-font-size;
+    }
+  }
+}
+
+.container {
+  display: block;
+  @include push-auto-x();
+  width: 100%;
+  padding-left: calc((100vw - #{$container-max-width}) / 2 )
+}
+
+.columns {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: $container-padding-x * 0.5;
+  flex-direction: column;
+  @include breakpoint-up(md) {
+    flex-direction: row;
+  }
+}
+
+.content {
+  width: 100%;
+  flex-shrink: 0;
+  padding: 0 $container-padding-x;
+  @include breakpoint-up(md) {
+    max-width: 48%;
+  }
+  @include breakpoint-up(lg) {
+    max-width: 40rem;
+  }
+}
+
+.graphic {
+  flex: 1;
+}
+
 .btnWrapper {
   margin: $btn-wrapper-margin-top 0 0 0;
 }

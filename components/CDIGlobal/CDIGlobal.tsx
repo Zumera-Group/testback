@@ -1,7 +1,8 @@
-import { Section, Container, Grid, GridColumn } from 'components/Layout';
+import { Section } from 'components/Layout';
 import { SectionHeading } from 'components/SectionHeading';
 import { Button } from 'components/Button';
 import { Marquee } from './Marquee';
+import { GlobeAnimation } from './GlobeAnimation';
 
 import styles from './CDIGlobal.module.scss';
 
@@ -32,16 +33,16 @@ export const CDIGlobal: React.FC<Props> = ({ ...rest }) => {
       size={'md'}
       bg={isHeader ? 'primary' : 'light'}
       color={isHeader ? 'white' : 'primary'}
+      classes={[
+        styles.section,
+        isHeader ? styles.section__isHeader : ''
+      ].join(' ')}
     >
-      <Container>
-        <Grid
-          fullWidth={true}
-          justifyContent={'space-between'}
-          alignItems={'start'}
-        >
-          <GridColumn sm={12} md={7} lg={7}>
+      <div className={styles.container}>
+        <div className={styles.columns}>
+          <div className={styles.content}>
             <SectionHeading
-              headingType={'h3'}
+              headingType={isHeader ? 'h1': 'h3'}
               title={title}
               subtitle={subtitle}
               description={description}
@@ -57,11 +58,12 @@ export const CDIGlobal: React.FC<Props> = ({ ...rest }) => {
                 </Button>
               </div>
             )}
-          </GridColumn>
-          <GridColumn sm={12} md={5} lg={5}>
-          </GridColumn>
-        </Grid>
-      </Container>
+          </div>
+          <div className={styles.graphic}>
+            <GlobeAnimation onDark={isHeader} />
+          </div>
+        </div>
+      </div>
       <Marquee items={locations} />
     </Section>
   );

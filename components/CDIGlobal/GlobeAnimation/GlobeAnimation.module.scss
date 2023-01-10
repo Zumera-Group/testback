@@ -1,0 +1,39 @@
+.globe {
+  --fill-primary: #{$primary};
+  --fill-primary-alt: #{$primary-alt};
+  --fill-dots: #{$white};
+  --glow-color: #{rgba($white, 0.8)};
+
+  width: 120%;
+  max-width: 54rem;
+  min-width: 38rem;
+  fill: var(--fill-primary);
+
+  &__onDark {
+    --fill-primary: #{$white};
+    --fill-primary-alt: #{$white};
+    --fill-dots: #{$accent};
+    --glow-color: #{rgba($white, 0.8)};
+  }
+}
+
+.linearGradientStop1 {
+  stop-color: var(--fill-primary-alt);
+  stop-opacity: 3.139731e-02;
+}
+
+.linearGradientStop2 {
+  stop-color: var(--fill-primary);
+}
+
+.linearGradientStop3 {
+  stop-color: var(--fill-primary-alt);
+  stop-opacity: 0;
+}
+
+.locationPoints {
+  fill: var(--fill-dots);
+  circle, path {
+    filter: drop-shadow(0px 0px 0.33rem var(--glow-color));
+  }
+}
