@@ -7,6 +7,7 @@ const sassOptions = {
 };
 
 module.exports = {
+  // Remove this object
   typescript: {
     // !! WARN !!
     // Dangerously allow production builds to successfully complete even if
