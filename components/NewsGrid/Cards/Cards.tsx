@@ -21,12 +21,12 @@ export const Cards = ({
 }): any => {
   const { downloadButtonContent } = useSharedContentContext();
 
-  const items = CardsConfig({ isDownloadVisible }).map((item) => {
+  const items = CardsConfig({ isDownloadVisible }).map((item, i) => {
     if (!item) return null;
 
     if (item.type === CardType.Employee) {
       if (!employee) return null;
-      return <Employee article={employee} />;
+      return <Employee article={employee} key={`newsGridCards-item-article-${i}`} />;
     }
 
     if (item.type === CardType.TwoNews) {
@@ -34,7 +34,7 @@ export const Cards = ({
       const secondItem = news?.[item.index2];
       if (!firstItem && !secondItem) return null;
       return (
-        <div className={styles.twoNewsRow}>
+        <div className={styles.twoNewsRow} key={`newsGridCards-item-article-${i}`}>
           <div className={styles.twoNewsCol}>
             <TwoNews article={firstItem} />
           </div>
@@ -48,17 +48,17 @@ export const Cards = ({
     if (item.type === CardType.NewsBig) {
       const firstItem = news?.[item.index1];
       if (!firstItem) return null;
-      return <NewsBig article={firstItem} />;
+      return <NewsBig article={firstItem} key={`newsGridCards-item-article-${i}`} />;
     }
 
     if (item.type === CardType.TransactionBig) {
       const firstItem = transactions?.[item.index1];
       if (!firstItem) return null;
-      return <TransactionBig article={firstItem} />
+      return <TransactionBig article={firstItem} key={`newsGridCards-item-article-${i}`} />
     }
 
     if (item.type === CardType.Download) {
-      return <Download article={downloadButtonContent} />;
+      return <Download article={downloadButtonContent} key={`newsGridCards-item-article-${i}`} />;
     }
 
     return null;
