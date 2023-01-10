@@ -18,6 +18,9 @@ export const SectorMoreDetails: React.FC<Props> = ({
   sectorMoreDetailsPicture,
   title,
 }) => {
+
+  const hasImage = sectorMoreDetailsPicture?.asset?.url;
+
   return (
     <Section
       size={'md'}
@@ -28,7 +31,7 @@ export const SectorMoreDetails: React.FC<Props> = ({
         <div className={styles.calloutBox}>
           <Grid
             fullWidth={true}
-            justifyContent={'space-between'}
+            justifyContent={hasImage ? 'space-between' : 'center'}
             alignItems={'center'}
           >
             <GridColumn sm={12} md={6} lg={6}>
@@ -36,13 +39,16 @@ export const SectorMoreDetails: React.FC<Props> = ({
                 headingType={'h3'}
                 title={title}
                 description={moreDetailsDescription}
+                align={hasImage ? 'left' : 'center'}
               />
             </GridColumn>
-            <GridColumn sm={12} md={6} lg={6}>
-              <div className={styles.imageWrapper}>
-                <img src={sectorMoreDetailsPicture.asset.url} />
-              </div>
-            </GridColumn>
+            {hasImage && (
+              <GridColumn sm={12} md={6} lg={6}>
+                <div className={styles.imageWrapper}>
+                  <img src={sectorMoreDetailsPicture?.asset?.url} />
+                </div>
+              </GridColumn>
+            )}
           </Grid>
         </div>
       </Container>
