@@ -7,13 +7,15 @@ import { Box, FlexRow } from '../../../../components/Layout/Flex/Flex';
 import { P } from '../../../../components/Typography/P';
 import { fontSizes } from '../../../../styles/foundations/fontStyles';
 import { colors } from '../../../../styles/foundations/colors';
-import { FooterLink } from '../../page/presentation/PageFooter';
+// import { FooterLink } from '../../page/presentation/PageFooter';
+import { FooterLink } from 'components/Footer';
 import Image from 'next/image';
 
 export const VTLandingFooter: React.FC<{
   siteSettings: SiteSettings;
 }> = ({ siteSettings }) => {
-  const isMobile = useBreakpointValue({ base: true, lg: false });
+  // const isMobile = useBreakpointValue({ base: true, lg: false });
+  const isMobile = false;
 
   return (
     <SectionContainer pt={isMobile ? 'md' : 'xs'} pb={isMobile ? 'xs' : 'md'}>
