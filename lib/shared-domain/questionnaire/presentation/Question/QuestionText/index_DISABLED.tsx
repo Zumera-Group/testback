@@ -1,5 +1,4 @@
 import { Box } from '@chakra-ui/react';
-import QuestionTitle from 'components/Calculator/QuestionTitle/QuestionTitle';
 import { H } from 'components/Typography/H';
 import { P } from 'components/Typography/P';
 import { AnimatePresence, motion } from 'framer-motion';
@@ -36,8 +35,7 @@ export const QuestionText: React.FC<Props> = ({
           exit="exit"
           variants={animationVariants}
         >
-          <QuestionTitle title={title} description={description} />
-          {/* <Box mt={{ base: 5.5, lg: 0 }} maxWidth={700} mx="auto" pb={4}>
+          <Box mt={{ base: 5.5, lg: 0 }} maxWidth={700} mx="auto" pb={4}>
             <H
               as="h1"
               textAlign="center"
@@ -52,7 +50,7 @@ export const QuestionText: React.FC<Props> = ({
                 {description}
               </P>
             )}
-          </Box> */}
+          </Box>
           {children}
         </motion.div>
       )}
