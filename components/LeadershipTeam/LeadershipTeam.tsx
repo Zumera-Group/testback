@@ -42,11 +42,7 @@ export const LeadershipTeam: React.FC<Props> = ({ ...rest }) => {
   );
 
   return (
-    <Section
-      size={'md'}
-      bg={'light'}
-      color={'primary'}
-    >
+    <Section size={'md'} bg={'light'} color={'primary'}>
       <Container>
         <SectionHeading
           title={title}
@@ -60,18 +56,20 @@ export const LeadershipTeam: React.FC<Props> = ({ ...rest }) => {
           alignItems={'stretch'}
           className={styles.teamGrid}
         >
-          {[...bigLeadershipTeamMembers, ...orderedLeadershipTeamMembers]?.map((member, index) => (
-            <GridColumn
-              key={`leaderShipTeamMember-${index}`}
-              xs={12}
-              sm={6}
-              md={6}
-              lg={4}
-              className={styles.teamColumn}
-            >
-              <Employee article={member} />
-            </GridColumn>
-          ))}
+          {[...bigLeadershipTeamMembers, ...orderedLeadershipTeamMembers]?.map(
+            (member, index) => (
+              <GridColumn
+                key={`leaderShipTeamMember-${index}`}
+                xs={12}
+                sm={6}
+                md={6}
+                lg={4}
+                className={styles.teamColumn}
+              >
+                <Employee article={member} />
+              </GridColumn>
+            ),
+          )}
         </Grid>
       </Container>
     </Section>
