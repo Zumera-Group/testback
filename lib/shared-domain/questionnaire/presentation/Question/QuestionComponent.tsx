@@ -214,7 +214,7 @@ export const QuestionComponent: React.FC<{
       {isOnResultScreen ? (
         <Result />
       ) : (
-        <Box align="center" key={currentQuestion?._id}>
+        <Box key={currentQuestion?._id}>
           <AnimateSharedLayout>{renderQuestion()}</AnimateSharedLayout>
         </Box>
       )}
