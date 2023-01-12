@@ -7,7 +7,8 @@ export const H: React.FC<HeadingProps> = ({
   children,
   ...props
 }) => (
-  <Heading {...props} color={color} variant={variant}>
+  // @ts-ignore
+  <Heading {...props} color={color} as={variant}>
     {children}
   </Heading>
 );
