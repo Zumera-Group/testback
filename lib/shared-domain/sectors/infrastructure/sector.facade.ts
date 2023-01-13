@@ -124,6 +124,19 @@ const querySectorDetail = (
       }
     }
   },
+  graphLight->{
+    iconImage{
+      asset->{
+        url,
+        metadata{
+          dimensions{
+            height,
+            width
+          }
+        }
+      }
+    }
+  },
   detailPageHeroImage {
       asset->{
         url,

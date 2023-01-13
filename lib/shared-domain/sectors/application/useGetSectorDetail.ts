@@ -1,5 +1,6 @@
 import { Locale } from 'lib/locale';
 import { SectorFacade } from '../infrastructure/sector.facade';
+import { useEffect, useState } from 'react';
 
 export const fetchSectorDetail = async (
   locale: Locale,
@@ -17,8 +18,21 @@ export const fetchSectorDetailContent = async (locale: Locale) => {
   return await facade.getSectorDetailContent(locale);
 };
 
-export const useGetSectorDetail = async (locale: Locale, slug: string) => {
-  const sectorDetail = await fetchSectorDetail(locale, slug);
+export const useGetSectorDetail = (locale: Locale, slug: string) => {
+  const [sector, setSector] = useState({
+    graphLight: {
+      iconImage: {
+        asset: { url: '', extension: '' },
+      },
+    },
+  });
+  useEffect(() => {
+    const fetchData = async () => {
+      const { sectorDetail } = await fetchSectorDetail(locale, slug);
+      setSector(sectorDetail as any);
+    };
+    fetchData().catch(console.error);
+  }, []);
 
-  return { sectorDetail };
+  return sector;
 };

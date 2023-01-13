@@ -210,11 +210,17 @@ export class GlobalNetworkSectionModule extends BaseModule {
   }
 }
 
+export interface ISectorsDropdown {
+  _id: string;
+  name: string;
+  slug: {
+    current: string;
+  };
+}
+
 export class TransactionGridSectionModule extends BaseModule {
   buttonText: string;
-  sectorsDropdown: {
-    name: string;
-  }[];
+  sectorsDropdown: ISectorsDropdown[];
   servicesDropdown: {
     name: string;
   }[];
