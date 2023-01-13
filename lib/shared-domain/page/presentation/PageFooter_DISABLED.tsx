@@ -64,7 +64,7 @@ const PageFooterColumn: React.FC<{
   };
 }> = ({ pageFooter }) => {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false); // Just mobile
-  // const isMobile = useBreakpointValue({ base: true, md: false });
+  const isMobile = useBreakpointValue({ base: true, md: false });
   const linkWithCurrentLocale = useLinkWithCurrentLocale();
 
   return (

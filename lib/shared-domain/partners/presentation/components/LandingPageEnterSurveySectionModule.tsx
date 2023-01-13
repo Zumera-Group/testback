@@ -81,7 +81,7 @@ export const LandingPageEnterSurveySection: React.FC<{
                     objectFit="contain"
                     src={image?.asset?.url}
                     alt={``}
-                    layout="fill"
+                    // layout="fill"
                   />
                 </Box>
               </>
@@ -106,7 +106,7 @@ export const LandingPageEnterSurveySection: React.FC<{
                   objectFit="contain"
                   src={image?.asset?.url}
                   alt={``}
-                  layout="fill"
+                  // layout="fill"
                 />
               </Box>
             )}

@@ -99,20 +99,20 @@ export const CostumedCarousel: React.FC<{
         </FlexRow>
       </Flex>
       <Flex w="100%" justifyContent="flex-start" p={-4}>
-        <Carousel
-          itemPadding={[0, 0]}
-          outerSpacing={0}
-          ref={reference}
-          onChange={onChange}
-          showArrows={false}
-          enableMouseSwipe={true}
-          pagination={false}
-          isRTL={false}
-          itemsToShow={getItemsToShow()}
-          itemPosition="START"
-        >
-          {children}
-        </Carousel>
+        {/*<Carousel*/}
+        {/*  itemPadding={[0, 0]}*/}
+        {/*  outerSpacing={0}*/}
+        {/*  ref={reference}*/}
+        {/*  onChange={onChange}*/}
+        {/*  showArrows={false}*/}
+        {/*  enableMouseSwipe={true}*/}
+        {/*  pagination={false}*/}
+        {/*  isRTL={false}*/}
+        {/*  itemsToShow={getItemsToShow()}*/}
+        {/*  itemPosition="START"*/}
+        {/*>*/}
+        {/*  {children}*/}
+        {/*</Carousel>*/}
       </Flex>
     </FlexCol>
   );

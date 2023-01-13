@@ -4,7 +4,7 @@ import { Box, FlexCol, FlexRow } from 'components/Layout/Flex/Flex';
 import React from 'react';
 import { colors } from 'styles/foundations/colors';
 import { SiteSettings, Service, Sector } from '../domain';
-import { Logo } from './PageHeader';
+// import { Logo } from './PageHeader';
 import backgroundImage from '../../../../public/big-menu-bg.png';
 import { fontSizes } from 'styles/foundations/fontStyles';
 import { P } from 'components/Typography/P';
@@ -132,9 +132,7 @@ export const BigMenu: React.FC<{
               <Box as="button" onClick={closeBigMenu} mr={1}>
                 <icons.BurgerOpen />
               </Box>
-              <Box mt={0.5}>
-                <Logo slug={homeSlug} src={logo} />
-              </Box>
+              <Box mt={0.5}>{/*<Logo slug={homeSlug} src={logo} />*/}</Box>
             </FlexRow>
             {siteSettings.hamburgerMenu?.map((h) => (
               <FlexCol

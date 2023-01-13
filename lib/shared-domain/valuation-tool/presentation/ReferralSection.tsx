@@ -25,7 +25,7 @@ const Quote: React.FC<{
         <FlexCol alignItems={params.starAlignRight && 'flex-end'}>
           <Box mb={4} height="20px" position="relative">
             <Image
-              layout="fill"
+              // layout="fill"
               objectFit="contain"
               alt=""
               src={params?.rating?.asset?.url}

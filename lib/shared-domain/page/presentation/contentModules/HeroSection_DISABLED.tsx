@@ -10,7 +10,7 @@ import { Box, FlexRow } from '../../../../../components/Layout/Flex/Flex';
 import { SectionContainer } from 'components/Layout/SectionContainer';
 import { SanityBlockContent } from 'components/SanityBlockContent';
 import { SlotMachineAnimation } from '../../../../animations/SlotMachineAnimation';
-import { getHeroBackground } from './getHeroBackground';
+// import { getHeroBackground } from './getHeroBackground';
 import { useCareerRef } from '../../infrastructure/useCareerRef';
 import Link from 'next/link';
 import { useLinkWithCurrentLocale } from 'lib/shared-domain/useLinkWithCurrentLocale';
@@ -166,11 +166,15 @@ export const HeroSection: React.FC<{
   const isMobileBg = useBreakpointValue({ base: true, sm: false });
   const isJobLanding = specificContentModule.type === 'job-landing';
   const isHome = specificContentModule.type === 'home';
+  // @ts-ignore
   const isLevel2 = specificContentModule.type === 'level2';
+  // @ts-ignore
   const isLevel1 = specificContentModule.type === 'level1';
   const isTransaction = specificContentModule.type === 'transaction';
+  // @ts-ignore
   const isAboutUs = specificContentModule.type === 'about-us';
   const isCareer = specificContentModule.type === 'career';
+  // @ts-ignore
   const isNews = specificContentModule.type === 'news';
   const isTermsAndConditions =
     specificContentModule.type === 'termsAndConditions';
@@ -203,11 +207,13 @@ export const HeroSection: React.FC<{
     if (isLevel2 || isLevel1) return 4;
   };
 
-  const getImage = getHeroBackground(
-    isAboutUs || isCareer || isHome || isJobLanding || mobileBgImage !== null,
-    isMobileBg,
-    specificContentModule,
-  );
+  // const getImage = getHeroBackground(
+  //   isAboutUs || isCareer || isHome || isJobLanding || mobileBgImage !== null,
+  //   isMobileBg,
+  //   specificContentModule,
+  // );
+
+  const getImage = '';
 
   const linkWithCurrentLocale = useLinkWithCurrentLocale();
 

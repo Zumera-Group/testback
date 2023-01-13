@@ -22,4 +22,6 @@
 //   );
 // };
 
-// export default DividerImage;
+const DividerImage = {};
+
+export default DividerImage;

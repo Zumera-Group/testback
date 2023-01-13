@@ -36,6 +36,7 @@ export const InputNumber: React.FC<NumberInputProps> = (props) => {
       <NumberInputField
         color="black"
         backgroundColor="inputBgColor"
+        // @ts-ignore
         focusBorderColor="primary.darkGreen"
         borderRadius={0}
         borderStyle="solid"

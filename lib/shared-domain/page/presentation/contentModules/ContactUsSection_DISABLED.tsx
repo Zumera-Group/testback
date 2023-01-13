@@ -13,7 +13,7 @@ import {
   paddingForSpaceY,
   SectionContainerWithoutPyAndPb,
 } from 'components/Layout/SectionContainer';
-import { ContactForm } from '../ContactForm';
+// import { ContactForm } from '../ContactForm';
 import { fontSizes } from 'styles/foundations/fontStyles';
 
 export const ContactUsSection: React.FC<{
@@ -97,7 +97,7 @@ export const ContactUsSection: React.FC<{
           )}
         </GridItem>
         <GridItem maxWidth="102vw" mx={{ base: -paddingForSpaceY.xs, lg: 0 }}>
-          <ContactForm contactForm={contentModule?.contactForm} />
+          {/*<ContactForm contactForm={contentModule?.contactForm} />*/}
         </GridItem>
       </Grid>
     </SectionContainerWithoutPyAndPb>

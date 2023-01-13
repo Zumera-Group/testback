@@ -2,7 +2,7 @@ import { Box, Flex, SimpleGrid } from '@chakra-ui/react';
 import { SectionContainer } from 'components/Layout/SectionContainer';
 import React from 'react';
 
-import { SectorCard } from 'lib/shared-domain/sectors/presentation/components/SectorCard';
+// import { SectorCard } from 'lib/shared-domain/sectors/presentation/components/SectorCard';
 import { LinkWithArrow } from 'lib/shared-domain/page/presentation/components/LinkWithArrow';
 import { TitleWithSubtitleAndDescription } from 'lib/shared-domain/page/presentation/components/TitleWithSubtitleAndDescription';
 import { SiteSettings, ServiceSectorsSection } from '../../page/domain/index';
@@ -23,9 +23,9 @@ export const ServiceSectors: React.FC<{
         />
       </Box>
       <SimpleGrid columns={{ base: 1, md: 2, lg: 3, xl: 3 }} spacing={3}>
-        {section.sectors?.map((s, index) => (
-          <SectorCard key={index} index={index} sector={s} />
-        ))}
+        {/*{section.sectors?.map((s, index) => (*/}
+        {/*  <SectorCard key={index} index={index} sector={s} />*/}
+        {/*))}*/}
       </SimpleGrid>
       {siteSettings?.sectorsOverviewPage?.slug?.current && (
         <Flex justify="center" align="center" mt={{ base: 4, md: 7 }}>

@@ -10,21 +10,17 @@ import { FutureTrends } from './FutureTrends';
 
 import styles from './SectorInfo.module.scss';
 
-export const SectorInfo = ({
-  sector,
-  sectorTransactions,
-  content,
-}) => {
+export const SectorInfo = ({ sector, sectorTransactions, content }) => {
   const t = (item) => content?.[item];
 
   const { accordionQuestions } = content;
   const {
     infoSection,
-    accordionAnswers, 
+    accordionAnswers,
     growthRatesTable,
     trendsTable,
     transactionsTable,
-    futureTrendsSection
+    futureTrendsSection,
   } = sector;
 
   return (
@@ -48,13 +44,16 @@ export const SectorInfo = ({
           </GridColumn>
           <GridColumn sm={12} md={6} lg={6}>
             <Description content={infoSection?.description} />
-            <Accordion questions={accordionQuestions} answers={accordionAnswers} />
+            <Accordion
+              questions={accordionQuestions}
+              answers={accordionAnswers}
+            />
           </GridColumn>
         </Grid>
 
         <div className={styles.calloutBox}>
           <GrowthRatesTable
-            title={t('growthRatesTable')} 
+            title={t('growthRatesTable')}
             growthRatesTable={growthRatesTable}
           />
           <Grid
@@ -64,10 +63,7 @@ export const SectorInfo = ({
             className={styles.calloutGrid}
           >
             <GridColumn sm={12} md={12} lg={6}>
-              <TrendsTable
-                title={t('trendsTitle')}
-                trendsTable={trendsTable}
-              />
+              <TrendsTable title={t('trendsTitle')} trendsTable={trendsTable} />
             </GridColumn>
             <GridColumn sm={12} md={12} lg={6}>
               <TransactionsTable
