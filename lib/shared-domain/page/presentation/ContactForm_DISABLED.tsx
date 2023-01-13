@@ -107,9 +107,9 @@ export const ContactForm: React.FC<{
           />
         </GridItem>
         <GridItem>
+          {/*{...form.subject}*/}
           <Input
             {...INPUT_PROPS}
-            {...form.subject}
             placeholder={contactForm?.subjectPlaceholder}
           />
         </GridItem>

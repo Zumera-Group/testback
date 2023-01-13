@@ -31,7 +31,7 @@ export const BrandOverviewSection: React.FC<{
               {t?.image?.asset?.url && (
                 <Box flexShrink={0} width="200px" position="relative">
                   <Image
-                    layout="fill"
+                    // layout="fill"
                     objectFit="contain"
                     alt=""
                     src={t?.image?.asset?.url}

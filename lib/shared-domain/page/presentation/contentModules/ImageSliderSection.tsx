@@ -24,9 +24,9 @@ export const ImageSliderSection: React.FC<{
     }
   };
   if (specificContentModule.slider.length === 0) return null;
-
   return (
     <Box width="100%" position="relative">
+      {/* @ts-ignore */}
       <Carousel
         ref={carouselRef}
         onPrevStart={onPrevStart}

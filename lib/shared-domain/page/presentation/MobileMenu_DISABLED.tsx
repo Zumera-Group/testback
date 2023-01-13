@@ -11,10 +11,10 @@ import { colors } from 'styles/foundations/colors';
 import { fontSizes, fontWeights } from 'styles/foundations/fontStyles';
 import { getTranslateByScope } from 'translation/i18n';
 import { SiteSettings, Sector, Service } from '../domain';
-import { SectorServiceItem } from './BigMenu';
-import { LanguageSwitcher } from './LanguageSwitcher';
+// import { SectorServiceItem } from './BigMenu';
+// import { LanguageSwitcher } from './LanguageSwitcher';
 import mobileBackgroundImage from '../../../../public/big-menu-bg.png';
-import { Logo } from './PageHeader';
+// import { Logo } from './PageHeader';
 
 import { useLinkWithCurrentLocale } from 'lib/shared-domain/useLinkWithCurrentLocale';
 
@@ -100,7 +100,7 @@ export const MobileMenu: React.FC<{
             overflow="hidden"
           >
             <FlexRow position="absolute" top={4} left={3} ml={0.5}>
-              <Logo isMobile slug={homeSlug} src={logo} />
+              {/*<Logo isMobile slug={homeSlug} src={logo} />*/}
             </FlexRow>
             <Box
               as="button"
@@ -160,11 +160,11 @@ export const MobileMenu: React.FC<{
                   opacity={0.8}
                   mb={5}
                 ></Box>
-                <LanguageSwitcher
-                  fontSize={fontSizes.h3}
-                  fontColor={colors.white}
-                  otherLangSlug={otherLangSlug}
-                />
+                {/*<LanguageSwitcher*/}
+                {/*  fontSize={fontSizes.h3}*/}
+                {/*  fontColor={colors.white}*/}
+                {/*  otherLangSlug={otherLangSlug}*/}
+                {/*/>*/}
               </Box>
             </FlexCol>
           </FlexCol>
@@ -216,24 +216,24 @@ export const MobileMenu: React.FC<{
                 </Box>
 
                 <Box overflow="scroll" maxHeight="calc(90%)">
-                  {showMode === 'sectors' &&
-                    [...sectors, ...sectors]?.map((s) => (
-                      <SectorServiceItem
-                        delay={0.5}
-                        href={links().sectors(s)}
-                        title={s.name}
-                        key={s._id}
-                      />
-                    ))}
-                  {showMode === 'services' &&
-                    services?.map((s) => (
-                      <SectorServiceItem
-                        delay={0.5}
-                        href={links().services(s)}
-                        title={s.name}
-                        key={s._id}
-                      />
-                    ))}
+                  {/*{showMode === 'sectors' &&*/}
+                  {/*  [...sectors, ...sectors]?.map((s) => (*/}
+                  {/*    <SectorServiceItem*/}
+                  {/*      delay={0.5}*/}
+                  {/*      href={links().sectors(s)}*/}
+                  {/*      title={s.name}*/}
+                  {/*      key={s._id}*/}
+                  {/*    />*/}
+                  {/*  ))}*/}
+                  {/*{showMode === 'services' &&*/}
+                  {/*  services?.map((s) => (*/}
+                  {/*    <SectorServiceItem*/}
+                  {/*      delay={0.5}*/}
+                  {/*      href={links().services(s)}*/}
+                  {/*      title={s.name}*/}
+                  {/*      key={s._id}*/}
+                  {/*    />*/}
+                  {/*  ))}*/}
                 </Box>
               </Box>
             </motion.div>

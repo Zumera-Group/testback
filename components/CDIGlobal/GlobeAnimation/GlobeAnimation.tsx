@@ -48,6 +48,7 @@ export const GlobeAnimation = ({ onDark }) => {
         {locationPoints.map((props, i) => (
           <motion.circle
             key={`globeAnimationLocationPoints-${i}`}
+            //@ts-ignore
             variants={locationPointAnimationProps}
             {...props}
           />

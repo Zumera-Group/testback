@@ -34,8 +34,8 @@ export const VTLandingFooter: React.FC<{
           </Box>
           <Box mr={8} mb={{ base: 4, md: 0 }}>
             <FooterLink
-              color={colors.text.light}
-              hoverColor={colors.primary.lightGreen}
+              // color={colors.text.light}
+              // hoverColor={colors.primary.lightGreen}
               title={siteSettings.footerTermsOfService.name}
               href={
                 '/' + siteSettings.footerTermsOfService?.page?.slug?.current
@@ -44,8 +44,8 @@ export const VTLandingFooter: React.FC<{
           </Box>
           <Box mr={8} mb={{ base: 4, md: 0 }}>
             <FooterLink
-              color={colors.text.light}
-              hoverColor={colors.primary.lightGreen}
+              // color={colors.text.light}
+              // hoverColor={colors.primary.lightGreen}
               title={siteSettings.footerPrivacyPolice.name}
               href={'/' + siteSettings.footerPrivacyPolice?.page?.slug?.current}
             />

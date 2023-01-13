@@ -59,8 +59,8 @@ export const SectorCard: React.FC<{
       >
         {sector?.graph?.iconImage?.asset?.url && (
           <Flex
-            ml={isMobile && 'auto'}
-            order={isMobile && 1}
+            // ml={isMobile && 'auto'}
+            // order={isMobile && 1}
             position={isMobile ? 'initial' : 'initial'}
             inset={!isMobile && 0}
           >
@@ -76,7 +76,7 @@ export const SectorCard: React.FC<{
           </Flex>
         )}
 
-        <Box maxWidth={isMobile && '70%'} width={isMobile && '70%'}>
+        <Box>
           <P
             fontSize={sector.name.length > 20 ? fontSizes.p : fontSizes.h3}
             color={colors.primary.darkGreen}

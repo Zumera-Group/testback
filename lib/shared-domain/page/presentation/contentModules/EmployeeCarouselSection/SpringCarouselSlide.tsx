@@ -55,6 +55,7 @@ export default function Slide({
   }
 
   return (
+    /*// @ts-ignore*/
     <Spring
       to={{
         transform: `translateY(-50%) translateX(${translateX}%) scale(${distanceFactor})`,

@@ -6,7 +6,7 @@ import { SectorsSectionModule } from '../../domain/contentModule';
 import { TitleWithSubtitleAndDescription } from '../components/TitleWithSubtitleAndDescription';
 
 import { LinkWithArrow } from '../components/LinkWithArrow';
-import { SectorCard } from 'lib/shared-domain/sectors/presentation/components/SectorCard';
+// import { SectorCard } from 'lib/shared-domain/sectors/presentation/components/SectorCard';
 
 export const SectorsSection: React.FC<{
   specificContentModule: SectorsSectionModule;
@@ -21,9 +21,9 @@ export const SectorsSection: React.FC<{
         <TitleWithSubtitleAndDescription {...specificContentModule} />
       </Box>
       <SimpleGrid columns={{ base: 1, md: 2, lg: 3, xl: 3 }} spacing={3}>
-        {specificContentModule?.sectors?.map((s, index) => (
-          <SectorCard key={index} index={index} sector={s} />
-        ))}
+        {/*{specificContentModule?.sectors?.map((s, index) => (*/}
+        {/*  <SectorCard key={index} index={index} sector={s} />*/}
+        {/*))}*/}
       </SimpleGrid>
       {showMoreButton && (
         <Flex justify="center" align="center" mt={{ base: 4, md: 7 }}>
@@ -36,6 +36,5 @@ export const SectorsSection: React.FC<{
     </SectionContainer>
   );
 };
-
 
 export default SectorsSection;

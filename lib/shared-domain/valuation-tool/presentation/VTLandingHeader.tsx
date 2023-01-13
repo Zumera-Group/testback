@@ -15,7 +15,7 @@ import {
 import { FlexCol, Box, FlexRow } from 'components/Layout/Flex/Flex';
 import { SectionContainer } from 'components/Layout/SectionContainer';
 import { Btn } from 'components/Buttons/Button';
-import { Logo } from 'lib/shared-domain/page/presentation/PageHeader';
+// import { Logo } from 'lib/shared-domain/page/presentation/PageHeader';
 import { links } from 'lib/links';
 import { useLinkWithCurrentLocale } from 'lib/shared-domain/useLinkWithCurrentLocale';
 
@@ -56,10 +56,12 @@ export const VTLandingHeader: React.FC<{
     if (!heroSection) return true;
 
     return (
+      // @ts-ignore
       (heroSection.specificContentModule as HeroSectionModule).type ===
         'level2' ||
       (heroSection.specificContentModule as HeroSectionModule).type ===
         'transaction' ||
+      // @ts-ignore
       (heroSection.specificContentModule as HeroSectionModule).type ===
         'news' ||
       (heroSection.specificContentModule as HeroSectionModule).type ===
