@@ -88,7 +88,7 @@ import TeamSection from './TeamSection';
 import TextElementSection from './TextElementSection';
 import TimelineSection from './TimelineSection';
 import TitleAndDescriptionItemsGrid from './TitleAndDescriptionItemsGrid';
-import TransactionGridSection from './TransactionGridSection';
+import TransactionGridSection from 'lib/shared-domain/page/presentation/contentModules/TransactionGridSection';
 import TransactionsCarouselSection from './TransactionsCarouselSection';
 import TransactionShowcaseSection from './TransactionShowcaseSection';
 import TrustSection from './TrustSection';
