@@ -9,7 +9,7 @@ import { Custom404 } from 'pages/404';
 import { useRouter } from 'next/router';
 import { usePreviewSubscription } from '../../lib/sanity';
 import { filterDataToSingleItem } from '../../lib/shared-domain/page/infrastructure/page.facade';
-import LoadingIndicator from 'lib/animations/LoadingIndicator';
+
 import { ErrorTrackingBoundary } from 'lib/ErrorTrackingBoundary';
 import { SharedContentContext } from 'lib/shared-domain/page/infrastructure/sharedContentContext';
 import { SharedContentFacade } from 'lib/shared-domain/page/infrastructure/sharedContent.facade';
@@ -81,12 +81,6 @@ export default function Index({
   });
 
   const previewPage = filterDataToSingleItem(previewData, preview);
-
-  const router = useRouter();
-
-  if (router.isFallback) {
-    return <LoadingIndicator siteSettings={siteSettings} />;
-  }
 
   return (
     <SharedContentContext value={sharedContent}>

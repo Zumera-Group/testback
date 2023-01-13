@@ -1,6 +1,5 @@
 import React from 'react';
 import { useRouter } from 'next/router';
-import LoadingIndicator from 'lib/animations/LoadingIndicator';
 
 export async function getStaticPaths() {
   return {
@@ -21,14 +20,10 @@ const CatchRoutesTo404Page = () => {
   const router = useRouter();
 
   if (router.isFallback) {
-    return (
-      <>
-        <LoadingIndicator />;
-      </>
-    );
+    return null;
   }
 
-  return <LoadingIndicator />;
+  return null;
 };
 
 export default CatchRoutesTo404Page;

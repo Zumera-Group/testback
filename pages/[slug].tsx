@@ -22,11 +22,7 @@ import { useRouter } from 'next/router';
 import { usePreviewSubscription } from '../lib/sanity';
 import { filterDataToSingleItem } from '../lib/shared-domain/page/infrastructure/page.facade';
 import { enPaths as en, dePaths as de } from '../lib/shared-domain/page/paths';
-import LoadingIndicator from 'lib/animations/LoadingIndicator';
-import {
-  REVALIDATE_ON_FAILURE_TIME_IN_SECONDS,
-  REVALIDATE_ON_SUCCESS_IN_SECONDS,
-} from '../lib/shared-domain/page/constants';
+import { REVALIDATE_ON_SUCCESS_IN_SECONDS } from '../lib/shared-domain/page/constants';
 
 export async function getStaticPaths() {
   const enPaths = en.map((slug) => ({
@@ -102,10 +98,6 @@ export default function Index({
   const previewPage = filterDataToSingleItem(previewData, preview);
 
   const router = useRouter();
-
-  if (router.isFallback) {
-    return <LoadingIndicator siteSettings={siteSettings} />;
-  }
 
   return (
     <SharedContentContext value={sharedContent}>
