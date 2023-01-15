@@ -113,7 +113,7 @@ export default function Index({
 
   return (
     <ErrorTrackingBoundary>
-      {selectedNewsArticle.isEvent ? (
+      {selectedNewsArticle?.isEvent ? (
         <SharedContentContext value={sharedContent}>
           <NewsEventDetailLayout
             siteSettings={siteSettings}

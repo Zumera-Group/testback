@@ -120,8 +120,8 @@ export const ServiceDetailLayout: React.FC<ServiceDetailProps> = ({
   return (
     <Box minHeight="100vh" overflowX="hidden">
       <SEO
-        seoTitle={service.name}
-        seoDescription={service.description}
+        seoTitle={service?.name}
+        seoDescription={service?.description}
         siteSettings={siteSettings}
       />
       <PageHeader
@@ -129,11 +129,11 @@ export const ServiceDetailLayout: React.FC<ServiceDetailProps> = ({
         siteSettings={siteSettings}
         otherLangSlug={otherLangSlug}
       />
-      <PageTransition slug={service._id}>
+      <PageTransition slug={service?._id}>
         <ServiceHero service={service} />
         {service?.tabs && service?.tabs.length > 1 && (
           <ServiceTabs
-            tabs={service.tabs}
+            tabs={service?.tabs}
             onSelectTab={onSelectTab}
             activeTabKey={selectedTab?._key}
           />
