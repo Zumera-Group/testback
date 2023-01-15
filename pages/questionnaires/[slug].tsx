@@ -115,6 +115,12 @@ export default function Index({
 
   const previewQuestionnaire = filterDataToSingleItem(previewData, preview);
 
+  const router = useRouter();
+
+  if (router.isFallback) {
+    return null;
+  }
+
   return (
     <SharedContentContext value={sharedContent}>
       <ErrorTrackingBoundary>

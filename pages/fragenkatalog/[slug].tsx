@@ -118,6 +118,10 @@ export default function Index({
 
   const router = useRouter();
 
+  if (router.isFallback) {
+    return null;
+  }
+
   return (
     <SharedContentContext value={sharedContent}>
       <ErrorTrackingBoundary>

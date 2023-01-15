@@ -111,6 +111,12 @@ export default function Index({
   });
   const previewNewsArticle = filterDataToSingleItem(previewData, preview);
 
+  const router = useRouter();
+
+  if (router.isFallback) {
+    return null;
+  }
+
   return (
     <ErrorTrackingBoundary>
       {selectedNewsArticle?.isEvent ? (
