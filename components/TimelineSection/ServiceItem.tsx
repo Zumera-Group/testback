@@ -22,7 +22,7 @@ export const ServiceItem: React.FC<IProps> = ({ service, index }) => {
         <P fontSize={'1rem'} color={'inherit'}>
           {service.shortDescription}
         </P>
-        <Link passHref href={service.slug?.current}>
+        <Link passHref href={`/services/${service.slug?.current}`}>
           <a>
             <Icon
               iconName={'arrow-circle'}
