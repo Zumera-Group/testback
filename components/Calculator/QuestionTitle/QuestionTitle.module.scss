@@ -1,6 +1,6 @@
 .questionTitleWrapper {
   text-align: left;
-  color: $white;
+  // color: $white;
   width: 100%;
   max-width: 628px;
 }
@@ -12,4 +12,24 @@
 .category {
   font-weight: normal;
   text-transform: uppercase;
+}
+
+.tooltip {
+  font-size: $font-size-tiny;
+  opacity: 0.5;
+  display: flex;
+  align-items: center;
+}
+
+.tooltipIcon {
+  margin: 5px;
+  position: relative;
+  display: inline-block;
+  &:hover .toolTipText {
+    visibility: visible;
+  }
+}
+
+.toolTipText {
+  visibility: hidden;
 }

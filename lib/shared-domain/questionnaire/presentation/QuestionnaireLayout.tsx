@@ -150,7 +150,7 @@ const QuestionnaireLayout: React.FC<{
       />
       <PageTransition slug={questionnaire?.questionnaireSlug?.current}>
         <Grid
-          backgroundImage={withBackgroundImage && `url(${backgroundImage.src})`}
+          // backgroundImage={withBackgroundImage && `url(${backgroundImage.src})`}
           backgroundPosition="center"
           backgroundSize="cover"
           backgroundRepeat="no-repeat"
