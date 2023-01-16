@@ -15,12 +15,15 @@ const QuestionTitle: React.FC<Props> = ({ title, description }) => {
     <div className={styles.questionTitleWrapper}>
       <span className={styles.category}>{currentCategory}</span>
       <h3 className={styles.title}>{title}</h3>
-      {/* {description && <p>{description} TEST</p>} */}
-      <div className={styles.tooltip}>
-        Why do you need this information?{' '}
-        <Tooltip color="#ffffff" className={styles.tooltipIcon} />
-        <p className={styles.tooltipText}>sse</p>
-      </div>
+      {description && (
+        <div className={styles.tooltipWrapper}>
+          <span className={styles.infoPrompt}>
+            Why do you need this information?
+          </span>
+          <Tooltip color="#ffffff" className={styles.tooltipIcon} />
+          <div className={styles.tooltipText}>{description}</div>
+        </div>
+      )}
     </div>
   );
 };

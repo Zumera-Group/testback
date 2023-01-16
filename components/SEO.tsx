@@ -8,7 +8,7 @@ export const SEO: React.FC<{
   seoImage?: { asset: { url: string } };
   siteSettings: SiteSettings;
 }> = ({ seoTitle, seoImage, seoDescription, siteSettings }) => {
-  const title = seoTitle + ' | ' + siteSettings.siteName;
+  const title = seoTitle + ' | ' + siteSettings?.siteName;
   const image = seoImage?.asset?.url;
   return (
     <Head>
@@ -23,14 +23,14 @@ export const SEO: React.FC<{
       <meta itemProp="og:description" content={seoDescription} />
 
       <meta itemProp="og:type" content="website" />
-      <meta itemProp="og:site_name" content={siteSettings.siteName} />
+      <meta itemProp="og:site_name" content={siteSettings?.siteName} />
 
       <meta itemProp="og:image" content={image} />
       <meta property="og:image" content={image} />
 
       <meta name="twitter:card" content="website" />
-      <meta name="twitter:site" content={siteSettings.siteName} />
-      <meta name="twitter:creator" content={siteSettings.siteName} />
+      <meta name="twitter:site" content={siteSettings?.siteName} />
+      <meta name="twitter:creator" content={siteSettings?.siteName} />
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={seoDescription} />
       <meta name="twitter:image" content={image} />

@@ -80,11 +80,7 @@ const Card: React.FC<{
               <P color={colors.text.light} fontSize={fontSizes.xs}>
                 {cardSubtitle}
               </P>
-              <FlexRow
-                overflow="hidden"
-                mt={1}
-                flexWrap="wrap"
-              >
+              <FlexRow overflow="hidden" mt={1} flexWrap="wrap">
                 {skills?.map((s, index) => (
                   <Box
                     mb={1}
@@ -214,6 +210,7 @@ export const EmployeeCarouselSection: React.FC<{
           minHeight="550px"
           height="550px"
         >
+          {/*// @ts-ignore*/}
           <Carousel
             offsetRadius={2}
             animationConfig={{ tension: 120, friction: 14 }}

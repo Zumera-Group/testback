@@ -12,7 +12,7 @@ import { useRouter } from 'next/router';
 import { EmployeeHero } from 'lib/shared-domain/employees/presentation/EmployeeHero';
 import { usePreviewSubscription } from '../../lib/sanity';
 import { filterDataToSingleItem } from '../../lib/shared-domain/page/infrastructure/page.facade';
-import LoadingIndicator from 'lib/animations/LoadingIndicator';
+
 import { REVALIDATE_ON_FAILURE_TIME_IN_SECONDS } from '../../lib/shared-domain/page/constants';
 
 export async function getStaticPaths() {
@@ -104,7 +104,7 @@ export default function Index({
   const router = useRouter();
 
   if (router.isFallback) {
-    return <LoadingIndicator siteSettings={siteSettings} />;
+    return null;
   }
 
   return (

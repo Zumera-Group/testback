@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react';
 import I18n from 'i18n-js';
 import { Box, Flex, Grid, GridItem } from '@chakra-ui/react';
-import backgroundImage from '../../../../public/bkg.svg';
+// import backgroundImage from '../../../../public/bkg.svg';
+import styles from './QuestionnaireLayout.module.scss';
 import { PageTransition } from 'components/PageTransition';
 import { SEO } from 'components/SEO';
 import { Question, Questionnaire } from '../domain/index';
@@ -150,10 +151,7 @@ const QuestionnaireLayout: React.FC<{
       />
       <PageTransition slug={questionnaire?.questionnaireSlug?.current}>
         <Grid
-          // backgroundImage={withBackgroundImage && `url(${backgroundImage.src})`}
-          backgroundPosition="center"
-          backgroundSize="cover"
-          backgroundRepeat="no-repeat"
+          className={styles.questionnaireWrapper}
           h="100%"
           w="100%"
           p={3}

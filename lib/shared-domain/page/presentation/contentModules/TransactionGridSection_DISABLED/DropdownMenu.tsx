@@ -92,7 +92,7 @@ export const DropdownMenu: React.FC<{
       <FlexRow
         justify="center"
         my={isMobile ? 5 : 0}
-        mb={isMobile && 1}
+        // mb={isMobile && 1}
         mx={isMobile ? 0 : 8}
       >
         <icons.TransactionX

@@ -19,7 +19,7 @@ import { SharedContentContext } from 'lib/shared-domain/page/infrastructure/shar
 import { SharedContentFacade } from 'lib/shared-domain/page/infrastructure/sharedContent.facade';
 import { usePreviewSubscription } from '../../lib/sanity';
 import { filterDataToSingleItem } from '../../lib/shared-domain/page/infrastructure/page.facade';
-import LoadingIndicator from 'lib/animations/LoadingIndicator';
+
 import { fetchSectors } from '../../lib/shared-domain/sectors/application/useGetSectors';
 import { REVALIDATE_ON_FAILURE_TIME_IN_SECONDS } from '../../lib/shared-domain/page/constants';
 
@@ -119,7 +119,7 @@ export default function Index({
   const router = useRouter();
 
   if (router.isFallback) {
-    return <LoadingIndicator siteSettings={siteSettings} />;
+    return null;
   }
 
   return (

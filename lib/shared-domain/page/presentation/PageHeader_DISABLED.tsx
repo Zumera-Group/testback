@@ -16,10 +16,10 @@ import {
 import { FlexCol, Box, FlexRow } from 'components/Layout/Flex/Flex';
 import { P } from 'components/Typography/P';
 import { SectionContainer } from 'components/Layout/SectionContainer';
-import { BigMenu } from './BigMenu';
+// import { BigMenu } from './BigMenu';
 import { AnimatePresence } from 'framer-motion';
-import { MobileMenu } from './MobileMenu';
-import { LanguageSwitcher } from './LanguageSwitcher';
+// import { MobileMenu } from './MobileMenu';
+// import { LanguageSwitcher } from './LanguageSwitcher';
 import { useLinkWithCurrentLocale } from 'lib/shared-domain/useLinkWithCurrentLocale';
 import { useRouter } from 'next/router';
 
@@ -111,18 +111,19 @@ export const PageHeader: React.FC<{
 
     if (darkBg) return false;
     if (!heroSection) return true;
-    return (
-      (heroSection.specificContentModule as HeroSectionModule).type ===
-        'level2' ||
-      (heroSection.specificContentModule as HeroSectionModule).type ===
-        'transaction' ||
-      (heroSection.specificContentModule as HeroSectionModule).type ===
-        'news' ||
-      (heroSection.specificContentModule as HeroSectionModule).type ===
-        'career' ||
-      (heroSection.specificContentModule as HeroSectionModule).type ===
-        'termsAndConditions'
-    );
+    return false;
+    // return (
+    //   (heroSection.specificContentModule as HeroSectionModule).type ===
+    //     'level2' ||
+    //   (heroSection.specificContentModule as HeroSectionModule).type ===
+    //     'transaction' ||
+    //   (heroSection.specificContentModule as HeroSectionModule).type ===
+    //     'news' ||
+    //   (heroSection.specificContentModule as HeroSectionModule).type ===
+    //     'career' ||
+    //   (heroSection.specificContentModule as HeroSectionModule).type ===
+    //     'termsAndConditions'
+    // );
   };
 
   useEffect(() => {

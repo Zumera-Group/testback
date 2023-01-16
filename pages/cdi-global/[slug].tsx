@@ -16,8 +16,6 @@ import { usePreviewSubscription } from '../../lib/sanity';
 import { filterDataToSingleItem } from '../../lib/shared-domain/page/infrastructure/page.facade';
 
 import { slugifyOffice } from 'lib/shared-domain/offices/application/slugifyOffice';
-import LoadingIndicator from 'lib/animations/LoadingIndicator';
-import { REVALIDATE_ON_FAILURE_TIME_IN_SECONDS } from '../../lib/shared-domain/page/constants';
 
 export async function getStaticPaths() {
   return {
@@ -103,7 +101,7 @@ export default function Index({
   const router = useRouter();
 
   if (router.isFallback) {
-    return <LoadingIndicator siteSettings={siteSettings} />;
+    return null;
   }
 
   return (

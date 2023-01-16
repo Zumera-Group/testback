@@ -40,7 +40,7 @@ export const PartnersPersonQuote: React.FC<{
                   height="auto"
                   mb="1rem"
                   alt=""
-                  layout="fill"
+                  // layout="fill"
                   objectFit="contain"
                   src={imageUrl}
                 />
@@ -69,7 +69,11 @@ export const PartnersPersonQuote: React.FC<{
               </FlexCol>
             </GridItem>
             {quoteText && (
-              <GridItem height="fit-content" p="2rem 1rem" border="1px solid black">
+              <GridItem
+                height="fit-content"
+                p="2rem 1rem"
+                border="1px solid black"
+              >
                 <Image src={quotes.src} alt="" height="80px" width="100px" />
                 <P color={colors.text.light} fontStyle="italic" mt={2} mb={3}>
                   <span

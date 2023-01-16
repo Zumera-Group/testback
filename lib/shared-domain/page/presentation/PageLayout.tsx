@@ -57,7 +57,10 @@ const PageLayout: React.FC<{
               );
             })}
         </main>
-        {!page.isFooterHidden ? <PageFooter siteSettings={siteSettings} /> : null}
+
+        {/*{!page.isFooterHidden ? (*/}
+        {/*  <PageFooter siteSettings={siteSettings} />*/}
+        {/*) : null}*/}
       </PageTransition>
     </>
   );
