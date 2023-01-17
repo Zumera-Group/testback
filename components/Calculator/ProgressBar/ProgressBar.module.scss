@@ -1,0 +1,21 @@
+.progressWrapper {
+  transform: rotate(-90deg);
+}
+.progressCircle {
+  stroke: $white;
+  fill: none;
+  stroke-width: 13px;
+  stroke-dasharray: 560;
+  transition: all 0.3s ease-in-out;
+}
+
+.textWrapper {
+  transform: translate(107px, 20px);
+  text {
+    alignment-baseline: middle;
+    text-anchor: middle;
+    font-size: $h2-font-size;
+    fill: $white;
+    transform: rotate(90deg);
+  }
+}

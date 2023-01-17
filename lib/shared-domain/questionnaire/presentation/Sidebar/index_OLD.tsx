@@ -1,45 +1,24 @@
 import { VStack } from '@chakra-ui/react';
-import { ProgressBar } from 'components/Calculator/ProgressBar';
-import { useEffect, useState } from 'react';
 import { Category } from '../../domain';
 import { useValuationStore } from '../../store';
 import { INDUSTRY_QUESTION_ID, SECTOR_QUESTION_ID } from '../questions';
 import { SidebarStep } from './SidebarStep';
 
 const Sidebar = (): JSX.Element => {
-  const { mainStep, subStep, questionnaire, isOnResultScreen } =
+  const { mainStep, subStep, isOnResultScreen, questionnaire } =
     useValuationStore();
-
-  const [currenQuestionPosition, setCurrentQuestionPosition] = useState(0);
   const categories = questionnaire && questionnaire.questionsByCategory;
+
   const currentCategory = questionnaire?.questionsByCategory?.[mainStep];
+
   const categoryQuestions = currentCategory?.questions;
+
   const currentQuestion =
     questionnaire && categoryQuestions && categoryQuestions[subStep];
+
   const isIndustryOrSectorQuestion =
     currentQuestion?.questionId === INDUSTRY_QUESTION_ID ||
     currentQuestion?.questionId === SECTOR_QUESTION_ID;
-  const numberOfQuestionsInTotal = questionnaire?.questionsByCategory?.reduce(
-    (numberOfQuestions, currentCategory) => {
-      return numberOfQuestions + currentCategory.questions.length;
-    },
-    0,
-  );
-  const progress = (currenQuestionPosition / numberOfQuestionsInTotal) * 100;
-
-  useEffect(() => {
-    const stepInCurrentCategory = subStep + 1;
-    let numberOfStepsInOtherCategories = 0;
-
-    for (let i = 0; i < mainStep; i++) {
-      numberOfStepsInOtherCategories =
-        numberOfStepsInOtherCategories +
-        questionnaire?.questionsByCategory?.[i]?.questions?.length;
-    }
-    setCurrentQuestionPosition(
-      stepInCurrentCategory + numberOfStepsInOtherCategories,
-    );
-  }, [mainStep, questionnaire?.questionsByCategory, subStep]);
 
   if (
     (subStep === 0 && mainStep === 0) ||
@@ -69,7 +48,7 @@ const Sidebar = (): JSX.Element => {
 
   return (
     <>
-      <ProgressBar progress={progress} />
+      <p>test</p>
       <VStack
         maxH="calc(100vh - 130px)"
         w="100%"
