@@ -1,0 +1,76 @@
+$toolTipOpacity: 0.5;
+
+.questionTitleWrapper {
+  text-align: left;
+  color: $white;
+  width: 100%;
+  max-width: $container-max-width / 2;
+}
+
+.title {
+  padding-top: $gutter * 1;
+}
+
+.category {
+  font-weight: normal;
+  text-transform: uppercase;
+}
+
+.tooltipWrapper {
+  display: flex;
+  align-items: center;
+  position: relative;
+  .infoPrompt {
+    font-size: $font-size-tiny;
+    opacity: $toolTipOpacity;
+  }
+}
+
+.tooltipIcon {
+  opacity: $toolTipOpacity;
+  margin: $gutter * 0.5;
+  cursor: pointer;
+  &:hover + .tooltipText {
+    visibility: visible;
+  }
+}
+
+.tooltipText {
+  visibility: hidden;
+  max-width: 18rem;
+  background-color: $secondary;
+  font-size: $font-size-tiny;
+  color: $white;
+  border-radius: 1rem;
+  padding: $gutter;
+  position: absolute;
+  z-index: 1;
+  width: fit-content;
+  top: 2.5rem;
+
+  @include breakpoint-up(md) {
+    top: -2.5rem;
+    right: -2.75rem;
+    max-width: 25rem;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    margin-left: 5.5rem;
+    border-width: 11px;
+    border-style: solid;
+    border-color: transparent transparent $secondary transparent;
+
+    @include breakpoint-up(md) {
+      bottom: unset;
+      left: unset;
+      top: 50%;
+      right: 100%;
+      margin-top: -0.7rem;
+      border-color: transparent $secondary transparent transparent;
+    }
+  }
+}

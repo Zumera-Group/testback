@@ -1,7 +1,10 @@
-import QuestionTitle from 'components/Calculator/QuestionTitle/QuestionTitle';
+import { Box } from '@chakra-ui/react';
+import { H } from 'components/Typography/H';
+import { P } from 'components/Typography/P';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useValuationStore } from 'lib/shared-domain/questionnaire/store';
 import React from 'react';
+import { fontSizes } from 'styles/foundations/fontStyles';
 
 interface Props {
   title: string;
@@ -19,7 +22,7 @@ export const QuestionText: React.FC<Props> = ({
   description,
   children,
 }): JSX.Element => {
-  const { isFadingOut, questionnaire, mainStep } = useValuationStore();
+  const { isFadingOut } = useValuationStore();
 
   return (
     <AnimatePresence>
@@ -32,8 +35,22 @@ export const QuestionText: React.FC<Props> = ({
           exit="exit"
           variants={animationVariants}
         >
-          <QuestionTitle title={title} description={description} />
-
+          <Box mt={{ base: 5.5, lg: 0 }} maxWidth={700} mx="auto" pb={4}>
+            <H
+              as="h1"
+              textAlign="center"
+              variant="h1"
+              fontSize={{ base: fontSizes.h2, lg: 'h1' }}
+              lineHeight={{ base: '27px', lg: '39px' }}
+            >
+              {title}
+            </H>
+            {description && (
+              <P whiteSpace="pre-wrap" textAlign="center" pt={3}>
+                {description}
+              </P>
+            )}
+          </Box>
           {children}
         </motion.div>
       )}

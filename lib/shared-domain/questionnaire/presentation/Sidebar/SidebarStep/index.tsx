@@ -115,7 +115,7 @@ export const SidebarStep = ({
               closed: { opacity: 0, scaleY: 0, height: 0 },
             }}
           >
-            <FlexCol>{category.questions.map(renderSubSteps)}</FlexCol>
+            <FlexCol>{category.questions.map(renderSubSteps)} </FlexCol>
           </motion.div>
         </AnimatePresence>
       </Box>
