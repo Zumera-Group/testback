@@ -1,0 +1,24 @@
+.sideBarWrapper {
+  margin-top: $gutter * 1.5;
+}
+
+.stepItem {
+  //   background-color: unset;
+  //   border: none;
+
+  opacity: 0.5;
+
+  * {
+    font-family: $font-family-sans-serif;
+    font-weight: $font-weight-bold;
+    color: $white !important;
+  }
+
+  &.active {
+    opacity: 1;
+  }
+}
+
+.stepItemIndex {
+  margin-right: $gutter * 0.5;
+}
