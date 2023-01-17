@@ -1,4 +1,4 @@
-import { Box, Flex } from '@chakra-ui/react';
+import { Box, Flex, StylesProvider } from '@chakra-ui/react';
 import { P } from 'components/Typography/P';
 import { Category, Question } from 'lib/shared-domain/questionnaire/domain';
 import { useValuationStore } from 'lib/shared-domain/questionnaire/store';
@@ -7,6 +7,7 @@ import { colors } from 'styles/foundations/colors';
 import { fontSizes, fontWeights } from 'styles/foundations/fontStyles';
 import { useAnswers } from '../../../application/useAnswers';
 import { useQuestionnaireRouter } from '../../Question';
+import styles from './SidebarChildStep.module.scss';
 
 interface Props {
   categoryIndex: number;
@@ -79,14 +80,15 @@ export const SidebarChildStep = ({
         }}
         mt={3}
         as={isClickable() ? 'button' : null}
+        className={styles.stepItem}
       >
         <P
           id={idForScrolling}
-          textAlign="left"
-          color={color}
-          fontSize={fontSize}
-          fontWeight={fontWeight}
-          variant="pSemiBold"
+          // textAlign="left"
+          // color={color}
+          // fontSize={fontSize}
+          // fontWeight={fontWeight}
+          // variant="pSemiBold"
         >
           {question.navigationTitle}
         </P>

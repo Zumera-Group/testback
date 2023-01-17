@@ -105,6 +105,19 @@ export const SidebarStep = ({
             </P>
           </Box>
         </Flex>
+        {/* <AnimatePresence exitBeforeEnter>
+          <motion.div
+            animate={isOpen ? 'open' : 'closed'}
+            style={{ originY: 0 }}
+            transition={{ duration: 0.4 }}
+            variants={{
+              open: { opacity: 1, scaleY: 1, display: 'block' },
+              closed: { opacity: 0, scaleY: 0, height: 0 },
+            }}
+          >
+            <FlexCol>{category.questions.map(renderSubSteps)}</FlexCol>
+          </motion.div>
+        </AnimatePresence> */}
       </Box>
     </FlexCol>
   );
