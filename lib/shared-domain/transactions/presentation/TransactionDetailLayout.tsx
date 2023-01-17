@@ -48,10 +48,7 @@ export const TransactionDetailLayout: React.FC<{
           transaction={transaction}
           content={transactionDetailContent.heroSectionContent}
         />
-        <TransactionCompany
-          transaction={transaction}
-          content={transactionDetailContent.companySection}
-        />
+        <TransactionCompany transaction={transaction} />
         <TransactionKeyfacts
           transaction={transaction}
           content={transactionDetailContent.keyFactsSection}
