@@ -13,6 +13,7 @@ import styles from './TransactionCard.module.scss';
 export const TransactionCard = ({ transaction }) => {
   const sharedContent = useSharedContentContext();
   const format = useFormatDate();
+
   if (!transaction) return null;
 
   const {

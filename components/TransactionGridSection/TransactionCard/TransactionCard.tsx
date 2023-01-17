@@ -85,8 +85,8 @@ export const TransactionCard = ({ transaction }) => {
               <Icon
                 iconName={'arrow-circle'}
                 viewBox={'0 0 32 32'}
-                width={24}
-                height={24}
+                width={32}
+                height={32}
               />
             </div>
           </div>

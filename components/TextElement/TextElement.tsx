@@ -4,9 +4,7 @@ import { SanityBlockContent } from 'components/SanityBlockContent';
 import styles from './TextElement.module.scss';
 import { H } from 'components/Typography/H';
 
-export const TextElement = ({ ...rest }) => {
-  const { firstBlock, secondBlock, title } = rest;
-
+export const TextElement = ({ firstBlock, secondBlock, title }) => {
   const TextColumn = ({ content }) => {
     return Array.isArray(content) && content?.length > 0 ? (
       <GridColumn sm={12} md={6} lg={6} className={styles.textColumn}>
@@ -16,8 +14,6 @@ export const TextElement = ({ ...rest }) => {
       </GridColumn>
     ) : null;
   };
-
-  console.log(rest);
 
   return (
     <Section size={'sm'} bg={'light'} color={'primary'}>

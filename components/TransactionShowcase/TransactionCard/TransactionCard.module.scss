@@ -15,7 +15,7 @@
 
 .cover {
   position: relative;
-  aspect-ratio: 5 / 3;
+  aspect-ratio: 5 / 2;
   background-color: $primary;
   color: $white;
 }
@@ -79,6 +79,7 @@
   align-items: center;
   text-align: center;
   padding: $gutter * 0.5;
+  aspect-ratio: 4/1.5;
 }
 
 .transactionLogoFallback {
@@ -108,6 +109,10 @@
   justify-content: flex-end;
   align-items: flex-start;
   padding: $gutter;
+  svg {
+    color: $accent;
+    margin-left: auto;
+  }
   @include breakpoint-up(md) {
     padding: $gutter * 1.5;
   }

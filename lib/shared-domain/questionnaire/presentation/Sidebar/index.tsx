@@ -72,7 +72,7 @@ const Sidebar = (): JSX.Element => {
       <ProgressBar progress={progress} />
       <VStack
         maxH="calc(100vh - 130px)"
-        w="100%"
+        // w="100%"
         overflow="scroll"
         style={{ scrollbarWidth: 'none' }}
         css={WEBKIT_SCROLL}
