@@ -1,4 +1,5 @@
-import { Box, Circle, Flex } from '@chakra-ui/react';
+import { Box, Flex } from '@chakra-ui/react';
+import { Tick } from 'components/Icons/Tick';
 import { FlexCol } from 'components/Layout/Flex/Flex';
 import { P } from 'components/Typography/P';
 import { Category, Question } from 'lib/shared-domain/questionnaire/domain';
@@ -29,17 +30,7 @@ export const SidebarStep = ({
     if (isActive && !isOpen) setIsOpen(true);
 
     if (!isActive && isOpen) setIsOpen(false);
-  }, [mainStep]);
-
-  // const color = isActive ? colors.primary.darkGreen : colors.text.light;
-  // const fontSize = isActive ? fontSizes.small : fontSizes.tiny;
-  // const fontWeight = isActive ? fontWeights.semiBold : fontWeights.highlight;
-  // const circleBgCol = isActive
-  //   ? colors.circleBg.active
-  //   : colors.circleBg.inactive;
-  // const circleCol = isActive
-  //   ? colors.circleCol.active
-  //   : colors.circleCol.inactive;
+  }, [isActive, isOpen, mainStep]);
 
   const renderSubSteps = (question: Question, index: number) => {
     const prevQuestion = category.questions[index - 1];
@@ -71,20 +62,25 @@ export const SidebarStep = ({
     isCurrentOrPrevCategory ||
     (isLastQuestionFromPrevCategory && isNextCategory);
 
-  const activeItem = isActive ? styles.active : '';
-
-  console.log(isClickable);
+  const activeItem = isActive ? styles.active : styles.inactive;
 
   return (
     <FlexCol justify="center" w="100%" className={styles.sideBarWrapper}>
       <Box>
-        <Flex className={[styles.stepItem, activeItem].join(' ')}>
+        <Flex className={[styles.stepItem].join(' ')}>
           <P className={styles.stepItemIndex}>
-            {categoryIndex + 1}. {isClickable && !isActive ? 'test' : 'no'}
+            {isClickable && !isActive && !isNextCategory ? (
+              <span className={styles.tick}>
+                <Tick color="#F0005C" size={18} />
+              </span>
+            ) : (
+              <span className={activeItem}>{`${categoryIndex + 1}.`}</span>
+            )}
           </P>
-          <Box ml={2}>
-            <P className={styles.stepItemName}>{category.categoryName}</P>
-          </Box>
+
+          <P className={[styles.stepItemName, activeItem].join(' ')}>
+            {category.categoryName}
+          </P>
         </Flex>
       </Box>
     </FlexCol>
