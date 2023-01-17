@@ -1,11 +1,10 @@
 import styles from './ProgressBar.module.scss';
 
 interface Props {
-  progress: any;
+  progress: number;
 }
 
 export const ProgressBar: React.FC<Props> = ({ progress }) => {
-  console.log(progress);
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
