@@ -6,5 +6,5 @@
   display: flex;
   align-items: center;
   flex-direction: column;
-  // @include divider(right, $white);
+  @include divider(right, $white);
 }
