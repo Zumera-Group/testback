@@ -2,12 +2,15 @@
   @include divider(bottom, $primary);
   padding-bottom: $gutter * 7.5;
   @include breakpoint-down(md) {
-    padding-bottom: $gutter * 3.5;
+    padding-bottom: $gutter * 5.5;
   }
 }
 .containerInner {
   background: $white;
   padding: $gutter * 3.5;
+  @include breakpoint-down(md) {
+    padding: $gutter * 2;
+  }
 }
 .companyCol {
   display: flex;
