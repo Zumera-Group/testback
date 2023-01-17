@@ -13,13 +13,14 @@ import { Office } from './../../offices/domain/index';
 import { SEO } from 'components/SEO';
 import { Job } from 'lib/shared-domain/jobs/domain';
 import { useRouter } from 'next/router';
+const PageFooter = dynamic(() => import('./PageFooter'));
 
 const PageLayout: React.FC<{
   page: Page;
   siteSettings: SiteSettings;
   sharedContent?: any;
 }> = ({ page, siteSettings, sharedContent }) => {
-  const PageFooter = dynamic(() => import('./PageFooter'));
+  const PageFooterComponent = PageFooter as any;
 
   const contentModules =
     page?.contentModules?.map((c) => ContentModule.create(c)) || [];
@@ -58,9 +59,9 @@ const PageLayout: React.FC<{
             })}
         </main>
 
-        {/*{!page.isFooterHidden ? (*/}
-        {/*  <PageFooter siteSettings={siteSettings} />*/}
-        {/*) : null}*/}
+        {!page.isFooterHidden ? (
+          <PageFooterComponent siteSettings={siteSettings} />
+        ) : null}
       </PageTransition>
     </>
   );

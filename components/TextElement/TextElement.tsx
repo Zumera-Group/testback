@@ -2,10 +2,10 @@ import { Section, Container, Grid, GridColumn } from 'components/Layout';
 import { SanityBlockContent } from 'components/SanityBlockContent';
 
 import styles from './TextElement.module.scss';
+import { H } from 'components/Typography/H';
 
 export const TextElement = ({ ...rest }) => {
-
-  const { firstBlock, secondBlock } = rest;
+  const { firstBlock, secondBlock, title } = rest;
 
   const TextColumn = ({ content }) => {
     return Array.isArray(content) && content?.length > 0 ? (
@@ -17,14 +17,17 @@ export const TextElement = ({ ...rest }) => {
     ) : null;
   };
 
+  console.log(rest);
+
   return (
-    <Section
-      size={'sm'}
-      bg={'light'}
-      color={'primary'}
-    >
+    <Section size={'sm'} bg={'light'} color={'primary'}>
       <Container>
         <div className={styles.textElement}>
+          {title ? (
+            <H variant={'h3'} color={'white'}>
+              {title}
+            </H>
+          ) : null}
           <Grid
             fullWidth={true}
             justifyContent={'space-between'}

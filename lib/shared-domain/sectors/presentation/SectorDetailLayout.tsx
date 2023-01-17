@@ -61,10 +61,7 @@ export const SectorDetailLayout: React.FC<{
           otherLangSlug={otherLangSlug}
         />
         <main id="main">
-          <SectorHero
-            sector={sector}
-            content={content?.heroSectionContent}
-          />
+          <SectorHero sector={sector} content={content?.heroSectionContent} />
           <SectorInfoSection
             siteSettings={siteSettings}
             sectorTransactions={filteredTransactions}

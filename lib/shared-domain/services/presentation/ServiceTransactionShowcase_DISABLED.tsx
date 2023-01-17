@@ -6,7 +6,7 @@ import {
   ServiceTransactionShowcaseSection,
 } from '../../page/domain/index';
 
-export const ServiceTransactionShowcase: React.FC<{
+export const ServiceTransactionShowcase_DISABLED: React.FC<{
   transaction: Transaction;
   siteSettings: SiteSettings;
   section: ServiceTransactionShowcaseSection | any;

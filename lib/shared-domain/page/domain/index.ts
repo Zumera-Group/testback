@@ -232,6 +232,11 @@ export interface Sector {
     title: string;
     trendDescription: string;
   };
+  trendsImage: {
+    asset: {
+      url: string;
+    };
+  };
   infoSection: {
     title: string;
     subtitle: string;

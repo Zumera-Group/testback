@@ -1,0 +1,48 @@
+.section {
+  background: $secondary;
+  padding: 5rem 3.5rem;
+  @include breakpoint-down(lg) {
+    padding: 2rem;
+  }
+}
+
+.checkmarks {
+  list-style-type: none;
+  padding: 0;
+  margin-top: 3rem;
+  li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 2.25rem;
+    svg {
+      margin-right: 1rem;
+    }
+    font-size: $font-size-normal;
+    font-weight: $font-weight-bold;
+  }
+}
+
+.contactPerson {
+  background: $primary;
+  padding: 2.25rem;
+  margin-bottom: 6px;
+  @include breakpoint-down(lg) {
+    padding: 1.5rem;
+  }
+  .name {
+    margin-bottom: 6px;
+  }
+  .jobTitle {
+    text-transform: uppercase;
+    margin-bottom: 2.75rem;
+  }
+  .bookLink {
+    display: flex;
+    align-items: center;
+    font-size: $font-size-small;
+    svg {
+      color: $accent;
+      margin-left: 12px;
+    }
+  }
+}

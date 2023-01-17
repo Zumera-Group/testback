@@ -172,11 +172,14 @@ export class TextElementSectionModule extends BaseModule {
   firstBlock: Description[];
   secondBlock: Description[];
 
+  title: string;
+
   constructor(fields: Record<string, any>) {
     super();
 
     this.firstBlock = fields.firstBlock;
     this.secondBlock = fields.secondBlock;
+    this.title = fields.title;
   }
 }
 
@@ -509,7 +512,7 @@ export class HeroSectionModule extends BaseModule {
     | 'career'
     | 'job-landing'
     | 'termsAndConditions';
-  heroBgImage: {
+  heroImage: {
     asset: { url: string };
   };
   heroMobileBgImage: {
@@ -530,6 +533,7 @@ export class HeroSectionModule extends BaseModule {
     this.description = fields.description;
     this.type = fields.type;
     this.button = fields.button;
+    this.heroImage = fields.heroImage;
   }
 }
 
@@ -682,12 +686,15 @@ export class TeamSectionModule extends BaseModule {
   description: any[];
   linkText: string;
 
+  isGridLayout: boolean;
+
   constructor(fields: Record<string, any>) {
     super();
     this.subtitle = fields.subtitle;
     this.title = fields.title;
     this.description = fields.description;
     this.linkText = fields.linkText;
+    this.isGridLayout = fields.isGridLayout;
   }
 }
 

@@ -6,7 +6,7 @@ import {
   Grid,
   GridColumn,
   SwiperTransactions,
-  SwiperNavigationButtons
+  SwiperNavigationButtons,
 } from 'components/Layout';
 
 import { SectionHeading } from 'components/SectionHeading';
@@ -18,7 +18,7 @@ import styles from './SectorTransactions.module.scss';
 export const SectorTransactions = ({ transactions, sector, content }) => {
   const swiperPrevRef = useRef();
   const swiperNextRef = useRef();
-  
+
   if (!transactions || transactions.length === 0) return null;
 
   const t = (item) => content?.[item];
@@ -31,11 +31,7 @@ export const SectorTransactions = ({ transactions, sector, content }) => {
   if (filteredTransactions.length === 0) return null;
 
   return (
-    <Section
-      size={'md'}
-      bg={'light'}
-      color={'primary'}
-    >
+    <Section size={'md'} bg={'light'} color={'primary'}>
       <Container>
         <Grid
           fullWidth={true}
@@ -68,9 +64,9 @@ export const SectorTransactions = ({ transactions, sector, content }) => {
                     key={`sectorTransactions-${t._id}`}
                     className={styles.slide}
                   >
-                  <TransactionBig article={t} />
-                </SwiperSlide>
-              ))}
+                    <TransactionBig article={t} />
+                  </SwiperSlide>
+                ))}
             </SwiperTransactions>
             <div className={styles.navigationBtns}>
               <SwiperNavigationButtons

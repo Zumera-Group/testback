@@ -25,10 +25,8 @@
   align-items: center;
   text-align: center;
   padding: var(--padding);
-  transition: background-color $timing-md $ease-out,
-              color $timing-md $ease-out,
-              border-color $timing-md $ease-out,
-              box-shadow $timing-md $ease-out;
+  transition: background-color $timing-md $ease-out, color $timing-md $ease-out,
+    border-color $timing-md $ease-out, box-shadow $timing-md $ease-out;
 
   background-color: $sector-bg;
   color: $sector-color;
@@ -57,6 +55,7 @@
   will-change: filter;
   filter: brightness(1) invert(0);
   transition: filter $timing-md $ease-out;
+  max-width: 72px;
 }
 
 .name {

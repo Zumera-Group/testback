@@ -5,7 +5,7 @@ import { SiteSettings } from 'lib/shared-domain/page/domain';
 import { Box } from 'components/Layout/Flex/Flex';
 import { PageFooter } from 'lib/shared-domain/page/presentation/PageFooter';
 import { PageHeader } from 'lib/shared-domain/page/presentation/PageHeader';
-import { TransactionHero } from './TransactionHero';
+import { TransactionHero } from 'lib/shared-domain/transactions/presentation/TransactionHero';
 import { TransactionCompany } from './TransactionCompany';
 import { TransactionKeyfacts } from './TransactionKeyfacts';
 import { TransactionValues } from './TransactionValues';

@@ -27,9 +27,12 @@ export const Offices = ({ offices, appointmentLinkText }) => {
               }}
               aria-selected={selectedOffice === office ? 'true' : 'false'}
             >
-              <span className={[
-                styles.officeToggleText,
-                selectedOffice === office ? styles.officeToggleText__active : ''
+              <span
+                className={[
+                  styles.officeToggleText,
+                  selectedOffice === office
+                    ? styles.officeToggleText__active
+                    : '',
                 ].join(' ')}
               >
                 {office?.city}
@@ -38,6 +41,10 @@ export const Offices = ({ offices, appointmentLinkText }) => {
           </li>
         ))}
       </ul>
+      <img
+        src={'/contentModules/contactUsSection/footer_cta-building.svg'}
+        alt={'building'}
+      />
       <AnimatePresence initial={false} exitBeforeEnter>
         {selectedOffice && (
           <motion.div
@@ -46,10 +53,18 @@ export const Offices = ({ offices, appointmentLinkText }) => {
             className={styles.officeDetails}
           >
             <address className={styles.address}>
-              <span>{selectedOffice.street}{' '}{selectedOffice.houseNumber}</span>
-              <span>{selectedOffice.zipCode}{' '}{selectedOffice.city}</span>
+              <span>
+                {selectedOffice.street} {selectedOffice.houseNumber}
+              </span>
+              <span>
+                {selectedOffice.zipCode} {selectedOffice.city}
+              </span>
             </address>
-            {selectedOffice.phoneNumber && <div className={styles.phoneNumber}>{selectedOffice.phoneNumber}</div>}
+            {selectedOffice.phoneNumber && (
+              <div className={styles.phoneNumber}>
+                {selectedOffice.phoneNumber}
+              </div>
+            )}
             {selectedOffice.calendlyLink && (
               <div className={styles.btnWrapper}>
                 <Button

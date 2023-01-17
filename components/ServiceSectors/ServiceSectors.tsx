@@ -12,6 +12,7 @@ interface Props {
   sectors?: Array<any>;
   linkText?: string;
   sectorsOverviewPage?: any;
+  customHref?: string;
 }
 
 export const ServiceSectors: React.FC<Props> = ({ ...rest }) => {
@@ -21,14 +22,11 @@ export const ServiceSectors: React.FC<Props> = ({ ...rest }) => {
     description,
     sectors,
     linkText,
-    sectorsOverviewPage
+    sectorsOverviewPage,
+    customHref,
   } = rest;
-
   return (
-    <Section
-      size={'md'}
-      bg={'light'}
-      color={'primary'}>
+    <Section size={'md'} bg={'light'} color={'primary'}>
       <Container>
         <SectionHeading
           title={title}
@@ -58,17 +56,17 @@ export const ServiceSectors: React.FC<Props> = ({ ...rest }) => {
             ))}
           </Grid>
         )}
-        {sectorsOverviewPage?.slug?.current && (
+        {customHref || sectorsOverviewPage?.slug?.current ? (
           <div className={styles.btnWrapper}>
             <Button
               variant={'secondary'}
               onDark={false}
-              link={sectorsOverviewPage}
+              link={{ slug: { current: customHref } } || sectorsOverviewPage}
             >
               {linkText}
             </Button>
           </div>
-        )}
+        ) : null}
       </Container>
     </Section>
   );

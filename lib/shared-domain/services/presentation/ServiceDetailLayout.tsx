@@ -5,11 +5,10 @@ import { PageFooter } from 'lib/shared-domain/page/presentation/PageFooter';
 import { PageHeader } from 'lib/shared-domain/page/presentation/PageHeader';
 
 import { PageTransition } from 'components/PageTransition';
-import { ServiceHero } from './ServiceHero';
+import { ServiceHero } from 'lib/shared-domain/services/presentation/ServiceHero';
 import { ServiceTransactions } from './ServiceTransactions';
-import { ServiceTransactionShowcase } from './ServiceTransactionShowcase';
 import { ServiceSectors } from './ServiceSectors';
-import { ServiceProcess } from './ServiceProcess';
+import { ServiceProcess } from 'lib/shared-domain/services/presentation/ServiceProcess';
 import { SEO } from 'components/SEO';
 import { useFetchTransactions } from '../../newsArticle/presentation/NewsArticleMoreNews';
 import { links } from 'lib/links';
@@ -20,7 +19,7 @@ import {
   serviceDetailSectionNames,
 } from 'lib/shared-domain/page/domain/contentModule';
 import { getContentForContentModule } from 'lib/shared-domain/page/presentation/contentModules';
-import { ServiceHelpContactPersonSection } from './ServiceHelpContactPerson';
+import { ServiceHelpContactPerson } from 'lib/shared-domain/services/presentation/ServiceHelpContactPerson';
 import { Transaction } from 'lib/shared-domain/transactions/domain';
 
 interface ServiceDetailProps {
@@ -52,12 +51,11 @@ const displayServiceDetailSectionOrContentModule = ({
         </Box>
       );
     }
-
     const renderComponentBasedOnModuleType = (moduleType: string) =>
       ({
         [serviceDetailSectionNames.helpContactPerson]: (
           <Box key={module._key}>
-            <ServiceHelpContactPersonSection helpContactPerson={module} />
+            <ServiceHelpContactPerson helpContactPerson={module as any} />
           </Box>
         ),
         [serviceDetailSectionNames.processSection]: (
@@ -68,22 +66,19 @@ const displayServiceDetailSectionOrContentModule = ({
         [serviceDetailSectionNames.serviceTransactionsSection]: (
           <Box key={module._key}>
             <ServiceTransactions
-              section={module}
+              // @ts-ignore
+              service={module}
               transactions={filteredTransactions}
+              content={[]}
             />
           </Box>
         ),
         [serviceDetailSectionNames.sectorsForThiServiceSection]: (
           <Box key={module._key}>
-            <ServiceSectors siteSettings={siteSettings} section={module} />
-          </Box>
-        ),
-        [serviceDetailSectionNames.transactionShowcaseSection]: (
-          <Box key={module._key}>
-            <ServiceTransactionShowcase
+            <ServiceSectors
               siteSettings={siteSettings}
-              transaction={filteredTransactions?.[0]}
               section={module}
+              customHref={'/sectors'}
             />
           </Box>
         ),
