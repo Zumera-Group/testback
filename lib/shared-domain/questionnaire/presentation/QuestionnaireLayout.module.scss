@@ -1,3 +1,10 @@
 .questionnaireWrapper {
   background-color: $primary;
 }
+
+.sideBarWrapper {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  // @include divider(right, $white);
+}

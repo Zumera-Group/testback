@@ -168,7 +168,11 @@ const QuestionnaireLayout: React.FC<{
             <Header siteSettings={siteSettings} />
           </GridItem>
 
-          <GridItem gridArea="sidebar" display={{ base: 'none', lg: 'grid' }}>
+          <GridItem
+            gridArea="sidebar"
+            display={{ base: 'none', lg: 'grid' }}
+            className={styles.sideBarWrapper}
+          >
             {questionnaire && <Sidebar />}
           </GridItem>
           <GridItem gridArea="question" mt={2}>
@@ -184,23 +188,7 @@ const QuestionnaireLayout: React.FC<{
                 pt={6}
                 pb={2}
                 w="100%"
-              >
-                {questionnaire?.checkmarkTexts?.map((c, index) => (
-                  <Box
-                    width="100%"
-                    key={index}
-                    flex={1}
-                    mb={{ base: 1, lg: 0 }}
-                  >
-                    <TextBoxGroup
-                      text={c}
-                      color={{
-                        circleBgColor: colors.textBoxGroupCircleBgColor,
-                      }}
-                    />
-                  </Box>
-                ))}
-              </Flex>
+              ></Flex>
             )}
           </GridItem>
 
@@ -209,9 +197,7 @@ const QuestionnaireLayout: React.FC<{
             display={{ base: 'none', lg: 'block' }}
             right={0}
             bottom={13}
-          >
-            {isFirstQuestion() && <TimeEstimationBox title={t('title')} />}
-          </Box>
+          ></Box>
         </Grid>
       </PageTransition>
     </>
