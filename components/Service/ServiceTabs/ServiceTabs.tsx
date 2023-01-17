@@ -1,6 +1,7 @@
 import { Section, Container, Grid } from 'components/Layout';
 import { Tab } from 'lib/shared-domain/page/domain';
 import { Button } from 'components/Button';
+import styles from './ServiceTabs.module.scss';
 interface ServiceTabsProps {
   tabs: Tab[];
   onSelectTab(t: Tab): void;
@@ -13,12 +14,13 @@ export const ServiceTabs: React.FC<any> = ({
   onSelectTab,
 }) => {
   return (
-    <Section size={'md'} bg={'light'} color={'primary'}>
+    <Section size={'sm'} bg={'light'} color={'primary'}>
       <Container>
         <Grid
           fullWidth={true}
-          justifyContent={'space-around'}
+          justifyContent={'center'}
           alignItems={'center'}
+          className={styles.buttonsWrapper}
         >
           {tabs.map((tab) => (
             <Button
