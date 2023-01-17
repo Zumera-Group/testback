@@ -1,0 +1,24 @@
+.transactionHero {
+  padding: 5.625rem 0;
+  @include divider(bottom, $primary);
+}
+.title {
+  font-size: $h2-font-size;
+}
+
+h1 {
+  &.title {
+    margin-top: 6.625rem;
+  }
+}
+
+.imageWrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  margin-top: $gutter * 2;
+  aspect-ratio: 3/2;
+  @include breakpoint-up(md) {
+    margin-top: 0;
+  }
+}

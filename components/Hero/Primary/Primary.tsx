@@ -7,7 +7,7 @@ import baseStyles from '../Hero.module.scss';
 import styles from './Primary.module.scss';
 
 export const Primary: HeroComponent = ({ ...rest }) => {
-  const { title, title2, description, button } = rest;
+  const { title, title2, description, button, heroImage } = rest;
 
   return (
     <Section
@@ -23,7 +23,12 @@ export const Primary: HeroComponent = ({ ...rest }) => {
           justifyContent={'space-between'}
           alignItems={'center'}
         >
-          <GridColumn sm={12} md={7} lg={7}>
+          <GridColumn
+            sm={12}
+            md={7}
+            lg={7}
+            className={styles.primaryDescription}
+          >
             <h1 className={styles.title}>
               {title && title}
               {title2 && <span>{title2}</span>}
@@ -31,13 +36,21 @@ export const Primary: HeroComponent = ({ ...rest }) => {
             <SanityBlockContent text={description} />
             {button?.title && (
               <div className={baseStyles.btnWrapper}>
-                <Button {...button} onDark={true}>{button.title}</Button>
+                <Button {...button} onDark={true}>
+                  {button.title}
+                </Button>
               </div>
             )}
           </GridColumn>
-          <GridColumn sm={12} md={5} lg={5}>
-            Illustration here
-          </GridColumn>
+          {heroImage?.asset?.url ? (
+            <GridColumn sm={12} md={5} lg={5}>
+              <img
+                src={heroImage.asset.url}
+                alt={'Hero image'}
+                className={styles.primaryHeroImage}
+              />
+            </GridColumn>
+          ) : null}
         </Grid>
       </Container>
     </Section>

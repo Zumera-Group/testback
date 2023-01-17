@@ -7,7 +7,7 @@ import {
   Grid,
   GridColumn,
   SwiperTransactions,
-  SwiperNavigationButtons
+  SwiperNavigationButtons,
 } from 'components/Layout';
 import { SectionHeading } from 'components/SectionHeading';
 import { Loader } from 'components/Loader';
@@ -45,10 +45,7 @@ export const AllTransactionsCarousel = ({ ...rest }) => {
     }
   }, [isVisible, router]);
 
-  const transactionsFiltered = filterTransactions(
-    rest,
-    transactions,
-  );
+  const transactionsFiltered = filterTransactions(rest, transactions);
 
   const Carousel = ({ transactions }) => {
     if (!transactions || transactions?.length === 0) return null;
@@ -72,25 +69,17 @@ export const AllTransactionsCarousel = ({ ...rest }) => {
               className={styles.slide}
             >
               <TransactionBig article={t} />
-          </SwiperSlide>
-        ))}
+            </SwiperSlide>
+          ))}
       </SwiperTransactions>
     );
-  }
+  };
 
   return (
     <div ref={wrapperRef}>
-      <Section
-        size={'md'}
-        bg={'light'}
-        color={'primary'}
-      >
+      <Section size={'md'} bg={'light'} color={'primary'}>
         <Container>
-          <Grid
-            fullWidth={true}
-            justifyContent={'space-between'}
-            alignItems={'end'}
-          >
+          <Grid fullWidth={true} justifyContent={'center'} alignItems={'end'}>
             <GridColumn xs={12} sm={6} md={6} lg={6}>
               <SectionHeading
                 title={title}
@@ -98,19 +87,25 @@ export const AllTransactionsCarousel = ({ ...rest }) => {
                 description={description}
               />
             </GridColumn>
-            {!loading && (
-              <GridColumn xs={12} sm={6} md={6} lg={6} className={styles.navigationColumn}>
-                <SwiperNavigationButtons
-                  prev={swiperPrevRef}
-                  next={swiperNextRef}
-                />
-              </GridColumn>
-            )}
           </Grid>
           {isVisible && !loading ? (
             <Carousel transactions={transactionsFiltered} />
           ) : (
             <Loader />
+          )}
+          {!loading && (
+            <GridColumn
+              xs={12}
+              sm={6}
+              md={6}
+              lg={6}
+              className={styles.navigationColumn}
+            >
+              <SwiperNavigationButtons
+                prev={swiperPrevRef}
+                next={swiperNextRef}
+              />
+            </GridColumn>
           )}
         </Container>
       </Section>

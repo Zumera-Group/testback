@@ -401,7 +401,7 @@ export const contentModulesQuery = (
       },
       externalUrl
     },
-    heroBgImage {
+    heroImage {
       asset->{
         url
       }

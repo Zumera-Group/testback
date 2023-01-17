@@ -32,8 +32,8 @@ export const TransactionSelectorTile: React.FC<IProps> = ({
             loading="lazy"
             src={sectorDetail.graphLight.iconImage?.asset?.url}
             alt={sector.name}
-            height="22px"
-            width="22px"
+            height="24px"
+            width="24px"
           />
         ) : null}
       </div>

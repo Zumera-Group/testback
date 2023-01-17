@@ -6,7 +6,7 @@ import {
   Grid,
   GridColumn,
   SwiperPeople,
-  SwiperNavigationButtons
+  SwiperNavigationButtons,
 } from 'components/Layout';
 import { SectionHeading } from 'components/SectionHeading';
 import { Employee } from 'components/NewsGrid';
@@ -21,14 +21,15 @@ interface Props {
   title?: string;
   subtitle?: string;
   description?: any;
+  isGridLayout?: boolean;
 }
 
 export const Team: React.FC<Props> = ({ ...rest }) => {
   const swiperPrevRef = useRef();
   const swiperNextRef = useRef();
 
-  const { title, subtitle, description } = rest;
-
+  const { title, subtitle, description, isGridLayout } = rest;
+  console.log(rest);
   const fallbackIndex = 99;
   const employees = useFetchEmployees();
 
@@ -40,45 +41,59 @@ export const Team: React.FC<Props> = ({ ...rest }) => {
   );
 
   return (
-    <Section
-      size={'md'}
-      bg={'light'}
-      color={'primary'}
-    >
-      <Container>
-        <Grid
-          fullWidth={true}
-          justifyContent={'space-between'}
-          alignItems={'end'}
-        >
-          <GridColumn xs={12} sm={6} md={6} lg={6}>
-            <SectionHeading
-              title={title}
-              subtitle={subtitle}
-              description={description}
-            />
-          </GridColumn>
-          <GridColumn xs={12} sm={6} md={6} lg={6} className={styles.navigationColumn}>
-            <SwiperNavigationButtons
-              prev={swiperPrevRef}
-              next={swiperNextRef}
-            />
-          </GridColumn>
-        </Grid>
-      </Container>
-      <SwiperPeople
-        prevButton={swiperPrevRef}
-        nextButton={swiperNextRef}
-        classes={styles.swiperWrapper}
-      >
-        {ordered
-          ?.filter((e) => !e.hasLeftTheTeam && !e.isInLeadershipTeam)
-          ?.map((member, index) => (
-            <SwiperSlide key={`TeamMember-${index}`}>
-              <Employee article={member} />
-            </SwiperSlide>
-        ))}
-      </SwiperPeople>
+    <Section size={'md'} bg={'light'} color={'primary'}>
+      {!isGridLayout ? (
+        <>
+          <Container>
+            <Grid
+              fullWidth={true}
+              justifyContent={'space-between'}
+              alignItems={'end'}
+            >
+              <GridColumn xs={12} sm={6} md={6} lg={6}>
+                <SectionHeading
+                  title={title}
+                  subtitle={subtitle}
+                  description={description}
+                />
+              </GridColumn>
+              <GridColumn
+                xs={12}
+                sm={6}
+                md={6}
+                lg={6}
+                className={styles.navigationColumn}
+              >
+                <SwiperNavigationButtons
+                  prev={swiperPrevRef}
+                  next={swiperNextRef}
+                />
+              </GridColumn>
+            </Grid>
+          </Container>
+          <SwiperPeople
+            prevButton={swiperPrevRef}
+            nextButton={swiperNextRef}
+            classes={styles.swiperWrapper}
+          >
+            {ordered
+              ?.filter((e) => !e.hasLeftTheTeam && !e.isInLeadershipTeam)
+              ?.map((member, index) => (
+                <SwiperSlide key={`TeamMember-${index}`}>
+                  <Employee article={member} />
+                </SwiperSlide>
+              ))}
+          </SwiperPeople>
+        </>
+      ) : (
+        <Container classes={styles.gridLayout}>
+          {ordered
+            ?.filter((e) => !e.hasLeftTheTeam && !e.isInLeadershipTeam)
+            ?.map((member, index) => (
+              <Employee article={member} key={`TeamMember-${index}`} />
+            ))}
+        </Container>
+      )}
     </Section>
   );
 };

@@ -7,9 +7,7 @@ import TextElement from 'components/TextElement';
 export const TextElementSection: React.FC<{
   specificContentModule: TextElementSectionModule;
 }> = ({ specificContentModule }) => {
-  return (
-    <TextElement {...specificContentModule} />
-  );
+  return <TextElement {...specificContentModule} />;
 };
 
 export default TextElementSection;
