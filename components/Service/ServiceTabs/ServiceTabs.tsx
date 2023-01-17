@@ -12,7 +12,6 @@ export const ServiceTabs: React.FC<any> = ({
   activeTabKey,
   onSelectTab,
 }) => {
-  console.log(activeTabKey);
   return (
     <Section size={'md'} bg={'light'} color={'primary'}>
       <Container>
