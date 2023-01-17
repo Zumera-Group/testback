@@ -23,12 +23,12 @@ export const TransactionSector: React.FC<IProps> = ({
               title={sector.name}
               subtitle={subtitle}
               description={sector.description}
-              headingType={'h3'}
+              headingType={'h2'}
               align={'left'}
             />
             <Button
               variant={'secondary'}
-              link={`/sectors/${sector?.slug?.current}`}
+              link={{ slug: { current: `/sectors/${sector?.slug?.current}` } }}
               onDark={true}
             >
               {linkText}
