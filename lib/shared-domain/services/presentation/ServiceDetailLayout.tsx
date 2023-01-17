@@ -13,7 +13,7 @@ import { SEO } from 'components/SEO';
 import { useFetchTransactions } from '../../newsArticle/presentation/NewsArticleMoreNews';
 import { links } from 'lib/links';
 import { useRouter } from 'next/router';
-import { ServiceTabs } from './ServiceTabs';
+import { ServiceTabs } from 'lib/shared-domain/services/presentation/ServiceTabs';
 import {
   ContentModule,
   serviceDetailSectionNames,
@@ -21,6 +21,7 @@ import {
 import { getContentForContentModule } from 'lib/shared-domain/page/presentation/contentModules';
 import { ServiceHelpContactPerson } from 'lib/shared-domain/services/presentation/ServiceHelpContactPerson';
 import { Transaction } from 'lib/shared-domain/transactions/domain';
+import { ServiceTransactionShowcase } from 'lib/shared-domain/services/presentation/ServiceTransactionShowcase';
 
 interface ServiceDetailProps {
   service: Service;
@@ -79,6 +80,15 @@ const displayServiceDetailSectionOrContentModule = ({
               siteSettings={siteSettings}
               section={module}
               customHref={'/sectors'}
+            />
+          </Box>
+        ),
+        [serviceDetailSectionNames.transactionShowcaseSection]: (
+          <Box key={module._key}>
+            <ServiceTransactionShowcase
+              siteSettings={siteSettings}
+              transaction={filteredTransactions?.[0]}
+              section={module}
             />
           </Box>
         ),

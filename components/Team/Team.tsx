@@ -24,12 +24,15 @@ interface Props {
   isGridLayout?: boolean;
 }
 
-export const Team: React.FC<Props> = ({ ...rest }) => {
+export const Team: React.FC<Props> = ({
+  title,
+  subtitle,
+  description,
+  isGridLayout,
+}) => {
   const swiperPrevRef = useRef();
   const swiperNextRef = useRef();
 
-  const { title, subtitle, description, isGridLayout } = rest;
-  console.log(rest);
   const fallbackIndex = 99;
   const employees = useFetchEmployees();
 

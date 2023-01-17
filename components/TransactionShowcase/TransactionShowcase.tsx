@@ -14,21 +14,10 @@ interface Props {
 }
 
 export const TransactionShowcase: React.FC<Props> = ({ ...rest }) => {
-
-  const {
-    title,
-    subtitle,
-    description,
-    link,
-    transaction,
-  } = rest;
+  const { title, subtitle, description, link, transaction } = rest;
 
   return (
-    <Section
-      as={'section'}
-      size={'md'}
-      bg={'light'}
-      color={'primary'}>
+    <Section as={'section'} size={'md'} bg={'light'} color={'primary'}>
       <Container>
         <Grid
           fullWidth={true}
@@ -40,14 +29,15 @@ export const TransactionShowcase: React.FC<Props> = ({ ...rest }) => {
               headingType={'h2'}
               title={title}
               subtitle={subtitle}
-              description={description} />
-              {link?.title && (
-                <div className={styles.btnWrapper}>
-                  <Button variant={'secondary'} link={link.page}>
-                    {link?.title}
-                  </Button>
-                </div>
-              )}
+              description={description}
+            />
+            {link?.title && (
+              <div className={styles.btnWrapper}>
+                <Button variant={'secondary'} link={link.page}>
+                  {link?.title}
+                </Button>
+              </div>
+            )}
           </GridColumn>
           {transaction && (
             <GridColumn sm={12} md={6} lg={6}>
@@ -57,7 +47,7 @@ export const TransactionShowcase: React.FC<Props> = ({ ...rest }) => {
         </Grid>
       </Container>
     </Section>
-  )
+  );
 };
 
 export default TransactionShowcase;

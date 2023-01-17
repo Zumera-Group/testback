@@ -116,6 +116,7 @@
 
   svg {
     color: $accent;
+    margin-left: auto;
   }
   @each $key, $value in $breakpoints {
     @if ($key == 'md') {
