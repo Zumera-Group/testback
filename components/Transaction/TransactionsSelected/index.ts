@@ -1,1 +1,1 @@
-export * from 'components/Transaction/TransationsSelected/TransationsSelected';
+export * from './TransactionsSelected';
