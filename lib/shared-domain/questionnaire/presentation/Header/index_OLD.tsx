@@ -83,7 +83,6 @@ const Header = ({ siteSettings }): JSX.Element => {
     if (isMobile) setLogo(siteSettings?.darkLogoMobile?.asset?.url);
     else setLogo(siteSettings?.darkLogo?.asset?.url);
   }, [isMobile]);
-  const progress = (currenQuestionPosition / numberOfQuestionsInTotal) * 100;
 
   const HeaderRightItems = () => {
     return (
@@ -109,6 +108,51 @@ const Header = ({ siteSettings }): JSX.Element => {
     );
   };
 
+  const HeaderCenterItems = () => {
+    return (
+      <FlexRow justifyContent="center" alignItems="center" alignSelf="center">
+        {isMobile ? (
+          <P
+            fontSize={fontSizes.small}
+            color={colors.text.lightest}
+            fontWeight={fontWeights.semiBold}
+            mr={2}
+          >
+            {t('mobileTitle', {
+              current: mainStep + 1,
+              max: questionnaire?.questionsByCategory?.length,
+            })}
+          </P>
+        ) : (
+          <Grid templateColumns="1fr" width="100%">
+            <GridItem>
+              <P
+                mb={2}
+                fontWeight={fontWeights.semiBold}
+                color={colors.primary.darkGreen}
+              >
+                {currentCategory?.categoryName}
+              </P>
+            </GridItem>
+
+            <GridItem>
+              <Progress
+                isAnimated
+                background={colors.mobileProgressBarBg}
+                colorScheme="primary"
+                width="100%"
+                height={1}
+                value={
+                  (currenQuestionPosition / numberOfQuestionsInTotal) * 100
+                }
+              />
+            </GridItem>
+          </Grid>
+        )}
+      </FlexRow>
+    );
+  };
+
   return (
     <>
       <Modals.Quit {...quitDisclosure} />
@@ -122,9 +166,9 @@ const Header = ({ siteSettings }): JSX.Element => {
         </GridItem>
         {!isOnResultScreen && (
           <>
-            {/* <GridItem textAlign="center">
+            <GridItem textAlign="center">
               <HeaderCenterItems />
-            </GridItem> */}
+            </GridItem>
             {/* <GridItem textAlign="right">
               <HeaderRightItems />
             </GridItem> */}
