@@ -1,3 +1,4 @@
 export * from './TransactionHero';
 export * from './TransactionCompany';
 export * from './TransactionTeam';
+export * from './TransactionSector';

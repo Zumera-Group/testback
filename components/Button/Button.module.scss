@@ -133,6 +133,11 @@
       $white,
       none
     );
+    @include hover-state() {
+      svg {
+        fill: $secondary;
+      }
+    }
   }
 
   &__tertiary,
