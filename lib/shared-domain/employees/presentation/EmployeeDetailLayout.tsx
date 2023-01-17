@@ -66,13 +66,13 @@ export const EmployeeDetailLayout: React.FC<{
           transactions={transactions}
           content={employeeDetailContent?.newsSectionContent}
         />
-        <EmployeeContact
-          content={employeeDetailContent?.contactSectionContent}
-        />
         <EmployeeMoreMembers
           employee={employee}
           employees={employees}
           content={employeeDetailContent?.teamSectionContent}
+        />
+        <EmployeeContact
+          content={employeeDetailContent?.contactSectionContent}
         />
       </PageTransition>
       <PageFooter siteSettings={siteSettings} />

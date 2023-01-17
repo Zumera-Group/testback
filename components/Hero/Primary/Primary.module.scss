@@ -2,18 +2,8 @@
   margin-top: calc(var(--header-height) * -1);
 }
 
-@keyframes fadeIn {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
 .container {
   margin-top: var(--header-height);
-  animation: fadeIn 1s;
 }
 
 .title {

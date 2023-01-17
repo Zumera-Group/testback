@@ -28,19 +28,9 @@
   }
 }
 
-@keyframes fadeIn {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
 .container {
   margin-top: $gutter * 2;
   margin-bottom: $gutter * 2;
-  animation: fadeIn 1s;
 }
 
 .gradient {
