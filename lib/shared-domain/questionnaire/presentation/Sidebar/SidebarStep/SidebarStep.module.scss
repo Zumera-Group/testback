@@ -3,10 +3,11 @@
 }
 
 .stepItem {
-  * {
+  .stepItemName,
+  .stepItemIndex {
     font-family: $font-family-sans-serif;
     font-weight: $font-weight-bold;
-    color: $white !important;
+    color: $white;
   }
 }
 
