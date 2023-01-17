@@ -1,7 +1,7 @@
 import styles from './ProgressBar.module.scss';
 
 interface Props {
-  progress: any;
+  progress: number;
 }
 
 export const ProgressBar: React.FC<Props> = ({ progress }) => {

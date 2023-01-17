@@ -16,7 +16,15 @@ export const Icon: React.FC<Props> = ({
   fill = 'currentColor',
 }) => {
   return (
-    <svg width={width} height={height} viewBox={viewBox} xmlns="http://www.w3.org/2000/svg" stroke={stroke} fill={fill}>
+    <svg
+      width={width}
+      height={height}
+      viewBox={viewBox}
+      xmlns="http://www.w3.org/2000/svg"
+      stroke={stroke}
+      fill={fill}
+      color={'#fff'}
+    >
       <use href={`#icon-${iconName || 'cross'}`} />
     </svg>
   );

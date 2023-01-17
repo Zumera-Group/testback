@@ -38,22 +38,21 @@ export const Button: React.FC<Props> = ({
   type,
   ...rest
 }) => {
-
   const isLink = externalUrl || link?.slug?.current;
   const btnVariant = generateButtonVariant({ variant, onDark });
 
   const ButtonIcon = () => {
     if (hideIcon) return null;
     if (variant === 'primary' || variant === 'secondary') {
-      return <Icon iconName={icon || 'arrow'} width={10} height={10} />
+      return <Icon iconName={icon || 'arrow'} width={10} height={10} />;
     } else if (variant === 'tertiary') {
-      return <Icon iconName={icon || 'arrow-circle'} width={32} height={32} />
+      return <Icon iconName={icon || 'arrow-circle'} width={32} height={32} />;
     }
     return null;
-  }
+  };
 
   return isLink ? (
-    <Link href={ externalUrl || link?.slug?.current || '#'} passHref>
+    <Link href={externalUrl || link?.slug?.current || '#'} passHref>
       <a
         id={id}
         title={title}

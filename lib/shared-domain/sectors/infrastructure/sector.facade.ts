@@ -93,7 +93,7 @@ const querySectors = (lang) => `*[_type == "sector" && _lang == "${lang}"] {
         }
       }
     }
-  }
+  },
 }`;
 
 const querySectorDetailContent = (
@@ -207,6 +207,14 @@ const querySectorDetail = (
       asset->{
         url
       },
+    }
+  },
+  futureTrendsSection {
+    ...,
+    trendsImage {
+      asset-> {
+        url
+      }
     }
   },
   industryReportSection {

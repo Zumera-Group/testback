@@ -6,7 +6,7 @@ import {
   Grid,
   GridColumn,
   SwiperPeople,
-  SwiperNavigationButtons
+  SwiperNavigationButtons,
 } from 'components/Layout';
 import { SectionHeading } from 'components/SectionHeading';
 
@@ -24,7 +24,8 @@ export const SectorTeam = ({ sector }) => {
     !sector.contributors ||
     sector.contributors.length === 0 ||
     !sector.teamSection
-  ) return null;
+  )
+    return null;
 
   const { teamSection, contributors } = sector;
 
@@ -41,10 +42,7 @@ export const SectorTeam = ({ sector }) => {
   };
 
   return (
-    <Section
-      size={'md'}
-      bg={'light'}
-      color={'primary'}>
+    <Section size={'md'} bg={'light'} color={'primary'}>
       <Container>
         <Grid
           fullWidth={true}
@@ -59,7 +57,13 @@ export const SectorTeam = ({ sector }) => {
             />
           </GridColumn>
           {Array.isArray(contributors) && contributors.length > 0 && (
-            <GridColumn xs={12} sm={6} md={6} lg={6} className={styles.navigationColumn}>
+            <GridColumn
+              xs={12}
+              sm={6}
+              md={6}
+              lg={6}
+              className={styles.navigationColumn}
+            >
               <SwiperNavigationButtons
                 prev={swiperPrevRef}
                 next={swiperNextRef}
@@ -73,6 +77,9 @@ export const SectorTeam = ({ sector }) => {
           prevButton={swiperPrevRef}
           nextButton={swiperNextRef}
           classes={styles.swiperWrapper}
+          slides={1}
+          lgSlides={2}
+          xxlSlides={2.3}
         >
           {contributors?.map((p, index) => (
             <>
@@ -80,7 +87,10 @@ export const SectorTeam = ({ sector }) => {
                 <Employee article={p} />
               </SwiperSlide>
               {index === 0 && teamSection ? (
-                <SwiperSlide className={styles.slide} key={`sectorTeamQuote-${index}`}>
+                <SwiperSlide
+                  className={styles.slide}
+                  key={`sectorTeamQuote-${index}`}
+                >
                   <Quote />
                 </SwiperSlide>
               ) : null}

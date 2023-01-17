@@ -3,6 +3,7 @@ export type HeroComponentProps = React.PropsWithChildren<{
   title2?: string;
   description?: any;
   button?: any;
+  heroImage?: any;
 }>;
 
 export type HeroComponent = React.FC<HeroComponentProps>;

@@ -2,7 +2,9 @@
 .hero {
   position: relative;
   width: 100%;
-  h1, p {
+  overflow: hidden;
+  h1,
+  p {
     margin: 0;
   }
   p {

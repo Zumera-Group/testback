@@ -15,11 +15,7 @@ export const Sectors: React.FC<Props> = ({ ...rest }) => {
   const { title, subtitle, description, sectors } = rest;
 
   return (
-    <Section
-      size={'md'}
-      bg={'light'}
-      color={'primary'}
-    >
+    <Section size={'md'} bg={'light'} color={'primary'}>
       <Container>
         <SectionHeading
           title={title}
