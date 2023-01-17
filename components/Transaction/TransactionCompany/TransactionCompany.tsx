@@ -1,0 +1,55 @@
+import { Container, Grid, GridColumn, Section } from 'components/Layout';
+import styles from './TransactionCompany.module.scss';
+import { Transaction } from 'lib/shared-domain/transactions/domain';
+import Image from 'next/image';
+import { P } from 'components/Typography/P';
+
+export const TransactionCompany: React.FC<{
+  transaction: Transaction;
+}> = ({ transaction }) => {
+  if (
+    !transaction?.companyDescription1?.length ||
+    !transaction?.companyDescription2?.length
+  ) {
+    return null;
+  }
+
+  return (
+    <Section size={'md'} bg={'light'} color={'primary'}>
+      <Container classes={styles.container}>
+        <Grid
+          fullWidth={true}
+          justifyContent={'start'}
+          alignItems={'stretch'}
+          className={styles.containerInner}
+        >
+          <Company
+            companyDescription={transaction?.companyDescription1}
+            companyImage={transaction.companyLogo1?.asset?.url}
+          />
+          <Company
+            companyDescription={transaction?.companyDescription2}
+            companyImage={transaction.companyLogo2?.asset?.url}
+          />
+        </Grid>
+      </Container>
+    </Section>
+  );
+};
+
+const Company = ({ companyImage, companyDescription }) => (
+  <GridColumn sm={12} md={6} lg={6} className={styles.companyCol}>
+    <Image
+      unoptimized
+      loading="lazy"
+      objectPosition="left"
+      objectFit="contain"
+      // layout="fill"
+      width={'100%'}
+      height={'63px'}
+      alt=""
+      src={companyImage}
+    />
+    <P color={'primary'}>{companyDescription}</P>
+  </GridColumn>
+);

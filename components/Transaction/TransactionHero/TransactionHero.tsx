@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import { Section, Container, Grid, GridColumn } from 'components/Layout';
 
 import baseStyles from 'components/Hero/Hero.module.scss';
@@ -21,7 +20,7 @@ export const TransactionHero = ({ transaction, content }) => {
           justifyContent={'space-between'}
           alignItems={'center'}
         >
-          <GridColumn sm={12} md={6} lg={6}>
+          <GridColumn sm={12} md={6} lg={6} className={styles.headingColumn}>
             <SectionHeading
               title={transaction.headline}
               subtitle={content.heroSubtitle}
