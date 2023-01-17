@@ -1,0 +1,12 @@
+.gridContainer {
+  background: $secondary;
+  padding: 5rem 3.5rem;
+  @include breakpoint-down(sm) {
+    padding: 3rem 1.5rem;
+  }
+}
+.imageCol {
+  @include breakpoint-down(sm) {
+    aspect-ratio: 1/1;
+  }
+}

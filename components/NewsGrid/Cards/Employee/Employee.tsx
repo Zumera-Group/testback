@@ -13,45 +13,48 @@ export const Employee = ({ article }) => {
   if (!article) return null;
   const name = getEmployeeFullName(article);
   const jobTitle = article.jobTitle;
-  const imageUrl = article.newsGridPicture?.picture?.asset?.url || article.cardPicture?.asset?.url;
+  const imageUrl =
+    article.newsGridPicture?.picture?.asset?.url ||
+    article.cardPicture?.asset?.url ||
+    article.cardPicture?.picture?.asset?.url;
   const image = sanityImageUrlFor(imageUrl)?.height(800).auto('format').url();
   const href = links().employees(article);
 
   return (
     <article className={styles.employee}>
-      <Link
-        passHref
-        href={href}>
-          <a className={styles.link}>
-            <div className={styles.imageWrapper}>
-              <div className={[
+      <Link passHref href={href}>
+        <a className={styles.link}>
+          <div className={styles.imageWrapper}>
+            <div
+              className={[
                 styles.imageWrapper_inner,
                 !image ? styles.imageWrapper_inner__noImage : '',
-              ].join(' ')}>
-                {image && (
-                  <Image
-                    unoptimized
-                    src={image}
-                    alt={name}
-                    objectFit={'cover'}
-                    objectPosition={'center center'}
-                    layout="fill"
-                    className={styles.image}
-                  />
-                )}
-              </div>
+              ].join(' ')}
+            >
+              {image && (
+                <Image
+                  unoptimized
+                  src={image}
+                  alt={name}
+                  objectFit={'cover'}
+                  objectPosition={'center center'}
+                  layout="fill"
+                  className={styles.image}
+                />
+              )}
             </div>
-            <div className={styles.body}>
-              {jobTitle && <h4 className={styles.jobTitle}>{jobTitle}</h4>}
-              {name && <h3 className={styles.name}>{name}</h3>}
-              <Icon
-                iconName={'arrow-circle'}
-                viewBox={'0 0 32 32'}
-                width={24}
-                height={24}
-              />
-            </div>
-          </a>
+          </div>
+          <div className={styles.body}>
+            {jobTitle && <h4 className={styles.jobTitle}>{jobTitle}</h4>}
+            {name && <h3 className={styles.name}>{name}</h3>}
+            <Icon
+              iconName={'arrow-circle'}
+              viewBox={'0 0 32 32'}
+              width={24}
+              height={24}
+            />
+          </div>
+        </a>
       </Link>
     </article>
   );
