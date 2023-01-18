@@ -34,7 +34,9 @@ export const VTLandingLayout: React.FC<{
         {landing.questionnaire && <VTLandingHero landing={landing} />}
         {contentModules &&
           contentModules.map((c) => (
-            <Box key={c._key}>{getContentForContentModule(c)}</Box>
+            <Box key={c._key}>
+              {getContentForContentModule(c, siteSettings)}
+            </Box>
           ))}
       </PageTransition>
       <VTLandingFooter siteSettings={siteSettings} />
