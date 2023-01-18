@@ -1,0 +1,52 @@
+.fact {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 100%;
+  height: 100%;
+  padding-bottom: var(--gutter);
+  @include divider(bottom, $white);
+  svg {
+    margin-top: auto;
+    color: $accent;
+    transform-origin: 50% 50%;
+    transform: scale(1);
+    transition: transform $timing-lg $ease-out;
+    backface-visibility: hidden;
+  }
+  @include hover-state() {
+    color: inherit;
+    .name,
+    .description {
+      opacity: 0.75;
+    }
+    svg {
+      transform: scale(0.96);
+    }
+  }
+  @include active-state() {
+    svg {
+      transform: scale(0.84);
+      transition: transform $timing-md $ease-out;
+    }
+  }
+}
+
+.name,
+.description {
+  opacity: 1;
+  transition: opacity $timing-lg $ease-out;
+}
+
+.name {
+  margin: 0;
+  font-size: $h2-font-size;
+  font-weight: $font-weight-light;
+}
+
+.description {
+  font-size: $font-size-big;
+  margin: 0 0 $paragraphs-margin-bottom 0;
+  text-transform: lowercase;
+}

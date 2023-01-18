@@ -177,6 +177,7 @@ export interface SiteSettings {
 }
 
 export interface Fact {
+  _id: string;
   factTitle: string;
   factSubtitle: string;
   factDescription: Description[];

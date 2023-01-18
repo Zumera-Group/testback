@@ -1,0 +1,4 @@
+.content {
+  @include callout-box();
+  background-color: $primary;
+}

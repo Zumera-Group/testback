@@ -1,0 +1,45 @@
+.facts {
+  --gutter: #{$gutter};
+  list-style-type: none;
+  position: relative;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  flex-wrap: wrap;
+  flex-direction: column;
+  width: 100%;
+  gap: var(--gutter);
+  &:after {
+    content: '';
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: $border-width;
+    height: 100%;
+    @include divider(left, $white);
+  }
+  @include breakpoint-up(sm) {
+    --gutter: #{$gutter * 1.5};
+    flex-direction: row;
+    &:after {
+      display: block;
+    }
+  }
+  @include breakpoint-down(md) {
+    margin-top: $gutter * 2;
+  }
+  & > * {
+    flex-basis: 100%;
+    padding: 0;
+    @include breakpoint-up(sm) {
+      flex-basis: calc(50% - calc(var(--gutter) / 2));
+    }
+    @include breakpoint-up(md) {
+      padding: 0 calc(var(--gutter) / 2);
+    }
+  }
+}
