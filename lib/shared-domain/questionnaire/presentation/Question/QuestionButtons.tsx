@@ -31,9 +31,7 @@ export const QuestionButtons: React.FC<{
   isAnswered,
 }) => {
   const { isFirstQuestion, isFadingOut } = useValuationStore();
-  const isMobile = useBreakpointValue({ base: true, lg: false });
 
-  console.log(onFinishQuestionnaire);
   return (
     <AnimatePresence>
       {!isFadingOut && (
