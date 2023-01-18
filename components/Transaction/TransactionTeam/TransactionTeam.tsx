@@ -19,7 +19,7 @@ import styles from './TransactionTeam.module.scss';
 export const TransactionTeam = ({ transaction, content }) => {
   const swiperPrevRef = useRef();
   const swiperNextRef = useRef();
-  console.log(transaction);
+
   if (!transaction.peopleInvolved || transaction.peopleInvolved.length === 0) {
     return null;
   }

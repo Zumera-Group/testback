@@ -5,7 +5,6 @@ import styles from './EmployeeBackground.module.scss';
 import { Button } from 'components/Button';
 
 export const EmployeeBackground: React.FC<any> = (props) => {
-  console.log(props);
   const { employee, content } = props;
   return (
     <Section as={'div'} size={'md'} bg={'light'} color={'primary'}>
