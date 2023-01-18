@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import I18n from 'i18n-js';
 import { Box, Flex, Grid, GridItem } from '@chakra-ui/react';
 // import backgroundImage from '../../../../public/bkg.svg';
