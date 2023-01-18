@@ -20,6 +20,7 @@ import { uuid } from 'uuidv4';
 import { qLogs } from '../application/log';
 import { useSalesforceAnswerSync } from '../application/useSalesforceAnswerSync';
 import { useRouter } from 'next/router';
+import BottomBar from 'components/Calculator/BottomBar/BottomBar';
 
 const t = getTranslateByScope('timeEstimation');
 const tSidebar = getTranslateByScope('sidebar');
@@ -52,6 +53,7 @@ const QuestionnaireLayout: React.FC<{
   const router = useRouter();
 
   useSetQuestionnaireLocaleToUseFori18n(locale);
+  const [currenQuestionPosition, setCurrentQuestionPosition] = useState(0);
 
   const {
     questionnaire,
@@ -60,9 +62,11 @@ const QuestionnaireLayout: React.FC<{
     isOnResultScreen,
     setIsOnResultScreen,
     mainStep,
+    subStep,
     isFirstQuestion,
     setStep,
     uniqueId,
+    industryId,
   } = useValuationStore();
 
   useEffect(() => {
@@ -134,10 +138,31 @@ const QuestionnaireLayout: React.FC<{
     }
   }, [router.asPath]);
 
+  useEffect(() => {
+    const stepInCurrentCategory = subStep + 1;
+    let numberOfStepsInOtherCategories = 0;
+
+    for (let i = 0; i < mainStep; i++) {
+      numberOfStepsInOtherCategories =
+        numberOfStepsInOtherCategories +
+        questionnaire?.questionsByCategory?.[i]?.questions?.length;
+    }
+    setCurrentQuestionPosition(
+      stepInCurrentCategory + numberOfStepsInOtherCategories,
+    );
+  }, [mainStep, questionnaire?.questionsByCategory, subStep]);
+
   const currentCategory =
     questionnaire?.questionsByCategory?.[mainStep]?.categoryName ?? '';
   const withBackgroundImage = !isOnResultScreen;
 
+  //total number of questions
+  const numberOfQuestionsInTotal = questionnaire?.questionsByCategory?.reduce(
+    (numberOfQuestions, currentCategory) => {
+      return numberOfQuestions + currentCategory.questions.length;
+    },
+    0,
+  );
   return (
     <>
       <SEO
@@ -200,6 +225,10 @@ const QuestionnaireLayout: React.FC<{
           ></Box>
         </Grid>
       </PageTransition>
+      <BottomBar
+        totalQuestions={numberOfQuestionsInTotal}
+        currentStep={currenQuestionPosition}
+      />
     </>
   );
 };
