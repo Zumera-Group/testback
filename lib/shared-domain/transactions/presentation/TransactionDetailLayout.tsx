@@ -17,6 +17,7 @@ import { SEO } from 'components/SEO';
 import { links } from 'lib/links';
 import { useRouter } from 'next/router';
 import { TransactionInvolvedParties } from './TransactionInvolvedParties';
+import ContactUsSection from 'lib/shared-domain/page/presentation/contentModules/ContactUsSection';
 
 export const TransactionDetailLayout: React.FC<{
   transaction: Transaction;
@@ -86,6 +87,10 @@ export const TransactionDetailLayout: React.FC<{
           content={transactionDetailContent.selectedTransactionSection}
         />
       </PageTransition>
+      <ContactUsSection
+        specificContentModule={null}
+        content={siteSettings.contactSectionContent}
+      />
       <PageFooter siteSettings={siteSettings} />
     </Box>
   );

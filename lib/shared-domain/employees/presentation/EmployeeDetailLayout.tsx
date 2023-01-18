@@ -71,9 +71,7 @@ export const EmployeeDetailLayout: React.FC<{
           employees={employees}
           content={employeeDetailContent?.teamSectionContent}
         />
-        <EmployeeContact
-          content={employeeDetailContent?.contactSectionContent}
-        />
+        <EmployeeContact {...siteSettings.contactSectionContent} />
       </PageTransition>
       <PageFooter siteSettings={siteSettings} />
     </Box>

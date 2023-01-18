@@ -22,6 +22,7 @@ import { getContentForContentModule } from 'lib/shared-domain/page/presentation/
 import { ServiceHelpContactPerson } from 'lib/shared-domain/services/presentation/ServiceHelpContactPerson';
 import { Transaction } from 'lib/shared-domain/transactions/domain';
 import { ServiceTransactionShowcase } from 'lib/shared-domain/services/presentation/ServiceTransactionShowcase';
+import ContactUsSection from 'lib/shared-domain/page/presentation/contentModules/ContactUsSection';
 
 interface ServiceDetailProps {
   service: Service;
@@ -153,6 +154,10 @@ export const ServiceDetailLayout: React.FC<ServiceDetailProps> = ({
             filteredTransactions,
           })}
       </PageTransition>
+      <ContactUsSection
+        specificContentModule={null}
+        content={siteSettings.contactSectionContent}
+      />
       <PageFooter siteSettings={siteSettings} />
     </Box>
   );

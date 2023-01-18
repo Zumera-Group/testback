@@ -15,7 +15,7 @@ interface Props {
   siteSettings?: any;
 }
 
-export const ContactUs: React.FC<Props> = ({ ...rest }) => {
+export const ContactUs: React.FC<Props> = (props) => {
   const {
     title,
     subtitle,
@@ -23,8 +23,7 @@ export const ContactUs: React.FC<Props> = ({ ...rest }) => {
     offices,
     appointmentLinkText,
     contactForm,
-    siteSettings,
-  } = rest;
+  } = props;
 
   return (
     <Section
@@ -48,7 +47,7 @@ export const ContactUs: React.FC<Props> = ({ ...rest }) => {
             />
             {offices?.length > 0 && (
               <Offices
-                offices={siteSettings.contactUsOffices}
+                offices={offices || []}
                 appointmentLinkText={appointmentLinkText}
               />
             )}

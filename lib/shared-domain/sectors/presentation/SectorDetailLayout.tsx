@@ -19,6 +19,7 @@ import { useFetchEmployees } from '../../employees/application/useGetEmployees';
 import { links } from 'lib/links';
 import { useRouter } from 'next/router';
 import { IndustryReportSection } from '../../page/presentation/contentModules/IndustryReportSection';
+import ContactUsSection from 'lib/shared-domain/page/presentation/contentModules/ContactUsSection';
 
 export const SectorDetailLayout: React.FC<{
   sector: Sector;
@@ -91,6 +92,10 @@ export const SectorDetailLayout: React.FC<{
           {sector.calculatorTeaserSection && (
             <ServiceQuestionnaire section={sector.calculatorTeaserSection} />
           )}
+          <ContactUsSection
+            specificContentModule={null}
+            content={siteSettings.contactSectionContent}
+          />
         </main>
       </PageTransition>
       <PageFooter siteSettings={siteSettings} />

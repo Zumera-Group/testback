@@ -26,7 +26,7 @@ export const TransactionCard = ({ transaction }) => {
     sectors,
   } = transaction;
 
-  const sectorsName = sectors.map((sector) => sector.name);
+  const sectorsName = sectors?.map((sector) => sector.name) || [];
 
   const dateFormatted = date ? format(new Date(date)) : null;
 

@@ -141,9 +141,12 @@ export const querySiteSettings = (
       }
     }
   },
-  contactUsOffices[]-> {
+  contactSectionContent {
+    ...,
+    offices[]->{
       ...
-   },
+    }
+  }
 }`;
 
 export class SiteSettingsFacade {

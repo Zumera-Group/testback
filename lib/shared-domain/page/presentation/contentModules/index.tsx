@@ -233,8 +233,8 @@ export const getContentForContentModule = (
   if (contentModule.specificContentModule instanceof ContactUsSectionModule) {
     return (
       <ContactUsSection
-        specificContentModule={contentModule.specificContentModule}
-        siteSettings={siteSettings}
+        specificContentModule={null}
+        content={siteSettings.contactSectionContent}
       />
     );
   }
