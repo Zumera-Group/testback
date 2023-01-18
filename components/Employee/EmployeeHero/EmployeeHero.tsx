@@ -30,7 +30,7 @@ export const EmployeeHero: React.FC<{
       bg={'light'}
       color={'primary'}
     >
-      <Container>
+      <Container classes={styles.heroContainer}>
         <Grid
           fullWidth={true}
           justifyContent={'space-between'}

@@ -1,0 +1,47 @@
+.swiperWrapper {
+  margin-top: $gutter * 2;
+  article,
+  blockquote {
+    aspect-ratio: 1 / 1;
+    height: 100%;
+    max-width: 100%;
+  }
+}
+
+.slide {
+  height: auto;
+  align-items: stretch;
+}
+
+.navigationColumn {
+  display: flex;
+  justify-content: flex-start;
+  margin-top: $gutter;
+  margin-bottom: 0;
+  @include breakpoint-up(sm) {
+    justify-content: flex-end;
+    margin-top: 0;
+    margin-bottom: $paragraphs-margin-bottom;
+  }
+}
+
+.quote {
+  @include callout-box();
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-direction: column;
+  & > p {
+    font-size: 1.5em;
+    line-height: $line-height-sm;
+  }
+  & > cite {
+    margin-top: auto;
+    font-size: $font-size-small;
+    font-style: normal;
+    & > span {
+      display: block;
+      font-weight: $font-weight-bold;
+    }
+  }
+}
