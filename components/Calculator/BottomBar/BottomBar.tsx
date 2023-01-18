@@ -22,7 +22,6 @@ const BottomBar: React.FC<Props> = ({ currentStep, totalQuestions }) => {
     questionnaire && categoryQuestions && categoryQuestions[subStep];
   const answerSelector = questionnaire && currentQuestion?.answerSelector;
   const answerType = questionnaire && answerSelector?.answerType;
-  console.log(answerType);
 
   return (
     <div className={styles.bottomBarWrapper}>

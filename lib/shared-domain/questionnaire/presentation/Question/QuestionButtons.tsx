@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { FlexCol } from 'components/Layout/Flex/Flex';
 import { getTranslateByScope } from 'translation/i18n';
 import { useValuationStore } from '../../store';
+import { Button } from 'components/Button/Button';
 
 const t = getTranslateByScope('question');
 
@@ -31,6 +32,8 @@ export const QuestionButtons: React.FC<{
 }) => {
   const { isFirstQuestion, isFadingOut } = useValuationStore();
   const isMobile = useBreakpointValue({ base: true, lg: false });
+
+  console.log(onFinishQuestionnaire);
   return (
     <AnimatePresence>
       {!isFadingOut && (
@@ -45,41 +48,38 @@ export const QuestionButtons: React.FC<{
         >
           <FlexCol mt={2} mb={2} alignItems="center">
             {onFinishQuestionnaire && (
-              <Btn
+              <Button
                 aria-label="Finish questionnaire button"
                 variant="primary"
-                onClick={onFinishQuestionnaire}
-                height="auto"
-                whiteSpace="normal"
-                style={{ wordWrap: 'break-word' }}
-                minW={{ base: '100%', lg: 40 }}
+                callBack={onFinishQuestionnaire}
+                onDark
+                hideIcon
               >
                 {secondButtonText}
-              </Btn>
+              </Button>
             )}
-            <Btn
-              mt={2}
+
+            <Button
               aria-label="Go to next question button"
               disabled={isRequired && !isAnswered}
-              mb={isMobile ? 1 : 0}
-              minW={{ base: '100%', lg: 40 }}
-              variant={onFinishQuestionnaire ? 'transparent' : 'primary'}
-              onClick={onNextQuestion}
-              height="auto"
-              whiteSpace="normal"
-              style={{ wordWrap: 'break-word' }}
+              variant={'primary'}
+              callBack={onNextQuestion}
+              onDark={onFinishQuestionnaire ? false : true}
             >
               {firstButtonText || t('nextBtn')}
-            </Btn>
+            </Button>
+
             {!isFirstQuestion() && !isRequired && !onFinishQuestionnaire && (
-              <Btn
+              <Button
                 aria-label="Skip button"
-                mt={isMobile ? 0 : 3}
-                variant="transparent"
-                onClick={onNextQuestion}
+                variant="secondary"
+                onDark
+                hideIcon
+                callBack={onNextQuestion}
+                type={'button'}
               >
                 {t('skipBtn')}
-              </Btn>
+              </Button>
             )}
           </FlexCol>
         </motion.div>
