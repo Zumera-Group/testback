@@ -9,7 +9,10 @@ import { Container } from 'components/Layout';
 import { Hamburger, Menu, BigMenu, LanguageSwitcher } from 'components/Header';
 
 import { useLinkWithCurrentLocale } from 'lib/shared-domain/useLinkWithCurrentLocale';
-import { HeroSectionModule, CDIGlobalSectionModule } from 'lib/shared-domain/page/domain/contentModule';
+import {
+  HeroSectionModule,
+  CDIGlobalSectionModule,
+} from 'lib/shared-domain/page/domain/contentModule';
 
 import styles from './Header.module.scss';
 
@@ -21,7 +24,6 @@ export const Header = ({
   hideHeader,
   isLightHeader,
 }) => {
-
   const [bigMenuOpen, setBigMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
@@ -34,22 +36,27 @@ export const Header = ({
   const isLightPage = () => {
     if (isLightHeader) return true;
     const hasHeroSection = contentModules.find((module) => {
-      return module.specificContentModule instanceof HeroSectionModule
+      return module.specificContentModule instanceof HeroSectionModule;
     });
-    const CDIGlobalIsHero = contentModules[0]?.specificContentModule instanceof CDIGlobalSectionModule
+    const CDIGlobalIsHero =
+      contentModules[0]?.specificContentModule instanceof
+      CDIGlobalSectionModule;
     if (darkBg) return false;
     if (CDIGlobalIsHero) return false;
     if (!hasHeroSection) return true;
     return (
-      (hasHeroSection.specificContentModule as HeroSectionModule).type !== 'home'
-      &&
-      (hasHeroSection.specificContentModule as HeroSectionModule).type !== 'primary'
-    )
-  }
+      (hasHeroSection.specificContentModule as HeroSectionModule).type !==
+        'home' &&
+      (hasHeroSection.specificContentModule as HeroSectionModule).type !==
+        'primary'
+    );
+  };
 
   const getLogoAsset = () => {
-    return !isScrolled && !isLightPage() ? siteSettings?.logo?.asset?.url : siteSettings?.darkLogo?.asset?.url
-  }
+    return !isScrolled && !isLightPage()
+      ? siteSettings?.logo?.asset?.url
+      : siteSettings?.darkLogo?.asset?.url;
+  };
 
   const services = siteSettings?.hamburgerMenu.find(
     (h) => h.type === 'services',
@@ -67,7 +74,7 @@ export const Header = ({
       } else {
         setIsScrolled(false);
       }
-    }
+    };
     handleScroll();
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
@@ -99,7 +106,8 @@ export const Header = ({
         <div className={styles.logoWrapper}>
           <Logo
             slug={homeSlug}
-            src={getLogoAsset()}
+            isScrolled={isScrolled}
+            isLightPage={isLightPage()}
             title={siteName}
           />
         </div>
@@ -121,7 +129,7 @@ export const Header = ({
             siteSettings={siteSettings}
             services={services}
             sectors={sectors}
-            logo={<Logo slug={homeSlug} src={siteSettings?.logo?.asset?.url} title={siteName} />}
+            logo={<Logo slug={homeSlug} title={siteName} />}
             closeBigMenu={() => setBigMenuOpen(false)}
             otherLangSlug={otherLangSlug}
           />
