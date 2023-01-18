@@ -36,7 +36,7 @@ export const EmployeeDetailLayout: React.FC<{
     links(locale === 'en' ? 'de' : 'en').employees(
       employee?.queryOtherLangSlug?.slice(-1)[0] as any,
     );
-  console.log(employee);
+
   return (
     <Box minHeight="100vh" overflowX="hidden">
       <SEO

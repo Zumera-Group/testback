@@ -25,11 +25,13 @@ export const EmployeeBackground: React.FC<any> = (props) => {
           </GridColumn>
           <GridColumn sm={12} md={6} lg={6} className={styles.rightColumn}>
             <SectionHeading subtitle={'SV HIGHLIGHTS'} align={'left'} />
-            <ul className={styles.factsList}>
-              {employee?.facts.map((fact, index) => (
-                <li key={index}>{fact}</li>
-              ))}
-            </ul>
+            {employee?.facts ? (
+              <ul className={styles.factsList}>
+                {employee?.facts.map((fact, index) => (
+                  <li key={index}>{fact}</li>
+                ))}
+              </ul>
+            ) : null}
             <Button
               variant={'secondary'}
               link={{ slug: { current: employee.linkedInUrl } }}
