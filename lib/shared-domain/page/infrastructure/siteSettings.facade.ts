@@ -140,7 +140,10 @@ export const querySiteSettings = (
         }
       }
     }
-  }
+  },
+  contactUsOffices[]-> {
+      ...
+   },
 }`;
 
 export class SiteSettingsFacade {

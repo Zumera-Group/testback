@@ -53,7 +53,7 @@ const PageLayout: React.FC<{
             contentModules.map((c) => {
               return (
                 <React.Fragment key={c._key}>
-                  {getContentForContentModule(c, sharedContent)}
+                  {getContentForContentModule(c, siteSettings, sharedContent)}
                 </React.Fragment>
               );
             })}
