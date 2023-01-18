@@ -1,8 +1,7 @@
 import React from 'react';
 import { Transaction } from '../domain/index';
-import { getTranslateByScope } from 'translation/i18n';
 
-import { SectorHeader } from 'lib/shared-domain/sectors/presentation/components/SectorHeader';
+import { TransactionSector as TSector } from 'components/Transaction';
 
 export const TransactionSector: React.FC<{
   transaction: Transaction;
@@ -14,9 +13,9 @@ export const TransactionSector: React.FC<{
   if (!firstSector) return null;
 
   return (
-    <SectorHeader
-      linkText={t('linkText')}
+    <TSector
       sector={firstSector}
+      linkText={t('linkText')}
       subtitle={t('subtitle')}
     />
   );

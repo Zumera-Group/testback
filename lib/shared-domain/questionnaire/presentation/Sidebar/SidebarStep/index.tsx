@@ -1,13 +1,12 @@
-import { Box, Circle, Flex } from '@chakra-ui/react';
+import { Box, Flex } from '@chakra-ui/react';
+import { Tick } from 'components/Icons/Tick';
 import { FlexCol } from 'components/Layout/Flex/Flex';
 import { P } from 'components/Typography/P';
-import { AnimatePresence, motion } from 'framer-motion';
 import { Category, Question } from 'lib/shared-domain/questionnaire/domain';
 import { useValuationStore } from 'lib/shared-domain/questionnaire/store';
 import React, { useEffect, useState } from 'react';
-import { colors } from 'styles/foundations/colors';
-import { fontSizes, fontWeights } from 'styles/foundations/fontStyles';
 import { SidebarChildStep } from '../SidebarChildStep';
+import styles from './SidebarStep.module.scss';
 
 interface Props {
   category: Category;
@@ -31,17 +30,7 @@ export const SidebarStep = ({
     if (isActive && !isOpen) setIsOpen(true);
 
     if (!isActive && isOpen) setIsOpen(false);
-  }, [mainStep]);
-
-  const color = isActive ? colors.primary.darkGreen : colors.text.light;
-  const fontSize = isActive ? fontSizes.small : fontSizes.tiny;
-  const fontWeight = isActive ? fontWeights.semiBold : fontWeights.highlight;
-  const circleBgCol = isActive
-    ? colors.circleBg.active
-    : colors.circleBg.inactive;
-  const circleCol = isActive
-    ? colors.circleCol.active
-    : colors.circleCol.inactive;
+  }, [isActive, isOpen, mainStep]);
 
   const renderSubSteps = (question: Question, index: number) => {
     const prevQuestion = category.questions[index - 1];
@@ -73,51 +62,26 @@ export const SidebarStep = ({
     isCurrentOrPrevCategory ||
     (isLastQuestionFromPrevCategory && isNextCategory);
 
-  return (
-    <FlexCol justify="flex-start" w="100%">
-      <Box alignContent="center">
-        <Flex
-          onClick={() => {
-            if (!isClickable) return;
-            setIsOpen((isOpen) => !isOpen);
-          }}
-          as={isClickable ? 'button' : null}
-          align="center"
-        >
-          <Circle bg={circleBgCol} size={10}>
-            <P
-              color={circleCol}
-              fontWeight={fontWeight}
-              fontSize={fontSizes.small}
-            >
-              {categoryIndex + 1}
-            </P>
-          </Circle>
+  const activeItem = isActive ? styles.active : styles.inactive;
 
-          <Box ml={2}>
-            <P
-              textAlign="left"
-              color={color}
-              fontSize={fontSize}
-              fontWeight={fontWeight}
-            >
-              {category.categoryName}
-            </P>
-          </Box>
+  return (
+    <FlexCol justify="center" w="100%" className={styles.sideBarWrapper}>
+      <Box>
+        <Flex className={[styles.stepItem].join(' ')}>
+          <P className={styles.stepItemIndex}>
+            {isClickable && !isActive && !isNextCategory ? (
+              <span className={styles.tick}>
+                <Tick color="#F0005C" size={18} />
+              </span>
+            ) : (
+              <span className={activeItem}>{`${categoryIndex + 1}.`}</span>
+            )}
+          </P>
+
+          <P className={[styles.stepItemName, activeItem].join(' ')}>
+            {category.categoryName}
+          </P>
         </Flex>
-        <AnimatePresence exitBeforeEnter>
-          <motion.div
-            animate={isOpen ? 'open' : 'closed'}
-            style={{ originY: 0 }}
-            transition={{ duration: 0.4 }}
-            variants={{
-              open: { opacity: 1, scaleY: 1, display: 'block' },
-              closed: { opacity: 0, scaleY: 0, height: 0 },
-            }}
-          >
-            <FlexCol>{category.questions.map(renderSubSteps)}</FlexCol>
-          </motion.div>
-        </AnimatePresence>
       </Box>
     </FlexCol>
   );

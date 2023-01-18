@@ -28,14 +28,14 @@
     outline: $focus-outline-style;
     outline-offset: $focus-outline-offset;
   }
-  
+
   &:focus:not(:focus-visible) {
     outline: 0;
   }
 
   svg {
     fill: currentColor;
-    margin-left: $gutter * .75;
+    margin-left: $gutter * 0.75;
     transform: scale(1);
     transform-origin: 50% 50%;
     will-change: transform;
@@ -60,7 +60,7 @@
       $black,
       $black,
       $white,
-      none,
+      none
     );
   }
 
@@ -81,7 +81,7 @@
       $white,
       $white,
       $black,
-      none,
+      none
     );
   }
 
@@ -102,8 +102,16 @@
       rgba($black, 0),
       $black,
       $black,
-      none,
+      none
     );
+    svg {
+      color: $secondary;
+    }
+    @include hover-state() {
+      svg {
+        fill: $white;
+      }
+    }
   }
 
   &__secondaryOnDark {
@@ -123,8 +131,13 @@
       rgba($black, 0),
       $white,
       $white,
-      none,
+      none
     );
+    @include hover-state() {
+      svg {
+        fill: $secondary;
+      }
+    }
   }
 
   &__tertiary,

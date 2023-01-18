@@ -1,4 +1,4 @@
-import { Box, Flex } from '@chakra-ui/react';
+import { Box, Flex, StylesProvider } from '@chakra-ui/react';
 import { P } from 'components/Typography/P';
 import { Category, Question } from 'lib/shared-domain/questionnaire/domain';
 import { useValuationStore } from 'lib/shared-domain/questionnaire/store';
