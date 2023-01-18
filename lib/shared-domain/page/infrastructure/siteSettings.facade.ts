@@ -140,6 +140,12 @@ export const querySiteSettings = (
         }
       }
     }
+  },
+  contactSectionContent {
+    ...,
+    offices[]->{
+      ...
+    }
   }
 }`;
 

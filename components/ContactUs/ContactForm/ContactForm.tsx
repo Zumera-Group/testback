@@ -17,7 +17,7 @@ export const ContactForm = ({ contactForm }) => {
   const sharedContent = useSharedContentContext();
   const linkWithCurrentLocale = useLinkWithCurrentLocale();
   const form = useContactFormSubmit();
-  
+
   const {
     title,
     description,
@@ -36,19 +36,16 @@ export const ContactForm = ({ contactForm }) => {
     phone: phoneProps,
     message: messageProps,
     isSuccess,
-    isError
+    isError,
   } = form;
 
   const handleSubmit = (e) => {
     e.preventDefault();
     form.submit();
-  }
+  };
 
   return (
-    <form
-      className={styles.form}
-      onSubmit={(e) => handleSubmit(e)}
-    >
+    <form className={styles.form} onSubmit={(e) => handleSubmit(e)}>
       <fieldset className={styles.formHeader}>
         {title && <legend className={styles.title}>{title}</legend>}
         {description && (
@@ -67,7 +64,8 @@ export const ContactForm = ({ contactForm }) => {
           type={'text'}
           required={true}
           placeholder={namePlaceholder}
-          {...nameProps} />
+          {...nameProps}
+        />
       </FormGroup>
       <FormGroup>
         <Input
@@ -75,7 +73,8 @@ export const ContactForm = ({ contactForm }) => {
           type={'email'}
           required={true}
           placeholder={emailPlaceholder}
-          {...emailProps} />
+          {...emailProps}
+        />
       </FormGroup>
       <FormGroup>
         <Input
@@ -83,7 +82,8 @@ export const ContactForm = ({ contactForm }) => {
           type={'tel'}
           required={true}
           placeholder={phoneNumberPlaceholder}
-          {...phoneProps} />
+          {...phoneProps}
+        />
       </FormGroup>
       <FormGroup>
         <Textarea
@@ -91,7 +91,8 @@ export const ContactForm = ({ contactForm }) => {
           rows={8}
           required={false}
           placeholder={messagePlaceholder}
-          {...messageProps} />
+          {...messageProps}
+        />
       </FormGroup>
       <FormGroup>
         <Checkbox
@@ -101,13 +102,15 @@ export const ContactForm = ({ contactForm }) => {
           required={true}
         >
           {sharedContent?.checkboxPrivacyText1}{' '}
-            <Link
-              passHref
-              href={linkWithCurrentLocale(sharedContent?.checkboxPrivacyPage?.slug?.current)}
-            >
-              <a>{sharedContent?.checkboxPrivacyText2}</a>
-            </Link>
-            {' ' + sharedContent?.checkboxPrivacyText3}
+          <Link
+            passHref
+            href={linkWithCurrentLocale(
+              sharedContent?.checkboxPrivacyPage?.slug?.current,
+            )}
+          >
+            <a>{sharedContent?.checkboxPrivacyText2}</a>
+          </Link>
+          {' ' + sharedContent?.checkboxPrivacyText3}
         </Checkbox>
       </FormGroup>
       <FormGroup>

@@ -1,6 +1,7 @@
 import { Employee } from 'lib/shared-domain/employees/domain';
 import { Transaction } from 'lib/shared-domain/transactions/domain';
 import {
+  ContactUsSectionModule,
   ContentModule,
   ContentModuleType,
   IndustryReportSectionModule,
@@ -44,6 +45,7 @@ export interface SiteSettings {
       };
     };
   };
+  contactSectionContent: ContactUsSectionModule;
   footerSocialLinks: {
     _key: string;
     link: string;

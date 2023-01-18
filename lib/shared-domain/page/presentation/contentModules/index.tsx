@@ -126,6 +126,7 @@ import { ReferralSection } from 'lib/shared-domain/valuation-tool/presentation/R
 
 export const getContentForContentModule = (
   contentModule: ContentModule,
+  siteSettings: any,
   sharedContent?: any,
 ): JSX.Element => {
   if (
@@ -232,7 +233,8 @@ export const getContentForContentModule = (
   if (contentModule.specificContentModule instanceof ContactUsSectionModule) {
     return (
       <ContactUsSection
-        specificContentModule={contentModule.specificContentModule}
+        specificContentModule={null}
+        content={siteSettings.contactSectionContent}
       />
     );
   }

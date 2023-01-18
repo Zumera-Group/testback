@@ -100,7 +100,7 @@ export const TransactionGridSection: React.FC<IProps> = (props) => {
             </SwiperTransactionsGrid>
           </GridColumn>
         </Grid>
-        {!loading ? (
+        {!loading && transactions.length ? (
           <Grid
             fullWidth={true}
             justifyContent={'space-between'}
@@ -115,6 +115,9 @@ export const TransactionGridSection: React.FC<IProps> = (props) => {
             >
               {transactions
                 .filter((item) => {
+                  if (!item.sectors) {
+                    return item;
+                  }
                   const sectorsId = item.sectors.map((sec) => sec._id);
                   return sectorsId.includes(activeSector);
                 })

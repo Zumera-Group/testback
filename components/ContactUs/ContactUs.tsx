@@ -1,5 +1,5 @@
 import { Section, Container, Grid, GridColumn } from 'components/Layout';
-import { SectionHeading } from 'components/SectionHeading'
+import { SectionHeading } from 'components/SectionHeading';
 import { Offices } from './Offices';
 import { ContactForm } from './ContactForm';
 
@@ -12,18 +12,18 @@ interface Props {
   offices?: any;
   appointmentLinkText?: string;
   contactForm?: any;
+  siteSettings?: any;
 }
 
-export const ContactUs: React.FC<Props> = ({ ...rest }) => {
-  
+export const ContactUs: React.FC<Props> = (props) => {
   const {
     title,
     subtitle,
     description,
     offices,
     appointmentLinkText,
-    contactForm
-  } = rest;
+    contactForm,
+  } = props;
 
   return (
     <Section
@@ -47,7 +47,7 @@ export const ContactUs: React.FC<Props> = ({ ...rest }) => {
             />
             {offices?.length > 0 && (
               <Offices
-                offices={offices}
+                offices={offices || []}
                 appointmentLinkText={appointmentLinkText}
               />
             )}

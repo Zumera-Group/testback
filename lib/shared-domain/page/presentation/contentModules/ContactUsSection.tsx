@@ -10,9 +10,7 @@ export const ContactUsSection: React.FC<{
 }> = ({ specificContentModule, content }) => {
   const contentModule = specificContentModule ? specificContentModule : content;
   if (!specificContentModule && !content) return null;
-  return (
-    <ContactUs {...contentModule} />
-  );
+  return <ContactUs {...contentModule} />;
 };
 
 export default ContactUsSection;
