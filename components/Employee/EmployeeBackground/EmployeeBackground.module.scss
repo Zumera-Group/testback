@@ -1,0 +1,23 @@
+.leftColumn {
+  padding-right: 6rem;
+}
+.rightColumn {
+  margin-top: 5.5rem;
+}
+.factsList {
+  list-style-type: none;
+  padding: 0;
+  margin-bottom: $gutter * 2.5;
+  li {
+    @include divider('bottom', $primary);
+    font-size: $font-size-big;
+    font-weight: $font-weight-medium;
+    padding: $gutter * 1.5 0;
+    &:before {
+      content: '▪';
+      color: $accent;
+      width: 10px;
+      margin-right: $gutter * 1;
+    }
+  }
+}

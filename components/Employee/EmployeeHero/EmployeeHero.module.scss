@@ -1,3 +1,7 @@
+.heroContainer {
+  @include divider('bottom', $primary);
+  padding: 1rem 1rem 2rem 1rem;
+}
 .title {
   font-size: $h2-font-size;
 }
@@ -18,7 +22,6 @@
   margin: $gutter * 1.5 0 0 0;
   padding: 0;
   display: flex;
-  //justify-content: space-between;
   align-items: flex-start;
   flex-wrap: wrap;
   flex-direction: column;

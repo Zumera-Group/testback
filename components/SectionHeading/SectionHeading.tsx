@@ -1,10 +1,12 @@
 import { SanityBlockContent } from 'components/SanityBlockContent';
 
 import styles from './SectionHeading.module.scss';
+import { H } from 'components/Typography/H';
 
 interface Props {
   title?: string;
   subtitle?: string;
+  secondaryTitle?: string;
   description?: any[] | string;
   headingType?: 'h1' | 'h2' | 'h3';
   align?: 'left' | 'right' | 'center';
@@ -14,6 +16,7 @@ interface Props {
 export const SectionHeading: React.FC<Props> = ({
   title,
   subtitle,
+  secondaryTitle,
   description,
   headingType,
   align,
@@ -31,6 +34,9 @@ export const SectionHeading: React.FC<Props> = ({
     >
       {subtitle && <p className={styles.subtitle}>{subtitle}</p>}
       {title && <Heading className={styles.title}>{title}</Heading>}
+      {secondaryTitle && (
+        <h4 className={styles.secondaryTitle}>{secondaryTitle}</h4>
+      )}
       {Array.isArray(description) ? (
         <SanityBlockContent text={description} />
       ) : null}
