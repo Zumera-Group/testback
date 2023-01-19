@@ -132,7 +132,7 @@ export const CalculatorTeaser: React.FC<{
     step3: string;
     step4: string;
   };
-  questionnaireSlug: string;
+  questionnaireSlug?: string;
 }> = ({
   title,
   description,
