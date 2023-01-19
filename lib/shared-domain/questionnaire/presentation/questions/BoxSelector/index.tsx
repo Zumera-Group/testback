@@ -93,7 +93,6 @@ export const BoxSelector = ({
     if (inSelectIndustryAndHasIndustryId) return true;
     return false;
   };
-
   return (
     <>
       <QuestionText title={question?.questionText}>

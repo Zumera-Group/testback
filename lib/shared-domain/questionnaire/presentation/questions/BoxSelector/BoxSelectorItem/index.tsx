@@ -4,6 +4,7 @@ import { useSelectAnswers } from '../useSelectAnswer';
 import { useSelectBoxSelector } from 'lib/shared-domain/questionnaire/presentation/questions/BoxSelector/useSelectBoxSelector';
 import RadioButton from 'components/Calculator/RadioButtonItem/RadioButtonItem';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import Checkbox from 'components/Calculator/CheckboxItem/CheckboxItem';
 
 interface Props {
   box: BoxAnswer;
@@ -27,7 +28,6 @@ export const BoxSelectorItem = ({ box, question }: Props): JSX.Element => {
     if (!box.boxIcon) return null;
     const iconUrl = box.boxIcon?.iconImage?.asset?.url;
     const iconLabel = box.boxIcon?.name;
-
     return (
       <Image
         unoptimized
@@ -42,12 +42,21 @@ export const BoxSelectorItem = ({ box, question }: Props): JSX.Element => {
 
   return (
     <>
-      <RadioButton
-        icon={renderIcon()}
-        label={box.label || box.boxContent}
-        onClick={onSelect}
-        selected={isSelected}
-      />
+      {!question.hasMultipleAnswers ? (
+        <RadioButton
+          icon={renderIcon()}
+          label={box.label || box.boxContent}
+          onClick={onSelect}
+          selected={isSelected}
+        />
+      ) : (
+        <Checkbox
+          icon={renderIcon()}
+          label={box.label || box.boxContent}
+          onClick={onSelect}
+          selected={isSelected}
+        />
+      )}
     </>
   );
 };
