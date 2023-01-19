@@ -35,7 +35,8 @@ export const Textarea: React.FC<Props> = ({
     <div>
       {!hideLabel && (
         <Label
-          htmlFor={id} text={label || placeholder}
+          htmlFor={id}
+          text={label || placeholder}
           required={required}
           disabled={disabled}
         />
@@ -52,7 +53,9 @@ export const Textarea: React.FC<Props> = ({
         disabled={disabled}
         onChange={onChange}
       ></textarea>
-      {description && <Description description={description} disabled={disabled} />}
+      {description && (
+        <Description description={description} disabled={disabled} />
+      )}
     </div>
   );
 };
