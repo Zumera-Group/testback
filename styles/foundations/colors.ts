@@ -78,7 +78,9 @@ export const colors = {
   // Partners About With Image Section
   partnersAboutBg: 'linear-gradient(90deg, #f1eae2, #fffffe)',
   // Orbit Selector
-  orbitSelector: 'linear-gradient(264.95deg, #E0C6B7 -2.77%, #F8F8E6 62.17%)',
+
+  orbitSelector:
+    'linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, #F1005C 99.99%, rgba(255, 255, 255, 0) 100%)',
   achievedTransactionMultipleBar:
     'linear-gradient(273.27deg, #F7F7E6 47.91%, #CBA78D 106.17%)',
   achievedTransactionMultipleBarMobile:
