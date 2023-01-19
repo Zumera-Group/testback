@@ -1,4 +1,4 @@
-.radioButtonWrapper {
+.checkboxWrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -10,6 +10,7 @@
   margin: $gutter * 0.5;
   cursor: pointer;
   text-align: center;
+  position: relative;
 
   &:hover,
   &.active {
@@ -27,13 +28,13 @@
 }
 
 .button {
-  position: relative;
-  top: 0;
-  left: 0;
+  position: absolute;
+  top: 15px;
+  right: 10px;
   height: 25px;
   width: 25px;
   background-color: #eee;
-  border-radius: 50%;
+  border-radius: 20%;
   background-color: $dark;
   border: solid 1px $quaternary;
 
@@ -42,13 +43,10 @@
   }
 
   &.active::after {
-    content: '';
+    content: '\2713';
     position: absolute;
-    top: 7px;
-    left: 7px;
-    width: 9px;
-    height: 9px;
-    border-radius: 50%;
-    background: $accent;
+    top: 0px;
+    left: 5px;
+    color: $accent;
   }
 }
