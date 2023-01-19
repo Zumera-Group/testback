@@ -55,6 +55,9 @@
     padding: 0 0 $gutter * 2 0;
     width: 100%;
     max-width: calc(100% - 48px);
+    @include breakpoint-down(md) {
+      max-width: 100%;
+    }
   }
   &__open {
     @include divider(bottom, $primary);

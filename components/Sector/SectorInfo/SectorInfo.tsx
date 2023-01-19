@@ -2,13 +2,13 @@ import { Section, Container, Grid, GridColumn } from 'components/Layout';
 import { SectionHeading } from 'components/SectionHeading';
 
 import { Description } from './Description';
-import { Accordion } from './Accordion';
 import { GrowthRatesTable } from './GrowthRatesTable';
 import { TrendsTable } from './TrendsTable';
 import { TransactionsTable } from './TransactionsTable';
 import { FutureTrends } from './FutureTrends';
 
 import styles from './SectorInfo.module.scss';
+import { Accordion } from 'components/Accordion';
 
 export const SectorInfo = ({ sector, sectorTransactions, content }) => {
   const t = (item) => content?.[item];

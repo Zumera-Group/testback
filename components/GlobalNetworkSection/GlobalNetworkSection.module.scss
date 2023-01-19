@@ -1,0 +1,29 @@
+.officeGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  justify-content: space-between;
+  grid-row-gap: 3rem;
+  grid-column-gap: 1.25rem;
+}
+.office {
+  @include divider('left', $primary);
+  padding-left: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  h5 {
+    font-size: $font-size-big;
+    margin-bottom: 8px;
+  }
+  address {
+    display: flex;
+    flex-direction: column;
+    line-height: $line-height-base;
+    margin-bottom: 1.25rem;
+  }
+  a {
+    margin-top: auto;
+  }
+  svg {
+    color: $accent;
+  }
+}
