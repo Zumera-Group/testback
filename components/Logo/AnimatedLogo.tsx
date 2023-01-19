@@ -1,18 +1,10 @@
-import { useEffect, useState } from 'react';
-import { motion, useMotionValue, useReducedMotion } from 'framer-motion';
-
-const settings = {
-  curve: [0.43, 0.15, 0.26, 0.97],
-  duration: 1.5,
-};
-
-const transition = {
-  duration: settings.duration,
-  ease: settings.curve,
-};
+import { motion } from 'framer-motion';
+import { useMediaQuery } from 'lib/hooks/useMediaQuery';
+import { SCREEN_SIZE_MD } from 'lib/constants';
 
 export const AnimatedLogo: React.FC<any> = ({ isScrolled, isLightPage }) => {
   const svgColor = isLightPage || isScrolled ? '#300032' : '#fff';
+  const isMobile = useMediaQuery(`(max-width: ${SCREEN_SIZE_MD})`);
   return (
     <motion.div>
       <motion.svg
@@ -26,11 +18,11 @@ export const AnimatedLogo: React.FC<any> = ({ isScrolled, isLightPage }) => {
               ? `0 0 134 56`
               : `0 -21 134 56`,
           color: svgColor,
+          y: isMobile ? 0 : '-5px',
         }}
         transition={{
           duration: 0.8,
           ease: 'easeInOut',
-          loop: Infinity,
           repeatDelay: 5,
           elapsed: -1.5,
         }}

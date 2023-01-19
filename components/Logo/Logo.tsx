@@ -11,6 +11,8 @@ interface Props {
 
   isScrolled?: boolean;
   isLightPage?: boolean;
+  isAnimated?: boolean;
+  src?: string;
 }
 
 export const Logo: React.FC<Props> = ({
@@ -19,6 +21,8 @@ export const Logo: React.FC<Props> = ({
   classes,
   isScrolled,
   isLightPage,
+  isAnimated,
+  src,
 }) => {
   return (
     <Link passHref href={slug}>
@@ -27,17 +31,20 @@ export const Logo: React.FC<Props> = ({
         rel="home"
         title={title}
       >
-        <AnimatedLogo isScrolled={isScrolled} isLightPage={isLightPage} />
-        {/*<Image*/}
-        {/*  unoptimized*/}
-        {/*  priority*/}
-        {/*  loading="eager"*/}
-        {/*  layout="fill"*/}
-        {/*  objectFit="contain"*/}
-        {/*  objectPosition="left center"*/}
-        {/*  alt={`${title} logo`}*/}
-        {/*  src={src}*/}
-        {/*/>*/}
+        {isAnimated ? (
+          <AnimatedLogo isScrolled={isScrolled} isLightPage={isLightPage} />
+        ) : (
+          <Image
+            unoptimized
+            priority
+            loading="eager"
+            layout="fill"
+            objectFit="contain"
+            objectPosition="left center"
+            alt={`${title} logo`}
+            src={src}
+          />
+        )}
       </a>
     </Link>
   );

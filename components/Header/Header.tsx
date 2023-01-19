@@ -109,6 +109,7 @@ export const Header = ({
             isScrolled={isScrolled}
             isLightPage={isLightPage()}
             title={siteName}
+            isAnimated={true}
           />
         </div>
         {!hideHeader && <Menu navigation={headerMenu} />}
@@ -129,7 +130,7 @@ export const Header = ({
             siteSettings={siteSettings}
             services={services}
             sectors={sectors}
-            logo={<Logo slug={homeSlug} title={siteName} />}
+            logo={<Logo slug={homeSlug} title={siteName} isAnimated={true} />}
             closeBigMenu={() => setBigMenuOpen(false)}
             otherLangSlug={otherLangSlug}
           />
