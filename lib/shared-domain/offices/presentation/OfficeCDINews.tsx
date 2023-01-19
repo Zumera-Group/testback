@@ -5,32 +5,18 @@ import React from 'react';
 
 import { NewsArticle } from '../../newsArticle/domain/index';
 import { Office } from '../domain';
+import { OfficeCDINews as OfficeCDINewsComponent } from 'components/OfficeCDI/OfficeCDINews';
 
 export const OfficeCDINews: React.FC<{
   office: Office;
   newsArticles: NewsArticle[];
   transactions: Transaction[];
   content: any;
-}> = ({ office, newsArticles, transactions, content }) => {
-  const filteredTransactions = transactions.filter(
-    (t) => t.location && t.location?._id === office._id && t.hasCDIRelation,
-  );
-  const filteredNewsArticles = newsArticles.filter(
-    (n) => n.office && n.office?._id === office._id && n.hasCDIRelation,
-  );
-
-  if (filteredTransactions.length === 0 && filteredNewsArticles.length === 0)
-    return null;
-  return (
-    <NewsGrid
-      linkText={content?.linkText}
-      title={content?.title}
-      subtitle={content?.subtitle}
-      loadMoreText={content?.allNewsLinkText}
-      description={content?.description}
-      employees={[]}
-      newsArticles={filteredNewsArticles}
-      transactions={filteredTransactions}
-    />
-  );
-};
+}> = ({ office, newsArticles, transactions, content }) => (
+  <OfficeCDINewsComponent
+    office={office}
+    newsArticles={newsArticles}
+    transactions={transactions}
+    content={content}
+  />
+);
