@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box } from '@chakra-ui/react';
-import { Textarea } from 'components/Inputs';
+// import { Textarea } from 'components/Inputs';
 import { getTranslateByScope } from 'translation/i18n';
 import { Question } from '../../../domain/index';
 import { useAnswers } from 'lib/shared-domain/questionnaire/application/useAnswers';
@@ -8,6 +8,7 @@ import { QuestionText } from '../../Question/QuestionText';
 import { QuestionButtons } from '../../Question/QuestionButtons';
 import { QuestionAnimation } from '../../Question/QuestionAnimation';
 import { RequiredQuestionInfo } from '../../Question/RequiredQuestionInfo';
+import Textarea from 'components/Form/Textarea/Textarea';
 
 const t = getTranslateByScope('answerTypes.textInput');
 
@@ -26,15 +27,12 @@ export const TextInput: React.FC<{
         <RequiredQuestionInfo isRequired={question?.isRequired} />
       </QuestionText>
       <QuestionAnimation>
-        <Box mx="auto" maxWidth={600} mt={5} mb={6}>
+        <Box maxWidth={600} mt={5} mb={6}>
           <Textarea
+            id={question._id}
             value={getAnswer()}
             onChange={(e) => setAnswer(e.target.value)}
             placeholder={placeholder}
-            minHeight={200}
-            maxHeight={200}
-            resize="none"
-            overflowY="scroll"
           />
         </Box>
       </QuestionAnimation>

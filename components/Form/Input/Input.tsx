@@ -4,7 +4,15 @@ import styles from './Input.module.scss';
 
 interface Props {
   hideLabel?: boolean;
-  type: 'text' | 'email' | 'url' | 'tel' | 'number' | 'password' | 'search' | '';
+  type:
+    | 'text'
+    | 'email'
+    | 'url'
+    | 'tel'
+    | 'number'
+    | 'password'
+    | 'search'
+    | '';
   required?: boolean;
   id: string;
   classes?: string;
@@ -53,7 +61,9 @@ export const Input: React.FC<Props> = ({
         disabled={disabled}
         onChange={onChange}
       />
-      {description && <Description description={description} disabled={disabled} />}
+      {description && (
+        <Description description={description} disabled={disabled} />
+      )}
     </div>
   );
 };
