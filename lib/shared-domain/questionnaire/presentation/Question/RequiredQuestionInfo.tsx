@@ -13,7 +13,7 @@ export const RequiredQuestionInfo: React.FC<{ isRequired: boolean }> = ({
   if (!isRequired) return null;
 
   return (
-    <P fontSize={fontSizes.small} textAlign="center" mb={2} color="text.light">
+    <P fontSize={fontSizes.small} textAlign="left" mb={'2rem'} color="white">
       {t('required')}
     </P>
   );
