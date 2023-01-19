@@ -2,7 +2,7 @@ import React from 'react';
 import { Box } from '@chakra-ui/react';
 import { ReactJSXElement } from '@emotion/react/types/jsx-namespace';
 
-import arrow from './icons/arrow.svg';
+import arrow from './icons/orbit-arrow.svg';
 
 type ArrowSelectorType = (props: {
   orbitHeightInPx: number;
@@ -14,27 +14,27 @@ const ArrowSelector: ArrowSelectorType = ({ orbitHeightInPx, sliderValue }) => {
     <>
       <Box
         position="relative"
-        bg={`linear-gradient(90deg,#000000c4, transparent)`}
-        width={orbitHeightInPx + 'px'}
-        height="3px"
+        bg={`linear-gradient(90deg, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%)`}
+        width={'315px'}
+        height="2px"
         bottom={-(orbitHeightInPx - 3) + 'px'}
-        ml={-(orbitHeightInPx - 3) + 'px'}
+        ml={'-15px'}
         transform={`rotate(${sliderValue}deg)`}
         transformOrigin="right"
         transition="transform 0.3s"
       >
         <Box
-          width="15px"
-          height="15px"
-          mt="-6px"
-          ml={-(orbitHeightInPx + 25) + 'px'}
+          width="20px"
+          height="18px"
+          mt="-10px"
+          ml={'-25px'}
           bgImage={`url(${arrow?.src})`}
           bgPosition="center"
           bgSize="cover"
           bgRepeat="no-repeat"
           opacity="1"
           display="table-caption"
-          transform="rotate(225deg)"
+          transform="rotate(255deg)"
         ></Box>
       </Box>
     </>

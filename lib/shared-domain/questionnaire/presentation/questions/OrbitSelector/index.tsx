@@ -100,16 +100,7 @@ export const OrbitSelector: React.FC<{
         <RequiredQuestionInfo isRequired={question?.isRequired} />
       </QuestionText>
       <QuestionAnimation>
-        <Flex mt={1} minH={4} justify="center">
-          <P variant="orbitSelector">
-            {
-              question?.answerSelector?.orbitSelector?.answerOptions?.find(
-                (a) => a?.value === answer,
-              )?.label
-            }
-          </P>
-        </Flex>
-        <Box mt={4}>
+        <Box mt={90}>
           <Box
             bg={colors.orbitSelector}
             bgSize="cover"
@@ -139,6 +130,7 @@ export const OrbitSelector: React.FC<{
               updateSlide(evt);
               stopSlide();
             }}
+            cursor={'pointer'}
           >
             <ArrowSelector
               orbitHeightInPx={orbitHeightInPx}
@@ -148,7 +140,7 @@ export const OrbitSelector: React.FC<{
             <Box
               borderTopLeftRadius="100em"
               borderTopRightRadius="100em"
-              bg="white"
+              bg="#300032"
               width={bgSize + 'px'}
               height={bgSize / 2 + 'px'}
               margin="auto"
@@ -172,6 +164,16 @@ export const OrbitSelector: React.FC<{
           </Box>
         </Box>
       </QuestionAnimation>
+
+      <Flex mt={1} minH={4} justify="center">
+        <P variant="orbitSelector" color={'white'}>
+          {
+            question?.answerSelector?.orbitSelector?.answerOptions?.find(
+              (a) => a?.value === answer,
+            )?.label
+          }
+        </P>
+      </Flex>
 
       <QuestionButtons
         onNextQuestion={onNextQuestion}
