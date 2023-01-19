@@ -1,0 +1,17 @@
+.bottomBarWrapper {
+  //   position: fixed;
+  //   bottom: 0;
+  height: 80px;
+  background-color: $secondary;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: $white;
+
+  padding: 0 $gutter;
+
+  @include breakpoint-up(md) {
+    padding: 0 5rem;
+  }
+}
