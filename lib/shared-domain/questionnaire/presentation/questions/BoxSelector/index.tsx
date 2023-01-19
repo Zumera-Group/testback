@@ -1,13 +1,10 @@
 import { Box, Flex, VStack } from '@chakra-ui/react';
 import useBreakpointValue from 'lib/shared-domain/useBreakpoint';
-import { P } from 'components/Typography/P';
 import { BoxAnswer, Question } from 'lib/shared-domain/questionnaire/domain';
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import { BoxSelectorItem } from './BoxSelectorItem';
 import { QuestionText } from '../../Question/QuestionText';
 import { QuestionButtons } from '../../Question/QuestionButtons';
-import { Btn } from '../../../../../../components/Buttons/Button/index';
-import { CircleSelectorItem } from './CircleSelectorItem';
 import { getTranslateByScope } from '../../../../../../translation/i18n';
 import { useValuationStore } from '../../../store/index';
 import { INDUSTRY_QUESTION_ID } from '..';
@@ -17,11 +14,6 @@ import { QuestionAnimation } from '../../Question/QuestionAnimation';
 import { RequiredQuestionInfo } from '../../Question/RequiredQuestionInfo';
 import { Sector } from '../../../../page/domain/index';
 import { Button } from 'components/Button';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { SwiperTransactions } from 'components/Layout/SwiperTransactions';
-import styles from './BoxSelector.module.scss';
-import { SwiperTransactionsGrid } from 'components/Layout/SwiperTransactionsGrid';
-import GridColumn from 'components/Layout/Grid/GridColumn/GridColumn';
 
 const t = getTranslateByScope('answerTypes.boxSelector');
 
@@ -101,8 +93,6 @@ export const BoxSelector = ({
     if (inSelectIndustryAndHasIndustryId) return true;
     return false;
   };
-  const swiperPrevRef = useRef();
-  const swiperNextRef = useRef();
 
   return (
     <>

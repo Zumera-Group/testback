@@ -41,48 +41,13 @@ export const BoxSelectorItem = ({ box, question }: Props): JSX.Element => {
   };
 
   return (
-    // <Square
-    //   background={colors.white}
-    //   border={borderBoxSelector}
-    //   size={SIZE}
-    //   flexDirection="column"
-    //   justifyContent="space-evenly"
-    //   cursor="pointer"
-    //   onClick={onSelect}
-    //   mx={1.5}
-    //   mb={3}
-    //   p={0.5}
-    // >
-    //   {renderIcon()}
-    //   <Box textAlign="center">
-    //     <P
-    //       style={{
-    //         hyphens: 'auto',
-    //       }}
-    //       variant="p"
-    //       fontWeight={fontWeight}
-    //       fontSize={fontSizes.tiny}
-    //       color={color}
-    //     >
-    //       {box.label || box.boxContent}
-    //     </P>
-    //   </Box>
-    // </Square>
     <>
-      {/* {renderIcon()} */}
-      {/* <Swiper
-        spaceBetween={50}
-        slidesPerView={3}
-        onSlideChange={() => console.log('slide change')}
-        onSwiper={(swiper) => console.log(swiper)}
-      > */}
       <RadioButton
         icon={renderIcon()}
         label={box.label || box.boxContent}
         onClick={onSelect}
         selected={isSelected}
       />
-      {/* </Swiper> */}
     </>
   );
 };
