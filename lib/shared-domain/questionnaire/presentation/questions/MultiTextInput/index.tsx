@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { VStack } from '@chakra-ui/react';
 import useBreakpointValue from 'lib/shared-domain/useBreakpoint';
-import { Input } from 'components/Inputs';
+import Input from 'components/Form/Input/Input';
 import { getTranslateByScope } from 'translation/i18n';
 import { Question } from '../../../domain/index';
 import { useAnswers } from 'lib/shared-domain/questionnaire/application/useAnswers';
@@ -47,20 +47,19 @@ export const MultiTextInput: React.FC<{
       <QuestionText title={question.questionText} />
 
       <QuestionAnimation>
-        <VStack
-          maxW={400}
-          mx="auto"
-          align="stretch"
-          spacing={2}
-          mb={!isMobile && 5}
-        >
+        <VStack maxW={400} align="stretch" spacing={'3rem'} mb={!isMobile && 5}>
           {question.answerSelector.multiTextInput?.map((field, index) => (
             <VStack key={index} align="stretch">
-              <P variant="multiTextInputP">{field.fieldTitle}</P>
+              <P variant="multiTextInputP" color={'white'} mb={2}>
+                {field.fieldTitle}
+              </P>
               <Input
                 value={answers[index]}
                 onChange={(e) => onChange(e, index)}
                 placeholder={field.fieldPlaceholder || placeholder}
+                type={'text'}
+                id={`${index}`}
+                hideLabel
               />
             </VStack>
           ))}
