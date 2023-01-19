@@ -25,7 +25,7 @@ export const SectorQuestionnaire: React.FC<{
         step3: t('calculatorSteps.step3'),
         step4: t('calculatorSteps.step4'),
       }}
-      questionnaireSlug={sector?.questionnaire?.questionnaireSlug?.current}
+      // questionnaireSlug={sector?.questionnaire?.questionnaireSlug?.current}
     />
   );
 };

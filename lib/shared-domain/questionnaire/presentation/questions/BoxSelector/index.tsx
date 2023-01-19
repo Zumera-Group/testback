@@ -2,7 +2,7 @@ import { Box, Flex, VStack } from '@chakra-ui/react';
 import useBreakpointValue from 'lib/shared-domain/useBreakpoint';
 import { P } from 'components/Typography/P';
 import { BoxAnswer, Question } from 'lib/shared-domain/questionnaire/domain';
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { BoxSelectorItem } from './BoxSelectorItem';
 import { QuestionText } from '../../Question/QuestionText';
 import { QuestionButtons } from '../../Question/QuestionButtons';
@@ -16,6 +16,12 @@ import { useAnswers } from 'lib/shared-domain/questionnaire/application/useAnswe
 import { QuestionAnimation } from '../../Question/QuestionAnimation';
 import { RequiredQuestionInfo } from '../../Question/RequiredQuestionInfo';
 import { Sector } from '../../../../page/domain/index';
+import { Button } from 'components/Button';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { SwiperTransactions } from 'components/Layout/SwiperTransactions';
+import styles from './BoxSelector.module.scss';
+import { SwiperTransactionsGrid } from 'components/Layout/SwiperTransactionsGrid';
+import GridColumn from 'components/Layout/Grid/GridColumn/GridColumn';
 
 const t = getTranslateByScope('answerTypes.boxSelector');
 
@@ -95,6 +101,8 @@ export const BoxSelector = ({
     if (inSelectIndustryAndHasIndustryId) return true;
     return false;
   };
+  const swiperPrevRef = useRef();
+  const swiperNextRef = useRef();
 
   return (
     <>
@@ -103,30 +111,18 @@ export const BoxSelector = ({
       </QuestionText>
 
       <QuestionAnimation>
-        <Box mx="auto" w="100%" maxWidth={600}>
-          {isMobile ? (
-            <VStack pt={2} spacing={2} bg="transparent">
-              {boxesToRender?.map((box) => (
-                <CircleSelectorItem
-                  key={box._key}
-                  question={question}
-                  box={box}
-                />
-              ))}
-            </VStack>
-          ) : (
-            <Flex mt={1} justify="center" flexWrap="wrap">
-              {boxesToRender?.map((box) => (
-                <BoxSelectorItem key={box._key} question={question} box={box} />
-              ))}
-            </Flex>
-          )}
+        <Box mx="auto" w="100%" maxWidth={950}>
+          <Flex mt={1} justify="center" flexWrap="wrap">
+            {boxesToRender?.map((box, index) => (
+              <BoxSelectorItem key={box._key} question={question} box={box} />
+            ))}
+          </Flex>
         </Box>
         <Flex justifyContent="center">
           {moreBoxesToShow && (
-            <Btn onClick={onShowMore} variant="transparent">
-              <P fontSize="small">{buttonText.trim()}</P>
-            </Btn>
+            <Button callBack={onShowMore} variant="primary" hideIcon>
+              {buttonText.trim()}
+            </Button>
           )}
         </Flex>
       </QuestionAnimation>
