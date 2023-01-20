@@ -126,28 +126,6 @@ const LoadingText: React.FC<{ isLoading: boolean; title: string }> = ({
   );
 };
 
-const ImageRow: React.FC = () => {
-  return (
-    <FlexCol flex={1}>
-      <P mb={4} fontSize="h3" textAlign="center">
-        {t('logoTitle')}
-      </P>
-      <Flex
-        direction={{ base: 'column', lg: 'row' }}
-        justifyContent="center"
-        alignItems="center"
-      >
-        <Box flex={1} mr={{ base: 0, lg: 2 }}>
-          <Image unoptimized alt="" src={firstLogoRowImage} />
-        </Box>
-        <Box flex={1} ml={{ base: 0, lg: 2 }} pb={{ base: 0, lg: 2 }}>
-          <Image unoptimized alt="" src={secondLogoRowImage} />
-        </Box>
-      </Flex>
-    </FlexCol>
-  );
-};
-
 const animationVariants = {
   initial: { opacity: 0 },
   in: { opacity: 1 },
@@ -198,9 +176,6 @@ const AppointmentBookingScreen: React.FC<{ userCalendlyLink?: string }> = ({
         url={process.env.NEXT_PUBLIC_CALENDLY_LINK}
         prefill={prefill}
       />
-      <Box>
-        <ImageRow />
-      </Box>
     </AnimateIn>
   );
 };
@@ -410,9 +385,6 @@ const EvaluationScreen: React.FC<{
           </FlexCol>
         </Flex>
       </FlexCol>
-      <Box mt={10} mb={2}>
-        <ImageRow />
-      </Box>
     </AnimateIn>
   );
 };
@@ -528,9 +500,6 @@ export const Result: React.FC = () => {
           />
         </FlexCol>
       </Flex>
-      <Box mt={10} mb={2}>
-        <ImageRow />
-      </Box>
     </AnimateIn>
   );
 };
