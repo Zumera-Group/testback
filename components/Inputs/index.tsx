@@ -1,4 +1,5 @@
 import React from 'react';
+import styles from './../Form/Input/Input.module.scss';
 
 import {
   Input as BaseInput,
@@ -16,15 +17,15 @@ import {
 export const Input: React.FC<InputProps> = (props) => {
   return (
     <BaseInput
-      color="black"
-      backgroundColor="inputBgColor"
-      focusBorderColor="primary.darkGreen"
-      borderRadius={0}
-      borderStyle="solid"
-      borderWidth={1}
-      borderColor="inputBorderColor"
-      px={2}
-      height={10}
+      // color="black"
+      // backgroundColor="inputBgColor"
+      // focusBorderColor="primary.darkGreen"
+      // borderRadius={0}
+      // borderStyle="solid"
+      // borderWidth={1}
+      // borderColor="inputBorderColor"
+      // px={2}
+      // height={10}
       {...props}
     />
   );
@@ -71,19 +72,21 @@ export const InputWithLabelAndError: React.FC<{
   label: string;
   placeholder: string;
   value: string;
+  classes?: string;
   onChange: (arg: string) => void;
   error?: string;
-}> = ({ label, placeholder, value, onChange, error }) => {
+}> = ({ label, placeholder, value, onChange, error, classes }) => {
   return (
     <FormControl isInvalid={!!error} mb={2}>
-      <FormLabel color="black" mb={0.5}>
+      <FormLabel color="white" mb={0.5}>
         {label}
       </FormLabel>
       <Input
-        color="black"
+        color="white"
         onChange={(e) => onChange(e.target.value)}
         value={value}
         placeholder={placeholder}
+        className={[styles.input, classes ? classes : ''].join(' ')}
       />
       {error && <FormErrorMessage mt={0.5}>{error}</FormErrorMessage>}
     </FormControl>

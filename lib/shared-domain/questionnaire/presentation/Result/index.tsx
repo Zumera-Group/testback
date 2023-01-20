@@ -31,6 +31,7 @@ import { qLogs } from '../../application/log';
 import Lottie from 'react-lottie';
 import * as animationData from './loading.json';
 import { useRouter } from 'next/router';
+import { Input } from 'components/Form';
 
 const t = getTranslateByScope('result');
 
