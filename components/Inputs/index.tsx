@@ -15,20 +15,7 @@ import {
 } from '@chakra-ui/react';
 
 export const Input: React.FC<InputProps> = (props) => {
-  return (
-    <BaseInput
-      // color="black"
-      // backgroundColor="inputBgColor"
-      // focusBorderColor="primary.darkGreen"
-      // borderRadius={0}
-      // borderStyle="solid"
-      // borderWidth={1}
-      // borderColor="inputBorderColor"
-      // px={2}
-      // height={10}
-      {...props}
-    />
-  );
+  return <BaseInput {...props} />;
 };
 
 export const InputNumber: React.FC<NumberInputProps> = (props) => {
@@ -77,8 +64,8 @@ export const InputWithLabelAndError: React.FC<{
   error?: string;
 }> = ({ label, placeholder, value, onChange, error, classes }) => {
   return (
-    <FormControl isInvalid={!!error} mb={2}>
-      <FormLabel color="white" mb={0.5}>
+    <FormControl isInvalid={!!error} mb={30}>
+      <FormLabel color="white" mb={'1rem'}>
         {label}
       </FormLabel>
       <Input
@@ -88,7 +75,11 @@ export const InputWithLabelAndError: React.FC<{
         placeholder={placeholder}
         className={[styles.input, classes ? classes : ''].join(' ')}
       />
-      {error && <FormErrorMessage mt={0.5}>{error}</FormErrorMessage>}
+      {error && (
+        <FormErrorMessage mt={20} color={'white'}>
+          {error}
+        </FormErrorMessage>
+      )}
     </FormControl>
   );
 };

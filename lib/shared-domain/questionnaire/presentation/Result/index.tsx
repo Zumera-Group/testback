@@ -3,7 +3,7 @@ import { InlineWidget } from 'react-calendly';
 import * as EmailValidator from 'email-validator';
 
 import {
-  Checkbox,
+  // Checkbox,
   Flex,
   FormControl,
   FormErrorMessage,
@@ -25,13 +25,13 @@ import {
 } from '../../../../../styles/foundations/fontStyles';
 import { useValuationStore } from '../../store';
 import { InputWithLabelAndError } from 'components/Inputs';
+import { Checkbox } from 'components/Form/Checkbox/';
 import { useGetSalesforceScore } from '../../application/useGetQuestionnaireScore';
 import { useSalesforceAnswerSync } from '../../application/useSalesforceAnswerSync';
 import { qLogs } from '../../application/log';
 import Lottie from 'react-lottie';
 import * as animationData from './loading.json';
 import { useRouter } from 'next/router';
-import { Input } from 'components/Form';
 
 const t = getTranslateByScope('result');
 
@@ -282,7 +282,7 @@ const EvaluationScreen: React.FC<{
         title={t('evaluation.title')}
         description={t('evaluation.description')}
       />
-      <FlexCol maxWidth={700} mx="auto">
+      <FlexCol maxWidth={700}>
         <Flex direction={{ base: 'column', lg: 'row' }} flexWrap="wrap">
           {hasScoreAndPercentage && (
             <FlexCol mb={2} flex={{ base: 1, lg: 0.4 }}>
@@ -368,12 +368,9 @@ const EvaluationScreen: React.FC<{
               <Checkbox
                 onChange={(e) => setCheckboxIsChecked(e.target.checked)}
                 isChecked={checkboxIsChecked}
-                colorScheme="primary"
-                alignItems="flex-start"
-                borderColor={colors.primary.darkGreen}
-                iconColor="white"
+                id="result_checkBox"
               >
-                <Box color="black" textAlign="left" mt={-0.5}>
+                <Box color="white" textAlign="left" mt={-0.5}>
                   <span>{t('evaluation.form.checkbox.first')}</span>
                   <a
                     style={{
@@ -391,7 +388,7 @@ const EvaluationScreen: React.FC<{
                 </Box>
               </Checkbox>
               {pressed && !checkboxIsChecked && (
-                <FormErrorMessage mt={0.5}>
+                <FormErrorMessage mt={20} mb={20} color={'white'}>
                   {t('evaluation.form.checkboxError')}
                 </FormErrorMessage>
               )}
