@@ -62,11 +62,12 @@ export const InputWithLabelAndError: React.FC<{
   classes?: string;
   onChange: (arg: string) => void;
   error?: string;
-}> = ({ label, placeholder, value, onChange, error, classes }) => {
+  isRequired: boolean;
+}> = ({ label, placeholder, value, onChange, error, classes, isRequired }) => {
   return (
     <FormControl isInvalid={!!error} mb={30}>
       <FormLabel color="white" mb={'1rem'}>
-        {label}
+        {label} {isRequired && <span style={{ color: '#f0005c' }}>*</span>}
       </FormLabel>
       <Input
         color="white"

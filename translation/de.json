@@ -78,18 +78,18 @@
       },
       "form": {
         "name": {
-          "label": "Name*",
+          "label": "Name",
           "placeholder": "Name",
           "error": "Name ist erforderlich"
         },
         "email": {
-          "label": "E-Mail*",
+          "label": "E-Mail",
           "placeholder": "E-Mail",
           "requiredError": "E-Mail ist erforderlich",
           "invalidError": "Die E-Mail ist ungültig"
         },
         "phoneNumber": {
-          "label": "Telefonnummer*",
+          "label": "Telefonnummer",
           "placeholder": "Telefonnummer",
           "error": "Telefonnummer ist erforderlich"
         },

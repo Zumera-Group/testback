@@ -339,6 +339,7 @@ const EvaluationScreen: React.FC<{
               onChange={(value) =>
                 setAnswer({ id: NAME_STORE_INDICATOR, value })
               }
+              isRequired
             />
 
             <InputWithLabelAndError
@@ -349,6 +350,7 @@ const EvaluationScreen: React.FC<{
               onChange={(value) =>
                 setAnswer({ id: EMAIL_STORE_INDICATOR, value })
               }
+              isRequired
             />
             <InputWithLabelAndError
               error={
@@ -362,6 +364,7 @@ const EvaluationScreen: React.FC<{
               onChange={(value) =>
                 setAnswer({ id: PHONE_NUMBER_STORE_INDICATOR, value })
               }
+              isRequired
             />
 
             <FormControl isInvalid={pressed && !checkboxIsChecked}>
