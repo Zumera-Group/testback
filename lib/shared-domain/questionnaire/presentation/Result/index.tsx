@@ -3,7 +3,6 @@ import { InlineWidget } from 'react-calendly';
 import * as EmailValidator from 'email-validator';
 
 import {
-  // Checkbox,
   Flex,
   FormControl,
   FormErrorMessage,
@@ -18,7 +17,8 @@ import { colors } from 'styles/foundations/colors';
 import { getTranslateByScope } from 'translation/i18n';
 import { QuestionText } from '../Question/QuestionText';
 import { motion } from 'framer-motion';
-import { Btn } from 'components/Buttons/Button';
+import { Button } from 'components/Button';
+import styles from './Result.module.scss';
 import {
   fontSizes,
   fontWeights,
@@ -393,14 +393,17 @@ const EvaluationScreen: React.FC<{
                 </FormErrorMessage>
               )}
             </FormControl>
-            <Btn
-              disabled={!checkboxIsChecked}
-              mt={3}
+            <Button
+              type="submit"
               variant="primary"
-              onClick={onSend}
+              callBack={onSend}
+              disabled={!checkboxIsChecked}
+              onDark
+              hideIcon
+              classes={styles.submitButton}
             >
               {t('evaluation.form.button')}
-            </Btn>
+            </Button>
           </FlexCol>
         </Flex>
       </FlexCol>
