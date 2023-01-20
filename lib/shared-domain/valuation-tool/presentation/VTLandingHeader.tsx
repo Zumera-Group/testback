@@ -62,12 +62,11 @@ export const VTLandingHeader: React.FC<{
       (heroSection.specificContentModule as HeroSectionModule).type ===
         'transaction' ||
       // @ts-ignore
-      (heroSection.specificContentModule as HeroSectionModule).type ===
-        'news' ||
-      (heroSection.specificContentModule as HeroSectionModule).type ===
-        'career' ||
-      (heroSection.specificContentModule as HeroSectionModule).type ===
-        'termsAndConditions'
+      (heroSection.specificContentModule as HeroSectionModule).type === 'news'
+      // (heroSection.specificContentModule as HeroSectionModule).type ===
+      //   'career' ||
+      // (heroSection.specificContentModule as HeroSectionModule).type ===
+      //   'termsAndConditions'
     );
   };
 

@@ -507,11 +507,12 @@ export class HeroSectionModule extends BaseModule {
   type:
     | 'home'
     | 'primary'
-    | 'sector'
+    // | 'sector'
     | 'transaction'
-    | 'career'
-    | 'job-landing'
-    | 'termsAndConditions';
+    // | 'career'
+    // | 'job-landing'
+    // | 'termsAndConditions'
+    | 'anchor';
   heroImage: {
     asset: { url: string };
   };
@@ -846,6 +847,7 @@ export enum serviceDetailSectionNames {
 }
 
 export type ContentModuleType =
+  | 'anchoredTextSection'
   | 'heroSection'
   | 'dividerImage'
   | 'servicesLargeGridSection'
@@ -908,6 +910,8 @@ export type ContentModuleType =
 
 abstract class ContentModuleTypeFactory {
   static createInstance(type: ContentModuleType, fields: Record<string, any>) {
+    if (type === 'anchoredTextSection')
+      return new AnchoredTextSectionModule(fields);
     if (type === 'heroSection') return new HeroSectionModule(fields);
     if (type === 'dividerImage') return new DividerImageModule(fields);
     if (type === 'servicesLargeGridSection')
@@ -1392,5 +1396,18 @@ export class LandingPageOurPromiseSectionModule extends BaseModule {
     this.bgImage = fields.bgImage;
     this.topics = fields.topics;
     this.iconTopics = fields.iconTopics;
+  }
+}
+
+export class AnchoredTextSectionModule extends BaseModule {
+  title: string;
+  textBlocks: any[];
+
+  hasBorderBottom: boolean;
+  constructor(fields: Record<string, any>) {
+    super();
+    this.title = fields.title;
+    this.textBlocks = fields.textBlocks;
+    this.hasBorderBottom = fields.hasBorderBottom;
   }
 }

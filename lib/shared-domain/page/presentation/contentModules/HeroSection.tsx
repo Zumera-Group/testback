@@ -6,10 +6,9 @@ import Hero from 'components/Hero';
 
 export const HeroSection: React.FC<{
   specificContentModule: HeroSectionModule;
-}> = ({ specificContentModule }) => {
-  return (
-    <Hero {...specificContentModule} />
-  );
+  allPageContent: any[];
+}> = ({ specificContentModule, allPageContent }) => {
+  return <Hero allPageContent={allPageContent} {...specificContentModule} />;
 };
 
 export default HeroSection;

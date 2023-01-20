@@ -105,8 +105,6 @@ export default function Index({
     return null;
   }
 
-  console.log(content);
-  console.log(selectedSector);
   return (
     <SharedContentContext value={sharedContent}>
       <ErrorTrackingBoundary>

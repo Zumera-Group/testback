@@ -164,7 +164,8 @@ export const HeroSection: React.FC<{
   const isBigScreen = useBreakpointValue({ base: false, xxl: true });
   const isMobile = useBreakpointValue({ base: true, lg: false });
   const isMobileBg = useBreakpointValue({ base: true, sm: false });
-  const isJobLanding = specificContentModule.type === 'job-landing';
+  const isJobLanding = false;
+  // specificContentModule.type === 'job-landing';
   const isHome = specificContentModule.type === 'home';
   // @ts-ignore
   const isLevel2 = specificContentModule.type === 'level2';
@@ -173,11 +174,12 @@ export const HeroSection: React.FC<{
   const isTransaction = specificContentModule.type === 'transaction';
   // @ts-ignore
   const isAboutUs = specificContentModule.type === 'about-us';
-  const isCareer = specificContentModule.type === 'career';
+  const isCareer = false;
+  // specificContentModule.type === 'career';
   // @ts-ignore
   const isNews = specificContentModule.type === 'news';
-  const isTermsAndConditions =
-    specificContentModule.type === 'termsAndConditions';
+  const isTermsAndConditions = false;
+  // specificContentModule.type === 'termsAndConditions';
   const mobileBgImage = specificContentModule.heroMobileBgImage;
   const { sectionRef } = useCareerRef();
 
@@ -251,10 +253,10 @@ export const HeroSection: React.FC<{
               <Box>
                 <Box className={classForTitle}>
                   <H
-                    color={
-                      isJobLanding &&
-                      `${colors.primary.lighterGreen} !important`
-                    }
+                    // color={
+                    //   isJobLanding &&
+                    //   `${colors.primary.lighterGreen} !important`
+                    // }
                     mt={getMarginTop()}
                     as="h1"
                     mb={3}
