@@ -1,0 +1,4 @@
+.border {
+  @include divider('bottom', $primary);
+  padding-bottom: calc(var(--section-size) / 2);
+}
