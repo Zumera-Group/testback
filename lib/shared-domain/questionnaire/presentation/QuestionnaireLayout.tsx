@@ -167,9 +167,6 @@ const QuestionnaireLayout: React.FC<{
     0,
   );
 
-  console.log(currenQuestionPosition);
-  console.log(numberOfQuestionsInTotal);
-
   //RESULTS LOGIC
   const [score, setScore] = React.useState<{
     points: string;
@@ -317,6 +314,7 @@ const QuestionnaireLayout: React.FC<{
               sectorSpecificQuestions={sectorSpecificQuestions}
               sectors={sectors}
             />
+
             {!isOnResultScreen && isFirstQuestion() && (
               <Flex
                 direction={{ base: 'column', lg: 'row' }}

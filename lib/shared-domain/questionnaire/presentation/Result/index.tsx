@@ -33,6 +33,7 @@ import { qLogs } from '../../application/log';
 import Lottie from 'react-lottie';
 import * as animationData from './loading.json';
 import { useRouter } from 'next/router';
+import { Beam } from 'components/Beam';
 
 const t = getTranslateByScope('result');
 
@@ -117,13 +118,9 @@ const LoadingText: React.FC<{ isLoading: boolean; title: string }> = ({
   title,
 }) => {
   return (
-    <P
-      color={isLoading ? colors.primary.darkGreen : colors.text.regular}
-      mb={3}
-      fontSize="h3"
-    >
+    <p className={isLoading ? styles.loadingText__active : styles.loadingText}>
       {title}
-    </P>
+    </p>
   );
 };
 
@@ -393,28 +390,28 @@ export const Result: React.FC = () => {
     loadScore();
   }, []);
 
-  React.useEffect(() => {
-    const interval = setInterval(() => {
-      if (loadingPercentage < 100) {
-        setLoadingPercentage(loadingPercentage + 1);
-      }
-    }, 50);
-    return () => clearInterval(interval);
-  }, [loadingPercentage]);
+  // React.useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     if (loadingPercentage < 100) {
+  //       setLoadingPercentage(loadingPercentage + 1);
+  //     }
+  //   }, 50);
+  //   return () => clearInterval(interval);
+  // }, [loadingPercentage]);
 
-  if (score && loadingPercentage >= 100)
-    return (
-      <>
-        {!showAppointmentBooking ? (
-          <EvaluationScreen
-            score={score}
-            onSuccess={() => setShowAppointmentBooking(true)}
-          />
-        ) : (
-          <AppointmentBookingScreen userCalendlyLink={score.calendly} />
-        )}
-      </>
-    );
+  // if (score && loadingPercentage >= 100)
+  //   return (
+  //     <>
+  //       {!showAppointmentBooking ? (
+  //         <EvaluationScreen
+  //           score={score}
+  //           onSuccess={() => setShowAppointmentBooking(true)}
+  //         />
+  //       ) : (
+  //         <AppointmentBookingScreen userCalendlyLink={score.calendly} />
+  //       )}
+  //     </>
+  //   );
 
   return (
     <AnimateIn>
@@ -430,14 +427,15 @@ export const Result: React.FC = () => {
         flexGrow={1}
       >
         <FlexCol justifyContent="flex-end" flexGrow={0} flex={0.5}>
-          <Lottie
+          {/* <Lottie
             options={defaultOptions}
             height={300}
             width="100%"
             style={{ maxWidth: 400, marginLeft: 'auto' }}
             isStopped={false}
             isPaused={false}
-          />
+          /> */}
+          <Beam color="white" glow classes={styles.beam} />
         </FlexCol>
 
         <FlexCol
