@@ -167,6 +167,9 @@ const QuestionnaireLayout: React.FC<{
     0,
   );
 
+  console.log(currenQuestionPosition);
+  console.log(numberOfQuestionsInTotal);
+
   //RESULTS LOGIC
   const [score, setScore] = React.useState<{
     points: string;
@@ -279,6 +282,12 @@ const QuestionnaireLayout: React.FC<{
               hideHeader={isOnResultScreen ? false : true}
               hideBurger={isOnResultScreen ? false : true}
               staticExtended
+              indicator={
+                !isOnResultScreen && {
+                  current: currenQuestionPosition,
+                  total: numberOfQuestionsInTotal,
+                }
+              }
             />
           </GridItem>
 

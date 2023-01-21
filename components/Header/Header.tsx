@@ -26,6 +26,7 @@ export const Header = ({
   isLightHeader,
   hideBurger,
   staticExtended,
+  indicator,
 }) => {
   const [bigMenuOpen, setBigMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -131,6 +132,11 @@ export const Header = ({
               callBack={() => setBigMenuOpen(true)}
               bigMenuOpen={bigMenuOpen}
             />
+          </div>
+        )}
+        {indicator && (
+          <div className={styles.questionIndicator}>
+            Question {indicator.current} / {indicator.total}
           </div>
         )}
       </Container>
