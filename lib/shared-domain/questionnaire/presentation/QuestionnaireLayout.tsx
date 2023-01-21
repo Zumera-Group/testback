@@ -20,6 +20,7 @@ import BottomBar from 'components/Calculator/BottomBar/BottomBar';
 import { useGetSalesforceScore } from '../application/useGetQuestionnaireScore';
 import { ProgressBar } from 'components/Calculator/ProgressBar';
 import Image from 'next/image';
+import { LoadingCircle } from 'components/Icons/LoadingCircle';
 
 const t = getTranslateByScope('timeEstimation');
 const tSidebar = getTranslateByScope('sidebar');
@@ -239,7 +240,7 @@ const QuestionnaireLayout: React.FC<{
         </>
       );
     }
-    return <div style={{ color: 'white' }}>NO SCORE</div>;
+    return <LoadingCircle />;
   };
 
   return (
