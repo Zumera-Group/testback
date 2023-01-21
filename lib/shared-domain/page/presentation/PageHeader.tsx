@@ -11,6 +11,7 @@ interface Props {
   hideHeader?: boolean;
   isLightHeader?: boolean;
   hideBurger?: boolean;
+  staticExtended?: boolean;
 }
 
 export const PageHeader: React.FC<Props> = ({
@@ -21,6 +22,7 @@ export const PageHeader: React.FC<Props> = ({
   hideHeader,
   isLightHeader,
   hideBurger,
+  staticExtended,
 }) => {
   return (
     <Header
@@ -31,6 +33,7 @@ export const PageHeader: React.FC<Props> = ({
       hideHeader={hideHeader}
       isLightHeader={isLightHeader}
       hideBurger={hideBurger}
+      staticExtended={staticExtended}
     />
   );
 };

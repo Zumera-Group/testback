@@ -22,6 +22,7 @@ import { ProgressBar } from 'components/Calculator/ProgressBar';
 import Image from 'next/image';
 import { LoadingCircle } from 'components/Icons/LoadingCircle';
 import PageHeader from 'lib/shared-domain/page/presentation/PageHeader';
+import Header from 'components/Calculator/Header';
 
 const t = getTranslateByScope('timeEstimation');
 const tSidebar = getTranslateByScope('sidebar');
@@ -271,15 +272,14 @@ const QuestionnaireLayout: React.FC<{
       `}
         >
           <GridItem gridArea="header" className={styles.questionnaireHeader}>
-            {/* <Header siteSettings={siteSettings} /> */}
             <PageHeader
               contentModules={[]}
               siteSettings={siteSettings}
               darkBg
               hideHeader={isOnResultScreen ? false : true}
               hideBurger={isOnResultScreen ? false : true}
+              staticExtended
             />
-            {/* <p style={{ color: 'white' }}>hello there</p> */}
           </GridItem>
 
           {questionnaire && !isOnResultScreen && (
@@ -328,10 +328,10 @@ const QuestionnaireLayout: React.FC<{
           ></Box>
         </Grid>
       </PageTransition>
-      <BottomBar
+      {/* <BottomBar
         totalQuestions={numberOfQuestionsInTotal}
         currentStep={currenQuestionPosition}
-      />
+      /> */}
     </>
   );
 };

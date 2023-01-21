@@ -29,4 +29,7 @@
 
 .questionnaireHeader {
   margin-bottom: $gutter * 10;
+  & > * {
+    background-color: $primary;
+  }
 }

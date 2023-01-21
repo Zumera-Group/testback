@@ -15,6 +15,7 @@ import {
 } from 'lib/shared-domain/page/domain/contentModule';
 
 import styles from './Header.module.scss';
+import { LogoExtended } from 'components/Icons/LogoExtended';
 
 export const Header = ({
   siteSettings,
@@ -24,6 +25,7 @@ export const Header = ({
   hideHeader,
   isLightHeader,
   hideBurger,
+  staticExtended,
 }) => {
   const [bigMenuOpen, setBigMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -105,13 +107,17 @@ export const Header = ({
     >
       <Container classes={styles.container}>
         <div className={styles.logoWrapper}>
-          <Logo
-            slug={homeSlug}
-            isScrolled={isScrolled}
-            isLightPage={isLightPage()}
-            title={siteName}
-            isAnimated={true}
-          />
+          {!staticExtended ? (
+            <Logo
+              slug={homeSlug}
+              isScrolled={isScrolled}
+              isLightPage={isLightPage()}
+              title={siteName}
+              isAnimated={true}
+            />
+          ) : (
+            <LogoExtended slug={homeSlug} title={siteName} />
+          )}
         </div>
         {!hideHeader && <Menu navigation={headerMenu} />}
 
