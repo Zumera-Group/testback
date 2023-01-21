@@ -42,6 +42,7 @@
   position: absolute;
   right: 0;
   width: 50%;
+  opacity: 0;
   @include breakpoint-down(md) {
     @include divider('top', $primary);
     position: relative;
@@ -52,4 +53,5 @@
 
 .fadeId {
   animation: fadeIn 1s;
+  opacity: 1;
 }

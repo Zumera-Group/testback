@@ -41,7 +41,18 @@ export const Career: HeroComponent = ({ ...rest }) => {
                   {button.title}
                 </Button>
               )}
-              <Button variant={'secondary'} onDark={true}>
+              <Button
+                variant={'secondary'}
+                callBack={() => {
+                  window.Calendly.showPopupWidget(
+                    'https://calendly.com/saxenhammer/unternehmensbewertung',
+                  );
+                }}
+                // externalUrl={
+                //   'https://calendly.com/saxenhammer/unternehmensbewertung'
+                // }
+                onDark={true}
+              >
                 Book an appointment
               </Button>
             </div>

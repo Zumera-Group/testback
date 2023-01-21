@@ -59,6 +59,23 @@ function MyApp({ Component, pageProps, router }) {
       >
         <Component {...pageProps} key={router.pathname} />
       </IntercomProvider>
+
+      <Script
+        async
+        defer
+        // strategy="lazyOnload"
+        src="https://assets.calendly.com/assets/external/widget.js"
+      />
+      <Script
+        async
+        defer
+        id="ga-2"
+        dangerouslySetInnerHTML={{
+          __html: `Calendly.initInlineWidget({
+            url: 'https://calendly.com/saxenhammer'
+            });`,
+        }}
+      />
     </>
   );
 }

@@ -28,4 +28,11 @@
 .btnWrapper {
   display: block;
   margin: $btn-wrapper-margin-top 0 0 0;
+  button,
+  a {
+    margin-right: 2rem;
+    @include breakpoint-down(md) {
+      margin-bottom: 2rem;
+    }
+  }
 }
