@@ -1,29 +1,29 @@
 import React, { useEffect, useState } from 'react';
 import I18n from 'i18n-js';
 import { Box, Flex, Grid, GridItem } from '@chakra-ui/react';
-// import backgroundImage from '../../../../public/bkg.svg';
 import styles from './QuestionnaireLayout.module.scss';
 import { PageTransition } from 'components/PageTransition';
 import { SEO } from 'components/SEO';
 import { Question, Questionnaire } from '../domain/index';
 import { Sector, SiteSettings } from '../../page/domain/index';
-import { TimeEstimationBox } from './TimeEstimation';
 import { getTranslateByScope } from 'translation/i18n';
 import { useValuationStore } from '../store';
-import { colors } from 'styles/foundations/colors';
 import Header from './Header';
 import { QuestionComponent } from './Question/QuestionComponent';
 import Sidebar from './Sidebar';
-import { TextBoxGroup } from './TextBoxGroup';
 import { EnvironmentService } from 'environment.service';
 import { uuid } from 'uuidv4';
 import { qLogs } from '../application/log';
 import { useSalesforceAnswerSync } from '../application/useSalesforceAnswerSync';
 import { useRouter } from 'next/router';
 import BottomBar from 'components/Calculator/BottomBar/BottomBar';
+import { useGetSalesforceScore } from '../application/useGetQuestionnaireScore';
+import { ProgressBar } from 'components/Calculator/ProgressBar';
+import Image from 'next/image';
 
 const t = getTranslateByScope('timeEstimation');
 const tSidebar = getTranslateByScope('sidebar');
+const tr = getTranslateByScope('result');
 
 function useSetQuestionnaireLocaleToUseFori18n(locale: string) {
   useEffect(() => {
@@ -163,6 +163,96 @@ const QuestionnaireLayout: React.FC<{
     },
     0,
   );
+
+  //RESULTS LOGIC
+  const [score, setScore] = React.useState<{
+    points: string;
+    percentage: string;
+    calendly: string;
+    avg: number;
+  }>(null);
+  const [hasError, setHasError] = React.useState(false);
+  const { getScore } = useGetSalesforceScore();
+
+  React.useEffect(() => {
+    const loadScore = async () => {
+      try {
+        const score = await getScore();
+        setScore(score);
+        setHasError(false);
+      } catch (e) {
+        setHasError(true);
+      }
+    };
+    loadScore();
+  }, []);
+
+  const scoreCard = () => {
+    if (score) {
+      const presenter = {
+        hasPoints: () => {
+          if (score.points === '#N/A' || !score.points) return false;
+          return true;
+        },
+        getFormattedPoints: () => {
+          return score.points;
+        },
+        getPercentage: () => {
+          try {
+            return Math.floor(Number(score.percentage) * 100);
+          } catch (e) {
+            return '';
+          }
+        },
+      };
+      const hasScoreAndPercentage =
+        presenter.hasPoints() && presenter.getPercentage();
+      const points = tr('evaluation.resultBox.points', {
+        points: presenter.getFormattedPoints(),
+      });
+      const title = tr('evaluation.resultBox.title');
+      const betterThan = tr('evaluation.resultBox.betterThen', {
+        percentage: presenter.getPercentage(),
+      });
+      return (
+        <>
+          {hasScoreAndPercentage && (
+            <div className={styles.scoreCardWrapper}>
+              {/* <p style={{ color: 'white' }}>
+                {tr('evaluation.resultBox.title')}
+
+                {presenter.hasPoints() ? (
+                  <p>
+                    {tr('evaluation.resultBox.betterThen', {
+                      percentage: presenter.getPercentage(),
+                    })}
+                  </p>
+                ) : null}
+              </p> */}
+              <span className={styles.scoreCardTitle}>{title}</span>
+              <ProgressBar
+                isPoint
+                progress={points.substring(0, points.length - 2)}
+                color="gradient"
+              />
+              <p className={styles.betterThan}>{betterThan}</p>
+              <Image
+                unoptimized
+                loading="lazy"
+                objectFit="cover"
+                alt={'booklet'}
+                src={'/booklet.png'}
+                height={217}
+                width={217}
+              />
+            </div>
+          )}
+        </>
+      );
+    }
+    return <div style={{ color: 'white' }}>NO SCORE</div>;
+  };
+
   return (
     <>
       <SEO
@@ -193,13 +283,27 @@ const QuestionnaireLayout: React.FC<{
             <Header siteSettings={siteSettings} />
           </GridItem>
 
-          <GridItem
-            gridArea="sidebar"
-            display={{ base: 'none', lg: 'grid' }}
-            className={styles.sideBarWrapper}
-          >
-            {questionnaire && <Sidebar />}
-          </GridItem>
+          {questionnaire && !isOnResultScreen && (
+            <GridItem
+              gridArea="sidebar"
+              display={{ base: 'none', lg: 'grid' }}
+              className={styles.sideBarWrapper}
+            >
+              <Sidebar />
+              <p style={{ color: 'white' }}>TEST RHIS IS A TEST</p>
+            </GridItem>
+          )}
+
+          {isOnResultScreen && (
+            <GridItem
+              gridArea="sidebar"
+              display={{ base: 'none', lg: 'grid' }}
+              className={styles.sideBarWrapper}
+            >
+              {scoreCard()}
+            </GridItem>
+          )}
+
           <GridItem gridArea="question" mt={2}>
             <QuestionComponent
               sectorSpecificQuestions={sectorSpecificQuestions}

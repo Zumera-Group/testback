@@ -6,6 +6,7 @@ import {
   Flex,
   FormControl,
   FormErrorMessage,
+  GridItem,
   Progress,
 } from '@chakra-ui/react';
 import Image from 'next/image';
@@ -257,46 +258,9 @@ const EvaluationScreen: React.FC<{
         title={t('evaluation.title')}
         description={t('evaluation.description')}
       />
+
       <FlexCol maxWidth={700}>
         <Flex direction={{ base: 'column', lg: 'row' }} flexWrap="wrap">
-          {hasScoreAndPercentage && (
-            <FlexCol mb={2} flex={{ base: 1, lg: 0.4 }}>
-              <FlexCol
-                textAlign="center"
-                px={3}
-                py={2.5}
-                bgColor={colors.evaluationResultBg}
-              >
-                <P
-                  mb={2}
-                  letterSpacing="0.5px"
-                  fontSize={fontSizes.tiny}
-                  color={colors.text.light}
-                  fontWeight={fontWeights.semiBold}
-                  textTransform="uppercase"
-                >
-                  {t('evaluation.resultBox.title')}
-                </P>
-                <P
-                  mb={2}
-                  fontSize="70px"
-                  fontWeight={fontWeights.semiBold}
-                  color={colors.primary.lightGreen}
-                >
-                  {t('evaluation.resultBox.points', {
-                    points: Presenter.getFormattedPoints(),
-                  })}
-                </P>
-                {Presenter.hasPoints() ? (
-                  <P fontSize={fontSizes.h3} color={colors.text.light}>
-                    {t('evaluation.resultBox.betterThen', {
-                      percentage: Presenter.getPercentage(),
-                    })}
-                  </P>
-                ) : null}
-              </FlexCol>
-            </FlexCol>
-          )}
           <FlexCol
             ml={{ base: 0, lg: hasScoreAndPercentage ? 4 : 'auto' }}
             flex={{ base: 1, lg: 0.6 }}

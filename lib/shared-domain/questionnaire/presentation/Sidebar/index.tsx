@@ -69,7 +69,7 @@ const Sidebar = (): JSX.Element => {
 
   return (
     <>
-      <ProgressBar progress={progress} />
+      <ProgressBar progress={progress} isPercent color="white" />
       <VStack
         maxH="calc(100vh - 130px)"
         // w="100%"

@@ -8,3 +8,21 @@
   flex-direction: column;
   @include divider(right, $white);
 }
+.scoreCardWrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+  min-height: 80%;
+}
+
+.scoreCardTitle {
+  color: $white;
+  text-transform: uppercase;
+}
+
+.betterThan {
+  color: $white;
+  font-weight: $font-weight-bold;
+  text-align: left;
+}

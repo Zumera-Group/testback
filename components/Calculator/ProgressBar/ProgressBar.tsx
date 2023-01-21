@@ -2,9 +2,17 @@ import styles from './ProgressBar.module.scss';
 
 interface Props {
   progress: number;
+  isPercent?: boolean;
+  isPoint?: boolean;
+  color: 'white' | 'gradient';
 }
 
-export const ProgressBar: React.FC<Props> = ({ progress }) => {
+export const ProgressBar: React.FC<Props> = ({
+  progress,
+  isPercent,
+  isPoint,
+  color,
+}) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -19,6 +27,7 @@ export const ProgressBar: React.FC<Props> = ({ progress }) => {
         cy="96"
         strokeDashoffset={560 - (progress / 100) * 560}
         className={styles.progressCircle}
+        stroke={color === 'white' ? 'white' : 'url(#paint0_linear_1639_80025)'}
       />
 
       <path
@@ -28,9 +37,23 @@ export const ProgressBar: React.FC<Props> = ({ progress }) => {
         clipRule="evenodd"
       />
       <g className={styles.textWrapper}>
-        <text x="75" y="20">
-          {Math.round(progress)}%
-        </text>
+        {isPercent && (
+          <text x="75" y="20">
+            {Math.round(progress)}
+          </text>
+        )}
+
+        {isPoint && (
+          <>
+            <text x="75" y="12">
+              {progress}
+            </text>
+            <br />
+            <text className={styles.pointsTitle} x="75" y="45">
+              pts
+            </text>
+          </>
+        )}
       </g>
       <path
         fill="url(#b)"
@@ -46,10 +69,11 @@ export const ProgressBar: React.FC<Props> = ({ progress }) => {
           y1="96"
           y2="96"
           gradientUnits="userSpaceOnUse"
+          gradientTransform="rotate(90)"
         >
-          <stop stopColor="#fff" stopOpacity="0"></stop>
-          <stop offset="0.5" stopColor="#fff"></stop>
-          <stop offset="1" stopColor="#fff" stopOpacity="0"></stop>
+          <stop stopColor="#ffffff" stopOpacity="0"></stop>
+          <stop offset="0.5" stopColor="#ffffff"></stop>
+          <stop offset="1" stopColor="#ffffff" stopOpacity="0"></stop>
         </linearGradient>
         <linearGradient
           id="b"
@@ -58,11 +82,28 @@ export const ProgressBar: React.FC<Props> = ({ progress }) => {
           y1="96"
           y2="96"
           gradientUnits="userSpaceOnUse"
+          gradientTransform="rotate(90)"
         >
-          <stop stopColor="#fff" stopOpacity="0"></stop>
-          <stop offset="0.5" stopColor="#fff"></stop>
-          <stop offset="1" stopColor="#fff" stopOpacity="0"></stop>
+          <stop stopColor="#ffffff" stopOpacity="0"></stop>
+          <stop offset="0.5" stopColor="#ffffff"></stop>
+          <stop offset="1" stopColor="#ffffff" stopOpacity="0"></stop>
         </linearGradient>
+        {color === 'gradient' && (
+          <linearGradient
+            id="paint0_linear_1639_80025"
+            x1="-81"
+            y1="162"
+            x2="118.846"
+            y2="256.09"
+            gradientUnits="userSpaceOnUse"
+            gradientTransform="rotate(90)"
+          >
+            <stop stopColor="#F0005C" />
+            <stop offset="0.265625" stopColor="#930075" />
+            <stop offset="0.734375" stopColor="#400044" />
+            <stop offset="1" stopColor="#300032" />
+          </linearGradient>
+        )}
       </defs>
     </svg>
   );
