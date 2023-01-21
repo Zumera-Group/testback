@@ -328,10 +328,6 @@ const QuestionnaireLayout: React.FC<{
           ></Box>
         </Grid>
       </PageTransition>
-      {/* <BottomBar
-        totalQuestions={numberOfQuestionsInTotal}
-        currentStep={currenQuestionPosition}
-      /> */}
     </>
   );
 };
