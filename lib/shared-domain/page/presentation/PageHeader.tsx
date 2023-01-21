@@ -10,6 +10,7 @@ interface Props {
   otherLangSlug?: string;
   hideHeader?: boolean;
   isLightHeader?: boolean;
+  hideBurger?: boolean;
 }
 
 export const PageHeader: React.FC<Props> = ({
@@ -19,6 +20,7 @@ export const PageHeader: React.FC<Props> = ({
   otherLangSlug,
   hideHeader,
   isLightHeader,
+  hideBurger,
 }) => {
   return (
     <Header
@@ -27,7 +29,9 @@ export const PageHeader: React.FC<Props> = ({
       darkBg={darkBg}
       otherLangSlug={otherLangSlug}
       hideHeader={hideHeader}
-      isLightHeader={isLightHeader} />
+      isLightHeader={isLightHeader}
+      hideBurger={hideBurger}
+    />
   );
 };
 

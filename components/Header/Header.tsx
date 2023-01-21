@@ -23,6 +23,7 @@ export const Header = ({
   otherLangSlug,
   hideHeader,
   isLightHeader,
+  hideBurger,
 }) => {
   const [bigMenuOpen, setBigMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -113,16 +114,19 @@ export const Header = ({
           />
         </div>
         {!hideHeader && <Menu navigation={headerMenu} />}
-        <div className={styles.actionsWrapper}>
-          <LanguageSwitcher
-            otherLangSlug={otherLangSlug}
-            classes={styles.languageSelector}
-          />
-          <Hamburger
-            callBack={() => setBigMenuOpen(true)}
-            bigMenuOpen={bigMenuOpen}
-          />
-        </div>
+
+        {!hideBurger && (
+          <div className={styles.actionsWrapper}>
+            <LanguageSwitcher
+              otherLangSlug={otherLangSlug}
+              classes={styles.languageSelector}
+            />
+            <Hamburger
+              callBack={() => setBigMenuOpen(true)}
+              bigMenuOpen={bigMenuOpen}
+            />
+          </div>
+        )}
       </Container>
       <AnimatePresence exitBeforeEnter>
         {bigMenuOpen && (
