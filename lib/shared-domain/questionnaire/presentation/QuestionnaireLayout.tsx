@@ -270,15 +270,16 @@ const QuestionnaireLayout: React.FC<{
       'sidebar   footer  .   '
       `}
         >
-          <GridItem gridArea="header">
+          <GridItem gridArea="header" className={styles.questionnaireHeader}>
             {/* <Header siteSettings={siteSettings} /> */}
             <PageHeader
               contentModules={[]}
               siteSettings={siteSettings}
               darkBg
-              hideHeader
-              hideBurger
+              hideHeader={isOnResultScreen ? false : true}
+              hideBurger={isOnResultScreen ? false : true}
             />
+            {/* <p style={{ color: 'white' }}>hello there</p> */}
           </GridItem>
 
           {questionnaire && !isOnResultScreen && (
