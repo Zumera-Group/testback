@@ -390,28 +390,28 @@ export const Result: React.FC = () => {
     loadScore();
   }, []);
 
-  // React.useEffect(() => {
-  //   const interval = setInterval(() => {
-  //     if (loadingPercentage < 100) {
-  //       setLoadingPercentage(loadingPercentage + 1);
-  //     }
-  //   }, 50);
-  //   return () => clearInterval(interval);
-  // }, [loadingPercentage]);
+  React.useEffect(() => {
+    const interval = setInterval(() => {
+      if (loadingPercentage < 100) {
+        setLoadingPercentage(loadingPercentage + 1);
+      }
+    }, 50);
+    return () => clearInterval(interval);
+  }, [loadingPercentage]);
 
-  // if (score && loadingPercentage >= 100)
-  //   return (
-  //     <>
-  //       {!showAppointmentBooking ? (
-  //         <EvaluationScreen
-  //           score={score}
-  //           onSuccess={() => setShowAppointmentBooking(true)}
-  //         />
-  //       ) : (
-  //         <AppointmentBookingScreen userCalendlyLink={score.calendly} />
-  //       )}
-  //     </>
-  //   );
+  if (score && loadingPercentage >= 100)
+    return (
+      <>
+        {!showAppointmentBooking ? (
+          <EvaluationScreen
+            score={score}
+            onSuccess={() => setShowAppointmentBooking(true)}
+          />
+        ) : (
+          <AppointmentBookingScreen userCalendlyLink={score.calendly} />
+        )}
+      </>
+    );
 
   return (
     <AnimateIn>

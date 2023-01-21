@@ -157,12 +157,12 @@ export const QuestionComponent: React.FC<{
         questionnaire?.sectorSpecific?.sectorSpecificBeginOrEnd === 'after' &&
         industry
       ) {
-        // return (
-        //   <SectorSpecificEntry
-        //     onNextQuestion={onNextQuestion}
-        //     industry={industry?.name}
-        //   />
-        // );
+        return (
+          <SectorSpecificEntry
+            onNextQuestion={onNextQuestion}
+            industry={industry?.name}
+          />
+        );
       } else {
         qLogs('Going to result screen');
         setIsOnResultScreen(true);

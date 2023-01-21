@@ -2,10 +2,11 @@ import { Btn } from 'components/Buttons/Button';
 import useBreakpointValue from 'lib/shared-domain/useBreakpoint';
 
 import { motion, AnimatePresence } from 'framer-motion';
-import { FlexCol } from 'components/Layout/Flex/Flex';
+import { FlexCol, FlexRow } from 'components/Layout/Flex/Flex';
 import { getTranslateByScope } from 'translation/i18n';
 import { useValuationStore } from '../../store';
 import { Button } from 'components/Button/Button';
+import styles from './QuestionButtons.module.scss';
 
 const t = getTranslateByScope('question');
 
@@ -44,7 +45,7 @@ export const QuestionButtons: React.FC<{
           variants={animationVariants}
           style={{ width: '100%' }}
         >
-          <FlexCol mt={2} mb={2} alignItems="center">
+          <FlexRow mt={2} mb={2} alignItems="center" justifyContent={'center'}>
             {onFinishQuestionnaire && (
               <Button
                 aria-label="Finish questionnaire button"
@@ -52,6 +53,7 @@ export const QuestionButtons: React.FC<{
                 callBack={onFinishQuestionnaire}
                 onDark
                 hideIcon
+                classes={styles.questionButton}
               >
                 {secondButtonText}
               </Button>
@@ -63,6 +65,7 @@ export const QuestionButtons: React.FC<{
               variant={'primary'}
               callBack={onNextQuestion}
               onDark={onFinishQuestionnaire ? false : true}
+              classes={styles.questionButton}
             >
               {firstButtonText || t('nextBtn')}
             </Button>
@@ -75,11 +78,12 @@ export const QuestionButtons: React.FC<{
                 hideIcon
                 callBack={onNextQuestion}
                 type={'button'}
+                classes={styles.questionButton}
               >
                 {t('skipBtn')}
               </Button>
             )}
-          </FlexCol>
+          </FlexRow>
         </motion.div>
       )}
     </AnimatePresence>

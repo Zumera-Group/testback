@@ -39,7 +39,7 @@ export const ProgressBar: React.FC<Props> = ({
       <g className={styles.textWrapper}>
         {isPercent && (
           <text x="75" y="20">
-            {Math.round(progress)}
+            {Math.round(progress)}%
           </text>
         )}
 
