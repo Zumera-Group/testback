@@ -218,17 +218,6 @@ const QuestionnaireLayout: React.FC<{
         <>
           {hasScoreAndPercentage && (
             <div className={styles.scoreCardWrapper}>
-              {/* <p style={{ color: 'white' }}>
-                {tr('evaluation.resultBox.title')}
-
-                {presenter.hasPoints() ? (
-                  <p>
-                    {tr('evaluation.resultBox.betterThen', {
-                      percentage: presenter.getPercentage(),
-                    })}
-                  </p>
-                ) : null}
-              </p> */}
               <span className={styles.scoreCardTitle}>{title}</span>
               <ProgressBar
                 isPoint
