@@ -1,6 +1,7 @@
 import { Home, Primary } from 'components/Hero';
 import { Transactions } from 'components/Hero/Transactions';
 import { AnchorHero } from 'components/Hero/AnchorHero/AnchorHero';
+import { Career } from 'components/Hero/Career';
 
 interface Props {
   type?: string;
@@ -12,7 +13,7 @@ export const Hero: React.FC<Props> = ({ allPageContent, ...rest }) => {
   const types = {
     home: <Home {...rest} />,
     primary: <Primary {...rest} />,
-    // secondary: <div>Secondary hero</div>,
+    career: <Career {...rest} />,
     transaction: <Transactions {...rest} />,
     anchor: <AnchorHero allPageContent={allPageContent} {...rest} />,
   };

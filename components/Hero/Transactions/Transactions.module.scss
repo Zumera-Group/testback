@@ -1,5 +1,8 @@
 .hero {
   margin-top: calc(var(--header-height) * -1);
+  @include breakpoint-down(md) {
+    padding-bottom: 0 !important;
+  }
 }
 
 .container {
@@ -24,4 +27,29 @@
   p {
     max-width: 80%;
   }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.animationImage {
+  position: absolute;
+  right: 0;
+  width: 50%;
+  @include breakpoint-down(md) {
+    @include divider('top', $primary);
+    position: relative;
+    margin-top: 2rem;
+    width: 100%;
+  }
+}
+
+.fadeId {
+  animation: fadeIn 1s;
 }

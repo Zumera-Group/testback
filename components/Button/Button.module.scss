@@ -83,6 +83,14 @@
       $black,
       none
     );
+    svg {
+      color: $secondary;
+    }
+    @include hover-state() {
+      svg {
+        fill: $white;
+      }
+    }
   }
 
   &__secondary {

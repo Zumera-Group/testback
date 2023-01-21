@@ -4,10 +4,9 @@ import { Button } from 'components/Button';
 import { SanityBlockContent } from 'components/SanityBlockContent';
 
 import baseStyles from '../Hero.module.scss';
-import styles from './Transactions.module.scss';
-import { AnimatedHeroImage } from 'components/Hero/Transactions/AnimatedHeroImage';
+import styles from './Career.module.scss';
 
-export const Transactions: HeroComponent = ({ ...rest }) => {
+export const Career: HeroComponent = ({ ...rest }) => {
   const { title, title2, description, button, heroImage } = rest;
 
   return (
@@ -15,7 +14,8 @@ export const Transactions: HeroComponent = ({ ...rest }) => {
       as={'div'}
       classes={[baseStyles.hero, styles.hero].join(' ')}
       size={'xl'}
-      color={'primary'}
+      bg={'primary'}
+      color={'white'}
     >
       <Container classes={styles.container}>
         <Grid
@@ -25,8 +25,8 @@ export const Transactions: HeroComponent = ({ ...rest }) => {
         >
           <GridColumn
             sm={12}
-            md={7}
-            lg={7}
+            md={8}
+            lg={8}
             className={styles.primaryDescription}
           >
             <h1 className={styles.title}>
@@ -34,19 +34,22 @@ export const Transactions: HeroComponent = ({ ...rest }) => {
               {title2 && <span>{title2}</span>}
             </h1>
             <SanityBlockContent text={description} />
-            {button?.title && (
-              <div className={baseStyles.btnWrapper}>
+
+            <div className={baseStyles.btnWrapper}>
+              {button?.title && (
                 <Button {...button} onDark={true}>
                   {button.title}
                 </Button>
-              </div>
-            )}
+              )}
+              <Button variant={'secondary'} onDark={true}>
+                Book an appointment
+              </Button>
+            </div>
           </GridColumn>
-          <AnimatedHeroImage />
         </Grid>
       </Container>
     </Section>
   );
 };
 
-export default Transactions;
+export default Career;
