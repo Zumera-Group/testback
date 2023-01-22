@@ -3,10 +3,10 @@ import { InlineWidget } from 'react-calendly';
 import * as EmailValidator from 'email-validator';
 
 import {
-  Checkbox,
   Flex,
   FormControl,
   FormErrorMessage,
+  GridItem,
   Progress,
 } from '@chakra-ui/react';
 import Image from 'next/image';
@@ -18,19 +18,22 @@ import { colors } from 'styles/foundations/colors';
 import { getTranslateByScope } from 'translation/i18n';
 import { QuestionText } from '../Question/QuestionText';
 import { motion } from 'framer-motion';
-import { Btn } from 'components/Buttons/Button';
+import { Button } from 'components/Button';
+import styles from './Result.module.scss';
 import {
   fontSizes,
   fontWeights,
 } from '../../../../../styles/foundations/fontStyles';
 import { useValuationStore } from '../../store';
 import { InputWithLabelAndError } from 'components/Inputs';
+import { Checkbox } from 'components/Form/Checkbox/';
 import { useGetSalesforceScore } from '../../application/useGetQuestionnaireScore';
 import { useSalesforceAnswerSync } from '../../application/useSalesforceAnswerSync';
 import { qLogs } from '../../application/log';
 import Lottie from 'react-lottie';
 import * as animationData from './loading.json';
 import { useRouter } from 'next/router';
+import { Beam } from 'components/Beam';
 
 const t = getTranslateByScope('result');
 
@@ -115,35 +118,9 @@ const LoadingText: React.FC<{ isLoading: boolean; title: string }> = ({
   title,
 }) => {
   return (
-    <P
-      color={isLoading ? colors.primary.darkGreen : colors.text.regular}
-      mb={3}
-      fontSize="h3"
-    >
+    <p className={isLoading ? styles.loadingText__active : styles.loadingText}>
       {title}
-    </P>
-  );
-};
-
-const ImageRow: React.FC = () => {
-  return (
-    <FlexCol flex={1}>
-      <P mb={4} fontSize="h3" textAlign="center">
-        {t('logoTitle')}
-      </P>
-      <Flex
-        direction={{ base: 'column', lg: 'row' }}
-        justifyContent="center"
-        alignItems="center"
-      >
-        <Box flex={1} mr={{ base: 0, lg: 2 }}>
-          <Image unoptimized alt="" src={firstLogoRowImage} />
-        </Box>
-        <Box flex={1} ml={{ base: 0, lg: 2 }} pb={{ base: 0, lg: 2 }}>
-          <Image unoptimized alt="" src={secondLogoRowImage} />
-        </Box>
-      </Flex>
-    </FlexCol>
+    </p>
   );
 };
 
@@ -197,9 +174,6 @@ const AppointmentBookingScreen: React.FC<{ userCalendlyLink?: string }> = ({
         url={process.env.NEXT_PUBLIC_CALENDLY_LINK}
         prefill={prefill}
       />
-      <Box>
-        <ImageRow />
-      </Box>
     </AnimateIn>
   );
 };
@@ -281,46 +255,9 @@ const EvaluationScreen: React.FC<{
         title={t('evaluation.title')}
         description={t('evaluation.description')}
       />
-      <FlexCol maxWidth={700} mx="auto">
+
+      <FlexCol maxWidth={700}>
         <Flex direction={{ base: 'column', lg: 'row' }} flexWrap="wrap">
-          {hasScoreAndPercentage && (
-            <FlexCol mb={2} flex={{ base: 1, lg: 0.4 }}>
-              <FlexCol
-                textAlign="center"
-                px={3}
-                py={2.5}
-                bgColor={colors.evaluationResultBg}
-              >
-                <P
-                  mb={2}
-                  letterSpacing="0.5px"
-                  fontSize={fontSizes.tiny}
-                  color={colors.text.light}
-                  fontWeight={fontWeights.semiBold}
-                  textTransform="uppercase"
-                >
-                  {t('evaluation.resultBox.title')}
-                </P>
-                <P
-                  mb={2}
-                  fontSize="70px"
-                  fontWeight={fontWeights.semiBold}
-                  color={colors.primary.lightGreen}
-                >
-                  {t('evaluation.resultBox.points', {
-                    points: Presenter.getFormattedPoints(),
-                  })}
-                </P>
-                {Presenter.hasPoints() ? (
-                  <P fontSize={fontSizes.h3} color={colors.text.light}>
-                    {t('evaluation.resultBox.betterThen', {
-                      percentage: Presenter.getPercentage(),
-                    })}
-                  </P>
-                ) : null}
-              </FlexCol>
-            </FlexCol>
-          )}
           <FlexCol
             ml={{ base: 0, lg: hasScoreAndPercentage ? 4 : 'auto' }}
             flex={{ base: 1, lg: 0.6 }}
@@ -338,6 +275,7 @@ const EvaluationScreen: React.FC<{
               onChange={(value) =>
                 setAnswer({ id: NAME_STORE_INDICATOR, value })
               }
+              isRequired
             />
 
             <InputWithLabelAndError
@@ -348,6 +286,7 @@ const EvaluationScreen: React.FC<{
               onChange={(value) =>
                 setAnswer({ id: EMAIL_STORE_INDICATOR, value })
               }
+              isRequired
             />
             <InputWithLabelAndError
               error={
@@ -361,18 +300,16 @@ const EvaluationScreen: React.FC<{
               onChange={(value) =>
                 setAnswer({ id: PHONE_NUMBER_STORE_INDICATOR, value })
               }
+              isRequired
             />
 
             <FormControl isInvalid={pressed && !checkboxIsChecked}>
               <Checkbox
                 onChange={(e) => setCheckboxIsChecked(e.target.checked)}
                 isChecked={checkboxIsChecked}
-                colorScheme="primary"
-                alignItems="flex-start"
-                borderColor={colors.primary.darkGreen}
-                iconColor="white"
+                id="result_checkBox"
               >
-                <Box color="black" textAlign="left" mt={-0.5}>
+                <Box color="white" textAlign="left" mt={-0.5}>
                   <span>{t('evaluation.form.checkbox.first')}</span>
                   <a
                     style={{
@@ -390,25 +327,25 @@ const EvaluationScreen: React.FC<{
                 </Box>
               </Checkbox>
               {pressed && !checkboxIsChecked && (
-                <FormErrorMessage mt={0.5}>
+                <FormErrorMessage mt={20} mb={20} color={'white'}>
                   {t('evaluation.form.checkboxError')}
                 </FormErrorMessage>
               )}
             </FormControl>
-            <Btn
-              disabled={!checkboxIsChecked}
-              mt={3}
+            <Button
+              type="submit"
               variant="primary"
-              onClick={onSend}
+              callBack={onSend}
+              disabled={!checkboxIsChecked}
+              onDark
+              hideIcon
+              classes={styles.submitButton}
             >
               {t('evaluation.form.button')}
-            </Btn>
+            </Button>
           </FlexCol>
         </Flex>
       </FlexCol>
-      <Box mt={10} mb={2}>
-        <ImageRow />
-      </Box>
     </AnimateIn>
   );
 };
@@ -490,14 +427,15 @@ export const Result: React.FC = () => {
         flexGrow={1}
       >
         <FlexCol justifyContent="flex-end" flexGrow={0} flex={0.5}>
-          <Lottie
+          {/* <Lottie
             options={defaultOptions}
             height={300}
             width="100%"
             style={{ maxWidth: 400, marginLeft: 'auto' }}
             isStopped={false}
             isPaused={false}
-          />
+          /> */}
+          <Beam color="white" glow classes={styles.beam} />
         </FlexCol>
 
         <FlexCol
@@ -524,9 +462,6 @@ export const Result: React.FC = () => {
           />
         </FlexCol>
       </Flex>
-      <Box mt={10} mb={2}>
-        <ImageRow />
-      </Box>
     </AnimateIn>
   );
 };

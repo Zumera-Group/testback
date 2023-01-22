@@ -1,0 +1,18 @@
+.submitButton {
+  max-width: max-content;
+  margin-top: $gutter * 2;
+  align-self: center;
+}
+
+.beam {
+  max-width: 15rem;
+  margin: auto;
+}
+
+.loadingText {
+  color: $white;
+
+  &__active {
+    color: $accent;
+  }
+}
