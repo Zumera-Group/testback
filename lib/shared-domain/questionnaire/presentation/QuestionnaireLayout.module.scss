@@ -9,7 +9,7 @@
   @include breakpoint-up(md) {
     grid-template-areas:
       'header header header'
-      'sidebar question aside'
+      'sidebar question question'
       'sidebar   footer  .   ';
   }
   padding-bottom: $gutter * 2;
@@ -31,7 +31,7 @@
 }
 
 .questionWrapper {
-  width: 100%;
+  max-width: 1000px;
   margin: $gutter * 1.5;
 }
 .scoreCardWrapper {

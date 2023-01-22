@@ -47,7 +47,7 @@ export const MultiTextInput: React.FC<{
       <QuestionText title={question.questionText} />
 
       <QuestionAnimation>
-        <VStack maxW={400} align="stretch" spacing={'3rem'} mb={!isMobile && 5}>
+        <VStack align="stretch" spacing={'3rem'} mb={!isMobile && 5}>
           {question.answerSelector.multiTextInput?.map((field, index) => (
             <VStack key={index} align="stretch">
               <P variant="multiTextInputP" color={'white'} mb={2}>
