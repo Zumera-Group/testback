@@ -10,6 +10,7 @@ import { QuestionButtons } from '../../Question/QuestionButtons';
 import { P } from '../../../../../../components/Typography/P';
 import { useEffect } from 'react';
 import { QuestionAnimation } from '../../Question/QuestionAnimation';
+import styles from './MultiTextInput.module.scss';
 
 const t = getTranslateByScope('answerTypes.textInput');
 const placeholder = t('basePlaceholder');
@@ -47,9 +48,28 @@ export const MultiTextInput: React.FC<{
       <QuestionText title={question.questionText} />
 
       <QuestionAnimation>
-        <VStack maxW={400} align="stretch" spacing={'3rem'} mb={!isMobile && 5}>
+        {/* <VStack align="stretch" spacing={'3rem'} mb={!isMobile && 5}>
           {question.answerSelector.multiTextInput?.map((field, index) => (
             <VStack key={index} align="stretch">
+              <>
+                <P variant="multiTextInputP" color={'white'} mb={2}>
+                  {field.fieldTitle}
+                </P>
+                <Input
+                  value={answers[index]}
+                  onChange={(e) => onChange(e, index)}
+                  placeholder={field.fieldPlaceholder || placeholder}
+                  type={'text'}
+                  id={`${index}`}
+                  hideLabel
+                />
+              </>
+            </VStack>
+          ))}
+        </VStack> */}
+        <div className={styles.multiTextInputWrapper}>
+          {question.answerSelector.multiTextInput?.map((field, index) => (
+            <VStack key={index} align="stretch" className={styles.inputItem}>
               <P variant="multiTextInputP" color={'white'} mb={2}>
                 {field.fieldTitle}
               </P>
@@ -63,7 +83,7 @@ export const MultiTextInput: React.FC<{
               />
             </VStack>
           ))}
-        </VStack>
+        </div>
       </QuestionAnimation>
 
       <QuestionButtons
