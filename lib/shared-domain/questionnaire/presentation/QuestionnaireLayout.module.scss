@@ -12,17 +12,27 @@
       'sidebar question aside'
       'sidebar   footer  .   ';
   }
+  padding-bottom: $gutter * 2;
 }
 
 .sideBarWrapper {
   display: flex;
   align-items: center;
   flex-direction: column;
-  @include divider(right, $white);
+  padding: $gutter;
+
+  @include breakpoint-up(md) {
+    @include divider(right, $white);
+  }
   @include breakpoint-up(lg) {
     max-width: 440px;
     min-height: 700px;
   }
+}
+
+.questionWrapper {
+  width: 100%;
+  margin: $gutter * 1.5;
 }
 .scoreCardWrapper {
   display: flex;
@@ -46,6 +56,6 @@
 .questionnaireHeader {
   margin-bottom: $gutter * 10;
   & > * {
-    background-color: $primary;
+    background-color: $primary !important;
   }
 }

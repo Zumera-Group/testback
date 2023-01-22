@@ -261,7 +261,6 @@ const QuestionnaireLayout: React.FC<{
           className={styles.questionnaireWrapper}
           h="100%"
           w="100%"
-          p={3}
           overflowY="scroll"
           height="100vh"
           gridTemplateColumns={{ base: '0% 100% 0%', lg: '20% 60% 20%' }}
@@ -304,7 +303,11 @@ const QuestionnaireLayout: React.FC<{
             </GridItem>
           )}
 
-          <GridItem gridArea="question" margin={'auto'}>
+          <GridItem
+            gridArea="question"
+            // margin={'auto'}
+            className={styles.questionWrapper}
+          >
             <QuestionComponent
               sectorSpecificQuestions={sectorSpecificQuestions}
               sectors={sectors}
