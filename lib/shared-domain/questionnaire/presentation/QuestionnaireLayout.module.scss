@@ -6,7 +6,7 @@
     'question question question'
     'footer footer footer';
 
-  @include breakpoint-up(lg) {
+  @include breakpoint-up(md) {
     grid-template-areas:
       'header header header'
       'sidebar question aside'
@@ -19,6 +19,10 @@
   align-items: center;
   flex-direction: column;
   @include divider(right, $white);
+  @include breakpoint-up(lg) {
+    max-width: 440px;
+    min-height: 700px;
+  }
 }
 .scoreCardWrapper {
   display: flex;
