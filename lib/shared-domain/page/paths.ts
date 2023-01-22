@@ -7,6 +7,7 @@ export const enPaths = [
   'news',
   'cdi-global',
   'career',
+  'imprint',
 ];
 
 export const dePaths = [
@@ -18,4 +19,5 @@ export const dePaths = [
   'news',
   'cdi-global',
   'karriere',
+  'impressum',
 ];

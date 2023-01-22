@@ -56,10 +56,14 @@ export const ServiceHelpContactPersonSection: React.FC<IProps> = ({
           <GridColumn xs={12} sm={6} md={6} lg={6}>
             <div className={styles.contactPerson}>
               <p className={styles.cardTitle}>{cardTitle}</p>
-              <H variant={'h4'} color={'white'} className={styles.name}>
-                {employee.title} {employee.firstName} {employee.lastName}
-              </H>
-              <p className={styles.jobTitle}>{employee.jobTitle}</p>
+              {employee ? (
+                <>
+                  <H variant={'h4'} color={'white'} className={styles.name}>
+                    {employee.title} {employee.firstName} {employee.lastName}
+                  </H>
+                  <p className={styles.jobTitle}>{employee.jobTitle}</p>
+                </>
+              ) : null}
               {appointmentLinkUrl && linkText && (
                 <Link passHref href={appointmentLinkUrl}>
                   <a className={styles.bookLink}>

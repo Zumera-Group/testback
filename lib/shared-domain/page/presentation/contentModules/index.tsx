@@ -40,6 +40,7 @@ import {
   LandingPageOurPromiseSectionModule,
   BrandOverviewSectionModule,
   ReferralSectionModule,
+  AnchoredTextSectionModule,
 } from '../../domain/contentModule';
 
 import {
@@ -123,12 +124,23 @@ import { LandingRoadmap } from './LandingRoadmap';
 import { LandingPageOurPromiseSection } from './LandingPageOurPromiseSection';
 import { BrandOverviewSection } from 'lib/shared-domain/valuation-tool/presentation/BrandOverviewSection';
 import { ReferralSection } from 'lib/shared-domain/valuation-tool/presentation/ReferralSection';
+import { AnchoredTextSection } from 'components/AnchoredTextSection/AnchoredTextSection';
 
 export const getContentForContentModule = (
   contentModule: ContentModule,
   siteSettings: any,
   sharedContent?: any,
+  allModulesData?: any,
 ): JSX.Element => {
+  if (
+    contentModule.specificContentModule instanceof AnchoredTextSectionModule
+  ) {
+    return (
+      <AnchoredTextSection
+        specificContentModule={contentModule.specificContentModule}
+      />
+    );
+  }
   if (
     contentModule.specificContentModule instanceof EmployeeCarouselSectionModule
   ) {
@@ -210,6 +222,7 @@ export const getContentForContentModule = (
     return (
       <HeroSection
         specificContentModule={contentModule.specificContentModule}
+        allPageContent={allModulesData}
       />
     );
   }
