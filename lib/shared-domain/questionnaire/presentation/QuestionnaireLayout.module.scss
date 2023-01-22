@@ -32,7 +32,11 @@
 
 .questionWrapper {
   max-width: 1000px;
-  margin: $gutter * 1.5;
+  margin: $gutter * 1.5 $gutter;
+
+  @include breakpoint-up(md) {
+    margin: $gutter * 1.5 $gutter * 4;
+  }
 }
 .scoreCardWrapper {
   display: flex;
