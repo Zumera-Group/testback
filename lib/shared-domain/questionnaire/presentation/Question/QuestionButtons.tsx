@@ -23,6 +23,7 @@ export const QuestionButtons: React.FC<{
   secondButtonText?: string;
   isRequired: boolean;
   isAnswered: boolean;
+  btnAlignLeft?: boolean;
 }> = ({
   onNextQuestion,
   firstButtonText,
@@ -30,6 +31,7 @@ export const QuestionButtons: React.FC<{
   onFinishQuestionnaire,
   isRequired,
   isAnswered,
+  btnAlignLeft,
 }) => {
   const { isFirstQuestion, isFadingOut } = useValuationStore();
 
@@ -45,7 +47,12 @@ export const QuestionButtons: React.FC<{
           variants={animationVariants}
           style={{ width: '100%' }}
         >
-          <FlexRow mt={2} mb={2} alignItems="center" justifyContent={'center'}>
+          <FlexRow
+            mt={2}
+            mb={2}
+            alignItems="center"
+            justifyContent={btnAlignLeft ? 'start' : 'center'}
+          >
             {onFinishQuestionnaire && (
               <Button
                 aria-label="Finish questionnaire button"

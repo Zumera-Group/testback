@@ -41,6 +41,7 @@ export const TextInput: React.FC<{
         onNextQuestion={onNextQuestion}
         isRequired={question?.isRequired}
         isAnswered={getAnswer()}
+        btnAlignLeft
       />
     </>
   );

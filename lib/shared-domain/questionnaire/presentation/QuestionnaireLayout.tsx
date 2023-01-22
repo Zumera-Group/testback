@@ -266,10 +266,6 @@ const QuestionnaireLayout: React.FC<{
           height="100vh"
           gridTemplateColumns={{ base: '0% 100% 0%', lg: '20% 60% 20%' }}
           gridTemplateRows={{ base: '7% 93% 0%', lg: '10% 75% 15%' }}
-          templateAreas={`'header header header'
-      'sidebar question aside'
-      'sidebar   footer  .   '
-      `}
         >
           <GridItem gridArea="header" className={styles.questionnaireHeader}>
             <PageHeader
@@ -295,7 +291,6 @@ const QuestionnaireLayout: React.FC<{
               className={styles.sideBarWrapper}
             >
               <Sidebar />
-              <p style={{ color: 'white' }}>TEST RHIS IS A TEST</p>
             </GridItem>
           )}
 
@@ -309,7 +304,7 @@ const QuestionnaireLayout: React.FC<{
             </GridItem>
           )}
 
-          <GridItem gridArea="question" mt={2}>
+          <GridItem gridArea="question" margin={'auto'}>
             <QuestionComponent
               sectorSpecificQuestions={sectorSpecificQuestions}
               sectors={sectors}

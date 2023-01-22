@@ -13,6 +13,8 @@ import { TextBoxGroup } from './TextBoxGroup';
 import resultTeaser from '../../../../public/contentModules/calculatorTeaserSection/result_teaser.svg';
 import { FlexCol } from '../../../../components/Layout/Flex/Flex';
 import { useRouter } from 'next/router';
+import { Beam } from 'components/Beam';
+import styles from './CalculatorTeaser.module.scss';
 
 const LineSpacerMobile = () => {
   return (
@@ -25,18 +27,10 @@ const LineSpacerMobile = () => {
   );
 };
 
-const TeaserBoxDesktop: React.FC<{ borderColor: string }> = ({
-  borderColor,
-  children,
-}) => {
+const TeaserBoxDesktop: React.FC<{}> = ({ children }) => {
   const BOX_SPACE_HEIGHT = '25%';
   return (
     <FlexRow h={BOX_SPACE_HEIGHT}>
-      <Box
-        w={8}
-        mr={{ md: 6, lg: 5 }}
-        borderBottom={`1px solid ${borderColor}`}
-      ></Box>
       <Flex align="center" justify="center">
         {children}
       </Flex>
@@ -66,39 +60,48 @@ export const ResultTeaser: React.FC<{
       py={isMobile ? 5 : 7}
       w={isMobileOrisSectorSpecificEntry ? '100%' : '60%'}
       mt={isMobile ? 8 : 0}
-      justify={isMobileOrisSectorSpecificEntry ? 'center' : 'flex-start'}
+      justify={isMobileOrisSectorSpecificEntry ? 'flex-start' : 'flex-start'}
     >
       {resultTeaser.src && (
-        <Image
-          unoptimized
-          loading="lazy"
-          src={resultTeaser.src}
-          alt=""
-          height={isMobile ? '150px' : '270px'}
-          width={isMobile ? '115px' : '215px'}
-        />
+        // <Image
+        //   unoptimized
+        //   loading="lazy"
+        //   src={resultTeaser.src}
+        //   alt=""
+        //   height={isMobile ? '150px' : '270px'}
+        //   width={isMobile ? '115px' : '215px'}
+        // />
+        <Beam color="white" glow classes={styles.teaserBeam} />
       )}
       <Hide below="md">
         <FlexCol ml={{ md: 6, lg: 3 }}>
-          <TeaserBoxDesktop borderColor={colors.text.light}>
-            <P variant={DESKTOP_VARIANT}>{calculatorSteps?.step4}</P>
+          <TeaserBoxDesktop>
+            <P variant={DESKTOP_VARIANT} className={styles.calculatorSteps}>
+              <span className={styles.dash}>&mdash;</span>
+              {calculatorSteps?.step4}
+            </P>
           </TeaserBoxDesktop>
-          <TeaserBoxDesktop borderColor={colors.text.light}>
-            <P variant={DESKTOP_VARIANT}>{calculatorSteps?.step3}</P>
+          <TeaserBoxDesktop>
+            <P variant={DESKTOP_VARIANT} className={styles.calculatorSteps}>
+              <span className={styles.dash}>&mdash;</span>
+              {calculatorSteps?.step3}
+            </P>
           </TeaserBoxDesktop>
-          <TeaserBoxDesktop borderColor={colors.text.light}>
-            <P variant={DESKTOP_VARIANT} color={colors.primary.darkGreen}>
+          <TeaserBoxDesktop>
+            <P variant={DESKTOP_VARIANT} className={styles.calculatorSteps}>
+              <span className={styles.dash}>&mdash;</span>
               {calculatorSteps?.step2}
             </P>
           </TeaserBoxDesktop>
-          <TeaserBoxDesktop borderColor="transparent">
-            <P variant={DESKTOP_VARIANT} color={colors.primary.darkGreen}>
+          <TeaserBoxDesktop>
+            <P variant={DESKTOP_VARIANT} className={styles.calculatorSteps}>
+              <span className={styles.dash}>&mdash;</span>
               {calculatorSteps?.step1}
             </P>
           </TeaserBoxDesktop>
         </FlexCol>
       </Hide>
-      <Show below="md">
+      {/* <Show below="md">
         <VStack
           ml={{ base: 2, sm: 7 }}
           spacing={isMobile ? 1.5 : 3}
@@ -116,7 +119,7 @@ export const ResultTeaser: React.FC<{
             {calculatorSteps?.step1}
           </P>
         </VStack>
-      </Show>
+      </Show> */}
     </FlexRow>
   );
 };

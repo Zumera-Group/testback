@@ -1,0 +1,14 @@
+.teaserBeam {
+  max-width: 10rem;
+  margin: $gutter;
+}
+
+.calculatorSteps {
+  color: $white !important;
+  margin-bottom: 0;
+  .dash {
+    margin-right: $gutter;
+    color: $accent;
+    font-weight: $font-weight-bold;
+  }
+}

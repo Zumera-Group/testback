@@ -1,5 +1,17 @@
 .questionnaireWrapper {
   background-color: $primary;
+  grid-template-areas:
+    'header header header'
+    'sidebar sidebar sidebar'
+    'question question question'
+    'footer footer footer';
+
+  @include breakpoint-up(lg) {
+    grid-template-areas:
+      'header header header'
+      'sidebar question aside'
+      'sidebar   footer  .   ';
+  }
 }
 
 .sideBarWrapper {

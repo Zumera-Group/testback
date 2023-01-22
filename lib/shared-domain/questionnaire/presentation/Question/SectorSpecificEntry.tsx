@@ -29,11 +29,7 @@ export const SectorSpecificEntry: React.FC<{
     <>
       <QuestionText title={t('questionText')} />
       <QuestionAnimation>
-        <P
-          variant="mobileSectorSpecificEntryP"
-          color={colors.text.light}
-          textAlign="center"
-        >
+        <P variant="mobileSectorSpecificEntryP" color={'white'}>
           {t('subtitle')}
         </P>
         <ResultTeaser calculatorSteps={calculatorSteps} isSectorSpecificEntry />
@@ -45,6 +41,7 @@ export const SectorSpecificEntry: React.FC<{
         onFinishQuestionnaire={onFinishQuestionnaire}
         isRequired={false}
         isAnswered
+        btnAlignLeft
       />
     </>
   );
