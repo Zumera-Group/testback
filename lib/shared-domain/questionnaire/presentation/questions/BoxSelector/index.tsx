@@ -15,6 +15,10 @@ import { RequiredQuestionInfo } from '../../Question/RequiredQuestionInfo';
 import { Sector } from '../../../../page/domain/index';
 import { Button } from 'components/Button';
 import styles from './BoxSelector.module.scss';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Scrollbar } from 'swiper';
+import { useMediaQuery } from 'lib/hooks/useMediaQuery';
+import { SCREEN_SIZE_MD } from 'lib/constants';
 
 const t = getTranslateByScope('answerTypes.boxSelector');
 
@@ -65,7 +69,7 @@ export const BoxSelector = ({
 
   const firstBoxesToRender = allBoxes?.slice(0, 8);
   const buttonText = question?.showMoreButton || t('buttonText');
-  const isMobile = useBreakpointValue({ base: true, md: false });
+  const isMobile = useMediaQuery(`(max-width: ${SCREEN_SIZE_MD})`);
 
   const [boxesToRender, setBoxesToRender] =
     useState<BoxAnswer[]>(firstBoxesToRender);
@@ -94,6 +98,7 @@ export const BoxSelector = ({
     if (inSelectIndustryAndHasIndustryId) return true;
     return false;
   };
+
   return (
     <>
       <QuestionText title={question?.questionText}>
@@ -101,13 +106,46 @@ export const BoxSelector = ({
       </QuestionText>
 
       <QuestionAnimation>
-        <Box mx="auto" w="100%" maxWidth={950}>
-          <Flex mt={1} justify="center" flexWrap="wrap">
-            {boxesToRender?.map((box, index) => (
-              <BoxSelectorItem key={box._key} question={question} box={box} />
-            ))}
-          </Flex>
-        </Box>
+        {!isMobile || (isMobile && boxesToRender.length === 2) ? (
+          <Box mx="auto" w="100%" maxWidth={950}>
+            <Flex mt={1} justify="center" flexWrap="wrap">
+              {boxesToRender?.map((box, index) => (
+                <BoxSelectorItem key={box._key} question={question} box={box} />
+              ))}
+            </Flex>
+          </Box>
+        ) : (
+          <>
+            <Box
+              mx="auto"
+              w="100%"
+              maxWidth={950}
+              className={styles.boxSelectorswiper}
+            >
+              <Swiper
+                slidesPerView={1}
+                spaceBetween={30}
+                centeredSlides={true}
+                className={styles.swiper}
+                scrollbar={{
+                  hide: false,
+                }}
+                modules={[Scrollbar]}
+              >
+                {boxesToRender?.map((box, index) => (
+                  <SwiperSlide key={index} className={styles.swiperSlide}>
+                    <BoxSelectorItem
+                      key={box._key}
+                      question={question}
+                      box={box}
+                    />
+                  </SwiperSlide>
+                ))}
+              </Swiper>
+            </Box>
+          </>
+        )}
+
         <Flex justifyContent="center" className={styles.showMoreWrapper}>
           {moreBoxesToShow && (
             <Button

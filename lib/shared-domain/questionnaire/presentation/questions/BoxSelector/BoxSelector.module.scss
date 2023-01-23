@@ -11,3 +11,14 @@
     justify-content: initial;
   }
 }
+
+.boxSelectorswiper {
+  .swiper {
+    min-width: 100%;
+    width: 0;
+
+    .swiperSlide {
+      width: 200px !important;
+    }
+  }
+}
