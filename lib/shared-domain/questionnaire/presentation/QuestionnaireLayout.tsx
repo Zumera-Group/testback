@@ -22,7 +22,6 @@ import { ProgressBar } from 'components/Calculator/ProgressBar';
 import Image from 'next/image';
 import { LoadingCircle } from 'components/Icons/LoadingCircle';
 import PageHeader from 'lib/shared-domain/page/presentation/PageHeader';
-import Header from 'components/Calculator/Header';
 
 const t = getTranslateByScope('timeEstimation');
 const tSidebar = getTranslateByScope('sidebar');
