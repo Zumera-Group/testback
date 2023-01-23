@@ -8,7 +8,7 @@ interface Props {
   subtitle?: string;
   secondaryTitle?: string;
   description?: any[] | string;
-  headingType?: 'h1' | 'h2' | 'h3';
+  headingType?: 'h1' | 'h2' | 'h3' | 'h4';
   align?: 'left' | 'right' | 'center';
   classes?: string;
 }

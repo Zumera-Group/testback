@@ -7,9 +7,7 @@ import AboutUs from 'components/AboutUs';
 export const AboutUsSection: React.FC<{
   specificContentModule: AboutUsSectionModule;
 }> = ({ specificContentModule }) => {
-  return (
-    <AboutUs {...specificContentModule} />
-  );
+  return <AboutUs {...specificContentModule} />;
 };
 
 export default AboutUsSection;

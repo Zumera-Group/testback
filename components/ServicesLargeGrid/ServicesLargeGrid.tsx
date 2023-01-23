@@ -7,11 +7,7 @@ import styles from './ServicesLargeGrid.module.scss';
 export const ServicesLargeGrid = ({ ...rest }) => {
   const { title, subtitle, description, services, linkText } = rest;
   return (
-    <Section
-      size={'md'}
-      bg={'light'}
-      color={'primary'}
-    >
+    <Section size={'md'} bg={'light'} color={'primary'}>
       <Container>
         <div className={styles.content}>
           <Grid
@@ -25,7 +21,8 @@ export const ServicesLargeGrid = ({ ...rest }) => {
                 subtitle={subtitle}
                 description={description}
                 headingType={'h3'}
-                align={'left'} />
+                align={'left'}
+              />
             </GridColumn>
             {Array.isArray(services) && services?.length > 0 && (
               <GridColumn sm={12} md={8} lg={7}>

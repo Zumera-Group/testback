@@ -75,6 +75,20 @@ export const contentModulesQuery = (
         }
       }
     },
+    images[] {
+      ...,
+       asset->{
+         url,
+       }
+    },
+    textBlocks[] {
+      ...,
+      image{
+        asset->{
+          url,
+        }
+      }
+    },
     topImage {
       asset->{
         url

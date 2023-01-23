@@ -5,9 +5,15 @@ import { SanityBlockContent } from 'components/SanityBlockContent';
 
 import baseStyles from '../Hero.module.scss';
 import styles from './Career.module.scss';
+import { useEffect, useState } from 'react';
 
 export const Career: HeroComponent = ({ ...rest }) => {
-  const { title, title2, description, button, heroImage } = rest;
+  const { title, title2, description, button } = rest;
+  const closeCalendly = () => {
+    const calendly = document.querySelector('.calendly-overlay');
+    calendly.removeEventListener('click', closeCalendly);
+    window.Calendly.closePopupWidget();
+  };
 
   return (
     <Section
@@ -45,12 +51,11 @@ export const Career: HeroComponent = ({ ...rest }) => {
                 variant={'secondary'}
                 callBack={() => {
                   window.Calendly.showPopupWidget(
-                    'https://calendly.com/saxenhammer/unternehmensbewertung',
+                    'https://calendly.com/thorebehrens/15min?embed_domain=opportunities.saxenhammer-co.com&amp;embed_type=PopupText',
                   );
+                  const calendly = document.querySelector('.calendly-overlay');
+                  calendly.addEventListener('click', closeCalendly);
                 }}
-                // externalUrl={
-                //   'https://calendly.com/saxenhammer/unternehmensbewertung'
-                // }
                 onDark={true}
               >
                 Book an appointment

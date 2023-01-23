@@ -1,17 +1,18 @@
 import Image from 'next/image';
 
-import { useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useInView } from 'react-intersection-observer';
 
 import styles from './DividerImage.module.scss';
+import { Container, Section } from 'components/Layout';
 
 interface Props {
   dividerImage?: string;
+  isInContainer: boolean;
 }
 
 export const DividerImage: React.FC<Props> = ({ ...rest }) => {
-
-  const { dividerImage } = rest;
+  const { dividerImage, isInContainer } = rest;
   const { ref, inView } = useInView();
   const imageRef = useRef(null);
   const strength = 15;
@@ -21,12 +22,18 @@ export const DividerImage: React.FC<Props> = ({ ...rest }) => {
     const handleScroll = () => {
       const scroll = window.scrollY;
       const offset =
-        imageRef.current?.parentElement.getBoundingClientRect().top + scroll - window.innerHeight;
+        imageRef.current?.parentElement.getBoundingClientRect().top +
+        scroll -
+        window.innerHeight;
       const distanceToObject = offset - scroll;
-      const distanceToMove = window.innerHeight + imageRef.current?.parentElement.offsetHeight;
-      const percentageToMove = strength + ((strength * 2) / distanceToMove) * distanceToObject;
+      const distanceToMove =
+        window.innerHeight + imageRef.current?.parentElement.offsetHeight;
+      const percentageToMove =
+        strength + ((strength * 2) / distanceToMove) * distanceToObject;
       if (imageRef.current) {
-        imageRef.current.style.transform = `translateY(-50%) translate3d(0,${percentageToMove * -1}%,0)`;
+        imageRef.current.style.transform = `translateY(-50%) translate3d(0,${
+          percentageToMove * -1
+        }%,0)`;
       }
     };
     if (inView) {
@@ -38,7 +45,7 @@ export const DividerImage: React.FC<Props> = ({ ...rest }) => {
 
   if (!dividerImage) return null;
 
-  return (
+  const getImageComponent = () => (
     <div className={styles.dividerImage} ref={ref}>
       <div
         className={styles.dividerImage_inner}
@@ -58,6 +65,14 @@ export const DividerImage: React.FC<Props> = ({ ...rest }) => {
         />
       </div>
     </div>
+  );
+
+  return isInContainer ? (
+    <Section size={'md'} bg={'light'} color={'white'}>
+      <Container classes={styles.container}>{getImageComponent()}</Container>
+    </Section>
+  ) : (
+    getImageComponent()
   );
 };
 

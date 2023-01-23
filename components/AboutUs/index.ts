@@ -1,4 +1,4 @@
 export * from './BulletPoints';
 
-import AboutUs from './AboutUs';
+import AboutUs from 'components/AboutUs/AboutUs';
 export default AboutUs;

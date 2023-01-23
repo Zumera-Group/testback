@@ -1,0 +1,31 @@
+.approachItem {
+  padding: 4rem 0;
+  @include divider('bottom', $primary);
+  &:last-child {
+    border-bottom: none;
+  }
+}
+.textCol {
+  margin-right: auto;
+  margin-left: initial;
+  @include breakpoint-down(sm) {
+    > div {
+      text-align: center !important;
+    }
+  }
+}
+.reversed {
+  > div {
+    display: flex;
+    flex-direction: row-reverse;
+  }
+  .textCol {
+    margin-left: auto;
+  }
+}
+.imageCol {
+  @include breakpoint-down(sm) {
+    aspect-ratio: 1/1;
+    margin-bottom: 1.5rem;
+  }
+}

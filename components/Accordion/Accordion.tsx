@@ -1,7 +1,7 @@
 import { AccordionItem } from './AccordionItem';
 
 import styles from './Accordion.module.scss';
-import React, { ReactElement } from 'react';
+import React from 'react';
 
 export const Accordion: React.FC<{
   questions: any[];

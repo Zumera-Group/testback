@@ -545,6 +545,8 @@ export class DividerImageModule extends BaseModule {
     };
   };
 
+  isInContainer: boolean;
+
   getImageUrl(): string {
     return this.image.asset?.url;
   }
@@ -552,6 +554,7 @@ export class DividerImageModule extends BaseModule {
   constructor(fields: Record<string, any>) {
     super();
     this.image = fields.image;
+    this.isInContainer = fields.isInContainer;
   }
 }
 
@@ -847,6 +850,12 @@ export enum serviceDetailSectionNames {
 }
 
 export type ContentModuleType =
+  | 'imagesGridSection'
+  | 'titleTextSection'
+  | 'accordion'
+  | 'approachListSection'
+  | 'textWithImageGrid'
+  | 'fiveStepsSection'
   | 'anchoredTextSection'
   | 'heroSection'
   | 'dividerImage'
@@ -910,6 +919,15 @@ export type ContentModuleType =
 
 abstract class ContentModuleTypeFactory {
   static createInstance(type: ContentModuleType, fields: Record<string, any>) {
+    if (type === 'imagesGridSection')
+      return new ImagesGridSectionModule(fields);
+    if (type === 'titleTextSection') return new TitleTextSectionModule(fields);
+    if (type === 'accordion') return new AccordionSectionModule(fields);
+    if (type === 'approachListSection')
+      return new ApproachListSectionModule(fields);
+    if (type === 'textWithImageGrid')
+      return new TextWithImageGridModule(fields);
+    if (type === 'fiveStepsSection') return new FiveStepsSectionModule(fields);
     if (type === 'anchoredTextSection')
       return new AnchoredTextSectionModule(fields);
     if (type === 'heroSection') return new HeroSectionModule(fields);
@@ -1409,5 +1427,94 @@ export class AnchoredTextSectionModule extends BaseModule {
     this.title = fields.title;
     this.textBlocks = fields.textBlocks;
     this.hasBorderBottom = fields.hasBorderBottom;
+  }
+}
+
+export class FiveStepsSectionModule extends BaseModule {
+  title: string;
+  subtitle: string;
+  steps: any[];
+
+  bottomTitle: string;
+
+  button: any;
+  constructor(fields: Record<string, any>) {
+    super();
+    this.title = fields.title;
+    this.subtitle = fields.subtitle;
+    this.steps = fields.steps;
+    this.bottomTitle = fields.bottomTitle;
+    this.button = fields.button;
+  }
+}
+
+export class TextWithImageGridModule extends BaseModule {
+  title: string;
+  subtitle: string;
+  description: any[];
+  background: 'gradient' | 'primary' | 'secondary' | 'tertiary' | 'light';
+  button: any;
+  image: any;
+  constructor(fields: Record<string, any>) {
+    super();
+    this.title = fields.title;
+    this.subtitle = fields.subtitle;
+    this.description = fields.description;
+    this.background = fields.background;
+    this.button = fields.button;
+    this.image = fields.image;
+  }
+}
+
+export class ApproachListSectionModule extends BaseModule {
+  title: string;
+  subtitle: string;
+  description: any[];
+  textBlocks: any[];
+  constructor(fields: Record<string, any>) {
+    super();
+    this.title = fields.title;
+    this.subtitle = fields.subtitle;
+    this.description = fields.description;
+    this.textBlocks = fields.textBlocks;
+  }
+}
+
+export class AccordionSectionModule extends BaseModule {
+  title: string;
+  subtitle: string;
+  description: any[];
+  accordionItems: any[];
+  constructor(fields: Record<string, any>) {
+    super();
+    this.title = fields.title;
+    this.subtitle = fields.subtitle;
+    this.description = fields.description;
+    this.accordionItems = fields.accordionItems;
+  }
+}
+
+export class TitleTextSectionModule extends BaseModule {
+  title: string;
+  subtitle: string;
+  description: any[];
+  leftButtons: any[];
+  rightButtons: any[];
+  constructor(fields: Record<string, any>) {
+    super();
+    this.title = fields.title;
+    this.subtitle = fields.subtitle;
+    this.description = fields.description;
+    this.leftButtons = fields.leftButtons;
+    this.leftButtons = fields.leftButtons;
+    this.rightButtons = fields.rightButtons;
+  }
+}
+
+export class ImagesGridSectionModule extends BaseModule {
+  images: any[];
+  constructor(fields: Record<string, any>) {
+    super();
+    this.images = fields.images;
   }
 }

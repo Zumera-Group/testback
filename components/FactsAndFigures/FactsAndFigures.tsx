@@ -15,11 +15,7 @@ export const FactsAndFigures: React.FC<Props> = ({ ...rest }) => {
   const { title, subtitle, description, facts } = rest;
 
   return (
-    <Section
-      size={'md'}
-      bg={'light'}
-      color={'primary'}
-    >
+    <Section size={'md'} bg={'light'} color={'primary'}>
       <Container>
         <div className={styles.content}>
           <Grid

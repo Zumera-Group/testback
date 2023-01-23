@@ -1,0 +1,28 @@
+.gridContainer {
+  padding: 5rem 3.5rem;
+
+  @each $name, $bg in $section-bgs {
+    &.bg-#{$name} {
+      @if ($name == 'gradient') {
+        @include zumera-gradient(100%, 0%);
+      } @else {
+        background-color: $bg;
+      }
+    }
+  }
+  @include breakpoint-down(sm) {
+    padding: 3rem 1.5rem;
+  }
+}
+.imageCol {
+  align-self: stretch;
+  @include breakpoint-down(sm) {
+    margin-top: 2rem;
+    aspect-ratio: 3/2;
+  }
+}
+.grid {
+  & > div {
+    min-height: 45vh;
+  }
+}

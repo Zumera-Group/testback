@@ -41,6 +41,12 @@ import {
   BrandOverviewSectionModule,
   ReferralSectionModule,
   AnchoredTextSectionModule,
+  FiveStepsSectionModule,
+  TextWithImageGridModule,
+  ApproachListSectionModule,
+  AccordionSectionModule,
+  TitleTextSectionModule,
+  ImagesGridSectionModule,
 } from '../../domain/contentModule';
 
 import {
@@ -125,6 +131,12 @@ import { LandingPageOurPromiseSection } from './LandingPageOurPromiseSection';
 import { BrandOverviewSection } from 'lib/shared-domain/valuation-tool/presentation/BrandOverviewSection';
 import { ReferralSection } from 'lib/shared-domain/valuation-tool/presentation/ReferralSection';
 import { AnchoredTextSection } from 'components/AnchoredTextSection/AnchoredTextSection';
+import { FiveSteps } from 'components/FiveSteps';
+import { TextWithImageGrid } from 'components/TextWithImageGrid';
+import { ApproachListSection } from 'components/ApproachListSection';
+import { AccordionSection } from 'components/Accordion/AccordionSection';
+import TitleTextSection from 'components/TitleTextSection';
+import { ImagesGridSection } from 'components/ImagesGridSection';
 
 export const getContentForContentModule = (
   contentModule: ContentModule,
@@ -132,6 +144,48 @@ export const getContentForContentModule = (
   sharedContent?: any,
   allModulesData?: any,
 ): JSX.Element => {
+  if (contentModule.specificContentModule instanceof ImagesGridSectionModule) {
+    return (
+      <ImagesGridSection
+        specificContentModule={contentModule.specificContentModule}
+      />
+    );
+  }
+  if (contentModule.specificContentModule instanceof TitleTextSectionModule) {
+    return (
+      <TitleTextSection
+        specificContentModule={contentModule.specificContentModule}
+      />
+    );
+  }
+  if (contentModule.specificContentModule instanceof AccordionSectionModule) {
+    return (
+      <AccordionSection
+        specificContentModule={contentModule.specificContentModule}
+      />
+    );
+  }
+  if (
+    contentModule.specificContentModule instanceof ApproachListSectionModule
+  ) {
+    return (
+      <ApproachListSection
+        specificContentModule={contentModule.specificContentModule}
+      />
+    );
+  }
+  if (contentModule.specificContentModule instanceof TextWithImageGridModule) {
+    return (
+      <TextWithImageGrid
+        specificContentModule={contentModule.specificContentModule}
+      />
+    );
+  }
+  if (contentModule.specificContentModule instanceof FiveStepsSectionModule) {
+    return (
+      <FiveSteps specificContentModule={contentModule.specificContentModule} />
+    );
+  }
   if (
     contentModule.specificContentModule instanceof AnchoredTextSectionModule
   ) {

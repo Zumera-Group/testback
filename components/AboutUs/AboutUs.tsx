@@ -5,12 +5,11 @@ import { BulletPoints } from './BulletPoints';
 import { SanityBlockContent } from 'components/SanityBlockContent';
 
 import { SCREEN_SIZE_MD } from 'lib/constants';
-import { useMediaQuery } from 'lib/hooks/useMediaQuery'
+import { useMediaQuery } from 'lib/hooks/useMediaQuery';
 
 import styles from './AboutUs.module.scss';
 
 export const AboutUs = ({ ...rest }) => {
-
   const { title, subtitle, description, link, bulletPoints } = rest;
   const isMobile = useMediaQuery(`(max-width: ${SCREEN_SIZE_MD})`);
 
@@ -18,23 +17,15 @@ export const AboutUs = ({ ...rest }) => {
     if (!link?.page?.slug?.current) return null;
     return (
       <div className={styles.btnWrapper}>
-        <Button
-          variant={'secondary'}
-          link={link?.page}
-          onDark={false}
-        >
+        <Button variant={'secondary'} link={link?.page} onDark={false}>
           {link?.title}
         </Button>
       </div>
-    )
-  }
-  
+    );
+  };
+
   return (
-    <Section
-      size={'md'}
-      bg={'light'}
-      color={'primary'}
-    >
+    <Section size={'md'} bg={'light'} color={'primary'}>
       <Container>
         <Grid
           justifyContent={'space-between'}
@@ -46,7 +37,8 @@ export const AboutUs = ({ ...rest }) => {
               title={title}
               subtitle={subtitle}
               headingType={'h2'}
-              align={'left'} />
+              align={'left'}
+            />
             {!isMobile && <CTA />}
           </GridColumn>
           <GridColumn sm={12} md={6} lg={6} className={styles.description}>
@@ -58,7 +50,9 @@ export const AboutUs = ({ ...rest }) => {
             {isMobile && <CTA />}
           </GridColumn>
         </Grid>
-        {bulletPoints?.length > 0 && <BulletPoints bulletPoints={bulletPoints} />}
+        {bulletPoints?.length > 0 && (
+          <BulletPoints bulletPoints={bulletPoints} />
+        )}
       </Container>
     </Section>
   );
