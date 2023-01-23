@@ -73,6 +73,21 @@ img {
   padding-top: var(--header-height);
 }
 
+//swiper js scrollbar override
+.swiper-scrollbar-drag {
+  background-color: $white !important;
+}
+
+.swiper-scrollbar {
+  height: $gutter * 0.25 !important;
+  background-color: $quaternary !important;
+  margin: $gutter 0;
+  width: 100% !important;
+  left: 0 !important;
+  position: relative !important;
+}
+
+
 .calendly-overlay {
   position: absolute;
   top: 0;
