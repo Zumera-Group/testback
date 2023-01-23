@@ -26,7 +26,6 @@ export const ImagesGridSection: React.FC<{
     setDisplayImages(chunk);
   }, [images]);
 
-  console.log(displayImage);
   return (
     <Section size={'md'} bg={'light'} color={'primary'}>
       <Container classes={styles.container}>

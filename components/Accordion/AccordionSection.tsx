@@ -14,7 +14,6 @@ export const AccordionSection: React.FC<{ specificContentModule: any }> = ({
   const getAccordionAnswers = (items) => {
     return items.map((item) => item.description);
   };
-  console.log(accordionItems);
   return (
     <Section size={'lg'} bg={'light'} color={'primary'}>
       <Container>
