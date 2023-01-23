@@ -19,12 +19,8 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Scrollbar } from 'swiper';
 import { useMediaQuery } from 'lib/hooks/useMediaQuery';
 import { SCREEN_SIZE_MD } from 'lib/constants';
-import {
-  SCREEN_SIZE_LG,
-  SCREEN_SIZE_SM,
-  CONTAINER_PADDING_X,
-} from 'lib/constants';
-
+import { SCREEN_SIZE_LG, SCREEN_SIZE_SM } from 'lib/constants';
+import 'swiper/css/scrollbar';
 const t = getTranslateByScope('answerTypes.boxSelector');
 
 interface Props {
@@ -122,8 +118,8 @@ export const BoxSelector = ({
     observer: true,
     observeParents: true,
     freeMode: true,
-    scrollbar: true,
-    slidesPerView: 2.5,
+    scrollbar: { hide: false, draggable: true },
+    slidesPerView: 1,
     centeredSlides: true,
     breakpoints: {
       [breakpoint_SM]: {
@@ -131,7 +127,6 @@ export const BoxSelector = ({
       },
       [breakpoint_LG]: {
         slidesPerView: maxSlidesToShow ? maxSlidesToShow : 3,
-        allowTouchMove: false,
       },
     },
   };
