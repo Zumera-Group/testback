@@ -1,9 +1,3 @@
 .questionButton {
   margin: $gutter * 0.5;
-  width: 100%;
-  justify-content: center;
-  @include breakpoint-up(md) {
-    width: auto;
-    justify-content: inherit;
-  }
 }
