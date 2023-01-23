@@ -1,7 +1,7 @@
 import { Box, Flex, VStack } from '@chakra-ui/react';
 import useBreakpointValue from 'lib/shared-domain/useBreakpoint';
 import { BoxAnswer, Question } from 'lib/shared-domain/questionnaire/domain';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { BoxSelectorItem } from './BoxSelectorItem';
 import { QuestionText } from '../../Question/QuestionText';
 import { QuestionButtons } from '../../Question/QuestionButtons';
@@ -68,8 +68,8 @@ export const BoxSelector = ({
   }
 
   const firstBoxesToRender = allBoxes?.slice(0, 8);
-  const buttonText = question?.showMoreButton || t('buttonText');
   const isMobile = useMediaQuery(`(max-width: ${SCREEN_SIZE_MD})`);
+  const buttonText = question?.showMoreButton || t('buttonText');
 
   const [boxesToRender, setBoxesToRender] =
     useState<BoxAnswer[]>(firstBoxesToRender);
@@ -81,6 +81,14 @@ export const BoxSelector = ({
     setBoxesToRender(allBoxes);
     setMoreBoxesToShow(false);
   };
+
+  useEffect(() => {
+    if (isMobile || (!isMobile && !moreBoxesToShow)) {
+      setBoxesToRender(allBoxes);
+    } else if (!isMobile && moreBoxesToShow) {
+      setBoxesToRender(firstBoxesToRender);
+    }
+  }, [allBoxes, firstBoxesToRender, isMobile, moreBoxesToShow]);
 
   const getShowButton = () => {
     const inSelectIndustryAndHasIndustryId =
@@ -147,7 +155,7 @@ export const BoxSelector = ({
         )}
 
         <Flex justifyContent="center" className={styles.showMoreWrapper}>
-          {moreBoxesToShow && (
+          {moreBoxesToShow && !isMobile && (
             <Button
               callBack={onShowMore}
               variant="primary"
