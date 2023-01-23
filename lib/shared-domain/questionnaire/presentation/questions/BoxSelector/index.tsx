@@ -14,7 +14,6 @@ import { QuestionAnimation } from '../../Question/QuestionAnimation';
 import { RequiredQuestionInfo } from '../../Question/RequiredQuestionInfo';
 import { Sector } from '../../../../page/domain/index';
 import { Button } from 'components/Button';
-import styles from './BoxSelector.module.scss';
 
 const t = getTranslateByScope('answerTypes.boxSelector');
 
@@ -108,15 +107,9 @@ export const BoxSelector = ({
             ))}
           </Flex>
         </Box>
-
-        <Flex justifyContent="center" className={styles.showMoreWrapper}>
+        <Flex justifyContent="center">
           {moreBoxesToShow && (
-            <Button
-              callBack={onShowMore}
-              variant="primary"
-              hideIcon
-              classes={styles.showMoreBtn}
-            >
+            <Button callBack={onShowMore} variant="primary" hideIcon>
               {buttonText.trim()}
             </Button>
           )}
