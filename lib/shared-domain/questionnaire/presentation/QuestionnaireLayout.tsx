@@ -302,11 +302,7 @@ const QuestionnaireLayout: React.FC<{
             </GridItem>
           )}
 
-          <GridItem
-            gridArea="question"
-            // margin={'auto'}
-            className={styles.questionWrapper}
-          >
+          <GridItem gridArea="question" className={styles.questionWrapper}>
             <QuestionComponent
               sectorSpecificQuestions={sectorSpecificQuestions}
               sectors={sectors}

@@ -14,7 +14,8 @@
   outline: 0;
 }
 
-html, body {
+html,
+body {
   font-family: $font-family;
   font-weight: $font-weight-base;
   width: 100%;
@@ -70,4 +71,18 @@ img {
   flex: 1;
   flex-grow: 1;
   padding-top: var(--header-height);
+}
+
+//swiper js scrollbar override
+.swiper-scrollbar-drag {
+  background-color: $white !important;
+}
+
+.swiper-scrollbar {
+  height: $gutter * 0.25 !important;
+  background-color: $quaternary !important;
+  margin: $gutter 0;
+  width: 100% !important;
+  left: 0 !important;
+  position: relative !important;
 }
