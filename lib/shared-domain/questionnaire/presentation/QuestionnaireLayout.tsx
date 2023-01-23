@@ -1,29 +1,31 @@
 import React, { useEffect, useState } from 'react';
 import I18n from 'i18n-js';
 import { Box, Flex, Grid, GridItem } from '@chakra-ui/react';
-// import backgroundImage from '../../../../public/bkg.svg';
 import styles from './QuestionnaireLayout.module.scss';
 import { PageTransition } from 'components/PageTransition';
 import { SEO } from 'components/SEO';
 import { Question, Questionnaire } from '../domain/index';
 import { Sector, SiteSettings } from '../../page/domain/index';
-import { TimeEstimationBox } from './TimeEstimation';
 import { getTranslateByScope } from 'translation/i18n';
 import { useValuationStore } from '../store';
-import { colors } from 'styles/foundations/colors';
-import Header from './Header';
+// import Header from './Header';
 import { QuestionComponent } from './Question/QuestionComponent';
 import Sidebar from './Sidebar';
-import { TextBoxGroup } from './TextBoxGroup';
 import { EnvironmentService } from 'environment.service';
 import { uuid } from 'uuidv4';
 import { qLogs } from '../application/log';
 import { useSalesforceAnswerSync } from '../application/useSalesforceAnswerSync';
 import { useRouter } from 'next/router';
 import BottomBar from 'components/Calculator/BottomBar/BottomBar';
+import { useGetSalesforceScore } from '../application/useGetQuestionnaireScore';
+import { ProgressBar } from 'components/Calculator/ProgressBar';
+import Image from 'next/image';
+import { LoadingCircle } from 'components/Icons/LoadingCircle';
+import PageHeader from 'lib/shared-domain/page/presentation/PageHeader';
 
 const t = getTranslateByScope('timeEstimation');
 const tSidebar = getTranslateByScope('sidebar');
+const tr = getTranslateByScope('result');
 
 function useSetQuestionnaireLocaleToUseFori18n(locale: string) {
   useEffect(() => {
@@ -163,6 +165,85 @@ const QuestionnaireLayout: React.FC<{
     },
     0,
   );
+
+  //RESULTS LOGIC
+  const [score, setScore] = React.useState<{
+    points: string;
+    percentage: string;
+    calendly: string;
+    avg: number;
+  }>(null);
+  const [hasError, setHasError] = React.useState(false);
+  const { getScore } = useGetSalesforceScore();
+
+  React.useEffect(() => {
+    const loadScore = async () => {
+      try {
+        const score = await getScore();
+        setScore(score);
+        setHasError(false);
+      } catch (e) {
+        setHasError(true);
+      }
+    };
+    loadScore();
+  }, []);
+
+  const scoreCard = () => {
+    if (score) {
+      const presenter = {
+        hasPoints: () => {
+          if (score.points === '#N/A' || !score.points) return false;
+          return true;
+        },
+        getFormattedPoints: () => {
+          return score.points;
+        },
+        getPercentage: () => {
+          try {
+            return Math.floor(Number(score.percentage) * 100);
+          } catch (e) {
+            return '';
+          }
+        },
+      };
+      const hasScoreAndPercentage =
+        presenter.hasPoints() && presenter.getPercentage();
+      const points = tr('evaluation.resultBox.points', {
+        points: presenter.getFormattedPoints(),
+      });
+      const title = tr('evaluation.resultBox.title');
+      const betterThan = tr('evaluation.resultBox.betterThen', {
+        percentage: presenter.getPercentage(),
+      });
+      return (
+        <>
+          {hasScoreAndPercentage && (
+            <div className={styles.scoreCardWrapper}>
+              <span className={styles.scoreCardTitle}>{title}</span>
+              <ProgressBar
+                isPoint
+                progress={points.substring(0, points.length - 2)}
+                color="gradient"
+              />
+              <p className={styles.betterThan}>{betterThan}</p>
+              <Image
+                unoptimized
+                loading="lazy"
+                objectFit="cover"
+                alt={'booklet'}
+                src={'/booklet.png'}
+                height={217}
+                width={217}
+              />
+            </div>
+          )}
+        </>
+      );
+    }
+    return <LoadingCircle />;
+  };
+
   return (
     <>
       <SEO
@@ -179,32 +260,58 @@ const QuestionnaireLayout: React.FC<{
           className={styles.questionnaireWrapper}
           h="100%"
           w="100%"
-          p={3}
           overflowY="scroll"
           height="100vh"
           gridTemplateColumns={{ base: '0% 100% 0%', lg: '20% 60% 20%' }}
           gridTemplateRows={{ base: '7% 93% 0%', lg: '10% 75% 15%' }}
-          templateAreas={`'header header header'
-      'sidebar question aside'
-      'sidebar   footer  .   '
-      `}
         >
-          <GridItem gridArea="header">
-            <Header siteSettings={siteSettings} />
+          <GridItem gridArea="header" className={styles.questionnaireHeader}>
+            <PageHeader
+              contentModules={[]}
+              siteSettings={siteSettings}
+              darkBg
+              hideHeader={isOnResultScreen ? false : true}
+              hideBurger={isOnResultScreen ? false : true}
+              staticExtended
+              indicator={
+                !isOnResultScreen && {
+                  current: currenQuestionPosition,
+                  total: numberOfQuestionsInTotal,
+                }
+              }
+            />
           </GridItem>
 
+          {questionnaire && !isOnResultScreen && (
+            <GridItem
+              gridArea="sidebar"
+              display={{ base: 'none', lg: 'grid' }}
+              className={styles.sideBarWrapper}
+            >
+              <Sidebar />
+            </GridItem>
+          )}
+
+          {isOnResultScreen && (
+            <GridItem
+              gridArea="sidebar"
+              display={{ base: 'none', lg: 'grid' }}
+              className={styles.sideBarWrapper}
+            >
+              {scoreCard()}
+            </GridItem>
+          )}
+
           <GridItem
-            gridArea="sidebar"
-            display={{ base: 'none', lg: 'grid' }}
-            className={styles.sideBarWrapper}
+            gridArea="question"
+            // margin={'auto'}
+            className={styles.questionWrapper}
           >
-            {questionnaire && <Sidebar />}
-          </GridItem>
-          <GridItem gridArea="question" mt={2}>
             <QuestionComponent
               sectorSpecificQuestions={sectorSpecificQuestions}
               sectors={sectors}
             />
+
             {!isOnResultScreen && isFirstQuestion() && (
               <Flex
                 direction={{ base: 'column', lg: 'row' }}
@@ -225,10 +332,6 @@ const QuestionnaireLayout: React.FC<{
           ></Box>
         </Grid>
       </PageTransition>
-      <BottomBar
-        totalQuestions={numberOfQuestionsInTotal}
-        currentStep={currenQuestionPosition}
-      />
     </>
   );
 };

@@ -1,8 +1,8 @@
 .progressWrapper {
   transform: rotate(-90deg);
+  width: 100%;
 }
 .progressCircle {
-  stroke: $white;
   fill: none;
   stroke-width: 13px;
   stroke-dasharray: 560;
@@ -17,5 +17,10 @@
     font-size: $h2-font-size;
     fill: $white;
     transform: rotate(90deg);
+  }
+  .pointsTitle {
+    font-size: $font-size-normal;
+    fill: $white;
+    font-weight: $font-weight-bold;
   }
 }

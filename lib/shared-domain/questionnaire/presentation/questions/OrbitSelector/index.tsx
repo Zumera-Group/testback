@@ -153,7 +153,7 @@ export const OrbitSelector: React.FC<{
               display="none"
               ref={sliderDom}
               type="range"
-              width="100%"
+              // width="100%"
               min={0}
               max={180}
               value={sliderValue}

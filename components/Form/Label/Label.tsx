@@ -13,7 +13,7 @@ export const Label: React.FC<Props> = ({
   text,
   required,
   disabled,
-  classes
+  classes,
 }) => {
   return (
     <label
@@ -21,9 +21,16 @@ export const Label: React.FC<Props> = ({
       className={[
         styles.label,
         disabled ? styles.label__disabled : '',
-        classes ? classes : ''
-      ].join(' ')}>
-      {text}{required && (<>{' '}<span className={styles.requiredMark}>*</span></>)}
+        classes ? classes : '',
+      ].join(' ')}
+    >
+      {text}
+      {required && (
+        <>
+          {' '}
+          <span className={styles.requiredMark}>*</span>
+        </>
+      )}
     </label>
   );
 };

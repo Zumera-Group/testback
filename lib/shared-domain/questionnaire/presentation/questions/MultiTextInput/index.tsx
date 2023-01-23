@@ -70,6 +70,7 @@ export const MultiTextInput: React.FC<{
         onNextQuestion={onNextQuestion}
         isAnswered
         isRequired={false}
+        btnAlignLeft
       />
     </>
   );
