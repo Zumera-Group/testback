@@ -19,6 +19,11 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Scrollbar } from 'swiper';
 import { useMediaQuery } from 'lib/hooks/useMediaQuery';
 import { SCREEN_SIZE_MD } from 'lib/constants';
+import {
+  SCREEN_SIZE_LG,
+  SCREEN_SIZE_SM,
+  CONTAINER_PADDING_X,
+} from 'lib/constants';
 
 const t = getTranslateByScope('answerTypes.boxSelector');
 
@@ -107,6 +112,30 @@ export const BoxSelector = ({
     return false;
   };
 
+  const breakpoint_LG = parseInt(SCREEN_SIZE_LG);
+  const breakpoint_SM = parseInt(SCREEN_SIZE_SM);
+
+  const maxSlidesToShow = allBoxes.length;
+
+  const swiperOptions = {
+    modules: [Scrollbar],
+    observer: true,
+    observeParents: true,
+    freeMode: true,
+    scrollbar: true,
+    slidesPerView: 2.5,
+    centeredSlides: true,
+    breakpoints: {
+      [breakpoint_SM]: {
+        slidesPerView: 3.5,
+      },
+      [breakpoint_LG]: {
+        slidesPerView: maxSlidesToShow ? maxSlidesToShow : 3,
+        allowTouchMove: false,
+      },
+    },
+  };
+
   return (
     <>
       <QuestionText title={question?.questionText}>
@@ -130,16 +159,7 @@ export const BoxSelector = ({
               maxWidth={950}
               className={styles.boxSelectorswiper}
             >
-              <Swiper
-                slidesPerView={1}
-                spaceBetween={30}
-                centeredSlides={true}
-                className={styles.swiper}
-                scrollbar={{
-                  hide: false,
-                }}
-                modules={[Scrollbar]}
-              >
+              <Swiper className={styles.swiper} {...swiperOptions}>
                 {boxesToRender?.map((box, index) => (
                   <SwiperSlide key={index} className={styles.swiperSlide}>
                     <BoxSelectorItem
