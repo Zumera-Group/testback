@@ -21,6 +21,8 @@
     transform-origin: 50% 50%;
     transition: transform $timing-lg $ease-out;
     backface-visibility: hidden;
+    display: block;
+    margin-left: auto;
   }
   @include hover-state() {
     color: $white;
@@ -87,6 +89,6 @@
 
 .name {
   color: inherit;
-  font-size: $h5-font-size;
+  font-size: $h4-font-size;
   margin: 0 0 1.25rem 0;
 }

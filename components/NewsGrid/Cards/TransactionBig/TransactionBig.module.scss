@@ -19,6 +19,8 @@
     transform-origin: 50% 50%;
     transition: color $timing-lg $ease-out, transform $timing-lg $ease-out;
     backface-visibility: hidden;
+    display: block;
+    margin-left: auto;
   }
   @include hover-state() {
     color: inherit;

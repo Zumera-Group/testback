@@ -1,4 +1,5 @@
 import React from 'react';
+import cx from 'classnames';
 import {
   Employee,
   TwoNews,
@@ -11,6 +12,7 @@ import { CardType, CardsConfig } from './interfaces';
 import { useSharedContentContext } from 'lib/shared-domain/page/infrastructure/sharedContentContext';
 
 import styles from './Cards.module.scss';
+import { Grid, GridColumn } from 'components/Layout';
 
 export const Cards = ({
   news,
@@ -66,13 +68,31 @@ export const Cards = ({
 
   if (!items?.length) return null;
 
+  const remappedElements =
+    items.reduce((accumulator, currentValue, currentIndex, array) => {
+      if (currentIndex % 2 === 0) {
+        accumulator.push(array.slice(currentIndex, currentIndex + 2));
+      }
+      return accumulator;
+    }, []);
+
   return (
     <div className={styles.cards}>
-      {items?.map((item, i) => (
-        <React.Fragment key={`newsGridCards-item-${i}`}>
-          {item}
-        </React.Fragment>
-      ))}
+      {remappedElements.map((elements, i) => {
+        const isOdd = i % 2 !== 0;
+        return (
+          <Grid className={cx(styles.grid, {[styles.reverse]: isOdd })}>
+            {elements.map((item, index) => {
+              const isEven = index % 2 === 0;
+              return (
+                <GridColumn sm={12} md={isEven ? 8 : 4} lg={isEven ? 8 : 4} key={i} className={styles.col}>
+                  {item}
+                </GridColumn>
+              );
+            })}
+          </Grid>
+        )
+      })}
     </div>
   );
 };
