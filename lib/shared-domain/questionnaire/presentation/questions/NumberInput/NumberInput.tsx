@@ -11,6 +11,7 @@ import {
   differenceInCalendarYears,
 } from 'date-fns';
 import { QuestionButtons } from '../../Question/QuestionButtons';
+import { QuestionAnimation } from '../../Question/QuestionAnimation';
 
 enum VALUE_TYPE {
   EUR = '€',
@@ -64,31 +65,33 @@ export const NumberInput: React.FC<{
         title={question.questionText}
         description={question.description}
       />
-      <p className={styles.fieldLabel}>{label}</p>
-      <div className={styles.fieldWrapper}>
-        {sign && <span className={styles.sign}> {sign}</span>}
-        <Input
-          type="number"
-          id={question._id}
-          placeholder={placeholder ? placeholder : '0'}
-          hideLabel
-          classes={[
-            styles.numberInput,
-            shortBox && styles.shortBox,
-            !sign && styles.noSign,
-          ].join(' ')}
-          value={getUnformattedAnswer()}
-          onChange={(e) => formatToSalesforce(Number(e.target.value))}
+      <QuestionAnimation>
+        <p className={styles.fieldLabel}>{label}</p>
+        <div className={styles.fieldWrapper}>
+          {sign && <span className={styles.sign}> {sign}</span>}
+          <Input
+            type="number"
+            id={question._id}
+            placeholder={placeholder ? placeholder : '0'}
+            hideLabel
+            classes={[
+              styles.numberInput,
+              shortBox && styles.shortBox,
+              !sign && styles.noSign,
+            ].join(' ')}
+            value={getUnformattedAnswer()}
+            onChange={(e) => formatToSalesforce(Number(e.target.value))}
+          />
+        </div>
+        <QuestionButtons
+          onNextQuestion={() => {
+            onNextQuestion();
+          }}
+          isRequired={question?.isRequired}
+          isAnswered={getUnformattedAnswer() != null}
+          btnAlignLeft
         />
-      </div>
-      <QuestionButtons
-        onNextQuestion={() => {
-          onNextQuestion();
-        }}
-        isRequired={question?.isRequired}
-        isAnswered={getUnformattedAnswer() != null}
-        btnAlignLeft
-      />
+      </QuestionAnimation>
     </div>
   );
 };
