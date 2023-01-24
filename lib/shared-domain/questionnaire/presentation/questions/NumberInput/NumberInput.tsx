@@ -56,7 +56,7 @@ export const NumberInput: React.FC<{
     if (salesforceFormat === 'date_month') return month;
     if (salesforceFormat === 'date_day') return day;
   };
-  const shortBox = salesforceFormat !== 'number';
+  const shortBox = salesforceFormat !== 'number' || valueType === 'year';
 
   return (
     <div className={styles.numberInputWrapper}>
