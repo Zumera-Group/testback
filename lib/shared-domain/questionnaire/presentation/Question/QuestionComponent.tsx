@@ -205,7 +205,15 @@ export const QuestionComponent: React.FC<{
           question={currentQuestion}
         />
       );
+    } else if (answerType === 'numberInput') {
+      return (
+        <questions.NumberInput
+          onNextQuestion={onNextQuestion}
+          question={currentQuestion}
+        />
+      );
     }
+
     return null;
   };
 

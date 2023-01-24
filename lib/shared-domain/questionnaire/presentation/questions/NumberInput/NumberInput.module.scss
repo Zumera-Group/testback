@@ -1,0 +1,24 @@
+.numberInputWrapper {
+  label {
+    color: $white;
+  }
+  .numberInput {
+    border: unset;
+    border-bottom: 1px solid #794d7c;
+    border-radius: 0;
+    font-size: $h1-font-size;
+    font-weight: $font-weight-light;
+  }
+
+  .shortBox {
+    max-width: 300px;
+    width: 100%;
+  }
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    display: none;
+  }
+  ::placeholder {
+    font-weight: $font-weight-light;
+  }
+}
