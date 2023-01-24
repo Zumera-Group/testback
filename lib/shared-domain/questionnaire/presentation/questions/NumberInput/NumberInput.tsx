@@ -66,7 +66,7 @@ export const NumberInput: React.FC<{
         description={question.description}
       />
       <QuestionAnimation>
-        <p className={styles.fieldLabel}>{label}</p>
+        {label && <p className={styles.fieldLabel}>{label}</p>}
         <div className={styles.fieldWrapper}>
           {sign && <span className={styles.sign}> {sign}</span>}
           <Input
