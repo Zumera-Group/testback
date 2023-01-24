@@ -1,0 +1,56 @@
+.gridContainer {
+  padding: 5rem 3.5rem;
+
+  @each $name, $bg in $section-bgs {
+    &.bg-#{$name} {
+      @if ($name == 'gradient') {
+        @include zumera-gradient(100%, 0%);
+      } @else {
+        background-color: $bg;
+      }
+    }
+  }
+  @include breakpoint-down(md) {
+    padding: 3rem 1.5rem;
+  }
+}
+.service {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+}
+.imageWrapper {
+  position: relative;
+  width: 48px;
+  height: 48px;
+  margin-bottom: 1rem;
+}
+.leftCol,
+.rightCol {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.leftCol {
+  align-items: flex-start;
+  @include breakpoint-down(md) {
+    align-items: center;
+    padding-bottom: 2rem;
+  }
+}
+.rightCol {
+  @include divider('top', $white);
+  padding-top: 2rem;
+  @include breakpoint-up(md) {
+    padding-top: 0;
+    @include divider('left', $white);
+  }
+}
+.grid {
+  & > div {
+    min-height: 45vh;
+  }
+}

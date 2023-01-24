@@ -433,5 +433,41 @@ export const contentModulesQuery = (
         }
       }
     },
+    values[] {
+      ...,
+      icon-> {
+		iconImage{
+			asset->{
+			  url,
+			}
+		  }
+      },
+    },
+    services[] {
+      ...,
+      icon-> {
+		iconImage{
+			asset->{
+			  url,
+			}
+		  }
+      },
+    },
+    buttons[] {
+      ...,
+      questionnaire->{
+		  questionnaireSlug {
+			current
+		  },
+		},
+    },
+    button {
+      ...,
+      questionnaire->{
+		  questionnaireSlug {
+			current
+		  },
+		},
+    },
 ${extraQuery || ''}
   }`;

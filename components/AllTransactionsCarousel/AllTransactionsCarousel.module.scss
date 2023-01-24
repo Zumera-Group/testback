@@ -22,3 +22,9 @@
     margin-bottom: $paragraphs-margin-bottom;
   }
 }
+.button {
+  margin-right: auto;
+  @include breakpoint-up(md) {
+    margin-left: 41%;
+  }
+}

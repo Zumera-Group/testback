@@ -5,11 +5,12 @@ import { SectionHeading } from 'components/SectionHeading';
 import { Button } from 'components/Button';
 import Image from 'next/image';
 import { TextWithImageGridModule } from 'lib/shared-domain/page/domain/contentModule';
+import { Icon } from 'components/Icon';
 
 export const TextWithImageGrid: React.FC<{
   specificContentModule: TextWithImageGridModule;
 }> = ({ specificContentModule }) => {
-  const { title, subtitle, description, button, background, image } =
+  const { title, subtitle, description, button, background, image, bullets } =
     specificContentModule;
 
   const sectionStyles = [
@@ -51,6 +52,27 @@ export const TextWithImageGrid: React.FC<{
             />
           </GridColumn>
         </Grid>
+        {bullets.length ? (
+          <Grid
+            fullWidth={true}
+            justifyContent={'start'}
+            alignItems={'center'}
+            className={styles.bullets}
+          >
+            {bullets.map((bullet) => (
+              <GridColumn
+                key={bullet}
+                sm={12}
+                md={4}
+                lg={4}
+                className={styles.bullet}
+              >
+                <Icon iconName={'tick'} width={32} height={32} />
+                <div>{bullet}</div>
+              </GridColumn>
+            ))}
+          </Grid>
+        ) : null}
       </Container>
     </Section>
   );

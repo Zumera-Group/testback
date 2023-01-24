@@ -1,15 +1,12 @@
 import React from 'react';
-import bgImage from 'public/404-bg.jpg';
-import { FlexCenterPage, FlexCol } from '../components/Layout/Flex/Flex';
-import { P } from 'components/Typography/P';
-import { useSharedContentContext } from 'lib/shared-domain/page/infrastructure/sharedContentContext';
-import { H } from '../components/Typography/H';
-import { colors } from '../styles/foundations/colors';
+import { FlexCol } from '../components/Layout/Flex/Flex';
 import { PageHeader } from '../lib/shared-domain/page/presentation/PageHeader';
 import { SiteSettings } from '../lib/shared-domain/page/domain/index';
 import { fetchSiteSettings } from '../lib/shared-domain/page/application/useGetSiteSettings';
 import { SharedContentFacade } from '../lib/shared-domain/page/infrastructure/sharedContent.facade';
 import { SharedContentContext } from 'lib/shared-domain/page/infrastructure/sharedContentContext';
+import { FourOFour } from 'components/FourOFour';
+import PageFooter from 'lib/shared-domain/page/presentation/PageFooter';
 
 export async function getStaticProps({ locale }) {
   const siteSettings = await fetchSiteSettings(locale);
@@ -29,28 +26,22 @@ interface PageProps {
 export const Custom404: React.FC<{ siteSettings: SiteSettings }> = ({
   siteSettings,
 }) => {
-  const data = useSharedContentContext();
-
   return (
     <FlexCol
       width="100%"
-      height="100vh"
       justifyContent="center"
-      backgroundImage={`url("${bgImage.src}")`}
       align="center"
       backgroundPosition="center"
       backgroundSize="cover"
       backgroundRepeat="no-repeat"
     >
-      <PageHeader contentModules={[]} siteSettings={siteSettings} />
-      <FlexCenterPage>
-        <H variant="h404" color={colors.primary.darkGreen} mb={4}>
-          404
-        </H>
-        <P variant="p404" color={colors.text.light}>
-          {data?.text404}
-        </P>
-      </FlexCenterPage>
+      <PageHeader
+        contentModules={[]}
+        siteSettings={siteSettings}
+        darkBg={true}
+      />
+      <FourOFour />
+      <PageFooter siteSettings={siteSettings} />
     </FlexCol>
   );
 };
