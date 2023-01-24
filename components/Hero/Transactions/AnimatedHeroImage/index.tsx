@@ -24,6 +24,9 @@ export const AnimatedHeroImage: React.FC<IProps> = () => {
 
   const setShowPlayerCallback = () => {
     setIsFadeIn(true);
+    setTimeout(() => {
+      ref.current.play();
+    }, 500);
   };
 
   return (
@@ -32,10 +35,15 @@ export const AnimatedHeroImage: React.FC<IProps> = () => {
         ' ',
       )}
     >
+      <img
+        src={'/lottie/transaction-hero-placeholder.png'}
+        alt={'partners'}
+        className={styles.placeholder}
+      />
       <dotlottie-player
         ref={ref}
         src={'/lottie/transaction-hero.lottie'}
-        autoplay={true}
+        className={styles.lottie}
         loop={true}
       />
     </div>
