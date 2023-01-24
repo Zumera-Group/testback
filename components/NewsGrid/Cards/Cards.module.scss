@@ -1,8 +1,15 @@
 .grid {
+  padding: 0;
   .col {
     display: flex;
     margin-bottom: 1.5rem;
     --gutter: 12px;
+  }
+
+  &.reverse {
+    >div {
+      flex-direction: row-reverse;
+    }
   }
 }
 
