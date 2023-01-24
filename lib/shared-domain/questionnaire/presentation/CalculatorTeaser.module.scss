@@ -1,11 +1,21 @@
+.calculatorTeaserWrapper {
+  justify-content: center;
+}
+
 .teaserBeam {
-  max-width: 10rem;
-  margin: $gutter;
+  max-width: 14rem;
+  margin: $gutter $gutter * 1;
+  @include breakpoint-up(md) {
+    margin: $gutter $gutter * 3;
+  }
 }
 
 .calculatorSteps {
   color: $white !important;
   margin-bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   .dash {
     margin-right: $gutter;
     color: $accent;

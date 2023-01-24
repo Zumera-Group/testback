@@ -61,9 +61,18 @@ export const ResultTeaser: React.FC<{
       py={isMobile ? 5 : 7}
       w={isMobileOrisSectorSpecificEntry ? '100%' : '60%'}
       mt={isMobile ? 8 : 0}
+      justify={isMobileOrisSectorSpecificEntry ? 'flex-start' : 'flex-start'}
       className={styles.calculatorTeaserWrapper}
     >
       {resultTeaser.src && (
+        // <Image
+        //   unoptimized
+        //   loading="lazy"
+        //   src={resultTeaser.src}
+        //   alt=""
+        //   height={isMobile ? '150px' : '270px'}
+        //   width={isMobile ? '115px' : '215px'}
+        // />
         <Beam color="white" glow classes={styles.teaserBeam} />
       )}
       <Hide below="md">
@@ -94,6 +103,25 @@ export const ResultTeaser: React.FC<{
           </TeaserBoxDesktop>
         </FlexCol>
       </Hide>
+      {/* <Show below="md">
+        <VStack
+          ml={{ base: 2, sm: 7 }}
+          spacing={isMobile ? 1.5 : 3}
+          align="flex-start"
+        >
+          <P variant={MOBILE_VARIANT}>{calculatorSteps?.step4}</P>
+          <LineSpacerMobile />
+          <P variant={MOBILE_VARIANT}>{calculatorSteps?.step3}</P>
+          <LineSpacerMobile />
+          <P variant={MOBILE_VARIANT} color={colors.primary.darkGreen}>
+            {calculatorSteps?.step2}
+          </P>
+          <LineSpacerMobile />
+          <P variant={MOBILE_VARIANT} color={colors.primary.darkGreen}>
+            {calculatorSteps?.step1}
+          </P>
+        </VStack>
+      </Show> */}
     </FlexRow>
   );
 };

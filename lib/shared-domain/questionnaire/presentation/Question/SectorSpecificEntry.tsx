@@ -41,7 +41,7 @@ export const SectorSpecificEntry: React.FC<{
         onFinishQuestionnaire={onFinishQuestionnaire}
         isRequired={false}
         isAnswered
-        btnAlignLeft
+        stackMobile
       />
     </>
   );
