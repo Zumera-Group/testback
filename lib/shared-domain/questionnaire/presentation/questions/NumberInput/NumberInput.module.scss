@@ -1,0 +1,60 @@
+.numberInputWrapper {
+  label {
+    color: $white;
+  }
+  .numberInput {
+    border: unset;
+    border-radius: 0;
+    font-size: $h1-font-size;
+    font-weight: $font-weight-light;
+    width: 100%;
+    @include breakpoint-up(md) {
+      max-width: 25rem;
+    }
+
+    &.noSign {
+      padding-left: 0;
+    }
+  }
+
+  .shortBox {
+    @include breakpoint-up(md) {
+      max-width: 14rem;
+    }
+  }
+
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    display: none;
+  }
+  ::placeholder {
+    font-weight: $font-weight-light;
+  }
+
+  .fieldWrapper {
+    display: flex;
+    align-items: flex-end;
+
+    border-bottom: 1px solid #794d7c;
+    margin-bottom: $gutter * 1.5;
+
+    max-width: 100%;
+
+    @include breakpoint-up(md) {
+      max-width: max-content;
+    }
+  }
+
+  .fieldLabel {
+    color: $white;
+  }
+
+  .sign {
+    border-radius: 0;
+    font-size: $h1-font-size;
+    font-weight: $font-weight-light;
+    color: $white;
+    opacity: 0.5;
+    padding: $gutter * 1.2 0;
+  }
+}

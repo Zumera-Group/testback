@@ -31,7 +31,8 @@ export interface Answer {
     | 'slider'
     | 'textInput'
     | 'orbitSelector'
-    | 'multiTextInput';
+    | 'multiTextInput'
+    | 'numberInput';
   boxSelector?: BoxAnswer[];
   slider?: {
     from: number;
@@ -51,6 +52,12 @@ export interface Answer {
     highestValue: string;
     answerOptions: { label: string; value: string }[];
   };
+  numberInput?: {
+    valueType: 'number' | 'EUR' | 'USD' | 'year' | 'age' | 'percent';
+    salesforceFormat: 'number' | 'date_year' | 'date_month' | 'date_day';
+    placeholder: string;
+    label: string;
+  };
 }
 
 export interface Question {
@@ -63,6 +70,7 @@ export interface Question {
   questionId: string;
   salesforceId: string;
   questionText: string;
+  description: string;
   _lang: string;
   industries: {
     id: string;

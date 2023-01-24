@@ -42,6 +42,7 @@ const queryQuestion = (
   navigationTitle,
   questionId,
   questionText,
+  description,
   salesforceId,
   showMoreButton,
   hasMultipleAnswers,
@@ -63,6 +64,12 @@ const queryQuestion = (
       subGaps
     },
     textInput,
+    numberInput{
+      valueType,
+      placeholder,
+      salesforceFormat,
+      label
+    },
     multiTextInput[],
     boxSelector[]{
       _key,
