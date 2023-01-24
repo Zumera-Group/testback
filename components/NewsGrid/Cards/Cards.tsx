@@ -81,7 +81,7 @@ export const Cards = ({
       {remappedElements.map((elements, i) => {
         const isOdd = i % 2 !== 0;
         return (
-          <Grid className={cx(styles.grid, {[styles.reverse]: isOdd })}>
+          <Grid className={cx(styles.grid, {[styles.reverse]: isOdd })} key={`grid-news-grid-${i}`}>
             {elements.map((item, index) => {
               const isEven = index % 2 === 0;
               return (
