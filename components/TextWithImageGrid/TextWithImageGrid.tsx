@@ -52,7 +52,7 @@ export const TextWithImageGrid: React.FC<{
             />
           </GridColumn>
         </Grid>
-        {bullets.length ? (
+        {bullets && bullets.length ? (
           <Grid
             fullWidth={true}
             justifyContent={'start'}
