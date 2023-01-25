@@ -10,13 +10,13 @@
       }
     }
   }
-  @include breakpoint-down(sm) {
+  @include breakpoint-down(md) {
     padding: 3rem 1.5rem;
   }
 }
 .imageCol {
   align-self: stretch;
-  @include breakpoint-down(sm) {
+  @include breakpoint-down(md) {
     margin-top: 2rem;
     aspect-ratio: 3/2;
   }
@@ -24,5 +24,39 @@
 .grid {
   & > div {
     min-height: 45vh;
+  }
+}
+.bullets {
+  margin-top: 4.125rem;
+  svg {
+    color: $accent;
+    margin-right: 1rem;
+  }
+}
+.bullet {
+  display: flex;
+  position: relative;
+  @include breakpoint-down(md) {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+  &:nth-child(even) {
+    @include breakpoint-up(md) {
+      @include divider('left', $white);
+      &:after {
+        content: '';
+        @include divider('right', $white);
+      }
+    }
+    @include breakpoint-down(md) {
+      @include divider('top', $white);
+      &:after {
+        content: '';
+        width: 100%;
+        position: absolute;
+        bottom: 0;
+        @include divider('bottom', $white);
+      }
+    }
   }
 }
