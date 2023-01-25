@@ -51,6 +51,7 @@ import {
   VTValuesGridSectionModule,
   VTServicesSectionModule,
   StepsDownBulletsSectionModule,
+  StickyFooterModule,
 } from '../../domain/contentModule';
 
 import {
@@ -145,6 +146,7 @@ import VTHero from 'components/VTHero';
 import { VTValuesGridSection } from 'components/VTValuesGridSection';
 import { VTServicesSection } from 'components/VTServicesSection/VTServicesSection';
 import { StepsDownBulletsSection } from 'components/StepsDownBulletsSection';
+import { StickyFooter } from 'components/StickyFooter';
 
 export const getContentForContentModule = (
   contentModule: ContentModule,
@@ -152,6 +154,13 @@ export const getContentForContentModule = (
   sharedContent?: any,
   allModulesData?: any,
 ): JSX.Element => {
+  if (contentModule.specificContentModule instanceof StickyFooterModule) {
+    return (
+      <StickyFooter
+        specificContentModule={contentModule.specificContentModule}
+      />
+    );
+  }
   if (
     contentModule.specificContentModule instanceof StepsDownBulletsSectionModule
   ) {

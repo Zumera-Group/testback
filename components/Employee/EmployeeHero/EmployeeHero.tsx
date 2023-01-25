@@ -40,7 +40,7 @@ export const EmployeeHero: React.FC<{
             <h1 className={styles.title}>
               {firstName} {lastName}
             </h1>
-            <p>{jobTitle}</p>
+            <h4>{jobTitle}</h4>
             <ul className={styles.details}>
               {comaSeparatedSectors && (
                 <Detail

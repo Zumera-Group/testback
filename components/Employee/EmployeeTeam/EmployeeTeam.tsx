@@ -35,7 +35,7 @@ export const EmployeeTeam: React.FC<{
   const display = filteredEmployees.slice(randomIndex, randomIndex + 3);
 
   if (!filteredEmployees || filteredEmployees.length === 0) return null;
-
+  console.log(content);
   return (
     <Section size={'md'} bg={'light'} color={'primary'}>
       <Container>
@@ -83,7 +83,7 @@ export const EmployeeTeam: React.FC<{
           {display?.map((p, index) => (
             <React.Fragment key={index}>
               <SwiperSlide className={styles.slide}>
-                <Employee article={p} />
+                <Employee article={p} cardLabel={content.linkText} />
               </SwiperSlide>
             </React.Fragment>
           ))}

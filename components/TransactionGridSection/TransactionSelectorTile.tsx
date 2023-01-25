@@ -17,7 +17,8 @@ export const TransactionSelectorTile: React.FC<IProps> = ({
   locale,
 }) => {
   const sectorDetail = useGetSectorDetail(locale, sector.slug.current);
-  const hasIcon = sectorDetail.graphLight?.iconImage?.asset?.url;
+  const hasIcon =
+    sector._id !== '0' ? sectorDetail.graphLight?.iconImage?.asset?.url : false;
   return (
     <div
       className={`${styles.selectorTile} ${

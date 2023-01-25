@@ -36,7 +36,7 @@ export const AnchorHero: React.FC<any> = ({
         <Grid
           fullWidth={true}
           justifyContent={'space-between'}
-          alignItems={'center'}
+          alignItems={'start'}
         >
           <GridColumn sm={12} md={6} lg={6} className={styles.titles}>
             <SectionHeading

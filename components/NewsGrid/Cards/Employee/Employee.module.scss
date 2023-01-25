@@ -1,7 +1,7 @@
 .employee {
   display: block;
   width: 100%;
-  aspect-ratio: 1.2;
+  aspect-ratio: 1/1;
 }
 
 .link,
@@ -91,4 +91,14 @@
   color: inherit;
   font-size: $h4-font-size;
   margin: 0 0 1.25rem 0;
+  font-weight: $font-weight-bold;
+}
+
+.moreAbout {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  svg {
+    margin-left: 12px;
+  }
 }

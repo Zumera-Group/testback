@@ -845,6 +845,7 @@ export enum serviceDetailSectionNames {
 }
 
 export type ContentModuleType =
+  | 'stickyFooter'
   | 'stepsDownBulletsSection'
   | 'vtServicesSection'
   | 'vtValuesGridSection'
@@ -918,6 +919,7 @@ export type ContentModuleType =
 
 abstract class ContentModuleTypeFactory {
   static createInstance(type: ContentModuleType, fields: Record<string, any>) {
+    if (type === 'stickyFooter') return new StickyFooterModule(fields);
     if (type === 'stepsDownBulletsSection')
       return new StepsDownBulletsSectionModule(fields);
     if (type === 'vtServicesSection')
@@ -1594,5 +1596,13 @@ export class StepsDownBulletsSectionModule extends BaseModule {
     this.subtitle = fields.subtitle;
     this.description = fields.description;
     this.steps = fields.steps;
+  }
+}
+
+export class StickyFooterModule extends BaseModule {
+  button: any;
+  constructor(fields: Record<string, any>) {
+    super();
+    this.button = fields.button;
   }
 }

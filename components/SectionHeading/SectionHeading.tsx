@@ -33,7 +33,12 @@ export const SectionHeading: React.FC<Props> = ({
       ].join(' ')}
     >
       {subtitle && <p className={styles.subtitle}>{subtitle}</p>}
-      {title && <Heading className={styles.title}>{title}</Heading>}
+      {title && (
+        <Heading
+          className={styles.title}
+          dangerouslySetInnerHTML={{ __html: title }}
+        />
+      )}
       {secondaryTitle && (
         <h4 className={styles.secondaryTitle}>{secondaryTitle}</h4>
       )}

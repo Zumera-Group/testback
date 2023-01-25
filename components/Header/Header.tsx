@@ -12,6 +12,7 @@ import { useLinkWithCurrentLocale } from 'lib/shared-domain/useLinkWithCurrentLo
 import {
   HeroSectionModule,
   CDIGlobalSectionModule,
+  VTHeroModule,
 } from 'lib/shared-domain/page/domain/contentModule';
 
 import styles from './Header.module.scss';
@@ -42,6 +43,11 @@ export const Header = ({
     const hasHeroSection = contentModules.find((module) => {
       return module.specificContentModule instanceof HeroSectionModule;
     });
+    const IsVTLandingHero =
+      contentModules[0]?.specificContentModule instanceof VTHeroModule;
+    if (IsVTLandingHero) {
+      return false;
+    }
     const CDIGlobalIsHero =
       contentModules[0]?.specificContentModule instanceof
       CDIGlobalSectionModule;
@@ -52,7 +58,9 @@ export const Header = ({
       (hasHeroSection.specificContentModule as HeroSectionModule).type !==
         'home' &&
       (hasHeroSection.specificContentModule as HeroSectionModule).type !==
-        'primary'
+        'primary' &&
+      (hasHeroSection.specificContentModule as HeroSectionModule).type !==
+        'career'
     );
   };
 
@@ -104,6 +112,7 @@ export const Header = ({
         styles.header,
         isLightPage() ? styles.header__light : '',
         isScrolled ? styles.header__scrolled : '',
+        bigMenuOpen ? styles.header__open : '',
         indicator && styles.hideBorder,
       ].join(' ')}
     >

@@ -31,6 +31,7 @@ export const EmployeeNews: React.FC<{
       employees={[]}
       news={filteredNewsArticles}
       transactions={filteredTransactions}
+      titleAlign={'left'}
     />
   );
 };

@@ -12,6 +12,7 @@ import {
 import { SectionHeading } from 'components/SectionHeading';
 import { TransactionBig } from 'components/NewsGrid/Cards';
 import { SwiperSlide } from 'swiper/react';
+import { Button } from 'components/Button';
 
 import styles from './ServiceTransactions.module.scss';
 
@@ -22,7 +23,6 @@ export const ServiceTransactions = ({ transactions, service, content }) => {
   if (!transactions || transactions.length === 0) return null;
 
   const t = (item) => service?.[item];
-
   return (
     <Section size={'md'} bg={'light'} color={'primary'}>
       <Container>
@@ -31,19 +31,26 @@ export const ServiceTransactions = ({ transactions, service, content }) => {
           justifyContent={'space-between'}
           alignItems={'start'}
         >
-          <GridColumn sm={12} md={12} lg={5}>
+          <GridColumn sm={12} md={12} lg={12}>
             <SectionHeading
               title={t('subtitle')}
               subtitle={t('title')}
               description={t('description')}
+              align={'center'}
             />
           </GridColumn>
-          <GridColumn sm={12} md={12} lg={7}>
+        </Grid>
+        <Grid
+          fullWidth={true}
+          justifyContent={'space-between'}
+          alignItems={'start'}
+        >
+          <GridColumn sm={12} md={12} lg={12}>
             <SwiperTransactions
               prevButton={swiperPrevRef}
               nextButton={swiperNextRef}
               classes={styles.carousel}
-              maxSlidesToShow={2}
+              maxSlidesToShow={3}
             >
               {transactions
                 .slice(0, 50)
@@ -62,6 +69,15 @@ export const ServiceTransactions = ({ transactions, service, content }) => {
                 ))}
             </SwiperTransactions>
             <div className={styles.navigationBtns}>
+              {service?.viewAllLinkText ? (
+                <Button
+                  variant={'secondary'}
+                  link={{ slug: { current: `/transactions` } }}
+                  classes={styles.button}
+                >
+                  {service?.viewAllLinkText}
+                </Button>
+              ) : null}
               <SwiperNavigationButtons
                 prev={swiperPrevRef}
                 next={swiperNextRef}

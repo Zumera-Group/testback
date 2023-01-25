@@ -3,10 +3,12 @@ import styles from './TransactionCompany.module.scss';
 import { Transaction } from 'lib/shared-domain/transactions/domain';
 import Image from 'next/image';
 import { P } from 'components/Typography/P';
+import { SectionHeading } from 'components/SectionHeading';
 
 export const TransactionCompany: React.FC<{
   transaction: Transaction;
-}> = ({ transaction }) => {
+  content: any;
+}> = ({ transaction, content }) => {
   if (
     !transaction?.companyDescription1?.length ||
     !transaction?.companyDescription2?.length
@@ -16,6 +18,13 @@ export const TransactionCompany: React.FC<{
 
   return (
     <Section size={'md'} bg={'light'} color={'primary'}>
+      <Container classes={styles.headingContainer}>
+        <SectionHeading
+          title={content.representedText}
+          headingType={'h3'}
+          align={'center'}
+        />
+      </Container>
       <Container classes={styles.container}>
         <Grid
           fullWidth={true}

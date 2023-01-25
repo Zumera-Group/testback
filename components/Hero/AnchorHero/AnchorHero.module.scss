@@ -1,5 +1,8 @@
 .titles {
   line-break: anywhere;
+  @include breakpoint-down(md) {
+    margin-bottom: 2rem;
+  }
 }
 .anchorLinks {
   list-style-type: none;

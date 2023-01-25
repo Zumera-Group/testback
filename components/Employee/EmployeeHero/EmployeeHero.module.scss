@@ -23,7 +23,6 @@
   padding: 0;
   display: flex;
   align-items: flex-start;
-  flex-wrap: wrap;
   flex-direction: column;
   gap: $gutter * 0.5;
   @include breakpoint-up(md) {
@@ -36,12 +35,13 @@
 
 .detail {
   display: block;
-  margin: $gutter 2rem 0 0;
+  margin: $gutter 0 0 0;
+  flex: 1;
   &_title,
   &_text {
     color: inherit;
     margin: 0;
-    font-size: $font-size-small;
+    font-size: $font-size-big;
     line-height: $line-height-sm;
     letter-spacing: $letter-spacing-body;
   }

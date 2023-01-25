@@ -26,7 +26,6 @@ export const TransactionTeam = ({ transaction, content }) => {
 
   const { peopleInvolved } = transaction;
   const { title, description, subtitle } = content;
-
   return (
     <Section size={'md'} bg={'light'} color={'primary'}>
       <Container>
@@ -70,7 +69,7 @@ export const TransactionTeam = ({ transaction, content }) => {
           {peopleInvolved?.map((p, index) => (
             <>
               <SwiperSlide className={styles.slide}>
-                <Employee article={p} />
+                <Employee article={p} cardLabel={content.linkText} />
               </SwiperSlide>
             </>
           ))}

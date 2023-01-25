@@ -36,7 +36,11 @@ export const TextWithImageGrid: React.FC<{
               align={'left'}
             />
             {button.title ? (
-              <Button {...button} onDark={background !== 'light'}>
+              <Button
+                {...button}
+                onDark={background !== 'light'}
+                classes={styles.button}
+              >
                 {button.title}
               </Button>
             ) : null}

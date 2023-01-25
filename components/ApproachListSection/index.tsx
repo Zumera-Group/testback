@@ -18,6 +18,7 @@ export const ApproachListSection: React.FC<{
             description={description}
             headingType={'h2'}
             align={'center'}
+            classes={styles.titles}
           />
         </Grid>
         {textBlocks?.map((block) => (
@@ -32,14 +33,16 @@ export const ApproachListSection: React.FC<{
             ].join(' ')}
           >
             <GridColumn sm={12} md={6} lg={6} className={styles.imageCol}>
-              <Image
-                unoptimized
-                loading="lazy"
-                src={block.image?.asset?.url}
-                alt={block.image?.name}
-                objectFit="contain"
-                layout="fill"
-              />
+              <div className={styles.image}>
+                <Image
+                  unoptimized
+                  loading="lazy"
+                  src={block.image?.asset?.url}
+                  alt={block.image?.name}
+                  objectFit="contain"
+                  layout="fill"
+                />
+              </div>
             </GridColumn>
             <GridColumn sm={12} md={5} lg={5} className={styles.textCol}>
               <SectionHeading

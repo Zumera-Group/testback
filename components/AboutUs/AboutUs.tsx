@@ -32,7 +32,7 @@ export const AboutUs = ({ ...rest }) => {
           alignItems={'start'}
           fullWidth={true}
         >
-          <GridColumn sm={12} md={6} lg={6}>
+          <GridColumn sm={12} md={6} lg={6} className={styles.title}>
             <SectionHeading
               title={title}
               subtitle={subtitle}

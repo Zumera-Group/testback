@@ -11,6 +11,10 @@
   background-color: rgba($header-bg, 0);
   color: $white;
 
+  svg {
+    fill: $white;
+  }
+
   &:not(&__light):not(&__scrolled) {
     .container {
       @include divider(bottom, $white);
@@ -18,9 +22,13 @@
   }
 
   &__light,
-  &__scrolled {
+  &__scrolled,
+  &__open {
     background-color: rgba($header-bg, 1);
     color: $primary;
+    svg {
+      fill: $primary;
+    }
     .container {
       @include divider(bottom, $primary);
     }

@@ -85,7 +85,7 @@
 }
 
 .beam {
-  height: 2.5rem;
+  height: 4.5rem;
   margin: 0 $gutter * 0.5;
   transition: fill $timing-md $ease-out;
 }
@@ -120,6 +120,14 @@
 .title {
   line-height: $line-height-base;
   margin: 0 0 1.25rem 0;
+  @include breakpoint-down(md) {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* number of lines to show */
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+  }
 }
 
 .excerpt {

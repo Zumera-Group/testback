@@ -18,7 +18,11 @@ export const FiveSteps: React.FC<{
           ))}
           <div className={styles.divider}></div>
         </div>
-        <SectionHeading title={bottomTitle} align={'center'} />
+        <SectionHeading
+          title={bottomTitle}
+          align={'center'}
+          headingType={'h3'}
+        />
         {button?.title && (
           <Button classes={styles.button} {...button}>
             {button.title}

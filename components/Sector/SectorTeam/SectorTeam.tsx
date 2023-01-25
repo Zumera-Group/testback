@@ -26,7 +26,7 @@ export const SectorTeam = ({ sector }) => {
     !sector.teamSection
   )
     return null;
-
+  console.log(sector);
   const { teamSection, contributors } = sector;
 
   const Quote = () => {
@@ -34,8 +34,8 @@ export const SectorTeam = ({ sector }) => {
       <blockquote className={styles.quote}>
         <p>{teamSection.quote}</p>
         <cite>
-          <span>{`${sector.teamSection.author?.firstName} ${sector.teamSection.author?.lastName}`}</span>
           {sector.teamSection.author?.jobTitle}
+          <span>{`${sector.teamSection.author?.firstName} ${sector.teamSection.author?.lastName}`}</span>
         </cite>
       </blockquote>
     );
@@ -84,7 +84,7 @@ export const SectorTeam = ({ sector }) => {
           {contributors?.map((p, index) => (
             <>
               <SwiperSlide className={styles.slide}>
-                <Employee article={p} />
+                <Employee article={p} cardLabel={sector.teamSection.linkText} />
               </SwiperSlide>
               {index === 0 && teamSection ? (
                 <SwiperSlide

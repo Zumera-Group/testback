@@ -18,6 +18,7 @@ import { TransactionCard } from 'components/TransactionGridSection/TransactionCa
 import { Loader } from 'components/Loader';
 import { SwiperTransactionsGrid } from 'components/Layout/SwiperTransactionsGrid';
 import { Locale } from 'lib/locale';
+import { Button } from 'components/Button';
 
 interface IProps {
   dropdownsTitle: string;
@@ -27,11 +28,48 @@ interface IProps {
 export const TransactionGridSection: React.FC<IProps> = (props) => {
   const router = useRouter();
   const { dropdownsTitle, sectorsDropdown } = props;
-  const [activeSector, setActiveSector] = useState(sectorsDropdown[0]._id);
+  const [activeSector, setActiveSector] = useState('0');
   const [transactions, setTransaction] = useState([]);
   const swiperPrevRef = useRef();
   const swiperNextRef = useRef();
   const [loading, setLoading] = useState(true);
+  const [activeChunk, setActiveChunk] = useState(1);
+  const [displayTransaction, setDisplayTransaction] = useState([]);
+
+  useEffect(() => {
+    const transactionsToDisplay = transactions
+      .filter((item) => {
+        if (activeSector === '0') {
+          return item;
+        }
+        if (!item.sectors) {
+          return item;
+        }
+        const sectorsId = item.sectors.map((sec) => sec._id);
+        return sectorsId.includes(activeSector);
+      })
+      ?.sort(
+        (a, b) =>
+          new Date(b.date || null).getTime() -
+          new Date(a.date || null).getTime(),
+      )
+      .reduce((resultArray, item, index) => {
+        const chunkIndex = Math.floor(index / chunkSize);
+
+        if (!resultArray[chunkIndex]) {
+          resultArray[chunkIndex] = []; // start a new chunk
+        }
+
+        resultArray[chunkIndex].push(item);
+
+        return resultArray;
+      }, []);
+    setDisplayTransaction(transactionsToDisplay.slice(0, activeChunk).flat());
+  }, [transactions, activeChunk, activeSector]);
+
+  useEffect(() => {
+    setActiveChunk(1);
+  }, [activeSector]);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -45,6 +83,7 @@ export const TransactionGridSection: React.FC<IProps> = (props) => {
   const sectorClickHandler = useCallback((state) => {
     setActiveSector(state);
   }, []);
+  const chunkSize = 12;
   return (
     <Section
       size={'md'}
@@ -87,6 +126,14 @@ export const TransactionGridSection: React.FC<IProps> = (props) => {
               maxSlidesToShow={7}
               classes={styles.swiper}
             >
+              <SwiperSlide>
+                <TransactionSelectorTile
+                  sector={{ name: 'All', _id: '0', slug: { current: '' } }}
+                  activeSector={activeSector}
+                  clickHandler={sectorClickHandler}
+                  locale={router.locale as Locale}
+                />
+              </SwiperSlide>
               {sectorsDropdown.map((sector) => (
                 <SwiperSlide key={sector._id}>
                   <TransactionSelectorTile
@@ -113,23 +160,19 @@ export const TransactionGridSection: React.FC<IProps> = (props) => {
               lg={12}
               className={styles.transactionsGrid}
             >
-              {transactions
-                .filter((item) => {
-                  if (!item.sectors) {
-                    return item;
-                  }
-                  const sectorsId = item.sectors.map((sec) => sec._id);
-                  return sectorsId.includes(activeSector);
-                })
-                ?.sort(
-                  (a, b) =>
-                    new Date(b.date || null).getTime() -
-                    new Date(a.date || null).getTime(),
-                )
-                .map((trans) => (
-                  <TransactionCard key={trans._id} transaction={trans} />
-                ))}
+              {displayTransaction.map((trans) => (
+                <TransactionCard key={trans._id} transaction={trans} />
+              ))}
             </GridColumn>
+            <Button
+              variant={'secondary'}
+              onDark={true}
+              hideIcon={true}
+              callBack={() => setActiveChunk(activeChunk + 1)}
+              classes={styles.loadMore}
+            >
+              Load more +
+            </Button>
           </Grid>
         ) : (
           <Loader className={styles.loader} />

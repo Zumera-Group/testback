@@ -5,6 +5,7 @@ import { Transaction } from '../domain/index';
 
 export const TransactionCompany: React.FC<{
   transaction: Transaction;
-}> = ({ transaction }) => {
-  return <TCompany transaction={transaction} />;
+  content: any;
+}> = ({ transaction, content }) => {
+  return <TCompany transaction={transaction} content={content} />;
 };

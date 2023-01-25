@@ -26,6 +26,7 @@ interface Props {
   shouldHideCDITransactions?: boolean;
   shouldHidePeopleUpdates?: boolean;
   initialNumberOfRepetitions?: number;
+  titleAlign?: 'left' | 'center' | 'right';
 }
 
 export const NewsGrid: React.FC<Props> = ({
@@ -43,9 +44,11 @@ export const NewsGrid: React.FC<Props> = ({
   shouldHideCDITransactions,
   shouldHidePeopleUpdates,
   initialNumberOfRepetitions = 1,
- }) => {
-
-  const [numberOfRepetitions, setNumberOfRepetitions] = useState(initialNumberOfRepetitions);
+  titleAlign,
+}) => {
+  const [numberOfRepetitions, setNumberOfRepetitions] = useState(
+    initialNumberOfRepetitions,
+  );
   const [hasMoreDataToLoad, setHasMoreDataToLoad] = useState(true);
 
   const numOfTransactionsDisplayed = 3;
@@ -61,14 +64,12 @@ export const NewsGrid: React.FC<Props> = ({
     ?.sort(sortByTime);
 
   let employees = useMemo(() => {
-    return (
-        !shouldHidePeopleUpdates
-        ? allEmployees
-            ?.map((value) => ({ value, sort: Math.random() }))
-            .sort((a, b) => a.sort - b.sort)
-            .map(({ value }) => value)
-        : []
-    )
+    return !shouldHidePeopleUpdates
+      ? allEmployees
+          ?.map((value) => ({ value, sort: Math.random() }))
+          .sort((a, b) => a.sort - b.sort)
+          .map(({ value }) => value)
+      : [];
   }, [allEmployees, shouldHidePeopleUpdates]);
 
   employees = employees?.filter(
@@ -76,10 +77,13 @@ export const NewsGrid: React.FC<Props> = ({
   );
 
   useEffect(() => {
-    const noMoreTransactionsToLoad = transactions?.length <= numOfTransactionsDisplayed * numberOfRepetitions;
-    const noMoreNewsToLoad = news?.length <= numOfNewsDisplayed * numberOfRepetitions;
+    const noMoreTransactionsToLoad =
+      transactions?.length <= numOfTransactionsDisplayed * numberOfRepetitions;
+    const noMoreNewsToLoad =
+      news?.length <= numOfNewsDisplayed * numberOfRepetitions;
     const noMoreEmployeesToLoad = employees?.length <= numberOfRepetitions;
-    const noMoreDataToLoad = noMoreTransactionsToLoad && noMoreNewsToLoad && noMoreEmployeesToLoad;
+    const noMoreDataToLoad =
+      noMoreTransactionsToLoad && noMoreNewsToLoad && noMoreEmployeesToLoad;
     const newsPageGridData = showAllNews && loadMoreText && !noMoreDataToLoad;
     const detailPageGridData = loadMoreText && !noMoreDataToLoad;
     if (newsPageGridData || detailPageGridData) {
@@ -87,26 +91,29 @@ export const NewsGrid: React.FC<Props> = ({
     } else if (noMoreDataToLoad) {
       setHasMoreDataToLoad(false);
     }
-  }, [numberOfRepetitions, transactions, news, employees, allNewsLinkText, showAllNews, loadMoreText]);
+  }, [
+    numberOfRepetitions,
+    transactions,
+    news,
+    employees,
+    allNewsLinkText,
+    showAllNews,
+    loadMoreText,
+  ]);
 
   if (transactions && shouldHideCDITransactions) {
     transactions = transactions?.filter((t) => !t.hasCDIRelation);
   }
 
   return (
-    <Section
-      size={'md'} 
-      bg={'light'}
-      color={'primary'}
-      divider={true}
-    >
+    <Section size={'md'} bg={'light'} color={'primary'} divider={true}>
       <Container>
         <SectionHeading
           title={title}
           subtitle={subtitle}
           description={description}
           headingType={'h2'}
-          align={'center'}
+          align={titleAlign || 'center'}
         />
 
         {new Array(numberOfRepetitions).fill(undefined).map((_i, i) => {
@@ -127,9 +134,9 @@ export const NewsGrid: React.FC<Props> = ({
         {hasMoreDataToLoad && (
           <LoadMore
             callBack={() => setNumberOfRepetitions(numberOfRepetitions + 1)}
-            text={loadMoreText} />
+            text={loadMoreText}
+          />
         )}
-
       </Container>
     </Section>
   );

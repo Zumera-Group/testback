@@ -9,7 +9,7 @@ import { sanityImageUrlFor } from 'lib/sanity';
 
 import styles from './Employee.module.scss';
 
-export const Employee = ({ article }) => {
+export const Employee = ({ article, cardLabel }) => {
   if (!article) return null;
   const name = getEmployeeFullName(article);
   const jobTitle = article.jobTitle;
@@ -47,12 +47,15 @@ export const Employee = ({ article }) => {
           <div className={styles.body}>
             {jobTitle && <h4 className={styles.jobTitle}>{jobTitle}</h4>}
             {name && <h3 className={styles.name}>{name}</h3>}
-            <Icon
-              iconName={'arrow-circle'}
-              viewBox={'0 0 32 32'}
-              width={24}
-              height={24}
-            />
+            <div className={styles.moreAbout}>
+              {cardLabel}
+              <Icon
+                iconName={'arrow-circle'}
+                viewBox={'0 0 32 32'}
+                width={24}
+                height={24}
+              />
+            </div>
           </div>
         </a>
       </Link>
