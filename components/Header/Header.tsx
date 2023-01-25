@@ -97,12 +97,6 @@ export const Header = ({
     }
   }, [bigMenuOpen]);
 
-  const current =
-    indicator.current > indicator.total
-      ? indicator.current - 1
-      : indicator.current;
-  const total = indicator.total;
-
   return (
     <header
       id="header"
@@ -110,9 +104,10 @@ export const Header = ({
         styles.header,
         isLightPage() ? styles.header__light : '',
         isScrolled ? styles.header__scrolled : '',
+        indicator && styles.hideBorder,
       ].join(' ')}
     >
-      <Container classes={styles.container}>
+      <Container classes={[styles.container].join('')}>
         <div className={styles.logoWrapper}>
           {!staticExtended ? (
             <Logo
@@ -140,9 +135,14 @@ export const Header = ({
             />
           </div>
         )}
+
         {indicator && (
           <div className={styles.questionIndicator}>
-            Question {current} / {total}
+            Question{' '}
+            {indicator?.current > indicator?.total
+              ? indicator?.current - 1
+              : indicator?.current}{' '}
+            / {indicator?.total}
           </div>
         )}
       </Container>

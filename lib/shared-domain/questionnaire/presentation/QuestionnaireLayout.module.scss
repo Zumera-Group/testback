@@ -67,8 +67,11 @@
 }
 
 .questionnaireHeader {
-  margin-bottom: $gutter * 10;
   & > * {
     background-color: $primary !important;
+  }
+
+  @include breakpoint-up(md) {
+    margin-bottom: $gutter * 10;
   }
 }

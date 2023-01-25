@@ -22,6 +22,8 @@ import { LoadingCircle } from 'components/Icons/LoadingCircle';
 import PageHeader from 'lib/shared-domain/page/presentation/PageHeader';
 import * as animationData from './loading-wheel.json';
 import Lottie from 'react-lottie';
+import { SCREEN_SIZE_MD } from 'lib/constants';
+import { useMediaQuery } from 'lib/hooks/useMediaQuery';
 
 const t = getTranslateByScope('timeEstimation');
 const tSidebar = getTranslateByScope('sidebar');
@@ -56,6 +58,7 @@ const QuestionnaireLayout: React.FC<{
 
   useSetQuestionnaireLocaleToUseFori18n(locale);
   const [currenQuestionPosition, setCurrentQuestionPosition] = useState(0);
+  const isMobile = useMediaQuery(`(max-width: ${SCREEN_SIZE_MD})`);
 
   const {
     questionnaire,
@@ -300,7 +303,7 @@ const QuestionnaireLayout: React.FC<{
             />
           </GridItem>
 
-          {questionnaire && !isOnResultScreen && (
+          {questionnaire && !isOnResultScreen && !isMobile && (
             <GridItem
               gridArea="sidebar"
               display={{ base: 'none', lg: 'grid' }}
