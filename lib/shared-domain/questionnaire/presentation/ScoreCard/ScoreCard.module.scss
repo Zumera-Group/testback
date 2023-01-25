@@ -10,12 +10,6 @@
     align-items: center;
     min-height: 80%;
   }
-
-  svg {
-    @include breakpoint-down(md) {
-      margin-left: -10%;
-    }
-  }
 }
 
 .scoreCardTitle {
