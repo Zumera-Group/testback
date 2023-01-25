@@ -1567,7 +1567,7 @@ export class VTServicesSectionModule extends BaseModule {
   subtitle: string;
   description: any[];
   background: 'gradient' | 'primary' | 'secondary' | 'tertiary' | 'light';
-  services: any[];
+  vtServices: any[];
 
   isFullWidth: boolean;
   button: any;
@@ -1577,7 +1577,7 @@ export class VTServicesSectionModule extends BaseModule {
     this.subtitle = fields.subtitle;
     this.description = fields.description;
     this.background = fields.background;
-    this.services = fields.services;
+    this.vtServices = fields.vtServices;
     this.isFullWidth = fields.isFullWidth;
     this.button = fields.button;
   }

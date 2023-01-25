@@ -38,7 +38,7 @@ export const ContactUs: React.FC<Props> = (props) => {
           alignItems={'start'}
           fullWidth={true}
         >
-          <GridColumn sm={12} md={6} lg={5}>
+          <GridColumn sm={12} md={6} lg={6}>
             <SectionHeading
               title={title}
               subtitle={subtitle}
@@ -51,6 +51,11 @@ export const ContactUs: React.FC<Props> = (props) => {
                 appointmentLinkText={appointmentLinkText}
               />
             )}
+            <img
+              src={'/contentModules/contactUsSection/footer_cta-building.svg'}
+              alt={'building'}
+              width={'100%'}
+            />
           </GridColumn>
           <GridColumn sm={12} md={6} lg={7} xl={6}>
             <ContactForm contactForm={contactForm} />
