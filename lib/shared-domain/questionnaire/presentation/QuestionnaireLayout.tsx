@@ -16,12 +16,11 @@ import { qLogs } from '../application/log';
 import { useSalesforceAnswerSync } from '../application/useSalesforceAnswerSync';
 import { useRouter } from 'next/router';
 import { useGetSalesforceScore } from '../application/useGetQuestionnaireScore';
-import { ProgressBar } from 'components/Calculator/ProgressBar';
-import Image from 'next/image';
 import PageHeader from 'lib/shared-domain/page/presentation/PageHeader';
 import { SCREEN_SIZE_MD } from 'lib/constants';
 import { useMediaQuery } from 'lib/hooks/useMediaQuery';
 import { ScoreCard } from './ScoreCard';
+import ProgressBarLine from 'components/Calculator/ProgressBarLine/ProgressBarLine';
 
 const t = getTranslateByScope('timeEstimation');
 const tSidebar = getTranslateByScope('sidebar');
@@ -167,6 +166,8 @@ const QuestionnaireLayout: React.FC<{
     0,
   );
 
+  const currentCategoryIndex = mainStep + 1;
+
   return (
     <>
       <SEO
@@ -204,7 +205,26 @@ const QuestionnaireLayout: React.FC<{
               }
             />
           </GridItem>
-
+          {questionnaire && !isOnResultScreen && isMobile && (
+            <GridItem
+              gridArea="sidebar"
+              display={{ base: 'none', lg: 'grid' }}
+              className={[styles.sideBarWrapper, styles.mobileSideBar].join(
+                ' ',
+              )}
+            >
+              <ProgressBarLine
+                indicator={
+                  !isOnResultScreen && {
+                    current: currenQuestionPosition,
+                    total: numberOfQuestionsInTotal,
+                  }
+                }
+                currentCategory={currentCategory}
+                categoryIndex={currentCategoryIndex}
+              />
+            </GridItem>
+          )}
           {questionnaire && !isOnResultScreen && !isMobile && (
             <GridItem
               gridArea="sidebar"
