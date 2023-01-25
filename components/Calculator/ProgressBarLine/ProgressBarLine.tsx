@@ -4,7 +4,9 @@ export const ProgressBarLine = ({
   indicator,
   currentCategory,
   categoryIndex,
+  progress,
 }) => {
+  console.log(progress);
   return (
     <div className={styles.progressBarWrapper}>
       <div className={styles.progressLabels}>
@@ -18,6 +20,12 @@ export const ProgressBarLine = ({
             : indicator?.current}{' '}
           / {indicator?.total}
         </span>
+      </div>
+      <div className={styles.outerBar}>
+        <div
+          className={styles.innerBar}
+          style={{ width: `${progress}%` }}
+        ></div>
       </div>
     </div>
   );

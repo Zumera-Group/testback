@@ -167,6 +167,7 @@ const QuestionnaireLayout: React.FC<{
   );
 
   const currentCategoryIndex = mainStep + 1;
+  const progress = (currenQuestionPosition / numberOfQuestionsInTotal) * 100;
 
   return (
     <>
@@ -222,6 +223,7 @@ const QuestionnaireLayout: React.FC<{
                 }
                 currentCategory={currentCategory}
                 categoryIndex={currentCategoryIndex}
+                progress={progress}
               />
             </GridItem>
           )}

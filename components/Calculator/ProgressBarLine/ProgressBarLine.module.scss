@@ -3,11 +3,23 @@
   align-items: center;
   justify-content: space-between;
   width: 100%;
+  padding: 0 $gutter;
   & > * {
     color: $white;
   }
 
   .category {
     font-weight: $font-weight-bold;
+  }
+}
+
+.outerBar {
+  background: $quaternary;
+
+  margin: $gutter 0;
+
+  .innerBar {
+    height: 2px;
+    background-color: $accent;
   }
 }
