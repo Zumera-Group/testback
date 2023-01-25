@@ -8,7 +8,6 @@ import { Question, Questionnaire } from '../domain/index';
 import { Sector, SiteSettings } from '../../page/domain/index';
 import { getTranslateByScope } from 'translation/i18n';
 import { useValuationStore } from '../store';
-
 import { QuestionComponent } from './Question/QuestionComponent';
 import Sidebar from './Sidebar';
 import { EnvironmentService } from 'environment.service';
@@ -16,12 +15,13 @@ import { uuid } from 'uuidv4';
 import { qLogs } from '../application/log';
 import { useSalesforceAnswerSync } from '../application/useSalesforceAnswerSync';
 import { useRouter } from 'next/router';
-import BottomBar from 'components/Calculator/BottomBar/BottomBar';
 import { useGetSalesforceScore } from '../application/useGetQuestionnaireScore';
 import { ProgressBar } from 'components/Calculator/ProgressBar';
 import Image from 'next/image';
 import { LoadingCircle } from 'components/Icons/LoadingCircle';
 import PageHeader from 'lib/shared-domain/page/presentation/PageHeader';
+import * as animationData from './loading-wheel.json';
+import Lottie from 'react-lottie';
 
 const t = getTranslateByScope('timeEstimation');
 const tSidebar = getTranslateByScope('sidebar');
@@ -241,7 +241,25 @@ const QuestionnaireLayout: React.FC<{
         </>
       );
     }
-    return <LoadingCircle />;
+    const defaultOptions = {
+      loop: true,
+      autoplay: true,
+      animationData: animationData,
+      rendererSettings: {
+        preserveAspectRatio: 'xMidYMid slice',
+      },
+    };
+
+    return (
+      <Lottie
+        options={defaultOptions}
+        width="100%"
+        height={'auto'}
+        style={{ maxWidth: 194, marginLeft: 'auto' }}
+        isStopped={false}
+        isPaused={false}
+      />
+    );
   };
 
   return (
