@@ -18,12 +18,10 @@ import { useRouter } from 'next/router';
 import { useGetSalesforceScore } from '../application/useGetQuestionnaireScore';
 import { ProgressBar } from 'components/Calculator/ProgressBar';
 import Image from 'next/image';
-import { LoadingCircle } from 'components/Icons/LoadingCircle';
 import PageHeader from 'lib/shared-domain/page/presentation/PageHeader';
-import * as animationData from './loading-wheel.json';
-import Lottie from 'react-lottie';
 import { SCREEN_SIZE_MD } from 'lib/constants';
 import { useMediaQuery } from 'lib/hooks/useMediaQuery';
+import { ScoreCard } from './ScoreCard';
 
 const t = getTranslateByScope('timeEstimation');
 const tSidebar = getTranslateByScope('sidebar');
@@ -169,102 +167,6 @@ const QuestionnaireLayout: React.FC<{
     0,
   );
 
-  //RESULTS LOGIC
-  const [score, setScore] = React.useState<{
-    points: string;
-    percentage: string;
-    calendly: string;
-    avg: number;
-  }>(null);
-  const [hasError, setHasError] = React.useState(false);
-  const { getScore } = useGetSalesforceScore();
-
-  React.useEffect(() => {
-    const loadScore = async () => {
-      try {
-        const score = await getScore();
-        setScore(score);
-        setHasError(false);
-      } catch (e) {
-        setHasError(true);
-      }
-    };
-    loadScore();
-  }, []);
-
-  const scoreCard = () => {
-    if (score) {
-      const presenter = {
-        hasPoints: () => {
-          if (score.points === '#N/A' || !score.points) return false;
-          return true;
-        },
-        getFormattedPoints: () => {
-          return score.points;
-        },
-        getPercentage: () => {
-          try {
-            return Math.floor(Number(score.percentage) * 100);
-          } catch (e) {
-            return '';
-          }
-        },
-      };
-      const hasScoreAndPercentage =
-        presenter.hasPoints() && presenter.getPercentage();
-      const points = tr('evaluation.resultBox.points', {
-        points: presenter.getFormattedPoints(),
-      });
-      const title = tr('evaluation.resultBox.title');
-      const betterThan = tr('evaluation.resultBox.betterThen', {
-        percentage: presenter.getPercentage(),
-      });
-      return (
-        <>
-          {hasScoreAndPercentage && (
-            <div className={styles.scoreCardWrapper}>
-              <span className={styles.scoreCardTitle}>{title}</span>
-              <ProgressBar
-                isPoint
-                progress={points.substring(0, points.length - 2)}
-                color="gradient"
-              />
-              <p className={styles.betterThan}>{betterThan}</p>
-              <Image
-                unoptimized
-                loading="lazy"
-                objectFit="cover"
-                alt={'booklet'}
-                src={'/booklet.png'}
-                height={217}
-                width={217}
-              />
-            </div>
-          )}
-        </>
-      );
-    }
-    const defaultOptions = {
-      loop: true,
-      autoplay: true,
-      animationData: animationData,
-      rendererSettings: {
-        preserveAspectRatio: 'xMidYMid slice',
-      },
-    };
-
-    return (
-      <Lottie
-        options={defaultOptions}
-        width="100%"
-        height={'auto'}
-        style={{ maxWidth: 194, marginLeft: 'auto' }}
-        isStopped={false}
-        isPaused={false}
-      />
-    );
-  };
-
   return (
     <>
       <SEO
@@ -319,7 +221,7 @@ const QuestionnaireLayout: React.FC<{
               display={{ base: 'none', lg: 'grid' }}
               className={styles.sideBarWrapper}
             >
-              {scoreCard()}
+              <ScoreCard />
             </GridItem>
           )}
 
