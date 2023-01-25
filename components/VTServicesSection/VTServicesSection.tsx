@@ -14,7 +14,7 @@ export const VTServicesSection: React.FC<{
     description,
     background,
     button,
-    services,
+    vtServices,
     isFullWidth,
   } = specificContentModule;
 
@@ -63,7 +63,7 @@ export const VTServicesSection: React.FC<{
             <ButtonComp />
           </GridColumn>
           <GridColumn sm={12} md={6} lg={6} className={styles.rightCol}>
-            {services.map((service) => (
+            {vtServices.map((service) => (
               <div key={service._key} className={styles.service}>
                 <div className={styles.imageWrapper}>
                   <Image

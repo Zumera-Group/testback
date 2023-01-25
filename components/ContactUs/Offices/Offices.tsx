@@ -41,10 +41,6 @@ export const Offices = ({ offices, appointmentLinkText }) => {
           </li>
         ))}
       </ul>
-      <img
-        src={'/contentModules/contactUsSection/footer_cta-building.svg'}
-        alt={'building'}
-      />
       <AnimatePresence initial={false} exitBeforeEnter>
         {selectedOffice && (
           <motion.div

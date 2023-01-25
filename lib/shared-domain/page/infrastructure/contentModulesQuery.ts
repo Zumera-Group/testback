@@ -443,7 +443,7 @@ export const contentModulesQuery = (
 		  }
       },
     },
-    services[] {
+    vtServices[] {
       ...,
       icon-> {
 		iconImage{
