@@ -70,3 +70,21 @@
     margin-bottom: $gutter * 10;
   }
 }
+
+.scoreCardTitle {
+  color: $white;
+  text-transform: uppercase;
+}
+
+.betterThan {
+  color: $white;
+  font-weight: $font-weight-bold;
+  text-align: left;
+}
+
+.booklet {
+  display: none;
+  @include breakpoint-up(md) {
+    display: block;
+  }
+}

@@ -16,6 +16,8 @@ export const ScoreCard = () => {
     calendly: string;
     avg: number;
   }>(null);
+  const [hasError, setHasError] = React.useState(false);
+  const { getScore } = useGetSalesforceScore();
 
   React.useEffect(() => {
     const loadScore = async () => {
@@ -29,8 +31,6 @@ export const ScoreCard = () => {
     };
     loadScore();
   }, []);
-  const [hasError, setHasError] = React.useState(false);
-  const { getScore } = useGetSalesforceScore();
 
   const presenter = {
     hasPoints: () => {
@@ -66,6 +66,8 @@ export const ScoreCard = () => {
       preserveAspectRatio: 'xMidYMid slice',
     },
   };
+
+  console.log(hasScoreAndPercentage);
 
   return (
     <>
