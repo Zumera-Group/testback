@@ -12,7 +12,9 @@
   }
 
   svg {
-    margin-left: -10%;
+    @include breakpoint-down(md) {
+      margin-left: -10%;
+    }
   }
 }
 
