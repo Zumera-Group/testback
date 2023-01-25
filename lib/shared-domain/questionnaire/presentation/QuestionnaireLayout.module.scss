@@ -20,6 +20,7 @@
       'sidebar   footer  .   ';
   }
   padding-bottom: $gutter * 2;
+  padding-top: $gutter * 7;
 }
 
 .sideBarWrapper {
@@ -34,10 +35,11 @@
     @include divider(right, $white);
     align-items: center;
     margin-top: 0;
+    width: 300px;
   }
 
   @include breakpoint-up(lg) {
-    max-width: 440px;
+    width: 450px;
     min-height: 700px;
   }
   &.mobileSideBar {
@@ -55,9 +57,11 @@
   max-width: 100%;
   margin: $gutter * 1.5;
   margin: $gutter * 1.5 $gutter;
+  min-height: 515px;
 
   @include breakpoint-up(md) {
     margin: $gutter * 1.5 $gutter * 4;
+    min-height: auto;
   }
 }
 
@@ -67,7 +71,7 @@
   }
 
   @include breakpoint-up(md) {
-    margin-bottom: $gutter * 10;
+    margin-bottom: $gutter * 4;
   }
 }
 
