@@ -25,7 +25,7 @@ export const ProgressBar: React.FC<Props> = ({
         r="89"
         cx="96"
         cy="96"
-        strokeDashoffset={560 - (progress / 100) * 560}
+        strokeDashoffset={560 - ((progress > 100 ? 100 : progress) / 100) * 560}
         className={styles.progressCircle}
         stroke={color === 'white' ? 'white' : 'url(#paint0_linear_1639_80025)'}
       />
@@ -39,7 +39,7 @@ export const ProgressBar: React.FC<Props> = ({
       <g className={styles.textWrapper}>
         {isPercent && (
           <text x="75" y="20">
-            {Math.round(progress)}%
+            {Math.round(progress > 100 ? 100 : progress)}%
           </text>
         )}
 

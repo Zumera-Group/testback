@@ -12,19 +12,14 @@ import {
 } from 'date-fns';
 import { QuestionButtons } from '../../Question/QuestionButtons';
 import { QuestionAnimation } from '../../Question/QuestionAnimation';
-
-enum VALUE_TYPE {
-  EUR = '€',
-  USD = '$',
-  percent = '%',
-}
+import { DEFAULT_VALUES } from './constants';
 
 export const NumberInput: React.FC<{
   question: Question;
   onNextQuestion: () => void;
 }> = ({ question, onNextQuestion }) => {
   const { valueType, placeholder, salesforceFormat, label } =
-    question?.answerSelector?.numberInput;
+    question?.answerSelector?.numberInput || DEFAULT_VALUES;
   const { getNumberFormat, sign } = useNumberFormat(valueType);
   const { getAnswer, setAnswer } = useAnswers(question);
 
