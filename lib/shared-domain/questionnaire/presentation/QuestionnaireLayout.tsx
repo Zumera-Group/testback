@@ -8,7 +8,7 @@ import { Question, Questionnaire } from '../domain/index';
 import { Sector, SiteSettings } from '../../page/domain/index';
 import { getTranslateByScope } from 'translation/i18n';
 import { useValuationStore } from '../store';
-// import Header from './Header';
+
 import { QuestionComponent } from './Question/QuestionComponent';
 import Sidebar from './Sidebar';
 import { EnvironmentService } from 'environment.service';

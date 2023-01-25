@@ -97,6 +97,12 @@ export const Header = ({
     }
   }, [bigMenuOpen]);
 
+  const current =
+    indicator.current > indicator.total
+      ? indicator.current - 1
+      : indicator.current;
+  const total = indicator.total;
+
   return (
     <header
       id="header"
@@ -136,7 +142,7 @@ export const Header = ({
         )}
         {indicator && (
           <div className={styles.questionIndicator}>
-            Question {indicator.current} / {indicator.total}
+            Question {current} / {total}
           </div>
         )}
       </Container>
