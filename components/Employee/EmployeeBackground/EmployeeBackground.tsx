@@ -24,7 +24,7 @@ export const EmployeeBackground: React.FC<any> = (props) => {
             />
           </GridColumn>
           <GridColumn sm={12} md={6} lg={6} className={styles.rightColumn}>
-            <SectionHeading subtitle={'SV HIGHLIGHTS'} align={'left'} />
+            <SectionHeading subtitle={'CV Highlights'} align={'left'} />
             {employee?.facts ? (
               <ul className={styles.factsList}>
                 {employee?.facts.map((fact, index) => (
