@@ -7,6 +7,7 @@
 
 .container {
   margin-top: var(--header-height);
+  position: static;
 }
 
 .title {
@@ -32,9 +33,17 @@
 .animationImage {
   position: absolute;
   right: 0;
-  width: 50%;
   min-height: 999px;
+  @include breakpoint-up(md) {
+    right: calc((100vw - #{$container-max-width}) / 2);
+    margin-right: $container-padding-x;
+    top: var(--header-height);
+    align-self: flex-start;
+    width: 100%;
+    max-width: 34rem;
+  }
   @include breakpoint-down(md) {
+    top: 0;
     min-height: auto;
     @include divider('top', $primary);
     position: relative;
