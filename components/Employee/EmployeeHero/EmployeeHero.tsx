@@ -13,12 +13,13 @@ const Detail = ({ as, title, text }) => {
     </Component>
   );
 };
+
 export const EmployeeHero: React.FC<{
   employee: Employee;
   content: any;
 }> = ({ employee, content }) => {
   const { firstName, lastName, jobTitle } = employee;
-  const comaSeparatedSectors = employee?.sectors?.map((s) => {
+  const commaSeparatedSectors = employee?.sectors?.map((s) => {
     return s.name;
   });
 
@@ -42,15 +43,15 @@ export const EmployeeHero: React.FC<{
             </h1>
             <h4>{jobTitle}</h4>
             <ul className={styles.details}>
-              {comaSeparatedSectors && (
+              {commaSeparatedSectors && employee?.sectors?.length > 0 && (
                 <Detail
                   as={'li'}
                   title={content?.sectorTitle}
-                  text={comaSeparatedSectors.join(' - ')}
+                  text={commaSeparatedSectors.join(' - ')}
                 />
               )}
 
-              {employee.office && (
+              {employee?.office && (
                 <Detail
                   as={'li'}
                   title={content?.officeTitle}

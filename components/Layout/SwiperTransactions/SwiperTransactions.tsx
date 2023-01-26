@@ -20,6 +20,7 @@ export const SwiperTransactions = ({ prevButton, nextButton, maxSlidesToShow, cl
       swiper.navigation.init();
       swiper.navigation.update();
     }
+    return () => swiper.destroy(true, true);
   }, [swiper, prevButton, nextButton]);
 
   const swiperOptions = {

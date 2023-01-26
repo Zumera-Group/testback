@@ -76,9 +76,9 @@ export const EmployeeTeam: React.FC<{
           prevButton={swiperPrevRef}
           nextButton={swiperNextRef}
           classes={styles.swiperWrapper}
-          slides={1}
-          lgSlides={2}
-          xxlSlides={2.3}
+          slides={1.33}
+          lgSlides={2.33}
+          xxlSlides={3.33}
         >
           {display?.map((p, index) => (
             <React.Fragment key={index}>

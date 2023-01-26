@@ -1,9 +1,13 @@
 .leftColumn {
-  padding-right: 6rem;
+  @include breakpoint-up(lg) {
+    padding-right: 6rem;
+  }
 }
+
 .rightColumn {
   margin-top: 5.5rem;
 }
+
 .factsList {
   list-style-type: none;
   padding: 0;
