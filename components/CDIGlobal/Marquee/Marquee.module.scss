@@ -31,7 +31,7 @@
   white-space: nowrap;
   font-size: var(--marquee-font-size);
   font-weight: $font-weight-medium;
-  color: #fff;
+  color: inherit;
   margin-right: $gutter * 3;
   opacity: 0.5;
 }
