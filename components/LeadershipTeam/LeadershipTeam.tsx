@@ -66,7 +66,7 @@ export const LeadershipTeam: React.FC<Props> = ({ ...rest }) => {
                 lg={4}
                 className={styles.teamColumn}
               >
-                <Employee article={member} />
+                <Employee article={member} cardLabel={''} />
               </GridColumn>
             ),
           )}

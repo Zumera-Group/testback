@@ -110,8 +110,7 @@ export const Cards = ({
           >
             {elements.map((item, index) => {
               const isEven = index % 2 === 0;
-              console.log(item.type.name);
-              const wideColl = item.type.name === 'Employee' ? 6 : 8;
+              const wideColl = item.type.name === 'Employee' || i === 0 ? 6 : 8;
               const smallColl = i === 0 ? 6 : 4;
               return (
                 <GridColumn

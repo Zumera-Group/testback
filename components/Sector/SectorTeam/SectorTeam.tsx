@@ -26,7 +26,7 @@ export const SectorTeam = ({ sector }) => {
     !sector.teamSection
   )
     return null;
-  console.log(sector);
+
   const { teamSection, contributors } = sector;
 
   const Quote = () => {

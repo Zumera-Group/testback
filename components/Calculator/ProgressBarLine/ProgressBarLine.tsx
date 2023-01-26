@@ -6,7 +6,6 @@ export const ProgressBarLine = ({
   categoryIndex,
   progress,
 }) => {
-  console.log(progress);
   return (
     <div className={styles.progressBarWrapper}>
       <div className={styles.progressLabels}>

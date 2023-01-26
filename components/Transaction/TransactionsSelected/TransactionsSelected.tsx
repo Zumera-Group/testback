@@ -32,8 +32,7 @@ export const TransactionsSelected: React.FC<{
     (t) => t._id !== transaction._id,
   );
   if (!filteredTransactions || filteredTransactions.length === 0) return null;
-  console.log(transaction);
-  console.log(content);
+
   return (
     <Section size={'md'} bg={'light'} color={'primary'}>
       <Container>
