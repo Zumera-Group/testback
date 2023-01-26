@@ -8,7 +8,6 @@ import styles from './Primary.module.scss';
 
 export const Primary: HeroComponent = ({ ...rest }) => {
   const { title, title2, description, button, heroImage } = rest;
-
   return (
     <Section
       as={'div'}
@@ -46,7 +45,7 @@ export const Primary: HeroComponent = ({ ...rest }) => {
             <GridColumn sm={12} md={5} lg={5}>
               <img
                 src={heroImage.asset.url}
-                alt={'Hero image'}
+                alt={`${title}${title2 ? ` ${title2}` : ''}`}
                 className={styles.primaryHeroImage}
               />
             </GridColumn>

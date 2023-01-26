@@ -53,8 +53,8 @@ export const ContactUs: React.FC<Props> = (props) => {
             )}
             <img
               src={'/contentModules/contactUsSection/footer_cta-building.svg'}
-              alt={'building'}
-              width={'100%'}
+              alt={'Zumera Office'}
+              className={styles.building}
             />
           </GridColumn>
           <GridColumn sm={12} md={6} lg={7} xl={6}>
