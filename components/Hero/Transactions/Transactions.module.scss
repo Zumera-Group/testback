@@ -61,14 +61,10 @@
   position: absolute;
   top: 0;
   opacity: 1;
-  @include breakpoint-down(md) {
-    max-width: 75%;
-  }
 }
 .lottie {
   opacity: 0;
   transition: opacity 0.2s linear;
-  //aspect-ratio: 1/1;
 }
 
 .fadeId {
