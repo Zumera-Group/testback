@@ -9,7 +9,7 @@ import { sanityImageUrlFor } from 'lib/sanity';
 
 import styles from './Employee.module.scss';
 
-export const Employee = ({ article, cardLabel } : {}) => {
+export const Employee = ({ article, cardLabel }) => {
   if (!article) return null;
   const name = getEmployeeFullName(article);
   const jobTitle = article.jobTitle;
