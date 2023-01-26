@@ -5,6 +5,7 @@ import { SanityBlockContent } from 'components/SanityBlockContent';
 import styles from './VTHero.module.scss';
 import { VTHeroModule } from 'lib/shared-domain/page/domain/contentModule';
 import { useState } from 'react';
+import Link from 'next/link';
 
 export const VTHero: React.FC<{
   specificContentModule: VTHeroModule;
@@ -12,6 +13,7 @@ export const VTHero: React.FC<{
   const [selectedPurpose, setSelectedPurpose] = useState('');
   const { title, title2, description, buttons, purposesTitle, purposes } =
     specificContentModule;
+  const questionnaire = `/questionnaires/${buttons[0]?.questionnaire?.questionnaireSlug?.current}`;
 
   return (
     <Section
@@ -61,16 +63,18 @@ export const VTHero: React.FC<{
               <h4>{purposesTitle}</h4>
               <div className={styles.purposes}>
                 {purposes.map((purpose) => (
-                  <div
-                    key={purpose}
-                    className={[
-                      styles.purpose,
-                      selectedPurpose === purpose ? styles.selected : '',
-                    ].join(' ')}
-                    onClick={() => setSelectedPurpose(purpose)}
-                  >
-                    {purpose}
-                  </div>
+                  <Link passHref href={questionnaire} key={purpose}>
+                    <div
+                      key={purpose}
+                      className={[
+                        styles.purpose,
+                        selectedPurpose === purpose ? styles.selected : '',
+                      ].join(' ')}
+                      onClick={() => setSelectedPurpose(purpose)}
+                    >
+                      {purpose}
+                    </div>
+                  </Link>
                 ))}
               </div>
             </div>
