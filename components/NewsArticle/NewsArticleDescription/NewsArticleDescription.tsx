@@ -11,7 +11,8 @@ interface Props {
 
 const NewsArticleDescription: React.FC<Props> = ({ newsArticle, content }) => {
   const { newArticleSection } = newsArticle;
-  const description = newArticleSection?.articleTextRichEditor || newArticleSection?.articleText;
+  const description =
+    newArticleSection?.articleTextRichEditor || newArticleSection?.articleText;
 
   return (
     <Section
