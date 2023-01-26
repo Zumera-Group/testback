@@ -413,6 +413,11 @@ export const contentModulesQuery = (
       page->{
         slug
       },
+      questionnaire->{
+		  questionnaireSlug {
+			current
+		  },
+		},
       externalUrl
     },
     heroImage {
@@ -461,13 +466,6 @@ export const contentModulesQuery = (
 		  },
 		},
     },
-    button {
-      ...,
-      questionnaire->{
-		  questionnaireSlug {
-			current
-		  },
-		},
-    },
+
 ${extraQuery || ''}
   }`;

@@ -43,12 +43,15 @@
     max-width: 34rem;
   }
   @include breakpoint-down(md) {
+    @include divider('top', $primary);
+    //aspect-ratio: 1/1;
     top: 0;
     min-height: auto;
-    @include divider('top', $primary);
     position: relative;
     margin-top: 2rem;
     width: 100%;
+    //display: flex;
+    //justify-content: center;
   }
 }
 
@@ -58,10 +61,14 @@
   position: absolute;
   top: 0;
   opacity: 1;
+  @include breakpoint-down(md) {
+    max-width: 75%;
+  }
 }
 .lottie {
   opacity: 0;
   transition: opacity 0.2s linear;
+  //aspect-ratio: 1/1;
 }
 
 .fadeId {

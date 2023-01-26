@@ -83,7 +83,9 @@ export const TransactionGridSection: React.FC<IProps> = (props) => {
   const sectorClickHandler = useCallback((state) => {
     setActiveSector(state);
   }, []);
+
   const chunkSize = 12;
+
   return (
     <Section
       size={'md'}
