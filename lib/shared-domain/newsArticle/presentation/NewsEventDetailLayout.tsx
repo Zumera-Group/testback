@@ -6,8 +6,10 @@ import { PageFooter } from 'lib/shared-domain/page/presentation/PageFooter';
 import { PageHeader } from 'lib/shared-domain/page/presentation/PageHeader';
 
 import { PageTransition } from 'components/PageTransition';
-import { NewsArticleTeam } from './NewsArticleTeam';
-import { NewsArticleHero } from './NewsArticleHero';
+// import { NewsArticleTeam } from './NewsArticleTeam';
+// import { NewsArticleHero } from './NewsArticleHero';
+import NewsArticleHero from 'components/NewsArticle/NewsArticleHero';
+import NewsArticleTeam from 'components/NewsArticle/NewsArticleTeam';
 import { SEO } from 'components/SEO';
 import { NewsEventAbout } from './NewsEventAbout';
 import { NewsEventWhyToAttend } from './NewsEventWhyToAttend';
@@ -57,10 +59,10 @@ export const NewsEventDetailLayout: React.FC<{
           />
         )}
 
-        {newsEvent?.eventPartnerRefereesSection &&
+        {/* {newsEvent?.eventPartnerRefereesSection &&
           newsEvent?.eventPartnerRefereesSection.map((s, index) => (
             <NewsArticleTeam key={index} partnerSection={s} />
-          ))}
+          ))} */}
 
         <NewsEventProgram content={content} newsEvent={newsEvent} />
         <NewsEventWhyToAttend content={content} newsEvent={newsEvent} />

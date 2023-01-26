@@ -1,0 +1,13 @@
+.links {
+  padding-top: 1.5rem;
+  padding-bottom: 0;
+}
+
+.container {
+  @include divider('bottom', $primary);
+  padding-bottom: 5rem; 
+}
+
+.section {
+  padding-bottom: 0 !important;
+}

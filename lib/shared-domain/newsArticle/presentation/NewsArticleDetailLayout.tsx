@@ -6,10 +6,10 @@ import { PageFooter } from 'lib/shared-domain/page/presentation/PageFooter';
 import { PageHeader } from 'lib/shared-domain/page/presentation/PageHeader';
 
 import { PageTransition } from 'components/PageTransition';
-import { NewsArticleTeam } from './NewsArticleTeam';
-import { NewsArticleMoreNews } from './NewsArticleMoreNews';
-import { NewsArticleHero } from './NewsArticleHero';
-import { NewsArticleDescription } from './NewsArticleDescription';
+// import { NewsArticleTeam } from './NewsArticleTeam';
+// import { NewsArticleMoreNews } from './NewsArticleMoreNews';
+// import { NewsArticleHero } from './NewsArticleHero';
+// import { NewsArticleDescription } from './NewsArticleDescription';
 import { SEO } from 'components/SEO';
 import { NewsArticleReportDownload } from './NewsArticleReportDownload';
 import { useFetchNewsArticles } from '../application/useGetNewsArticles';
@@ -17,6 +17,11 @@ import { useFetchEmployees } from '../../employees/application/useGetEmployees';
 import { links } from 'lib/links';
 import { useRouter } from 'next/router';
 import { IndustryReportSection } from '../../page/presentation/contentModules/IndustryReportSection';
+
+import NewsArticleHero from 'components/NewsArticle/NewsArticleHero';
+import NewsArticleDescription from 'components/NewsArticle/NewsArticleDescription';
+import NewsArticleTeam from 'components/NewsArticle/NewsArticleTeam';
+import NewsArticleMoreNews from 'components/NewsArticle/NewsArticleMoreNews';
 
 export const NewsArticleDetailLayout: React.FC<{
   newsArticle: NewsArticle;
@@ -35,6 +40,7 @@ export const NewsArticleDetailLayout: React.FC<{
     links(locale === 'en' ? 'de' : 'en').newsArticles(
       newsArticle?.queryOtherLangSlug?.slice(-1)[0] as any,
     );
+
   return (
     <Box minHeight="100vh" overflowX="hidden">
       <SEO
@@ -59,10 +65,12 @@ export const NewsArticleDetailLayout: React.FC<{
             specificContentModule={newsArticle.industryReportSection}
           />
         )}
-        <NewsArticleTeam
-          employees={newsArticle?.team}
-          content={content?.teamSectionContent}
-        />
+        {newsArticle?.team && !!newsArticle?.team.length && (
+          <NewsArticleTeam
+            employees={newsArticle?.team}
+            content={content?.teamSectionContent}
+          />
+        )}
         <NewsArticleReportDownload newsArticle={newsArticle} />
         <NewsArticleMoreNews
           newsArticles={filteredNewsArticles}

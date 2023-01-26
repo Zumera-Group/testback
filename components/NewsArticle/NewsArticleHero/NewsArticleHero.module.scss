@@ -1,0 +1,58 @@
+.heroContainer {
+  @include divider('bottom', $primary);
+  padding: 1rem 1rem 2rem 1rem;
+}
+.title {
+  font-size: $h3-font-size;
+}
+
+.imageWrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  margin-top: $gutter * 2;
+  aspect-ratio: 1/1;
+  @include breakpoint-up(md) {
+    margin-top: 0;
+  }
+}
+
+.details {
+  list-style-type: none;
+  margin: $gutter * 1.5 0 0 0;
+  padding: 0;
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  flex-direction: column;
+  gap: $gutter * 0.5;
+  @include breakpoint-up(md) {
+    flex-direction: row;
+    gap: $gutter;
+  }
+  width: 100%;
+  max-width: 56rem;
+}
+
+.detail {
+  display: block;
+  margin: $gutter 2rem 0 0;
+  &_title,
+  &_text {
+    color: inherit;
+    margin: 0;
+    font-size: $font-size-small;
+    line-height: $line-height-sm;
+    letter-spacing: $letter-spacing-body;
+  }
+  &_title {
+    text-transform: none;
+  }
+  &_text {
+    margin-top: $gutter * 0.5 !important;
+  }
+}
+
+.hero {
+  padding-bottom: 0 !important;
+}
