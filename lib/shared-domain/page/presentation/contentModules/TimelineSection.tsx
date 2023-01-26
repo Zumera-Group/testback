@@ -7,7 +7,6 @@ import TimelineSectionComponent from 'components/TimelineSection';
 export const TimelineSection: React.FC<{
   specificContentModule: TimelineSectionModule;
 }> = ({ specificContentModule }) => {
-  console.log(specificContentModule);
   return <TimelineSectionComponent {...specificContentModule} />;
 };
 
