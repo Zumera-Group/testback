@@ -72,6 +72,11 @@
 .tileTitle {
   font-size: $font-size-small;
   flex: 1;
+  &__noIcon {
+    flex: 0;
+    margin-top: auto;
+    margin-bottom: auto;
+  }
 }
 
 .transactionsGrid {

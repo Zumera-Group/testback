@@ -26,8 +26,8 @@ export const TransactionSelectorTile: React.FC<IProps> = ({
       }`}
       onClick={() => clickHandler(sector._id)}
     >
-      <div className={styles.tileImage}>
-        {hasIcon ? (
+      {hasIcon ? (
+        <div className={styles.tileImage}>
           <Image
             unoptimized
             loading="lazy"
@@ -35,9 +35,9 @@ export const TransactionSelectorTile: React.FC<IProps> = ({
             alt={sector.name}
             layout={'fill'}
           />
-        ) : null}
-      </div>
-      <div className={styles.tileTitle}>{sector.name}</div>
+        </div>
+      ) : null}
+      <div className={[styles.tileTitle, !hasIcon ? styles.tileTitle__noIcon : '' ].join(' ')}>{sector.name}</div>
     </div>
   );
 };
