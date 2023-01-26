@@ -5,6 +5,8 @@ import { Swiper } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/navigation';
 
+import { useRouter } from 'next/router';
+
 import {
   SCREEN_SIZE_LG,
   SCREEN_SIZE_XXL,
@@ -22,6 +24,7 @@ export const SwiperPeople = ({
   lgSlides = 2.33,
   slides = 1.33,
 }) => {
+  const { asPath } = useRouter();
   const [swiper, setSwiper] = useState(null);
 
   const breakpoint_LG = parseInt(SCREEN_SIZE_LG);
@@ -34,7 +37,13 @@ export const SwiperPeople = ({
       swiper.navigation.init();
       swiper.navigation.update();
     }
+    return () => swiper.destroy(true, true);
   }, [swiper, prevButton, nextButton]);
+
+  useEffect(() => {
+    if (!swiper) return;
+    swiper.slideTo(0);
+  }, [swiper, asPath])
 
   const swiperOptions = {
     modules: [Navigation],
