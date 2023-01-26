@@ -10,31 +10,28 @@ export const TransactionInvolvedParties: React.FC<{
   return (
     <Section size={'md'} bg={'light'} color={'primary'}>
       <Container classes={styles.container}>
-        <Grid
-          fullWidth={true}
-          justifyContent={'center'}
-          alignItems={'center'}
-          className={styles.sliderHeader}
-        >
-          {parties.map((party) => (
-            <div key={party.name} className={styles.party}>
-              <div className={styles.image}>
-                <Image
-                  unoptimized
-                  loading="lazy"
-                  src={party.companyLogo?.asset?.url}
-                  alt={party.name}
-                  objectFit="cover"
-                  layout="fill"
-                />
+        <Grid fullWidth={true} justifyContent={'center'} alignItems={'center'}>
+          {parties.map((party) =>
+            party ? (
+              <div key={party.name} className={styles.party}>
+                <div className={styles.image}>
+                  <Image
+                    unoptimized
+                    loading="lazy"
+                    src={party.companyLogo?.asset?.url}
+                    alt={party.name}
+                    objectFit="cover"
+                    layout="fill"
+                  />
+                </div>
+                <h4 className={styles.quote}>“{party.quote}”</h4>
+                <div>
+                  <h4 className={styles.name}>{party.name}</h4>
+                  <p>{party.jobTitle}</p>
+                </div>
               </div>
-              <h4 className={styles.quote}>“{party.quote}”</h4>
-              <div>
-                <h4 className={styles.name}>{party.name}</h4>
-                <p>{party.jobTitle}</p>
-              </div>
-            </div>
-          ))}
+            ) : null,
+          )}
         </Grid>
       </Container>
     </Section>

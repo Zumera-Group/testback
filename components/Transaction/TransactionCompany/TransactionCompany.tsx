@@ -2,7 +2,6 @@ import { Container, Grid, GridColumn, Section } from 'components/Layout';
 import styles from './TransactionCompany.module.scss';
 import { Transaction } from 'lib/shared-domain/transactions/domain';
 import Image from 'next/image';
-import { P } from 'components/Typography/P';
 import { SectionHeading } from 'components/SectionHeading';
 
 export const TransactionCompany: React.FC<{
@@ -48,17 +47,19 @@ export const TransactionCompany: React.FC<{
 
 const Company = ({ companyImage, companyDescription }) => (
   <GridColumn sm={12} md={6} lg={6} className={styles.companyCol}>
-    <Image
-      unoptimized
-      loading="lazy"
-      objectPosition="left"
-      objectFit="contain"
-      // layout="fill"
-      width={'100%'}
-      height={'63px'}
-      alt=""
-      src={companyImage}
-    />
-    <P color={'primary'}>{companyDescription}</P>
+    <div className={styles.companyLogo}>
+      <Image
+        unoptimized
+        loading="lazy"
+        objectPosition="left"
+        objectFit="contain"
+        layout="responsive"
+        width={'200px'}
+        height={'64px'}
+        alt=""
+        src={companyImage}
+      />
+    </div>
+    <p color={'primary'}>{companyDescription}</p>
   </GridColumn>
 );

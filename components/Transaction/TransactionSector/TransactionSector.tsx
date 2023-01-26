@@ -17,7 +17,12 @@ export const TransactionSector: React.FC<IProps> = ({
   return (
     <Section size={'sm'} bg={'light'} color={'white'}>
       <Container classes={styles.gridContainer}>
-        <Grid fullWidth={true} justifyContent={'start'} alignItems={'stretch'}>
+        <Grid
+          fullWidth={true}
+          justifyContent={'start'}
+          alignItems={'stretch'}
+          className={styles.grid}
+        >
           <GridColumn sm={12} md={6} lg={6}>
             <SectionHeading
               title={sector.name}
@@ -30,20 +35,23 @@ export const TransactionSector: React.FC<IProps> = ({
               variant={'secondary'}
               link={{ slug: { current: `/sectors/${sector?.slug?.current}` } }}
               onDark={true}
+              classes={styles.button}
             >
               {linkText}
             </Button>
           </GridColumn>
-          <GridColumn sm={12} md={6} lg={6} className={styles.imageCol}>
-            <Image
-              unoptimized
-              loading="lazy"
-              src={sector?.detailPageHeroImage?.asset?.url}
-              alt={sector?.name}
-              objectFit="contain"
-              layout="fill"
-            />
-          </GridColumn>
+          {sector?.detailPageHeroImage?.asset?.url && (
+            <GridColumn sm={12} md={6} lg={6} className={styles.imageCol}>
+              <Image
+                unoptimized
+                loading="lazy"
+                src={sector?.detailPageHeroImage?.asset?.url}
+                alt={sector?.name}
+                objectFit="contain"
+                layout="fill"
+              />
+            </GridColumn>
+          )}
         </Grid>
       </Container>
     </Section>

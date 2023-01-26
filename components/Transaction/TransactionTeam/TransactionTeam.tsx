@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { Fragment, useRef } from 'react';
 
 import {
   Section,
@@ -62,16 +62,16 @@ export const TransactionTeam = ({ transaction, content }) => {
           prevButton={swiperPrevRef}
           nextButton={swiperNextRef}
           classes={styles.swiperWrapper}
-          slides={1}
-          lgSlides={2}
-          xxlSlides={2.3}
+          slides={1.33}
+          lgSlides={2.33}
+          xxlSlides={3.33}
         >
           {peopleInvolved?.map((p, index) => (
-            <>
+            <Fragment key={index}>
               <SwiperSlide className={styles.slide}>
                 <Employee article={p} cardLabel={content.linkText} />
               </SwiperSlide>
-            </>
+            </Fragment>
           ))}
         </SwiperPeople>
       )}
