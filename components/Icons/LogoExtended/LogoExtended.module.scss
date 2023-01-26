@@ -3,3 +3,11 @@
     color: $white;
   }
 }
+
+.icon {
+  height: auto !important;
+  width: 6rem !important;
+  @include breakpoint-up(md) {
+    width: 9rem !important;
+  }
+}
