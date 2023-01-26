@@ -12,27 +12,27 @@ interface IProps {
 export const ServiceItem: React.FC<IProps> = ({ service, index }) => {
   return (
     <div className={styles.serviceItem}>
-      <H variant={'h2'} className={styles.serviceIndex}>
-        {index}
-      </H>
-      <div className={styles.serviceItemContent}>
-        <H variant={'h4'} color={'inherit'} className={styles.serviceName}>
-          {service.name}
-        </H>
-        <P fontSize={'1rem'} color={'inherit'}>
-          {service.shortDescription}
-        </P>
-        <Link passHref href={`/services/${service.slug?.current}`}>
-          <a>
+      <Link passHref href={`/services/${service.slug?.current}`}>
+        <a className={styles.serviceLink}>
+          <h2 className={styles.serviceIndex}>
+            {index}
+          </h2>
+          <div className={styles.serviceItemContent}>
+            <h4 className={styles.serviceName}>
+              {service.name}
+            </h4>
+            <p>
+              {service.shortDescription}
+            </p>
             <Icon
               iconName={'arrow-circle'}
               viewBox={'0 0 32 32'}
               width={24}
               height={24}
             />
-          </a>
-        </Link>
-      </div>
+          </div>
+        </a>
+      </Link>
     </div>
   );
 };
