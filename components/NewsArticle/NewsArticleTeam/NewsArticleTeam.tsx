@@ -32,7 +32,7 @@ const NewsArticleTeam: React.FC<Props> = ({ employees, content }) => {
           </GridColumn>
           {employees.map((item) => (
             <GridColumn sm={12} md={6} lg={6} key={item._id}>
-              <Employee article={item} />
+              <Employee article={item} cardLabel={''} />
             </GridColumn>
           ))}
         </Grid>
