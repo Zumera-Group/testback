@@ -34,7 +34,7 @@ export const EmployeeBackground: React.FC<any> = (props) => {
             ) : null}
             <Button
               variant={'secondary'}
-              link={{ slug: { current: employee.linkedInUrl } }}
+              externalUrl={employee.linkedInUrl}
             >
               {content.viewLinkedText}
             </Button>
