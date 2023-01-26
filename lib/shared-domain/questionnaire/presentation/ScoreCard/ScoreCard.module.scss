@@ -1,0 +1,31 @@
+.scoreCardWrapper {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  min-height: 18rem;
+
+  @include breakpoint-up(md) {
+    margin-top: 0;
+
+    align-items: center;
+    min-height: 80%;
+  }
+}
+
+.scoreCardTitle {
+  color: $white;
+  text-transform: uppercase;
+}
+
+.betterThan {
+  color: $white;
+  font-weight: $font-weight-bold;
+  text-align: left;
+}
+
+.booklet {
+  display: none;
+  @include breakpoint-up(md) {
+    display: block;
+  }
+}

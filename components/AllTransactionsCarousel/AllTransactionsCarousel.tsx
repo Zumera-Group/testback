@@ -20,6 +20,7 @@ import { useOnElementIntersecting } from 'lib/hooks/useOnElementIntersecting';
 import { fetchTransactions } from 'lib/shared-domain/transactions/application/useGetTransactions';
 
 import styles from './AllTransactionsCarousel.module.scss';
+import { Button } from 'components/Button';
 
 export const AllTransactionsCarousel = ({ ...rest }) => {
   const [transactions, setTransactions] = useState([]);
@@ -34,7 +35,7 @@ export const AllTransactionsCarousel = ({ ...rest }) => {
     rootMargin: '0px 0px -20px 0px',
   });
 
-  const { title, subtitle, description } = rest;
+  const { title, subtitle, description, button } = rest;
 
   useEffect(() => {
     if (typeof window !== 'undefined' && isVisible) {
@@ -74,7 +75,6 @@ export const AllTransactionsCarousel = ({ ...rest }) => {
       </SwiperTransactions>
     );
   };
-
   return (
     <div ref={wrapperRef}>
       <Section size={'md'} bg={'light'} color={'primary'}>
@@ -85,6 +85,8 @@ export const AllTransactionsCarousel = ({ ...rest }) => {
                 title={title}
                 subtitle={subtitle}
                 description={description}
+                align={'center'}
+                headingType={'h3'}
               />
             </GridColumn>
           </Grid>
@@ -101,6 +103,11 @@ export const AllTransactionsCarousel = ({ ...rest }) => {
               lg={6}
               className={styles.navigationColumn}
             >
+              {button?.title ? (
+                <Button {...button} classes={styles.button}>
+                  {button.title}
+                </Button>
+              ) : null}
               <SwiperNavigationButtons
                 prev={swiperPrevRef}
                 next={swiperNextRef}

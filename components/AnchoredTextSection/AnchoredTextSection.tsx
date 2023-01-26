@@ -29,7 +29,12 @@ export const AnchoredTextSection = ({ specificContentModule }) => {
           alignItems={'start'}
         >
           <GridColumn sm={12} md={6} lg={6}>
-            <SectionHeading title={title} headingType={'h3'} align={'left'} />
+            <SectionHeading
+              title={title}
+              headingType={'h3'}
+              align={'left'}
+              classes={styles.titles}
+            />
           </GridColumn>
           <GridColumn sm={12} md={6} lg={6}>
             {textBlocks?.map((textBlock) => {

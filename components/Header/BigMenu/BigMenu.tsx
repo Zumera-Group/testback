@@ -17,8 +17,9 @@ export const BigMenu = ({
   closeBigMenu,
   otherLangSlug,
 }) => {
-
-  const [showMode, setShowMode] = useState<'normal' | 'sectors' | 'services'>('normal');
+  const [showMode, setShowMode] = useState<'normal' | 'sectors' | 'services'>(
+    'normal',
+  );
 
   const getNavigationHeading = () => {
     if (showMode === 'sectors') {
@@ -37,7 +38,8 @@ export const BigMenu = ({
   };
 
   useEffect(() => {
-    const close = (e: { keyCode: number }) => e.keyCode === 27 && closeBigMenu();
+    const close = (e: { keyCode: number }) =>
+      e.keyCode === 27 && closeBigMenu();
     window.addEventListener('keydown', close);
     return () => window.removeEventListener('keydown', close);
   }, [closeBigMenu]);
@@ -59,10 +61,7 @@ export const BigMenu = ({
         sectors={sectors}
         services={services}
       />
-      <Close
-        mobile={false}
-        callBack={closeBigMenu}
-      />
+      <Close mobile={false} callBack={closeBigMenu} />
     </motion.nav>
   );
 };

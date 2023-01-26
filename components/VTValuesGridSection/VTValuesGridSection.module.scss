@@ -1,0 +1,37 @@
+.valuesGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-column-gap: 6rem;
+  @include breakpoint-down(md) {
+    grid-template-columns: repeat(1, 1fr);
+    margin-top: 2rem;
+  }
+  &:before {
+    content: '';
+    @include divider('right', $primary);
+    position: absolute;
+    height: 100%;
+    top: 0;
+    left: calc(100% / 2);
+    @include breakpoint-down(md) {
+      display: none;
+    }
+  }
+}
+.valueItem {
+  padding-bottom: 1.5rem;
+  margin-bottom: 1.5rem;
+  &:nth-child(1),
+  &:nth-child(2) {
+    @include divider('bottom', $primary);
+  }
+  @include breakpoint-down(md) {
+    @include divider('bottom', $primary);
+  }
+}
+.imageWrapper {
+  position: relative;
+  width: 48px;
+  height: 48px;
+  margin-bottom: 1rem;
+}

@@ -414,54 +414,13 @@ export const Result: React.FC = () => {
     );
 
   return (
+    //loading screen
     <AnimateIn>
       {!hasError ? (
         <QuestionText title={t('loading.title')} />
       ) : (
         <QuestionText title={t('loading.error')} />
       )}
-      <Flex
-        flexDirection={['column', 'column', 'row']}
-        alignItems="center"
-        justify="center"
-        flexGrow={1}
-      >
-        <FlexCol justifyContent="flex-end" flexGrow={0} flex={0.5}>
-          {/* <Lottie
-            options={defaultOptions}
-            height={300}
-            width="100%"
-            style={{ maxWidth: 400, marginLeft: 'auto' }}
-            isStopped={false}
-            isPaused={false}
-          /> */}
-          <Beam color="white" glow classes={styles.beam} />
-        </FlexCol>
-
-        <FlexCol
-          flexGrow={0}
-          flex={0.5}
-          mt={MT}
-          textAlign={['center', 'center', 'left']}
-        >
-          <LoadingText
-            title={t('loading.progress.evaluation')}
-            isLoading={loadingPercentage > 85}
-          />
-          <LoadingText
-            title={t('loading.progress.sectorSpecifics')}
-            isLoading={loadingPercentage > 65}
-          />
-          <LoadingText
-            title={t('loading.progress.companySpecifics')}
-            isLoading={loadingPercentage > 35}
-          />
-          <LoadingText
-            title={t('loading.progress.generalInformation')}
-            isLoading={loadingPercentage > 15}
-          />
-        </FlexCol>
-      </Flex>
     </AnimateIn>
   );
 };

@@ -7,6 +7,7 @@
 
 .container {
   margin-top: var(--header-height);
+  position: static;
 }
 
 .title {
@@ -32,14 +33,25 @@
 .animationImage {
   position: absolute;
   right: 0;
-  width: 50%;
   min-height: 999px;
+  @include breakpoint-up(md) {
+    right: calc((100vw - #{$container-max-width}) / 2);
+    margin-right: $container-padding-x;
+    top: var(--header-height);
+    align-self: flex-start;
+    width: 100%;
+    max-width: 34rem;
+  }
   @include breakpoint-down(md) {
-    min-height: auto;
     @include divider('top', $primary);
+    //aspect-ratio: 1/1;
+    top: 0;
+    min-height: auto;
     position: relative;
     margin-top: 2rem;
     width: 100%;
+    //display: flex;
+    //justify-content: center;
   }
 }
 
@@ -49,10 +61,14 @@
   position: absolute;
   top: 0;
   opacity: 1;
+  @include breakpoint-down(md) {
+    max-width: 75%;
+  }
 }
 .lottie {
   opacity: 0;
   transition: opacity 0.2s linear;
+  //aspect-ratio: 1/1;
 }
 
 .fadeId {

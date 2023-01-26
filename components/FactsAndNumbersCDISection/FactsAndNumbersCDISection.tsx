@@ -23,7 +23,7 @@ export const FactsAndNumbersCDISection: React.FC<
                 title={title}
                 subtitle={subtitle}
                 description={description}
-                headingType={'h2'}
+                headingType={'h3'}
                 align={'left'}
               />
             </GridColumn>

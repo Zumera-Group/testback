@@ -292,6 +292,8 @@ export class CalculatorTeaserSectionModule extends BaseModule {
 export class CDIGlobalSectionModule extends BaseModule {
   subtitle: string;
   title: string;
+
+  title2: string;
   description: any[];
   button: {
     text: string;
@@ -308,6 +310,7 @@ export class CDIGlobalSectionModule extends BaseModule {
     super();
     this.subtitle = fields.subtitle;
     this.title = fields.title;
+    this.title2 = fields.title2;
     this.description = fields.description;
     this.button = fields.button;
     this.locations = fields.locations;
@@ -383,6 +386,8 @@ export class AllTransactionsCarouselSectionModule extends BaseModule {
   sectors: Sector[];
   showAll: boolean;
 
+  button: any;
+
   constructor(fields: Record<string, any>) {
     super();
     this.subtitle = fields.subtitle;
@@ -391,6 +396,7 @@ export class AllTransactionsCarouselSectionModule extends BaseModule {
     this.linkText = fields.linkText;
     this.showAll = fields.showAll;
     this.sectors = fields.sectors;
+    this.button = fields.button;
   }
 
   getTransactionBg(): string {
@@ -504,15 +510,7 @@ export class HeroSectionModule extends BaseModule {
   title: string;
   title2: string;
   description: any[];
-  type:
-    | 'home'
-    | 'primary'
-    // | 'sector'
-    | 'transaction'
-    // | 'career'
-    // | 'job-landing'
-    // | 'termsAndConditions'
-    | 'anchor';
+  type: 'home' | 'primary' | 'transaction' | 'career' | 'anchor';
   heroImage: {
     asset: { url: string };
   };
@@ -850,6 +848,11 @@ export enum serviceDetailSectionNames {
 }
 
 export type ContentModuleType =
+  | 'stickyFooter'
+  | 'stepsDownBulletsSection'
+  | 'vtServicesSection'
+  | 'vtValuesGridSection'
+  | 'vtHeroSection'
   | 'imagesGridSection'
   | 'titleTextSection'
   | 'accordion'
@@ -919,6 +922,14 @@ export type ContentModuleType =
 
 abstract class ContentModuleTypeFactory {
   static createInstance(type: ContentModuleType, fields: Record<string, any>) {
+    if (type === 'stickyFooter') return new StickyFooterModule(fields);
+    if (type === 'stepsDownBulletsSection')
+      return new StepsDownBulletsSectionModule(fields);
+    if (type === 'vtServicesSection')
+      return new VTServicesSectionModule(fields);
+    if (type === 'vtValuesGridSection')
+      return new VTValuesGridSectionModule(fields);
+    if (type === 'vtHeroSection') return new VTHeroModule(fields);
     if (type === 'imagesGridSection')
       return new ImagesGridSectionModule(fields);
     if (type === 'titleTextSection') return new TitleTextSectionModule(fields);
@@ -1455,6 +1466,8 @@ export class TextWithImageGridModule extends BaseModule {
   background: 'gradient' | 'primary' | 'secondary' | 'tertiary' | 'light';
   button: any;
   image: any;
+
+  bullets: any[];
   constructor(fields: Record<string, any>) {
     super();
     this.title = fields.title;
@@ -1463,6 +1476,7 @@ export class TextWithImageGridModule extends BaseModule {
     this.background = fields.background;
     this.button = fields.button;
     this.image = fields.image;
+    this.bullets = fields.bullets;
   }
 }
 
@@ -1516,5 +1530,82 @@ export class ImagesGridSectionModule extends BaseModule {
   constructor(fields: Record<string, any>) {
     super();
     this.images = fields.images;
+  }
+}
+
+export class VTHeroModule extends BaseModule {
+  title: string;
+  title2: string;
+  description: any[];
+  buttons?: any[];
+  purposesTitle: string;
+  purposes: any[];
+
+  constructor(fields: Record<string, any>) {
+    super();
+    this.title = fields.title;
+    this.title2 = fields.title2;
+    this.description = fields.description;
+    this.buttons = fields.buttons;
+    this.purposesTitle = fields.purposesTitle;
+    this.purposes = fields.purposes;
+  }
+}
+
+export class VTValuesGridSectionModule extends BaseModule {
+  title: string;
+  description: any[];
+  button?: any;
+  values: any[];
+
+  constructor(fields: Record<string, any>) {
+    super();
+    this.title = fields.title;
+    this.description = fields.description;
+    this.button = fields.button;
+    this.values = fields.values;
+  }
+}
+
+export class VTServicesSectionModule extends BaseModule {
+  title: string;
+  subtitle: string;
+  description: any[];
+  background: 'gradient' | 'primary' | 'secondary' | 'tertiary' | 'light';
+  vtServices: any[];
+
+  isFullWidth: boolean;
+  button: any;
+  constructor(fields: Record<string, any>) {
+    super();
+    this.title = fields.title;
+    this.subtitle = fields.subtitle;
+    this.description = fields.description;
+    this.background = fields.background;
+    this.vtServices = fields.vtServices;
+    this.isFullWidth = fields.isFullWidth;
+    this.button = fields.button;
+  }
+}
+
+export class StepsDownBulletsSectionModule extends BaseModule {
+  title: string;
+  subtitle: string;
+  description: any[];
+  steps: any[];
+  constructor(fields: Record<string, any>) {
+    super();
+    this.title = fields.title;
+    this.subtitle = fields.subtitle;
+    this.description = fields.description;
+    this.steps = fields.steps;
+  }
+}
+
+export class StickyFooterModule extends BaseModule {
+  button: any;
+  constructor(fields: Record<string, any>) {
+    super();
+    this.button = fields.button;
   }
 }

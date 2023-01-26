@@ -82,6 +82,7 @@
   }
   & > svg {
     margin-left: $gutter;
+    fill: var(--sidebar-color) !important;
   }
   &__languageSelector {
     margin-top: var(--sidebar-link-padding-y);

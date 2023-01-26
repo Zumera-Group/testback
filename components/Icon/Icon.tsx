@@ -23,7 +23,7 @@ export const Icon: React.FC<Props> = ({
       xmlns="http://www.w3.org/2000/svg"
       stroke={stroke}
       fill={fill}
-      color={'#fff'}
+      color={'currentColor'}
     >
       <use href={`#icon-${iconName || 'cross'}`} />
     </svg>

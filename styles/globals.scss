@@ -87,7 +87,6 @@ img {
   position: relative !important;
 }
 
-
 .calendly-overlay {
   position: fixed;
   top: 0;
@@ -116,6 +115,9 @@ img {
     max-width: 1000px;
     height: 90%;
     max-height: 680px;
+    @include breakpoint-down(md) {
+      min-width: 95vw;
+    }
   }
   .calendly-popup-content {
     position: relative;

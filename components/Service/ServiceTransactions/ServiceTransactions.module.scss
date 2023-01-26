@@ -1,8 +1,5 @@
 .carousel {
   margin-top: $gutter * 2;
-  @include breakpoint-up(lg) {
-    margin-top: 0;
-  }
 }
 
 .slide {
@@ -16,7 +13,22 @@
 
 .navigationBtns {
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
   align-items: center;
-  margin: $gutter * 1.5 0 0 0;
+  margin-top: $gutter;
+  margin-bottom: 0;
+  @include breakpoint-up(md) {
+    justify-content: center;
+    margin-top: $gutter * 2.5;
+    margin-bottom: $paragraphs-margin-bottom;
+    > div {
+      margin-left: auto;
+    }
+  }
+}
+.button {
+  margin-right: auto;
+  @include breakpoint-up(md) {
+    position: absolute;
+  }
 }

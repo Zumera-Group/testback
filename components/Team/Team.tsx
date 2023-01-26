@@ -83,7 +83,7 @@ export const Team: React.FC<Props> = ({
               ?.filter((e) => !e.hasLeftTheTeam && !e.isInLeadershipTeam)
               ?.map((member, index) => (
                 <SwiperSlide key={`TeamMember-${index}`}>
-                  <Employee article={member} />
+                  <Employee article={member} cardLabel={''} />
                 </SwiperSlide>
               ))}
           </SwiperPeople>
@@ -93,7 +93,11 @@ export const Team: React.FC<Props> = ({
           {ordered
             ?.filter((e) => !e.hasLeftTheTeam && !e.isInLeadershipTeam)
             ?.map((member, index) => (
-              <Employee article={member} key={`TeamMember-${index}`} />
+              <Employee
+                article={member}
+                key={`TeamMember-${index}`}
+                cardLabel={''}
+              />
             ))}
         </Container>
       )}

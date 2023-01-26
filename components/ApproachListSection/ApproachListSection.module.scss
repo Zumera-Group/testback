@@ -8,7 +8,7 @@
 .textCol {
   margin-right: auto;
   margin-left: initial;
-  @include breakpoint-down(sm) {
+  @include breakpoint-down(md) {
     > div {
       text-align: center !important;
     }
@@ -24,8 +24,19 @@
   }
 }
 .imageCol {
-  @include breakpoint-down(sm) {
+  @include breakpoint-down(md) {
     aspect-ratio: 1/1;
-    margin-bottom: 1.5rem;
+    padding: 0 1rem;
+    .image {
+      width: 90%;
+      position: relative;
+      aspect-ratio: 1/1;
+      margin: 0 auto;
+    }
+  }
+}
+.titles {
+  @include breakpoint-down(md) {
+    padding: 0 1rem;
   }
 }

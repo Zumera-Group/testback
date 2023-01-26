@@ -1,0 +1,17 @@
+.wrapper {
+  height: 80px;
+  background: $secondary;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.5s linear;
+  z-index: 2;
+}
+
+.show {
+  opacity: 1;
+}

@@ -2,7 +2,13 @@ import styles from './Grid.module.scss';
 
 interface Props {
   as?: '' | 'section' | 'div' | 'article' | 'aside' | 'footer';
-  justifyContent?: 'start' | 'center' | 'space-between' | 'space-around' | 'space-evenly';
+  justifyContent?:
+    | 'start'
+    | 'center'
+    | 'space-between'
+    | 'space-around'
+    | 'space-evenly'
+    | 'flex-end';
   alignItems?: 'stretch' | 'center' | 'start' | 'end';
   fullWidth?: boolean;
   className?: string;
@@ -31,7 +37,7 @@ export const Grid: React.FC<Props> = ({
       className={[
         styles.grid,
         fullWidth ? styles.grid__fullWidth : '',
-        className
+        className,
       ].join(' ')}
       {...rest}
     >

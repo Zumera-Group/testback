@@ -5,11 +5,13 @@ import { Category } from '../../domain';
 import { useValuationStore } from '../../store';
 import { INDUSTRY_QUESTION_ID, SECTOR_QUESTION_ID } from '../questions';
 import { SidebarStep } from './SidebarStep';
+import { SCREEN_SIZE_MD } from 'lib/constants';
+import { useMediaQuery } from 'lib/hooks/useMediaQuery';
 
 const Sidebar = (): JSX.Element => {
   const { mainStep, subStep, questionnaire, isOnResultScreen } =
     useValuationStore();
-
+  const isMobile = useMediaQuery(`(max-width: ${SCREEN_SIZE_MD})`);
   const [currenQuestionPosition, setCurrentQuestionPosition] = useState(0);
   const categories = questionnaire && questionnaire.questionsByCategory;
   const currentCategory = questionnaire?.questionsByCategory?.[mainStep];
@@ -70,17 +72,18 @@ const Sidebar = (): JSX.Element => {
   return (
     <>
       <ProgressBar progress={progress} isPercent color="white" />
-      <VStack
-        maxH="calc(100vh - 130px)"
-        // w="100%"
-        overflow="scroll"
-        style={{ scrollbarWidth: 'none' }}
-        css={WEBKIT_SCROLL}
-        pr="17px"
-        spacing={3}
-      >
-        {categories && categories.map(renderSteps)}
-      </VStack>
+      {!isMobile && (
+        <VStack
+          maxH="calc(100vh - 130px)"
+          overflow="scroll"
+          style={{ scrollbarWidth: 'none' }}
+          css={WEBKIT_SCROLL}
+          pr="17px"
+          spacing={3}
+        >
+          {categories && categories.map(renderSteps)}
+        </VStack>
+      )}
     </>
   );
 };

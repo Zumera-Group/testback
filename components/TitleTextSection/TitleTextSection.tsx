@@ -19,7 +19,7 @@ export const TitleTextSection: React.FC<{
           alignItems={'start'}
           fullWidth={true}
         >
-          <GridColumn sm={12} md={6} lg={6}>
+          <GridColumn sm={12} md={7} lg={7}>
             <SectionHeading
               title={title}
               subtitle={subtitle}

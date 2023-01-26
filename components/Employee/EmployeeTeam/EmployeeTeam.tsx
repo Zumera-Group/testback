@@ -83,7 +83,7 @@ export const EmployeeTeam: React.FC<{
           {display?.map((p, index) => (
             <React.Fragment key={index}>
               <SwiperSlide className={styles.slide}>
-                <Employee article={p} />
+                <Employee article={p} cardLabel={content.linkText} />
               </SwiperSlide>
             </React.Fragment>
           ))}

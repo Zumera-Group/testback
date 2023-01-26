@@ -32,15 +32,17 @@
   align-items: flex-start;
   flex-direction: column;
   & > p {
-    font-size: 1.5em;
+    font-size: $h4-font-size;
     line-height: $line-height-sm;
   }
   & > cite {
     margin-top: auto;
     font-size: $font-size-small;
     font-style: normal;
+    text-transform: uppercase;
     & > span {
       display: block;
+      font-size: $h4-font-size;
       font-weight: $font-weight-bold;
     }
   }

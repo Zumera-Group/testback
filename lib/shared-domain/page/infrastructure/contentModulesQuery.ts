@@ -413,6 +413,11 @@ export const contentModulesQuery = (
       page->{
         slug
       },
+      questionnaire->{
+		  questionnaireSlug {
+			current
+		  },
+		},
       externalUrl
     },
     heroImage {
@@ -433,5 +438,34 @@ export const contentModulesQuery = (
         }
       }
     },
+    values[] {
+      ...,
+      icon-> {
+		iconImage{
+			asset->{
+			  url,
+			}
+		  }
+      },
+    },
+    vtServices[] {
+      ...,
+      icon-> {
+		iconImage{
+			asset->{
+			  url,
+			}
+		  }
+      },
+    },
+    buttons[] {
+      ...,
+      questionnaire->{
+		  questionnaireSlug {
+			current
+		  },
+		},
+    },
+
 ${extraQuery || ''}
   }`;

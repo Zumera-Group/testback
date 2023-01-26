@@ -8,6 +8,7 @@ import styles from './CDIGlobal.module.scss';
 
 interface Props {
   title?: string;
+  title2?: string;
   subtitle?: string;
   description?: any;
   button?: any;
@@ -16,9 +17,9 @@ interface Props {
 }
 
 export const CDIGlobal: React.FC<Props> = ({ ...rest }) => {
-
   const {
     title,
+    title2,
     subtitle,
     description,
     button,
@@ -33,20 +34,31 @@ export const CDIGlobal: React.FC<Props> = ({ ...rest }) => {
       size={'md'}
       bg={isHeader ? 'primary' : 'light'}
       color={isHeader ? 'white' : 'primary'}
-      classes={[
-        styles.section,
-        isHeader ? styles.section__isHeader : ''
-      ].join(' ')}
+      classes={[styles.section, isHeader ? styles.section__isHeader : ''].join(
+        ' ',
+      )}
     >
       <div className={styles.container}>
         <div className={styles.columns}>
           <div className={styles.content}>
-            <SectionHeading
-              headingType={isHeader ? 'h1': 'h3'}
-              title={title}
-              subtitle={subtitle}
-              description={description}
-            />
+            {isHeader ? (
+              <>
+                <SectionHeading subtitle={subtitle} />
+                <h1 className={styles.title}>
+                  {title && title}
+                  {title2 && <span>{title2}</span>}
+                </h1>
+                <SectionHeading description={description} />
+              </>
+            ) : (
+              <SectionHeading
+                headingType={'h3'}
+                title={title}
+                subtitle={subtitle}
+                description={description}
+              />
+            )}
+
             {button?.page?.slug?.current && (
               <div className={styles.btnWrapper}>
                 <Button

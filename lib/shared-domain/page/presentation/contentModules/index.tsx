@@ -47,6 +47,11 @@ import {
   AccordionSectionModule,
   TitleTextSectionModule,
   ImagesGridSectionModule,
+  VTHeroModule,
+  VTValuesGridSectionModule,
+  VTServicesSectionModule,
+  StepsDownBulletsSectionModule,
+  StickyFooterModule,
 } from '../../domain/contentModule';
 
 import {
@@ -137,6 +142,11 @@ import { ApproachListSection } from 'components/ApproachListSection';
 import { AccordionSection } from 'components/Accordion/AccordionSection';
 import TitleTextSection from 'components/TitleTextSection';
 import { ImagesGridSection } from 'components/ImagesGridSection';
+import VTHero from 'components/VTHero';
+import { VTValuesGridSection } from 'components/VTValuesGridSection';
+import { VTServicesSection } from 'components/VTServicesSection/VTServicesSection';
+import { StepsDownBulletsSection } from 'components/StepsDownBulletsSection';
+import { StickyFooter } from 'components/StickyFooter';
 
 export const getContentForContentModule = (
   contentModule: ContentModule,
@@ -144,6 +154,43 @@ export const getContentForContentModule = (
   sharedContent?: any,
   allModulesData?: any,
 ): JSX.Element => {
+  if (contentModule.specificContentModule instanceof StickyFooterModule) {
+    return (
+      <StickyFooter
+        specificContentModule={contentModule.specificContentModule}
+      />
+    );
+  }
+  if (
+    contentModule.specificContentModule instanceof StepsDownBulletsSectionModule
+  ) {
+    return (
+      <StepsDownBulletsSection
+        specificContentModule={contentModule.specificContentModule}
+      />
+    );
+  }
+  if (contentModule.specificContentModule instanceof VTServicesSectionModule) {
+    return (
+      <VTServicesSection
+        specificContentModule={contentModule.specificContentModule}
+      />
+    );
+  }
+  if (
+    contentModule.specificContentModule instanceof VTValuesGridSectionModule
+  ) {
+    return (
+      <VTValuesGridSection
+        specificContentModule={contentModule.specificContentModule}
+      />
+    );
+  }
+  if (contentModule.specificContentModule instanceof VTHeroModule) {
+    return (
+      <VTHero specificContentModule={contentModule.specificContentModule} />
+    );
+  }
   if (contentModule.specificContentModule instanceof ImagesGridSectionModule) {
     return (
       <ImagesGridSection

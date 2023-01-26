@@ -3,13 +3,16 @@
   display: inline-flex;
   justify-content: flex-start;
   align-items: center;
-  height: 28px;
   width: 112px;
   @include breakpoint-up(lg) {
-    width: 134px;
+    width: 135px;
+  }
+  div {
+    width: 100%;
   }
 }
 
-.logo, .logo * {
+.logo,
+.logo * {
   cursor: pointer;
 }

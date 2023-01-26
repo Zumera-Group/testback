@@ -12,12 +12,7 @@ export const LogoExtended: React.FC<Props> = ({ slug, title }) => {
   return (
     <Link passHref href={slug}>
       <a rel="home" title={title} className={styles.link}>
-        <Icon
-          width="134"
-          height="56"
-          viewBox={'0 0 134 56'}
-          xmlns="http://www.w3.org/2000/svg"
-        >
+        <Icon viewBox={'0 0 134 56'} xmlns="http://www.w3.org/2000/svg">
           <g clipPath="url(#clip0_1526_47574)">
             <g clipPath="url(#clip1_1526_47574)">
               <path

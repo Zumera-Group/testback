@@ -8,8 +8,6 @@ export const AnimatedLogo: React.FC<any> = ({ isScrolled, isLightPage }) => {
   return (
     <motion.div>
       <motion.svg
-        width="134"
-        height="56"
         viewBox={'0 -21 134 56'}
         xmlns="http://www.w3.org/2000/svg"
         animate={{

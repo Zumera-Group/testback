@@ -43,8 +43,8 @@ export const SwiperPeople = ({
     onSwiper: setSwiper,
     slidesPerView: slides,
     spaceBetween: containerPaddingX,
-    // slidesOffsetAfter: containerPaddingX * 1.5,
-    // slidesOffsetBefore: containerPaddingX,
+    slidesOffsetAfter: containerPaddingX * 1.5,
+    slidesOffsetBefore: containerPaddingX,
     breakpoints: {
       [breakpoint_LG]: {
         slidesPerView: lgSlides,

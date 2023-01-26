@@ -8,7 +8,6 @@ import { Question, Questionnaire } from '../domain/index';
 import { Sector, SiteSettings } from '../../page/domain/index';
 import { getTranslateByScope } from 'translation/i18n';
 import { useValuationStore } from '../store';
-// import Header from './Header';
 import { QuestionComponent } from './Question/QuestionComponent';
 import Sidebar from './Sidebar';
 import { EnvironmentService } from 'environment.service';
@@ -16,12 +15,11 @@ import { uuid } from 'uuidv4';
 import { qLogs } from '../application/log';
 import { useSalesforceAnswerSync } from '../application/useSalesforceAnswerSync';
 import { useRouter } from 'next/router';
-import BottomBar from 'components/Calculator/BottomBar/BottomBar';
-import { useGetSalesforceScore } from '../application/useGetQuestionnaireScore';
-import { ProgressBar } from 'components/Calculator/ProgressBar';
-import Image from 'next/image';
-import { LoadingCircle } from 'components/Icons/LoadingCircle';
 import PageHeader from 'lib/shared-domain/page/presentation/PageHeader';
+import { SCREEN_SIZE_MD } from 'lib/constants';
+import { useMediaQuery } from 'lib/hooks/useMediaQuery';
+import { ScoreCard } from './ScoreCard';
+import ProgressBarLine from 'components/Calculator/ProgressBarLine/ProgressBarLine';
 
 const t = getTranslateByScope('timeEstimation');
 const tSidebar = getTranslateByScope('sidebar');
@@ -56,6 +54,7 @@ const QuestionnaireLayout: React.FC<{
 
   useSetQuestionnaireLocaleToUseFori18n(locale);
   const [currenQuestionPosition, setCurrentQuestionPosition] = useState(0);
+  const isMobile = useMediaQuery(`(max-width: ${SCREEN_SIZE_MD})`);
 
   const {
     questionnaire,
@@ -166,83 +165,8 @@ const QuestionnaireLayout: React.FC<{
     0,
   );
 
-  //RESULTS LOGIC
-  const [score, setScore] = React.useState<{
-    points: string;
-    percentage: string;
-    calendly: string;
-    avg: number;
-  }>(null);
-  const [hasError, setHasError] = React.useState(false);
-  const { getScore } = useGetSalesforceScore();
-
-  React.useEffect(() => {
-    const loadScore = async () => {
-      try {
-        const score = await getScore();
-        setScore(score);
-        setHasError(false);
-      } catch (e) {
-        setHasError(true);
-      }
-    };
-    loadScore();
-  }, []);
-
-  const scoreCard = () => {
-    if (score) {
-      const presenter = {
-        hasPoints: () => {
-          if (score.points === '#N/A' || !score.points) return false;
-          return true;
-        },
-        getFormattedPoints: () => {
-          return score.points;
-        },
-        getPercentage: () => {
-          try {
-            return Math.floor(Number(score.percentage) * 100);
-          } catch (e) {
-            return '';
-          }
-        },
-      };
-      const hasScoreAndPercentage =
-        presenter.hasPoints() && presenter.getPercentage();
-      const points = tr('evaluation.resultBox.points', {
-        points: presenter.getFormattedPoints(),
-      });
-      const title = tr('evaluation.resultBox.title');
-      const betterThan = tr('evaluation.resultBox.betterThen', {
-        percentage: presenter.getPercentage(),
-      });
-      return (
-        <>
-          {hasScoreAndPercentage && (
-            <div className={styles.scoreCardWrapper}>
-              <span className={styles.scoreCardTitle}>{title}</span>
-              <ProgressBar
-                isPoint
-                progress={points.substring(0, points.length - 2)}
-                color="gradient"
-              />
-              <p className={styles.betterThan}>{betterThan}</p>
-              <Image
-                unoptimized
-                loading="lazy"
-                objectFit="cover"
-                alt={'booklet'}
-                src={'/booklet.png'}
-                height={217}
-                width={217}
-              />
-            </div>
-          )}
-        </>
-      );
-    }
-    return <LoadingCircle />;
-  };
+  const currentCategoryIndex = mainStep + 1;
+  const progress = (currenQuestionPosition / numberOfQuestionsInTotal) * 100;
 
   return (
     <>
@@ -281,8 +205,28 @@ const QuestionnaireLayout: React.FC<{
               }
             />
           </GridItem>
-
-          {questionnaire && !isOnResultScreen && (
+          {questionnaire && !isOnResultScreen && isMobile && (
+            <GridItem
+              gridArea="sidebar"
+              display={{ base: 'none', lg: 'grid' }}
+              className={[styles.sideBarWrapper, styles.mobileSideBar].join(
+                ' ',
+              )}
+            >
+              <ProgressBarLine
+                indicator={
+                  !isOnResultScreen && {
+                    current: currenQuestionPosition,
+                    total: numberOfQuestionsInTotal,
+                  }
+                }
+                currentCategory={currentCategory}
+                categoryIndex={currentCategoryIndex}
+                progress={progress}
+              />
+            </GridItem>
+          )}
+          {questionnaire && !isOnResultScreen && !isMobile && (
             <GridItem
               gridArea="sidebar"
               display={{ base: 'none', lg: 'grid' }}
@@ -298,7 +242,7 @@ const QuestionnaireLayout: React.FC<{
               display={{ base: 'none', lg: 'grid' }}
               className={styles.sideBarWrapper}
             >
-              {scoreCard()}
+              <ScoreCard />
             </GridItem>
           )}
 

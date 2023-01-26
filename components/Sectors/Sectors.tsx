@@ -35,7 +35,7 @@ export const Sectors: React.FC<Props> = ({ ...rest }) => {
               <GridColumn
                 key={`${sector?._key}-${index}`}
                 className={styles.sectorWrapper}
-                xs={12}
+                xs={6}
                 sm={6}
                 md={4}
                 lg={3}

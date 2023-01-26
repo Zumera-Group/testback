@@ -25,6 +25,7 @@ export const FactsAndFigures: React.FC<Props> = ({ ...rest }) => {
           >
             <GridColumn sm={12} md={5} lg={5}>
               <SectionHeading
+                headingType={'h3'}
                 title={title}
                 subtitle={subtitle}
                 description={description}
