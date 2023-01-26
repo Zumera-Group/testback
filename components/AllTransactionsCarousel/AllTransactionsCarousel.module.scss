@@ -12,7 +12,7 @@
 }
 
 .navigationColumn {
-  display: flex;
+  display: none;
   justify-content: flex-start;
   margin-top: $gutter * .5;
   margin-bottom: 0;
@@ -21,6 +21,9 @@
   @include breakpoint-up(sm) {
     justify-content: flex-end;
     margin-bottom: $paragraphs-margin-bottom;
+  }
+  @include breakpoint-up(sm) {
+    display: flex;
   }
 }
 
