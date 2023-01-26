@@ -1,0 +1,33 @@
+.container {
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.party {
+  @include divider('top', $primary);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 5rem 0 2.5rem;
+  text-align: center;
+  @include breakpoint-down(md) {
+    padding: 3rem 1rem 1.5rem;
+  }
+}
+.image {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 2.5rem;
+}
+.quote {
+  margin-bottom: 2.5rem;
+}
+.name {
+  font-weight: $font-weight-bold;
+}
+.jobTitle {
+  text-transform: uppercase;
+}
