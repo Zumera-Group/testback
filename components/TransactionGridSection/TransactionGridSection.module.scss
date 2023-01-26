@@ -1,9 +1,11 @@
 .sectionWrapper {
   overflow: hidden;
 }
+
 .sliderHeader {
   color: $white;
 }
+
 .sliderButtons {
   display: flex;
   justify-content: flex-end;
@@ -18,36 +20,55 @@
     }
   }
 }
+
 .swiper {
-  margin-top: 40px;
+  margin-top: $gutter * 3;
   overflow: visible;
 }
+
 .selectorTile {
   aspect-ratio: 1 / 1;
   max-width: 100%;
-  border: 1px solid $quaternary;
-  border-radius: 20px;
+  border: $border-width solid $quaternary;
+  border-radius: $border-radius-sm;
   color: $white;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  padding: 16px;
+  padding: $gutter;
   cursor: pointer;
-  transition: all 0.2s linear;
+  backface-visibility: hidden;
+  will-change: transform, background-color, border-color;
+  transition: border-color $timing-sm $ease-out, background-color $timing-sm $ease-out, transform $timing-sm $ease-out;
+  transform-origin: 50% 50%;
   &:hover,
   &.active {
+    background-color: $primary-alt;
+  }
+  &:hover {
+    transform: scale(0.98);
+  }
+  &:active {
+    transform: scale(0.96);
+    transition-duration: $timing-xs;
+  }
+  &.active {
+    transform: scale(1.08);
     border-color: $accent;
-    background: $primary-alt;
+    transition-duration: $timing-md;
   }
 }
+
 .tileImage {
   margin-bottom: auto;
 }
+
 .tileTitle {
   margin-bottom: auto;
   font-size: $font-size-small;
 }
+
 .transactionsGrid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -63,12 +84,14 @@
     }
   }
 }
+
 .loader {
   span {
     border-color: $white;
     border-right-color: transparent;
   }
 }
+
 .loadMore {
-  margin: 2rem auto 0;
+  margin: $gutter * 2 auto 0;
 }
