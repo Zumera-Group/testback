@@ -29,6 +29,7 @@ export const SwiperTransactionsGrid = ({
       swiper.navigation.init();
       swiper.navigation.update();
     }
+    return () => swiper.destroy(true, true);
   }, [swiper, prevButton, nextButton]);
 
   const swiperOptions = {
