@@ -32,11 +32,9 @@ export const SwiperTransactions = ({ prevButton, nextButton, maxSlidesToShow, cl
     breakpoints: {
       [breakpoint_SM]: {
         slidesPerView: 2,
-        spaceBetween: spaceBetween,
       },
       [breakpoint_LG]: {
         slidesPerView: maxSlidesToShow ? maxSlidesToShow : 3,
-        spaceBetween: spaceBetween,
       }
     },
     navigation: {
