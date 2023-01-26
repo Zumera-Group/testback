@@ -18,7 +18,7 @@
   display: block;
   @include push-auto-x();
   width: 100%;
-  padding-left: calc((100vw - #{$container-max-width}) / 2 )
+  padding-left: calc((100vw - #{$container-max-width}) / 2);
 }
 
 .columns {
@@ -41,6 +41,15 @@
   }
   @include breakpoint-up(lg) {
     max-width: 40rem;
+  }
+}
+
+.title {
+  font-size: $h2-font-size;
+  span {
+    display: block;
+    font-style: normal;
+    font-weight: 300;
   }
 }
 

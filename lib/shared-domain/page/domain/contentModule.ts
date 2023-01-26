@@ -292,6 +292,8 @@ export class CalculatorTeaserSectionModule extends BaseModule {
 export class CDIGlobalSectionModule extends BaseModule {
   subtitle: string;
   title: string;
+
+  title2: string;
   description: any[];
   button: {
     text: string;
@@ -308,6 +310,7 @@ export class CDIGlobalSectionModule extends BaseModule {
     super();
     this.subtitle = fields.subtitle;
     this.title = fields.title;
+    this.title2 = fields.title2;
     this.description = fields.description;
     this.button = fields.button;
     this.locations = fields.locations;
