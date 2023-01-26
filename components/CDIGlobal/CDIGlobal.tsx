@@ -28,7 +28,7 @@ export const CDIGlobal: React.FC<Props> = ({ ...rest }) => {
   } = rest;
 
   const isHeader = sectionType === 'header';
-  console.log(button);
+
   return (
     <Section
       size={'md'}
