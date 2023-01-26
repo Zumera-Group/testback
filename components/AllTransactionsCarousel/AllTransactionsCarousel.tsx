@@ -86,6 +86,7 @@ export const AllTransactionsCarousel = ({ ...rest }) => {
                 subtitle={subtitle}
                 description={description}
                 align={'center'}
+                headingType={'h3'}
               />
             </GridColumn>
           </Grid>
