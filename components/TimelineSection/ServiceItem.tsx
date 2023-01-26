@@ -1,6 +1,4 @@
 import { IService } from 'components/TimelineSection/TimelineSection';
-import { H } from 'components/Typography/H';
-import { P } from 'components/Typography/P';
 import styles from './TimelineSection.module.scss';
 import { Icon } from 'components/Icon';
 import Link from 'next/link';
@@ -14,27 +12,27 @@ export const ServiceItem: React.FC<IProps> = ({ service, index }) => {
   const route = useRouter();
   return (
     <div className={styles.serviceItem}>
-      <H variant={'h2'} className={styles.serviceIndex}>
-        {index}
-      </H>
-      <div className={styles.serviceItemContent}>
-        <H variant={'h4'} color={'inherit'} className={styles.serviceName}>
-          {service.name}
-        </H>
-        <P fontSize={'1rem'} color={'inherit'}>
-          {service.shortDescription}
-        </P>
-        <Link passHref href={`${route.asPath}${service.slug?.current}`}>
-          <a>
+      <Link passHref href={`${route.asPath}${service.slug?.current}`}>
+        <a className={styles.serviceLink}>
+          <h2 className={styles.serviceIndex}>
+            {index}
+          </h2>
+          <div className={styles.serviceItemContent}>
+            <h4 className={styles.serviceName}>
+              {service.name}
+            </h4>
+            <p>
+              {service.shortDescription}
+            </p>
             <Icon
               iconName={'arrow-circle'}
               viewBox={'0 0 32 32'}
               width={24}
               height={24}
             />
-          </a>
-        </Link>
-      </div>
+          </div>
+        </a>
+      </Link>
     </div>
   );
 };

@@ -10,6 +10,7 @@ import { SCREEN_SIZE_LG, SCREEN_SIZE_SM, CONTAINER_PADDING_X } from 'lib/constan
 export const SwiperTransactions = ({ prevButton, nextButton, maxSlidesToShow, classes, children }) => {
   const [swiper, setSwiper] = useState(null);
   
+  const spaceBetween = parseInt(CONTAINER_PADDING_X);
   const breakpoint_LG = parseInt(SCREEN_SIZE_LG);
   const breakpoint_SM = parseInt(SCREEN_SIZE_SM);
 

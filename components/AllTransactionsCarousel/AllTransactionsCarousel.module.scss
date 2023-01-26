@@ -14,14 +14,16 @@
 .navigationColumn {
   display: flex;
   justify-content: flex-start;
-  margin-top: $gutter;
+  margin-top: $gutter * .5;
   margin-bottom: 0;
+  padding-left: $gutter;
+  padding-right: $gutter;
   @include breakpoint-up(sm) {
     justify-content: flex-end;
-    margin-top: 0;
     margin-bottom: $paragraphs-margin-bottom;
   }
 }
+
 .button {
   margin-right: auto;
   @include breakpoint-up(md) {

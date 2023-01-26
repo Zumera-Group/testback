@@ -6,11 +6,16 @@
   $sector-color-hover: $white;
   $sector-border-color: $sector-color;
   $sector-border-color-hover: $sector-bg-base;
-  $sector-border-radius: $border-radius;
   $sector-box-shadow: none;
   $sector-box-shadow-hover: $btn-box-shadow;
 
   --padding: #{$gutter};
+  --border-radius: #{$border-radius-sm};
+  --image-max-width: 56px;
+  @include breakpoint-up(sm) {
+    --border-radius: #{$border-radius};
+    --image-max-width: 72px;
+  }
   @include breakpoint-up(md) {
     --padding: #{$gutter * 1.5};
   }
@@ -33,7 +38,7 @@
   border-width: $border-width;
   border-style: solid;
   border-color: $sector-border-color;
-  border-radius: $sector-border-radius;
+  border-radius: var(--border-radius);
   box-shadow: $sector-box-shadow;
   @include hover-state() {
     background-color: $sector-bg-hover;
@@ -55,7 +60,7 @@
   will-change: filter;
   filter: brightness(1) invert(0);
   transition: filter $timing-md $ease-out;
-  max-width: 72px;
+  max-width: var(--image-max-width);
 }
 
 .name {

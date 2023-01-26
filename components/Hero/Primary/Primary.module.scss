@@ -13,10 +13,12 @@
 .primaryHeroImage {
   position: relative;
   right: 59px;
+  max-width: 130%;
   @include breakpoint-down(md) {
     right: 0;
-    margin: 3rem auto 0;
+    margin: $gutter * 3 auto 0;
     width: 100%;
+    max-width: 100%;
   }
 }
 
