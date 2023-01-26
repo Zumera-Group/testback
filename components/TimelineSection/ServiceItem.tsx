@@ -1,18 +1,18 @@
 import { IService } from 'components/TimelineSection/TimelineSection';
-import { H } from 'components/Typography/H';
-import { P } from 'components/Typography/P';
 import styles from './TimelineSection.module.scss';
 import { Icon } from 'components/Icon';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 interface IProps {
   service: IService;
   index: number;
 }
 export const ServiceItem: React.FC<IProps> = ({ service, index }) => {
+  const route = useRouter();
   return (
     <div className={styles.serviceItem}>
-      <Link passHref href={`/services/${service.slug?.current}`}>
+      <Link passHref href={`${route.asPath}${service.slug?.current}`}>
         <a className={styles.serviceLink}>
           <h2 className={styles.serviceIndex}>
             {index}
