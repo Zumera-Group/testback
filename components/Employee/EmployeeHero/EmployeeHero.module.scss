@@ -49,6 +49,7 @@
     text-transform: none;
   }
   &_text {
+    font-size: $font-size-small;
     margin-top: $gutter * 0.5 !important;
   }
 }
