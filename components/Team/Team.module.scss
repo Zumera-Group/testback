@@ -11,7 +11,7 @@
   justify-content: flex-start;
   margin-top: $gutter;
   margin-bottom: 0;
-  @include breakpoint-up(sm) {
+  @include breakpoint-up(md) {
     justify-content: flex-end;
     margin-top: 0;
     margin-bottom: $paragraphs-margin-bottom;
@@ -22,4 +22,7 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 1.5rem;
+  @include breakpoint-down(lg) {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }

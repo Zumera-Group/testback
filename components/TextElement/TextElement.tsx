@@ -19,11 +19,7 @@ export const TextElement = ({ firstBlock, secondBlock, title }) => {
     <Section size={'sm'} bg={'light'} color={'primary'}>
       <Container>
         <div className={styles.textElement}>
-          {title ? (
-            <H variant={'h3'} color={'white'}>
-              {title}
-            </H>
-          ) : null}
+          {title ? <h3>{title}</h3> : null}
           <Grid
             fullWidth={true}
             justifyContent={'space-between'}
