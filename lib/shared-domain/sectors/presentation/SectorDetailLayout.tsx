@@ -13,7 +13,7 @@ import { SectorNews } from './SectorNews';
 import { SectorMoreDetails } from './SectorMoreDetails';
 import { SEO } from 'components/SEO';
 import { ServiceQuestionnaire } from 'lib/shared-domain/services/presentation/ServiceQuestionnaire';
-import { useFetchTransactions } from '../../newsArticle/presentation/NewsArticleMoreNews';
+import { useFetchTransactions } from '../../newsArticle/presentation/NewsArticleMoreNews_DISABLED';
 import { useFetchNewsArticles } from '../../newsArticle/application/useGetNewsArticles';
 import { useFetchEmployees } from '../../employees/application/useGetEmployees';
 import { links } from 'lib/links';

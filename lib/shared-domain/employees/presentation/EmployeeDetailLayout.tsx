@@ -15,7 +15,7 @@ import { EmployeeNews } from './EmployeeNews';
 import { EmployeeContact } from './EmployeeContact';
 import { SEO } from 'components/SEO';
 import { useFetchEmployees } from '../application/useGetEmployees';
-import { useFetchTransactions } from '../../newsArticle/presentation/NewsArticleMoreNews';
+import { useFetchTransactions } from '../../newsArticle/presentation/NewsArticleMoreNews_DISABLED';
 import { useFetchNewsArticles } from '../../newsArticle/application/useGetNewsArticles';
 import { links } from 'lib/links';
 import { useRouter } from 'next/router';
