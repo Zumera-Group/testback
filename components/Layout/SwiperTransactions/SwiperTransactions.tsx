@@ -45,9 +45,11 @@ export const SwiperTransactions = ({
     breakpoints: {
       [breakpoint_SM]: {
         slidesPerView: 2,
+        centeredSlides: true,
       },
       [breakpoint_LG]: {
         slidesPerView: maxSlidesToShow ? maxSlidesToShow : 3,
+        centeredSlides: false,
       },
     },
     navigation: {
