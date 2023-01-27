@@ -8,6 +8,7 @@ import { QuestionButtons } from './QuestionButtons';
 import { useValuationStore } from '../../store/index';
 import { QuestionAnimation } from './QuestionAnimation';
 import BackButton from 'components/Calculator/BackButton/BackButton';
+import styles from './SectorSpecificEntry.module.scss';
 
 const t = getTranslateByScope('sectorSpecificEntry');
 
@@ -35,16 +36,18 @@ export const SectorSpecificEntry: React.FC<{
         {t('subtitle')}
       </P>
       <ResultTeaser calculatorSteps={calculatorSteps} isSectorSpecificEntry />
-      <BackButton onPrevQuestion={onPrevQuestion} currentPos={currentPos} />
-      <QuestionButtons
-        firstButtonText={firstButtonText}
-        secondButtonText={secondButtonText}
-        onNextQuestion={onNextQuestion}
-        onFinishQuestionnaire={onFinishQuestionnaire}
-        isRequired={false}
-        isAnswered
-        stackMobile
-      />
+      <div className={styles.buttonOuter}>
+        <BackButton onPrevQuestion={onPrevQuestion} currentPos={currentPos} />
+        <QuestionButtons
+          firstButtonText={firstButtonText}
+          secondButtonText={secondButtonText}
+          onNextQuestion={onNextQuestion}
+          onFinishQuestionnaire={onFinishQuestionnaire}
+          isRequired={false}
+          isAnswered
+          stackMobile
+        />
+      </div>
     </QuestionAnimation>
   );
 };

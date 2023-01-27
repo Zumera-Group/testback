@@ -179,11 +179,17 @@ export const OrbitSelector: React.FC<{
         </P>
       </Flex>
 
-      <QuestionButtons
-        onNextQuestion={onNextQuestion}
-        isRequired={question?.isRequired}
-        isAnswered={getAnswer()}
-      />
+      <div className={styles.buttonOuter}>
+        {!isMobile && (
+          <BackButton onPrevQuestion={onPrevQuestion} currentPos={currentPos} />
+        )}
+
+        <QuestionButtons
+          onNextQuestion={onNextQuestion}
+          isRequired={question?.isRequired}
+          isAnswered={getAnswer()}
+        />
+      </div>
     </QuestionAnimation>
   );
 };

@@ -153,6 +153,7 @@ export const BoxSelector = ({
               currentPos={currentPos}
             />
           )}
+
           <div className={styles.buttonWrapper}>
             <div className={styles.showMoreWrapper}>
               {moreBoxesToShow && !isMobile && (
