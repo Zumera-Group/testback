@@ -264,22 +264,6 @@ const QuestionnaireLayout: React.FC<{
                 </Grid>
               </Container>
             </Section>
-
-            {questionnaire && !isOnResultScreen && isMobile && (
-              <aside>
-                <ProgressBarLine
-                  indicator={
-                    !isOnResultScreen && {
-                      current: currenQuestionPosition,
-                      total: numberOfQuestionsInTotal,
-                    }
-                  }
-                  currentCategory={currentCategory}
-                  categoryIndex={currentCategoryIndex}
-                  progress={progress}
-                />
-              </aside>
-            )}
           </main>
         </div>
       </PageTransition>
