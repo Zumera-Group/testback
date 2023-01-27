@@ -24,7 +24,8 @@
   font-size: $h1-font-size;
   font-weight: $font-weight-light;
   width: 100%;
-
+  padding-left: $input-padding-x * 0.75;
+  padding-right: $input-padding-x * 0.75;
   &.noSign {
     padding-left: 0;
   }
@@ -41,12 +42,9 @@
 .fieldWrapper {
   display: flex;
   align-items: flex-end;
+  justify-content: space-between;
   margin-bottom: $gutter * 1.5;
   max-width: 100%;
-
-  @include breakpoint-down(md) {
-    padding: 0 $gutter;
-  }
 
   @include breakpoint-up(md) {
     max-width: max-content;
