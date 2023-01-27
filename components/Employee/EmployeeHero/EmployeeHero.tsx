@@ -26,7 +26,7 @@ export const EmployeeHero: React.FC<{
   return (
     <Section
       as={'div'}
-      classes={[baseStyles.hero].join(' ')}
+      classes={[baseStyles.hero, styles.hero].join(' ')}
       size={'lg'}
       bg={'light'}
       color={'primary'}
