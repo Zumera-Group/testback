@@ -27,7 +27,7 @@
 
   // Styles for when the sidebar is rendered
   &__hasSidebar {
-    .sidebarCol {
+    .sidebarWrapper {
       padding-right: var(--grid-gap);
     }
     
@@ -57,22 +57,24 @@
   min-height: calc(100vh - var(--header-height));
 }
 
-.progressBarLineMobile {
-  display: block;
-  width: 100%;
-  margin: -$gutter auto $gutter * 2.5 auto;
+.questionCol {
+  position: relative;
 }
 
 .sidebarCol {
-  position: sticky;
-  position: -webkit-sticky;
+  position: sticky !important;
+  position: -webkit-sticky !important;
   top: $gutter * 1.5;
+}
+
+.sidebarWrapper {
   & > * {
     width: 100%;
   }
 }
 
-.questionCol {
-  position: relative;
+.progressBarLineMobile {
+  display: block;
+  width: 100%;
+  margin: -$gutter auto $gutter * 2.5 auto;
 }
-
