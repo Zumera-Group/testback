@@ -1,5 +1,8 @@
 .carousel {
   margin-top: $gutter * 2;
+  @include breakpoint-down(sm) {
+    overflow: visible;
+  }
 }
 
 .slide {
@@ -7,14 +10,14 @@
   align-self: stretch;
   & > * {
     height: 100%;
-    padding: $gutter;
+    padding: 0.5rem;
   }
 }
 
 .navigationColumn {
   display: none;
   justify-content: flex-start;
-  margin-top: $gutter * .5;
+  margin-top: $gutter * 0.5;
   margin-bottom: 0;
   padding-left: $gutter;
   padding-right: $gutter;
