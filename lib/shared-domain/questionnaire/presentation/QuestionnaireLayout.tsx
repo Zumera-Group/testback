@@ -224,7 +224,7 @@ const QuestionnaireLayout: React.FC<{
               <Container>
                 <Grid
                   fullWidth={true}
-                  justifyContent={'flex-end'}
+                  justifyContent={'center'}
                   alignItems={'start'}
                   className={styles.grid}
                 >
