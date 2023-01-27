@@ -29,7 +29,7 @@ export const SectorSpecificEntry: React.FC<{
     <>
       <QuestionText title={t('questionText')} />
       <QuestionAnimation>
-        <P variant="mobileSectorSpecificEntryP" color={'white'}>
+        <P variant="mobileSectorSpecificEntryP" color={'white'} pl={'0.75rem'}>
           {t('subtitle')}
         </P>
         <ResultTeaser calculatorSteps={calculatorSteps} isSectorSpecificEntry />

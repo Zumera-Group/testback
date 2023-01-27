@@ -20,6 +20,7 @@ import { SCREEN_SIZE_MD } from 'lib/constants';
 import { useMediaQuery } from 'lib/hooks/useMediaQuery';
 import { ScoreCard } from './ScoreCard';
 import ProgressBarLine from 'components/Calculator/ProgressBarLine/ProgressBarLine';
+import { Section } from 'components/Layout';
 
 const t = getTranslateByScope('timeEstimation');
 const tSidebar = getTranslateByScope('sidebar');
@@ -180,16 +181,13 @@ const QuestionnaireLayout: React.FC<{
         siteSettings={siteSettings}
       />
       <PageTransition slug={questionnaire?.questionnaireSlug?.current}>
-        <Grid
-          className={styles.questionnaireWrapper}
-          h="100%"
-          w="100%"
-          overflowY="scroll"
-          height="100vh"
-          gridTemplateColumns={{ base: '0% 100% 0%', lg: '20% 60% 20%' }}
-          gridTemplateRows={{ base: '7% 93% 0%', lg: '10% 75% 15%' }}
-        >
-          <GridItem gridArea="header" className={styles.questionnaireHeader}>
+        <div className={styles.questionnaireWrapper}>
+          <Section
+            size={'sm'}
+            bg={'primary'}
+            color={'white'}
+            classes={styles.headerSection}
+          >
             <PageHeader
               contentModules={[]}
               siteSettings={siteSettings}
@@ -204,11 +202,20 @@ const QuestionnaireLayout: React.FC<{
                 }
               }
             />
-          </GridItem>
+          </Section>
+          {questionnaire && !isOnResultScreen && !isMobile && (
+            <aside className={styles.sideBarWrapper}>
+              <Sidebar />
+            </aside>
+          )}
+          {isOnResultScreen && (
+            <aside className={styles.sideBarWrapper}>
+              <ScoreCard />
+            </aside>
+          )}
+
           {questionnaire && !isOnResultScreen && isMobile && (
-            <GridItem
-              gridArea="sidebar"
-              display={{ base: 'none', lg: 'grid' }}
+            <aside
               className={[styles.sideBarWrapper, styles.mobileSideBar].join(
                 ' ',
               )}
@@ -224,53 +231,20 @@ const QuestionnaireLayout: React.FC<{
                 categoryIndex={currentCategoryIndex}
                 progress={progress}
               />
-            </GridItem>
+            </aside>
           )}
-          {questionnaire && !isOnResultScreen && !isMobile && (
-            <GridItem
-              gridArea="sidebar"
-              display={{ base: 'none', lg: 'grid' }}
-              className={styles.sideBarWrapper}
-            >
-              <Sidebar />
-            </GridItem>
-          )}
-
-          {isOnResultScreen && (
-            <GridItem
-              gridArea="sidebar"
-              display={{ base: 'none', lg: 'grid' }}
-              className={styles.sideBarWrapper}
-            >
-              <ScoreCard />
-            </GridItem>
-          )}
-
-          <GridItem gridArea="question" className={styles.questionWrapper}>
+          <Section
+            size={'sm'}
+            bg={'primary'}
+            color={'white'}
+            classes={styles.questionWrapper}
+          >
             <QuestionComponent
               sectorSpecificQuestions={sectorSpecificQuestions}
               sectors={sectors}
             />
-
-            {!isOnResultScreen && isFirstQuestion() && (
-              <Flex
-                direction={{ base: 'column', lg: 'row' }}
-                justify="space-between"
-                align="center"
-                pt={6}
-                pb={2}
-                w="100%"
-              ></Flex>
-            )}
-          </GridItem>
-
-          <Box
-            position="fixed"
-            display={{ base: 'none', lg: 'block' }}
-            right={0}
-            bottom={13}
-          ></Box>
-        </Grid>
+          </Section>
+        </div>
       </PageTransition>
     </>
   );

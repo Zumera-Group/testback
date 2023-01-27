@@ -1,5 +1,15 @@
 .calculatorTeaserWrapper {
   justify-content: center;
+
+  @include breakpoint-up(md) {
+    justify-content: flex-start;
+  }
+
+  & + p {
+    @include breakpoint-down(md) {
+      padding: 0 $gutter * 1 !important;
+    }
+  }
 }
 
 .teaserBeam {

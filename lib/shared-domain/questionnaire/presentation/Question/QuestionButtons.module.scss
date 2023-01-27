@@ -2,6 +2,7 @@
   margin: $gutter * 0.5;
   width: 100%;
   justify-content: center;
+
   @include breakpoint-up(md) {
     width: auto;
     justify-content: inherit;
@@ -9,6 +10,9 @@
 }
 
 .buttonWrapper {
+  @include breakpoint-down(md) {
+    padding: 0 $gutter * 1;
+  }
   &.stack {
     flex-direction: column;
     @include breakpoint-up(md) {

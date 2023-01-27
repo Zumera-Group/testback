@@ -139,8 +139,8 @@ export const BoxSelector = ({
 
       <QuestionAnimation>
         {!isMobile || (isMobile && boxesToRender.length === 2) ? (
-          <Box mx="auto" w="100%" maxWidth={950}>
-            <Flex mt={1} justify="center" flexWrap="wrap">
+          <Box maxWidth={950} className={styles.boxSelector}>
+            <Flex mt={1} justify="flex-start" flexWrap="wrap">
               {boxesToRender?.map((box, index) => (
                 <BoxSelectorItem key={box._key} question={question} box={box} />
               ))}
@@ -169,7 +169,7 @@ export const BoxSelector = ({
           </>
         )}
 
-        <Flex justifyContent="center" className={styles.showMoreWrapper}>
+        <Flex justifyContent="flex-start" className={styles.showMoreWrapper}>
           {moreBoxesToShow && !isMobile && (
             <Button
               callBack={onShowMore}

@@ -256,7 +256,7 @@ const EvaluationScreen: React.FC<{
         description={t('evaluation.description')}
       />
 
-      <FlexCol maxWidth={700}>
+      <FlexCol maxWidth={700} className={styles.resultForm}>
         <Flex direction={{ base: 'column', lg: 'row' }} flexWrap="wrap">
           <FlexCol
             ml={{ base: 0, lg: hasScoreAndPercentage ? 4 : 'auto' }}

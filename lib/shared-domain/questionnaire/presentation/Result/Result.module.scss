@@ -16,3 +16,9 @@
     color: $accent;
   }
 }
+
+.resultForm {
+  @include breakpoint-down(md) {
+    padding: 0 $gutter * 1;
+  }
+}

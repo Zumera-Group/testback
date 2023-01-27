@@ -36,11 +36,13 @@
   .fieldWrapper {
     display: flex;
     align-items: flex-end;
-
     border-bottom: 1px solid #794d7c;
     margin-bottom: $gutter * 1.5;
-
     max-width: 100%;
+
+    @include breakpoint-down(md) {
+      padding: 0 $gutter * 1;
+    }
 
     @include breakpoint-up(md) {
       max-width: max-content;
@@ -49,6 +51,9 @@
 
   .fieldLabel {
     color: $white;
+    @include breakpoint-down(md) {
+      padding: 0 $gutter * 1;
+    }
   }
 
   .sign {

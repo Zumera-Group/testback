@@ -84,7 +84,6 @@ export const NumberInput: React.FC<{
           }}
           isRequired={question?.isRequired}
           isAnswered={getUnformattedAnswer() != null}
-          btnAlignLeft
         />
       </QuestionAnimation>
     </div>

@@ -1,0 +1,5 @@
+.textInputWrapper {
+  @include breakpoint-down(md) {
+    padding: $gutter * 1;
+  }
+}

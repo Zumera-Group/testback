@@ -9,6 +9,7 @@ import { QuestionButtons } from '../../Question/QuestionButtons';
 import { QuestionAnimation } from '../../Question/QuestionAnimation';
 import { RequiredQuestionInfo } from '../../Question/RequiredQuestionInfo';
 import Textarea from 'components/Form/Textarea/Textarea';
+import styles from './TextInput.module.scss';
 
 const t = getTranslateByScope('answerTypes.textInput');
 
@@ -27,7 +28,7 @@ export const TextInput: React.FC<{
         <RequiredQuestionInfo isRequired={question?.isRequired} />
       </QuestionText>
       <QuestionAnimation>
-        <Box maxWidth={600} mt={5} mb={6}>
+        <Box maxWidth={600} mt={5} mb={6} className={styles.textInputWrapper}>
           <Textarea
             id={question._id}
             value={getAnswer()}
@@ -41,7 +42,6 @@ export const TextInput: React.FC<{
         onNextQuestion={onNextQuestion}
         isRequired={question?.isRequired}
         isAnswered={getAnswer()}
-        btnAlignLeft
       />
     </>
   );

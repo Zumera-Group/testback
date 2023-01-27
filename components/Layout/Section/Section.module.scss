@@ -4,7 +4,7 @@
   width: 100%;
   @each $name, $size in $section-sizes {
     &.size-#{$name} {
-      --section-size: #{$size * .75};
+      --section-size: #{$size * 0.75};
       @include breakpoint-up(lg) {
         --section-size: #{$size};
       }
@@ -41,4 +41,3 @@
     }
   }
 }
-

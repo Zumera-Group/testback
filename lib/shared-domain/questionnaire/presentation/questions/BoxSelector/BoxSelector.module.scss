@@ -1,3 +1,11 @@
+.boxSelector {
+  & > * {
+    @include breakpoint-down(md) {
+      justify-content: center !important;
+    }
+  }
+}
+
 .showMoreWrapper {
   margin-top: $gutter * 2;
 }

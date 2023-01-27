@@ -23,7 +23,6 @@ export const QuestionButtons: React.FC<{
   secondButtonText?: string;
   isRequired: boolean;
   isAnswered: boolean;
-  btnAlignLeft?: boolean;
   stackMobile?: boolean;
 }> = ({
   onNextQuestion,
@@ -32,7 +31,6 @@ export const QuestionButtons: React.FC<{
   onFinishQuestionnaire,
   isRequired,
   isAnswered,
-  btnAlignLeft,
   stackMobile,
 }) => {
   const { isFirstQuestion, isFadingOut } = useValuationStore();
@@ -53,7 +51,7 @@ export const QuestionButtons: React.FC<{
             mt={2}
             mb={2}
             alignItems="center"
-            justifyContent={btnAlignLeft ? 'start' : 'center'}
+            justifyContent={'start'}
             className={[styles.buttonWrapper, stackMobile && styles.stack].join(
               ' ',
             )}

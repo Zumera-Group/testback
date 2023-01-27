@@ -3,6 +3,9 @@
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
+  @include breakpoint-down(md) {
+    padding: 0 $gutter * 1;
+  }
 }
 
 .inputItem {
