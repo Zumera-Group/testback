@@ -51,7 +51,7 @@ export const QuestionButtons: React.FC<{
             mt={2}
             mb={2}
             alignItems="center"
-            justifyContent={'start'}
+            justifyContent={'end'}
             className={[styles.buttonWrapper, stackMobile && styles.stack].join(
               ' ',
             )}

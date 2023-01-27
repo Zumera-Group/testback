@@ -183,8 +183,12 @@ const QuestionnaireLayout: React.FC<{
       />
 
       <PageTransition slug={questionnaire?.questionnaireSlug?.current}>
-        <div className={[styles.page, !hasSidebar ? styles.page__hasSidebar : ''].join(' ')}>
-
+        <div
+          className={[
+            styles.page,
+            !hasSidebar ? styles.page__hasSidebar : '',
+          ].join(' ')}
+        >
           <PageHeader
             contentModules={[]}
             siteSettings={siteSettings}
@@ -201,11 +205,7 @@ const QuestionnaireLayout: React.FC<{
           />
 
           <main id="main">
-            <Section
-              bg={'primary'}
-              color={'white'}
-              size={'md'}
-            >
+            <Section bg={'primary'} color={'white'} size={'md'}>
               <Container>
                 <Grid
                   fullWidth={true}
@@ -220,7 +220,9 @@ const QuestionnaireLayout: React.FC<{
                       className={styles.sidebarCol}
                     >
                       <aside className={styles.sidebarWrapper}>
-                        {questionnaire && !isOnResultScreen && !isMobile && <Sidebar />}
+                        {questionnaire && !isOnResultScreen && !isMobile && (
+                          <Sidebar />
+                        )}
                         {isOnResultScreen && <ScoreCard />}
                       </aside>
                     </GridColumn>
@@ -235,13 +237,13 @@ const QuestionnaireLayout: React.FC<{
                       <QuestionComponent
                         sectorSpecificQuestions={sectorSpecificQuestions}
                         sectors={sectors}
+                        currentPos={currenQuestionPosition}
                       />
                     </div>
                   </GridColumn>
                 </Grid>
               </Container>
             </Section>
-
 
             {questionnaire && !isOnResultScreen && isMobile && (
               <aside>
@@ -258,7 +260,6 @@ const QuestionnaireLayout: React.FC<{
                 />
               </aside>
             )}
-
           </main>
         </div>
       </PageTransition>

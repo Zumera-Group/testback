@@ -7,6 +7,7 @@ import { ResultTeaser } from '../CalculatorTeaser';
 import { QuestionButtons } from './QuestionButtons';
 import { useValuationStore } from '../../store/index';
 import { QuestionAnimation } from './QuestionAnimation';
+import BackButton from 'components/Calculator/BackButton/BackButton';
 
 const t = getTranslateByScope('sectorSpecificEntry');
 
@@ -19,8 +20,10 @@ const calculatorSteps = {
 
 export const SectorSpecificEntry: React.FC<{
   onNextQuestion(): void;
+  onPrevQuestion(): void;
+  currentPos: number;
   industry: string;
-}> = ({ onNextQuestion, industry }) => {
+}> = ({ onNextQuestion, industry, currentPos, onPrevQuestion }) => {
   const firstButtonText = t('firstButtonText', { industry });
   const { setIsOnResultScreen } = useValuationStore();
   const secondButtonText = t('secondButtonText');
@@ -34,6 +37,8 @@ export const SectorSpecificEntry: React.FC<{
         </P>
         <ResultTeaser calculatorSteps={calculatorSteps} isSectorSpecificEntry />
       </QuestionAnimation>
+
+      <BackButton onPrevQuestion={onPrevQuestion} currentPos={currentPos} />
       <QuestionButtons
         firstButtonText={firstButtonText}
         secondButtonText={secondButtonText}

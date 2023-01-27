@@ -31,7 +31,9 @@ const t = getTranslateByScope('answerTypes.slider');
 export const Slider: React.FC<{
   question: Question;
   onNextQuestion: () => void;
-}> = ({ question, onNextQuestion }) => {
+  onPrevQuestion: () => void;
+  currentPos: number;
+}> = ({ question, onNextQuestion, onPrevQuestion, currentPos }) => {
   const { from, gap, to, valueType, subGaps, salesforceFormat } =
     question?.answerSelector?.slider || DEFAULT_SLIDER_VALUES;
 

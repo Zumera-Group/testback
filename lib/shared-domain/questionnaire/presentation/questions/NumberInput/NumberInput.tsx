@@ -13,15 +13,21 @@ import {
 import { QuestionButtons } from '../../Question/QuestionButtons';
 import { QuestionAnimation } from '../../Question/QuestionAnimation';
 import { DEFAULT_VALUES } from './constants';
+import BackButton from 'components/Calculator/BackButton/BackButton';
+import { useMediaQuery } from 'lib/hooks/useMediaQuery';
+import { SCREEN_SIZE_MD } from 'lib/constants';
 
 export const NumberInput: React.FC<{
   question: Question;
   onNextQuestion: () => void;
-}> = ({ question, onNextQuestion }) => {
+  onPrevQuestion: () => void;
+  currentPos: any;
+}> = ({ question, onNextQuestion, onPrevQuestion, currentPos }) => {
   const { valueType, placeholder, salesforceFormat, label } =
     question?.answerSelector?.numberInput || DEFAULT_VALUES;
   const { getNumberFormat, sign } = useNumberFormat(valueType);
   const { getAnswer, setAnswer } = useAnswers(question);
+  const isMobile = useMediaQuery(`(max-width: ${SCREEN_SIZE_MD})`);
 
   const formatToSalesforce = (v: number) => {
     const today = new Date();
@@ -56,6 +62,9 @@ export const NumberInput: React.FC<{
 
   return (
     <div className={styles.numberInputWrapper}>
+      {isMobile && (
+        <BackButton onPrevQuestion={onPrevQuestion} currentPos={currentPos} />
+      )}
       <QuestionText
         title={question.questionText}
         description={question.description}
@@ -78,13 +87,22 @@ export const NumberInput: React.FC<{
             onChange={(e) => formatToSalesforce(Number(e.target.value))}
           />
         </div>
-        <QuestionButtons
-          onNextQuestion={() => {
-            onNextQuestion();
-          }}
-          isRequired={question?.isRequired}
-          isAnswered={getUnformattedAnswer() != null}
-        />
+        <div className={styles.buttonOuter}>
+          {!isMobile && (
+            <BackButton
+              onPrevQuestion={onPrevQuestion}
+              currentPos={currentPos}
+            />
+          )}
+
+          <QuestionButtons
+            onNextQuestion={() => {
+              onNextQuestion();
+            }}
+            isRequired={question?.isRequired}
+            isAnswered={getUnformattedAnswer() != null}
+          />
+        </div>
       </QuestionAnimation>
     </div>
   );

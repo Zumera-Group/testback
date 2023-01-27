@@ -21,11 +21,14 @@ import { useMediaQuery } from 'lib/hooks/useMediaQuery';
 import { SCREEN_SIZE_MD } from 'lib/constants';
 import { SCREEN_SIZE_LG, SCREEN_SIZE_SM } from 'lib/constants';
 import 'swiper/css/scrollbar';
+import BackButton from 'components/Calculator/BackButton/BackButton';
 const t = getTranslateByScope('answerTypes.boxSelector');
 
 interface Props {
   question: Question;
   onNextQuestion?: () => void;
+  onPrevQuestion?: () => void;
+  currentPos?: number;
   sectors?: Sector[];
   industries?: {
     id: string;
@@ -38,8 +41,10 @@ interface Props {
 export const BoxSelector = ({
   question,
   onNextQuestion,
+  onPrevQuestion,
   sectors,
   industries,
+  currentPos,
 }: Props): JSX.Element => {
   const { sectorId, industryId } = useValuationStore();
   let allBoxes = question?.answerSelector?.boxSelector;
@@ -133,6 +138,9 @@ export const BoxSelector = ({
 
   return (
     <>
+      {isMobile && (
+        <BackButton onPrevQuestion={onPrevQuestion} currentPos={currentPos} />
+      )}
       <QuestionText title={question?.questionText}>
         <RequiredQuestionInfo isRequired={question?.isRequired} />
       </QuestionText>
@@ -169,26 +177,40 @@ export const BoxSelector = ({
           </>
         )}
 
-        <Flex justifyContent="flex-start" className={styles.showMoreWrapper}>
-          {moreBoxesToShow && !isMobile && (
-            <Button
-              callBack={onShowMore}
-              variant="primary"
-              hideIcon
-              classes={styles.showMoreBtn}
-            >
-              {buttonText.trim()}
-            </Button>
+        <div className={styles.buttonOuter}>
+          {!isMobile && (
+            <BackButton
+              onPrevQuestion={onPrevQuestion}
+              currentPos={currentPos}
+            />
           )}
-        </Flex>
+
+          <div className={styles.buttonWrapper}>
+            <Flex
+              justifyContent="flex-start"
+              className={styles.showMoreWrapper}
+            >
+              {moreBoxesToShow && !isMobile && (
+                <Button
+                  callBack={onShowMore}
+                  variant="primary"
+                  hideIcon
+                  classes={styles.showMoreBtn}
+                >
+                  {buttonText.trim()}
+                </Button>
+              )}
+            </Flex>
+            {getShowButton() && (
+              <QuestionButtons
+                onNextQuestion={onNextQuestion}
+                isRequired={question?.isRequired}
+                isAnswered={getAnswer()}
+              />
+            )}
+          </div>
+        </div>
       </QuestionAnimation>
-      {getShowButton() && (
-        <QuestionButtons
-          onNextQuestion={onNextQuestion}
-          isRequired={question?.isRequired}
-          isAnswered={getAnswer()}
-        />
-      )}
     </>
   );
 };

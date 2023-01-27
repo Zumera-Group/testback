@@ -18,7 +18,8 @@ import { Box } from '@chakra-ui/react';
 export const QuestionComponent: React.FC<{
   sectorSpecificQuestions: Question[];
   sectors: Sector[];
-}> = ({ sectorSpecificQuestions, sectors }) => {
+  currentPos: number;
+}> = ({ sectorSpecificQuestions, sectors, currentPos }) => {
   const {
     questionnaire,
     mainStep,
@@ -119,6 +120,25 @@ export const QuestionComponent: React.FC<{
     }
   };
 
+  const onPreviousQuestion = () => {
+    console.log('clicked');
+    if (isOnResultScreen) {
+      setIsOnResultScreen(false);
+      return;
+    }
+    const hasPrevQuestion = categoryQuestions[subStep - 1];
+    const hasPrevCategory = questionnaire?.questionsByCategory?.[mainStep - 1];
+
+    if (hasPrevQuestion) {
+      return pushQuestion(mainStep, subStep - 1);
+    } else if (hasPrevCategory) {
+      const prevCategoryQuestions = hasPrevCategory?.questions;
+      return pushQuestion(mainStep - 1, prevCategoryQuestions?.length - 1);
+    } else {
+      return pushQuestion(0, 0);
+    }
+  };
+
   const renderQuestion = () => {
     const answerType = questionnaire && answerSelector?.answerType;
 
@@ -129,8 +149,10 @@ export const QuestionComponent: React.FC<{
       return (
         <questions.BoxSelector
           onNextQuestion={onNextQuestion}
+          onPrevQuestion={onPreviousQuestion}
           question={currentQuestion}
           sectors={sectors?.filter((s) => s?.industries?.length > 0)}
+          currentPos={currentPos}
         />
       );
     }
@@ -141,8 +163,10 @@ export const QuestionComponent: React.FC<{
       return (
         <questions.BoxSelector
           onNextQuestion={onNextQuestion}
+          onPrevQuestion={onPreviousQuestion}
           question={currentQuestion}
           industries={filteredIndustriesBySectorId}
+          currentPos={currentPos}
         />
       );
     }
@@ -160,6 +184,8 @@ export const QuestionComponent: React.FC<{
           <SectorSpecificEntry
             onNextQuestion={onNextQuestion}
             industry={industry?.name}
+            onPrevQuestion={onPreviousQuestion}
+            currentPos={currentPos}
           />
         );
       } else {
@@ -172,43 +198,55 @@ export const QuestionComponent: React.FC<{
       return (
         <questions.BoxSelector
           onNextQuestion={onNextQuestion}
+          onPrevQuestion={onPreviousQuestion}
           question={currentQuestion}
           sectorSpecificQuestions={sectorSpecificQuestions}
+          currentPos={currentPos}
         />
       );
     } else if (answerType === 'slider') {
       return (
         <questions.Slider
           onNextQuestion={onNextQuestion}
+          onPrevQuestion={onPreviousQuestion}
           question={currentQuestion}
+          currentPos={currentPos}
         />
       );
     } else if (answerType === 'textInput') {
       return (
         <questions.TextInput
           onNextQuestion={onNextQuestion}
+          onPrevQuestion={onPreviousQuestion}
           question={currentQuestion}
+          currentPos={currentPos}
         />
       );
     } else if (answerType === 'orbitSelector') {
       return (
         <questions.OrbitSelector
+          onPrevQuestion={onPreviousQuestion}
           onNextQuestion={onNextQuestion}
           question={currentQuestion}
+          currentPos={currentPos}
         />
       );
     } else if (answerType === 'multiTextInput') {
       return (
         <questions.MultiTextInput
+          onPrevQuestion={onPreviousQuestion}
           onNextQuestion={onNextQuestion}
           question={currentQuestion}
+          currentPos={currentPos}
         />
       );
     } else if (answerType === 'numberInput') {
       return (
         <questions.NumberInput
+          onPrevQuestion={onPreviousQuestion}
           onNextQuestion={onNextQuestion}
           question={currentQuestion}
+          currentPos={currentPos}
         />
       );
     }

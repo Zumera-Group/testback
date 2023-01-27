@@ -13,6 +13,9 @@ import getDegreeFromAnswer from './utils/getDegreeFromAnswer';
 import getCoordsPositionDiv from './utils/getCoordsPositionDiv';
 import getDegreeFromCoords from './utils/getDegreeFromCoords';
 import ArrowSelector from './ArrowSelector';
+import BackButton from 'components/Calculator/BackButton/BackButton';
+
+import styles from './Orbit.module.scss';
 
 export interface AnswerOption {
   value: string;
@@ -22,7 +25,9 @@ export interface AnswerOption {
 export const OrbitSelector: React.FC<{
   question: Question;
   onNextQuestion: () => void;
-}> = ({ question, onNextQuestion }) => {
+  onPrevQuestion: () => void;
+  currentPos: number;
+}> = ({ question, onNextQuestion, onPrevQuestion, currentPos }) => {
   const isMobile = useBreakpointValue({ base: true, lg: false });
   const [orbitWidthInPx, setOrbitWidthInPx] = useState(0);
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -96,6 +101,9 @@ export const OrbitSelector: React.FC<{
 
   return (
     <>
+      {isMobile && (
+        <BackButton onPrevQuestion={onPrevQuestion} currentPos={currentPos} />
+      )}
       <QuestionText title={question.questionText}>
         <RequiredQuestionInfo isRequired={question?.isRequired} />
       </QuestionText>
@@ -175,11 +183,17 @@ export const OrbitSelector: React.FC<{
         </P>
       </Flex>
 
-      <QuestionButtons
-        onNextQuestion={onNextQuestion}
-        isRequired={question?.isRequired}
-        isAnswered={getAnswer()}
-      />
+      <div className={styles.buttonOuter}>
+        {!isMobile && (
+          <BackButton onPrevQuestion={onPrevQuestion} currentPos={currentPos} />
+        )}
+
+        <QuestionButtons
+          onNextQuestion={onNextQuestion}
+          isRequired={question?.isRequired}
+          isAnswered={getAnswer()}
+        />
+      </div>
     </>
   );
 };

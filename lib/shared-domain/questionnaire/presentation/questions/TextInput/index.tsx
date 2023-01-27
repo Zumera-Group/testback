@@ -10,20 +10,28 @@ import { QuestionAnimation } from '../../Question/QuestionAnimation';
 import { RequiredQuestionInfo } from '../../Question/RequiredQuestionInfo';
 import Textarea from 'components/Form/Textarea/Textarea';
 import styles from './TextInput.module.scss';
+import BackButton from 'components/Calculator/BackButton/BackButton';
+import { useMediaQuery } from 'lib/hooks/useMediaQuery';
+import { SCREEN_SIZE_MD } from 'lib/constants';
 
 const t = getTranslateByScope('answerTypes.textInput');
 
 export const TextInput: React.FC<{
   question: Question;
   onNextQuestion: () => void;
-}> = ({ question, onNextQuestion }) => {
+  onPrevQuestion: () => void;
+  currentPos: number;
+}> = ({ question, onNextQuestion, onPrevQuestion, currentPos }) => {
   const { getAnswer, setAnswer } = useAnswers(question);
-
+  const isMobile = useMediaQuery(`(max-width: ${SCREEN_SIZE_MD})`);
   const placeholder =
     question.answerSelector?.textInput || t('basePlaceholder');
 
   return (
     <>
+      {isMobile && (
+        <BackButton onPrevQuestion={onPrevQuestion} currentPos={currentPos} />
+      )}
       <QuestionText title={question?.questionText}>
         <RequiredQuestionInfo isRequired={question?.isRequired} />
       </QuestionText>
@@ -38,11 +46,17 @@ export const TextInput: React.FC<{
         </Box>
       </QuestionAnimation>
 
-      <QuestionButtons
-        onNextQuestion={onNextQuestion}
-        isRequired={question?.isRequired}
-        isAnswered={getAnswer()}
-      />
+      <div className={styles.buttonOuter}>
+        {!isMobile && (
+          <BackButton onPrevQuestion={onPrevQuestion} currentPos={currentPos} />
+        )}
+
+        <QuestionButtons
+          onNextQuestion={onNextQuestion}
+          isRequired={question?.isRequired}
+          isAnswered={getAnswer()}
+        />
+      </div>
     </>
   );
 };

@@ -6,10 +6,6 @@
   }
 }
 
-.showMoreWrapper {
-  margin-top: $gutter * 2;
-}
-
 .showMoreBtn {
   width: 100%;
   justify-content: center;
@@ -28,5 +24,14 @@
     .swiperSlide {
       width: 200px !important;
     }
+  }
+}
+
+.buttonOuter {
+  @include breakpoint-up(md) {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: $gutter * 2;
   }
 }

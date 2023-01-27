@@ -65,3 +65,12 @@
     padding: $gutter * 1.2 0;
   }
 }
+
+.buttonOuter {
+  @include breakpoint-up(md) {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: $gutter * 2;
+  }
+}
