@@ -76,6 +76,7 @@ export const NumberInput: React.FC<{
             id={question._id}
             placeholder={placeholder ? placeholder : '0'}
             hideLabel
+            autoFocus
             classes={[
               styles.numberInput,
               shortBox && styles.shortBox,
