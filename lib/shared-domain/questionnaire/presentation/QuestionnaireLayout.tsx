@@ -21,6 +21,7 @@ import { ScoreCard } from './ScoreCard';
 import ProgressBarLine from 'components/Calculator/ProgressBarLine/ProgressBarLine';
 
 import { Section, Container, Grid, GridColumn } from 'components/Layout';
+import { INDUSTRY_QUESTION_ID, SECTOR_QUESTION_ID } from './questions';
 
 const t = getTranslateByScope('timeEstimation');
 const tSidebar = getTranslateByScope('sidebar');
@@ -168,7 +169,14 @@ const QuestionnaireLayout: React.FC<{
   const currentCategoryIndex = mainStep + 1;
   const progress = (currenQuestionPosition / numberOfQuestionsInTotal) * 100;
 
-  const hasSidebar = subStep === 0 || subStep === 1 || subStep === 2;
+  //LOGIC FOR SIDEBAR SHOWING OR NOT
+  const currentCatSidebar = questionnaire?.questionsByCategory?.[mainStep];
+  const categoryQuestions = currentCatSidebar?.questions;
+  const currentQuestion =
+    questionnaire && categoryQuestions && categoryQuestions[subStep];
+  const isIndustryOrSectorQuestion =
+    currentQuestion?.questionId === INDUSTRY_QUESTION_ID ||
+    currentQuestion?.questionId === SECTOR_QUESTION_ID;
 
   return (
     <>
@@ -186,7 +194,7 @@ const QuestionnaireLayout: React.FC<{
         <div
           className={[
             styles.page,
-            !hasSidebar ? styles.page__hasSidebar : '',
+            !isIndustryOrSectorQuestion && styles.page__hasSidebar,
           ].join(' ')}
         >
           <PageHeader
@@ -232,7 +240,7 @@ const QuestionnaireLayout: React.FC<{
                   alignItems={'start'}
                   className={styles.grid}
                 >
-                  {!hasSidebar && (
+                  {!isIndustryOrSectorQuestion && (
                     <GridColumn
                       sm={12}
                       md={4}

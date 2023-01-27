@@ -70,9 +70,7 @@ const Sidebar = (): JSX.Element => {
     <>
       <ProgressBar progress={progress} isPercent color="white" />
       {!isMobile && (
-        <VStack spacing={0}>
-          {categories && categories.map(renderSteps)}
-        </VStack>
+        <VStack spacing={0}>{categories && categories.map(renderSteps)}</VStack>
       )}
     </>
   );
