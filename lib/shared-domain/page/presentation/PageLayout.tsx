@@ -65,7 +65,12 @@ const PageLayout: React.FC<{
         </main>
 
         {!page.isFooterHidden ? (
-          <PageFooterComponent siteSettings={siteSettings} />
+          <PageFooterComponent
+            siteSettings={{
+              ...siteSettings,
+              hideFooterSitemap: page.hideFooterSitemap,
+            }}
+          />
         ) : null}
       </PageTransition>
     </>

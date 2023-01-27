@@ -40,6 +40,7 @@
 }
 
 .logo {
+  min-height: 24px;
   width: 100%;
   max-width: 6.4rem;
   @include breakpoint-up(sm) {

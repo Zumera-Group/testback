@@ -58,7 +58,8 @@ export const NumberInput: React.FC<{
     if (salesforceFormat === 'date_month') return month;
     if (salesforceFormat === 'date_day') return day;
   };
-  const shortBox = salesforceFormat !== 'number' || valueType === 'year';
+  
+  const shortBox = salesforceFormat !== 'number' || valueType === 'year' || valueType === 'percent';
 
   return (
     <div className={styles.numberInputWrapper}>
@@ -71,13 +72,14 @@ export const NumberInput: React.FC<{
           description={question.description}
         />
         {label && <p className={styles.fieldLabel}>{label}</p>}
-        <div className={styles.fieldWrapper}>
-          {sign && <span className={styles.sign}> {sign}</span>}
+        <div className={[styles.fieldWrapper, shortBox ? styles.fieldWrapper__shortBox : ''].join(' ')}>
+          {sign && sign !== '%' && <span className={styles.sign}> {sign}</span>}
           <Input
             type="number"
             id={question._id}
             placeholder={placeholder ? placeholder : '0'}
             hideLabel
+            autoFocus
             classes={[
               styles.numberInput,
               shortBox && styles.shortBox,
@@ -86,6 +88,7 @@ export const NumberInput: React.FC<{
             value={getUnformattedAnswer()}
             onChange={(e) => formatToSalesforce(Number(e.target.value))}
           />
+          {sign && sign === '%' && <span className={styles.sign}>{sign}</span>}
         </div>
         <div className={styles.buttonOuter}>
           {!isMobile && (

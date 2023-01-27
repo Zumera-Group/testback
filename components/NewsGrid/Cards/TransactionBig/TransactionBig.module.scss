@@ -50,6 +50,8 @@
   padding: $gutter * 1.5;
   min-height: calc(7rem + 3vw);
   user-select: none;
+  aspect-ratio: 4/2;
+  max-height: 12rem;
   @media screen and (min-width: $container-max-width) {
     min-height: 10rem;
   }

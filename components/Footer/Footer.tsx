@@ -1,7 +1,7 @@
 import { Section, Container } from 'components/Layout';
 import { FooterSitemap } from './FooterSitemap';
 import { FooterOfficials } from './FooterOfficials';
-
+import styles from './Footer.module.scss';
 import { getFooterSitemap } from './utils';
 
 const Footer = ({ ...rest }) => {
@@ -14,6 +14,7 @@ const Footer = ({ ...rest }) => {
     logo,
     homePage,
     siteName,
+    hideFooterSitemap,
   } = rest;
 
   const sitemap = getFooterSitemap(footerMenu);
@@ -25,9 +26,10 @@ const Footer = ({ ...rest }) => {
       bg={'primary'}
       color={'white'}
       id={'footer'}
+      classes={hideFooterSitemap ? styles.noSiteMap : ''}
     >
       <Container>
-        <FooterSitemap sitemap={sitemap} />
+        {hideFooterSitemap ? null : <FooterSitemap sitemap={sitemap} />}
         <FooterOfficials
           logo={logo}
           homePage={homePage}

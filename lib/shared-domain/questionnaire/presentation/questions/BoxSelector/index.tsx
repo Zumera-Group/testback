@@ -16,7 +16,7 @@ import styles from './BoxSelector.module.scss';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Scrollbar } from 'swiper';
 import { useMediaQuery } from 'lib/hooks/useMediaQuery';
-import { SCREEN_SIZE_MD } from 'lib/constants';
+import { CONTAINER_PADDING_X, SCREEN_SIZE_MD } from 'lib/constants';
 import 'swiper/css/scrollbar';
 import BackButton from 'components/Calculator/BackButton/BackButton';
 const t = getTranslateByScope('answerTypes.boxSelector');
@@ -116,8 +116,12 @@ export const BoxSelector = ({
     observeParents: true,
     freeMode: true,
     scrollbar: { hide: false, draggable: true },
-    slidesPerView: 'auto',
-    a11y: false,
+    slidesPerView: 'auto' as 'auto',
+    spaceBetween: parseInt(CONTAINER_PADDING_X),
+    touchStartForcePreventDefault: true,
+    touchMoveStopPropagation: true,
+    slideToClickedSlide: false,
+    watchSlidesProgress: true,
   };
   const buttonRef = useRef(null);
 

@@ -21,6 +21,7 @@ export const VTServicesSection: React.FC<{
   const sectionStyles = [
     styles.gridContainer,
     !isFullWidth ? styles[`bg-${background}`] || styles['bg-light'] : '',
+    isFullWidth ? styles.underline : '',
   ].join(' ');
 
   const ButtonComp = () => {
