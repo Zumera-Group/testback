@@ -7,14 +7,14 @@
 
   & + p {
     @include breakpoint-down(md) {
-      padding: 0 $gutter * 1 !important;
+      padding: 0 $gutter !important;
     }
   }
 }
 
 .teaserBeam {
   max-width: 14rem;
-  margin: $gutter $gutter * 1;
+  margin: $gutter $gutter;
   @include breakpoint-up(md) {
     margin: $gutter $gutter * 3;
   }

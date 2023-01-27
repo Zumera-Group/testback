@@ -1,5 +1,5 @@
 .questionButton {
-  margin: $gutter * 0.5;
+  margin: $gutter * 0.5 0;
   width: 100%;
   justify-content: center;
 
@@ -10,9 +10,11 @@
 }
 
 .buttonWrapper {
-  @include breakpoint-down(md) {
-    padding: 0 $gutter * 1;
-  }
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: $gutter 0;
+  gap: $gutter * 0.5;
   &.stack {
     flex-direction: column;
     @include breakpoint-up(md) {

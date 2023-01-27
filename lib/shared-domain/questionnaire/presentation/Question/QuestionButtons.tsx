@@ -1,4 +1,3 @@
-import { FlexRow } from 'components/Layout/Flex/Flex';
 import { getTranslateByScope } from 'translation/i18n';
 import { useValuationStore } from '../../store';
 import { Button } from 'components/Button/Button';
@@ -26,13 +25,7 @@ export const QuestionButtons: React.FC<{
   const { isFirstQuestion } = useValuationStore();
 
   return (
-    <FlexRow
-      mt={2}
-      mb={2}
-      alignItems="center"
-      justifyContent={'start'}
-      className={[styles.buttonWrapper, stackMobile && styles.stack].join(' ')}
-    >
+    <div className={[styles.buttonWrapper, stackMobile && styles.stack].join(' ')}>
       {onFinishQuestionnaire && (
         <Button
           aria-label="Finish questionnaire button"
@@ -70,6 +63,6 @@ export const QuestionButtons: React.FC<{
           {t('skipBtn')}
         </Button>
       )}
-    </FlexRow>
+    </div>
   );
 };
