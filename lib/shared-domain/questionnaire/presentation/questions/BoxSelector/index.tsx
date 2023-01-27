@@ -120,6 +120,8 @@ export const BoxSelector = ({
     spaceBetween: parseInt(CONTAINER_PADDING_X),
     touchStartForcePreventDefault: true,
     touchMoveStopPropagation: true,
+    slideToClickedSlide: false,
+    watchSlidesProgress: true,
   };
 
   return (
