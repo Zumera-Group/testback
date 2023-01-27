@@ -19,7 +19,7 @@
 
   .shortBox {
     @include breakpoint-up(md) {
-      max-width: 3.5ch;
+      max-width: 3.75ch;
       padding-right: 0;
       padding-left: 0;
     }
