@@ -2,15 +2,15 @@
   label {
     color: $white;
   }
+
   .numberInput {
+    padding-top: 0;
+    padding-bottom: 0;
     border: unset;
     border-radius: 0;
     font-size: $h1-font-size;
     font-weight: $font-weight-light;
     width: 100%;
-    @include breakpoint-up(md) {
-      max-width: 25rem;
-    }
 
     &.noSign {
       padding-left: 0;
@@ -19,7 +19,7 @@
 
   .shortBox {
     @include breakpoint-up(md) {
-      max-width: 12rem;
+      max-width: 3.5ch;
       padding-right: 0;
       padding-left: 0;
     }
@@ -29,14 +29,15 @@
   input::-webkit-inner-spin-button {
     display: none;
   }
-  ::placeholder {
+
+  input::placeholder {
     font-weight: $font-weight-light;
+    opacity: 0.75;
   }
 
   .fieldWrapper {
     display: flex;
     align-items: flex-end;
-    border-bottom: 1px solid #794d7c;
     margin-bottom: $gutter * 1.5;
     max-width: 100%;
 
@@ -46,6 +47,10 @@
 
     @include breakpoint-up(md) {
       max-width: max-content;
+    }
+    
+    &__shortBox {
+      border-bottom: $border-width solid #794d7c;
     }
   }
 

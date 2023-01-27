@@ -58,6 +58,7 @@ export const NumberInput: React.FC<{
     if (salesforceFormat === 'date_month') return month;
     if (salesforceFormat === 'date_day') return day;
   };
+  
   const shortBox = salesforceFormat !== 'number' || valueType === 'year';
 
   return (
@@ -68,7 +69,7 @@ export const NumberInput: React.FC<{
           description={question.description}
         />
         {label && <p className={styles.fieldLabel}>{label}</p>}
-        <div className={styles.fieldWrapper}>
+        <div className={[styles.fieldWrapper, shortBox ? styles.fieldWrapper__shortBox : ''].join(' ')}>
           {sign && <span className={styles.sign}> {sign}</span>}
           <Input
             type="number"
