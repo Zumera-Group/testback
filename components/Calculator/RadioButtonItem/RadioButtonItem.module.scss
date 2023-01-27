@@ -5,15 +5,14 @@
   justify-content: space-evenly;
   width: 192px;
   height: 192px;
-  border: solid 1px $quaternary;
+  border: solid $border-width $quaternary;
   border-radius: 1.25rem;
-  margin: $gutter * 0.5;
   cursor: pointer;
   text-align: center;
 
   &:hover,
   &.active {
-    border: solid 1px $accent;
+    border: solid $border-width $accent;
     background-color: $dark;
   }
 }
@@ -32,13 +31,12 @@
   left: 0;
   height: 25px;
   width: 25px;
-  background-color: #eee;
   border-radius: 50%;
   background-color: $dark;
-  border: solid 1px $quaternary;
+  border: solid $border-width $quaternary;
 
   &.active {
-    border: solid 1px $accent;
+    border: solid $border-width $accent;
   }
 
   &.active::after {

@@ -3,6 +3,7 @@
   justify-content: flex-start;
   flex-wrap: wrap;
   width: 100%;
+  gap: $container-padding-x;
 }
 
 .showMoreWrapper {
@@ -16,17 +17,6 @@
   }
 }
 
-.boxSelectorswiper {
-  .swiper {
-    min-width: 100%;
-    width: 0;
-
-    .swiperSlide {
-      width: 200px !important;
-    }
-  }
-}
-
 .buttonOuter {
   @include breakpoint-up(md) {
     display: flex;
@@ -35,6 +25,7 @@
     margin-top: $gutter * 2;
   }
 }
+
 .swiperSlide {
   width: auto !important;
 }
