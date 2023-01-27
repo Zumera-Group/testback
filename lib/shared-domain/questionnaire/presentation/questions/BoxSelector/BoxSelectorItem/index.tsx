@@ -10,8 +10,6 @@ interface Props {
   question: Question;
 }
 
-const SIZE = 120;
-
 export const BoxSelectorItem = ({ box, question }: Props): JSX.Element => {
   const { isSelected, onSelectAnswer } = useSelectAnswers(
     question,
