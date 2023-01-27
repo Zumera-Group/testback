@@ -204,13 +204,29 @@ const QuestionnaireLayout: React.FC<{
             <Section
               bg={'primary'}
               color={'white'}
-              size={'md'}
+              size={isMobile ? 'sm' : 'md'}
             >
+              {questionnaire && !isOnResultScreen && isMobile && (
+                <div className={styles.progressBarLineMobile}>
+                  <ProgressBarLine
+                    indicator={
+                      !isOnResultScreen && {
+                        current: currenQuestionPosition,
+                        total: numberOfQuestionsInTotal,
+                      }
+                    }
+                    currentCategory={currentCategory}
+                    categoryIndex={currentCategoryIndex}
+                    progress={progress}
+                  />
+                </div>
+              )}
               <Container>
                 <Grid
                   fullWidth={true}
                   justifyContent={'flex-end'}
                   alignItems={'start'}
+                  className={styles.grid}
                 >
                   {!hasSidebar && (
                     <GridColumn
@@ -241,24 +257,6 @@ const QuestionnaireLayout: React.FC<{
                 </Grid>
               </Container>
             </Section>
-
-
-            {questionnaire && !isOnResultScreen && isMobile && (
-              <aside>
-                <ProgressBarLine
-                  indicator={
-                    !isOnResultScreen && {
-                      current: currenQuestionPosition,
-                      total: numberOfQuestionsInTotal,
-                    }
-                  }
-                  currentCategory={currentCategory}
-                  categoryIndex={currentCategoryIndex}
-                  progress={progress}
-                />
-              </aside>
-            )}
-
           </main>
         </div>
       </PageTransition>

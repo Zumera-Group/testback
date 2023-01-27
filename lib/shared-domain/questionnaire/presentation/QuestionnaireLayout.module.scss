@@ -12,6 +12,19 @@
     --grid-gap: #{$gutter * 4};
   }
 
+  header {
+    position: relative !important;
+    background-color: transparent !important;
+    color: $white !important;
+    svg {
+      fill: $white !important;
+    }
+  }
+
+  main {
+    padding-top: 0 !important;
+  }
+
   // Styles for when the sidebar is rendered
   &__hasSidebar {
     .sidebarCol {
@@ -21,6 +34,7 @@
     .questionWrapper {
       padding-left: var(--grid-gap);
     }
+
     .questionCol {
       @include breakpoint-up(md) {
         &:before {
@@ -29,6 +43,7 @@
           top: 0;
           left: 0;
           height: 100%;
+          min-height: calc(100vh - var(--header-height));
           width: $border-width;
           @include divider(left, $white);
         }
@@ -38,7 +53,20 @@
 
 }
 
+.grid {
+  min-height: calc(100vh - var(--header-height));
+}
+
+.progressBarLineMobile {
+  display: block;
+  width: 100%;
+  margin: -$gutter auto $gutter * 2.5 auto;
+}
+
 .sidebarCol {
+  position: sticky;
+  position: -webkit-sticky;
+  top: $gutter * 1.5;
   & > * {
     width: 100%;
   }
