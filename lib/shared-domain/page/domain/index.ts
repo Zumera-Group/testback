@@ -11,6 +11,8 @@ import { Questionnaire } from '../../questionnaire/domain/index';
 export interface Page {
   isHeaderRoutesHidden: boolean;
   isFooterHidden: boolean;
+
+  hideFooterSitemap: boolean;
   slug: {
     current: string;
   };

@@ -1,15 +1,25 @@
 import { useEffect, useState } from 'react';
 
-import { Navigation } from "swiper";
+import { Navigation } from 'swiper';
 import { Swiper } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/navigation';
 
-import { SCREEN_SIZE_LG, SCREEN_SIZE_SM, CONTAINER_PADDING_X } from 'lib/constants';
+import {
+  SCREEN_SIZE_LG,
+  SCREEN_SIZE_SM,
+  CONTAINER_PADDING_X,
+} from 'lib/constants';
 
-export const SwiperTransactions = ({ prevButton, nextButton, maxSlidesToShow, classes, children }) => {
+export const SwiperTransactions = ({
+  prevButton,
+  nextButton,
+  maxSlidesToShow,
+  classes,
+  children,
+}) => {
   const [swiper, setSwiper] = useState(null);
-  
+
   const spaceBetween = parseInt(CONTAINER_PADDING_X);
   const breakpoint_LG = parseInt(SCREEN_SIZE_LG);
   const breakpoint_SM = parseInt(SCREEN_SIZE_SM);
@@ -29,14 +39,16 @@ export const SwiperTransactions = ({ prevButton, nextButton, maxSlidesToShow, cl
     observeParents: true,
     onSwiper: setSwiper,
     spaceBetween: 0,
-    slidesPerView: 1,
+    slidesPerView: 1.2,
+    centerContent: true,
+    centeredSlides: true,
     breakpoints: {
       [breakpoint_SM]: {
         slidesPerView: 2,
       },
       [breakpoint_LG]: {
         slidesPerView: maxSlidesToShow ? maxSlidesToShow : 3,
-      }
+      },
     },
     navigation: {
       prevEl: prevButton.current || null,

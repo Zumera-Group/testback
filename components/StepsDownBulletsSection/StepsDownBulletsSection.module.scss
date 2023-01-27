@@ -54,11 +54,16 @@
     font-size: $font-size-big;
     font-weight: $font-weight-medium;
     padding-bottom: $gutter * 1.25;
+    display: flex;
+    align-items: baseline;
     &:before {
-      content: '▪';
-      color: $accent;
+      content: ' ';
+      display: block;
+      background: $accent;
       width: 10px;
+      height: 10px;
       margin-right: $gutter * 1;
+      flex: 0 0 auto;
     }
   }
 }

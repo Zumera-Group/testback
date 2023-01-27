@@ -7,3 +7,8 @@
   margin-top: var(--gutter);
   margin-bottom: var(--gutter);
 }
+
+.container {
+  padding-bottom: 5rem;
+  @include divider(bottom, $primary);
+}

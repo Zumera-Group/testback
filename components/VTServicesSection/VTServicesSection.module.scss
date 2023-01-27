@@ -13,6 +13,9 @@
   @include breakpoint-down(md) {
     padding: 3rem 1.5rem;
   }
+  &.underline {
+    @include divider('bottom', $white);
+  }
 }
 .service {
   display: flex;
