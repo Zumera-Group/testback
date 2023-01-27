@@ -1,5 +1,5 @@
 import { BoxAnswer, Question } from 'lib/shared-domain/questionnaire/domain';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { BoxSelectorItem } from './BoxSelectorItem';
 import { QuestionText } from '../../Question/QuestionText';
 import { QuestionButtons } from '../../Question/QuestionButtons';
@@ -119,6 +119,7 @@ export const BoxSelector = ({
     slidesPerView: 'auto',
     a11y: false,
   };
+  const buttonRef = useRef(null);
 
   return (
     <>
@@ -133,14 +134,24 @@ export const BoxSelector = ({
         {!isMobile || (isMobile && boxesToRender.length === 2) ? (
           <div className={styles.boxRow}>
             {boxesToRender?.map((box, index) => (
-              <BoxSelectorItem key={box._key} question={question} box={box} />
+              <BoxSelectorItem
+                key={box._key}
+                question={question}
+                box={box}
+                refEl={buttonRef}
+              />
             ))}
           </div>
         ) : (
           <Swiper {...swiperOptions}>
             {boxesToRender?.map((box, index) => (
               <SwiperSlide key={index} className={styles.swiperSlide}>
-                <BoxSelectorItem key={box._key} question={question} box={box} />
+                <BoxSelectorItem
+                  key={box._key}
+                  question={question}
+                  box={box}
+                  refEl={buttonRef}
+                />
               </SwiperSlide>
             ))}
           </Swiper>
@@ -154,7 +165,7 @@ export const BoxSelector = ({
             />
           )}
 
-          <div className={styles.buttonWrapper}>
+          <div className={styles.buttonWrapper} ref={buttonRef}>
             <div className={styles.showMoreWrapper}>
               {moreBoxesToShow && !isMobile && (
                 <Button
