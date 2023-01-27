@@ -1,5 +1,8 @@
 .carousel {
   margin-top: $gutter * 2;
+  @include breakpoint-down(sm) {
+    overflow: visible;
+  }
 }
 
 .slide {
