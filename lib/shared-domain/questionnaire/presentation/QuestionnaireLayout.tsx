@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import I18n from 'i18n-js';
 import styles from './QuestionnaireLayout.module.scss';
 import { PageTransition } from 'components/PageTransition';
@@ -178,6 +178,8 @@ const QuestionnaireLayout: React.FC<{
     currentQuestion?.questionId === INDUSTRY_QUESTION_ID ||
     currentQuestion?.questionId === SECTOR_QUESTION_ID;
 
+  const pageRef = useRef(null);
+
   return (
     <>
       <SEO
@@ -196,6 +198,7 @@ const QuestionnaireLayout: React.FC<{
             styles.page,
             !isIndustryOrSectorQuestion && styles.page__hasSidebar,
           ].join(' ')}
+          ref={pageRef}
         >
           <PageHeader
             contentModules={[]}
@@ -266,6 +269,7 @@ const QuestionnaireLayout: React.FC<{
                         sectorSpecificQuestions={sectorSpecificQuestions}
                         sectors={sectors}
                         currentPos={currenQuestionPosition}
+                        refEl={pageRef}
                       />
                     </div>
                   </GridColumn>

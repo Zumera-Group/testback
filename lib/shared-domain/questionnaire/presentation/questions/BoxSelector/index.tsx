@@ -157,7 +157,7 @@ export const BoxSelector = ({
           </Swiper>
         )}
 
-        <div className={styles.buttonOuter}>
+        <div className={styles.buttonOuter} ref={buttonRef}>
           {!isMobile && (
             <BackButton
               onPrevQuestion={onPrevQuestion}
@@ -165,7 +165,7 @@ export const BoxSelector = ({
             />
           )}
 
-          <div className={styles.buttonWrapper} ref={buttonRef}>
+          <div className={styles.buttonWrapper}>
             <div className={styles.showMoreWrapper}>
               {moreBoxesToShow && !isMobile && (
                 <Button
