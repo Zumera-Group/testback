@@ -1,28 +1,7 @@
 .numberInputWrapper {
+
   label {
     color: $white;
-  }
-
-  .numberInput {
-    padding-top: 0;
-    padding-bottom: 0;
-    border: unset;
-    border-radius: 0;
-    font-size: $h1-font-size;
-    font-weight: $font-weight-light;
-    width: 100%;
-
-    &.noSign {
-      padding-left: 0;
-    }
-  }
-
-  .shortBox {
-    @include breakpoint-up(md) {
-      max-width: 3.75ch;
-      padding-right: 0;
-      padding-left: 0;
-    }
   }
 
   input::-webkit-outer-spin-button,
@@ -35,40 +14,63 @@
     opacity: 0.75;
   }
 
-  .fieldWrapper {
-    display: flex;
-    align-items: flex-end;
-    margin-bottom: $gutter * 1.5;
-    max-width: 100%;
+}
 
-    @include breakpoint-down(md) {
-      padding: 0 $gutter * 1;
-    }
+.numberInput {
+  padding-top: 0;
+  padding-bottom: 0;
+  border: unset;
+  border-radius: 0;
+  font-size: $h1-font-size;
+  font-weight: $font-weight-light;
+  width: 100%;
 
-    @include breakpoint-up(md) {
-      max-width: max-content;
-    }
-    
-    &__shortBox {
-      border-bottom: $border-width solid #794d7c;
-    }
+  &.noSign {
+    padding-left: 0;
+  }
+}
+
+.shortBox {
+  @include breakpoint-up(md) {
+    max-width: 3.75ch;
+    padding-right: 0;
+    padding-left: 0;
+  }
+}
+
+.fieldWrapper {
+  display: flex;
+  align-items: flex-end;
+  margin-bottom: $gutter * 1.5;
+  max-width: 100%;
+
+  @include breakpoint-down(md) {
+    padding: 0 $gutter * 1;
   }
 
-  .fieldLabel {
-    color: $white;
-    @include breakpoint-down(md) {
-      padding: 0 $gutter * 1;
-    }
+  @include breakpoint-up(md) {
+    max-width: max-content;
   }
+  
+  &__shortBox {
+    border-bottom: $border-width solid #794d7c;
+  }
+}
 
-  .sign {
-    border-radius: 0;
-    font-size: $h1-font-size;
-    font-weight: $font-weight-light;
-    color: $white;
-    padding: 0;
-    line-height: $input-line-height;
+.fieldLabel {
+  color: $white;
+  @include breakpoint-down(md) {
+    padding: 0 $gutter;
   }
+}
+
+.sign {
+  border-radius: 0;
+  font-size: $h1-font-size;
+  font-weight: $font-weight-light;
+  color: $white;
+  padding: 0;
+  line-height: $input-line-height;
 }
 
 .buttonOuter {
@@ -79,3 +81,5 @@
     margin-top: $gutter * 2;
   }
 }
+
+
