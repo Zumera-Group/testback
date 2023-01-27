@@ -6,18 +6,7 @@ import Document, {
   NextScript,
   DocumentContext,
 } from 'next/document';
-import TagManager from 'react-gtm-module';
 import { IconSprite } from 'components/Icon';
-
-import { EnvironmentService } from 'environment.service';
-
-const tagManagerArgs = {
-  gtmId: 'GTM-PXQZLHF',
-};
-
-if (process.browser && EnvironmentService.isProduction()) {
-  TagManager.initialize(tagManagerArgs);
-}
 
 export default class MyDocument extends Document {
   static async getInitialProps(ctx: DocumentContext) {
@@ -84,53 +73,8 @@ export default class MyDocument extends Document {
             href="/fonts/Yellix-MediumItalic.woff2"
           />
           <link rel="shortcut icon" href="/favicon.ico" />
-
-          {EnvironmentService.isProduction() && (
-            <>
-              <style
-                dangerouslySetInnerHTML={{
-                  __html: `.async-hide { opacity: 0 !important}`,
-                }}
-              ></style>
-              <script
-                dangerouslySetInnerHTML={{
-                  __html: `(function(a,s,y,n,c,h,i,d,e){s.className+=' '+y;h.start=1*new Date;
-h.end=i=function(){s.className=s.className.replace(RegExp(' ?'+y),'')};
-(a[n]=a[n]||[]).hide=h;setTimeout(function(){i();h.end=null},c);h.timeout=c;
-})(window,document.documentElement,'async-hide','dataLayer',4000,
-{'GTM-PXQZLHF':true});`,
-                }}
-              ></script>
-            </>
-          )}
-
-          {EnvironmentService.isProduction() && (
-            <>
-              <style
-                dangerouslySetInnerHTML={{
-                  __html: `.async-hide { opacity: 0 !important}`,
-                }}
-              ></style>
-              <script
-                dangerouslySetInnerHTML={{
-                  __html: `(function(a,s,y,n,c,h,i,d,e){s.className+=' '+y;h.start=1*new Date;
-h.end=i=function(){s.className=s.className.replace(RegExp(' ?'+y),'')};
-(a[n]=a[n]||[]).hide=h;setTimeout(function(){i();h.end=null},c);h.timeout=c;
-})(window,document.documentElement,'async-hide','dataLayer',4000,
-{'GTM-PXQZLHF':true});`,
-                }}
-              ></script>
-            </>
-          )}
         </Head>
         <body>
-          {EnvironmentService.isProduction() && (
-            <noscript
-              dangerouslySetInnerHTML={{
-                __html: `<iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PXQZLHF" height="0" width="0" style="display:none;visibility:hidden"></iframe>`,
-              }}
-            ></noscript>
-          )}
           <IconSprite />
           <Main />
           <NextScript />
