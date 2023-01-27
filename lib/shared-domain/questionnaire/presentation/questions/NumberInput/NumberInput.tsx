@@ -82,8 +82,8 @@ export const NumberInput: React.FC<{
             autoFocus
             classes={[
               styles.numberInput,
-              shortBox && styles.shortBox,
-              !sign && styles.noSign,
+              shortBox ? styles.shortBox : '',
+              !sign || sign === '%' ? styles.noSign : '',
             ].join(' ')}
             value={getUnformattedAnswer()}
             onChange={(e) => formatToSalesforce(Number(e.target.value))}
