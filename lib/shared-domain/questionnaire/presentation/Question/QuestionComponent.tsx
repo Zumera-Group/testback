@@ -1,5 +1,4 @@
 import React from 'react';
-import { FlexCol } from 'components/Layout/Flex/Flex';
 import { useValuationStore } from 'lib/shared-domain/questionnaire/store';
 import { useSalesforceAnswerSync } from '../../application/useSalesforceAnswerSync';
 import {
