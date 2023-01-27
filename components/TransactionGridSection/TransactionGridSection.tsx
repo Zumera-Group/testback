@@ -21,6 +21,7 @@ import { Locale } from 'lib/locale';
 import { Button } from 'components/Button';
 
 interface IProps {
+  buttonText: string;
   dropdownsTitle: string;
   sectorsDropdown: ISectorsDropdown[];
 }
@@ -35,7 +36,7 @@ export const TransactionGridSection: React.FC<IProps> = (props) => {
   const [loading, setLoading] = useState(true);
   const [activeChunk, setActiveChunk] = useState(1);
   const [displayTransaction, setDisplayTransaction] = useState([]);
-
+  console.log(props);
   useEffect(() => {
     const transactionsToDisplay = transactions
       .filter((item) => {
@@ -173,7 +174,7 @@ export const TransactionGridSection: React.FC<IProps> = (props) => {
               callBack={() => setActiveChunk(activeChunk + 1)}
               classes={styles.loadMore}
             >
-              Load more +
+              {props.buttonText} +
             </Button>
           </Grid>
         ) : (
