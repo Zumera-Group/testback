@@ -64,6 +64,9 @@ export const NumberInput: React.FC<{
   return (
     <div className={styles.numberInputWrapper}>
       <QuestionAnimation>
+        {isMobile && (
+          <BackButton onPrevQuestion={onPrevQuestion} currentPos={currentPos} />
+        )}
         <QuestionText
           title={question.questionText}
           description={question.description}

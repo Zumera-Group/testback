@@ -16,6 +16,8 @@ import ArrowSelector from './ArrowSelector';
 import BackButton from 'components/Calculator/BackButton/BackButton';
 
 import styles from './Orbit.module.scss';
+import { useMediaQuery } from 'lib/hooks/useMediaQuery';
+import { SCREEN_SIZE_MD } from 'lib/constants';
 
 export interface AnswerOption {
   value: string;
@@ -30,6 +32,7 @@ export const OrbitSelector: React.FC<{
 }> = ({ question, onNextQuestion, onPrevQuestion, currentPos }) => {
   const isMobile = useBreakpointValue({ base: true, lg: false });
   const [orbitWidthInPx, setOrbitWidthInPx] = useState(0);
+  const isMobileBtn = useMediaQuery(`(max-width: ${SCREEN_SIZE_MD})`);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const setOrbitHeightInPx = () => {
     const totalMargin = 100;
@@ -101,6 +104,9 @@ export const OrbitSelector: React.FC<{
 
   return (
     <QuestionAnimation>
+      {isMobileBtn && (
+        <BackButton onPrevQuestion={onPrevQuestion} currentPos={currentPos} />
+      )}
       <QuestionText title={question.questionText}>
         <RequiredQuestionInfo isRequired={question?.isRequired} />
       </QuestionText>
@@ -180,7 +186,7 @@ export const OrbitSelector: React.FC<{
       </Flex>
 
       <div className={styles.buttonOuter}>
-        {!isMobile && (
+        {!isMobileBtn && (
           <BackButton onPrevQuestion={onPrevQuestion} currentPos={currentPos} />
         )}
 

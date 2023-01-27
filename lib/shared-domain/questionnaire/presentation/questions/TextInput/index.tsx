@@ -28,10 +28,14 @@ export const TextInput: React.FC<{
 
   return (
     <QuestionAnimation>
+      {isMobile && (
+        <BackButton onPrevQuestion={onPrevQuestion} currentPos={currentPos} />
+      )}
       <QuestionText title={question?.questionText}>
         <RequiredQuestionInfo isRequired={question?.isRequired} />
       </QuestionText>
-      <Box maxWidth={600} mt={5} mb={6} className={styles.textInputWrapper}>
+
+      <Box mt={5} mb={6} className={styles.textInputWrapper}>
         <Textarea
           id={question._id}
           value={getAnswer()}
@@ -39,11 +43,17 @@ export const TextInput: React.FC<{
           placeholder={placeholder}
         />
       </Box>
-      <QuestionButtons
-        onNextQuestion={onNextQuestion}
-        isRequired={question?.isRequired}
-        isAnswered={getAnswer()}
-      />
+      <div className={styles.buttonOuter}>
+        {!isMobile && (
+          <BackButton onPrevQuestion={onPrevQuestion} currentPos={currentPos} />
+        )}
+
+        <QuestionButtons
+          onNextQuestion={onNextQuestion}
+          isRequired={question?.isRequired}
+          isAnswered={getAnswer()}
+        />
+      </div>
     </QuestionAnimation>
   );
 };

@@ -18,7 +18,8 @@ export const QuestionComponent: React.FC<{
   sectorSpecificQuestions: Question[];
   sectors: Sector[];
   currentPos: number;
-}> = ({ sectorSpecificQuestions, sectors, currentPos }) => {
+  refEl: any;
+}> = ({ sectorSpecificQuestions, sectors, currentPos, refEl }) => {
   const {
     questionnaire,
     mainStep,
@@ -98,6 +99,8 @@ export const QuestionComponent: React.FC<{
   };
 
   const onNextQuestion = () => {
+    refEl.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
     qLogs('onNextQuestion');
     syncCurrentAnswersToSalesforce(uniqueId, currentQuestion?.salesforceId);
     if (industryId && currentQuestion?.questionId === INDUSTRY_QUESTION_ID) {

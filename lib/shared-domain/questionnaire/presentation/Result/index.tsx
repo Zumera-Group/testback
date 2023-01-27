@@ -208,9 +208,9 @@ const EvaluationScreen: React.FC<{
 
     if (!score || !score.avg || score?.avg < 5000000) {
       if (locale === 'de') {
-        push('https://www.saxenhammer-co.com/de');
+        push('https://www.zumera.com/de');
       } else {
-        push('https://www.saxenhammer-co.com/');
+        push('https://www.zumera.com/');
       }
     } else {
       onSuccess();
