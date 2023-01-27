@@ -1,5 +1,14 @@
 .carousel {
   margin-top: $gutter * 2;
+  @include breakpoint-down(md) {
+    overflow: visible;
+  }
+}
+
+.section {
+  @include breakpoint-down(md) {
+    overflow: hidden;
+  }
 }
 
 .slide {
@@ -7,7 +16,7 @@
   align-self: stretch;
   & > * {
     height: 100%;
-    padding: $gutter;
+    padding: 0.5rem;
   }
 }
 

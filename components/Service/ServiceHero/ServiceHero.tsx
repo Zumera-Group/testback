@@ -8,7 +8,7 @@ export const ServiceHero = ({ service }) => {
   return (
     <Section
       as={'div'}
-      classes={[baseStyles.hero].join(' ')}
+      classes={[baseStyles.hero, styles.serviceHero].join(' ')}
       size={'lg'}
       bg={'light'}
       color={'primary'}

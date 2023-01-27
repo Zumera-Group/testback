@@ -13,6 +13,7 @@ interface Props {
   linkText?: string;
   sectorsOverviewPage?: any;
   customHref?: string;
+  displayMaxItems?: number;
 }
 
 export const ServiceSectors: React.FC<Props> = ({ ...rest }) => {
@@ -24,7 +25,11 @@ export const ServiceSectors: React.FC<Props> = ({ ...rest }) => {
     linkText,
     sectorsOverviewPage,
     customHref,
+    displayMaxItems,
   } = rest;
+  const displaySectors = displayMaxItems
+    ? sectors.slice(0, displayMaxItems)
+    : sectors;
   return (
     <Section size={'md'} bg={'light'} color={'primary'}>
       <Container>
@@ -42,18 +47,24 @@ export const ServiceSectors: React.FC<Props> = ({ ...rest }) => {
             alignItems={'stretch'}
             className={styles.sectors}
           >
-            {sectors?.map((sector, index) => (
-              <GridColumn
-                key={`${sector?._key}-${index}`}
-                className={styles.sectorWrapper}
-                xs={6}
-                sm={6}
-                md={4}
-                lg={3}
-              >
-                <Sector sector={sector} />
-              </GridColumn>
-            ))}
+            {displaySectors
+              ?.sort((a, b) => {
+                if (a.name > b.name) return 1;
+                if (a.name < b.name) return -1;
+                return 0;
+              })
+              .map((sector, index) => (
+                <GridColumn
+                  key={`${sector?._key}-${index}`}
+                  className={styles.sectorWrapper}
+                  xs={6}
+                  sm={6}
+                  md={4}
+                  lg={3}
+                >
+                  <Sector sector={sector} />
+                </GridColumn>
+              ))}
           </Grid>
         )}
         {customHref || sectorsOverviewPage?.slug?.current ? (

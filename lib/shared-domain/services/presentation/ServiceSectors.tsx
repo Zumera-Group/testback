@@ -8,7 +8,8 @@ export const ServiceSectors: React.FC<{
   section: ServiceSectorsSection | any;
   siteSettings: SiteSettings;
   customHref?: string;
-}> = ({ section, siteSettings, customHref }) => {
+  displayMaxItems?: number;
+}> = ({ section, siteSettings, customHref, displayMaxItems }) => {
   if (section?.sectors?.length === 0) return null;
 
   return (
@@ -16,6 +17,7 @@ export const ServiceSectors: React.FC<{
       {...section}
       {...siteSettings}
       customHref={customHref}
+      displayMaxItems={displayMaxItems}
     />
   );
 };
