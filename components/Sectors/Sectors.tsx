@@ -16,7 +16,7 @@ export const Sectors: React.FC<Props> = ({ ...rest }) => {
 
   return (
     <Section size={'md'} bg={'light'} color={'primary'}>
-      <Container>
+      <Container classes={styles.container}>
         <SectionHeading
           title={title}
           subtitle={subtitle}
