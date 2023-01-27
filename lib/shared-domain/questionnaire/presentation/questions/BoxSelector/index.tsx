@@ -116,9 +116,10 @@ export const BoxSelector = ({
     observeParents: true,
     freeMode: true,
     scrollbar: { hide: false, draggable: true },
-    slidesPerView: 'auto',
+    slidesPerView: 'auto' as 'auto',
     spaceBetween: parseInt(CONTAINER_PADDING_X),
-    a11y: false,
+    touchStartForcePreventDefault: true,
+    touchMoveStopPropagation: true,
   };
 
   return (

@@ -40,6 +40,8 @@ export const SwiperTransactionsGrid = ({
     onSwiper: setSwiper,
     spaceBetween: 16,
     slidesPerView: 2.5,
+    touchStartForcePreventDefault: true,
+    touchMoveStopPropagation: true,
     breakpoints: {
       [breakpoint_SM]: {
         slidesPerView: 3.5,
