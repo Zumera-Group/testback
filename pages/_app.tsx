@@ -50,7 +50,7 @@ function MyApp({ Component, pageProps, router }) {
         <Component {...pageProps} key={router.pathname} />
       </IntercomProvider>
 
-      <Script
+      {/* <Script
         async
         defer
         // strategy="lazyOnload"
@@ -65,7 +65,7 @@ function MyApp({ Component, pageProps, router }) {
             url: 'https://calendly.com/saxenhammer'
             });`,
         }}
-      />
+      /> */}
     </>
   );
 }
