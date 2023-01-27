@@ -6,16 +6,6 @@ $toolTipOpacity: 0.5;
   width: 100%;
   max-width: $container-max-width / 2;
   margin-bottom: $gutter * 2;
-
-  @include breakpoint-down(md) {
-    padding: 0 $gutter * 1;
-  }
-
-  & + * {
-    @include breakpoint-down(md) {
-      padding: 0 $gutter * 1;
-    }
-  }
 }
 
 .title {
