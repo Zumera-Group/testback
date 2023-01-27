@@ -44,34 +44,30 @@ export const MultiTextInput: React.FC<{
   }, [answers]);
 
   return (
-    <>
+    <QuestionAnimation>
       <QuestionText title={question.questionText} />
-
-      <QuestionAnimation>
-        <div className={styles.multiTextInputWrapper}>
-          {question.answerSelector.multiTextInput?.map((field, index) => (
-            <VStack key={index} align="stretch" className={styles.inputItem}>
-              <P variant="multiTextInputP" color={'white'} mb={2}>
-                {field.fieldTitle}
-              </P>
-              <Input
-                value={answers[index]}
-                onChange={(e) => onChange(e, index)}
-                placeholder={field.fieldPlaceholder || placeholder}
-                type={'text'}
-                id={`${index}`}
-                hideLabel
-              />
-            </VStack>
-          ))}
-        </div>
-      </QuestionAnimation>
-
+      <div className={styles.multiTextInputWrapper}>
+        {question.answerSelector.multiTextInput?.map((field, index) => (
+          <VStack key={index} align="stretch" className={styles.inputItem}>
+            <P variant="multiTextInputP" color={'white'} mb={2}>
+              {field.fieldTitle}
+            </P>
+            <Input
+              value={answers[index]}
+              onChange={(e) => onChange(e, index)}
+              placeholder={field.fieldPlaceholder || placeholder}
+              type={'text'}
+              id={`${index}`}
+              hideLabel
+            />
+          </VStack>
+        ))}
+      </div>
       <QuestionButtons
         onNextQuestion={onNextQuestion}
         isAnswered
         isRequired={false}
       />
-    </>
+    </QuestionAnimation>
   );
 };

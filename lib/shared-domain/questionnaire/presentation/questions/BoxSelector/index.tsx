@@ -116,12 +116,11 @@ export const BoxSelector = ({
   };
 
   return (
-    <>
+    <QuestionAnimation>
       <QuestionText title={question?.questionText}>
         <RequiredQuestionInfo isRequired={question?.isRequired} />
       </QuestionText>
 
-      <QuestionAnimation>
         {!isMobile || (isMobile && boxesToRender.length === 2) ? (
           <div className={styles.boxRow}>
             {boxesToRender?.map((box, index) => (
@@ -156,8 +155,6 @@ export const BoxSelector = ({
           )}
         </div>
 
-      </QuestionAnimation>
-
       {getShowButton() && (
         <QuestionButtons
           onNextQuestion={onNextQuestion}
@@ -165,6 +162,6 @@ export const BoxSelector = ({
           isAnswered={getAnswer()}
         />
       )}
-    </>
+    </QuestionAnimation>
   );
 };

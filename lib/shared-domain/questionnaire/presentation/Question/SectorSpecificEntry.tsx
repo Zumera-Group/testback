@@ -26,14 +26,12 @@ export const SectorSpecificEntry: React.FC<{
   const secondButtonText = t('secondButtonText');
   const onFinishQuestionnaire = () => setIsOnResultScreen(true);
   return (
-    <>
+    <QuestionAnimation>
       <QuestionText title={t('questionText')} />
-      <QuestionAnimation>
-        <P variant="mobileSectorSpecificEntryP" color={'white'} pl={'0.75rem'}>
-          {t('subtitle')}
-        </P>
-        <ResultTeaser calculatorSteps={calculatorSteps} isSectorSpecificEntry />
-      </QuestionAnimation>
+      <P variant="mobileSectorSpecificEntryP" color={'white'} pl={'0.75rem'}>
+        {t('subtitle')}
+      </P>
+      <ResultTeaser calculatorSteps={calculatorSteps} isSectorSpecificEntry />
       <QuestionButtons
         firstButtonText={firstButtonText}
         secondButtonText={secondButtonText}
@@ -43,6 +41,6 @@ export const SectorSpecificEntry: React.FC<{
         isAnswered
         stackMobile
       />
-    </>
+    </QuestionAnimation>
   );
 };
