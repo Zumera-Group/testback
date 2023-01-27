@@ -1,6 +1,3 @@
-import { Btn } from 'components/Buttons/Button';
-import useBreakpointValue from 'lib/shared-domain/useBreakpoint';
-
 import { motion, AnimatePresence } from 'framer-motion';
 import { FlexCol, FlexRow } from 'components/Layout/Flex/Flex';
 import { getTranslateByScope } from 'translation/i18n';
