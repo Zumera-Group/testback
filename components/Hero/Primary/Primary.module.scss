@@ -8,12 +8,13 @@
 
 .title {
   font-size: $h2-font-size;
+  font-size: clamp(2rem, -0.5203rem + 6.9444vw, 3.5rem);
 }
 
 .primaryHeroImage {
   position: relative;
   right: 59px;
-  max-width: 130%;
+  max-width: 150%;
   @include breakpoint-down(md) {
     right: 0;
     margin: $gutter * 3 auto 0;
