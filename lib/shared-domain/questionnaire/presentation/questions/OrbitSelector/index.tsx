@@ -100,78 +100,74 @@ export const OrbitSelector: React.FC<{
   const bgSize = orbitHeightInPx + 50;
 
   return (
-    <>
-      {isMobile && (
-        <BackButton onPrevQuestion={onPrevQuestion} currentPos={currentPos} />
-      )}
+    <QuestionAnimation>
       <QuestionText title={question.questionText}>
         <RequiredQuestionInfo isRequired={question?.isRequired} />
       </QuestionText>
-      <QuestionAnimation>
-        <Box mt={90}>
+
+      <Box mt={90}>
+        <Box
+          bg={colors.orbitSelector}
+          bgSize="cover"
+          ref={doomElementToGetCoords}
+          margin="auto"
+          width={orbitWidthInPx + 'px'}
+          height={orbitHeightInPx + 'px'}
+          borderTopLeftRadius="100em"
+          borderTopRightRadius="100em"
+          borderBottom={0}
+          onTouchStart={() => initSlide()}
+          onMouseDown={(evt) => {
+            initSlide();
+            updateSlide(evt);
+          }}
+          onTouchMove={(evt) => updateSlide(evt)}
+          onMouseMove={(evt) => updateSlide(evt)}
+          onMouseUp={() => stopSlide()}
+          onMouseLeave={() => stopSlide()}
+          onTouchEnd={(evt) => {
+            initSlide();
+            updateSlide(evt);
+            stopSlide();
+          }}
+          onClick={(evt) => {
+            initSlide();
+            updateSlide(evt);
+            stopSlide();
+          }}
+          cursor={'pointer'}
+        >
+          <ArrowSelector
+            orbitHeightInPx={orbitHeightInPx}
+            sliderValue={sliderValue}
+          />
+
           <Box
-            bg={colors.orbitSelector}
-            bgSize="cover"
-            ref={doomElementToGetCoords}
-            margin="auto"
-            width={orbitWidthInPx + 'px'}
-            height={orbitHeightInPx + 'px'}
             borderTopLeftRadius="100em"
             borderTopRightRadius="100em"
-            borderBottom={0}
-            onTouchStart={() => initSlide()}
-            onMouseDown={(evt) => {
-              initSlide();
-              updateSlide(evt);
-            }}
-            onTouchMove={(evt) => updateSlide(evt)}
-            onMouseMove={(evt) => updateSlide(evt)}
-            onMouseUp={() => stopSlide()}
-            onMouseLeave={() => stopSlide()}
-            onTouchEnd={(evt) => {
-              initSlide();
-              updateSlide(evt);
-              stopSlide();
-            }}
-            onClick={(evt) => {
-              initSlide();
-              updateSlide(evt);
-              stopSlide();
-            }}
-            cursor={'pointer'}
-          >
-            <ArrowSelector
-              orbitHeightInPx={orbitHeightInPx}
-              sliderValue={sliderValue}
-            />
-
-            <Box
-              borderTopLeftRadius="100em"
-              borderTopRightRadius="100em"
-              bg="#300032"
-              width={bgSize + 'px'}
-              height={bgSize / 2 + 'px'}
-              margin="auto"
-              marginTop={orbitHeightInPx - bgSize / 2 + 'px'}
-            ></Box>
-          </Box>
-
-          <Box>
-            <Input
-              display="none"
-              ref={sliderDom}
-              type="range"
-              // width="100%"
-              min={0}
-              max={180}
-              value={sliderValue}
-              onChange={({ target: { value } }) => {
-                setSliderValue(value);
-              }}
-            ></Input>
-          </Box>
+            bg="#300032"
+            width={bgSize + 'px'}
+            height={bgSize / 2 + 'px'}
+            margin="auto"
+            marginTop={orbitHeightInPx - bgSize / 2 + 'px'}
+          ></Box>
         </Box>
-      </QuestionAnimation>
+
+        <Box>
+          <Input
+            display="none"
+            ref={sliderDom}
+            type="range"
+            // width="100%"
+            min={0}
+            max={180}
+            value={sliderValue}
+            onChange={({ target: { value } }) => {
+              setSliderValue(value);
+            }}
+          ></Input>
+        </Box>
+      </Box>
 
       <Flex mt={1} minH={4} justify="center">
         <P variant="orbitSelector" color={'white'}>
@@ -183,17 +179,11 @@ export const OrbitSelector: React.FC<{
         </P>
       </Flex>
 
-      <div className={styles.buttonOuter}>
-        {!isMobile && (
-          <BackButton onPrevQuestion={onPrevQuestion} currentPos={currentPos} />
-        )}
-
-        <QuestionButtons
-          onNextQuestion={onNextQuestion}
-          isRequired={question?.isRequired}
-          isAnswered={getAnswer()}
-        />
-      </div>
-    </>
+      <QuestionButtons
+        onNextQuestion={onNextQuestion}
+        isRequired={question?.isRequired}
+        isAnswered={getAnswer()}
+      />
+    </QuestionAnimation>
   );
 };

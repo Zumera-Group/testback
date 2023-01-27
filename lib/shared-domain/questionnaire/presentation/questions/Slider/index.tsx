@@ -105,84 +105,82 @@ export const Slider: React.FC<{
   }, []);
 
   return (
-    <>
+    <QuestionAnimation>
       <Box className={styles.questionTextContainer}>
         <QuestionText title={question.questionText}>
           <RequiredQuestionInfo isRequired={question?.isRequired} />
         </QuestionText>
       </Box>
-      <QuestionAnimation>
-        <Box maxWidth={600} mt={8} mb={6} className={styles.sliderContainer}>
-          <ChakraSlider
-            focusThumbOnChange={false}
-            value={getUnformattedAnswer()}
-            onChange={(v) => {
-              formatToSalesforce(v);
-              setAutoMarginBoxValue(v);
-            }}
-            defaultValue={getUnformattedAnswer()}
-            min={from}
-            max={to}
-            step={getGapValue()}
-          >
-            <SliderTrack bg="sliderBgColor" height={2} borderRadius={4}>
-              <SliderFilledTrack bg="sliderActiveBgColor" />
-            </SliderTrack>
-            <SliderThumb height={4} width={4} bg="sliderThumbColor">
-              <Box
-                position="relative"
-                p={1}
-                ml={marginBoxValue}
-                top="-250%"
-                bg="sliderActiveBgColor"
-                width="fit-content"
-                transition="margin 0.5s"
-              >
-                <P color="white">
-                  {getNumberFormat(Number(getUnformattedAnswer()) || 0)}
-                </P>
-              </Box>
-            </SliderThumb>
-          </ChakraSlider>
-          <FlexRow justify="space-between">
-            <P>{getNumberFormat(from)}</P>
-            <P>{getNumberFormat(to)}</P>
-          </FlexRow>
-          <FlexCol width={180} mt={5} mb={3} ml="auto" mr="auto">
-            <P pb={0.5} textAlign="left">
-              {t('inputLabel')}
-            </P>
-            <Box position="relative">
-              <InputNumber
-                clampValueOnBlur={false}
-                isInvalid={false}
-                min={from}
-                max={to}
-                value={
-                  sign === VALUE_TYPE.EUR || sign === VALUE_TYPE.USD
-                    ? getNumberFormat(Number(getUnformattedAnswer()) || 0)
-                        ?.replace(sign, '')
-                        ?.trim()
-                    : getUnformattedAnswer() || 0
-                }
-                onChange={(valueAsString) => {
-                  const newValue = Number(valueAsString?.replaceAll('.', ''));
-                  if (newValue <= to) {
-                    formatToSalesforce(newValue);
-                    setAutoMarginBoxValue(newValue);
-                  }
-                }}
-                onKeyDown={(evt) => onKeyDownEvent(evt)}
-              />
-              {sign && (
-                <Box position="absolute" right={-2} top={1}>
-                  {sign}
-                </Box>
-              )}
+      <Box maxWidth={600} mt={8} mb={6} className={styles.sliderContainer}>
+        <ChakraSlider
+          focusThumbOnChange={false}
+          value={getUnformattedAnswer()}
+          onChange={(v) => {
+            formatToSalesforce(v);
+            setAutoMarginBoxValue(v);
+          }}
+          defaultValue={getUnformattedAnswer()}
+          min={from}
+          max={to}
+          step={getGapValue()}
+        >
+          <SliderTrack bg="sliderBgColor" height={2} borderRadius={4}>
+            <SliderFilledTrack bg="sliderActiveBgColor" />
+          </SliderTrack>
+          <SliderThumb height={4} width={4} bg="sliderThumbColor">
+            <Box
+              position="relative"
+              p={1}
+              ml={marginBoxValue}
+              top="-250%"
+              bg="sliderActiveBgColor"
+              width="fit-content"
+              transition="margin 0.5s"
+            >
+              <P color="white">
+                {getNumberFormat(Number(getUnformattedAnswer()) || 0)}
+              </P>
             </Box>
-          </FlexCol>
-        </Box>
-      </QuestionAnimation>
+          </SliderThumb>
+        </ChakraSlider>
+        <FlexRow justify="space-between">
+          <P>{getNumberFormat(from)}</P>
+          <P>{getNumberFormat(to)}</P>
+        </FlexRow>
+        <FlexCol width={180} mt={5} mb={3} ml="auto" mr="auto">
+          <P pb={0.5} textAlign="left">
+            {t('inputLabel')}
+          </P>
+          <Box position="relative">
+            <InputNumber
+              clampValueOnBlur={false}
+              isInvalid={false}
+              min={from}
+              max={to}
+              value={
+                sign === VALUE_TYPE.EUR || sign === VALUE_TYPE.USD
+                  ? getNumberFormat(Number(getUnformattedAnswer()) || 0)
+                      ?.replace(sign, '')
+                      ?.trim()
+                  : getUnformattedAnswer() || 0
+              }
+              onChange={(valueAsString) => {
+                const newValue = Number(valueAsString?.replaceAll('.', ''));
+                if (newValue <= to) {
+                  formatToSalesforce(newValue);
+                  setAutoMarginBoxValue(newValue);
+                }
+              }}
+              onKeyDown={(evt) => onKeyDownEvent(evt)}
+            />
+            {sign && (
+              <Box position="absolute" right={-2} top={1}>
+                {sign}
+              </Box>
+            )}
+          </Box>
+        </FlexCol>
+      </Box>
       <QuestionButtons
         onNextQuestion={() => {
           onNextQuestion();
@@ -190,6 +188,6 @@ export const Slider: React.FC<{
         isRequired={question?.isRequired}
         isAnswered={getUnformattedAnswer() != null}
       />
-    </>
+    </QuestionAnimation>
   );
 };

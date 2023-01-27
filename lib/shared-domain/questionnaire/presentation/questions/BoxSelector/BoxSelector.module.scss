@@ -1,18 +1,18 @@
-.boxSelector {
-  & > * {
-    @include breakpoint-down(md) {
-      justify-content: center !important;
-    }
-  }
+.boxRow {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.showMoreWrapper {
+  margin-top: $gutter * 2;
+  text-align: center;
 }
 
 .showMoreBtn {
-  width: 100%;
-  justify-content: center;
-  margin: $gutter * 0.5;
-  @include breakpoint-up(md) {
-    width: auto;
-    justify-content: initial;
+  @include breakpoint-down(md) {
+    width: 100%;
   }
 }
 
@@ -34,4 +34,7 @@
     justify-content: space-between;
     margin-top: $gutter * 2;
   }
+}
+.swiperSlide {
+  width: auto !important;
 }

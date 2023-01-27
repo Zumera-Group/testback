@@ -1,5 +1,3 @@
-import { Box, Flex, VStack } from '@chakra-ui/react';
-import useBreakpointValue from 'lib/shared-domain/useBreakpoint';
 import { BoxAnswer, Question } from 'lib/shared-domain/questionnaire/domain';
 import React, { useEffect, useState } from 'react';
 import { BoxSelectorItem } from './BoxSelectorItem';
@@ -19,7 +17,6 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Scrollbar } from 'swiper';
 import { useMediaQuery } from 'lib/hooks/useMediaQuery';
 import { SCREEN_SIZE_MD } from 'lib/constants';
-import { SCREEN_SIZE_LG, SCREEN_SIZE_SM } from 'lib/constants';
 import 'swiper/css/scrollbar';
 import BackButton from 'components/Calculator/BackButton/BackButton';
 const t = getTranslateByScope('answerTypes.boxSelector');
@@ -113,27 +110,14 @@ export const BoxSelector = ({
     return false;
   };
 
-  const breakpoint_LG = parseInt(SCREEN_SIZE_LG);
-  const breakpoint_SM = parseInt(SCREEN_SIZE_SM);
-
-  const maxSlidesToShow = allBoxes.length;
-
   const swiperOptions = {
     modules: [Scrollbar],
     observer: true,
     observeParents: true,
     freeMode: true,
     scrollbar: { hide: false, draggable: true },
-    slidesPerView: 1,
-    centeredSlides: true,
-    breakpoints: {
-      [breakpoint_SM]: {
-        slidesPerView: 3.5,
-      },
-      [breakpoint_LG]: {
-        slidesPerView: maxSlidesToShow ? maxSlidesToShow : 3,
-      },
-    },
+    slidesPerView: 'auto',
+    a11y: false,
   };
 
   return (
@@ -141,40 +125,25 @@ export const BoxSelector = ({
       {isMobile && (
         <BackButton onPrevQuestion={onPrevQuestion} currentPos={currentPos} />
       )}
-      <QuestionText title={question?.questionText}>
-        <RequiredQuestionInfo isRequired={question?.isRequired} />
-      </QuestionText>
-
       <QuestionAnimation>
+        <QuestionText title={question?.questionText}>
+          <RequiredQuestionInfo isRequired={question?.isRequired} />
+        </QuestionText>
+
         {!isMobile || (isMobile && boxesToRender.length === 2) ? (
-          <Box maxWidth={950} className={styles.boxSelector}>
-            <Flex mt={1} justify="flex-start" flexWrap="wrap">
-              {boxesToRender?.map((box, index) => (
-                <BoxSelectorItem key={box._key} question={question} box={box} />
-              ))}
-            </Flex>
-          </Box>
+          <div className={styles.boxRow}>
+            {boxesToRender?.map((box, index) => (
+              <BoxSelectorItem key={box._key} question={question} box={box} />
+            ))}
+          </div>
         ) : (
-          <>
-            <Box
-              mx="auto"
-              w="100%"
-              maxWidth={950}
-              className={styles.boxSelectorswiper}
-            >
-              <Swiper className={styles.swiper} {...swiperOptions}>
-                {boxesToRender?.map((box, index) => (
-                  <SwiperSlide key={index} className={styles.swiperSlide}>
-                    <BoxSelectorItem
-                      key={box._key}
-                      question={question}
-                      box={box}
-                    />
-                  </SwiperSlide>
-                ))}
-              </Swiper>
-            </Box>
-          </>
+          <Swiper {...swiperOptions}>
+            {boxesToRender?.map((box, index) => (
+              <SwiperSlide key={index} className={styles.swiperSlide}>
+                <BoxSelectorItem key={box._key} question={question} box={box} />
+              </SwiperSlide>
+            ))}
+          </Swiper>
         )}
 
         <div className={styles.buttonOuter}>
@@ -184,31 +153,29 @@ export const BoxSelector = ({
               currentPos={currentPos}
             />
           )}
-
           <div className={styles.buttonWrapper}>
-            <Flex
-              justifyContent="flex-start"
-              className={styles.showMoreWrapper}
-            >
+            <div className={styles.showMoreWrapper}>
               {moreBoxesToShow && !isMobile && (
                 <Button
                   callBack={onShowMore}
-                  variant="primary"
+                  variant="secondary"
+                  onDark={true}
                   hideIcon
                   classes={styles.showMoreBtn}
                 >
                   {buttonText.trim()}
                 </Button>
               )}
-            </Flex>
-            {getShowButton() && (
-              <QuestionButtons
-                onNextQuestion={onNextQuestion}
-                isRequired={question?.isRequired}
-                isAnswered={getAnswer()}
-              />
-            )}
+            </div>
           </div>
+
+          {getShowButton() && (
+            <QuestionButtons
+              onNextQuestion={onNextQuestion}
+              isRequired={question?.isRequired}
+              isAnswered={getAnswer()}
+            />
+          )}
         </div>
       </QuestionAnimation>
     </>

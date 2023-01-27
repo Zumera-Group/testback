@@ -62,14 +62,11 @@ export const NumberInput: React.FC<{
 
   return (
     <div className={styles.numberInputWrapper}>
-      {isMobile && (
-        <BackButton onPrevQuestion={onPrevQuestion} currentPos={currentPos} />
-      )}
-      <QuestionText
-        title={question.questionText}
-        description={question.description}
-      />
       <QuestionAnimation>
+        <QuestionText
+          title={question.questionText}
+          description={question.description}
+        />
         {label && <p className={styles.fieldLabel}>{label}</p>}
         <div className={styles.fieldWrapper}>
           {sign && <span className={styles.sign}> {sign}</span>}

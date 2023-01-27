@@ -13,7 +13,6 @@ import { qLogs } from '../../application/log';
 import { useQuestionnaireRouter, t } from './index';
 import { AnimateSharedLayout } from 'framer-motion';
 import { Sector } from '../../../page/domain/index';
-import { Box } from '@chakra-ui/react';
 
 export const QuestionComponent: React.FC<{
   sectorSpecificQuestions: Question[];
@@ -259,9 +258,7 @@ export const QuestionComponent: React.FC<{
       {isOnResultScreen ? (
         <Result />
       ) : (
-        <Box key={currentQuestion?._id} margin={'auto'}>
-          <AnimateSharedLayout>{renderQuestion()}</AnimateSharedLayout>
-        </Box>
+        <AnimateSharedLayout>{renderQuestion()}</AnimateSharedLayout>
       )}
     </>
   );
