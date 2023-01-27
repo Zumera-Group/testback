@@ -1,5 +1,6 @@
 .transaction {
-  display: block;
+  display: flex;
+  align-items: stretch;
   width: 100%;
   @include breakpoint-down(sm) {
     @include divider(bottom, $white);
@@ -16,10 +17,13 @@
 .cover {
   position: relative;
   color: $white;
+  flex: 1;
 }
 
 .link {
   height: 100%;
+  display: flex;
+  flex-direction: column;
   svg:not(.beam) {
     transform: scale(1);
     transform-origin: 50% 50%;
