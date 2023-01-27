@@ -26,7 +26,7 @@ export const VTValuesGridSection: React.FC<{
 
   return (
     <Section size={'md'} bg={'light'} color={'primary'}>
-      <Container>
+      <Container classes={styles.container}>
         <Grid
           justifyContent={'space-between'}
           alignItems={'start'}

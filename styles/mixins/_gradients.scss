@@ -1,18 +1,18 @@
-@mixin zumera-gradient(
-  $x: 0%,
-  $y: 100%,
-  $radial-size: $zumera-gradient-size
-) {
+@mixin zumera-gradient($x: 0%, $y: 100%, $radial-size: $zumera-gradient-size) {
   background: $primary; // Fallback
   background: radial-gradient(
     $radial-size $radial-size at $x $y,
     $zumera-gradient-front 0%,
-    $zumera-gradient-middle-front 25%,
-    $zumera-gradient-middle-back 75%,
-    $zumera-gradient-back 100%
+    $zumera-gradient-middle-front 20%,
+    $zumera-gradient-middle-back 48%,
+    $zumera-gradient-back 60%
   );
 }
-
+//100vmin 100vmin at 100% 0%, #f0005c 0%, #930075 19%, #400044 48%, #300032 60%)
 @mixin dark-overlay-gradient() {
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.75) 100%);
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.75) 100%
+  );
 }
