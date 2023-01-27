@@ -23,9 +23,11 @@ interface PageProps {
   sharedContent: any;
 }
 
-export const Custom404: React.FC<{ siteSettings: SiteSettings }> = ({
-  siteSettings,
-}) => {
+export const Custom404: React.FC<{
+  siteSettings: SiteSettings;
+  sharedContent: any;
+}> = ({ siteSettings, sharedContent }) => {
+  console.log(siteSettings);
   return (
     <FlexCol
       width="100%"
@@ -40,7 +42,7 @@ export const Custom404: React.FC<{ siteSettings: SiteSettings }> = ({
         siteSettings={siteSettings}
         darkBg={true}
       />
-      <FourOFour />
+      <FourOFour title={sharedContent.text404} />
       <PageFooter siteSettings={siteSettings} />
     </FlexCol>
   );
@@ -52,7 +54,7 @@ export default function Custom404Page({
 }: PageProps): JSX.Element {
   return (
     <SharedContentContext value={sharedContent}>
-      <Custom404 siteSettings={siteSettings} />
+      <Custom404 siteSettings={siteSettings} sharedContent={sharedContent} />
     </SharedContentContext>
   );
 }
