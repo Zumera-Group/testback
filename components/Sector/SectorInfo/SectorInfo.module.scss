@@ -15,6 +15,9 @@
     height: $border-width;
     @include divider(top, $primary);
   }
+  .title {
+    margin-bottom: 2rem;
+  }
 }
 
 .calloutBox {
@@ -22,7 +25,7 @@
   margin-top: var(--section-spacing);
 
   section,
-  *[class^="Container"] {
+  *[class^='Container'] {
     padding: 0 !important;
     background-color: transparent !important;
     color: inherit !important;

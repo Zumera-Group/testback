@@ -36,7 +36,7 @@ export const SectorInfo = ({ sector, sectorTransactions, content }) => {
           justifyContent={'space-between'}
           alignItems={'start'}
         >
-          <GridColumn sm={12} md={6} lg={6}>
+          <GridColumn sm={12} md={6} lg={6} className={styles.title}>
             <SectionHeading
               title={infoSection?.title}
               subtitle={infoSection?.subtitle}
