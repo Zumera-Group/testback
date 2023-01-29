@@ -385,13 +385,13 @@ export const contentModulesQuery = (
       },
     },
     offices[]-> {
-      ...
+      ...,
     },
     link {
       ...,
       page->{
         slug
-      }
+      },
     },
     sectorsDropdown[]-> {
       ...,
