@@ -47,6 +47,7 @@ const PageLayout: React.FC<{
           siteSettings={siteSettings}
           otherLangSlug={otherLangSlug}
           hideHeader={page.isHeaderRoutesHidden}
+          hideMenu={page.hideNavMenu}
         />
         <main id="main">
           {contentModules &&

@@ -28,6 +28,7 @@ export const Header = ({
   hideBurger,
   staticExtended,
   indicator,
+  hideMenu,
 }) => {
   const [bigMenuOpen, setBigMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -130,9 +131,9 @@ export const Header = ({
             <LogoExtended slug={homeSlug} title={siteName} />
           )}
         </div>
-        {!hideHeader && <Menu navigation={headerMenu} />}
+        {!hideHeader && !hideMenu && <Menu navigation={headerMenu} />}
 
-        {!hideBurger && (
+        {!hideBurger && !hideMenu && (
           <div className={styles.actionsWrapper}>
             <LanguageSwitcher
               otherLangSlug={otherLangSlug}
