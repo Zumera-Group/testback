@@ -1,5 +1,8 @@
-import { BoxAnswer, Question } from 'lib/shared-domain/questionnaire/domain';
 import React, { useEffect, useRef, useState } from 'react';
+
+import { BoxAnswer, Question } from 'lib/shared-domain/questionnaire/domain';
+import { useAnswers } from 'lib/shared-domain/questionnaire/application/useAnswers';
+import { Sector } from '../../../../page/domain/index';
 import { BoxSelectorItem } from './BoxSelectorItem';
 import { QuestionText } from '../../Question/QuestionText';
 import { QuestionButtons } from '../../Question/QuestionButtons';
@@ -7,18 +10,17 @@ import { getTranslateByScope } from '../../../../../../translation/i18n';
 import { useValuationStore } from '../../../store/index';
 import { INDUSTRY_QUESTION_ID } from '..';
 import { SECTOR_QUESTION_ID } from '../index';
-import { useAnswers } from 'lib/shared-domain/questionnaire/application/useAnswers';
 import { QuestionAnimation } from '../../Question/QuestionAnimation';
 import { RequiredQuestionInfo } from '../../Question/RequiredQuestionInfo';
-import { Sector } from '../../../../page/domain/index';
 import { Button } from 'components/Button';
-import styles from './BoxSelector.module.scss';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Scrollbar } from 'swiper';
+import BackButton from 'components/Calculator/BackButton/BackButton';
 import { useMediaQuery } from 'lib/hooks/useMediaQuery';
 import { CONTAINER_PADDING_X, SCREEN_SIZE_MD } from 'lib/constants';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Scrollbar } from 'swiper';
 import 'swiper/css/scrollbar';
-import BackButton from 'components/Calculator/BackButton/BackButton';
+import styles from './BoxSelector.module.scss';
+
 const t = getTranslateByScope('answerTypes.boxSelector');
 
 interface Props {
@@ -43,55 +45,89 @@ export const BoxSelector = ({
   industries,
   currentPos,
 }: Props): JSX.Element => {
+  
   const { sectorId, industryId } = useValuationStore();
-  let allBoxes = question?.answerSelector?.boxSelector;
-
   const { getAnswer } = useAnswers(question);
 
-  if (sectors) {
-    allBoxes = sectors?.map((s) => ({
-      _key: s.id,
-      boxContent: s.id,
-      label: s.name,
-      sheetName: s.sectorSheetName,
-      boxIcon: {
-        name: s.name,
-        iconImage: s.graph.iconImage,
-      },
-    }));
-  }
+  const boxAnswers = question?.answerSelector?.boxSelector;
+  const INITIAL_BOXES = 8;
 
-  if (industries) {
-    allBoxes = industries?.map((i) => ({
-      _key: i.id,
-      boxContent: i.id,
-      label: i.name,
-      sheetName: i.industrySheetName,
-    }));
-  }
+  const [selectionsLoaded, setSelectionsLoaded] = useState<boolean>(false);
 
-  const firstBoxesToRender = allBoxes?.slice(0, 8);
-  const isMobile = useMediaQuery(`(max-width: ${SCREEN_SIZE_MD})`);
+  const [allBoxes, setAllBoxes] = useState<BoxAnswer[]>([]);
+  const [boxesToShow, setBoxesToShow] = useState<number>(INITIAL_BOXES);
+  const [moreBoxesToShow, setMoreBoxesToShow] = useState<boolean>(false);
+
   const buttonText = question?.showMoreButton || t('buttonText');
+  const isMobile = useMediaQuery(`(max-width: ${SCREEN_SIZE_MD})`);
 
-  const [boxesToRender, setBoxesToRender] =
-    useState<BoxAnswer[]>(firstBoxesToRender);
-  const [moreBoxesToShow, setMoreBoxesToShow] = useState<boolean>(
-    allBoxes?.length > 8,
-  );
+  // Map the selections
+  useEffect(() => {
+    // Prevent the useEffect from firing multiple times
+    if (!boxAnswers || selectionsLoaded) return;
+    setSelectionsLoaded(true);
 
-  const onShowMore = () => {
-    setBoxesToRender(allBoxes);
-    setMoreBoxesToShow(false);
-  };
+    if (!sectors && !industries) setAllBoxes(boxAnswers);
 
+    if (sectors) {
+      setAllBoxes(
+        sectors?.map((s) => ({
+          _key: s.id,
+          boxContent: s.id,
+          label: s.name,
+          sheetName: s.sectorSheetName,
+          boxIcon: {
+            name: s.name,
+            iconImage: s.graph.iconImage,
+          },
+        }))
+      );
+    }
+    if (industries) {
+      setAllBoxes(
+        industries?.map((i) => ({
+          _key: i.id,
+          boxContent: i.id,
+          label: i.name,
+          sheetName: i.industrySheetName,
+        }))
+      );
+    }
+  }, [boxAnswers, selectionsLoaded, sectors, industries]);
+
+  // Set the amount of boxes to display to the initial number set
+  useEffect(() => {
+    if (!allBoxes?.length) return;
+    setBoxesToShow(INITIAL_BOXES);
+    return () => setBoxesToShow(INITIAL_BOXES);
+  }, [allBoxes]);
+
+  // Show/hide the 'Show more' button if the items length exceeds initial length
+  useEffect(() => {
+    if (moreBoxesToShow) return;
+    setMoreBoxesToShow(allBoxes?.length > boxesToShow);
+  }, [allBoxes, boxesToShow, moreBoxesToShow]);
+
+  // Show all boxes in the carousel mobile view
   useEffect(() => {
     if (isMobile || (!isMobile && !moreBoxesToShow)) {
-      setBoxesToRender(allBoxes);
+      setBoxesToShow(allBoxes?.length);
     } else if (!isMobile && moreBoxesToShow) {
-      setBoxesToRender(firstBoxesToRender);
+      setBoxesToShow(INITIAL_BOXES);
     }
-  }, [allBoxes, firstBoxesToRender, isMobile, moreBoxesToShow]);
+  }, [allBoxes?.length, isMobile, moreBoxesToShow]);
+
+  // Reset to original state when question changes
+  useEffect(() => {
+    setSelectionsLoaded(false);
+    setMoreBoxesToShow(false);
+    setBoxesToShow(INITIAL_BOXES);
+  }, [question, currentPos]);
+
+  const onShowMore = () => {
+    setBoxesToShow(allBoxes?.length);
+    setMoreBoxesToShow(false);
+  }
 
   const getShowButton = () => {
     const inSelectIndustryAndHasIndustryId =
@@ -110,6 +146,8 @@ export const BoxSelector = ({
     return false;
   };
 
+  // Swiper configs
+  const buttonRef = useRef(null);
   const swiperOptions = {
     modules: [Scrollbar],
     observer: true,
@@ -123,21 +161,19 @@ export const BoxSelector = ({
     slideToClickedSlide: false,
     watchSlidesProgress: true,
   };
-  const buttonRef = useRef(null);
 
   return (
     <>
-      {isMobile && (
-        <BackButton onPrevQuestion={onPrevQuestion} currentPos={currentPos} />
-      )}
+      {isMobile && <BackButton onPrevQuestion={onPrevQuestion} currentPos={currentPos} />}
+
       <QuestionAnimation>
         <QuestionText title={question?.questionText}>
           <RequiredQuestionInfo isRequired={question?.isRequired} />
         </QuestionText>
 
-        {!isMobile || (isMobile && boxesToRender.length === 2) ? (
+        {!isMobile || (isMobile && allBoxes.length === 2) ? (
           <div className={styles.boxRow}>
-            {boxesToRender?.map((box, index) => (
+            {allBoxes?.slice(0, boxesToShow).map((box, index) => (
               <BoxSelectorItem
                 key={box._key}
                 question={question}
@@ -148,7 +184,7 @@ export const BoxSelector = ({
           </div>
         ) : (
           <Swiper {...swiperOptions}>
-            {boxesToRender?.map((box, index) => (
+            {allBoxes?.slice(0, boxesToShow).map((box, index) => (
               <SwiperSlide key={index} className={styles.swiperSlide}>
                 <BoxSelectorItem
                   key={box._key}
@@ -169,20 +205,18 @@ export const BoxSelector = ({
             />
           )}
 
-          <div className={styles.buttonWrapper}>
-            <div className={styles.showMoreWrapper}>
-              {moreBoxesToShow && !isMobile && (
-                <Button
-                  callBack={onShowMore}
-                  variant="secondary"
-                  onDark={true}
-                  hideIcon
-                  classes={styles.showMoreBtn}
-                >
-                  {buttonText.trim()}
-                </Button>
-              )}
-            </div>
+          <div className={styles.showMoreWrapper}>
+            {(moreBoxesToShow && !isMobile) && (
+              <Button
+                callBack={onShowMore}
+                variant="secondary"
+                onDark={true}
+                hideIcon
+                classes={styles.showMoreBtn}
+              >
+                {buttonText.trim()}
+              </Button>
+            )}
           </div>
 
           {getShowButton() && (
