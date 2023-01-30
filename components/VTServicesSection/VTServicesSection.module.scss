@@ -1,3 +1,8 @@
+.section {
+  @include breakpoint-down(md) {
+    padding: 1rem;
+  }
+}
 .gridContainer {
   padding: 5rem 3.5rem;
 
@@ -23,6 +28,7 @@
   align-items: center;
   justify-content: center;
   flex: 1;
+  text-align: center;
 }
 .imageWrapper {
   position: relative;

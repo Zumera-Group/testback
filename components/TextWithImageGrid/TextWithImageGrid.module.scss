@@ -1,7 +1,12 @@
+.section {
+  @include breakpoint-down(md) {
+    padding: 1rem;
+  }
+}
 .gridContainer {
   padding: $gutter * 2;
   @include breakpoint-up(lg) {
-    padding: $gutter * 3
+    padding: $gutter * 3;
   }
 
   @each $name, $bg in $section-bgs {

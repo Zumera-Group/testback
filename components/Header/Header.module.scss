@@ -28,7 +28,7 @@
     background-color: rgba($header-bg, 1);
     color: $primary;
     svg {
-      fill: $primary;
+      fill: currentColor;
     }
     .container {
       @include divider(bottom, $primary);
