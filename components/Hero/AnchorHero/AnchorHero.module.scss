@@ -11,6 +11,9 @@
   font-size: $font-size-big;
   li {
     margin-bottom: 12px;
+    &:hover {
+      text-decoration: underline;
+    }
     span {
       font-weight: $font-weight-bold;
       cursor: pointer;

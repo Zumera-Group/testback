@@ -28,6 +28,7 @@ export const Custom404: React.FC<{
   sharedContent: any;
 }> = ({ siteSettings, sharedContent }) => {
   console.log(siteSettings);
+  console.log(sharedContent);
   return (
     <FlexCol
       width="100%"
