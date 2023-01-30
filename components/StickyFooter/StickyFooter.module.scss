@@ -1,17 +1,47 @@
-.wrapper {
+.stickyFooter {
   height: 80px;
-  background: $secondary;
+  background: rgba($tertiary, 0.9);
   position: fixed;
   bottom: 0;
   left: 0;
-  width: 100vw;
-  display: flex;
-  align-items: center;
+  width: 100%;
+  max-width: 100%;
   opacity: 0;
-  transition: opacity 0.5s linear;
+  transform: translateY(100%);
+  transition: opacity $timing-md $ease-out, transform $timing-md $ease-out;
   z-index: 2;
+  &__show {
+    opacity: 1;
+    transform: translateY(0%);
+  }
+  & > div,
+  .btnWrapper {
+    height: 100%;
+  }
 }
 
-.show {
-  opacity: 1;
+.btnWrapper {
+  display: flex;
+  align-items: center;
+  @include push-auto-x();
+  justify-content: flex-start;
+  // Avoid overlapping with ChatButton
+  @media screen and (min-width: 1440px) {
+    justify-content: flex-end;
+  }
+  @media screen and (max-width: 1440px) {
+    & > * {
+      width: 100%;
+      max-width: calc(100% - 96px);
+      justify-content: center;
+    }
+  }
+  @include breakpoint-down(md) {
+    & > * {
+      max-width: calc(100% - 64px);
+    }
+  }
 }
+
+
+

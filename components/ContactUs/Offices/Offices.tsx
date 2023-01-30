@@ -13,6 +13,8 @@ export const Offices = ({ offices, appointmentLinkText }) => {
 
   if (!offices?.length) return null;
 
+  console.log(offices);
+
   return (
     <div className={styles.offices}>
       <ul className={styles.officeToggles}>
@@ -71,6 +73,19 @@ export const Offices = ({ offices, appointmentLinkText }) => {
                   {appointmentLinkText}
                 </Button>
               </div>
+            )}
+            {selectedOffice?.image?.asset?.url ? (
+              <img
+                src={selectedOffice?.image?.asset?.url}
+                alt={'Zumera Office'}
+                className={styles.building}
+              />
+            ) : (
+              <img
+                src={'/contentModules/contactUsSection/footer_cta-building.svg'}
+                alt={'Zumera Office'}
+                className={styles.building}
+              />
             )}
           </motion.div>
         )}

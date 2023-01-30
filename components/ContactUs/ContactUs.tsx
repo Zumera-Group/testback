@@ -51,11 +51,6 @@ export const ContactUs: React.FC<Props> = (props) => {
                 appointmentLinkText={appointmentLinkText}
               />
             )}
-            <img
-              src={'/contentModules/contactUsSection/footer_cta-building.svg'}
-              alt={'Zumera Office'}
-              className={styles.building}
-            />
           </GridColumn>
           <GridColumn sm={12} md={6} lg={7} xl={6}>
             <ContactForm contactForm={contactForm} />

@@ -13,6 +13,7 @@ interface Props {
   hideBurger?: boolean;
   staticExtended?: boolean;
   indicator?: {};
+  hideMenu?: boolean;
 }
 
 export const PageHeader: React.FC<Props> = ({
@@ -25,6 +26,7 @@ export const PageHeader: React.FC<Props> = ({
   hideBurger,
   staticExtended,
   indicator,
+  hideMenu,
 }) => {
   return (
     <Header
@@ -37,6 +39,7 @@ export const PageHeader: React.FC<Props> = ({
       hideBurger={hideBurger}
       staticExtended={staticExtended}
       indicator={indicator}
+      hideMenu={hideMenu}
     />
   );
 };

@@ -43,7 +43,9 @@ const queryCDIOfficeDetailContent = (
   ...,
   contactUsSection {
     ...,
-    offices[]->{...}
+    offices[]->{
+      ...
+    }
   }
 }`;
 

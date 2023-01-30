@@ -1,51 +1,58 @@
 .headingColumn {
-  @media screen and (max-width: 768px) {
+  @include breakpoint-down(md) {
     margin: 0 auto;
     div {
       text-align: center;
     }
   }
 }
+
 .rightColumn {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
 }
+
 .stepsContainer {
   position: relative;
   padding: 2.25rem 1.625rem;
   flex: 1;
   width: 100%;
   top: -1rem;
-  @include breakpoint-down(md) {
+  @include breakpoint-down(lg) {
     padding: 2.25rem 0;
   }
 }
+
 .stepItem {
   display: flex;
 }
+
 .stepIndex {
-  font-weight: 100;
+  font-weight: $font-weight-light;
   margin-right: 2.625rem;
   min-width: 40px;
-  @media screen and (max-width: 768px) {
-    margin-right: 0;
+  @include breakpoint-down(lg) {
+    margin-right: $gutter;
   }
 }
+
 .stepItemContent {
   color: $primary;
   svg {
     color: $accent;
     cursor: pointer;
-    transition: 0.3s linear;
+    transition: opacity $timing-md $ease-out, color $timing-md $ease-out;
     &:hover {
       opacity: 0.5;
     }
   }
 }
+
 .stepName {
-  margin-bottom: 0.5rem;
+  margin-bottom: $gutter * 0.5;
 }
+
 .stepsList {
   list-style-type: none;
   padding: 0;
@@ -67,8 +74,9 @@
     }
   }
 }
+
 .arrowColumn {
-  @include breakpoint-down(md) {
+  @include breakpoint-down(lg) {
     display: none;
   }
 }

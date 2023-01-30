@@ -32,7 +32,7 @@ export const VTValuesGridSection: React.FC<{
           alignItems={'start'}
           fullWidth={true}
         >
-          <GridColumn sm={12} md={6} lg={6}>
+          <GridColumn sm={12} md={5} lg={5} xl={6}>
             <SectionHeading
               title={title}
               description={description}
@@ -41,7 +41,7 @@ export const VTValuesGridSection: React.FC<{
             />
             <ButtonComp />
           </GridColumn>
-          <GridColumn sm={12} md={6} lg={6}>
+          <GridColumn sm={12} md={7} lg={7} xl={6}>
             <div className={styles.valuesGrid}>
               {values.map((value) => (
                 <div key={value._key} className={styles.valueItem}>
