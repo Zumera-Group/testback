@@ -129,7 +129,7 @@ export const TransactionGridSection: React.FC<IProps> = (props) => {
               maxSlidesToShow={7}
               classes={styles.swiper}
             >
-              <SwiperSlide>
+              <SwiperSlide className={styles.swiperSlide}>
                 <TransactionSelectorTile
                   sector={{ name: 'All', _id: '0', slug: { current: '' } }}
                   activeSector={activeSector}
@@ -138,7 +138,7 @@ export const TransactionGridSection: React.FC<IProps> = (props) => {
                 />
               </SwiperSlide>
               {sectorsDropdown.map((sector) => (
-                <SwiperSlide key={sector._id}>
+                <SwiperSlide key={sector._id} className={styles.swiperSlide}>
                   <TransactionSelectorTile
                     sector={sector}
                     activeSector={activeSector}

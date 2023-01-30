@@ -3,7 +3,6 @@
   align-items: stretch;
   width: 100%;
   @include breakpoint-down(sm) {
-    @include divider(bottom, $white);
     padding-bottom: 16px;
   }
 }
