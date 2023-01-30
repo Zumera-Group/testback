@@ -28,6 +28,8 @@ export const NumberInput: React.FC<{
   const { getNumberFormat, sign } = useNumberFormat(valueType);
   const { getAnswer, setAnswer } = useAnswers(question);
   const isMobile = useMediaQuery(`(max-width: ${SCREEN_SIZE_MD})`);
+  const [inputLength, setInputLength] = useState(null);
+  const isYear = valueType === 'year';
 
   const formatToSalesforce = (v: number) => {
     const today = new Date();
@@ -58,8 +60,11 @@ export const NumberInput: React.FC<{
     if (salesforceFormat === 'date_month') return month;
     if (salesforceFormat === 'date_day') return day;
   };
-  
-  const shortBox = salesforceFormat !== 'number' || valueType === 'year' || valueType === 'percent';
+
+  const shortBox =
+    salesforceFormat !== 'number' ||
+    valueType === 'year' ||
+    valueType === 'percent';
 
   return (
     <div className={styles.numberInputWrapper}>
@@ -72,7 +77,12 @@ export const NumberInput: React.FC<{
           description={question.description}
         />
         {label && <p className={styles.fieldLabel}>{label}</p>}
-        <div className={[styles.fieldWrapper, shortBox ? styles.fieldWrapper__shortBox : ''].join(' ')}>
+        <div
+          className={[
+            styles.fieldWrapper,
+            shortBox ? styles.fieldWrapper__shortBox : '',
+          ].join(' ')}
+        >
           {sign && sign !== '%' && <span className={styles.sign}> {sign}</span>}
           <Input
             type="number"
@@ -86,7 +96,10 @@ export const NumberInput: React.FC<{
               !sign || sign === '%' ? styles.noSign : '',
             ].join(' ')}
             value={getUnformattedAnswer()}
-            onChange={(e) => formatToSalesforce(Number(e.target.value))}
+            onChange={(e) => {
+              formatToSalesforce(Number(e.target.value));
+              setInputLength(e.target.value.length);
+            }}
           />
           {sign && sign === '%' && <span className={styles.sign}>{sign}</span>}
         </div>
@@ -103,7 +116,10 @@ export const NumberInput: React.FC<{
               onNextQuestion();
             }}
             isRequired={question?.isRequired}
-            isAnswered={getUnformattedAnswer() != null}
+            isAnswered={
+              (!isYear && getUnformattedAnswer() != null) ||
+              (isYear && inputLength >= 4)
+            }
           />
         </div>
       </QuestionAnimation>
