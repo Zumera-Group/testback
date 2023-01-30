@@ -30,9 +30,9 @@
   margin: $btn-wrapper-margin-top 0 0 0;
   button,
   a {
-    margin-right: 2rem;
+    margin-right: $gutter * 2;
     @include breakpoint-down(md) {
-      margin-bottom: 2rem;
+      margin-bottom: $gutter * 2;
     }
   }
 }
@@ -52,33 +52,35 @@
 }
 
 .purposesWrapper {
-  border: 1px solid #794d7c;
+  border: $border-width solid $quaternary;
   border-radius: 24px;
   text-align: center;
-  padding: 4rem 3.188rem;
+  padding: $gutter * 4 3.188rem;
   @include breakpoint-down(md) {
-    padding: 2rem 1rem;
+    padding: $gutter * 2 $gutter;
   }
   h4 {
     margin-bottom: 3.188rem;
   }
 }
+
 .purposes {
   display: flex;
   justify-content: space-between;
 }
+
 .purpose {
   cursor: pointer;
-  border: 1px solid #794d7c;
-  border-radius: 20px;
-  padding: 2rem 1rem;
+  border: $border-width solid $quaternary;
+  border-radius: $input-border-radius;
+  padding: $gutter * 2 $gutter;
   font-size: 1rem;
   width: 32%;
   display: flex;
   align-items: center;
   justify-content: center;
   @include breakpoint-down(md) {
-    padding: 1rem 0.5rem;
+    padding: $gutter $gutter * 0.5;
   }
   &.selected {
     border-color: $accent;
