@@ -1,8 +1,9 @@
 import { StickyFooterModule } from 'lib/shared-domain/page/domain/contentModule';
 import styles from './StickyFooter.module.scss';
-import { Container, Grid } from 'components/Layout';
+import { Container } from 'components/Layout';
 import { Button } from 'components/Button';
 import { useEffect, useState } from 'react';
+
 export const StickyFooter: React.FC<{
   specificContentModule: StickyFooterModule;
 }> = ({ specificContentModule }) => {
@@ -40,15 +41,11 @@ export const StickyFooter: React.FC<{
   };
 
   return (
-    <div className={[styles.wrapper, isScrolled ? styles.show : ''].join(' ')}>
+    <div className={[styles.stickyFooter, isScrolled ? styles.stickyFooter__show : ''].join(' ')}>
       <Container>
-        <Grid
-          fullWidth={true}
-          justifyContent={'flex-end'}
-          alignItems={'center'}
-        >
+        <div className={styles.btnWrapper}>
           <ButtonComp />
-        </Grid>
+        </div>
       </Container>
     </div>
   );

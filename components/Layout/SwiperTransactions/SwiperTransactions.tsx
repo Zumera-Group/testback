@@ -40,7 +40,7 @@ export const SwiperTransactions = ({
     onSwiper: setSwiper,
     spaceBetween: 0,
     slidesPerView: 1.2,
-    centerContent: true,
+    loop: true,
     centeredSlides: true,
     breakpoints: {
       [breakpoint_SM]: {

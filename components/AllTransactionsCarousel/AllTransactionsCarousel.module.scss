@@ -1,7 +1,8 @@
 .carousel {
   margin-top: $gutter * 2;
-  @include breakpoint-down(sm) {
-    overflow: visible;
+  @include breakpoint-down(md) {
+    width: calc(100% + #{$container-padding-x * 2});
+    margin-left: -$container-padding-x;
   }
 }
 
