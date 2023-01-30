@@ -13,6 +13,7 @@
 
   svg {
     fill: $white;
+    display: block;
   }
 
   &:not(&__light):not(&__scrolled) {
