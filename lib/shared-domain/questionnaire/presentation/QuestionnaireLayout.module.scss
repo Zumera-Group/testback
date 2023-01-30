@@ -1,4 +1,5 @@
-$main-layout-height: calc(100vh - var(--header-height) - calc(var(--section-size) * 2));
+$main-layout-chat-button-offset: 48px;
+$main-layout-height: calc(100vh - var(--header-height) - calc(var(--section-size) * 2) - #{$main-layout-chat-button-offset});
 
 .page {
   width: 100%;
@@ -53,6 +54,10 @@ $main-layout-height: calc(100vh - var(--header-height) - calc(var(--section-size
     }
   }
 
+}
+
+.section {
+  padding-bottom: calc(var(--section-size) + #{$main-layout-chat-button-offset}) !important;
 }
 
 .grid {

@@ -220,6 +220,7 @@ const QuestionnaireLayout: React.FC<{
               bg={'primary'}
               color={'white'}
               size={isMobile ? 'sm' : 'md'}
+              classes={styles.section}
             >
               {questionnaire && !isOnResultScreen && isMobile && (
                 <div className={styles.progressBarLineMobile}>
