@@ -1,5 +1,4 @@
 .questionButton {
-  margin: $gutter * 0.5 0;
   width: 100%;
   justify-content: center;
 
@@ -13,7 +12,6 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: $gutter 0;
   gap: $gutter * 0.5;
   &.stack {
     flex-direction: column;
