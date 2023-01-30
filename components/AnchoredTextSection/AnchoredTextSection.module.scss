@@ -3,6 +3,10 @@
   padding-bottom: calc(var(--section-size) + 24px);
 }
 .titles {
+  max-width: 80%;
+  @include breakpoint-down(md) {
+    max-width: 100%;
+  }
   h3 {
     margin-bottom: 1rem;
     word-break: break-all;

@@ -64,4 +64,7 @@
   &__open {
     @include divider(bottom, $primary);
   }
+  img {
+    width: 100%;
+  }
 }

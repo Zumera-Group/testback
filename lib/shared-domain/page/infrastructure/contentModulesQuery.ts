@@ -417,7 +417,7 @@ export const contentModulesQuery = (
 		  questionnaireSlug {
 			current
 		  },
-		},
+	  },
       externalUrl
     },
     heroImage {
