@@ -174,6 +174,7 @@ export const getContentForContentModule = (
     return (
       <VTServicesSection
         specificContentModule={contentModule.specificContentModule}
+        siteSettings={siteSettings}
       />
     );
   }
