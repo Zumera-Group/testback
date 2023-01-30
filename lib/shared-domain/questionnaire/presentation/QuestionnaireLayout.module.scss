@@ -1,3 +1,6 @@
+$main-layout-chat-button-offset: 48px;
+$main-layout-height: calc(100vh - var(--header-height) - calc(var(--section-size) * 2) - #{$main-layout-chat-button-offset});
+
 .page {
   width: 100%;
   max-width: 100%;
@@ -43,7 +46,7 @@
           top: 0;
           left: 0;
           height: 100%;
-          min-height: calc(100vh - var(--header-height));
+          min-height: $main-layout-height;
           width: $border-width;
           @include divider(left, $white);
         }
@@ -53,8 +56,12 @@
 
 }
 
+.section {
+  padding-bottom: calc(var(--section-size) + #{$main-layout-chat-button-offset}) !important;
+}
+
 .grid {
-  min-height: calc(100vh - var(--header-height));
+  min-height: $main-layout-height;
 }
 
 .questionCol {

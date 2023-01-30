@@ -51,15 +51,13 @@
   }
   
   &__shortBox {
-    border-bottom: $border-width solid #794d7c;
+    border-bottom: $border-width solid $quaternary;
   }
 }
 
 .fieldLabel {
   color: $white;
-  @include breakpoint-down(md) {
-    padding: 0 $gutter;
-  }
+  margin-bottom: $label-margin-bottom;
 }
 
 .sign {

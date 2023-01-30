@@ -1,0 +1,24 @@
+@mixin calculator-checkbox() {
+  --calculator-checkbox-size: 162px;
+  --calculator-checkbox-border-radius: #{$border-radius-sm};
+  @include breakpoint-up(md) {
+    --calculator-checkbox-size: 192px;
+    --calculator-checkbox-border-radius: #{$border-radius};
+  }
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  width: var(--calculator-checkbox-size);
+  height: var(--calculator-checkbox-size);
+  border: solid $border-width $quaternary;
+  border-radius: var(--calculator-checkbox-border-radius);
+  cursor: pointer;
+  text-align: center;
+  &:hover,
+  &.active {
+    border: solid $border-width $accent;
+    background-color: $dark;
+  }
+}

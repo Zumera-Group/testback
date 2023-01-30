@@ -1,7 +1,4 @@
 import styles from './CheckboxItem.module.scss';
-import { SCREEN_SIZE_MD } from 'lib/constants';
-import { useMediaQuery } from 'lib/hooks/useMediaQuery';
-
 interface Props {
   icon: JSX.Element;
   label: any;
@@ -10,7 +7,6 @@ interface Props {
 }
 
 const Checkbox: React.FC<Props> = ({ icon, label, onClick, selected }) => {
-  const isMobile = useMediaQuery(`(max-width: ${SCREEN_SIZE_MD})`);
   return (
     <>
       <div
