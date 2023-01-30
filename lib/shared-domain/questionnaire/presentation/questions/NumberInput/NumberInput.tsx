@@ -28,7 +28,7 @@ export const NumberInput: React.FC<{
   const { getNumberFormat, sign } = useNumberFormat(valueType);
   const { getAnswer, setAnswer } = useAnswers(question);
   const isMobile = useMediaQuery(`(max-width: ${SCREEN_SIZE_MD})`);
-  const [inputLength, setInputLength] = useState(null);
+  const [inputLength, setInputLength] = useState(0);
   const isYear = valueType === 'year';
 
   const formatToSalesforce = (v: number) => {
@@ -95,12 +95,13 @@ export const NumberInput: React.FC<{
               shortBox ? styles.shortBox : '',
               !sign || sign === '%' ? styles.noSign : '',
             ].join(' ')}
-            value={getUnformattedAnswer()}
+            value={getUnformattedAnswer() || ''}
             onChange={(e) => {
               formatToSalesforce(Number(e.target.value));
               setInputLength(e.target.value.length);
             }}
           />
+
           {sign && sign === '%' && <span className={styles.sign}>{sign}</span>}
         </div>
         <div className={styles.buttonOuter}>
