@@ -15,11 +15,13 @@ export const staggerChildrenAnimationProps = {
 export const verticalLineAnimationProps = {
   initial: {
     // scaleY: 0,
+    opacity: 0,
   },
   animate: {
     // scaleY: 1,
-    originY: '100%',
-    originX: '50%',
+    // originY: '100%',
+    // originX: '50%',
+    opacity: 1,
     transition: {
       duration: durations.xl * 2,
       ease: eases.out,
@@ -72,11 +74,11 @@ export const staggerLocationsAnimationProps = {
 export const locationPointAnimationProps = {
   initial: {
     opacity: 0,
-    scale: 0.75,
+    scale: 0.8,
   },
   animate: {
     opacity: 1,
-    scale: 1.25,
+    scale: 1.2,
     transition: {
       duration: durations.xl,
       eases: eases.in,
