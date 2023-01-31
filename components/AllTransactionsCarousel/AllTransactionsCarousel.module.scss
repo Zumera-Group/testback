@@ -23,6 +23,7 @@
   margin-bottom: 0;
   padding-left: $gutter;
   padding-right: $gutter;
+  min-height: 50px;
   @include breakpoint-up(sm) {
     margin-bottom: $paragraphs-margin-bottom;
   }
@@ -38,11 +39,5 @@
   margin-left: $gutter * 2;
   @include breakpoint-down(sm) {
     display: none;
-  }
-}
-
-.button {
-  @include breakpoint-up(md) {
-    //margin-right: 41%;
   }
 }

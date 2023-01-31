@@ -31,18 +31,24 @@ export const Sectors: React.FC<Props> = ({ ...rest }) => {
             alignItems={'stretch'}
             className={styles.sectors}
           >
-            {sectors?.map((sector, index) => (
-              <GridColumn
-                key={`${sector?._key}-${index}`}
-                className={styles.sectorWrapper}
-                xs={6}
-                sm={6}
-                md={4}
-                lg={3}
-              >
-                <Sector sector={sector} />
-              </GridColumn>
-            ))}
+            {sectors
+              ?.sort((a, b) => {
+                if (a.name > b.name) return 1;
+                if (a.name < b.name) return -1;
+                return 0;
+              })
+              ?.map((sector, index) => (
+                <GridColumn
+                  key={`${sector?._key}-${index}`}
+                  className={styles.sectorWrapper}
+                  xs={6}
+                  sm={6}
+                  md={4}
+                  lg={3}
+                >
+                  <Sector sector={sector} />
+                </GridColumn>
+              ))}
           </Grid>
         )}
       </Container>
