@@ -64,7 +64,7 @@ export const VTHero: React.FC<{
               <div className={styles.purposes}>
                 {purposes.map((purpose) => (
                   <Link passHref href={questionnaire} key={purpose}>
-                    <div
+                    <a
                       key={purpose}
                       className={[
                         styles.purpose,
@@ -73,7 +73,7 @@ export const VTHero: React.FC<{
                       onClick={() => setSelectedPurpose(purpose)}
                     >
                       {purpose}
-                    </div>
+                    </a>
                   </Link>
                 ))}
               </div>
