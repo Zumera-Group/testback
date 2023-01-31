@@ -5,7 +5,6 @@ import { SanityBlockContent } from 'components/SanityBlockContent';
 
 import baseStyles from '../Hero.module.scss';
 import styles from './Career.module.scss';
-import { useEffect, useState } from 'react';
 
 export const Career: HeroComponent = ({ ...rest }) => {
   const { title, title2, description, button } = rest;
