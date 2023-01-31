@@ -12,7 +12,7 @@ export const AnchorHero: React.FC<any> = ({
   description,
 }) => {
   const router = useRouter();
-  console.log(router);
+
   const pageSections = allPageContent.filter(
     (item) =>
       item.specificContentModule?.constructor &&

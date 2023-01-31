@@ -18,7 +18,7 @@ export const VTServicesSection: React.FC<{
     vtServices,
     isFullWidth,
   } = specificContentModule;
-  console.log(siteSettings);
+
   const sectionStyles = [
     styles.gridContainer,
     !isFullWidth ? styles[`bg-${background}`] || styles['bg-light'] : '',

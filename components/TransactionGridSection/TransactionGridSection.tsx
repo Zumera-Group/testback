@@ -89,7 +89,7 @@ export const TransactionGridSection: React.FC<IProps> = (props) => {
   }, []);
 
   const chunkSize = 12;
-  console.log(chunkLength);
+
   return (
     <Section
       size={'md'}
