@@ -47,7 +47,6 @@ export const AllTransactionsCarousel = ({ ...rest }) => {
   }, [isVisible, router]);
 
   const transactionsFiltered = filterTransactions(rest, transactions);
-  console.log(button);
   const Carousel = ({ transactions }) => {
     if (!transactions || transactions?.length === 0) return null;
     return (
