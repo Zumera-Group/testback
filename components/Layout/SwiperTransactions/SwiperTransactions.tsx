@@ -41,7 +41,6 @@ export const SwiperTransactions = ({
     spaceBetween: 0,
     slidesPerView: 1.2,
     loop: true,
-    centeredSlides: true,
     breakpoints: {
       [breakpoint_SM]: {
         slidesPerView: 2,

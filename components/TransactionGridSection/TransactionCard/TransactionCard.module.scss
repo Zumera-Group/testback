@@ -80,7 +80,8 @@
   align-items: center;
   text-align: center;
   padding: $gutter * 0.5;
-  aspect-ratio: 16 / 9;
+  flex: 1;
+  aspect-ratio: 16/9;
 
   @each $key, $value in $breakpoints {
     @if ($key == 'md') {
