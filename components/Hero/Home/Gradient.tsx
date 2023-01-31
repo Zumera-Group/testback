@@ -9,7 +9,6 @@ import styles from './Home.module.scss';
 
 export const Gradient = ({ parent }) => {
   const [heroIsInteractive, setHeroIsInteractive] = useState(false);
-  const [isPortrait, setIsPortrait] = useState(null);
   const [mousePosition, setMousePosition] = useState({x: 100, y: 0});
   
   // Gradient styles
@@ -56,27 +55,22 @@ export const Gradient = ({ parent }) => {
   useEffect(() => {
     if (!parent.current) return;
     const parentEl = parent.current;
-    
-    // Determine the screen orientation
-    // Needed for passing in the boolean to getTiltPosition
-    const screenOrientation = window.matchMedia('(orientation: portrait)');
-    setIsPortrait(screenOrientation.matches);
-    const handlePortrait = (event) => setIsPortrait(event.matches);
-    screenOrientation.addEventListener('change', handlePortrait);
 
     // Mouse / tilt controls
     const handleMouseMove = (event) => setMousePosition(getCursorPosition(event, parentEl));
-    // const handleOrientation = (event) => setMousePosition(getTiltPosition(event, isPortrait));
-    const handleOrientation = (event) => setMousePosition(getTiltPosition(event, true));
+    const handleOrientation = (event) => {
+      const orientation = event.currentTarget?.screen?.orientation?.type;
+      setMousePosition(getTiltPosition(event, orientation.includes('portrait')));
+    };
+
     window.addEventListener('mousemove', handleMouseMove, true);
     window.addEventListener('deviceorientation', handleOrientation, true);
 
     return () => {
-      screenOrientation.removeEventListener('change', handlePortrait);
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('deviceorientation', handleOrientation);
     };
-  }, [parent, isPortrait]);
+  }, [parent]);
 
   return (
     <motion.div
