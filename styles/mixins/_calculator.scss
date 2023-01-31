@@ -22,3 +22,18 @@
     background-color: $dark;
   }
 }
+
+
+@mixin calculator-action-btns-wrapper {
+  margin-top: $gutter * 2;
+  min-height: 100px;
+  @include breakpoint-up(md) {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0 $gutter * 0.5;
+  }
+  & > * {
+    margin: $gutter * 0.5 0;
+  }
+}
