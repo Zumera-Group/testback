@@ -91,10 +91,12 @@ export const SectorTransactions = ({ transactions, sector, content }) => {
                   {content?.linkText}
                 </Button>
               ) : null}
-              <SwiperNavigationButtons
-                prev={swiperPrevRef}
-                next={swiperNextRef}
-              />
+              <div className={styles.swiperButtons}>
+                <SwiperNavigationButtons
+                  prev={swiperPrevRef}
+                  next={swiperNextRef}
+                />
+              </div>
             </div>
           </GridColumn>
         </Grid>
