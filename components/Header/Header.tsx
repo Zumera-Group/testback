@@ -133,16 +133,18 @@ export const Header = ({
         </div>
         {!hideHeader && !hideMenu && <Menu navigation={headerMenu} />}
 
-        {!hideBurger && !hideMenu && (
+        {!hideBurger && (
           <div className={styles.actionsWrapper}>
             <LanguageSwitcher
               otherLangSlug={otherLangSlug}
               classes={styles.languageSelector}
             />
-            <Hamburger
-              callBack={() => setBigMenuOpen(true)}
-              bigMenuOpen={bigMenuOpen}
-            />
+            {!hideMenu ? (
+              <Hamburger
+                callBack={() => setBigMenuOpen(true)}
+                bigMenuOpen={bigMenuOpen}
+              />
+            ) : null}
           </div>
         )}
 
