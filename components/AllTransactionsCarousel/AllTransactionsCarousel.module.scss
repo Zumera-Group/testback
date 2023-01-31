@@ -16,7 +16,7 @@
 }
 
 .navigationColumn {
-  display: none;
+  display: flex;
   justify-content: flex-start;
   margin-top: $gutter * 0.5;
   margin-bottom: 0;
@@ -26,13 +26,20 @@
     justify-content: flex-end;
     margin-bottom: $paragraphs-margin-bottom;
   }
-  @include breakpoint-up(sm) {
-    display: flex;
+  @include breakpoint-down(sm) {
+    justify-content: center;
+  }
+}
+
+.swiperButtons {
+  display: flex;
+  margin-left: $gutter * 2;
+  @include breakpoint-down(sm) {
+    display: none;
   }
 }
 
 .button {
-  margin-right: auto;
   @include breakpoint-up(md) {
     margin-left: 41%;
   }

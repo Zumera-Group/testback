@@ -47,7 +47,7 @@ export const AllTransactionsCarousel = ({ ...rest }) => {
   }, [isVisible, router]);
 
   const transactionsFiltered = filterTransactions(rest, transactions);
-
+  console.log(button);
   const Carousel = ({ transactions }) => {
     if (!transactions || transactions?.length === 0) return null;
     return (
@@ -108,10 +108,12 @@ export const AllTransactionsCarousel = ({ ...rest }) => {
                   {button.title}
                 </Button>
               ) : null}
-              <SwiperNavigationButtons
-                prev={swiperPrevRef}
-                next={swiperNextRef}
-              />
+              <div className={styles.swiperButtons}>
+                <SwiperNavigationButtons
+                  prev={swiperPrevRef}
+                  next={swiperNextRef}
+                />
+              </div>
             </GridColumn>
           )}
         </Container>
