@@ -24,34 +24,39 @@
   font-size: $h1-font-size;
   font-weight: $font-weight-light;
   width: 100%;
+  letter-spacing: 1 !important;
   padding-left: $input-padding-x * 0.75;
   padding-right: $input-padding-x * 0.75;
-  &.noSign {
+
+  &__noSign {
     padding-left: 0;
   }
-}
 
-.shortBox {
-  @include breakpoint-up(md) {
-    max-width: 3.75ch;
-    padding-right: 0;
-    padding-left: 0;
+  &__shortBox {
+    --input-width: 3.75ch;
+    border-bottom: $input-border-width solid $quaternary;
+    width: 100%;
+    max-width: 100%;
+    @include breakpoint-up(md) {
+      min-width: var(--input-width);
+      padding-right: 0;
+      padding-left: 0;
+    }
   }
 }
 
 .fieldWrapper {
   display: flex;
   align-items: flex-end;
+  font-size: $h1-font-size;
   justify-content: space-between;
   margin-bottom: $gutter * 1.5;
+  width: 100%;
   max-width: 100%;
 
-  @include breakpoint-up(md) {
-    max-width: max-content;
-  }
-  
-  &__shortBox {
-    border-bottom: $border-width solid $quaternary;
+  & > div {
+    display: block;
+    width: 100%;
   }
 }
 

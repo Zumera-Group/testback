@@ -1,6 +1,6 @@
+import React, { useState, useRef, useEffect } from 'react';
 import { useAnswers } from 'lib/shared-domain/questionnaire/application/useAnswers';
 import { useNumberFormat } from 'lib/shared-domain/questionnaire/application/useNumberFormat';
-import React, { useState } from 'react';
 import { Question } from '../../../domain/index';
 import { Input } from 'components/Form';
 import styles from './NumberInput.module.scss';
@@ -30,6 +30,7 @@ export const NumberInput: React.FC<{
   const isMobile = useMediaQuery(`(max-width: ${SCREEN_SIZE_MD})`);
   const [inputLength, setInputLength] = useState(0);
   const isYear = valueType === 'year';
+  const fieldWrapperRef = useRef(null);
 
   const formatToSalesforce = (v: number) => {
     const today = new Date();
@@ -66,6 +67,20 @@ export const NumberInput: React.FC<{
     valueType === 'year' ||
     valueType === 'percent';
 
+  useEffect(() => {
+    if (!fieldWrapperRef.current) return;
+    if (!shortBox) return;
+    const childInput = fieldWrapperRef.current.querySelector('input');
+    const resizeInput = () => {
+      if (childInput.value.length > 4) {
+        childInput.style.width = `${childInput.value.length * 0.9375}ch`;
+      } else {
+        childInput.style.width = 'var(--input-width)';
+      }
+    }
+    if (childInput) resizeInput();
+  }, [fieldWrapperRef, question, inputLength, shortBox])
+
   return (
     <div className={styles.numberInputWrapper}>
       <QuestionAnimation>
@@ -77,12 +92,7 @@ export const NumberInput: React.FC<{
           description={question.description}
         />
         {label && <p className={styles.fieldLabel}>{label}</p>}
-        <div
-          className={[
-            styles.fieldWrapper,
-            shortBox ? styles.fieldWrapper__shortBox : '',
-          ].join(' ')}
-        >
+        <div className={styles.fieldWrapper} ref={fieldWrapperRef}>
           {sign && sign !== '%' && <span className={styles.sign}> {sign}</span>}
           <Input
             type="number"
@@ -92,8 +102,8 @@ export const NumberInput: React.FC<{
             autoFocus
             classes={[
               styles.numberInput,
-              shortBox ? styles.shortBox : '',
-              !sign || sign === '%' ? styles.noSign : '',
+              shortBox ? styles.numberInput__shortBox : '',
+              !sign || sign === '%' ? styles.numberInput__noSign : '',
             ].join(' ')}
             value={getUnformattedAnswer() || ''}
             onChange={(e) => {
