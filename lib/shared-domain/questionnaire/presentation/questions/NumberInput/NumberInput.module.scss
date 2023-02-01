@@ -16,6 +16,27 @@
 
 }
 
+.fieldWrapper {
+  display: flex;
+  align-items: flex-end;
+  font-size: $h1-font-size;
+  // justify-content: space-between;
+  justify-content: flex-start;
+  margin-bottom: $gutter * 1.5;
+  width: 100%;
+  max-width: 100%;
+
+  & > div {
+    display: block;
+    max-width: calc(100% - 0.75em);
+  }
+}
+
+.fieldLabel {
+  color: $white;
+  margin-bottom: $label-margin-bottom;
+}
+
 .numberInput {
   padding-top: 0;
   padding-bottom: 0;
@@ -23,7 +44,8 @@
   border-radius: 0;
   font-size: $h1-font-size;
   font-weight: $font-weight-light;
-  width: 100%;
+  // width: 100%;
+  max-width: 100%;
   letter-spacing: 1 !important;
   padding-left: $input-padding-x * 0.75;
   padding-right: $input-padding-x * 0.75;
@@ -35,35 +57,13 @@
   &__shortBox {
     --input-width: 3.75ch;
     border-bottom: $input-border-width solid $quaternary;
-    width: 100%;
-    max-width: 100%;
     @include breakpoint-up(md) {
       min-width: var(--input-width);
       padding-right: 0;
       padding-left: 0;
     }
   }
-}
-
-.fieldWrapper {
-  display: flex;
-  align-items: flex-end;
-  font-size: $h1-font-size;
-  justify-content: space-between;
-  margin-bottom: $gutter * 1.5;
-  width: 100%;
-  max-width: 100%;
-
-  & > div {
-    display: block;
-    width: 100%;
-  }
-}
-
-.fieldLabel {
-  color: $white;
-  margin-bottom: $label-margin-bottom;
-}
+} 
 
 .sign {
   border-radius: 0;
@@ -72,6 +72,7 @@
   color: $white;
   padding: 0;
   line-height: $input-line-height;
+  flex-grow: 1;
 }
 
 .buttonOuter {
