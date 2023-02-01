@@ -112,9 +112,9 @@ export const Cards = ({
               const smallCallCards =
                 ['NewsBig', 'TransactionBig'].indexOf(item.type.name) > -1;
               const isEven = index % 2 === 0;
-              const wideCallException = item.type.name === 'Employee' ? 6 : 5;
+              const wideCallException = item.type.name === 'Employee' ? 6 : 4;
               const wideColl = i === 0 && index === 0 ? wideCallException : 8;
-              const smallCallException = index === 1 && smallCallCards ? 7 : 5;
+              const smallCallException = index === 1 && smallCallCards ? 8 : 5;
               const smallColl = i === 0 ? smallCallException : 4;
               return (
                 <GridColumn
