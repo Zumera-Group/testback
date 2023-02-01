@@ -544,7 +544,7 @@ export class DividerImageModule extends BaseModule {
   };
 
   isInContainer: boolean;
-
+  isNoParalax: boolean;
   getImageUrl(): string {
     return this.image.asset?.url;
   }
@@ -553,6 +553,7 @@ export class DividerImageModule extends BaseModule {
     super();
     this.image = fields.image;
     this.isInContainer = fields.isInContainer;
+    this.isNoParalax = fields.isNoParalax;
   }
 }
 
