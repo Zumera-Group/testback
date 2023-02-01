@@ -88,10 +88,12 @@ export const TransactionsSelected: React.FC<{
                   {content?.linkText}
                 </Button>
               ) : null}
-              <SwiperNavigationButtons
-                prev={swiperPrevRef}
-                next={swiperNextRef}
-              />
+              <div className={styles.swiperButtons}>
+                <SwiperNavigationButtons
+                  prev={swiperPrevRef}
+                  next={swiperNextRef}
+                />
+              </div>
             </div>
           </GridColumn>
         </Grid>

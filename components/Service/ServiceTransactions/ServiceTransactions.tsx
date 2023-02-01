@@ -78,10 +78,12 @@ export const ServiceTransactions = ({ transactions, service, content }) => {
                   {service?.viewAllLinkText}
                 </Button>
               ) : null}
-              <SwiperNavigationButtons
-                prev={swiperPrevRef}
-                next={swiperNextRef}
-              />
+              <div className={styles.swiperButtons}>
+                <SwiperNavigationButtons
+                  prev={swiperPrevRef}
+                  next={swiperNextRef}
+                />
+              </div>
             </div>
           </GridColumn>
         </Grid>

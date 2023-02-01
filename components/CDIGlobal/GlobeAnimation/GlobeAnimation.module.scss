@@ -1,7 +1,8 @@
 .globe {
   --fill-primary: #{$primary};
   --fill-primary-alt: #{$primary-alt};
-  --fill-dots: #{$white};
+  // --fill-dots: #{$white};
+  --fill-dots: #{$accent};
   --glow-color: #{rgba($white, 0.8)};
 
   width: 120%;

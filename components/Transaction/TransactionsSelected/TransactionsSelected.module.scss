@@ -1,5 +1,9 @@
 .carousel {
   margin-top: $gutter * 2;
+  @include breakpoint-down(md) {
+    width: calc(100% + #{$container-padding-x * 2});
+    margin-left: -$container-padding-x;
+  }
 }
 
 .slide {
@@ -7,28 +11,33 @@
   align-self: stretch;
   & > * {
     height: 100%;
-    padding: $gutter;
+    padding: $gutter / 2;
   }
 }
 
 .navigationBtns {
   display: flex;
-  justify-content: center;
   align-items: center;
-  margin-top: $gutter;
+  justify-content: center;
+  margin-top: $gutter * 0.5;
   margin-bottom: 0;
-  @include breakpoint-up(md) {
-    justify-content: center;
-    margin-top: $gutter * 2.5;
+  padding-left: $gutter;
+  padding-right: $gutter;
+  min-height: 50px;
+  @include breakpoint-up(sm) {
     margin-bottom: $paragraphs-margin-bottom;
-    > div {
-      margin-left: auto;
-    }
+  }
+  @include breakpoint-down(sm) {
+    justify-content: center;
   }
 }
-.button {
-  margin-right: auto;
-  @include breakpoint-up(md) {
-    position: absolute;
+
+.swiperButtons {
+  position: absolute;
+  right: 0;
+  display: flex;
+  margin-left: $gutter * 2;
+  @include breakpoint-down(sm) {
+    display: none;
   }
 }

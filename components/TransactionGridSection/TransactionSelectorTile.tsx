@@ -19,6 +19,19 @@ export const TransactionSelectorTile: React.FC<IProps> = ({
   const sectorDetail = useGetSectorDetail(locale, sector.slug.current);
   const hasIcon =
     sector._id !== '0' ? sectorDetail.graphLight?.iconImage?.asset?.url : false;
+
+  const name = sector.name
+    .split(' ')
+    .map((word) => {
+      if (word.length > 15) {
+        const wordAsArray = word.split('');
+        wordAsArray.splice(Math.round(word.length / 2), 0, '-');
+        return wordAsArray.join('');
+      }
+      return word;
+    })
+    .join(' ');
+
   return (
     <div
       className={`${styles.selectorTile} ${
@@ -37,7 +50,14 @@ export const TransactionSelectorTile: React.FC<IProps> = ({
           />
         </div>
       ) : null}
-      <div className={[styles.tileTitle, !hasIcon ? styles.tileTitle__noIcon : '' ].join(' ')}>{sector.name}</div>
+      <div
+        className={[
+          styles.tileTitle,
+          !hasIcon ? styles.tileTitle__noIcon : '',
+        ].join(' ')}
+      >
+        {name}
+      </div>
     </div>
   );
 };

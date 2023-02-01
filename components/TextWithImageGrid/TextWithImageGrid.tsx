@@ -19,7 +19,7 @@ export const TextWithImageGrid: React.FC<{
   ].join(' ');
 
   return (
-    <Section size={'lg'} bg={'light'} color={'white'}>
+    <Section size={'lg'} bg={'light'} color={'white'} classes={styles.section}>
       <Container classes={sectionStyles}>
         <Grid
           fullWidth={true}

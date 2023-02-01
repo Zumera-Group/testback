@@ -3,6 +3,7 @@ import { Container, Grid, GridColumn, Section } from 'components/Layout';
 import baseStyles from '../Hero.module.scss';
 import { SectionHeading } from 'components/SectionHeading';
 import styles from './AnchorHero.module.scss';
+import { useRouter } from 'next/router';
 
 export const AnchorHero: React.FC<any> = ({
   allPageContent,
@@ -10,6 +11,8 @@ export const AnchorHero: React.FC<any> = ({
   title2,
   description,
 }) => {
+  const router = useRouter();
+
   const pageSections = allPageContent.filter(
     (item) =>
       item.specificContentModule?.constructor &&
@@ -42,7 +45,7 @@ export const AnchorHero: React.FC<any> = ({
             <SectionHeading
               title={title}
               description={description}
-              headingType={'h2'}
+              headingType={router.locale === 'de' ? 'h3' : 'h2'}
               align={'left'}
             />
           </GridColumn>

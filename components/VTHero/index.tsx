@@ -6,6 +6,7 @@ import styles from './VTHero.module.scss';
 import { VTHeroModule } from 'lib/shared-domain/page/domain/contentModule';
 import { useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 export const VTHero: React.FC<{
   specificContentModule: VTHeroModule;
@@ -13,7 +14,17 @@ export const VTHero: React.FC<{
   const [selectedPurpose, setSelectedPurpose] = useState('');
   const { title, title2, description, buttons, purposesTitle, purposes } =
     specificContentModule;
-  const questionnaire = `/questionnaires/${buttons[0]?.questionnaire?.questionnaireSlug?.current}`;
+  // const questionnaire = `/questionnaires/${buttons[0]?.questionnaire?.questionnaireSlug?.current}`;
+
+  const router = useRouter();
+  const page = router.locale === 'en' ? 'questionnaires' : 'fragenkatalog';
+  const questionnaire =
+    '/' +
+    router.locale +
+    '/' +
+    page +
+    '/' +
+    buttons[0]?.questionnaire?.questionnaireSlug?.current;
 
   return (
     <Section
@@ -37,7 +48,13 @@ export const VTHero: React.FC<{
             <SanityBlockContent text={description} />
             <div className={styles.btnWrapper}>
               {buttons.map((button) => {
-                const qLink = `/questionnaires/${button?.questionnaire?.questionnaireSlug?.current}`;
+                const qLink =
+                  '/' +
+                  router.locale +
+                  '/' +
+                  page +
+                  '/' +
+                  button?.questionnaire?.questionnaireSlug?.current;
                 if (qLink) {
                   return (
                     <Button
@@ -64,7 +81,7 @@ export const VTHero: React.FC<{
               <div className={styles.purposes}>
                 {purposes.map((purpose) => (
                   <Link passHref href={questionnaire} key={purpose}>
-                    <div
+                    <a
                       key={purpose}
                       className={[
                         styles.purpose,
@@ -73,7 +90,7 @@ export const VTHero: React.FC<{
                       onClick={() => setSelectedPurpose(purpose)}
                     >
                       {purpose}
-                    </div>
+                    </a>
                   </Link>
                 ))}
               </div>

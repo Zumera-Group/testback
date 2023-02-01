@@ -42,6 +42,13 @@ export const TransactionShowcase: React.FC<Props> = ({ ...rest }) => {
           {transaction && (
             <GridColumn sm={12} md={6} lg={6}>
               <TransactionCard transaction={transaction} />
+              {link?.title && (
+                <div className={styles.btnWrapperMobile}>
+                  <Button variant={'secondary'} link={link.page}>
+                    {link?.title}
+                  </Button>
+                </div>
+              )}
             </GridColumn>
           )}
         </Grid>

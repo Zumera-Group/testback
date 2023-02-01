@@ -1,4 +1,4 @@
-import { forwardRef } from "react";
+import { forwardRef } from 'react';
 
 import { Icon } from 'components/Icon';
 
@@ -7,10 +7,12 @@ import styles from './SwiperNavigationButtons.module.scss';
 interface ButtonProps {
   type: 'prev' | 'next';
   ref: any;
-};
+}
 
-const SwiperNavigationButtonComponent: React.ForwardRefRenderFunction<HTMLButtonElement, ButtonProps> = ({ type }, ref) => {
-  
+const SwiperNavigationButtonComponent: React.ForwardRefRenderFunction<
+  HTMLButtonElement,
+  ButtonProps
+> = ({ type }, ref) => {
   const buttonType = () => {
     let title: string, icon: string;
     if (type === 'prev') {
@@ -25,7 +27,7 @@ const SwiperNavigationButtonComponent: React.ForwardRefRenderFunction<HTMLButton
       title: title,
       icon: icon,
     };
-  }
+  };
   return (
     <button
       ref={ref}
@@ -34,10 +36,7 @@ const SwiperNavigationButtonComponent: React.ForwardRefRenderFunction<HTMLButton
       title={buttonType().title}
       aria-label={buttonType().title}
     >
-      <Icon
-        iconName={buttonType().icon}
-        width={36}
-        height={36} />
+      <Icon iconName={buttonType().icon} width={36} height={36} />
     </button>
   );
 };
@@ -51,6 +50,6 @@ export const SwiperNavigationButtons = ({ prev, next }) => {
       <SwiperNavigationButton type={'next'} ref={next} />
     </div>
   );
-}
+};
 
 export default SwiperNavigationButtons;

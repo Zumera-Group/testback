@@ -56,7 +56,10 @@ const PageLayout: React.FC<{
                 <React.Fragment key={c._key}>
                   {getContentForContentModule(
                     c,
-                    siteSettings,
+                    {
+                      ...siteSettings,
+                      hideFooterSitemap: page.hideFooterSitemap,
+                    },
                     sharedContent,
                     contentModules,
                   )}

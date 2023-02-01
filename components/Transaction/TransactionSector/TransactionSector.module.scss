@@ -8,6 +8,7 @@
   }
 }
 .imageCol {
+  filter: brightness(0) invert(1);
   @include breakpoint-down(md) {
     aspect-ratio: 1/1;
     margin-top: 2.5rem;

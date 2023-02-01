@@ -13,6 +13,13 @@
     opacity: 1;
     transition: opacity $timing-sm $timing-sm / 2 $ease-in;
   }
+  &:last-child {
+    &:after {
+      @include breakpoint-down(md) {
+        border-top: none;
+      }
+    }
+  }
   &__open {
     &:after {
       opacity: 0;
