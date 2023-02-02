@@ -1,20 +1,15 @@
 import React from 'react';
 
-import { P } from 'components/Typography/P';
-
 import { getTranslateByScope } from 'translation/i18n';
-import { fontSizes } from 'styles/foundations/fontStyles';
 
 const t = getTranslateByScope('question');
+
+import styles from './RequiredQuestionInfo.module.scss';
 
 export const RequiredQuestionInfo: React.FC<{ isRequired: boolean }> = ({
   isRequired,
 }) => {
   if (!isRequired) return null;
 
-  return (
-    <P fontSize={fontSizes.small} textAlign="left" mb={'2rem'} color="white">
-      {t('required')}
-    </P>
-  );
+  return <p className={styles.requiredQuestionInfo}>{t('required')}</p>;
 };
