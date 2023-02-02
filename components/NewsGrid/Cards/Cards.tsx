@@ -109,7 +109,6 @@ export const Cards = ({
             alignItems={i === 0 ? 'start' : 'stretch'}
           >
             {elements.map((item, index) => {
-              console.log(item.props?.article?._type);
               const smallCallCards =
                 ['newsArticle', 'transaction'].indexOf(
                   item.props?.article?._type,
