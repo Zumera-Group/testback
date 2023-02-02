@@ -37,7 +37,15 @@ export interface Page {
   }[];
 }
 
+export interface IAnnouncementTopBanner {
+  text: string;
+  buttonText: string;
+  buttonLink: string;
+  isEnabled: boolean;
+}
+
 export interface SiteSettings {
+  announcementTopBanner: IAnnouncementTopBanner;
   footerCopyright: string;
   footerPrivacyPolice: {
     name: string;

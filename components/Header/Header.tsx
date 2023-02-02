@@ -17,6 +17,7 @@ import {
 
 import styles from './Header.module.scss';
 import { LogoExtended } from 'components/Icons/LogoExtended';
+import Link from 'next/link';
 
 export const Header = ({
   siteSettings,
@@ -107,70 +108,87 @@ export const Header = ({
   }, [bigMenuOpen]);
 
   return (
-    <header
-      id="header"
-      className={[
-        styles.header,
-        isLightPage() ? styles.header__light : '',
-        isScrolled ? styles.header__scrolled : '',
-        bigMenuOpen ? styles.header__open : '',
-        indicator && styles.hideBorder,
-      ].join(' ')}
-    >
-      <Container classes={[styles.container].join('')}>
-        <div className={styles.logoWrapper}>
-          {!staticExtended ? (
-            <Logo
-              slug={homeSlug}
-              isScrolled={isScrolled}
-              isLightPage={isLightPage()}
-              title={siteName}
-              isAnimated={true}
-            />
-          ) : (
-            <LogoExtended slug={homeSlug} title={siteName} />
-          )}
+    <>
+      {siteSettings.announcementTopBanner.isEnabled && (
+        <div className={styles.announcementTopBanner}>
+          <p>
+            {siteSettings.announcementTopBanner.text}{' '}
+            <Link
+              href={siteSettings.announcementTopBanner.buttonLink}
+              passHref={true}
+            >
+              <a>{siteSettings.announcementTopBanner.buttonText}</a>
+            </Link>
+          </p>
         </div>
-        {!hideHeader && !hideMenu && <Menu navigation={headerMenu} />}
+      )}
 
-        {!hideBurger && (
-          <div className={styles.actionsWrapper}>
-            <LanguageSwitcher
-              otherLangSlug={otherLangSlug}
-              classes={styles.languageSelector}
-            />
-            {!hideMenu ? (
-              <Hamburger
-                callBack={() => setBigMenuOpen(true)}
-                bigMenuOpen={bigMenuOpen}
+      <header
+        id="header"
+        className={[
+          styles.header,
+          isLightPage() ? styles.header__light : '',
+          isScrolled ? styles.header__scrolled : '',
+          bigMenuOpen ? styles.header__open : '',
+          indicator && styles.hideBorder,
+          siteSettings.announcementTopBanner.isEnabled && styles.withBanner,
+        ].join(' ')}
+      >
+        <Container classes={[styles.container].join('')}>
+          <div className={styles.logoWrapper}>
+            {!staticExtended ? (
+              <Logo
+                slug={homeSlug}
+                isScrolled={isScrolled}
+                isLightPage={isLightPage()}
+                title={siteName}
+                isAnimated={true}
               />
-            ) : null}
+            ) : (
+              <LogoExtended slug={homeSlug} title={siteName} />
+            )}
           </div>
-        )}
+          {!hideHeader && !hideMenu && <Menu navigation={headerMenu} />}
 
-        {indicator && (
-          <div className={styles.questionIndicator}>
-            Question{' '}
-            {indicator?.current > indicator?.total
-              ? indicator?.current - 1
-              : indicator?.current}{' '}
-            / {indicator?.total}
-          </div>
-        )}
-      </Container>
-      <AnimatePresence exitBeforeEnter>
-        {bigMenuOpen && (
-          <BigMenu
-            siteSettings={siteSettings}
-            services={services}
-            sectors={sectors}
-            logo={<Logo slug={homeSlug} title={siteName} isAnimated={true} />}
-            closeBigMenu={() => setBigMenuOpen(false)}
-            otherLangSlug={otherLangSlug}
-          />
-        )}
-      </AnimatePresence>
-    </header>
+          {!hideBurger && (
+            <div className={styles.actionsWrapper}>
+              <LanguageSwitcher
+                otherLangSlug={otherLangSlug}
+                classes={styles.languageSelector}
+              />
+              {!hideMenu ? (
+                <Hamburger
+                  callBack={() => setBigMenuOpen(true)}
+                  bigMenuOpen={bigMenuOpen}
+                />
+              ) : null}
+            </div>
+          )}
+
+          {indicator && (
+            <div className={styles.questionIndicator}>
+              Question{' '}
+              {indicator?.current > indicator?.total
+                ? indicator?.current - 1
+                : indicator?.current}{' '}
+              / {indicator?.total}
+            </div>
+          )}
+        </Container>
+        <AnimatePresence exitBeforeEnter>
+          {bigMenuOpen && (
+            <BigMenu
+              siteSettings={siteSettings}
+              services={services}
+              sectors={sectors}
+              logo={<Logo slug={homeSlug} title={siteName} isAnimated={true} />}
+              closeBigMenu={() => setBigMenuOpen(false)}
+              otherLangSlug={otherLangSlug}
+            />
+          )}
+        </AnimatePresence>
+      </header>
+    </>
   );
 };
 

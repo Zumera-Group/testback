@@ -1,3 +1,22 @@
+.announcementTopBanner {
+  background: $tertiary;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 2;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: $white;
+  p {
+    margin-bottom: 0;
+  }
+  a {
+    text-decoration: underline !important;
+  }
+}
 .header {
   position: fixed;
   // position: sticky;
@@ -14,6 +33,10 @@
   svg {
     fill: $white;
     display: block;
+  }
+
+  &.withBanner {
+    top: 48px;
   }
 
   &:not(&__light):not(&__scrolled) {
