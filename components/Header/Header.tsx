@@ -109,7 +109,7 @@ export const Header = ({
 
   return (
     <>
-      {siteSettings.announcementTopBanner.isEnabled && (
+      {siteSettings?.announcementTopBanner?.isEnabled && (
         <div className={styles.announcementTopBanner}>
           <p>
             {siteSettings.announcementTopBanner.text}{' '}
@@ -131,7 +131,7 @@ export const Header = ({
           isScrolled ? styles.header__scrolled : '',
           bigMenuOpen ? styles.header__open : '',
           indicator && styles.hideBorder,
-          siteSettings.announcementTopBanner.isEnabled && styles.withBanner,
+          siteSettings?.announcementTopBanner?.isEnabled && styles.withBanner,
         ].join(' ')}
       >
         <Container classes={[styles.container].join('')}>
