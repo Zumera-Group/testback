@@ -123,7 +123,6 @@ export const QuestionComponent: React.FC<{
   };
 
   const onPreviousQuestion = () => {
-    console.log('clicked');
     if (isOnResultScreen) {
       setIsOnResultScreen(false);
       return;
