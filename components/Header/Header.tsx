@@ -28,6 +28,7 @@ export const Header = ({
   hideBurger,
   staticExtended,
   indicator,
+  hideMenu,
 }) => {
   const [bigMenuOpen, setBigMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -130,7 +131,7 @@ export const Header = ({
             <LogoExtended slug={homeSlug} title={siteName} />
           )}
         </div>
-        {!hideHeader && <Menu navigation={headerMenu} />}
+        {!hideHeader && !hideMenu && <Menu navigation={headerMenu} />}
 
         {!hideBurger && (
           <div className={styles.actionsWrapper}>
@@ -138,10 +139,12 @@ export const Header = ({
               otherLangSlug={otherLangSlug}
               classes={styles.languageSelector}
             />
-            <Hamburger
-              callBack={() => setBigMenuOpen(true)}
-              bigMenuOpen={bigMenuOpen}
-            />
+            {!hideMenu ? (
+              <Hamburger
+                callBack={() => setBigMenuOpen(true)}
+                bigMenuOpen={bigMenuOpen}
+              />
+            ) : null}
           </div>
         )}
 

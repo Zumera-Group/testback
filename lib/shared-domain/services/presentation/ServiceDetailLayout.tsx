@@ -81,6 +81,7 @@ const displayServiceDetailSectionOrContentModule = ({
               siteSettings={siteSettings}
               section={module}
               customHref={'/sectors'}
+              displayMaxItems={4}
             />
           </Box>
         ),

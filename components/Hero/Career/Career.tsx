@@ -5,13 +5,14 @@ import { SanityBlockContent } from 'components/SanityBlockContent';
 
 import baseStyles from '../Hero.module.scss';
 import styles from './Career.module.scss';
-import { useEffect, useState } from 'react';
 
 export const Career: HeroComponent = ({ ...rest }) => {
   const { title, title2, description, button } = rest;
   const closeCalendly = () => {
     const calendly = document.querySelector('.calendly-overlay');
-    calendly.removeEventListener('click', closeCalendly);
+    if (calendly) {
+      calendly.removeEventListener('click', closeCalendly);
+    }
     window.Calendly.closePopupWidget();
   };
 

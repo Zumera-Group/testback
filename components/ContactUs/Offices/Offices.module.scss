@@ -57,3 +57,10 @@
 .btnWrapper {
   margin-top: $btn-wrapper-margin-top * .5;
 }
+
+.building {
+  margin: $gutter * 0.5 0;
+  display: block;
+  width: 95%;
+  max-width: 36rem;
+}

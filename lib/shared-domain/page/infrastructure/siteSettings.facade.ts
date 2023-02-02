@@ -144,7 +144,12 @@ export const querySiteSettings = (
   contactSectionContent {
     ...,
     offices[]->{
-      ...
+      ...,
+      image{
+        asset->{
+          url,
+        }
+      }
     }
   }
 }`;

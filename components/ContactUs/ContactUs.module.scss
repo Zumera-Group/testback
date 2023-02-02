@@ -11,10 +11,3 @@
     @include divider(top, $white);
   }
 }
-
-.building {
-  margin: $gutter * 0.5 0;
-  display: block;
-  width: 95%;
-  max-width: 36rem;
-}

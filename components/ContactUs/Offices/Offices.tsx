@@ -72,6 +72,19 @@ export const Offices = ({ offices, appointmentLinkText }) => {
                 </Button>
               </div>
             )}
+            {selectedOffice?.image?.asset?.url ? (
+              <img
+                src={selectedOffice?.image?.asset?.url}
+                alt={'Zumera Office'}
+                className={styles.building}
+              />
+            ) : (
+              <img
+                src={'/contentModules/contactUsSection/footer_cta-building.svg'}
+                alt={'Zumera Office'}
+                className={styles.building}
+              />
+            )}
           </motion.div>
         )}
       </AnimatePresence>

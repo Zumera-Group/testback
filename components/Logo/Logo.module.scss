@@ -3,12 +3,24 @@
   display: inline-flex;
   justify-content: flex-start;
   align-items: center;
-  width: 112px;
+  width: 100px;
+  overflow: hidden;
   @include breakpoint-up(lg) {
     width: 135px;
   }
   div {
     width: 100%;
+  }
+  svg {
+    &:last-of-type {
+      width: 112px;
+      margin-left: auto;
+      margin-top: 8px;
+      @include breakpoint-down(md) {
+        width: 82px;
+        margin-top: 6px;
+      }
+    }
   }
 }
 

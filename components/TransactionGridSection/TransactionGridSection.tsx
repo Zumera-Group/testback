@@ -21,6 +21,7 @@ import { Locale } from 'lib/locale';
 import { Button } from 'components/Button';
 
 interface IProps {
+  buttonText: string;
   dropdownsTitle: string;
   sectorsDropdown: ISectorsDropdown[];
 }
@@ -35,6 +36,7 @@ export const TransactionGridSection: React.FC<IProps> = (props) => {
   const [loading, setLoading] = useState(true);
   const [activeChunk, setActiveChunk] = useState(1);
   const [displayTransaction, setDisplayTransaction] = useState([]);
+  const [chunkLength, setChunkLength] = useState(0);
 
   useEffect(() => {
     const transactionsToDisplay = transactions
@@ -64,6 +66,8 @@ export const TransactionGridSection: React.FC<IProps> = (props) => {
 
         return resultArray;
       }, []);
+
+    setChunkLength(transactionsToDisplay.length);
     setDisplayTransaction(transactionsToDisplay.slice(0, activeChunk).flat());
   }, [transactions, activeChunk, activeSector]);
 
@@ -128,7 +132,7 @@ export const TransactionGridSection: React.FC<IProps> = (props) => {
               maxSlidesToShow={7}
               classes={styles.swiper}
             >
-              <SwiperSlide>
+              <SwiperSlide className={styles.swiperSlide}>
                 <TransactionSelectorTile
                   sector={{ name: 'All', _id: '0', slug: { current: '' } }}
                   activeSector={activeSector}
@@ -136,16 +140,22 @@ export const TransactionGridSection: React.FC<IProps> = (props) => {
                   locale={router.locale as Locale}
                 />
               </SwiperSlide>
-              {sectorsDropdown.map((sector) => (
-                <SwiperSlide key={sector._id}>
-                  <TransactionSelectorTile
-                    sector={sector}
-                    activeSector={activeSector}
-                    clickHandler={sectorClickHandler}
-                    locale={router.locale as Locale}
-                  />
-                </SwiperSlide>
-              ))}
+              {sectorsDropdown
+                .sort((a, b) => {
+                  if (a.name > b.name) return 1;
+                  if (a.name < b.name) return -1;
+                  return 0;
+                })
+                .map((sector) => (
+                  <SwiperSlide key={sector._id} className={styles.swiperSlide}>
+                    <TransactionSelectorTile
+                      sector={sector}
+                      activeSector={activeSector}
+                      clickHandler={sectorClickHandler}
+                      locale={router.locale as Locale}
+                    />
+                  </SwiperSlide>
+                ))}
             </SwiperTransactionsGrid>
           </GridColumn>
         </Grid>
@@ -166,15 +176,17 @@ export const TransactionGridSection: React.FC<IProps> = (props) => {
                 <TransactionCard key={trans._id} transaction={trans} />
               ))}
             </GridColumn>
-            <Button
-              variant={'secondary'}
-              onDark={true}
-              hideIcon={true}
-              callBack={() => setActiveChunk(activeChunk + 1)}
-              classes={styles.loadMore}
-            >
-              Load more +
-            </Button>
+            {activeChunk <= chunkLength - 1 ? (
+              <Button
+                variant={'secondary'}
+                onDark={true}
+                hideIcon={true}
+                callBack={() => setActiveChunk(activeChunk + 1)}
+                classes={styles.loadMore}
+              >
+                {props.buttonText} +
+              </Button>
+            ) : null}
           </Grid>
         ) : (
           <Loader className={styles.loader} />

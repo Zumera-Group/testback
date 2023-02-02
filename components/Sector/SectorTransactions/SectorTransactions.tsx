@@ -30,8 +30,14 @@ export const SectorTransactions = ({ transactions, sector, content }) => {
   );
 
   if (filteredTransactions.length === 0) return null;
+
   return (
-    <Section size={'md'} bg={'light'} color={'primary'}>
+    <Section
+      size={'md'}
+      bg={'light'}
+      color={'primary'}
+      classes={styles.section}
+    >
       <Container>
         <Grid
           fullWidth={true}
@@ -76,19 +82,21 @@ export const SectorTransactions = ({ transactions, sector, content }) => {
                 ))}
             </SwiperTransactions>
             <div className={styles.navigationBtns}>
-              {sector?.transactionsSection?.linkText ? (
+              {content?.linkText ? (
                 <Button
                   variant={'secondary'}
                   link={{ slug: { current: `/transactions` } }}
                   classes={styles.button}
                 >
-                  {sector?.transactionsSection?.linkText}
+                  {content?.linkText}
                 </Button>
               ) : null}
-              <SwiperNavigationButtons
-                prev={swiperPrevRef}
-                next={swiperNextRef}
-              />
+              <div className={styles.swiperButtons}>
+                <SwiperNavigationButtons
+                  prev={swiperPrevRef}
+                  next={swiperNextRef}
+                />
+              </div>
             </div>
           </GridColumn>
         </Grid>

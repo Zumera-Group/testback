@@ -14,7 +14,7 @@ export const TransactionHero = ({ transaction, content }) => {
       bg={'light'}
       color={'primary'}
     >
-      <Container classes={styles.transactionHero}>
+      <Container classes={styles.transactionHeroContainer}>
         <Grid
           fullWidth={true}
           justifyContent={'space-between'}

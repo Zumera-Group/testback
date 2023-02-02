@@ -50,6 +50,7 @@ export const SwiperTransactionsGrid = ({
       },
       [breakpoint_LG]: {
         slidesPerView: maxSlidesToShow ? maxSlidesToShow : 3,
+        threshold: 20,
       },
     },
     navigation: {

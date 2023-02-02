@@ -1,5 +1,16 @@
 .buttonsWrapper {
+  @include breakpoint-down(md) {
+    width: 80%;
+  }
   button {
     margin: 0 24px;
+    @include breakpoint-down(md) {
+      margin-bottom: 2rem;
+      flex: 1;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
   }
 }

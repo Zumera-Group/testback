@@ -16,7 +16,7 @@ export const FourOFour = ({ ...rest }) => {
       <Container classes={styles.container}>
         <h1>
           ERROR 404
-          <span>Page not found</span>
+          <span>{rest.title}</span>
         </h1>
         <div className={styles.btnWrapper}>
           <Button

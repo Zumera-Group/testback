@@ -104,7 +104,6 @@ export const NewsGrid: React.FC<Props> = ({
   if (transactions && shouldHideCDITransactions) {
     transactions = transactions?.filter((t) => !t.hasCDIRelation);
   }
-
   return (
     <Section size={'md'} bg={'light'} color={'primary'} divider={true}>
       <Container>

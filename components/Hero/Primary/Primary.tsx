@@ -24,8 +24,8 @@ export const Primary: HeroComponent = ({ ...rest }) => {
         >
           <GridColumn
             sm={12}
-            md={7}
-            lg={7}
+            md={8}
+            lg={8}
             className={styles.primaryDescription}
           >
             <h1 className={styles.title}>
@@ -42,7 +42,7 @@ export const Primary: HeroComponent = ({ ...rest }) => {
             )}
           </GridColumn>
           {heroImage?.asset?.url ? (
-            <GridColumn sm={12} md={5} lg={5}>
+            <GridColumn sm={12} md={4} lg={4}>
               <img
                 src={heroImage.asset.url}
                 alt={`${title}${title2 ? ` ${title2}` : ''}`}

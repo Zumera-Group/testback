@@ -13,7 +13,7 @@
 .primaryHeroImage {
   position: relative;
   right: 59px;
-  max-width: 130%;
+  max-width: 150%;
   @include breakpoint-down(md) {
     right: 0;
     margin: $gutter * 3 auto 0;

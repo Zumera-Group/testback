@@ -47,6 +47,7 @@ const PageLayout: React.FC<{
           siteSettings={siteSettings}
           otherLangSlug={otherLangSlug}
           hideHeader={page.isHeaderRoutesHidden}
+          hideMenu={page.hideNavMenu}
         />
         <main id="main">
           {contentModules &&
@@ -55,7 +56,10 @@ const PageLayout: React.FC<{
                 <React.Fragment key={c._key}>
                   {getContentForContentModule(
                     c,
-                    siteSettings,
+                    {
+                      ...siteSettings,
+                      hideFooterSitemap: page.hideFooterSitemap,
+                    },
                     sharedContent,
                     contentModules,
                   )}

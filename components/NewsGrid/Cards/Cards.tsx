@@ -109,9 +109,16 @@ export const Cards = ({
             alignItems={i === 0 ? 'start' : 'stretch'}
           >
             {elements.map((item, index) => {
+              const smallCallCards =
+                ['newsArticle', 'transaction'].indexOf(
+                  item.props?.article?._type,
+                ) > -1;
               const isEven = index % 2 === 0;
-              const wideColl = item.type.name === 'Employee' || i === 0 ? 6 : 8;
-              const smallColl = i === 0 ? 6 : 4;
+              const wideCallException =
+                item.props?.article?._type === 'employee' ? 6 : 4;
+              const wideColl = i === 0 && index === 0 ? wideCallException : 8;
+              const smallCallException = index === 1 && smallCallCards ? 8 : 5;
+              const smallColl = i === 0 ? smallCallException : 4;
               return (
                 <GridColumn
                   sm={12}

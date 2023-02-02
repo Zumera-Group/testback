@@ -1,10 +1,6 @@
 .transaction {
   display: block;
   width: 100%;
-  margin-top: $gutter * 3;
-  @include breakpoint-up(md) {
-    margin-top: 0;
-  }
 }
 
 .link,
@@ -15,8 +11,7 @@
 
 .cover {
   position: relative;
-  aspect-ratio: 5 / 2;
-  background-color: $primary;
+  background-color: $secondary;
   color: $white;
 }
 
@@ -73,6 +68,7 @@
 }
 
 .logosCover {
+  position: relative;
   background-color: $white;
   display: flex;
   justify-content: center;
@@ -80,12 +76,31 @@
   text-align: center;
   padding: $gutter * 0.5;
   aspect-ratio: 4/1.5;
+  user-select: none;
+  &:before,
+  &:after {
+    content: '';
+    position: absolute;
+  }
+  &:before {
+    top: -$gutter;
+    left: 0;
+    height: calc(100% + #{$gutter});
+    width: $border-width;
+    @include divider(left, $primary, true);
+  }
+  &:after {
+    top: 0;
+    left: -$gutter;
+    height: $border-width;
+    width: calc(100% + #{$gutter});
+    @include divider(top, $primary, true);
+  }
 }
 
 .transactionLogoFallback {
   font-size: $font-size-tiny;
   font-weight: $font-weight-bold;
-  flex: 1;
   margin: 0;
   line-height: 1;
   padding: $gutter;

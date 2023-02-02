@@ -40,14 +40,15 @@ export const SwiperTransactions = ({
     onSwiper: setSwiper,
     spaceBetween: 0,
     slidesPerView: 1.2,
-    centerContent: true,
-    centeredSlides: true,
+    loop: true,
     breakpoints: {
       [breakpoint_SM]: {
         slidesPerView: 2,
+        centeredSlides: true,
       },
       [breakpoint_LG]: {
         slidesPerView: maxSlidesToShow ? maxSlidesToShow : 3,
+        centeredSlides: false,
       },
     },
     navigation: {
