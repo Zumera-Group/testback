@@ -60,6 +60,12 @@
   margin: 0 !important;
   line-height: 1;
   color: rgba($secondary, 0.5);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  line-clamp: 5;
+  -webkit-box-orient: vertical;
 }
 
 .beam {
