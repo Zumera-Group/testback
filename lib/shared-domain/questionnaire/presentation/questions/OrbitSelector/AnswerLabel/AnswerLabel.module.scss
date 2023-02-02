@@ -1,0 +1,9 @@
+.answerLabel {
+  text-align: center;
+  display: block;
+  margin-top: -1.25em;
+  font-size: $h4-font-size;
+  @include breakpoint-up(md) {
+    font-size: calc(#{$h4-font-size} * 0.8);
+  }
+}

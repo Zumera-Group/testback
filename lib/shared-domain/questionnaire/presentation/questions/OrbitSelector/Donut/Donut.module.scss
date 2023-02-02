@@ -1,0 +1,7 @@
+.donut {
+  --track-color: #{rgba(0,0,0,0.15)};
+  --stop-color-1: #{rgba($white, 0)};
+  --stop-color-2: #{rgba($accent, 1)};
+  display: block;
+  width: 100%;
+}

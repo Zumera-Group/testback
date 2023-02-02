@@ -1,0 +1,20 @@
+@mixin orbit-range-slider-track() {
+  border-radius: $border-radius-pill;
+  height: 0.6rem; 
+}
+
+@mixin orbit-range-slider-thumb($bg, $outline, $is-webkit) {
+  background-color: $bg;
+  border-radius: 50%;
+  height: 1.5rem;
+  width: 1.5rem;
+  // outline: $border-width * 2 solid $outline;
+  @if ($is-webkit) {
+    appearance: none;
+    -webkit-appearance: none;
+    margin-top: -7px; /* Centers thumb on the track */
+  } @else {
+    border: none;
+    border-radius: 0;
+  }
+}
