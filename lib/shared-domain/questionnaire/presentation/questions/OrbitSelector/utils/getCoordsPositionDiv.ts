@@ -11,7 +11,7 @@ const getCoordsPositionDiv: getCoordsPositionDivType = (
   doomElementToGetCoords,
 ) => {
   const pos = { x: 0, y: 0 };
-
+  console.log(evt.type);
   if (
     evt.type == 'touchstart' ||
     evt.type == 'touchmove' ||
@@ -28,7 +28,9 @@ const getCoordsPositionDiv: getCoordsPositionDivType = (
     evt.type == 'mouseover' ||
     evt.type == 'mouseout' ||
     evt.type == 'mouseenter' ||
-    evt.type == 'mouseleave'
+    evt.type == 'mouseleave' ||
+    evt.type == 'click' ||
+    evt.type == 'dblclick'
   ) {
     pos.x = evt.pageX;
     pos.y = evt.pageY;

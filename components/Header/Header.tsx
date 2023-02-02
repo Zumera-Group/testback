@@ -81,7 +81,7 @@ export const Header = ({
   useEffect(() => {
     const handleScroll = () => {
       const positionY = window.pageYOffset;
-      const POSITION_Y_OFFSET = 64;
+      const POSITION_Y_OFFSET = 94;
       if (positionY > POSITION_Y_OFFSET) {
         setIsScrolled(true);
       } else {

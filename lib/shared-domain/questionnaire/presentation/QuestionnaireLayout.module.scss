@@ -1,64 +1,87 @@
-.questionnaireWrapper {
-  display: grid;
-  grid-template-rows: $header-height-desktop 1fr $gutter;
-  padding: 0;
+$main-layout-chat-button-offset: 48px;
+$main-layout-height: calc(100vh - var(--header-height) - calc(var(--section-size) * 2) - #{$main-layout-chat-button-offset});
 
+.page {
+  width: 100%;
+  max-width: 100%;
+  min-height: 100vh;
   background-color: $primary;
-  grid-template-areas:
-    'header header header'
-    'sidebar sidebar sidebar'
-    'question question question'
-    'footer footer footer';
 
+  --grid-gap: 0;
   @include breakpoint-up(md) {
-    grid-template-areas:
-      'header header header'
-      'sidebar question aside'
-      'sidebar   footer  .   ';
-    grid-template-columns: 20rem 1fr;
-    grid-template-rows: 9rem 1fr $gutter;
-    grid-template-columns: 18rem 1fr;
-    column-gap: 2rem;
+    --grid-gap: #{$gutter * 3};
   }
-
   @include breakpoint-up(lg) {
-    grid-template-columns: 25rem 1fr;
-    column-gap: 6rem;
+    --grid-gap: #{$gutter * 4};
   }
 
-  @media screen and (min-width: 1500px) {
-    grid-template-areas:
-      'header header header'
-      'sidebar question aide'
-      'sidebar   footer  .   ';
-  }
-}
-
-.headerSection {
-  grid-area: header;
-}
-
-.sideBarWrapper {
-  grid-area: sidebar;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  margin-bottom: $gutter * 1.5;
-
-  & > * {
-    @include breakpoint-down(md) {
-      width: 100%;
+  header {
+    position: relative !important;
+    background-color: transparent !important;
+    color: $white !important;
+    svg {
+      fill: $white !important;
     }
   }
 
-  @include breakpoint-up(md) {
-    @include divider(right, $white);
+  main {
+    padding-top: 0 !important;
+  }
+
+  // Styles for when the sidebar is rendered
+  &__hasSidebar {
+    .sidebarWrapper {
+      padding-right: var(--grid-gap);
+    }
+    
+    .questionWrapper {
+      padding-left: var(--grid-gap);
+    }
+
+    .questionCol {
+      @include breakpoint-up(md) {
+        &:before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          height: 100%;
+          min-height: $main-layout-height;
+          width: $border-width;
+          @include divider(left, $white);
+        }
+      }
+    }
+  }
+
+}
+
+.section {
+  padding-bottom: calc(var(--section-size) + #{$main-layout-chat-button-offset}) !important;
+}
+
+.grid {
+  min-height: $main-layout-height;
+}
+
+.questionCol {
+  position: relative;
+}
+
+.sidebarCol {
+  position: sticky !important;
+  position: -webkit-sticky !important;
+  top: $gutter * 1.5;
+}
+
+.sidebarWrapper {
+  & > * {
+    width: 100%;
   }
 }
 
-.questionWrapper {
-  grid-area: question;
-  padding-top: 0 !important;
-  padding-bottom: 0 !important;
-  min-height: 100vh;
+.progressBarLineMobile {
+  display: block;
+  width: 100%;
+  margin: -$gutter auto $gutter * 2.5 auto;
 }

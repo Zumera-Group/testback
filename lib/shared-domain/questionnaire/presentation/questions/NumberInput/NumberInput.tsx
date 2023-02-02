@@ -1,6 +1,6 @@
+import React, { useState, useRef, useEffect } from 'react';
 import { useAnswers } from 'lib/shared-domain/questionnaire/application/useAnswers';
 import { useNumberFormat } from 'lib/shared-domain/questionnaire/application/useNumberFormat';
-import React, { useState } from 'react';
 import { Question } from '../../../domain/index';
 import { Input } from 'components/Form';
 import styles from './NumberInput.module.scss';
@@ -13,15 +13,24 @@ import {
 import { QuestionButtons } from '../../Question/QuestionButtons';
 import { QuestionAnimation } from '../../Question/QuestionAnimation';
 import { DEFAULT_VALUES } from './constants';
+import BackButton from 'components/Calculator/BackButton/BackButton';
+import { useMediaQuery } from 'lib/hooks/useMediaQuery';
+import { SCREEN_SIZE_MD } from 'lib/constants';
 
 export const NumberInput: React.FC<{
   question: Question;
   onNextQuestion: () => void;
-}> = ({ question, onNextQuestion }) => {
+  onPrevQuestion: () => void;
+  currentPos: any;
+}> = ({ question, onNextQuestion, onPrevQuestion, currentPos }) => {
   const { valueType, placeholder, salesforceFormat, label } =
     question?.answerSelector?.numberInput || DEFAULT_VALUES;
   const { getNumberFormat, sign } = useNumberFormat(valueType);
   const { getAnswer, setAnswer } = useAnswers(question);
+  const isMobile = useMediaQuery(`(max-width: ${SCREEN_SIZE_MD})`);
+  const [inputLength, setInputLength] = useState(0);
+  const isYear = valueType === 'year';
+  const fieldWrapperRef = useRef(null);
 
   const formatToSalesforce = (v: number) => {
     const today = new Date();
@@ -52,39 +61,78 @@ export const NumberInput: React.FC<{
     if (salesforceFormat === 'date_month') return month;
     if (salesforceFormat === 'date_day') return day;
   };
-  const shortBox = salesforceFormat !== 'number' || valueType === 'year';
+
+  const shortBox =
+    salesforceFormat !== 'number' ||
+    valueType === 'year' ||
+    valueType === 'percent';
+
+  useEffect(() => {
+    if (!fieldWrapperRef.current) return;
+    if (!shortBox) return;
+    const childInput = fieldWrapperRef.current.querySelector('input');
+    const resizeInput = () => {
+      if (childInput.value.length > 4) {
+        childInput.style.width = `${childInput.value.length * 0.9375}ch`;
+      } else {
+        childInput.style.width = 'var(--input-width)';
+      }
+    }
+    if (childInput) resizeInput();
+  }, [fieldWrapperRef, question, inputLength, shortBox])
 
   return (
     <div className={styles.numberInputWrapper}>
-      <QuestionText
-        title={question.questionText}
-        description={question.description}
-      />
       <QuestionAnimation>
+        {isMobile && (
+          <BackButton onPrevQuestion={onPrevQuestion} currentPos={currentPos} />
+        )}
+        <QuestionText
+          title={question.questionText}
+          description={question.description}
+        />
         {label && <p className={styles.fieldLabel}>{label}</p>}
-        <div className={styles.fieldWrapper}>
-          {sign && <span className={styles.sign}> {sign}</span>}
+        <div className={styles.fieldWrapper} ref={fieldWrapperRef}>
+          {sign && sign !== '%' && <span className={styles.sign}> {sign}</span>}
           <Input
             type="number"
             id={question._id}
             placeholder={placeholder ? placeholder : '0'}
             hideLabel
+            autoFocus
             classes={[
               styles.numberInput,
-              shortBox && styles.shortBox,
-              !sign && styles.noSign,
+              shortBox ? styles.numberInput__shortBox : '',
+              !sign || sign === '%' ? styles.numberInput__noSign : '',
             ].join(' ')}
-            value={getUnformattedAnswer()}
-            onChange={(e) => formatToSalesforce(Number(e.target.value))}
+            value={getUnformattedAnswer() || ''}
+            onChange={(e) => {
+              formatToSalesforce(Number(e.target.value));
+              setInputLength(e.target.value.length);
+            }}
+          />
+
+          {sign && sign === '%' && <span className={styles.sign}>{sign}</span>}
+        </div>
+        <div className={styles.buttonOuter}>
+          {!isMobile && (
+            <BackButton
+              onPrevQuestion={onPrevQuestion}
+              currentPos={currentPos}
+            />
+          )}
+
+          <QuestionButtons
+            onNextQuestion={() => {
+              onNextQuestion();
+            }}
+            isRequired={question?.isRequired}
+            isAnswered={
+              (!isYear && getUnformattedAnswer() != null) ||
+              (isYear && inputLength >= 4)
+            }
           />
         </div>
-        <QuestionButtons
-          onNextQuestion={() => {
-            onNextQuestion();
-          }}
-          isRequired={question?.isRequired}
-          isAnswered={getUnformattedAnswer() != null}
-        />
       </QuestionAnimation>
     </div>
   );

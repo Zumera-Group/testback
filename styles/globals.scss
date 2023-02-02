@@ -81,7 +81,7 @@ img {
 .swiper-scrollbar {
   height: $gutter * 0.25 !important;
   background-color: $quaternary !important;
-  margin: $gutter 0;
+  margin: $gutter * 2 0 $gutter 0;
   width: 100% !important;
   left: 0 !important;
   position: relative !important;
