@@ -1,5 +1,9 @@
 .textInputWrapper {
   @include breakpoint-down(md) {
-    padding: $gutter * 1;
+    padding: $gutter;
   }
+}
+
+.buttonOuter {
+  @include calculator-action-btns-wrapper();
 }

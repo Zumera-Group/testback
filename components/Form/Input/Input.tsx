@@ -22,6 +22,7 @@ interface Props {
   name?: string;
   disabled?: boolean;
   description?: string;
+  autoFocus?: boolean;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
@@ -37,6 +38,7 @@ export const Input: React.FC<Props> = ({
   name,
   disabled,
   description,
+  autoFocus,
   onChange,
 }) => {
   return (
@@ -60,6 +62,7 @@ export const Input: React.FC<Props> = ({
         value={value}
         disabled={disabled}
         onChange={onChange}
+        autoFocus={autoFocus}
       />
       {description && (
         <Description description={description} disabled={disabled} />

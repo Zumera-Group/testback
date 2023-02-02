@@ -1,7 +1,8 @@
-import { Box, Flex, VStack } from '@chakra-ui/react';
-import useBreakpointValue from 'lib/shared-domain/useBreakpoint';
+import React, { useEffect, useRef, useState } from 'react';
+
 import { BoxAnswer, Question } from 'lib/shared-domain/questionnaire/domain';
-import React, { useEffect, useState } from 'react';
+import { useAnswers } from 'lib/shared-domain/questionnaire/application/useAnswers';
+import { Sector } from '../../../../page/domain/index';
 import { BoxSelectorItem } from './BoxSelectorItem';
 import { QuestionText } from '../../Question/QuestionText';
 import { QuestionButtons } from '../../Question/QuestionButtons';
@@ -9,23 +10,24 @@ import { getTranslateByScope } from '../../../../../../translation/i18n';
 import { useValuationStore } from '../../../store/index';
 import { INDUSTRY_QUESTION_ID } from '..';
 import { SECTOR_QUESTION_ID } from '../index';
-import { useAnswers } from 'lib/shared-domain/questionnaire/application/useAnswers';
 import { QuestionAnimation } from '../../Question/QuestionAnimation';
 import { RequiredQuestionInfo } from '../../Question/RequiredQuestionInfo';
-import { Sector } from '../../../../page/domain/index';
 import { Button } from 'components/Button';
-import styles from './BoxSelector.module.scss';
+import BackButton from 'components/Calculator/BackButton/BackButton';
+import { useMediaQuery } from 'lib/hooks/useMediaQuery';
+import { CONTAINER_PADDING_X, SCREEN_SIZE_MD } from 'lib/constants';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Scrollbar } from 'swiper';
-import { useMediaQuery } from 'lib/hooks/useMediaQuery';
-import { SCREEN_SIZE_MD } from 'lib/constants';
-import { SCREEN_SIZE_LG, SCREEN_SIZE_SM } from 'lib/constants';
 import 'swiper/css/scrollbar';
+import styles from './BoxSelector.module.scss';
+
 const t = getTranslateByScope('answerTypes.boxSelector');
 
 interface Props {
   question: Question;
   onNextQuestion?: () => void;
+  onPrevQuestion?: () => void;
+  currentPos?: number;
   sectors?: Sector[];
   industries?: {
     id: string;
@@ -38,58 +40,94 @@ interface Props {
 export const BoxSelector = ({
   question,
   onNextQuestion,
+  onPrevQuestion,
   sectors,
   industries,
+  currentPos,
 }: Props): JSX.Element => {
+  
   const { sectorId, industryId } = useValuationStore();
-  let allBoxes = question?.answerSelector?.boxSelector;
-
   const { getAnswer } = useAnswers(question);
 
-  if (sectors) {
-    allBoxes = sectors?.map((s) => ({
-      _key: s.id,
-      boxContent: s.id,
-      label: s.name,
-      sheetName: s.sectorSheetName,
-      boxIcon: {
-        name: s.name,
-        iconImage: s.graph.iconImage,
-      },
-    }));
-  }
+  const boxAnswers = question?.answerSelector?.boxSelector;
+  const INITIAL_BOXES = 8;
 
-  if (industries) {
-    allBoxes = industries?.map((i) => ({
-      _key: i.id,
-      boxContent: i.id,
-      label: i.name,
-      sheetName: i.industrySheetName,
-    }));
-  }
+  const [selectionsLoaded, setSelectionsLoaded] = useState<boolean>(false);
 
-  const firstBoxesToRender = allBoxes?.slice(0, 8);
-  const isMobile = useMediaQuery(`(max-width: ${SCREEN_SIZE_MD})`);
+  const [allBoxes, setAllBoxes] = useState<BoxAnswer[]>([]);
+  const [boxesToShow, setBoxesToShow] = useState<number>(INITIAL_BOXES);
+  const [moreBoxesToShow, setMoreBoxesToShow] = useState<boolean>(false);
+
   const buttonText = question?.showMoreButton || t('buttonText');
+  const isMobile = useMediaQuery(`(max-width: ${SCREEN_SIZE_MD})`);
 
-  const [boxesToRender, setBoxesToRender] =
-    useState<BoxAnswer[]>(firstBoxesToRender);
-  const [moreBoxesToShow, setMoreBoxesToShow] = useState<boolean>(
-    allBoxes?.length > 8,
-  );
+  // Map the selections
+  useEffect(() => {
+    // Prevent the useEffect from firing multiple times
+    if (!boxAnswers || selectionsLoaded) return;
+    setSelectionsLoaded(true);
 
-  const onShowMore = () => {
-    setBoxesToRender(allBoxes);
-    setMoreBoxesToShow(false);
-  };
+    if (!sectors && !industries) setAllBoxes(boxAnswers);
 
+    if (sectors) {
+      setAllBoxes(
+        sectors?.map((s) => ({
+          _key: s.id,
+          boxContent: s.id,
+          label: s.name,
+          sheetName: s.sectorSheetName,
+          boxIcon: {
+            name: s.name,
+            iconImage: s.graph.iconImage,
+          },
+        }))
+      );
+    }
+    if (industries) {
+      setAllBoxes(
+        industries?.map((i) => ({
+          _key: i.id,
+          boxContent: i.id,
+          label: i.name,
+          sheetName: i.industrySheetName,
+        }))
+      );
+    }
+  }, [boxAnswers, selectionsLoaded, sectors, industries]);
+
+  // Set the amount of boxes to display to the initial number set
+  useEffect(() => {
+    if (!allBoxes?.length) return;
+    setBoxesToShow(INITIAL_BOXES);
+    return () => setBoxesToShow(INITIAL_BOXES);
+  }, [allBoxes]);
+
+  // Show/hide the 'Show more' button if the items length exceeds initial length
+  useEffect(() => {
+    if (moreBoxesToShow) return;
+    setMoreBoxesToShow(allBoxes?.length > boxesToShow);
+  }, [allBoxes, boxesToShow, moreBoxesToShow]);
+
+  // Show all boxes in the carousel mobile view
   useEffect(() => {
     if (isMobile || (!isMobile && !moreBoxesToShow)) {
-      setBoxesToRender(allBoxes);
+      setBoxesToShow(allBoxes?.length);
     } else if (!isMobile && moreBoxesToShow) {
-      setBoxesToRender(firstBoxesToRender);
+      setBoxesToShow(INITIAL_BOXES);
     }
-  }, [allBoxes, firstBoxesToRender, isMobile, moreBoxesToShow]);
+  }, [allBoxes?.length, isMobile, moreBoxesToShow]);
+
+  // Reset to original state when question changes
+  useEffect(() => {
+    setSelectionsLoaded(false);
+    setMoreBoxesToShow(false);
+    setBoxesToShow(INITIAL_BOXES);
+  }, [question, currentPos]);
+
+  const onShowMore = () => {
+    setBoxesToShow(allBoxes?.length);
+    setMoreBoxesToShow(false);
+  }
 
   const getShowButton = () => {
     const inSelectIndustryAndHasIndustryId =
@@ -108,87 +146,88 @@ export const BoxSelector = ({
     return false;
   };
 
-  const breakpoint_LG = parseInt(SCREEN_SIZE_LG);
-  const breakpoint_SM = parseInt(SCREEN_SIZE_SM);
-
-  const maxSlidesToShow = allBoxes.length;
-
+  // Swiper configs
+  const buttonRef = useRef(null);
   const swiperOptions = {
     modules: [Scrollbar],
     observer: true,
     observeParents: true,
     freeMode: true,
     scrollbar: { hide: false, draggable: true },
-    slidesPerView: 1,
-    centeredSlides: true,
-    breakpoints: {
-      [breakpoint_SM]: {
-        slidesPerView: 3.5,
-      },
-      [breakpoint_LG]: {
-        slidesPerView: maxSlidesToShow ? maxSlidesToShow : 3,
-      },
-    },
+    slidesPerView: 'auto' as 'auto',
+    spaceBetween: parseInt(CONTAINER_PADDING_X),
+    touchStartForcePreventDefault: true,
+    touchMoveStopPropagation: true,
+    slideToClickedSlide: false,
+    watchSlidesProgress: true,
   };
 
   return (
     <>
-      <QuestionText title={question?.questionText}>
-        <RequiredQuestionInfo isRequired={question?.isRequired} />
-      </QuestionText>
+      {isMobile && <BackButton onPrevQuestion={onPrevQuestion} currentPos={currentPos} />}
 
       <QuestionAnimation>
-        {!isMobile || (isMobile && boxesToRender.length === 2) ? (
-          <Box maxWidth={950} className={styles.boxSelector}>
-            <Flex mt={1} justify="flex-start" flexWrap="wrap">
-              {boxesToRender?.map((box, index) => (
-                <BoxSelectorItem key={box._key} question={question} box={box} />
-              ))}
-            </Flex>
-          </Box>
+        <QuestionText title={question?.questionText}>
+          <RequiredQuestionInfo isRequired={question?.isRequired} />
+        </QuestionText>
+
+        {!isMobile || (isMobile && allBoxes.length === 2) ? (
+          <div className={styles.boxRow}>
+            {allBoxes?.slice(0, boxesToShow).map((box, index) => (
+              <BoxSelectorItem
+                key={box._key}
+                question={question}
+                box={box}
+                refEl={buttonRef}
+              />
+            ))}
+          </div>
         ) : (
-          <>
-            <Box
-              mx="auto"
-              w="100%"
-              maxWidth={950}
-              className={styles.boxSelectorswiper}
-            >
-              <Swiper className={styles.swiper} {...swiperOptions}>
-                {boxesToRender?.map((box, index) => (
-                  <SwiperSlide key={index} className={styles.swiperSlide}>
-                    <BoxSelectorItem
-                      key={box._key}
-                      question={question}
-                      box={box}
-                    />
-                  </SwiperSlide>
-                ))}
-              </Swiper>
-            </Box>
-          </>
+          <Swiper {...swiperOptions}>
+            {allBoxes?.slice(0, boxesToShow).map((box, index) => (
+              <SwiperSlide key={index} className={styles.swiperSlide}>
+                <BoxSelectorItem
+                  key={box._key}
+                  question={question}
+                  box={box}
+                  refEl={buttonRef}
+                />
+              </SwiperSlide>
+            ))}
+          </Swiper>
         )}
 
-        <Flex justifyContent="flex-start" className={styles.showMoreWrapper}>
-          {moreBoxesToShow && !isMobile && (
-            <Button
-              callBack={onShowMore}
-              variant="primary"
-              hideIcon
-              classes={styles.showMoreBtn}
-            >
-              {buttonText.trim()}
-            </Button>
+        <div className={styles.buttonOuter} ref={buttonRef}>
+          {!isMobile && (
+            <BackButton
+              onPrevQuestion={onPrevQuestion}
+              currentPos={currentPos}
+            />
           )}
-        </Flex>
+
+          <div className={styles.showMoreWrapper}>
+            {(moreBoxesToShow && !isMobile) && (
+              <Button
+                callBack={onShowMore}
+                variant="secondary"
+                onDark={true}
+                hideIcon
+                classes={styles.showMoreBtn}
+              >
+                {buttonText.trim()}
+              </Button>
+            )}
+          </div>
+
+          {getShowButton() && (
+            <QuestionButtons
+              onNextQuestion={onNextQuestion}
+              isRequired={question?.isRequired}
+              isAnswered={getAnswer()}
+            />
+          )}
+        </div>
       </QuestionAnimation>
-      {getShowButton() && (
-        <QuestionButtons
-          onNextQuestion={onNextQuestion}
-          isRequired={question?.isRequired}
-          isAnswered={getAnswer()}
-        />
-      )}
     </>
   );
 };

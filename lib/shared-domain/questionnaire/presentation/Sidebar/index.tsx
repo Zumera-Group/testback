@@ -9,9 +9,10 @@ import { SCREEN_SIZE_MD } from 'lib/constants';
 import { useMediaQuery } from 'lib/hooks/useMediaQuery';
 
 const Sidebar = (): JSX.Element => {
+  const isMobile = useMediaQuery(`(max-width: ${SCREEN_SIZE_MD})`);
+
   const { mainStep, subStep, questionnaire, isOnResultScreen } =
     useValuationStore();
-  const isMobile = useMediaQuery(`(max-width: ${SCREEN_SIZE_MD})`);
   const [currenQuestionPosition, setCurrentQuestionPosition] = useState(0);
   const categories = questionnaire && questionnaire.questionsByCategory;
   const currentCategory = questionnaire?.questionsByCategory?.[mainStep];
@@ -65,24 +66,11 @@ const Sidebar = (): JSX.Element => {
     />
   );
 
-  const WEBKIT_SCROLL = `::-webkit-scrollbar {
-    display: none
-  }`;
-
   return (
     <>
       <ProgressBar progress={progress} isPercent color="white" />
       {!isMobile && (
-        <VStack
-          maxH="calc(100vh - 130px)"
-          overflow="scroll"
-          style={{ scrollbarWidth: 'none' }}
-          css={WEBKIT_SCROLL}
-          pr="17px"
-          spacing={3}
-        >
-          {categories && categories.map(renderSteps)}
-        </VStack>
+        <VStack spacing={0}>{categories && categories.map(renderSteps)}</VStack>
       )}
     </>
   );

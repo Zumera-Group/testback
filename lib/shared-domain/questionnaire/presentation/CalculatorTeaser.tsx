@@ -15,6 +15,7 @@ import { FlexCol } from '../../../../components/Layout/Flex/Flex';
 import { useRouter } from 'next/router';
 import { Beam } from 'components/Beam';
 import styles from './CalculatorTeaser.module.scss';
+import { HalfBeam } from 'components/HalfBeam';
 
 const LineSpacerMobile = () => {
   return (
@@ -64,7 +65,8 @@ export const ResultTeaser: React.FC<{
       className={styles.calculatorTeaserWrapper}
     >
       {resultTeaser.src && (
-        <Beam color="white" glow classes={styles.teaserBeam} />
+        // <Beam color="white" glow classes={styles.teaserBeam} />
+        <HalfBeam />
       )}
       <Hide below="md">
         <FlexCol ml={{ md: 6, lg: 3 }}>

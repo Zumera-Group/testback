@@ -3,17 +3,19 @@ import { BoxAnswer, Question } from 'lib/shared-domain/questionnaire/domain';
 import { useSelectAnswers } from '../useSelectAnswer';
 import { useSelectBoxSelector } from 'lib/shared-domain/questionnaire/presentation/questions/BoxSelector/useSelectBoxSelector';
 import RadioButton from 'components/Calculator/RadioButtonItem/RadioButtonItem';
-import { Swiper, SwiperSlide } from 'swiper/react';
 import Checkbox from 'components/Calculator/CheckboxItem/CheckboxItem';
 
 interface Props {
   box: BoxAnswer;
   question: Question;
+  refEl: any;
 }
 
-const SIZE = 120;
-
-export const BoxSelectorItem = ({ box, question }: Props): JSX.Element => {
+export const BoxSelectorItem = ({
+  box,
+  question,
+  refEl,
+}: Props): JSX.Element => {
   const { isSelected, onSelectAnswer } = useSelectAnswers(
     question,
     box.boxContent || box.label,
@@ -23,6 +25,8 @@ export const BoxSelectorItem = ({ box, question }: Props): JSX.Element => {
     box,
     onSelectAnswer,
   });
+  const executeScroll = () =>
+    refEl.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
   const renderIcon = () => {
     if (!box.boxIcon) return null;
@@ -46,14 +50,20 @@ export const BoxSelectorItem = ({ box, question }: Props): JSX.Element => {
         <RadioButton
           icon={renderIcon()}
           label={box.label || box.boxContent}
-          onClick={onSelect}
+          onClick={() => {
+            onSelect();
+            executeScroll();
+          }}
           selected={isSelected}
         />
       ) : (
         <Checkbox
           icon={renderIcon()}
           label={box.label || box.boxContent}
-          onClick={onSelect}
+          onClick={() => {
+            onSelect();
+            executeScroll();
+          }}
           selected={isSelected}
         />
       )}

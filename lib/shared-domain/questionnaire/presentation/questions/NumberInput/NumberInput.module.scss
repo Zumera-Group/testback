@@ -1,67 +1,82 @@
 .numberInputWrapper {
+
   label {
     color: $white;
-  }
-  .numberInput {
-    border: unset;
-    border-radius: 0;
-    font-size: $h1-font-size;
-    font-weight: $font-weight-light;
-    width: 100%;
-    @include breakpoint-up(md) {
-      max-width: 25rem;
-    }
-
-    &.noSign {
-      padding-left: 0;
-    }
-  }
-
-  .shortBox {
-    @include breakpoint-up(md) {
-      max-width: 12rem;
-      padding-right: 0;
-      padding-left: 0;
-    }
   }
 
   input::-webkit-outer-spin-button,
   input::-webkit-inner-spin-button {
     display: none;
   }
-  ::placeholder {
+
+  input::placeholder {
     font-weight: $font-weight-light;
+    opacity: 0.75;
   }
 
-  .fieldWrapper {
-    display: flex;
-    align-items: flex-end;
-    border-bottom: 1px solid #794d7c;
-    margin-bottom: $gutter * 1.5;
-    max-width: 100%;
+}
 
-    @include breakpoint-down(md) {
-      padding: 0 $gutter * 1;
-    }
+.fieldWrapper {
+  display: flex;
+  align-items: flex-end;
+  font-size: $h1-font-size;
+  // justify-content: space-between;
+  justify-content: flex-start;
+  margin-bottom: $gutter * 1.5;
+  width: 100%;
+  max-width: 100%;
 
-    @include breakpoint-up(md) {
-      max-width: max-content;
-    }
-  }
-
-  .fieldLabel {
-    color: $white;
-    @include breakpoint-down(md) {
-      padding: 0 $gutter * 1;
-    }
-  }
-
-  .sign {
-    border-radius: 0;
-    font-size: $h1-font-size;
-    font-weight: $font-weight-light;
-    color: $white;
-    opacity: 0.5;
-    padding: $gutter * 1.2 0;
+  & > div {
+    display: block;
+    max-width: calc(100% - 0.75em);
   }
 }
+
+.fieldLabel {
+  color: $white;
+  margin-bottom: $label-margin-bottom;
+}
+
+.numberInput {
+  padding-top: 0;
+  padding-bottom: 0;
+  border: unset;
+  border-radius: 0;
+  font-size: $h1-font-size;
+  font-weight: $font-weight-light;
+  // width: 100%;
+  max-width: 100%;
+  letter-spacing: 1 !important;
+  padding-left: $input-padding-x * 0.75;
+  padding-right: $input-padding-x * 0.75;
+
+  &__noSign {
+    padding-left: 0;
+  }
+
+  &__shortBox {
+    --input-width: 3.75ch;
+    border-bottom: $input-border-width solid $quaternary;
+    @include breakpoint-up(md) {
+      min-width: var(--input-width);
+      padding-right: 0;
+      padding-left: 0;
+    }
+  }
+} 
+
+.sign {
+  border-radius: 0;
+  font-size: $h1-font-size;
+  font-weight: $font-weight-light;
+  color: $white;
+  padding: 0;
+  line-height: $input-line-height;
+  flex-grow: 1;
+}
+
+.buttonOuter {
+  @include calculator-action-btns-wrapper();
+}
+
+

@@ -33,9 +33,9 @@
   margin: $btn-wrapper-margin-top 0 0 0;
   button,
   a {
-    margin-right: 2rem;
+    margin-right: $gutter * 2;
     @include breakpoint-down(md) {
-      margin-bottom: 2rem;
+      margin-bottom: $gutter * 2;
     }
   }
 }
