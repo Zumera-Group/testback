@@ -1,3 +1,71 @@
+@import './mixins';
+
 .buttonOuter {
   @include calculator-action-btns-wrapper();
+}
+
+.rangeWrapper {
+  --orbit-max-width: 38rem;
+  margin: $gutter * 2 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.donutWrapper {
+  width: 100%;
+  max-width: var(--orbit-max-width);
+  margin: 0 auto $gutter * 2.5 auto;
+}
+
+.rangeSlider {
+  --range-track-bg: #{darken($primary, 1.5%)};
+  --range-progress-bg: #{$accent};
+  --range-thumb-bg: #{$white};
+
+  // Reset default range styles
+  appearance: none;
+  -webkit-appearance: none;
+  background: transparent;
+  opacity: 1;
+  border: none;
+  cursor: pointer;
+  cursor: ew-resize;
+  border-radius: $border-radius-pill;
+
+  // Custom range styles
+  width: 100%;
+  max-width: var(--orbit-max-width);
+  @include push-auto-x();
+
+  // Track
+  &::-webkit-slider-runnable-track {
+    @include orbit-range-slider-track();
+  }
+
+  &::-moz-range-track {
+    @include orbit-range-slider-track();
+  }
+
+  // Thumb
+  &::-webkit-slider-thumb {
+    @include orbit-range-slider-thumb(
+      $bg: var(--range-thumb-bg),
+      $outline: var(--range-track-bg),
+      $is-webkit: true
+    );
+  }
+
+  &::-moz-range-thumb {
+    @include orbit-range-slider-thumb(
+      $bg: var(--range-thumb-bg),
+      $outline: var(--range-track-bg),
+      $is-webkit: false
+    );
+  }
+
+  &:focus {
+    outline: none;
+  }
 }
