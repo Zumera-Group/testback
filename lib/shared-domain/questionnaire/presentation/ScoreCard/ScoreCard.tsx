@@ -67,8 +67,6 @@ export const ScoreCard = () => {
     },
   };
 
-  console.log(hasScoreAndPercentage);
-
   return (
     <>
       <div className={styles.scoreCardWrapper}>
