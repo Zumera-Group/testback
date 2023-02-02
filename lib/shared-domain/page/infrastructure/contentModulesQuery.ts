@@ -81,14 +81,14 @@ export const contentModulesQuery = (
          url,
        }
     },
-    textBlocks[] {
-      ...,
-      image{
-        asset->{
-          url,
-        }
-      }
-    },
+    // textBlocks[] {
+    //   ...,
+    //   image{
+    //     asset->{
+    //       url,
+    //     }
+    //   },
+    // },
     topImage {
       asset->{
         url
@@ -465,6 +465,30 @@ export const contentModulesQuery = (
 			current
 		  },
 		},
+    },
+    textBlocks[] {
+		...,
+		image {
+			asset->{
+			  url,
+			}
+		  },
+		accordionItems[] {
+			...,
+			description[] {
+				...,
+				image {
+					...,
+					asset->{
+					...,
+					  url,
+					}
+				}
+			}	
+		},
+		news->{
+		 ...,
+	   }
     },
 
 ${extraQuery || ''}

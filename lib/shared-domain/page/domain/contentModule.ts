@@ -1434,11 +1434,13 @@ export class AnchoredTextSectionModule extends BaseModule {
   textBlocks: any[];
 
   hasBorderBottom: boolean;
+  hideSection: boolean;
   constructor(fields: Record<string, any>) {
     super();
     this.title = fields.title;
     this.textBlocks = fields.textBlocks;
     this.hasBorderBottom = fields.hasBorderBottom;
+    this.hideSection = fields.hideSection;
   }
 }
 

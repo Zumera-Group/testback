@@ -102,7 +102,6 @@ export default function Index({
   if (router.isFallback) {
     return null;
   }
-
   return (
     <SharedContentContext value={sharedContent}>
       <ErrorTrackingBoundary>

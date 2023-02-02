@@ -59,6 +59,9 @@
   overflow: hidden;
   color: inherit;
   font-size: $font-size-small;
+  img {
+    width: 100%;
+  }
   & > span {
     display: block;
     padding: 0 0 $gutter * 2 0;
@@ -70,8 +73,5 @@
   }
   &__open {
     @include divider(bottom, $primary);
-  }
-  img {
-    width: 100%;
   }
 }

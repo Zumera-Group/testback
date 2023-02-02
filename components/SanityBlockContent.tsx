@@ -3,7 +3,7 @@ import urlForImage from '@sanity/image-url/lib/types/urlForImage';
 import { Button } from 'components/Button';
 
 function ImageRenderer({ node }) {
-  console.log(node);
+  // console.log(node);
   return <Button {...node}>{node.title}</Button>;
 }
 

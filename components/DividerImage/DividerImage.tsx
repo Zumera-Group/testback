@@ -17,7 +17,6 @@ export const DividerImage: React.FC<Props> = ({ ...rest }) => {
   const { ref, inView } = useInView();
   const imageRef = useRef(null);
   const strength = 15;
-  console.log(rest);
   useEffect(() => {
     if (!imageRef) return;
     const handleScroll = () => {
