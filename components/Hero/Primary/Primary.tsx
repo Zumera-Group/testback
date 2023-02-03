@@ -19,8 +19,9 @@ export const Primary: HeroComponent = ({ ...rest }) => {
       <Container classes={styles.container}>
         <Grid
           fullWidth={true}
-          justifyContent={'space-between'}
+          justifyContent={'center'}
           alignItems={'center'}
+          className={styles.grid}
         >
           <GridColumn
             sm={12}

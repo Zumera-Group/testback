@@ -5,6 +5,11 @@
 .container {
   margin-top: var(--header-height);
 }
+//
+//.grid {
+//  min-height: 50vh;
+//  display: flex;
+//}
 
 .title {
   font-size: $h2-font-size;
@@ -12,8 +17,8 @@
 
 .primaryHeroImage {
   position: relative;
-  right: 59px;
-  max-width: 150%;
+  right: 9vw;
+  width: 38vw;
   @include breakpoint-down(md) {
     right: 0;
     margin: $gutter * 3 auto 0;
