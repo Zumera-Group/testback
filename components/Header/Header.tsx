@@ -39,7 +39,9 @@ export const Header = ({
   const router = useRouter();
   const linkWithCurrentLocale = useLinkWithCurrentLocale();
   const homeSlug = linkWithCurrentLocale(siteSettings?.homePage?.slug?.current);
-
+  console.log(router);
+  const hideTopBanner =
+    ['/questionnaires/company-valuation/'].indexOf(router.asPath) > -1;
   const isLightPage = () => {
     if (isLightHeader) return true;
     const hasHeroSection = contentModules.find((module) => {
@@ -109,7 +111,7 @@ export const Header = ({
 
   return (
     <>
-      {siteSettings?.announcementTopBanner?.isEnabled && (
+      {siteSettings?.announcementTopBanner?.isEnabled && !hideTopBanner && (
         <div className={styles.announcementTopBanner}>
           <p>
             {siteSettings.announcementTopBanner.text}{' '}
@@ -131,7 +133,9 @@ export const Header = ({
           isScrolled ? styles.header__scrolled : '',
           bigMenuOpen ? styles.header__open : '',
           indicator && styles.hideBorder,
-          siteSettings?.announcementTopBanner?.isEnabled && styles.withBanner,
+          siteSettings?.announcementTopBanner?.isEnabled &&
+            !hideTopBanner &&
+            styles.withBanner,
         ].join(' ')}
       >
         <Container classes={[styles.container].join('')}>
