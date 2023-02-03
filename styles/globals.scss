@@ -39,6 +39,10 @@ body {
   }
 }
 
+main {
+  min-height: 100vh;
+}
+
 ::selection {
   background: $accent;
   color: $white;

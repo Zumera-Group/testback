@@ -23,6 +23,7 @@ import { usePreviewSubscription } from '../lib/sanity';
 import { filterDataToSingleItem } from '../lib/shared-domain/page/infrastructure/page.facade';
 import { enPaths as en, dePaths as de } from '../lib/shared-domain/page/paths';
 import { REVALIDATE_ON_SUCCESS_IN_SECONDS } from '../lib/shared-domain/page/constants';
+import { useEffect } from 'react';
 
 export async function getStaticPaths() {
   const enPaths = en.map((slug) => ({
@@ -98,6 +99,18 @@ export default function Index({
   const previewPage = filterDataToSingleItem(previewData, preview);
 
   const router = useRouter();
+
+  useEffect(() => {
+    if (router.query.slug === 'about-us') {
+      setTimeout(() => {
+        window.scrollTo({
+          top: 0,
+          left: 0,
+          behavior: 'instant' as any,
+        });
+      }, 0);
+    }
+  }, [router.query.slug]);
 
   if (router.isFallback) {
     return null;

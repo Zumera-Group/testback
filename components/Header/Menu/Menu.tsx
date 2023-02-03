@@ -17,26 +17,23 @@ export const Menu = ({ navigation }) => {
     <nav className={styles.menu}>
       <ul className={styles.items}>
         {navigation.map(({ _key, name, page }, index: number) => (
-            <li key={`${_key}-${index}`} className={styles.item}>
-              <Link
-                passHref
-                href={linkWithCurrentLocale(page.slug?.current)}
+          <li key={`${_key}-${index}`} className={styles.item}>
+            <Link passHref href={linkWithCurrentLocale(page.slug?.current)}>
+              <a
+                className={[
+                  styles.link,
+                  isActive(page.slug?.current) ? styles.link__active : '',
+                ].join(' ')}
+                data-title={name}
               >
-                <a
-                  className={[
-                    styles.link,
-                    isActive(page.slug?.current) ? styles.link__active : ''
-                  ].join(' ')}
-                  data-title={name}
-                >
-                  {name}
-                </a>
-              </Link>
-            </li>
+                {name}
+              </a>
+            </Link>
+          </li>
         ))}
       </ul>
     </nav>
-  )
+  );
 };
 
 export default Menu;

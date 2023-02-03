@@ -16,7 +16,6 @@ function MyApp({ Component, pageProps, router }) {
     const element = document.querySelector('html');
     element.classList.add('mobileLoaded');
   }, []);
-
   MarketingParamsService.useSaveOnMount();
 
   // Initialise Google tag manager
