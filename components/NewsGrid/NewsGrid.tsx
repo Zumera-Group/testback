@@ -104,6 +104,7 @@ export const NewsGrid: React.FC<Props> = ({
   if (transactions && shouldHideCDITransactions) {
     transactions = transactions?.filter((t) => !t.hasCDIRelation);
   }
+  console.log(news);
   return (
     <Section size={'md'} bg={'light'} color={'primary'} divider={true}>
       <Container>
@@ -121,9 +122,13 @@ export const NewsGrid: React.FC<Props> = ({
           return (
             <Cards
               key={`newsGridCards-${i}`}
-              transactions={transactions?.slice(i * numT, numT + i * numT)}
-              employee={employees?.[i]}
-              news={news?.slice(i * numN, numN + i * numN)}
+              transactions={transactions
+                ?.filter((item) => item.slug)
+                ?.slice(i * numT, numT + i * numT)}
+              employee={employees?.filter((item) => item.slug)?.[i]}
+              news={news
+                ?.filter((item) => item.slug)
+                ?.slice(i * numN, numN + i * numN)}
               isDownloadVisible={i === 0 && displayDownload}
               isAfterSecondBlock={i > 0}
             />
