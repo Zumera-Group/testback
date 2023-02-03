@@ -151,6 +151,16 @@ export const querySiteSettings = (
         }
       }
     }
+  },
+  announcementTopBanner {
+    ...,
+    buttonPageLink-> {
+      slug {
+        ...,
+          current
+        },
+      _type
+    }
   }
 }`;
 

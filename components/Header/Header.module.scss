@@ -1,5 +1,5 @@
 .announcementTopBanner {
-  background: $tertiary;
+  background: $accent;
   position: fixed;
   top: 0;
   left: 0;
@@ -9,12 +9,18 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: $white;
+  color: $black;
+  transition: height $timing-sm linear;
+  overflow: hidden;
   p {
     margin-bottom: 0;
+    font-size: $font-size-tiny;
   }
   a {
     text-decoration: underline !important;
+  }
+  &.hideBanner {
+    height: 0;
   }
 }
 .header {
@@ -37,6 +43,10 @@
 
   &.withBanner {
     top: 48px;
+    transition: all $timing-sm linear;
+    &.header__scrolled {
+      top: 0;
+    }
   }
 
   &:not(&__light):not(&__scrolled) {

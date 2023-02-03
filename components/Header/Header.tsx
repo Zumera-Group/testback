@@ -39,6 +39,7 @@ export const Header = ({
   const router = useRouter();
   const linkWithCurrentLocale = useLinkWithCurrentLocale();
   const homeSlug = linkWithCurrentLocale(siteSettings?.homePage?.slug?.current);
+
   const hideTopBanner =
     ['/questionnaires/company-valuation/'].indexOf(router.asPath) > -1;
   const isLightPage = () => {
@@ -108,16 +109,37 @@ export const Header = ({
     }
   }, [bigMenuOpen]);
 
+  const getBannerLink = () => {
+    if (!siteSettings.announcementTopBanner.buttonPageLink) {
+      return siteSettings.announcementTopBanner.buttonLink;
+    }
+    const pageType = siteSettings.announcementTopBanner.buttonPageLink._type;
+
+    const linkTypePart = {
+      sector: router.locale === 'en' ? 'sectors' : 'sektoren',
+      valueCalculator:
+        router.locale === 'en' ? 'questionnaires' : 'fragenkatalog',
+      employee: router.locale === 'en' ? 'employees' : 'mitarbeiter',
+      transaction: router.locale === 'en' ? 'transactions' : 'transaktionen',
+      newsArticle: 'news',
+      service: router.locale === 'en' ? 'services' : 'leistungsspektrum',
+      page: '',
+    }[pageType];
+    return `/${linkTypePart}/${siteSettings.announcementTopBanner.buttonPageLink.slug.current}`;
+  };
+
   return (
     <>
       {siteSettings?.announcementTopBanner?.isEnabled && !hideTopBanner && (
-        <div className={styles.announcementTopBanner}>
+        <div
+          className={[
+            styles.announcementTopBanner,
+            isScrolled ? styles.hideBanner : '',
+          ].join(' ')}
+        >
           <p>
             {siteSettings.announcementTopBanner.text}{' '}
-            <Link
-              href={siteSettings.announcementTopBanner.buttonLink}
-              passHref={true}
-            >
+            <Link href={getBannerLink()} passHref={true}>
               <a>{siteSettings.announcementTopBanner.buttonText}</a>
             </Link>
           </p>

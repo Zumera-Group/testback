@@ -41,6 +41,7 @@ export interface IAnnouncementTopBanner {
   text: string;
   buttonText: string;
   buttonLink: string;
+  buttonPageLink: any;
   isEnabled: boolean;
 }
 
