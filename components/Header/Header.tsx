@@ -39,7 +39,6 @@ export const Header = ({
   const router = useRouter();
   const linkWithCurrentLocale = useLinkWithCurrentLocale();
   const homeSlug = linkWithCurrentLocale(siteSettings?.homePage?.slug?.current);
-  console.log(router);
   const hideTopBanner =
     ['/questionnaires/company-valuation/'].indexOf(router.asPath) > -1;
   const isLightPage = () => {
