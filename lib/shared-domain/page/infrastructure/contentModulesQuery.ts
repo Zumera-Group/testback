@@ -490,6 +490,13 @@ export const contentModulesQuery = (
 		 ...,
 	   }
     },
+    highlightedArticleSection {
+    	...,
+		highlightedPage ->  {
+			...,
+		}
+    }
+    
 
 ${extraQuery || ''}
   }`;

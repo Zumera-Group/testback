@@ -486,7 +486,7 @@ export class NewsGridSectionModule extends BaseModule {
   displayDownload: boolean;
   shouldHideCDITransactions?: boolean;
   shouldHidePeopleUpdates?: boolean;
-
+  highlightedArticleSection?: any;
   constructor(fields: Record<string, any>) {
     super();
 
@@ -503,6 +503,8 @@ export class NewsGridSectionModule extends BaseModule {
     this.shouldHidePeopleUpdates = fields.shouldHidePeopleUpdates;
 
     this.displayDownload = fields.displayDownload;
+
+    this.highlightedArticleSection = fields.highlightedArticleSection;
   }
 }
 

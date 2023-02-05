@@ -27,6 +27,7 @@ interface Props {
   shouldHidePeopleUpdates?: boolean;
   initialNumberOfRepetitions?: number;
   titleAlign?: 'left' | 'center' | 'right';
+  highlightedArticleSection?: any;
 }
 
 export const NewsGrid: React.FC<Props> = ({
@@ -45,6 +46,7 @@ export const NewsGrid: React.FC<Props> = ({
   shouldHidePeopleUpdates,
   initialNumberOfRepetitions = 1,
   titleAlign,
+  highlightedArticleSection,
 }) => {
   const [numberOfRepetitions, setNumberOfRepetitions] = useState(
     initialNumberOfRepetitions,
@@ -104,7 +106,6 @@ export const NewsGrid: React.FC<Props> = ({
   if (transactions && shouldHideCDITransactions) {
     transactions = transactions?.filter((t) => !t.hasCDIRelation);
   }
-  console.log(news);
   return (
     <Section size={'md'} bg={'light'} color={'primary'} divider={true}>
       <Container>
@@ -131,6 +132,7 @@ export const NewsGrid: React.FC<Props> = ({
                 ?.slice(i * numN, numN + i * numN)}
               isDownloadVisible={i === 0 && displayDownload}
               isAfterSecondBlock={i > 0}
+              highlightedArticleSection={highlightedArticleSection}
             />
           );
         })}
