@@ -494,7 +494,18 @@ export const contentModulesQuery = (
     	...,
 		highlightedPage ->  {
 			...,
+			picture {
+				asset->{
+				  url
+				},
+			  },
+		},
+		customTitleImage { 
+			asset->{
+				  url
+				},
 		}
+		
     }
     
 

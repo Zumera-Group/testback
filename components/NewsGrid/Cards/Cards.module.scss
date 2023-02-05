@@ -7,6 +7,11 @@
     display: flex;
     margin-bottom: 1.5rem;
     --gutter: 12px;
+    article {
+      @include breakpoint-up(md) {
+        aspect-ratio: initial;
+      }
+    }
   }
 
   &.reverse {
@@ -27,6 +32,25 @@
 }
 
 .twoNewsCol {
-  // flex: 1;
   width: 100%;
+}
+
+.cardsNew {
+  display: flex;
+  flex-wrap: wrap;
+}
+.highlighted {
+  aspect-ratio: 1/1;
+}
+
+.twoNewsTile {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  article {
+    &:first-child {
+      margin-bottom: $gutter * 2;
+    }
+  }
 }
