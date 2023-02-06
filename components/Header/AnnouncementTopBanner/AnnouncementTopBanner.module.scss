@@ -1,0 +1,31 @@
+.announcementTopBanner {
+  background: $accent;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 2;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: $black;
+  text-align: center;
+  padding: 0 $container-padding-x;
+  overflow: hidden;
+  transition: height $timing-sm linear;
+  p {
+    margin-bottom: 0;
+    font-size: $font-size-tiny;
+  }
+  a {
+    text-decoration: underline !important;
+    transition: color $timing-sm $ease-out;
+    @include hover-state() {
+      color: $white;
+    }
+  }
+  &.hideBanner {
+    height: 0;
+  }
+}

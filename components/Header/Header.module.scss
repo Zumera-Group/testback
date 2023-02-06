@@ -1,28 +1,3 @@
-.announcementTopBanner {
-  background: $accent;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 2;
-  height: 48px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: $black;
-  transition: height $timing-sm linear;
-  overflow: hidden;
-  p {
-    margin-bottom: 0;
-    font-size: $font-size-tiny;
-  }
-  a {
-    text-decoration: underline !important;
-  }
-  &.hideBanner {
-    height: 0;
-  }
-}
 .header {
   position: fixed;
   // position: sticky;
