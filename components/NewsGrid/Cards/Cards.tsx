@@ -14,10 +14,13 @@ export const Cards = ({
   employee,
   isDownloadVisible,
   isAfterSecondBlock,
+  highlightedArticleSection,
 }): any => {
   const { downloadButtonContent } = useSharedContentContext();
 
-  const items = CardsConfig({ isDownloadVisible })
+  const isHighlightedEnabled = highlightedArticleSection?.highLightedArticle;
+
+  const items = CardsConfig({ isDownloadVisible, isHighlightedEnabled })
     .map((item, i) => {
       if (!item) return null;
 
