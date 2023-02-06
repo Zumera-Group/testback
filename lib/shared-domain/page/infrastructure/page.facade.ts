@@ -28,7 +28,7 @@ const queryPage = (
   ${contentModulesQuery()},
   "queryOtherLangSlug": ${otherLangSlugQuery},
   "querySiteSettings": ${querySiteSettings},
-  "querySharedContent": ${querySharedContent}
+  "querySharedContent": ${querySharedContent},
 }`;
 
 const queryPages = () => `*[_type == "page"] {

@@ -5,12 +5,19 @@ export enum CardType {
   Empty = 'Empty',
   Download = 'Download',
   Employee = 'Employee',
+
+  HighlightedCard = 'HighlightedCard',
 }
 
-export const CardsConfig = ({ isDownloadVisible }) => [
+export const CardsConfig = ({ isDownloadVisible, isHighlightedEnabled }) => [
   {
     type: CardType.Employee,
   },
+  isHighlightedEnabled
+    ? {
+        type: CardType.HighlightedCard,
+      }
+    : null,
   {
     type: CardType.TwoNews,
     index1: 0,

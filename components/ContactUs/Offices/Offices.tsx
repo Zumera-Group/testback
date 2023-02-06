@@ -13,8 +13,6 @@ export const Offices = ({ offices, appointmentLinkText }) => {
 
   if (!offices?.length) return null;
 
-  console.log(offices);
-
   return (
     <div className={styles.offices}>
       <ul className={styles.officeToggles}>

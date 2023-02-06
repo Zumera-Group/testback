@@ -486,7 +486,7 @@ export class NewsGridSectionModule extends BaseModule {
   displayDownload: boolean;
   shouldHideCDITransactions?: boolean;
   shouldHidePeopleUpdates?: boolean;
-
+  highlightedArticleSection?: any;
   constructor(fields: Record<string, any>) {
     super();
 
@@ -503,6 +503,8 @@ export class NewsGridSectionModule extends BaseModule {
     this.shouldHidePeopleUpdates = fields.shouldHidePeopleUpdates;
 
     this.displayDownload = fields.displayDownload;
+
+    this.highlightedArticleSection = fields.highlightedArticleSection;
   }
 }
 
@@ -544,7 +546,7 @@ export class DividerImageModule extends BaseModule {
   };
 
   isInContainer: boolean;
-
+  isNoParalax: boolean;
   getImageUrl(): string {
     return this.image.asset?.url;
   }
@@ -553,6 +555,7 @@ export class DividerImageModule extends BaseModule {
     super();
     this.image = fields.image;
     this.isInContainer = fields.isInContainer;
+    this.isNoParalax = fields.isNoParalax;
   }
 }
 
@@ -1433,11 +1436,13 @@ export class AnchoredTextSectionModule extends BaseModule {
   textBlocks: any[];
 
   hasBorderBottom: boolean;
+  hideSection: boolean;
   constructor(fields: Record<string, any>) {
     super();
     this.title = fields.title;
     this.textBlocks = fields.textBlocks;
     this.hasBorderBottom = fields.hasBorderBottom;
+    this.hideSection = fields.hideSection;
   }
 }
 

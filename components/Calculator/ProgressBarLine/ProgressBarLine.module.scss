@@ -21,5 +21,7 @@
   .innerBar {
     height: 2px;
     background-color: $accent;
+    transform-origin: 0% 50%;
+    transition: transform $timing-md $ease-out;
   }
 }

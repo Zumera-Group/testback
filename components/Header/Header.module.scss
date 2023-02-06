@@ -16,6 +16,14 @@
     display: block;
   }
 
+  &.withBanner {
+    top: 48px;
+    transition: all $timing-sm linear;
+    &.header__scrolled {
+      top: 0;
+    }
+  }
+
   &:not(&__light):not(&__scrolled) {
     .container {
       @include divider(bottom, $white);

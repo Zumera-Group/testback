@@ -48,7 +48,9 @@
   &:after {
     content: '';
     position: absolute;
-    inset: 0;
+    height: 38%;
+    bottom: 0;
+    width: 100%;
     @include dark-overlay-gradient();
   }
   &_inner {

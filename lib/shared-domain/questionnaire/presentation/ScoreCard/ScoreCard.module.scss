@@ -5,7 +5,7 @@
   min-height: 18rem;
 
   @include breakpoint-down(md) {
-    padding: 0 $gutter * 1;
+    padding: 0 $gutter;
     margin-top: $gutter * 1.5;
   }
 

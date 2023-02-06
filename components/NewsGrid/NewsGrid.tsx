@@ -3,13 +3,15 @@ import { useState, useEffect, useMemo } from 'react';
 import { Section, Container } from 'components/Layout';
 import { SectionHeading } from 'components/SectionHeading';
 import { LoadMore } from './LoadMore';
-import { Cards } from './Cards';
 
 import { removeIfNotCDI, sortByTime } from './utils';
 
 import { NewsArticle } from 'lib/shared-domain/newsArticle/domain/index';
 import { Transaction } from 'lib/shared-domain/transactions/domain/index';
 import { Employee } from 'lib/shared-domain/employees/domain';
+import { CardsNew } from 'components/NewsGrid/Cards/CardsNew';
+import { sliceIntoChunks } from 'lib/utils/sliceIntoChunks';
+import { shuffle } from 'lib/utils/shuffle';
 
 interface Props {
   title: string;
@@ -27,6 +29,7 @@ interface Props {
   shouldHidePeopleUpdates?: boolean;
   initialNumberOfRepetitions?: number;
   titleAlign?: 'left' | 'center' | 'right';
+  highlightedArticleSection?: any;
 }
 
 export const NewsGrid: React.FC<Props> = ({
@@ -45,6 +48,7 @@ export const NewsGrid: React.FC<Props> = ({
   shouldHidePeopleUpdates,
   initialNumberOfRepetitions = 1,
   titleAlign,
+  highlightedArticleSection,
 }) => {
   const [numberOfRepetitions, setNumberOfRepetitions] = useState(
     initialNumberOfRepetitions,
@@ -105,6 +109,39 @@ export const NewsGrid: React.FC<Props> = ({
     transactions = transactions?.filter((t) => !t.hasCDIRelation);
   }
 
+  const all = [...transactions, ...news, ...employees];
+  const emptyNews = new Array(all.length).fill(undefined);
+  const sortedNews = [...transactions, ...news]
+    .map((item) => ({
+      ...item,
+      sortDate: new Date(item.date).getTime(),
+    }))
+    .sort((a, b) => {
+      return b.sortDate - a.sortDate;
+    });
+
+  const shuffleEmployees = shuffle(employees);
+
+  emptyNews[0] = shuffleEmployees.shift();
+
+  for (let i = 0; i <= emptyNews.length - 1; i++) {
+    const randomBoolean = i % 14 == 0;
+    let item;
+    if (randomBoolean) {
+      const t = shuffleEmployees.shift();
+      if (t) {
+        item = t;
+      } else {
+        item = sortedNews.shift();
+      }
+    } else {
+      item = sortedNews.shift();
+    }
+    emptyNews[i] = item;
+  }
+  const chunkedArray = sliceIntoChunks(emptyNews, 10);
+  const displayItems = chunkedArray.slice(0, numberOfRepetitions);
+
   return (
     <Section size={'md'} bg={'light'} color={'primary'} divider={true}>
       <Container>
@@ -116,20 +153,14 @@ export const NewsGrid: React.FC<Props> = ({
           align={titleAlign || 'center'}
         />
 
-        {new Array(numberOfRepetitions).fill(undefined).map((_i, i) => {
-          const numT = numOfTransactionsDisplayed;
-          const numN = numOfNewsDisplayed;
-          return (
-            <Cards
-              key={`newsGridCards-${i}`}
-              transactions={transactions?.slice(i * numT, numT + i * numT)}
-              employee={employees?.[i]}
-              news={news?.slice(i * numN, numN + i * numN)}
-              isDownloadVisible={i === 0 && displayDownload}
-              isAfterSecondBlock={i > 0}
-            />
-          );
-        })}
+        {displayItems.map((chunk, index) => (
+          <CardsNew
+            key={index}
+            cardsRow={chunk}
+            isFirstChunk={index === 0}
+            highlightedArticleSection={highlightedArticleSection}
+          />
+        ))}
 
         {hasMoreDataToLoad && (
           <LoadMore

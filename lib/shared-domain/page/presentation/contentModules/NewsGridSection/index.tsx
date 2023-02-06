@@ -13,7 +13,6 @@ import NewsGrid from 'components/NewsGrid';
 export const NewsGridSection: React.FC<{
   specificContentModule: NewsGridSectionModule;
 }> = ({ specificContentModule }) => {
-
   const [transactions, setTransactions] = useState([]);
   const [news, setNews] = useState([]);
   const [employees, setEmployees] = useState([]);

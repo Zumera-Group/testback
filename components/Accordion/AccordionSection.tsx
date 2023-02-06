@@ -31,7 +31,6 @@ export const AccordionSection: React.FC<{ specificContentModule: any }> = ({
             <Accordion
               questions={getAccordionQuestion(accordionItems || [])}
               answers={getAccordionAnswers(accordionItems || [])}
-              // answerComponent={AnswerComponent}
             />
           </GridColumn>
         </Grid>

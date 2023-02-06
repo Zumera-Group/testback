@@ -1,10 +1,5 @@
-import Link from 'next/link';
 import Image from 'next/image';
-
 import { Beam } from 'components/Beam';
-import { Icon } from 'components/Icon';
-
-import { links } from 'lib/links';
 import { useSharedContentContext } from 'lib/shared-domain/page/infrastructure/sharedContentContext';
 import { useFormatDate } from 'lib/shared-domain/useFormatDate';
 

@@ -5,8 +5,10 @@ import styles from './AnchoredTextSection.module.scss';
 import { Accordion } from 'components/Accordion';
 import { Button } from 'components/Button';
 import { Fragment } from 'react';
+import { TwoNews } from 'components/NewsGrid';
 export const AnchoredTextSection = ({ specificContentModule }) => {
-  const { title, textBlocks, hasBorderBottom } = specificContentModule;
+  const { title, textBlocks, hasBorderBottom, hideSection } =
+    specificContentModule;
 
   const getAccordionQuestion = (items) => {
     return items.map((item) => item.title);
@@ -14,7 +16,7 @@ export const AnchoredTextSection = ({ specificContentModule }) => {
   const getAccordionAnswers = (items) => {
     return items.map((item) => item.description);
   };
-  return (
+  return !hideSection ? (
     <Section
       as={'div'}
       size={'sm'}
@@ -55,6 +57,14 @@ export const AnchoredTextSection = ({ specificContentModule }) => {
                 );
               }
 
+              if (textBlock._type === 'newsCard') {
+                return (
+                  <div key={textBlock._key} className={styles.newsCard}>
+                    <TwoNews article={textBlock.news} />
+                  </div>
+                );
+              }
+
               if (textBlock._type === 'button') {
                 return (
                   <Button
@@ -75,7 +85,7 @@ export const AnchoredTextSection = ({ specificContentModule }) => {
         </Grid>
       </Container>
     </Section>
-  );
+  ) : null;
 };
 
 const AnswerComponent = ({ answer }) => {

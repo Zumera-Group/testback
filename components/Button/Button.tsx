@@ -5,6 +5,11 @@ import { Icon } from 'components/Icon';
 import styles from './Button.module.scss';
 
 import { generateButtonVariant } from './utils';
+import { useEffect } from 'react';
+import { getClient } from 'lib/sanity.server';
+import { sanityImageUrlFor } from 'lib/sanity';
+import axios from 'axios';
+// import urlForImage from '@sanity/image-url/lib/types/urlForImage';
 
 interface Props {
   title?: string;
@@ -40,7 +45,10 @@ export const Button: React.FC<Props> = ({
 }) => {
   const isLink = externalUrl || link?.slug?.current;
   const btnVariant = generateButtonVariant({ variant, onDark });
-
+  // @ts-ignore
+  const downloadImage = rest?.image?.asset?.url;
+  // @ts-ignore
+  const downloadFileName = rest?.image?.asset?.originalFilename;
   const ButtonIcon = () => {
     if (hideIcon) return null;
     if (variant === 'primary' || variant === 'secondary') {
@@ -50,8 +58,22 @@ export const Button: React.FC<Props> = ({
     }
     return null;
   };
+  const downloadFile = () => {
+    axios({
+      url: downloadImage,
+      method: 'GET',
+      responseType: 'blob',
+    }).then((response) => {
+      const url = window.URL.createObjectURL(new Blob([response.data]));
+      const link = document.createElement('a');
+      link.href = url;
+      link.setAttribute('download', downloadFileName);
+      document.body.appendChild(link);
+      link.click();
+    });
+  };
 
-  return isLink ? (
+  return isLink && !downloadImage ? (
     <Link href={externalUrl || link?.slug?.current || '#'} passHref>
       <a
         id={id}
@@ -70,7 +92,7 @@ export const Button: React.FC<Props> = ({
       id={id}
       title={title}
       className={[styles.button, btnVariant, classes ?? ''].join(' ')}
-      onClick={callBack}
+      onClick={downloadImage ? downloadFile : callBack}
       role="button"
       disabled={disabled}
       type={type}

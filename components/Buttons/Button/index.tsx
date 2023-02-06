@@ -10,7 +10,6 @@ export const Btn: React.FC<ButtonProps> = ({
   ...props
 }) => {
   const isLoading = false;
-
   return (
     <Button
       textTransform="unset"

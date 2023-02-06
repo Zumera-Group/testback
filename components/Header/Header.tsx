@@ -6,7 +6,7 @@ import { useRouter } from 'next/router';
 
 import { Logo } from 'components/Logo';
 import { Container } from 'components/Layout';
-import { Hamburger, Menu, BigMenu, LanguageSwitcher } from 'components/Header';
+import { Hamburger, Menu, BigMenu, LanguageSwitcher, AnnouncementTopBanner } from 'components/Header';
 
 import { useLinkWithCurrentLocale } from 'lib/shared-domain/useLinkWithCurrentLocale';
 import {
@@ -15,8 +15,9 @@ import {
   VTHeroModule,
 } from 'lib/shared-domain/page/domain/contentModule';
 
-import styles from './Header.module.scss';
 import { LogoExtended } from 'components/Icons/LogoExtended';
+
+import styles from './Header.module.scss';
 
 export const Header = ({
   siteSettings,
@@ -38,6 +39,9 @@ export const Header = ({
   const router = useRouter();
   const linkWithCurrentLocale = useLinkWithCurrentLocale();
   const homeSlug = linkWithCurrentLocale(siteSettings?.homePage?.slug?.current);
+  
+  const isQuestionnaire = () => router.locale === 'en' ? '/questionnaires/' : '/fragenkatalog/';
+  const hideTopBanner = router.asPath.includes(isQuestionnaire());
 
   const isLightPage = () => {
     if (isLightHeader) return true;
@@ -81,7 +85,7 @@ export const Header = ({
   useEffect(() => {
     const handleScroll = () => {
       const positionY = window.pageYOffset;
-      const POSITION_Y_OFFSET = 64;
+      const POSITION_Y_OFFSET = 94;
       if (positionY > POSITION_Y_OFFSET) {
         setIsScrolled(true);
       } else {
@@ -107,68 +111,82 @@ export const Header = ({
   }, [bigMenuOpen]);
 
   return (
-    <header
-      id="header"
-      className={[
-        styles.header,
-        isLightPage() ? styles.header__light : '',
-        isScrolled ? styles.header__scrolled : '',
-        bigMenuOpen ? styles.header__open : '',
-        indicator && styles.hideBorder,
-      ].join(' ')}
-    >
-      <Container classes={[styles.container].join('')}>
-        <div className={styles.logoWrapper}>
-          {!staticExtended ? (
-            <Logo
-              slug={homeSlug}
-              isScrolled={isScrolled}
-              isLightPage={isLightPage()}
-              title={siteName}
-              isAnimated={true}
-            />
-          ) : (
-            <LogoExtended slug={homeSlug} title={siteName} />
+    <>
+      {siteSettings?.announcementTopBanner?.isEnabled && !hideTopBanner && (
+        <AnnouncementTopBanner
+          announcementTopBanner={siteSettings?.announcementTopBanner}
+          isScrolled={isScrolled}
+        />
+      )}
+
+      <header
+        id="header"
+        className={[
+          styles.header,
+          isLightPage() ? styles.header__light : '',
+          isScrolled ? styles.header__scrolled : '',
+          bigMenuOpen ? styles.header__open : '',
+          indicator && styles.hideBorder,
+          siteSettings?.announcementTopBanner?.isEnabled &&
+            !hideTopBanner &&
+            styles.withBanner,
+        ].join(' ')}
+      >
+        <Container classes={[styles.container].join('')}>
+          <div className={styles.logoWrapper}>
+            {!staticExtended ? (
+              <Logo
+                slug={homeSlug}
+                isScrolled={isScrolled}
+                isLightPage={isLightPage()}
+                title={siteName}
+                isAnimated={true}
+              />
+            ) : (
+              <LogoExtended slug={homeSlug} title={siteName} />
+            )}
+          </div>
+          {!hideHeader && !hideMenu && <Menu navigation={headerMenu} />}
+
+          {!hideBurger && (
+            <div className={styles.actionsWrapper}>
+              <LanguageSwitcher
+                otherLangSlug={otherLangSlug}
+                classes={styles.languageSelector}
+              />
+              {!hideMenu ? (
+                <Hamburger
+                  callBack={() => setBigMenuOpen(true)}
+                  bigMenuOpen={bigMenuOpen}
+                />
+              ) : null}
+            </div>
           )}
-        </div>
-        {!hideHeader && !hideMenu && <Menu navigation={headerMenu} />}
 
-        {!hideBurger && !hideMenu && (
-          <div className={styles.actionsWrapper}>
-            <LanguageSwitcher
+          {indicator && (
+            <div className={styles.questionIndicator}>
+              Question{' '}
+              {indicator?.current > indicator?.total
+                ? indicator?.current - 1
+                : indicator?.current}{' '}
+              / {indicator?.total}
+            </div>
+          )}
+        </Container>
+        <AnimatePresence exitBeforeEnter>
+          {bigMenuOpen && (
+            <BigMenu
+              siteSettings={siteSettings}
+              services={services}
+              sectors={sectors}
+              logo={<Logo slug={homeSlug} title={siteName} isAnimated={true} />}
+              closeBigMenu={() => setBigMenuOpen(false)}
               otherLangSlug={otherLangSlug}
-              classes={styles.languageSelector}
             />
-            <Hamburger
-              callBack={() => setBigMenuOpen(true)}
-              bigMenuOpen={bigMenuOpen}
-            />
-          </div>
-        )}
-
-        {indicator && (
-          <div className={styles.questionIndicator}>
-            Question{' '}
-            {indicator?.current > indicator?.total
-              ? indicator?.current - 1
-              : indicator?.current}{' '}
-            / {indicator?.total}
-          </div>
-        )}
-      </Container>
-      <AnimatePresence exitBeforeEnter>
-        {bigMenuOpen && (
-          <BigMenu
-            siteSettings={siteSettings}
-            services={services}
-            sectors={sectors}
-            logo={<Logo slug={homeSlug} title={siteName} isAnimated={true} />}
-            closeBigMenu={() => setBigMenuOpen(false)}
-            otherLangSlug={otherLangSlug}
-          />
-        )}
-      </AnimatePresence>
-    </header>
+          )}
+        </AnimatePresence>
+      </header>
+    </>
   );
 };
 

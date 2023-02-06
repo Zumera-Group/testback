@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import I18n from 'i18n-js';
-import { Box, Flex, Grid, GridItem } from '@chakra-ui/react';
 import styles from './QuestionnaireLayout.module.scss';
 import { PageTransition } from 'components/PageTransition';
 import { SEO } from 'components/SEO';
@@ -20,7 +19,9 @@ import { SCREEN_SIZE_MD } from 'lib/constants';
 import { useMediaQuery } from 'lib/hooks/useMediaQuery';
 import { ScoreCard } from './ScoreCard';
 import ProgressBarLine from 'components/Calculator/ProgressBarLine/ProgressBarLine';
-import { Section } from 'components/Layout';
+
+import { Section, Container, Grid, GridColumn } from 'components/Layout';
+import { INDUSTRY_QUESTION_ID, SECTOR_QUESTION_ID } from './questions';
 
 const t = getTranslateByScope('timeEstimation');
 const tSidebar = getTranslateByScope('sidebar');
@@ -156,7 +157,6 @@ const QuestionnaireLayout: React.FC<{
 
   const currentCategory =
     questionnaire?.questionsByCategory?.[mainStep]?.categoryName ?? '';
-  const withBackgroundImage = !isOnResultScreen;
 
   //total number of questions
   const numberOfQuestionsInTotal = questionnaire?.questionsByCategory?.reduce(
@@ -169,6 +169,17 @@ const QuestionnaireLayout: React.FC<{
   const currentCategoryIndex = mainStep + 1;
   const progress = (currenQuestionPosition / numberOfQuestionsInTotal) * 100;
 
+  //LOGIC FOR SIDEBAR SHOWING OR NOT
+  const currentCatSidebar = questionnaire?.questionsByCategory?.[mainStep];
+  const categoryQuestions = currentCatSidebar?.questions;
+  const currentQuestion =
+    questionnaire && categoryQuestions && categoryQuestions[subStep];
+  const isIndustryOrSectorQuestion =
+    currentQuestion?.questionId === INDUSTRY_QUESTION_ID ||
+    currentQuestion?.questionId === SECTOR_QUESTION_ID;
+
+  const pageRef = useRef(null);
+
   return (
     <>
       <SEO
@@ -180,70 +191,93 @@ const QuestionnaireLayout: React.FC<{
         seoImage={questionnaire?.seoImage}
         siteSettings={siteSettings}
       />
-      <PageTransition slug={questionnaire?.questionnaireSlug?.current}>
-        <div className={styles.questionnaireWrapper}>
-          <Section
-            size={'sm'}
-            bg={'primary'}
-            color={'white'}
-            classes={styles.headerSection}
-          >
-            <PageHeader
-              contentModules={[]}
-              siteSettings={siteSettings}
-              darkBg
-              hideHeader={isOnResultScreen ? false : true}
-              hideBurger={isOnResultScreen ? false : true}
-              staticExtended
-              indicator={
-                !isOnResultScreen && {
-                  current: currenQuestionPosition,
-                  total: numberOfQuestionsInTotal,
-                }
-              }
-            />
-          </Section>
-          {questionnaire && !isOnResultScreen && !isMobile && (
-            <aside className={styles.sideBarWrapper}>
-              <Sidebar />
-            </aside>
-          )}
-          {isOnResultScreen && (
-            <aside className={styles.sideBarWrapper}>
-              <ScoreCard />
-            </aside>
-          )}
 
-          {questionnaire && !isOnResultScreen && isMobile && (
-            <aside
-              className={[styles.sideBarWrapper, styles.mobileSideBar].join(
-                ' ',
-              )}
+      <PageTransition slug={questionnaire?.questionnaireSlug?.current}>
+        <div
+          className={[
+            styles.page,
+            !isIndustryOrSectorQuestion && styles.page__hasSidebar,
+          ].join(' ')}
+          ref={pageRef}
+        >
+          <PageHeader
+            contentModules={[]}
+            siteSettings={siteSettings}
+            darkBg
+            hideHeader={isOnResultScreen ? false : true}
+            hideBurger={isOnResultScreen ? false : true}
+            staticExtended
+            indicator={
+              !isOnResultScreen && {
+                current: currenQuestionPosition,
+                total: numberOfQuestionsInTotal,
+              }
+            }
+          />
+
+          <main id="main">
+            <Section
+              bg={'primary'}
+              color={'white'}
+              size={isMobile ? 'sm' : 'md'}
+              classes={styles.section}
             >
-              <ProgressBarLine
-                indicator={
-                  !isOnResultScreen && {
-                    current: currenQuestionPosition,
-                    total: numberOfQuestionsInTotal,
-                  }
-                }
-                currentCategory={currentCategory}
-                categoryIndex={currentCategoryIndex}
-                progress={progress}
-              />
-            </aside>
-          )}
-          <Section
-            size={'sm'}
-            bg={'primary'}
-            color={'white'}
-            classes={styles.questionWrapper}
-          >
-            <QuestionComponent
-              sectorSpecificQuestions={sectorSpecificQuestions}
-              sectors={sectors}
-            />
-          </Section>
+              {questionnaire && !isOnResultScreen && isMobile && (
+                <div className={styles.progressBarLineMobile}>
+                  <ProgressBarLine
+                    indicator={
+                      !isOnResultScreen && {
+                        current: currenQuestionPosition,
+                        total: numberOfQuestionsInTotal,
+                      }
+                    }
+                    currentCategory={currentCategory}
+                    categoryIndex={currentCategoryIndex}
+                    progress={progress}
+                  />
+                </div>
+              )}
+              <Container>
+                <Grid
+                  fullWidth={true}
+                  justifyContent={'center'}
+                  alignItems={'start'}
+                  className={styles.grid}
+                >
+                  {!isIndustryOrSectorQuestion && (
+                    <GridColumn
+                      sm={12}
+                      md={4}
+                      lg={3}
+                      className={styles.sidebarCol}
+                    >
+                      <aside className={styles.sidebarWrapper}>
+                        {questionnaire && !isOnResultScreen && !isMobile && (
+                          <Sidebar />
+                        )}
+                        {isOnResultScreen && <ScoreCard />}
+                      </aside>
+                    </GridColumn>
+                  )}
+                  <GridColumn
+                    sm={12}
+                    md={8}
+                    lg={9}
+                    className={styles.questionCol}
+                  >
+                    <div className={styles.questionWrapper}>
+                      <QuestionComponent
+                        sectorSpecificQuestions={sectorSpecificQuestions}
+                        sectors={sectors}
+                        currentPos={currenQuestionPosition}
+                        refEl={pageRef}
+                      />
+                    </div>
+                  </GridColumn>
+                </Grid>
+              </Container>
+            </Section>
+          </main>
         </div>
       </PageTransition>
     </>

@@ -81,14 +81,14 @@ export const contentModulesQuery = (
          url,
        }
     },
-    textBlocks[] {
-      ...,
-      image{
-        asset->{
-          url,
-        }
-      }
-    },
+    // textBlocks[] {
+    //   ...,
+    //   image{
+    //     asset->{
+    //       url,
+    //     }
+    //   },
+    // },
     topImage {
       asset->{
         url
@@ -417,7 +417,7 @@ export const contentModulesQuery = (
 		  questionnaireSlug {
 			current
 		  },
-		},
+	  },
       externalUrl
     },
     heroImage {
@@ -466,6 +466,48 @@ export const contentModulesQuery = (
 		  },
 		},
     },
+    textBlocks[] {
+		...,
+		image {
+			asset->{
+			  url,
+			}
+		  },
+		accordionItems[] {
+			...,
+			description[] {
+				...,
+				image {
+					...,
+					asset->{
+					...,
+					  url,
+					}
+				}
+			}	
+		},
+		news->{
+		 ...,
+	   }
+    },
+    highlightedArticleSection {
+    	...,
+		highlightedPage ->  {
+			...,
+			picture {
+				asset->{
+				  url
+				},
+			  },
+		},
+		customTitleImage { 
+			asset->{
+				  url
+				},
+		}
+		
+    }
+    
 
 ${extraQuery || ''}
   }`;

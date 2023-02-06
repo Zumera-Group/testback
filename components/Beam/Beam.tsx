@@ -19,7 +19,7 @@ export const Beam: React.FC<Props> = ({ color, glow, classes }) => {
         styles.beam,
         beamColor,
         glow ? styles.beam__glow : '',
-        classes ?? ''
+        classes ?? '',
       ].join(' ')}
     >
       <path d="M309 0 82.35 409.015A58.174 58.174 0 0 1 31.469 439H0L226.65 29.985A58.168 58.168 0 0 1 277.532 0H309Z" />

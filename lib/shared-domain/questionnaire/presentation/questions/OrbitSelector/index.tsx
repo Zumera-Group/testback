@@ -1,18 +1,17 @@
 import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
-import { Box, Flex, Input, useBreakpointValue } from '@chakra-ui/react';
-import { colors } from 'styles/foundations/colors';
-import { P } from 'components/Typography/P';
 import { Question } from 'lib/shared-domain/questionnaire/domain';
 import { useAnswers } from 'lib/shared-domain/questionnaire/application/useAnswers';
 import { QuestionButtons } from '../../Question/QuestionButtons';
 import { QuestionText } from '../../Question/QuestionText';
 import { QuestionAnimation } from '../../Question/QuestionAnimation';
 import { RequiredQuestionInfo } from '../../Question/RequiredQuestionInfo';
-import getAnswerFromDegree from './utils/getAnswerFromDegree';
-import getDegreeFromAnswer from './utils/getDegreeFromAnswer';
-import getCoordsPositionDiv from './utils/getCoordsPositionDiv';
-import getDegreeFromCoords from './utils/getDegreeFromCoords';
-import ArrowSelector from './ArrowSelector';
+import { Donut } from './Donut';
+import { AnswerLabel } from './AnswerLabel';
+import BackButton from 'components/Calculator/BackButton/BackButton';
+
+import styles from './Orbit.module.scss';
+import { useMediaQuery } from 'lib/hooks/useMediaQuery';
+import { SCREEN_SIZE_MD } from 'lib/constants';
 
 export interface AnswerOption {
   value: string;
@@ -22,164 +21,110 @@ export interface AnswerOption {
 export const OrbitSelector: React.FC<{
   question: Question;
   onNextQuestion: () => void;
-}> = ({ question, onNextQuestion }) => {
-  const isMobile = useBreakpointValue({ base: true, lg: false });
-  const [orbitWidthInPx, setOrbitWidthInPx] = useState(0);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const setOrbitHeightInPx = () => {
-    const totalMargin = 100;
-    const screenWidth = document?.body?.clientWidth;
-    const screenHeight = document?.body?.clientHeight;
-
-    const orbitWidthInPx =
-      screenWidth - totalMargin > 600 ? 600 : screenWidth - totalMargin;
-
-    if (isMobile) {
-      if (screenHeight > screenWidth) setOrbitWidthInPx(orbitWidthInPx);
-      else setOrbitWidthInPx(screenHeight);
-    } else {
-      setOrbitWidthInPx(600);
-    }
-  };
-  useLayoutEffect(() => {
-    setOrbitHeightInPx();
-  }, [setOrbitHeightInPx]);
+  onPrevQuestion: () => void;
+  currentPos: number;
+}> = ({ question, onNextQuestion, onPrevQuestion, currentPos }) => {
+  const rangeInputRef = useRef(null);
 
   const { getAnswer, setAnswer } = useAnswers(question);
-  const sliderDom = useRef(undefined);
-  const doomElementToGetCoords = useRef(undefined);
-  const [sliderValue, setSliderValue] = useState(undefined);
-  const [canSliderMove, setCanSliderMove] = useState(undefined);
-  const [answer, setStringAnswer] = useState(getAnswer());
 
-  const initSlide = () => {
-    setCanSliderMove(true);
+  const RANGE_MIN_VALUE = 0;
+  const RANGE_MAX_VALUE = 100;
+  const answers = question.answerSelector.orbitSelector.answerOptions;
+  const TOTAL_SEGMENTS = (answers.length / RANGE_MAX_VALUE) * RANGE_MAX_VALUE;
+  const STEPS = RANGE_MAX_VALUE / TOTAL_SEGMENTS;
+
+  const isMobile = useMediaQuery(`(max-width: ${SCREEN_SIZE_MD})`);
+
+  const [rangeValue, setRangeValue] = useState(80);
+  const [chosenAnswer, setChosenAnswer] = useState(answers[0]);
+
+  const updateRange = () => {
+    const rangeInput = rangeInputRef.current;
+    const rangeTrackBg = 'var(--range-track-bg)';
+    const rangeProgressBg = 'var(--range-progress-bg)';
+    const value =
+      ((rangeInput.value - rangeInput.min) /
+        (rangeInput.max - rangeInput.min)) *
+      100;
+    rangeInput.style.background = `
+      linear-gradient(
+        to right,
+        ${rangeProgressBg} 0%,
+        ${rangeProgressBg} ${value}%,
+        ${rangeTrackBg} ${value}%,
+        ${rangeTrackBg} 100%
+      )`;
   };
-  const stopSlide = () => {
-    setCanSliderMove(false);
-  };
-  const updateSlide = (evt) => {
-    if (!canSliderMove) return;
-    const coords = getCoordsPositionDiv(evt, doomElementToGetCoords);
 
-    const mainCoord = {
-      x: orbitHeightInPx,
-      y: orbitHeightInPx,
-    };
+  const updateAnswer = (value: number) => {
+    setRangeValue(value);
+    const FRACTION = Math.ceil(value / STEPS) * STEPS;
+    const answerIndex = Math.min(
+      Math.max(FRACTION / STEPS - 1, 0),
+      TOTAL_SEGMENTS,
+    );
+    setChosenAnswer(answers[answerIndex]);
 
-    const deg = getDegreeFromCoords(coords, mainCoord);
-    if (deg >= 0 && deg <= 180) {
-      setSliderValue(deg);
-      const answer = getAnswerFromDegree(
-        deg,
-        question?.answerSelector?.orbitSelector?.answerOptions,
-      );
-      setStringAnswer(answer);
-      setAnswer(answer);
-    }
+    // E.g. Large Impact
+    setAnswer(`${answers[answerIndex].value}`);
   };
 
   useEffect(() => {
-    if (answer) {
-      setSliderValue(
-        getDegreeFromAnswer(
-          answer,
-          question?.answerSelector?.orbitSelector?.answerOptions,
-        ),
+    updateRange();
+  }, [rangeValue]);
+
+  useEffect(() => {
+    const previousAnswer = getAnswer();
+    let formattedAnswerAsNumber;
+    if (previousAnswer) {
+      // E.g. Large Impact (80 / 100); from updateAnswer above
+      // This will find the user's answered value by getting the number in between the '(' and '/'
+      formattedAnswerAsNumber = Number(
+        previousAnswer.split('(').pop().split('/')[0],
       );
+    } else {
+      formattedAnswerAsNumber = rangeValue;
     }
-    setOrbitHeightInPx();
+    updateAnswer(formattedAnswerAsNumber);
   }, []);
 
-  const orbitHeightInPx = orbitWidthInPx / 2;
-  const bgSize = orbitHeightInPx + 50;
-
   return (
-    <>
+    <QuestionAnimation>
+      {isMobile && (
+        <BackButton onPrevQuestion={onPrevQuestion} currentPos={currentPos} />
+      )}
+
       <QuestionText title={question.questionText}>
         <RequiredQuestionInfo isRequired={question?.isRequired} />
       </QuestionText>
-      <QuestionAnimation>
-        <Box mt={90}>
-          <Box
-            bg={colors.orbitSelector}
-            bgSize="cover"
-            ref={doomElementToGetCoords}
-            margin="auto"
-            width={orbitWidthInPx + 'px'}
-            height={orbitHeightInPx + 'px'}
-            borderTopLeftRadius="100em"
-            borderTopRightRadius="100em"
-            borderBottom={0}
-            onTouchStart={() => initSlide()}
-            onMouseDown={(evt) => {
-              initSlide();
-              updateSlide(evt);
-            }}
-            onTouchMove={(evt) => updateSlide(evt)}
-            onMouseMove={(evt) => updateSlide(evt)}
-            onMouseUp={() => stopSlide()}
-            onMouseLeave={() => stopSlide()}
-            onTouchEnd={(evt) => {
-              initSlide();
-              updateSlide(evt);
-              stopSlide();
-            }}
-            onClick={(evt) => {
-              initSlide();
-              updateSlide(evt);
-              stopSlide();
-            }}
-            cursor={'pointer'}
-          >
-            <ArrowSelector
-              orbitHeightInPx={orbitHeightInPx}
-              sliderValue={sliderValue}
-            />
 
-            <Box
-              borderTopLeftRadius="100em"
-              borderTopRightRadius="100em"
-              bg="#300032"
-              width={bgSize + 'px'}
-              height={bgSize / 2 + 'px'}
-              margin="auto"
-              marginTop={orbitHeightInPx - bgSize / 2 + 'px'}
-            ></Box>
-          </Box>
+      <div className={styles.rangeWrapper}>
+        <div className={styles.donutWrapper}>
+          <Donut progress={rangeValue} total={RANGE_MAX_VALUE} />
+          <AnswerLabel answer={chosenAnswer?.label} />
+        </div>
+        <input
+          ref={rangeInputRef}
+          className={styles.rangeSlider}
+          type="range"
+          min={RANGE_MIN_VALUE}
+          max={RANGE_MAX_VALUE}
+          value={rangeValue}
+          onChange={(e) => updateAnswer(Number(e.target.value))}
+        />
+      </div>
 
-          <Box>
-            <Input
-              display="none"
-              ref={sliderDom}
-              type="range"
-              // width="100%"
-              min={0}
-              max={180}
-              value={sliderValue}
-              onChange={({ target: { value } }) => {
-                setSliderValue(value);
-              }}
-            ></Input>
-          </Box>
-        </Box>
-      </QuestionAnimation>
-
-      <Flex mt={1} minH={4} justify="center">
-        <P variant="orbitSelector" color={'white'}>
-          {
-            question?.answerSelector?.orbitSelector?.answerOptions?.find(
-              (a) => a?.value === answer,
-            )?.label
-          }
-        </P>
-      </Flex>
-
-      <QuestionButtons
-        onNextQuestion={onNextQuestion}
-        isRequired={question?.isRequired}
-        isAnswered={getAnswer()}
-      />
-    </>
+      <div className={styles.buttonOuter}>
+        {!isMobile && (
+          <BackButton onPrevQuestion={onPrevQuestion} currentPos={currentPos} />
+        )}
+        <QuestionButtons
+          onNextQuestion={onNextQuestion}
+          isRequired={question?.isRequired}
+          isAnswered={getAnswer()}
+        />
+      </div>
+    </QuestionAnimation>
   );
 };

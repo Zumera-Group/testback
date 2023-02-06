@@ -9,7 +9,6 @@
   }
 }
 
-.link,
 .body,
 .cover {
   width: 100%;
@@ -19,34 +18,6 @@
   position: relative;
   background-color: $secondary;
   color: $white;
-}
-
-.link {
-  height: 100%;
-  svg:not(.beam) {
-    transform: scale(1);
-    transform-origin: 50% 50%;
-    transition: color $timing-lg $ease-out, transform $timing-lg $ease-out;
-    backface-visibility: hidden;
-  }
-  @include hover-state() {
-    color: $white;
-    .image {
-      transform: scale(1.06);
-    }
-    svg:not(.beam) {
-      transform: scale(0.96);
-    }
-    .beam {
-      fill: $tertiary;
-    }
-  }
-  @include active-state() {
-    .image {
-      transition: transform $timing-md $ease-out;
-      transform: scale(1);
-    }
-  }
 }
 
 .imageWrapper {
@@ -66,37 +37,40 @@
   }
 }
 
-.image {
-  transform-origin: 50% 50%;
-  transform: scale(1);
-  transition: transform $timing-xl * 3 $ease-out;
-  backface-visibility: hidden;
-}
-
 .logosCover {
   background-color: $white;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   text-align: center;
-  padding: $gutter * 0.5;
+  padding: $gutter;
+  @include breakpoint-up(sm) {
+    padding: $gutter * 0.5 $gutter * 2;
+  }
   aspect-ratio: 5/2;
+  & > *:not(.beam) {
+    flex: 1;
+    flex-shrink: 0;
+  }
 }
 
 .transactionLogoFallback {
   font-size: $font-size-tiny;
   font-weight: $font-weight-bold;
-  flex: 1;
-  margin: 0;
+  margin: 0 !important;
   line-height: 1;
-  padding: $gutter;
-  color: rgba($secondary, 0.5);
+  color: $black;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  line-clamp: 5;
+  -webkit-box-orient: vertical;
 }
 
 .beam {
   height: 4.5rem;
-  margin: 0 $gutter * 0.5;
-  transition: fill $timing-md $ease-out;
+  margin: 0 $gutter;
 }
 
 .body {

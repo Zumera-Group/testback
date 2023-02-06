@@ -16,13 +16,16 @@
   p {
     margin: 0;
   }
+
   p {
     margin-top: $headings-margin-bottom;
     width: 100%;
   }
+
   & > div {
     animation: fadeIn 1s;
   }
+
 }
 
 .btnWrapper {
@@ -30,9 +33,9 @@
   margin: $btn-wrapper-margin-top 0 0 0;
   button,
   a {
-    margin-right: 2rem;
+    margin-right: $gutter * 2;
     @include breakpoint-down(md) {
-      margin-bottom: 2rem;
+      margin-bottom: $gutter * 2;
     }
   }
 }
@@ -52,36 +55,56 @@
 }
 
 .purposesWrapper {
-  border: 1px solid #794d7c;
-  border-radius: 24px;
+  border: $border-width solid $quaternary;
+  border-radius: $border-radius;
   text-align: center;
-  padding: 4rem 3.188rem;
-  @include breakpoint-down(md) {
-    padding: 2rem 1rem;
+  padding: $gutter * 2;
+  @include breakpoint-up(lg) {
+    padding: $gutter * 3
   }
   h4 {
-    margin-bottom: 3.188rem;
+    margin-bottom: $headings-margin-bottom * 2;
   }
 }
+
 .purposes {
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
+  align-items: stretch;
+  gap: $gutter * 0.5;
 }
+
 .purpose {
   cursor: pointer;
-  border: 1px solid #794d7c;
-  border-radius: 20px;
-  padding: 2rem 1rem;
-  font-size: 1rem;
-  width: 32%;
+  color: inherit !important;
+  border: $border-width solid $quaternary;
+  border-radius: $border-radius-sm;
+  font-size: $font-size-normal;
   display: flex;
   align-items: center;
   justify-content: center;
-  @include breakpoint-down(md) {
-    padding: 1rem 0.5rem;
+  flex-direction: column;
+  flex: 1;
+  backface-visibility: hidden;
+  will-change: transform, background-color, border-color;
+  transition: border-color $timing-sm $ease-out,
+  background-color $timing-sm $ease-out, transform $timing-sm $ease-out;
+  transform-origin: 50% 50%;
+  padding: $gutter * 1.5 $gutter * 0.75;
+  @include breakpoint-up(lg) {
+    padding: $gutter * 2 $gutter;
   }
-  &.selected {
+  &.selected,
+  &:hover {
     border-color: $accent;
-    background: $zumera-gradient-middle-back;
+    background-color: $zumera-gradient-middle-back;
+  }
+  &:hover {
+    transform: scale(0.98);
+  }
+  &:active {
+    transform: scale(0.96);
+    transition-duration: $timing-xs;
   }
 }

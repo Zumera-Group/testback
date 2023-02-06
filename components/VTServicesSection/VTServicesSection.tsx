@@ -7,7 +7,8 @@ import { VTServicesSectionModule } from 'lib/shared-domain/page/domain/contentMo
 
 export const VTServicesSection: React.FC<{
   specificContentModule: VTServicesSectionModule;
-}> = ({ specificContentModule }) => {
+  siteSettings: any;
+}> = ({ specificContentModule, siteSettings }) => {
   const {
     title,
     subtitle,
@@ -21,7 +22,7 @@ export const VTServicesSection: React.FC<{
   const sectionStyles = [
     styles.gridContainer,
     !isFullWidth ? styles[`bg-${background}`] || styles['bg-light'] : '',
-    isFullWidth ? styles.underline : '',
+    isFullWidth && !siteSettings.hideFooterSitemap ? styles.underline : '',
   ].join(' ');
 
   const ButtonComp = () => {

@@ -8,15 +8,15 @@ import { Container, Section } from 'components/Layout';
 
 interface Props {
   dividerImage?: string;
-  isInContainer: boolean;
+  isInContainer?: boolean;
+  isNoParalax?: boolean;
 }
 
 export const DividerImage: React.FC<Props> = ({ ...rest }) => {
-  const { dividerImage, isInContainer } = rest;
+  const { dividerImage, isInContainer, isNoParalax } = rest;
   const { ref, inView } = useInView();
   const imageRef = useRef(null);
   const strength = 15;
-
   useEffect(() => {
     if (!imageRef) return;
     const handleScroll = () => {
@@ -51,13 +51,13 @@ export const DividerImage: React.FC<Props> = ({ ...rest }) => {
         className={styles.dividerImage_inner}
         ref={imageRef}
         style={{
-          height: 100 + strength + '%',
+          height: isNoParalax ? '100%' : 100 + strength + '%',
         }}
       >
         <Image
           loading="lazy"
           unoptimized
-          objectFit={'cover'}
+          objectFit={isNoParalax ? 'contain' : 'cover'}
           objectPosition="center"
           layout="fill"
           alt={''}

@@ -1,4 +1,4 @@
-import { SiteSettings } from '../domain/index';
+import { IAnnouncementTopBanner, SiteSettings } from '../domain/index';
 import { ContentModule } from '../domain/contentModule';
 
 import Header from 'components/Header';
@@ -14,6 +14,7 @@ interface Props {
   staticExtended?: boolean;
   indicator?: {};
   hideMenu?: boolean;
+  announcementTopBanner?: IAnnouncementTopBanner;
 }
 
 export const PageHeader: React.FC<Props> = ({
