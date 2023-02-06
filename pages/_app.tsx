@@ -34,12 +34,19 @@ function MyApp({ Component, pageProps, router }) {
           content="width=device-width, initial-scale=1, shrink-to-fit=no"
         />
       </Head>
-      <Script
+      {/* <Script
         async
         defer
         strategy="lazyOnload"
         src="https://consent.cookiefirst.com/banner.js"
         data-cookiefirst-key="dd7fd031-9337-411f-839c-774530a85280"
+      /> */}
+      <Script
+        async
+        defer
+        strategy="lazyOnload"
+        src="https://consent.cookiefirst.com/banner.js"
+        data-cookiefirst-key="187e6cb5-6683-48db-9a01-a5892c9f29d2"
       />
       <IntercomProvider
         initializeDelay={10000}
