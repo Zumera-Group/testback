@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { fetchQuestionnaire } from 'lib/shared-domain/questionnaire/application/useGetQuestionnaire';
 import {
@@ -22,6 +22,7 @@ import { filterDataToSingleItem } from '../../lib/shared-domain/page/infrastruct
 
 import { fetchSectors } from '../../lib/shared-domain/sectors/application/useGetSectors';
 import { REVALIDATE_ON_FAILURE_TIME_IN_SECONDS } from '../../lib/shared-domain/page/constants';
+import { SecretKeyLockScreen } from 'components/SecretKeyLockScreen';
 
 export async function getStaticPaths() {
   return {
@@ -118,8 +119,21 @@ export default function Index({
 
   const router = useRouter();
 
+  const [isSecretOpen, setIsSecretOpen] = useState(
+    !siteSettings?.isUnderSecretKey,
+  );
+  useEffect(() => {
+    if (localStorage.getItem('secretKeyOpen')) {
+      setIsSecretOpen(true);
+    }
+  }, []);
+
   if (router.isFallback) {
     return null;
+  }
+
+  if (siteSettings && siteSettings?.isUnderSecretKey && !isSecretOpen) {
+    return <SecretKeyLockScreen siteSettings={siteSettings} />;
   }
 
   return (

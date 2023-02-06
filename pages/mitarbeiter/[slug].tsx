@@ -13,6 +13,8 @@ import { EmployeeHero } from 'lib/shared-domain/employees/presentation/EmployeeH
 import { filterDataToSingleItem } from '../../lib/shared-domain/page/infrastructure/page.facade';
 import { usePreviewSubscription } from '../../lib/sanity';
 import { REVALIDATE_ON_FAILURE_TIME_IN_SECONDS } from '../../lib/shared-domain/page/constants';
+import { useEffect, useState } from 'react';
+import { SecretKeyLockScreen } from 'components/SecretKeyLockScreen';
 
 export async function getStaticPaths() {
   const de = await fetchEmployees('de');
@@ -112,6 +114,14 @@ export default function Index({
 
   const router = useRouter();
 
+  const [isSecretOpen, setIsSecretOpen] = useState(
+    !siteSettings?.isUnderSecretKey,
+  );
+  useEffect(() => {
+    if (localStorage.getItem('secretKeyOpen')) {
+      setIsSecretOpen(true);
+    }
+  }, []);
   if (router.isFallback) {
     return (
       <>
@@ -123,6 +133,10 @@ export default function Index({
         </div>
       </>
     );
+  }
+
+  if (siteSettings && siteSettings?.isUnderSecretKey && !isSecretOpen) {
+    return <SecretKeyLockScreen siteSettings={siteSettings} />;
   }
 
   return (
