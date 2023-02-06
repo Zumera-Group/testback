@@ -20,14 +20,14 @@ export const CardsNew = ({
   const hasHighlighted = highLightedArticle;
   const highlightedCard = {
     ...highlightedArticleSection?.highlightedPage,
-    title: customTitle || highlightedArticleSection?.highlightedPage.title,
+    title: customTitle || highlightedArticleSection?.highlightedPage?.title,
     customLink: customTitleLink,
-    date: date || highlightedArticleSection?.highlightedPage.date,
+    date: date || highlightedArticleSection?.highlightedPage?.date,
     picture:
-      customTitleImage || highlightedArticleSection?.highlightedPage.picture,
+      customTitleImage || highlightedArticleSection?.highlightedPage?.picture,
     _type: customTitle
       ? 'newsArticle'
-      : highlightedArticleSection?.highlightedPage._type,
+      : highlightedArticleSection?.highlightedPage?._type,
   };
 
   const firstCard = hasHighlighted ? highlightedCard : cardsRow[0];
