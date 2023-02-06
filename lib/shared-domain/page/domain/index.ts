@@ -47,6 +47,7 @@ export interface IAnnouncementTopBanner {
 
 export interface SiteSettings {
   announcementTopBanner: IAnnouncementTopBanner;
+  isUnderSecretKey: boolean;
   footerCopyright: string;
   footerPrivacyPolice: {
     name: string;
