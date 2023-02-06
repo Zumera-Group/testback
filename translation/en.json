@@ -95,7 +95,8 @@
         },
         "checkbox": "I agree with the processing of the given data for the creation of the evaluation as well as the contacting by Saxenhammer & Co GmbH.",
         "checkboxError": "This is required",
-        "button": "Send"
+        "button": "Send",
+        "successMessage": "Thank you for filling out your information."
       }
     },
     "appointment": {

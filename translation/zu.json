@@ -100,7 +100,8 @@
           "link": "/de/datenschutzerklarung/"
         },
         "checkboxError": "This is required",
-        "button": "Send"
+        "button": "Send",
+        "successMessage": "Thank you for filling out your information."
       }
     },
     "appointment": {

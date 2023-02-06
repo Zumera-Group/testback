@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { InlineWidget } from 'react-calendly';
 import * as EmailValidator from 'email-validator';
 
@@ -189,7 +189,7 @@ const EvaluationScreen: React.FC<{
 }> = ({ onSuccess, score }) => {
   const { syncCurrentAnswersToSalesforce } = useSalesforceAnswerSync();
   const { locale, push } = useRouter();
-
+  const [isSubmit, setSubmit] = useState(false);
   const { getAnswer, setAnswer, uniqueId } = useValuationStore();
   const [checkboxIsChecked, setCheckboxIsChecked] = React.useState(false);
   const [pressed, setPressed] = React.useState(false);
@@ -203,15 +203,17 @@ const EvaluationScreen: React.FC<{
 
   const onSend = async () => {
     setPressed(true);
+
     if (!SEND_IS_ALLOWED) return;
     await syncCurrentAnswersToSalesforce(uniqueId, 'lastQuestion');
 
     if (!score || !score.avg || score?.avg < 5000000) {
-      if (locale === 'de') {
-        push('https://www.zumera.com/de');
-      } else {
-        push('https://www.zumera.com/');
-      }
+      // if (locale === 'de') {
+      //   push('https://www.zumera.com/de');
+      // } else {
+      //   push('https://www.zumera.com/');
+      // }
+      setSubmit(true);
     } else {
       onSuccess();
     }
@@ -251,101 +253,109 @@ const EvaluationScreen: React.FC<{
 
   return (
     <AnimateIn>
-      <QuestionText
-        title={t('evaluation.title')}
-        description={t('evaluation.description')}
-      />
+      {!isSubmit ? (
+        <>
+          <QuestionText
+            title={t('evaluation.title')}
+            description={t('evaluation.description')}
+          />
 
-      <FlexCol maxWidth={700} className={styles.resultForm}>
-        <Flex direction={{ base: 'column', lg: 'row' }} flexWrap="wrap">
-          <FlexCol
-            ml={{ base: 0, lg: hasScoreAndPercentage ? 4 : 'auto' }}
-            flex={{ base: 1, lg: 0.6 }}
-            mr={!hasScoreAndPercentage && 'auto'}
-          >
-            <InputWithLabelAndError
-              error={
-                pressed &&
-                !getAnswer(NAME_STORE_INDICATOR)?.trim() &&
-                t('evaluation.form.name.error')
-              }
-              label={t('evaluation.form.name.label')}
-              placeholder={t('evaluation.form.name.placeholder')}
-              value={getAnswer(NAME_STORE_INDICATOR)}
-              onChange={(value) =>
-                setAnswer({ id: NAME_STORE_INDICATOR, value })
-              }
-              isRequired
-            />
-
-            <InputWithLabelAndError
-              error={getEmailError()}
-              label={t('evaluation.form.email.label')}
-              placeholder={t('evaluation.form.email.placeholder')}
-              value={getAnswer(EMAIL_STORE_INDICATOR)}
-              onChange={(value) =>
-                setAnswer({ id: EMAIL_STORE_INDICATOR, value })
-              }
-              isRequired
-            />
-            <InputWithLabelAndError
-              error={
-                pressed &&
-                !getAnswer(PHONE_NUMBER_STORE_INDICATOR)?.trim() &&
-                t('evaluation.form.phoneNumber.error')
-              }
-              label={t('evaluation.form.phoneNumber.label')}
-              placeholder={t('evaluation.form.phoneNumber.placeholder')}
-              value={getAnswer(PHONE_NUMBER_STORE_INDICATOR)}
-              onChange={(value) =>
-                setAnswer({ id: PHONE_NUMBER_STORE_INDICATOR, value })
-              }
-              isRequired
-            />
-
-            <FormControl isInvalid={pressed && !checkboxIsChecked}>
-              <Checkbox
-                onChange={(e) => setCheckboxIsChecked(e.target.checked)}
-                isChecked={checkboxIsChecked}
-                id="result_checkBox"
+          <FlexCol maxWidth={700} className={styles.resultForm}>
+            <Flex direction={{ base: 'column', lg: 'row' }} flexWrap="wrap">
+              <FlexCol
+                ml={{ base: 0, lg: hasScoreAndPercentage ? 4 : 'auto' }}
+                flex={{ base: 1, lg: 0.6 }}
+                mr={!hasScoreAndPercentage && 'auto'}
               >
-                <Box color="white" textAlign="left" mt={-0.5}>
-                  <span>{t('evaluation.form.checkbox.first')}</span>
-                  <a
-                    style={{
-                      display: 'inline-block',
-                      cursor: 'pointer',
-                      textDecoration: 'underline',
-                    }}
-                    target="_blank"
-                    rel="noreferrer"
-                    href={t('evaluation.form.checkbox.link')}
+                <InputWithLabelAndError
+                  error={
+                    pressed &&
+                    !getAnswer(NAME_STORE_INDICATOR)?.trim() &&
+                    t('evaluation.form.name.error')
+                  }
+                  label={t('evaluation.form.name.label')}
+                  placeholder={t('evaluation.form.name.placeholder')}
+                  value={getAnswer(NAME_STORE_INDICATOR)}
+                  onChange={(value) =>
+                    setAnswer({ id: NAME_STORE_INDICATOR, value })
+                  }
+                  isRequired
+                />
+
+                <InputWithLabelAndError
+                  error={getEmailError()}
+                  label={t('evaluation.form.email.label')}
+                  placeholder={t('evaluation.form.email.placeholder')}
+                  value={getAnswer(EMAIL_STORE_INDICATOR)}
+                  onChange={(value) =>
+                    setAnswer({ id: EMAIL_STORE_INDICATOR, value })
+                  }
+                  isRequired
+                />
+                <InputWithLabelAndError
+                  error={
+                    pressed &&
+                    !getAnswer(PHONE_NUMBER_STORE_INDICATOR)?.trim() &&
+                    t('evaluation.form.phoneNumber.error')
+                  }
+                  label={t('evaluation.form.phoneNumber.label')}
+                  placeholder={t('evaluation.form.phoneNumber.placeholder')}
+                  value={getAnswer(PHONE_NUMBER_STORE_INDICATOR)}
+                  onChange={(value) =>
+                    setAnswer({ id: PHONE_NUMBER_STORE_INDICATOR, value })
+                  }
+                  isRequired
+                />
+
+                <FormControl isInvalid={pressed && !checkboxIsChecked}>
+                  <Checkbox
+                    onChange={(e) => setCheckboxIsChecked(e.target.checked)}
+                    isChecked={checkboxIsChecked}
+                    id="result_checkBox"
                   >
-                    {t('evaluation.form.checkbox.second')}
-                  </a>
-                  <span>{t('evaluation.form.checkbox.third')}</span>
-                </Box>
-              </Checkbox>
-              {pressed && !checkboxIsChecked && (
-                <FormErrorMessage mt={20} mb={20} color={'white'}>
-                  {t('evaluation.form.checkboxError')}
-                </FormErrorMessage>
-              )}
-            </FormControl>
-            <Button
-              type="submit"
-              variant="primary"
-              callBack={onSend}
-              disabled={!checkboxIsChecked}
-              onDark
-              hideIcon
-              classes={styles.submitButton}
-            >
-              {t('evaluation.form.button')}
-            </Button>
+                    <Box color="white" textAlign="left" mt={-0.5}>
+                      <span>{t('evaluation.form.checkbox.first')}</span>
+                      <a
+                        style={{
+                          display: 'inline-block',
+                          cursor: 'pointer',
+                          textDecoration: 'underline',
+                        }}
+                        target="_blank"
+                        rel="noreferrer"
+                        href={t('evaluation.form.checkbox.link')}
+                      >
+                        {t('evaluation.form.checkbox.second')}
+                      </a>
+                      <span>{t('evaluation.form.checkbox.third')}</span>
+                    </Box>
+                  </Checkbox>
+                  {pressed && !checkboxIsChecked && (
+                    <FormErrorMessage mt={20} mb={20} color={'white'}>
+                      {t('evaluation.form.checkboxError')}
+                    </FormErrorMessage>
+                  )}
+                </FormControl>
+                <Button
+                  type="submit"
+                  variant="primary"
+                  callBack={onSend}
+                  disabled={!checkboxIsChecked}
+                  onDark
+                  hideIcon
+                  classes={styles.submitButton}
+                >
+                  {t('evaluation.form.button')}
+                </Button>
+              </FlexCol>
+            </Flex>
           </FlexCol>
-        </Flex>
-      </FlexCol>
+        </>
+      ) : (
+        <h3 className={styles.successMessage}>
+          {t('evaluation.form.successMessage')}
+        </h3>
+      )}
     </AnimateIn>
   );
 };

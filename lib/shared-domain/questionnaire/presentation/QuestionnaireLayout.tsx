@@ -249,7 +249,10 @@ const QuestionnaireLayout: React.FC<{
                       sm={12}
                       md={4}
                       lg={3}
-                      className={styles.sidebarCol}
+                      className={[
+                        styles.sidebarCol,
+                        isOnResultScreen && styles.nonStick,
+                      ].join(' ')}
                     >
                       <aside className={styles.sidebarWrapper}>
                         {questionnaire && !isOnResultScreen && !isMobile && (
