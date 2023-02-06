@@ -24,24 +24,18 @@
   display: flex;
   align-items: center;
   @include push-auto-x();
-  justify-content: flex-start;
-  // Avoid overlapping with ChatButton
-  @media screen and (min-width: 1440px) {
-    justify-content: flex-end;
-  }
-  @media screen and (max-width: 1440px) {
+  justify-content: flex-end;
+  @include breakpoint-down(xxl) {
     & > * {
-      width: 100%;
-      max-width: calc(100% - 96px);
-      justify-content: center;
+      margin-right: 10vw;
     }
   }
   @include breakpoint-down(md) {
+    justify-content: flex-start;
     & > * {
+      width: 100%;
       max-width: calc(100% - 64px);
+      justify-content: center;
     }
   }
 }
-
-
-
