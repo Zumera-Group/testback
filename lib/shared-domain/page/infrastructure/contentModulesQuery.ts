@@ -504,10 +504,7 @@ export const contentModulesQuery = (
 			asset->{
 				  url
 				},
-		}
-		
-    }
-    
-
+		},
+    }, 
 ${extraQuery || ''}
   }`;
