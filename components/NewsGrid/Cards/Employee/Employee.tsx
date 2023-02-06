@@ -20,7 +20,8 @@ export const Employee: React.FC<{
     article.newsGridPicture?.picture?.asset?.url ||
     article.cardPicture?.asset?.url ||
     article.cardPicture?.picture?.asset?.url;
-  const image = sanityImageUrlFor(imageUrl)?.height(800).auto('format').url();
+  const image = sanityImageUrlFor(imageUrl)?.url();
+
   const href = links().employees(article);
 
   return (

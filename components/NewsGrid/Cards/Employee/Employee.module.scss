@@ -67,7 +67,6 @@
   transform-origin: 50% 50%;
   transform: scale(1);
   transition: transform $timing-xl * 3 $ease-out;
-  backface-visibility: hidden;
 }
 
 .body {
