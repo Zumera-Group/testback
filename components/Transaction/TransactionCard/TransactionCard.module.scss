@@ -43,6 +43,7 @@
   justify-content: space-between;
   align-items: center;
   text-align: center;
+  width: 100%;
   padding: $gutter;
   @include breakpoint-up(sm) {
     padding: $gutter * 0.5 $gutter * 2;

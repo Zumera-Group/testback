@@ -5,6 +5,7 @@
   align-items: center;
   padding: $container-padding-x;
   margin-right: -$container-padding-x;
+  color: inherit;
   & > svg {
     transition: color $timing-sm $ease-out;
   }
