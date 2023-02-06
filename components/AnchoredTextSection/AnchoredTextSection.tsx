@@ -33,7 +33,7 @@ export const AnchoredTextSection = ({ specificContentModule }) => {
           <GridColumn sm={12} md={6} lg={6}>
             <SectionHeading
               title={title}
-              headingType={'h3'}
+              headingType={'h4'}
               align={'left'}
               classes={styles.titles}
             />
