@@ -24,7 +24,6 @@ export const OrbitSelector: React.FC<{
   onPrevQuestion: () => void;
   currentPos: number;
 }> = ({ question, onNextQuestion, onPrevQuestion, currentPos }) => {
-  
   const rangeInputRef = useRef(null);
 
   const { getAnswer, setAnswer } = useAnswers(question);
@@ -34,18 +33,20 @@ export const OrbitSelector: React.FC<{
   const answers = question.answerSelector.orbitSelector.answerOptions;
   const TOTAL_SEGMENTS = (answers.length / RANGE_MAX_VALUE) * RANGE_MAX_VALUE;
   const STEPS = RANGE_MAX_VALUE / TOTAL_SEGMENTS;
-  
+
   const isMobile = useMediaQuery(`(max-width: ${SCREEN_SIZE_MD})`);
 
   const [rangeValue, setRangeValue] = useState(80);
   const [chosenAnswer, setChosenAnswer] = useState(answers[0]);
 
-
   const updateRange = () => {
     const rangeInput = rangeInputRef.current;
     const rangeTrackBg = 'var(--range-track-bg)';
     const rangeProgressBg = 'var(--range-progress-bg)';
-    const value = (rangeInput.value - rangeInput.min) / (rangeInput.max - rangeInput.min) * 100
+    const value =
+      ((rangeInput.value - rangeInput.min) /
+        (rangeInput.max - rangeInput.min)) *
+      100;
     rangeInput.style.background = `
       linear-gradient(
         to right,
@@ -59,12 +60,15 @@ export const OrbitSelector: React.FC<{
   const updateAnswer = (value: number) => {
     setRangeValue(value);
     const FRACTION = Math.ceil(value / STEPS) * STEPS;
-    const answerIndex = Math.min(Math.max((FRACTION / STEPS) - 1, 0), TOTAL_SEGMENTS);
+    const answerIndex = Math.min(
+      Math.max(FRACTION / STEPS - 1, 0),
+      TOTAL_SEGMENTS,
+    );
     setChosenAnswer(answers[answerIndex]);
 
-    // E.g. Large Impact (80 / 100);
-    setAnswer(`${answers[answerIndex].value} (${value}/${RANGE_MAX_VALUE})`);
-  }
+    // E.g. Large Impact
+    setAnswer(`${answers[answerIndex].value}`);
+  };
 
   useEffect(() => {
     updateRange();
@@ -76,7 +80,9 @@ export const OrbitSelector: React.FC<{
     if (previousAnswer) {
       // E.g. Large Impact (80 / 100); from updateAnswer above
       // This will find the user's answered value by getting the number in between the '(' and '/'
-      formattedAnswerAsNumber = Number(previousAnswer.split('(').pop().split('/')[0]);
+      formattedAnswerAsNumber = Number(
+        previousAnswer.split('(').pop().split('/')[0],
+      );
     } else {
       formattedAnswerAsNumber = rangeValue;
     }
@@ -85,7 +91,9 @@ export const OrbitSelector: React.FC<{
 
   return (
     <QuestionAnimation>
-      {isMobile && <BackButton onPrevQuestion={onPrevQuestion} currentPos={currentPos} />}
+      {isMobile && (
+        <BackButton onPrevQuestion={onPrevQuestion} currentPos={currentPos} />
+      )}
 
       <QuestionText title={question.questionText}>
         <RequiredQuestionInfo isRequired={question?.isRequired} />
@@ -108,7 +116,9 @@ export const OrbitSelector: React.FC<{
       </div>
 
       <div className={styles.buttonOuter}>
-        {!isMobile && <BackButton onPrevQuestion={onPrevQuestion} currentPos={currentPos} />}
+        {!isMobile && (
+          <BackButton onPrevQuestion={onPrevQuestion} currentPos={currentPos} />
+        )}
         <QuestionButtons
           onNextQuestion={onNextQuestion}
           isRequired={question?.isRequired}
