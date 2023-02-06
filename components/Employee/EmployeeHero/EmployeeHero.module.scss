@@ -3,7 +3,7 @@
 }
 .heroContainer {
   @include divider('bottom', $primary);
-  padding: 1rem 1rem 2rem 1rem;
+  padding: 4rem 1rem 2rem 1rem;
 }
 .title {
   font-size: $h2-font-size;
