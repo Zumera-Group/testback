@@ -1,5 +1,4 @@
 .numberInputWrapper {
-
   label {
     color: $white;
   }
@@ -13,7 +12,6 @@
     font-weight: $font-weight-light;
     opacity: 0.75;
   }
-
 }
 
 .fieldWrapper {
@@ -48,7 +46,10 @@
   max-width: 100%;
   letter-spacing: 1 !important;
   padding-left: $input-padding-x * 0.75;
-  padding-right: $input-padding-x * 0.75;
+  padding-right: 0;
+  @include breakpoint-up(md) {
+    padding-right: $input-padding-x * 0.75;
+  }
 
   &__noSign {
     padding-left: 0;
@@ -63,7 +64,7 @@
       padding-left: 0;
     }
   }
-} 
+}
 
 .sign {
   border-radius: 0;
@@ -78,5 +79,3 @@
 .buttonOuter {
   @include calculator-action-btns-wrapper();
 }
-
-
