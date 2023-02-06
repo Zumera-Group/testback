@@ -26,6 +26,7 @@ $main-layout-height: calc(100vh - var(--header-height) - calc(var(--section-size
 
   main {
     padding-top: 0 !important;
+    min-height: calc(100vh - var(--header-height)) !important;
   }
 
   // Styles for when the sidebar is rendered
