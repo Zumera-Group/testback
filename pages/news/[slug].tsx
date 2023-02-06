@@ -78,7 +78,7 @@ export async function getStaticProps({ locale, params, preview = false }) {
         content,
         sharedContent,
       },
-      revalidate: 600,
+      revalidate: REVALIDATE_ON_FAILURE_TIME_IN_SECONDS,
     };
   } catch (e) {
     console.log(e);

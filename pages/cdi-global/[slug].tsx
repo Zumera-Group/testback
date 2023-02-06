@@ -18,6 +18,7 @@ import { filterDataToSingleItem } from '../../lib/shared-domain/page/infrastruct
 import { slugifyOffice } from 'lib/shared-domain/offices/application/slugifyOffice';
 import { useEffect, useState } from 'react';
 import { SecretKeyLockScreen } from 'components/SecretKeyLockScreen';
+import { REVALIDATE_ON_SUCCESS_IN_SECONDS } from 'lib/shared-domain/page/constants';
 
 export async function getStaticPaths() {
   return {
@@ -63,7 +64,7 @@ export async function getStaticProps({ locale, params, preview = false }) {
         content,
         sharedContent,
       },
-      revalidate: 600,
+      revalidate: REVALIDATE_ON_SUCCESS_IN_SECONDS,
     };
   } catch (e) {
     console.log(e);

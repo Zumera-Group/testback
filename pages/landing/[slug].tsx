@@ -13,7 +13,10 @@ import { filterDataToSingleItem } from '../../lib/shared-domain/page/infrastruct
 import { ErrorTrackingBoundary } from 'lib/ErrorTrackingBoundary';
 import { SharedContentContext } from 'lib/shared-domain/page/infrastructure/sharedContentContext';
 import { SharedContentFacade } from 'lib/shared-domain/page/infrastructure/sharedContent.facade';
-import { REVALIDATE_ON_FAILURE_TIME_IN_SECONDS } from '../../lib/shared-domain/page/constants';
+import {
+  REVALIDATE_ON_FAILURE_TIME_IN_SECONDS,
+  REVALIDATE_ON_SUCCESS_IN_SECONDS,
+} from '../../lib/shared-domain/page/constants';
 
 export async function getStaticPaths() {
   return {
@@ -49,7 +52,7 @@ export async function getStaticProps({ locale, params, preview = false }) {
         siteSettings,
         sharedContent,
       },
-      revalidate: 600,
+      revalidate: REVALIDATE_ON_SUCCESS_IN_SECONDS,
     };
   } catch (e) {
     console.log(e);

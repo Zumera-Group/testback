@@ -21,7 +21,10 @@ import { usePreviewSubscription } from '../../lib/sanity';
 import { filterDataToSingleItem } from '../../lib/shared-domain/page/infrastructure/page.facade';
 
 import { fetchSectors } from '../../lib/shared-domain/sectors/application/useGetSectors';
-import { REVALIDATE_ON_FAILURE_TIME_IN_SECONDS } from '../../lib/shared-domain/page/constants';
+import {
+  REVALIDATE_ON_FAILURE_TIME_IN_SECONDS,
+  REVALIDATE_ON_SUCCESS_IN_SECONDS,
+} from '../../lib/shared-domain/page/constants';
 import { SecretKeyLockScreen } from 'components/SecretKeyLockScreen';
 
 export async function getStaticPaths() {
@@ -78,7 +81,7 @@ export async function getStaticProps({
         locale,
         sharedContent,
       },
-      revalidate: 600,
+      revalidate: REVALIDATE_ON_SUCCESS_IN_SECONDS,
     };
   } catch (e) {
     console.log(e);

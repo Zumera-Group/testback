@@ -12,7 +12,10 @@ import { useRouter } from 'next/router';
 import { EmployeeHero } from 'lib/shared-domain/employees/presentation/EmployeeHero';
 import { usePreviewSubscription } from '../../lib/sanity';
 import { filterDataToSingleItem } from '../../lib/shared-domain/page/infrastructure/page.facade';
-import { REVALIDATE_ON_FAILURE_TIME_IN_SECONDS } from '../../lib/shared-domain/page/constants';
+import {
+  REVALIDATE_ON_FAILURE_TIME_IN_SECONDS,
+  REVALIDATE_ON_SUCCESS_IN_SECONDS,
+} from '../../lib/shared-domain/page/constants';
 import { useEffect, useState } from 'react';
 import { SecretKeyLockScreen } from 'components/SecretKeyLockScreen';
 
@@ -78,7 +81,7 @@ export async function getStaticProps({
         employeeDetailContent,
         sharedContent,
       },
-      revalidate: 600,
+      revalidate: REVALIDATE_ON_SUCCESS_IN_SECONDS,
     };
   } catch (e) {
     console.log(e);
