@@ -46,7 +46,7 @@ export const GlobalNetworkSection: React.FC<any> = ({
 const AnswerComponent = ({ answer }) => (
   <div className={styles.officeGrid}>
     {answer.map((item) => {
-      const link = 'cdi-global/' + slugifyOffice(item.city);
+      // const link = 'cdi-global/' + slugifyOffice(item.city);
       return (
         <div key={item._id} className={styles.office}>
           <h5>{item.city}</h5>
@@ -59,16 +59,6 @@ const AnswerComponent = ({ answer }) => (
             </span>
             <span>{item.country}</span>
           </address>
-          <Link passHref href={link}>
-            <a>
-              <Icon
-                iconName={'arrow-circle'}
-                viewBox={'0 0 32 32'}
-                width={32}
-                height={32}
-              />
-            </a>
-          </Link>
         </div>
       );
     })}
