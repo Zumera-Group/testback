@@ -79,16 +79,11 @@
   justify-content: center;
   align-items: center;
   text-align: center;
-  padding: $gutter * 0.5;
+  padding: $gutter * 2 $gutter;
   flex: 1;
-  aspect-ratio: 16/9;
-
-  @each $key, $value in $breakpoints {
-    @if ($key == 'md') {
-      @media screen and (max-width: $value) {
-        padding: 0 0.3rem;
-      }
-    }
+  width: 100%;
+  @include breakpoint-up(md) {
+    padding: $gutter * 3 $gutter;
   }
 }
 
