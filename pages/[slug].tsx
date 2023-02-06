@@ -114,7 +114,7 @@ export default function Index({
   }, [router.query.slug]);
 
   const [isSecretOpen, setIsSecretOpen] = useState(
-    !siteSettings.isUnderSecretKey,
+    !siteSettings?.isUnderSecretKey,
   );
   useEffect(() => {
     if (localStorage.getItem('secretKeyOpen')) {
@@ -126,7 +126,12 @@ export default function Index({
     return null;
   }
 
-  if (siteSettings.isUnderSecretKey && !isSecretOpen) {
+  if (
+    siteSettings &&
+    siteSettings &&
+    siteSettings?.isUnderSecretKey &&
+    !isSecretOpen
+  ) {
     return <SecretKeyLockScreen siteSettings={siteSettings} />;
   }
 

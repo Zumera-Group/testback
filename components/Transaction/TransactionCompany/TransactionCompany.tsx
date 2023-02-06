@@ -21,7 +21,7 @@ export const TransactionCompany: React.FC<{
         <SectionHeading
           title={content.representedText}
           headingType={'h3'}
-          align={'center'}
+          align={'left'}
         />
       </Container>
       <Container classes={styles.container}>

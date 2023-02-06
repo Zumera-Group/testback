@@ -12,6 +12,8 @@ import { filterDataToSingleItem } from '../../lib/shared-domain/page/infrastruct
 import { usePreviewSubscription } from '../../lib/sanity';
 
 import { REVALIDATE_ON_FAILURE_TIME_IN_SECONDS } from '../../lib/shared-domain/page/constants';
+import { useEffect, useState } from 'react';
+import { SecretKeyLockScreen } from 'components/SecretKeyLockScreen';
 
 export async function getStaticPaths() {
   const de = await fetchServices('de');
@@ -104,8 +106,21 @@ export default function Index({
 
   const router = useRouter();
 
+  const [isSecretOpen, setIsSecretOpen] = useState(
+    !siteSettings?.isUnderSecretKey,
+  );
+  useEffect(() => {
+    if (localStorage.getItem('secretKeyOpen')) {
+      setIsSecretOpen(true);
+    }
+  }, []);
+
   if (router.isFallback) {
     return null;
+  }
+
+  if (siteSettings && siteSettings?.isUnderSecretKey && !isSecretOpen) {
+    return <SecretKeyLockScreen siteSettings={siteSettings} />;
   }
 
   return (

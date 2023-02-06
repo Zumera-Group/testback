@@ -16,6 +16,8 @@ import { usePreviewSubscription } from '../../lib/sanity';
 import { filterDataToSingleItem } from '../../lib/shared-domain/page/infrastructure/page.facade';
 
 import { slugifyOffice } from 'lib/shared-domain/offices/application/slugifyOffice';
+import { useEffect, useState } from 'react';
+import { SecretKeyLockScreen } from 'components/SecretKeyLockScreen';
 
 export async function getStaticPaths() {
   return {
@@ -100,8 +102,26 @@ export default function Index({
 
   const router = useRouter();
 
+  const [isSecretOpen, setIsSecretOpen] = useState(
+    !siteSettings?.isUnderSecretKey,
+  );
+  useEffect(() => {
+    if (localStorage.getItem('secretKeyOpen')) {
+      setIsSecretOpen(true);
+    }
+  }, []);
+
   if (router.isFallback) {
     return null;
+  }
+
+  if (
+    siteSettings &&
+    siteSettings &&
+    siteSettings?.isUnderSecretKey &&
+    !isSecretOpen
+  ) {
+    return <SecretKeyLockScreen siteSettings={siteSettings} />;
   }
 
   return (

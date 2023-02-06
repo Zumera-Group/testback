@@ -2,7 +2,7 @@ import {
   fetchSectorDetail,
   fetchSectorDetailContent,
 } from 'lib/shared-domain/sectors/application/useGetSectorDetail';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { fetchSiteSettings } from 'lib/shared-domain/page/application/useGetSiteSettings';
 import { Sector, SiteSettings } from 'lib/shared-domain/page/domain';
 import { SectorDetailLayout } from 'lib/shared-domain/sectors/presentation/SectorDetailLayout';
@@ -15,6 +15,7 @@ import { usePreviewSubscription } from '../../lib/sanity';
 import { filterDataToSingleItem } from '../../lib/shared-domain/page/infrastructure/page.facade';
 
 import { REVALIDATE_ON_FAILURE_TIME_IN_SECONDS } from '../../lib/shared-domain/page/constants';
+import { SecretKeyLockScreen } from 'components/SecretKeyLockScreen';
 
 export async function getStaticPaths() {
   return {
@@ -102,8 +103,21 @@ export default function Index({
 
   const router = useRouter();
 
+  const [isSecretOpen, setIsSecretOpen] = useState(
+    !siteSettings?.isUnderSecretKey,
+  );
+  useEffect(() => {
+    if (localStorage.getItem('secretKeyOpen')) {
+      setIsSecretOpen(true);
+    }
+  }, []);
+
   if (router.isFallback) {
     return null;
+  }
+
+  if (siteSettings && siteSettings?.isUnderSecretKey && !isSecretOpen) {
+    return <SecretKeyLockScreen siteSettings={siteSettings} />;
   }
 
   return (

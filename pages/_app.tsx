@@ -33,13 +33,6 @@ function MyApp({ Component, pageProps, router }) {
           content="width=device-width, initial-scale=1, shrink-to-fit=no"
         />
       </Head>
-      {/* <Script
-        async
-        defer
-        strategy="lazyOnload"
-        src="https://consent.cookiefirst.com/banner.js"
-        data-cookiefirst-key="dd7fd031-9337-411f-839c-774530a85280"
-      /> */}
       <Script
         async
         defer
