@@ -11,7 +11,7 @@ const getCoordsPositionDiv: getCoordsPositionDivType = (
   doomElementToGetCoords,
 ) => {
   const pos = { x: 0, y: 0 };
-  console.log(evt.type);
+
   if (
     evt.type == 'touchstart' ||
     evt.type == 'touchmove' ||
