@@ -39,17 +39,6 @@ export const QuestionButtons: React.FC<{
         </Button>
       )}
 
-      <Button
-        aria-label="Go to next question button"
-        disabled={isRequired && !isAnswered}
-        variant={'primary'}
-        callBack={onNextQuestion}
-        onDark={onFinishQuestionnaire ? false : true}
-        classes={styles.questionButton}
-      >
-        {firstButtonText || t('nextBtn')}
-      </Button>
-
       {!isFirstQuestion() && !isRequired && !onFinishQuestionnaire && (
         <Button
           aria-label="Skip button"
@@ -63,6 +52,18 @@ export const QuestionButtons: React.FC<{
           {t('skipBtn')}
         </Button>
       )}
+
+      <Button
+        aria-label="Go to next question button"
+        disabled={isRequired && !isAnswered}
+        variant={'primary'}
+        callBack={onNextQuestion}
+        onDark={onFinishQuestionnaire ? false : true}
+        classes={styles.questionButton}
+      >
+        {firstButtonText || t('nextBtn')}
+      </Button>
+
     </div>
   );
 };
