@@ -4,6 +4,7 @@ import { getTranslateByScope } from 'translation/i18n';
 import { Question } from '../../../domain/index';
 import { useAnswers } from 'lib/shared-domain/questionnaire/application/useAnswers';
 import { QuestionText } from '../../Question/QuestionText';
+import { QuestionButtonsWrapper } from '../../Question/QuestionButtonsWrapper';
 import { QuestionButtons } from '../../Question/QuestionButtons';
 import { QuestionAnimation } from '../../Question/QuestionAnimation';
 import { RequiredQuestionInfo } from '../../Question/RequiredQuestionInfo';
@@ -27,33 +28,37 @@ export const TextInput: React.FC<{
     question.answerSelector?.textInput || t('basePlaceholder');
 
   return (
-    <QuestionAnimation>
-      {isMobile && (
-        <BackButton onPrevQuestion={onPrevQuestion} currentPos={currentPos} />
-      )}
-      <QuestionText title={question?.questionText}>
-        <RequiredQuestionInfo isRequired={question?.isRequired} />
-      </QuestionText>
-
-      <Box mt={5} mb={6} className={styles.textInputWrapper}>
-        <Textarea
-          id={question._id}
-          value={getAnswer()}
-          onChange={(e) => setAnswer(e.target.value)}
-          placeholder={placeholder}
-        />
-      </Box>
-      <div className={styles.buttonOuter}>
-        {!isMobile && (
+    <>
+      <QuestionAnimation>
+        {isMobile && (
           <BackButton onPrevQuestion={onPrevQuestion} currentPos={currentPos} />
         )}
+        <QuestionText title={question?.questionText}>
+          <RequiredQuestionInfo isRequired={question?.isRequired} />
+        </QuestionText>
 
-        <QuestionButtons
-          onNextQuestion={onNextQuestion}
-          isRequired={question?.isRequired}
-          isAnswered={getAnswer()}
-        />
-      </div>
-    </QuestionAnimation>
+        <Box mt={5} mb={6} className={styles.textInputWrapper}>
+          <Textarea
+            id={question._id}
+            value={getAnswer()}
+            onChange={(e) => setAnswer(e.target.value)}
+            placeholder={placeholder}
+          />
+        </Box>
+      </QuestionAnimation>
+      <QuestionButtonsWrapper>
+        <div className={styles.buttonOuter}>
+          {!isMobile && (
+            <BackButton onPrevQuestion={onPrevQuestion} currentPos={currentPos} />
+          )}
+
+          <QuestionButtons
+            onNextQuestion={onNextQuestion}
+            isRequired={question?.isRequired}
+            isAnswered={getAnswer()}
+          />
+        </div>
+      </QuestionButtonsWrapper>
+    </>
   );
 };

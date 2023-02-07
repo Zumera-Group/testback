@@ -10,6 +10,7 @@ import {
   differenceInCalendarMonths,
   differenceInCalendarYears,
 } from 'date-fns';
+import { QuestionButtonsWrapper } from '../../Question/QuestionButtonsWrapper';
 import { QuestionButtons } from '../../Question/QuestionButtons';
 import { QuestionAnimation } from '../../Question/QuestionAnimation';
 import { DEFAULT_VALUES } from './constants';
@@ -82,38 +83,42 @@ export const NumberInput: React.FC<{
   }, [fieldWrapperRef, question, inputLength, shortBox])
 
   return (
-    <div className={styles.numberInputWrapper}>
-      <QuestionAnimation>
-        {isMobile && (
-          <BackButton onPrevQuestion={onPrevQuestion} currentPos={currentPos} />
-        )}
-        <QuestionText
-          title={question.questionText}
-          description={question.description}
-        />
-        {label && <p className={styles.fieldLabel}>{label}</p>}
-        <div className={styles.fieldWrapper} ref={fieldWrapperRef}>
-          {sign && sign !== '%' && <span className={styles.sign}> {sign}</span>}
-          <Input
-            type="number"
-            id={question._id}
-            placeholder={placeholder ? placeholder : '0'}
-            hideLabel
-            autoFocus
-            classes={[
-              styles.numberInput,
-              shortBox ? styles.numberInput__shortBox : '',
-              !sign || sign === '%' ? styles.numberInput__noSign : '',
-            ].join(' ')}
-            value={getUnformattedAnswer() || ''}
-            onChange={(e) => {
-              formatToSalesforce(Number(e.target.value));
-              setInputLength(e.target.value.length);
-            }}
+    <>
+      <div className={styles.numberInputWrapper}>
+        <QuestionAnimation>
+          {isMobile && (
+            <BackButton onPrevQuestion={onPrevQuestion} currentPos={currentPos} />
+          )}
+          <QuestionText
+            title={question.questionText}
+            description={question.description}
           />
+          {label && <p className={styles.fieldLabel}>{label}</p>}
+          <div className={styles.fieldWrapper} ref={fieldWrapperRef}>
+            {sign && sign !== '%' && <span className={styles.sign}> {sign}</span>}
+            <Input
+              type="number"
+              id={question._id}
+              placeholder={placeholder ? placeholder : '0'}
+              hideLabel
+              autoFocus
+              classes={[
+                styles.numberInput,
+                shortBox ? styles.numberInput__shortBox : '',
+                !sign || sign === '%' ? styles.numberInput__noSign : '',
+              ].join(' ')}
+              value={getUnformattedAnswer() || ''}
+              onChange={(e) => {
+                formatToSalesforce(Number(e.target.value));
+                setInputLength(e.target.value.length);
+              }}
+            />
 
-          {sign && sign === '%' && <span className={styles.sign}>{sign}</span>}
-        </div>
+            {sign && sign === '%' && <span className={styles.sign}>{sign}</span>}
+          </div>
+        </QuestionAnimation>
+      </div>
+      <QuestionButtonsWrapper>
         <div className={styles.buttonOuter}>
           {!isMobile && (
             <BackButton
@@ -133,7 +138,7 @@ export const NumberInput: React.FC<{
             }
           />
         </div>
-      </QuestionAnimation>
-    </div>
+      </QuestionButtonsWrapper>
+    </>
   );
 };
