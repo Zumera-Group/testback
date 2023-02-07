@@ -1,0 +1,17 @@
+$safe-breakpoint: $container-max-width + 186px; // Avoid ChatBtn overlapping Calc buttons
+
+.questionButtonsWrapper {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: $secondary;
+  z-index: $zindex-chat-btn - 1;
+  padding-right: 64px;
+  @include breakpoint-up(md) {
+    padding-right: 98px;
+  }
+  @media screen and (min-width: $safe-breakpoint) {
+    padding-right: 0;
+  }
+}
