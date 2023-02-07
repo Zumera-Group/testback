@@ -58,14 +58,16 @@ export const NewsGrid: React.FC<Props> = ({
   const numOfTransactionsDisplayed = 3;
   const numOfNewsDisplayed = 5;
 
-  const news = allNews
-    ?.filter((n) => !n.isPressRelease)
-    ?.filter((n) => removeIfNotCDI(n, showOnlyCDI))
-    .sort(sortByTime);
+  const news =
+    allNews
+      ?.filter((n) => !n.isPressRelease)
+      ?.filter((n) => removeIfNotCDI(n, showOnlyCDI))
+      .sort(sortByTime) || [];
 
-  let transactions = allTransactions
-    ?.filter((n) => removeIfNotCDI(n, showOnlyCDI))
-    ?.sort(sortByTime);
+  let transactions =
+    allTransactions
+      ?.filter((n) => removeIfNotCDI(n, showOnlyCDI))
+      ?.sort(sortByTime) || [];
 
   let employees = useMemo(() => {
     return !shouldHidePeopleUpdates
@@ -76,9 +78,8 @@ export const NewsGrid: React.FC<Props> = ({
       : [];
   }, [allEmployees, shouldHidePeopleUpdates]);
 
-  employees = employees?.filter(
-    (e) => !!e.newsGridPicture?.picture?.asset?.url,
-  );
+  employees =
+    employees?.filter((e) => !!e.newsGridPicture?.picture?.asset?.url) || [];
 
   useEffect(() => {
     const noMoreTransactionsToLoad =
