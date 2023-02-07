@@ -108,7 +108,6 @@ export const CardsNew = ({
                   ].join(' ')}
                   key={index}
                 >
-                  {/*className={styles.twoNewsTile}*/}
                   {article.map((subArticle) => getSmallCardType(subArticle))}
                 </GridColumn>
               ) : (

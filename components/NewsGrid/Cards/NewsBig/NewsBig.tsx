@@ -15,7 +15,6 @@ export const NewsBig = ({ article }) => {
   const sharedContent = useSharedContentContext();
 
   if (!article) return null;
-
   const {
     _id,
     title,
@@ -34,7 +33,7 @@ export const NewsBig = ({ article }) => {
   return (
     <article key={`newsBig-${_id}`} className={styles.newsBig}>
       <Link passHref href={href}>
-        <a className={styles.link}>
+        <a className={styles.link} target={customLink ? '_blank' : ''} rel={customLink ? 'noopener noreferrer' : ''}>
           <div className={styles.imageWrapper}>
             <div className={styles.imageWrapper_inner}>
               <Image
