@@ -64,11 +64,14 @@ export const OrbitSelector: React.FC<{
       Math.max(FRACTION / STEPS - 1, 0),
       TOTAL_SEGMENTS,
     );
+
     setChosenAnswer(answers[answerIndex]);
 
     // E.g. Large Impact
-    setAnswer(`${answers[answerIndex].value}`);
+    setAnswer(`${answers[answerIndex]?.value}`);
   };
+
+  useEffect(() => {}, []);
 
   useEffect(() => {
     updateRange();
@@ -78,14 +81,16 @@ export const OrbitSelector: React.FC<{
     const previousAnswer = getAnswer();
     let formattedAnswerAsNumber;
     if (previousAnswer) {
-      // E.g. Large Impact (80 / 100); from updateAnswer above
-      // This will find the user's answered value by getting the number in between the '(' and '/'
-      formattedAnswerAsNumber = Number(
-        previousAnswer.split('(').pop().split('/')[0],
-      );
+      // E.g. Large Impact index is 3, so add 1 and times by steps to get the correct previous answer value
+
+      const prevAnswerIndex =
+        answers.map((answer) => answer.value).indexOf(previousAnswer) + 1;
+
+      formattedAnswerAsNumber = prevAnswerIndex * STEPS;
     } else {
       formattedAnswerAsNumber = rangeValue;
     }
+
     updateAnswer(formattedAnswerAsNumber);
   }, []);
 
