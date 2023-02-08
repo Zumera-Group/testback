@@ -29,10 +29,10 @@ export const TextInput: React.FC<{
 
   return (
     <>
+      {isMobile && (
+        <BackButton onPrevQuestion={onPrevQuestion} currentPos={currentPos} />
+      )}
       <QuestionAnimation>
-        {isMobile && (
-          <BackButton onPrevQuestion={onPrevQuestion} currentPos={currentPos} />
-        )}
         <QuestionText title={question?.questionText}>
           <RequiredQuestionInfo isRequired={question?.isRequired} />
         </QuestionText>
@@ -49,7 +49,10 @@ export const TextInput: React.FC<{
       <QuestionButtonsWrapper>
         <div className={styles.buttonOuter}>
           {!isMobile && (
-            <BackButton onPrevQuestion={onPrevQuestion} currentPos={currentPos} />
+            <BackButton
+              onPrevQuestion={onPrevQuestion}
+              currentPos={currentPos}
+            />
           )}
 
           <QuestionButtons

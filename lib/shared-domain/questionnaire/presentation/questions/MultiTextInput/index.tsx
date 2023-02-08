@@ -49,6 +49,9 @@ export const MultiTextInput: React.FC<{
 
   return (
     <>
+      {isMobile && (
+        <BackButton onPrevQuestion={onPrevQuestion} currentPos={currentPos} />
+      )}
       <QuestionAnimation>
         <QuestionText title={question.questionText} />
         <div className={styles.multiTextInputWrapper}>
@@ -72,7 +75,10 @@ export const MultiTextInput: React.FC<{
       <QuestionButtonsWrapper>
         <div className={styles.buttonOuter}>
           {!isMobile && (
-            <BackButton onPrevQuestion={onPrevQuestion} currentPos={currentPos} />
+            <BackButton
+              onPrevQuestion={onPrevQuestion}
+              currentPos={currentPos}
+            />
           )}
           <QuestionButtons
             onNextQuestion={onNextQuestion}
