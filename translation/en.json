@@ -24,7 +24,7 @@
     "step1": "General Information",
     "step2": "Company specifics",
     "step3": "Sector Specifics",
-    "step4": "Saxenhammer Evaluation",
+    "step4": "Zumera Evaluation",
     "firstButtonText": "Go to ({{industry}})",
     "secondButtonText": "I will end here"
   },
@@ -65,11 +65,11 @@
         "generalInformation": "General Information",
         "companySpecifics": "Company specifics",
         "sectorSpecifics": "Sector Specifics",
-        "evaluation": "Saxenhammer Evaluation"
+        "evaluation": "Zumera Evaluation"
       }
     },
     "evaluation": {
-      "title": "Saxenhammer Free Expert Evaluation",
+      "title": "Zumera Free Expert Evaluation",
       "description": "In order to give a sound estimation of the company value an adviser will double check the entries and will reach out with the result via email or via phone if there are open question.",
       "resultBox": {
         "title": "Your preliminary result",
@@ -93,7 +93,7 @@
           "placeholder": "Phone number",
           "error": "Phone number is required"
         },
-        "checkbox": "I agree with the processing of the given data for the creation of the evaluation as well as the contacting by Saxenhammer & Co GmbH.",
+        "checkbox": "I agree with the processing of the given data for the creation of the evaluation as well as the contacting by Zumera.",
         "checkboxError": "This is required",
         "button": "Send",
         "successMessage": "Thank you for filling out your information."
