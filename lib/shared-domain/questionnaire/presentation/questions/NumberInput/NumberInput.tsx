@@ -78,16 +78,19 @@ export const NumberInput: React.FC<{
       } else {
         childInput.style.width = 'var(--input-width)';
       }
-    }
+    };
     if (childInput) resizeInput();
-  }, [fieldWrapperRef, question, inputLength, shortBox])
+  }, [fieldWrapperRef, question, inputLength, shortBox]);
 
   return (
     <>
       <div className={styles.numberInputWrapper}>
         <QuestionAnimation>
           {isMobile && (
-            <BackButton onPrevQuestion={onPrevQuestion} currentPos={currentPos} />
+            <BackButton
+              onPrevQuestion={onPrevQuestion}
+              currentPos={currentPos}
+            />
           )}
           <QuestionText
             title={question.questionText}
@@ -95,7 +98,9 @@ export const NumberInput: React.FC<{
           />
           {label && <p className={styles.fieldLabel}>{label}</p>}
           <div className={styles.fieldWrapper} ref={fieldWrapperRef}>
-            {sign && sign !== '%' && <span className={styles.sign}> {sign}</span>}
+            {sign && sign !== '%' && (
+              <span className={styles.sign}> {sign}</span>
+            )}
             <Input
               type="number"
               id={question._id}
@@ -114,7 +119,9 @@ export const NumberInput: React.FC<{
               }}
             />
 
-            {sign && sign === '%' && <span className={styles.sign}>{sign}</span>}
+            {sign && sign === '%' && (
+              <span className={styles.sign}>{sign}</span>
+            )}
           </div>
         </QuestionAnimation>
       </div>

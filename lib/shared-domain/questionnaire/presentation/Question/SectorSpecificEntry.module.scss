@@ -1,8 +1,3 @@
 .buttonOuter {
-  @include breakpoint-up(md) {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-top: $gutter * 2;
-  }
+  @include calculator-action-btns-wrapper();
 }

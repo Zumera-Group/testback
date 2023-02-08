@@ -64,10 +64,7 @@ export const ResultTeaser: React.FC<{
       mt={isMobile ? 8 : 0}
       className={styles.calculatorTeaserWrapper}
     >
-      {resultTeaser.src && (
-        // <Beam color="white" glow classes={styles.teaserBeam} />
-        <HalfBeam />
-      )}
+      {resultTeaser.src && <HalfBeam />}
       <Hide below="md">
         <FlexCol ml={{ md: 6, lg: 3 }}>
           <TeaserBoxDesktop>

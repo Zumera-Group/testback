@@ -25,7 +25,9 @@ export const QuestionButtons: React.FC<{
   const { isFirstQuestion } = useValuationStore();
 
   return (
-    <div className={[styles.buttonWrapper, stackMobile && styles.stack].join(' ')}>
+    <div
+      className={[styles.buttonWrapper, stackMobile && styles.stack].join(' ')}
+    >
       {onFinishQuestionnaire && (
         <Button
           aria-label="Finish questionnaire button"
@@ -53,17 +55,31 @@ export const QuestionButtons: React.FC<{
         </Button>
       )}
 
-      <Button
-        aria-label="Go to next question button"
-        disabled={isRequired && !isAnswered}
-        variant={'primary'}
-        callBack={onNextQuestion}
-        onDark={onFinishQuestionnaire ? false : true}
-        classes={styles.questionButton}
-      >
-        {firstButtonText || t('nextBtn')}
-      </Button>
+      {!firstButtonText && (
+        <Button
+          aria-label="Go to next question button"
+          disabled={isRequired && !isAnswered}
+          variant={'primary'}
+          callBack={onNextQuestion}
+          onDark={onFinishQuestionnaire ? false : true}
+          classes={styles.questionButton}
+        >
+          {firstButtonText || t('nextBtn')}
+        </Button>
+      )}
 
+      {firstButtonText && (
+        <Button
+          aria-label="Go to next question button"
+          disabled={isRequired && !isAnswered}
+          variant={'secondary'}
+          callBack={onNextQuestion}
+          onDark={true}
+          classes={styles.questionButton}
+        >
+          {firstButtonText || t('nextBtn')}
+        </Button>
+      )}
     </div>
   );
 };

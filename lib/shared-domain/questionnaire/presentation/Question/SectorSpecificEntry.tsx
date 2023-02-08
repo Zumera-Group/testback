@@ -9,6 +9,9 @@ import { useValuationStore } from '../../store/index';
 import { QuestionAnimation } from './QuestionAnimation';
 import BackButton from 'components/Calculator/BackButton/BackButton';
 import styles from './SectorSpecificEntry.module.scss';
+import { useMediaQuery } from 'lib/hooks/useMediaQuery';
+import { SCREEN_SIZE_MD } from 'lib/constants';
+import QuestionButtonsWrapper from './QuestionButtonsWrapper';
 
 const t = getTranslateByScope('sectorSpecificEntry');
 
@@ -29,25 +32,38 @@ export const SectorSpecificEntry: React.FC<{
   const { setIsOnResultScreen } = useValuationStore();
   const secondButtonText = t('secondButtonText');
   const onFinishQuestionnaire = () => setIsOnResultScreen(true);
+  const isMobile = useMediaQuery(`(max-width: ${SCREEN_SIZE_MD})`);
   return (
-    <QuestionAnimation>
-      <QuestionText title={t('questionText')} />
-      <P variant="mobileSectorSpecificEntryP" color={'white'} pl={'0.75rem'}>
-        {t('subtitle')}
-      </P>
-      <ResultTeaser calculatorSteps={calculatorSteps} isSectorSpecificEntry />
-      <div className={styles.buttonOuter}>
+    <>
+      {isMobile && (
         <BackButton onPrevQuestion={onPrevQuestion} currentPos={currentPos} />
-        <QuestionButtons
-          firstButtonText={firstButtonText}
-          secondButtonText={secondButtonText}
-          onNextQuestion={onNextQuestion}
-          onFinishQuestionnaire={onFinishQuestionnaire}
-          isRequired={false}
-          isAnswered
-          stackMobile
-        />
-      </div>
-    </QuestionAnimation>
+      )}
+      <QuestionAnimation>
+        <QuestionText title={t('questionText')} />
+        <P variant="mobileSectorSpecificEntryP" color={'white'} pl={'0.75rem'}>
+          {t('subtitle')}
+        </P>
+        <ResultTeaser calculatorSteps={calculatorSteps} isSectorSpecificEntry />
+      </QuestionAnimation>
+      <QuestionButtonsWrapper>
+        <div className={styles.buttonOuter}>
+          {!isMobile && (
+            <BackButton
+              onPrevQuestion={onPrevQuestion}
+              currentPos={currentPos}
+            />
+          )}
+          <QuestionButtons
+            firstButtonText={firstButtonText}
+            secondButtonText={secondButtonText}
+            onNextQuestion={onNextQuestion}
+            onFinishQuestionnaire={onFinishQuestionnaire}
+            isRequired={false}
+            isAnswered
+            stackMobile
+          />
+        </div>
+      </QuestionButtonsWrapper>
+    </>
   );
 };
