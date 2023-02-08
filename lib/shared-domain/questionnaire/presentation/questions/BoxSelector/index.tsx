@@ -5,6 +5,7 @@ import { useAnswers } from 'lib/shared-domain/questionnaire/application/useAnswe
 import { Sector } from '../../../../page/domain/index';
 import { BoxSelectorItem } from './BoxSelectorItem';
 import { QuestionText } from '../../Question/QuestionText';
+import { QuestionButtonsWrapper } from '../../Question/QuestionButtonsWrapper';
 import { QuestionButtons } from '../../Question/QuestionButtons';
 import { getTranslateByScope } from '../../../../../../translation/i18n';
 import { useValuationStore } from '../../../store/index';
@@ -196,7 +197,21 @@ export const BoxSelector = ({
             ))}
           </Swiper>
         )}
-
+        <div className={styles.showMoreWrapper}>
+          {(moreBoxesToShow && !isMobile) && (
+            <Button
+              callBack={onShowMore}
+              variant="secondary"
+              onDark={true}
+              hideIcon
+              classes={styles.showMoreBtn}
+            >
+              {buttonText.trim()}
+            </Button>
+          )}
+        </div>
+      </QuestionAnimation>
+      <QuestionButtonsWrapper>
         <div className={styles.buttonOuter} ref={buttonRef}>
           {!isMobile && (
             <BackButton
@@ -204,21 +219,6 @@ export const BoxSelector = ({
               currentPos={currentPos}
             />
           )}
-
-          <div className={styles.showMoreWrapper}>
-            {(moreBoxesToShow && !isMobile) && (
-              <Button
-                callBack={onShowMore}
-                variant="secondary"
-                onDark={true}
-                hideIcon
-                classes={styles.showMoreBtn}
-              >
-                {buttonText.trim()}
-              </Button>
-            )}
-          </div>
-
           {getShowButton() && (
             <QuestionButtons
               onNextQuestion={onNextQuestion}
@@ -227,7 +227,7 @@ export const BoxSelector = ({
             />
           )}
         </div>
-      </QuestionAnimation>
+      </QuestionButtonsWrapper>
     </>
   );
 };

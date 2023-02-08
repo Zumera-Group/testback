@@ -6,6 +6,7 @@ import { getTranslateByScope } from 'translation/i18n';
 import { Question } from '../../../domain/index';
 import { useAnswers } from 'lib/shared-domain/questionnaire/application/useAnswers';
 import { QuestionText } from '../../Question/QuestionText';
+import { QuestionButtonsWrapper } from '../../Question/QuestionButtonsWrapper';
 import { QuestionButtons } from '../../Question/QuestionButtons';
 import { P } from '../../../../../../components/Typography/P';
 import { useEffect } from 'react';
@@ -47,36 +48,45 @@ export const MultiTextInput: React.FC<{
   }, [answers]);
 
   return (
-    <QuestionAnimation>
-      <QuestionText title={question.questionText} />
-      <div className={styles.multiTextInputWrapper}>
-        {question.answerSelector.multiTextInput?.map((field, index) => (
-          <VStack key={index} align="stretch" className={styles.inputItem}>
-            <P variant="multiTextInputP" color={'white'} mb={2}>
-              {field.fieldTitle}
-            </P>
-            <Input
-              value={answers[index]}
-              onChange={(e) => onChange(e, index)}
-              placeholder={field.fieldPlaceholder || placeholder}
-              type={'text'}
-              id={`${index}`}
-              hideLabel
+    <>
+      {isMobile && (
+        <BackButton onPrevQuestion={onPrevQuestion} currentPos={currentPos} />
+      )}
+      <QuestionAnimation>
+        <QuestionText title={question.questionText} />
+        <div className={styles.multiTextInputWrapper}>
+          {question.answerSelector.multiTextInput?.map((field, index) => (
+            <VStack key={index} align="stretch" className={styles.inputItem}>
+              <P variant="multiTextInputP" color={'white'} mb={2}>
+                {field.fieldTitle}
+              </P>
+              <Input
+                value={answers[index]}
+                onChange={(e) => onChange(e, index)}
+                placeholder={field.fieldPlaceholder || placeholder}
+                type={'text'}
+                id={`${index}`}
+                hideLabel
+              />
+            </VStack>
+          ))}
+        </div>
+      </QuestionAnimation>
+      <QuestionButtonsWrapper>
+        <div className={styles.buttonOuter}>
+          {!isMobile && (
+            <BackButton
+              onPrevQuestion={onPrevQuestion}
+              currentPos={currentPos}
             />
-          </VStack>
-        ))}
-      </div>
-      <div className={styles.buttonOuter}>
-        {!isMobile && (
-          <BackButton onPrevQuestion={onPrevQuestion} currentPos={currentPos} />
-        )}
-
-        <QuestionButtons
-          onNextQuestion={onNextQuestion}
-          isAnswered
-          isRequired={false}
-        />
-      </div>
-    </QuestionAnimation>
+          )}
+          <QuestionButtons
+            onNextQuestion={onNextQuestion}
+            isAnswered
+            isRequired={false}
+          />
+        </div>
+      </QuestionButtonsWrapper>
+    </>
   );
 };

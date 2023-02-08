@@ -28,6 +28,7 @@ $main-layout-height: calc(
 
   main {
     padding-top: 0 !important;
+    padding-bottom: $calculator-question-buttons-wrapper-height / 2;
     min-height: calc(100vh - var(--header-height)) !important;
   }
 

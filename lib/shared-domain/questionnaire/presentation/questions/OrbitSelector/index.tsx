@@ -1,6 +1,7 @@
 import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { Question } from 'lib/shared-domain/questionnaire/domain';
 import { useAnswers } from 'lib/shared-domain/questionnaire/application/useAnswers';
+import { QuestionButtonsWrapper } from '../../Question/QuestionButtonsWrapper';
 import { QuestionButtons } from '../../Question/QuestionButtons';
 import { QuestionText } from '../../Question/QuestionText';
 import { QuestionAnimation } from '../../Question/QuestionAnimation';
@@ -95,41 +96,44 @@ export const OrbitSelector: React.FC<{
   }, []);
 
   return (
-    <QuestionAnimation>
-      {isMobile && (
-        <BackButton onPrevQuestion={onPrevQuestion} currentPos={currentPos} />
-      )}
-
-      <QuestionText title={question.questionText}>
-        <RequiredQuestionInfo isRequired={question?.isRequired} />
-      </QuestionText>
-
-      <div className={styles.rangeWrapper}>
-        <div className={styles.donutWrapper}>
-          <Donut progress={rangeValue} total={RANGE_MAX_VALUE} />
-          <AnswerLabel answer={chosenAnswer?.label} />
-        </div>
-        <input
-          ref={rangeInputRef}
-          className={styles.rangeSlider}
-          type="range"
-          min={RANGE_MIN_VALUE}
-          max={RANGE_MAX_VALUE}
-          value={rangeValue}
-          onChange={(e) => updateAnswer(Number(e.target.value))}
-        />
-      </div>
-
-      <div className={styles.buttonOuter}>
-        {!isMobile && (
+    <>
+      <QuestionAnimation>
+        {isMobile && (
           <BackButton onPrevQuestion={onPrevQuestion} currentPos={currentPos} />
         )}
-        <QuestionButtons
-          onNextQuestion={onNextQuestion}
-          isRequired={question?.isRequired}
-          isAnswered={getAnswer()}
-        />
-      </div>
-    </QuestionAnimation>
+
+        <QuestionText title={question.questionText}>
+          <RequiredQuestionInfo isRequired={question?.isRequired} />
+        </QuestionText>
+
+        <div className={styles.rangeWrapper}>
+          <div className={styles.donutWrapper}>
+            <Donut progress={rangeValue} total={RANGE_MAX_VALUE} />
+            <AnswerLabel answer={chosenAnswer?.label} />
+          </div>
+          <input
+            ref={rangeInputRef}
+            className={styles.rangeSlider}
+            type="range"
+            min={RANGE_MIN_VALUE}
+            max={RANGE_MAX_VALUE}
+            value={rangeValue}
+            onChange={(e) => updateAnswer(Number(e.target.value))}
+          />
+        </div>
+      </QuestionAnimation>
+      <QuestionButtonsWrapper>
+        <div className={styles.buttonOuter}>
+          {!isMobile && (
+            <BackButton onPrevQuestion={onPrevQuestion} currentPos={currentPos} />
+          )}
+          <QuestionButtons
+            onNextQuestion={onNextQuestion}
+            isRequired={question?.isRequired}
+            isAnswered={getAnswer()}
+          />
+        </div>
+      </QuestionButtonsWrapper>
+    </>
   );
 };

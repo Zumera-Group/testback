@@ -24,7 +24,7 @@
     "step1": "Allgemeine Informationen",
     "step2": "Spezifische Angaben zum Unternehmen",
     "step3": "Besonderheiten des Sektors",
-    "step4": "Saxenhammer Bewertung",
+    "step4": "Zumera Bewertung",
     "firstButtonText": "Gehe zu spezifischen Fragen in deinem Sektor ({{industry}})",
     "secondButtonText": "Ich werde hier aufhören"
   },
@@ -65,7 +65,7 @@
         "generalInformation": "Allgemeine Informationen",
         "companySpecifics": "Besonderheiten des Unternehmens",
         "sectorSpecifics": "Besonderheiten des Sektors",
-        "evaluation": "Saxenhammer Bewertung"
+        "evaluation": "Zumera Bewertung"
       }
     },
     "evaluation": {
