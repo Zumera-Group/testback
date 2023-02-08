@@ -1,7 +1,8 @@
 import Button from 'components/Button/Button';
-import { useValuationStore } from 'lib/shared-domain/questionnaire/store';
-import { useState } from 'react';
+import { getTranslateByScope } from 'translation/i18n';
 import styles from './BackButton.module.scss';
+
+const t = getTranslateByScope('question');
 
 interface Props {
   onPrevQuestion: () => void;
@@ -19,7 +20,7 @@ const BackButton: React.FC<Props> = ({ onPrevQuestion, currentPos }) => {
           classes={styles.backButton}
           onDark
         >
-          Back
+          {t('backBtn')}
         </Button>
       )}
     </>

@@ -55,7 +55,8 @@
   "question": {
     "nextBtn": "Next",
     "skipBtn": "Skip",
-    "required": "An answer is required in order to continue"
+    "required": "An answer is required in order to continue",
+    "backBtn": "Back"
   },
   "result": {
     "loading": {

@@ -53,9 +53,10 @@
     }
   },
   "question": {
-    "nextBtn": "weiter",
-    "skipBtn": "überspringen",
-    "required": "Eine Antwort wird benötigt"
+    "nextBtn": "Weiter",
+    "skipBtn": "Überspringen",
+    "required": "Eine Antwort wird benötigt",
+    "backBtn": "Zurück"
   },
   "result": {
     "loading": {
