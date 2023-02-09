@@ -4,7 +4,7 @@ import { FlexCol, Box } from '../../../../components/Layout/Flex/Flex';
 import { SimpleGrid } from '@chakra-ui/react';
 import useBreakpointValue from 'lib/shared-domain/useBreakpoint';
 import { P } from '../../../../components/Typography/P';
-import reportDownloadBg from 'public/newsDetail/reportDownloadBg-min.jpg';
+// import reportDownloadBg from 'public/newsDetail/reportDownloadBg-min.jpg';
 import { colors } from '../../../../styles/foundations/colors';
 import { Employee } from '../domain/index';
 import { CardDownload } from 'lib/shared-domain/newsArticle/presentation/newsCards';
@@ -27,7 +27,7 @@ export const EmployeeReportDownload: React.FC<{
     : 'reportDownloadDescription';
   return (
     <FlexCol
-      backgroundImage={`url(${reportDownloadBg.src})`}
+      // backgroundImage={`url(${reportDownloadBg.src})`}
       backgroundPosition="center"
       backgroundSize="cover"
       backgroundRepeat="no-repeat"

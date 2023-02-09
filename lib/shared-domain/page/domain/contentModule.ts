@@ -316,10 +316,6 @@ export class CDIGlobalSectionModule extends BaseModule {
     this.locations = fields.locations;
     this.sectionType = fields.sectionType;
   }
-
-  getSectionImage(image: 'bg' | 'bubble' | 'map'): string {
-    return sectionImages.cdiGlobalSection[image].src;
-  }
 }
 
 export class SectorHeaderSectionModule extends BaseModule {
@@ -371,10 +367,6 @@ export class TransactionsCarouselSectionModule extends BaseModule {
     this.linkText = fields.linkText;
     this.transactions = fields.transactions;
   }
-
-  getTransactionBg(): string {
-    return sectionImages.trustSectionBgImage.src;
-  }
 }
 
 export class AllTransactionsCarouselSectionModule extends BaseModule {
@@ -397,10 +389,6 @@ export class AllTransactionsCarouselSectionModule extends BaseModule {
     this.showAll = fields.showAll;
     this.sectors = fields.sectors;
     this.button = fields.button;
-  }
-
-  getTransactionBg(): string {
-    return sectionImages.trustSectionBgImage.src;
   }
 }
 

@@ -10,7 +10,6 @@ import { ServiceTransactions } from './ServiceTransactions';
 import { ServiceSectors } from './ServiceSectors';
 import { ServiceProcess } from 'lib/shared-domain/services/presentation/ServiceProcess';
 import { SEO } from 'components/SEO';
-import { useFetchTransactions } from '../../newsArticle/presentation/NewsArticleMoreNews_DISABLED';
 import { links } from 'lib/links';
 import { useRouter } from 'next/router';
 import { ServiceTabs } from 'lib/shared-domain/services/presentation/ServiceTabs';
@@ -23,6 +22,7 @@ import { ServiceHelpContactPerson } from 'lib/shared-domain/services/presentatio
 import { Transaction } from 'lib/shared-domain/transactions/domain';
 import { ServiceTransactionShowcase } from 'lib/shared-domain/services/presentation/ServiceTransactionShowcase';
 import ContactUsSection from 'lib/shared-domain/page/presentation/contentModules/ContactUsSection';
+import { useFetchTransactions } from 'components/NewsArticle/NewsArticleMoreNews';
 
 interface ServiceDetailProps {
   service: Service;
