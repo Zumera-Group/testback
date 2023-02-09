@@ -4,12 +4,15 @@ import { TransactionBig } from 'components/NewsGrid/Cards/TransactionBig';
 import { Employee } from 'components/NewsGrid/Cards/Employee';
 import styles from './Cards.module.scss';
 import { Grid, GridColumn } from 'components/Layout';
+import { useSharedContentContext } from 'lib/shared-domain/page/infrastructure/sharedContentContext';
 
 export const CardsNew = ({
   cardsRow,
   highlightedArticleSection,
   isFirstChunk,
 }) => {
+  const { downloadButtonContent } = useSharedContentContext();
+  console.log(downloadButtonContent);
   const {
     highLightedArticle,
     customTitle,
