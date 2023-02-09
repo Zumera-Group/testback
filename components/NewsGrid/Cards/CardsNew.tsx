@@ -147,13 +147,13 @@ const getBigCardType = (card) => {
     return null;
   }
   if (card._type === 'newsArticle') {
-    return <NewsBig article={card} />;
+    return <NewsBig article={card} key={card._id} />;
   }
   if (card._type === 'employee') {
-    return <Employee article={card} />;
+    return <Employee article={card} key={card._id} />;
   }
   if (card._type === 'transaction') {
-    return <TransactionBig article={card} />;
+    return <TransactionBig article={card} key={card._id} />;
   }
 };
 
@@ -163,16 +163,15 @@ const getSmallCardType = (card) => {
   }
   if (card._type === 'newsArticle') {
     return card.secondPicture || card.picture ? (
-      <NewsBig article={card} />
+      <NewsBig article={card} key={card._id} />
     ) : (
-      <TwoNews article={card} />
+      <TwoNews article={card} key={card._id} />
     );
-    // return <TwoNews article={card} />;
   }
   if (card._type === 'employee') {
-    return <Employee article={card} />;
+    return <Employee article={card} key={card._id} />;
   }
   if (card._type === 'transaction') {
-    return <TransactionBig article={card} />;
+    return <TransactionBig article={card} key={card._id} />;
   }
 };

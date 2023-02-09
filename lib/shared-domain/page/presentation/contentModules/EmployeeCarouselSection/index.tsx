@@ -112,9 +112,9 @@ const Card: React.FC<{
 export const EmployeeCarouselSection: React.FC<{
   specificContentModule: EmployeeCarouselSectionModule;
 }> = ({ specificContentModule }) => {
-  const Carousel = dynamic(() => import('./SpringCarousel'), {
-    ssr: false,
-  });
+  // const Carousel = dynamic(() => import('./SpringCarousel'), {
+  //   ssr: false,
+  // });
   const jobs = useFetchJobs();
   const [slides, setSlides] = React.useState([]);
 

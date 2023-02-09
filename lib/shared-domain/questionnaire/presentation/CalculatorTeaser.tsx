@@ -1,4 +1,4 @@
-import React from 'react';
+import result_teaserReact from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useBreakpointValue, VStack, Flex, Hide, Show } from '@chakra-ui/react';
@@ -10,7 +10,7 @@ import { TitleWithSubtitleAndDescription } from 'lib/shared-domain/page/presenta
 import { colors } from 'styles/foundations/colors';
 import { TextBoxGroup } from './TextBoxGroup';
 
-import resultTeaser from '../../../../public/contentModules/calculatorTeaserSection/result_teaser.svg';
+// import resultTeaser from '../../../../public/contentModules/calculatorTeaserSection/result_teaser.svg';
 import { FlexCol } from '../../../../components/Layout/Flex/Flex';
 import { useRouter } from 'next/router';
 import { Beam } from 'components/Beam';
@@ -64,35 +64,35 @@ export const ResultTeaser: React.FC<{
       mt={isMobile ? 8 : 0}
       className={styles.calculatorTeaserWrapper}
     >
-      {resultTeaser.src && <HalfBeam />}
-      <Hide below="md">
-        <FlexCol ml={{ md: 6, lg: 3 }}>
-          <TeaserBoxDesktop>
-            <P variant={DESKTOP_VARIANT} className={styles.calculatorSteps}>
-              <span className={styles.dash}>&mdash;</span>
-              {calculatorSteps?.step4}
-            </P>
-          </TeaserBoxDesktop>
-          <TeaserBoxDesktop>
-            <P variant={DESKTOP_VARIANT} className={styles.calculatorSteps}>
-              <span className={styles.dash}>&mdash;</span>
-              {calculatorSteps?.step3}
-            </P>
-          </TeaserBoxDesktop>
-          <TeaserBoxDesktop>
-            <P variant={DESKTOP_VARIANT} className={styles.calculatorSteps}>
-              <span className={styles.dash}>&mdash;</span>
-              {calculatorSteps?.step2}
-            </P>
-          </TeaserBoxDesktop>
-          <TeaserBoxDesktop>
-            <P variant={DESKTOP_VARIANT} className={styles.calculatorSteps}>
-              <span className={styles.dash}>&mdash;</span>
-              {calculatorSteps?.step1}
-            </P>
-          </TeaserBoxDesktop>
-        </FlexCol>
-      </Hide>
+      {/*{resultTeaser.src && <HalfBeam />}*/}
+      {/*<Hide below="md">*/}
+      {/*  <FlexCol ml={{ md: 6, lg: 3 }}>*/}
+      {/*    <TeaserBoxDesktop>*/}
+      {/*      <P variant={DESKTOP_VARIANT} className={styles.calculatorSteps}>*/}
+      {/*        <span className={styles.dash}>&mdash;</span>*/}
+      {/*        {calculatorSteps?.step4}*/}
+      {/*      </P>*/}
+      {/*    </TeaserBoxDesktop>*/}
+      {/*    <TeaserBoxDesktop>*/}
+      {/*      <P variant={DESKTOP_VARIANT} className={styles.calculatorSteps}>*/}
+      {/*        <span className={styles.dash}>&mdash;</span>*/}
+      {/*        {calculatorSteps?.step3}*/}
+      {/*      </P>*/}
+      {/*    </TeaserBoxDesktop>*/}
+      {/*    <TeaserBoxDesktop>*/}
+      {/*      <P variant={DESKTOP_VARIANT} className={styles.calculatorSteps}>*/}
+      {/*        <span className={styles.dash}>&mdash;</span>*/}
+      {/*        {calculatorSteps?.step2}*/}
+      {/*      </P>*/}
+      {/*    </TeaserBoxDesktop>*/}
+      {/*    <TeaserBoxDesktop>*/}
+      {/*      <P variant={DESKTOP_VARIANT} className={styles.calculatorSteps}>*/}
+      {/*        <span className={styles.dash}>&mdash;</span>*/}
+      {/*        {calculatorSteps?.step1}*/}
+      {/*      </P>*/}
+      {/*    </TeaserBoxDesktop>*/}
+      {/*  </FlexCol>*/}
+      {/*</Hide>*/}
     </FlexRow>
   );
 };

@@ -5,7 +5,7 @@ import { FakeLinkWithArrow } from 'lib/shared-domain/page/presentation/component
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import backgroundImage from '/public/transactionCard-bg.webp';
+// import backgroundImage from '/public/transactionCard-bg.webp';
 
 import { colors } from 'styles/foundations/colors';
 import { fontWeights } from 'styles/foundations/fontStyles';
@@ -59,7 +59,7 @@ const TransactionSectorServiceDateAndOtherInfos = ({ transaction }) => {
   if (isMobile) {
     return (
       <FlexCol
-        backgroundImage={`url(${backgroundImage.src})`}
+        // backgroundImage={`url(${backgroundImage.src})`}
         backgroundPosition="center"
         backgroundSize="cover"
         backgroundRepeat="no-repeat"
@@ -106,7 +106,7 @@ const TransactionSectorServiceDateAndOtherInfos = ({ transaction }) => {
 
   return (
     <FlexCol
-      backgroundImage={`url(${backgroundImage.src})`}
+      // backgroundImage={`url(${backgroundImage.src})`}
       backgroundPosition="center"
       backgroundSize="cover"
       backgroundRepeat="no-repeat"
@@ -181,7 +181,7 @@ export const TransactionCard: React.FC<{
 
   const config = {
     carousel: {
-      backgroundImage: `url(${backgroundImage.src})`,
+      // backgroundImage: `url(${backgroundImage.src})`,
       px: 3,
       py: 4,
       height: 382,
@@ -190,7 +190,7 @@ export const TransactionCard: React.FC<{
     },
 
     newsGrid: {
-      backgroundImage: `url(${backgroundImage.src})`,
+      // backgroundImage: `url(${backgroundImage.src})`,
       px: 3,
       py: 4,
       height: 382,
@@ -198,7 +198,7 @@ export const TransactionCard: React.FC<{
     },
 
     hero: {
-      backgroundImage: `url(${backgroundImage.src})`,
+      // backgroundImage: `url(${backgroundImage.src})`,
       px: 3,
       py: 4,
       height: 482,
@@ -211,7 +211,7 @@ export const TransactionCard: React.FC<{
         ) as any,
     },
     transactionGrid: {
-      backgroundImage: `url(${backgroundImage.src})`,
+      // backgroundImage: `url(${backgroundImage.src})`,
       px: 3,
       py: 4,
       height: TRANSACTION_GRID_HEIGHT,

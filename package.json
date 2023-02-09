@@ -24,6 +24,7 @@
     "@emotion/react": "^11.5.0",
     "@emotion/server": "^11.4.0",
     "@emotion/styled": "^11.3.0",
+    "@next/font": "^13.1.6",
     "@react-pdf/renderer": "^2.1.1",
     "@sanity/block-content-to-react": "^3.0.0",
     "@sanity/client": "^2.13.0",

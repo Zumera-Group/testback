@@ -4,8 +4,8 @@ import React from 'react';
 import { Box, FlexCol } from '../../../../../components/Layout/Flex/Flex';
 import { ImageSliderSectionModule } from '../../domain/contentModule';
 import Carousel from 'react-elastic-carousel';
-import arrowLeft from '../../../../../public/contentModules/imageSliderSection/arrowLeft.svg';
-import arrowRight from '../../../../../public/contentModules/imageSliderSection/arrowRight.svg';
+// import arrowLeft from '../../../../../public/contentModules/imageSliderSection/arrowLeft.svg';
+// import arrowRight from '../../../../../public/contentModules/imageSliderSection/arrowRight.svg';
 
 export const ImageSliderSection: React.FC<{
   specificContentModule: ImageSliderSectionModule;
@@ -57,10 +57,10 @@ export const ImageSliderSection: React.FC<{
             height="40px"
             onClick={onClick}
           >
-            <img
-              style={{ width: '8px', height: '14px' }}
-              src={type === 'PREV' ? arrowLeft.src : arrowRight.src}
-            />
+            {/*<img*/}
+            {/*  style={{ width: '8px', height: '14px' }}*/}
+            {/*  src={type === 'PREV' ? arrowLeft.src : arrowRight.src}*/}
+            {/*/>*/}
           </FlexCol>
         )}
       >
