@@ -91,7 +91,7 @@ import HowCoolSection from './HowCoolSection';
 import LeadershipTeamSection from './LeadershipTeamSection';
 import LegalNoticeSection from './LegalNoticeSection';
 import LogosWithHeadlineSection from './LogosWithHeadlineSection';
-import NewsGridSection from './NewsGridSection';
+// import NewsGridSection from './NewsGridSection';
 import OpenJobsList from './OpenJobsList';
 import SectorHeaderSection from './SectorHeaderSection';
 import SectorsSection from './SectorsSection';
@@ -147,6 +147,11 @@ import { VTValuesGridSection } from 'components/VTValuesGridSection';
 import { VTServicesSection } from 'components/VTServicesSection/VTServicesSection';
 import { StepsDownBulletsSection } from 'components/StepsDownBulletsSection';
 import { StickyFooter } from 'components/StickyFooter';
+
+import dynamic from 'next/dynamic';
+const NewsGridSection = dynamic(() => import('./NewsGridSection'), {
+  ssr: false,
+});
 
 export const getContentForContentModule = (
   contentModule: ContentModule,
@@ -386,6 +391,7 @@ export const getContentForContentModule = (
 
   if (contentModule.specificContentModule instanceof NewsGridSectionModule) {
     return (
+      // @ts-ignore
       <NewsGridSection
         specificContentModule={contentModule.specificContentModule}
       />
