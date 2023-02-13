@@ -10,7 +10,10 @@ interface Props {
   classes?: string;
 }
 
-export const LanguageSwitcher: React.FC<Props> = ({ otherLangSlug, classes }) => {
+export const LanguageSwitcher: React.FC<Props> = ({
+  otherLangSlug,
+  classes,
+}) => {
   const router = useRouter();
 
   const getLocale = () => {
@@ -21,7 +24,7 @@ export const LanguageSwitcher: React.FC<Props> = ({ otherLangSlug, classes }) =>
 
   const localeLabel = () => {
     return router.locale === 'en' ? 'DE' : 'EN';
-  }
+  };
 
   const pages = {
     en: [
@@ -63,8 +66,9 @@ export const LanguageSwitcher: React.FC<Props> = ({ otherLangSlug, classes }) =>
       if (pageIndex === -1) {
         return `/${pathElements[0]}`;
       }
-      const pathOtherLocale = `/${pages[otherLocale][pageIndex]}`;
-
+      const pathOtherLocale = `/${pages[otherLocale][pageIndex]}${
+        pathElements[1] ? '/' + pathElements[1] : ''
+      }`;
       return pathOtherLocale;
     } else {
       return '/home';
@@ -72,17 +76,8 @@ export const LanguageSwitcher: React.FC<Props> = ({ otherLangSlug, classes }) =>
   };
 
   return (
-    <Link
-      passHref
-      locale={getLocale()}
-      href={getSlug()}
-    >
-      <a className={[
-          styles.link,
-          classes ?? '',
-        ].join(' ')}>
-        {localeLabel()}
-      </a>
+    <Link passHref locale={getLocale()} href={getSlug()}>
+      <a className={[styles.link, classes ?? ''].join(' ')}>{localeLabel()}</a>
     </Link>
   );
 };

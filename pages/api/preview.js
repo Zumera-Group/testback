@@ -48,6 +48,10 @@ export default async function preview(req, res) {
     res.writeHead(307, {
       Location: `/${req?.query?.lang}/landing/${req?.query?.slug}` ?? `/`,
     });
+  } else if (req?.query?.type === 'landings') {
+    res.writeHead(307, {
+      Location: `/${req?.query?.lang}/landing/${req?.query?.slug}` ?? `/`,
+    });
   } else if (req?.query?.type === 'employee') {
     const pageSlug = req?.query?.lang === 'de' ? 'mitarbeiter' : 'employees';
     res.writeHead(307, {

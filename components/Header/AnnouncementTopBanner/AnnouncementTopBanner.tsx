@@ -3,7 +3,10 @@ import Link from 'next/link';
 
 import styles from './AnnouncementTopBanner.module.scss';
 
-export const AnnouncementTopBanner = ({ announcementTopBanner, isScrolled }) => {
+export const AnnouncementTopBanner = ({
+  announcementTopBanner,
+  isScrolled,
+}) => {
   const router = useRouter();
 
   const getBannerLink = () => {
@@ -20,6 +23,7 @@ export const AnnouncementTopBanner = ({ announcementTopBanner, isScrolled }) => 
       transaction: router.locale === 'en' ? 'transactions' : 'transaktionen',
       newsArticle: 'news',
       service: router.locale === 'en' ? 'services' : 'leistungsspektrum',
+      landings: 'landings',
       page: '',
     }[pageType];
     return `/${linkTypePart}/${announcementTopBanner.buttonPageLink.slug.current}`;

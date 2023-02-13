@@ -17,6 +17,8 @@ import {
   REVALIDATE_ON_FAILURE_TIME_IN_SECONDS,
   REVALIDATE_ON_SUCCESS_IN_SECONDS,
 } from '../../lib/shared-domain/page/constants';
+import { fetchLanding } from 'lib/shared-domain/landings/application/useGetVTLanding';
+import PageLayout from 'lib/shared-domain/page/presentation/PageLayout';
 
 export async function getStaticPaths() {
   return {
@@ -27,11 +29,7 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ locale, params, preview = false }) {
   try {
-    const { landing, query } = await fetchValuationToolLanding(
-      locale,
-      params.slug,
-      preview,
-    );
+    const { landing, query } = await fetchLanding(locale, params.slug, preview);
     const siteSettings = await fetchSiteSettings(locale);
     const sharedContent =
       await new SharedContentFacade().getSharedContentFacade(locale);
@@ -93,9 +91,10 @@ export default function Index({
   return (
     <SharedContentContext value={sharedContent}>
       <ErrorTrackingBoundary>
-        <VTLandingLayout
+        <PageLayout
+          page={previewPage || selectedLanding}
           siteSettings={siteSettings}
-          landing={previewPage || selectedLanding}
+          sharedContent={sharedContent}
         />
       </ErrorTrackingBoundary>
     </SharedContentContext>
