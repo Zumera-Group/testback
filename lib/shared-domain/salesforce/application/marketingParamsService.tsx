@@ -10,7 +10,7 @@ const config = {
 
 const MarketingQueryStorage = {
   saveIfWithValue: (key: string, value: any) => {
-    if (!value) return null;
+    // if (!value) return null;
     window.localStorage.setItem(
       config.localStoreKey + key,
       JSON.stringify(value),
@@ -77,8 +77,8 @@ const getCookies = () => {
   const ga = getCookieByName('_ga');
 
   return {
-    GaSessionID__c: ga,
-    GAUserId__c: gid,
+    gasessionid__c: ga,
+    gauserid__c: gid,
   };
 };
 
