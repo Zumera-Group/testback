@@ -490,7 +490,23 @@ export const contentModulesQuery = (
 		 ...,
 	   }
     },
-    highlightedArticleSection {
+    firstHighlightedArticleSection {
+    	...,
+		highlightedPage ->  {
+			...,
+			picture {
+				asset->{
+				  url
+				},
+			  },
+		},
+		customTitleImage { 
+			asset->{
+				  url
+				},
+		},
+    }, 
+    secondHighlightedArticleSection {
     	...,
 		highlightedPage ->  {
 			...,

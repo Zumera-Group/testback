@@ -29,7 +29,8 @@ interface Props {
   shouldHidePeopleUpdates?: boolean;
   initialNumberOfRepetitions?: number;
   titleAlign?: 'left' | 'center' | 'right';
-  highlightedArticleSection?: any;
+  firstHighlightedArticleSection?: any;
+  secondHighlightedArticleSection?: any;
 }
 
 export const NewsGrid: React.FC<Props> = ({
@@ -48,7 +49,8 @@ export const NewsGrid: React.FC<Props> = ({
   shouldHidePeopleUpdates,
   initialNumberOfRepetitions = 1,
   titleAlign,
-  highlightedArticleSection,
+  firstHighlightedArticleSection,
+  secondHighlightedArticleSection,
 }) => {
   const [numberOfRepetitions, setNumberOfRepetitions] = useState(
     initialNumberOfRepetitions,
@@ -159,7 +161,8 @@ export const NewsGrid: React.FC<Props> = ({
             key={index}
             cardsRow={chunk}
             isFirstChunk={index === 0}
-            highlightedArticleSection={highlightedArticleSection}
+            firstHighlightedArticleSection={firstHighlightedArticleSection}
+            secondHighlightedArticleSection={secondHighlightedArticleSection}
           />
         ))}
 

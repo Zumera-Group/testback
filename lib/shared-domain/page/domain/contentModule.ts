@@ -474,7 +474,8 @@ export class NewsGridSectionModule extends BaseModule {
   displayDownload: boolean;
   shouldHideCDITransactions?: boolean;
   shouldHidePeopleUpdates?: boolean;
-  highlightedArticleSection?: any;
+  firstHighlightedArticleSection?: any;
+  secondHighlightedArticleSection?: any;
   constructor(fields: Record<string, any>) {
     super();
 
@@ -492,7 +493,9 @@ export class NewsGridSectionModule extends BaseModule {
 
     this.displayDownload = fields.displayDownload;
 
-    this.highlightedArticleSection = fields.highlightedArticleSection;
+    this.firstHighlightedArticleSection = fields.firstHighlightedArticleSection;
+    this.secondHighlightedArticleSection =
+      fields.secondHighlightedArticleSection;
   }
 }
 
