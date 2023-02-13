@@ -58,9 +58,18 @@ export const AnchoredTextSection = ({ specificContentModule }) => {
               }
 
               if (textBlock._type === 'newsCard') {
+                const { customLink, customTitle, date } = textBlock || {};
+                const card = {
+                  ...textBlock.news,
+                  title: customTitle || textBlock.news?.title,
+                  customLink: customLink,
+                  date: date || textBlock.news?.date,
+                  _type: customTitle ? textBlock.type : textBlock.news?._id,
+                };
+
                 return (
                   <div key={textBlock._key} className={styles.newsCard}>
-                    <TwoNews article={textBlock.news} />
+                    <TwoNews article={card} />
                   </div>
                 );
               }

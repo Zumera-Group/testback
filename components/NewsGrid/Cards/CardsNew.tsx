@@ -12,7 +12,7 @@ export const CardsNew = ({
   isFirstChunk,
 }) => {
   const { downloadButtonContent } = useSharedContentContext();
-  console.log(downloadButtonContent);
+  // console.log(downloadButtonContent);
   const {
     highLightedArticle,
     customTitle,
