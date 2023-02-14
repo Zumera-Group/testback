@@ -13,7 +13,6 @@ export const Menu = ({ navigation }) => {
   const isActive = (slug: string) => {
     return router.query.slug === slug;
   };
-  console.log(navigation);
   return (
     <nav className={styles.menu}>
       <ul className={styles.items}>
