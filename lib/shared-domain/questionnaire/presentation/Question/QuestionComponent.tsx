@@ -13,6 +13,7 @@ import { qLogs } from '../../application/log';
 import { useQuestionnaireRouter, t } from './index';
 import { AnimateSharedLayout } from 'framer-motion';
 import { Sector } from '../../../page/domain/index';
+import { useGetSalesforceScore } from '../../application/useGetQuestionnaireScore';
 
 export const QuestionComponent: React.FC<{
   sectorSpecificQuestions: Question[];
@@ -34,6 +35,8 @@ export const QuestionComponent: React.FC<{
   const { syncCurrentAnswersToSalesforce } = useSalesforceAnswerSync();
 
   const { pushQuestion } = useQuestionnaireRouter();
+
+  const { getScore } = useGetSalesforceScore();
 
   const currentCategory = questionnaire?.questionsByCategory?.[mainStep];
 
@@ -102,6 +105,15 @@ export const QuestionComponent: React.FC<{
     refEl.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
     qLogs('onNextQuestion');
+
+    const loadScore = async () => {
+      try {
+        const score = await getScore();
+        console.log(score);
+      } catch (e) {}
+    };
+    loadScore();
+
     syncCurrentAnswersToSalesforce(uniqueId, currentQuestion?.salesforceId);
     if (industryId && currentQuestion?.questionId === INDUSTRY_QUESTION_ID) {
       buildSectorSpecificQuestions();

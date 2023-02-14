@@ -33,6 +33,7 @@ export const SectorSpecificEntry: React.FC<{
   const secondButtonText = t('secondButtonText');
   const onFinishQuestionnaire = () => setIsOnResultScreen(true);
   const isMobile = useMediaQuery(`(max-width: ${SCREEN_SIZE_MD})`);
+
   return (
     <>
       {isMobile && (
