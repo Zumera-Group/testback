@@ -7,6 +7,8 @@ import {
 import { MarketingParamsService } from '../application/marketingParamsService';
 
 const BASE_URL = process.env.NEXT_PUBLIC_SALESFORCE_API_BASE_URL;
+const unformattedParams =
+  process.env.NEXT_PUBLIC_MARKETING_QUERY_PARAMS?.split(',') || [];
 
 const endpoints = {
   getSectionsAndIndustries: 'overview',
@@ -35,12 +37,30 @@ export class SalesforceFacade {
       const marketingParams = MarketingParamsService.retrieve();
       const cookies = MarketingParamsService.getCookies();
 
+      let keyMap = {
+        [unformattedParams[0]]: 'UTMSource__c',
+        [unformattedParams[1]]: 'UTMMedium__c',
+        [unformattedParams[2]]: 'UTMCampaign__c',
+        [unformattedParams[3]]: 'UTM_ID__c',
+        [unformattedParams[4]]: 'UTM_Source_Platform__c',
+        [unformattedParams[5]]: 'UTMTerm__c',
+        [unformattedParams[6]]: 'UTM_Content__c',
+      };
+      const formattedMarketingParams = Object.keys(marketingParams).reduce(
+        (acc, key) => {
+          const newKey = keyMap[key] || key;
+          acc[newKey] = marketingParams[key];
+          return acc;
+        },
+        {},
+      );
+
       const params = {
         lead_entry: {
           unique_id: uniqueId,
           data: {
             ...fields,
-            ...marketingParams,
+            ...formattedMarketingParams,
             ...cookies,
             industry_id: industryId,
             sector_id: sectorId,
@@ -53,6 +73,7 @@ export class SalesforceFacade {
       qLogs(
         'SalesforceFacade.createOrUpdateLeadEntry ' + JSON.stringify(fields),
       );
+      qLogs(marketingParams); //console.log
 
       await this.httpService.post(
         endpoints.createOrUpdateLeadEntry,
@@ -108,11 +129,29 @@ export class SalesforceFacade {
       const marketingParams = MarketingParamsService.retrieve();
       const cookies = MarketingParamsService.getCookies();
 
+      let keyMap = {
+        [unformattedParams[0]]: 'UTMSource__c',
+        [unformattedParams[1]]: 'UTMMedium__c',
+        [unformattedParams[2]]: 'UTMCampaign__c',
+        [unformattedParams[3]]: 'UTM_ID__c',
+        [unformattedParams[4]]: 'UTM_Source_Platform__c',
+        [unformattedParams[5]]: 'UTMTerm__c',
+        [unformattedParams[6]]: 'UTM_Content__c',
+      };
+      const formattedMarketingParams = Object.keys(marketingParams).reduce(
+        (acc, key) => {
+          const newKey = keyMap[key] || key;
+          acc[newKey] = marketingParams[key];
+          return acc;
+        },
+        {},
+      );
+
       await this.httpService.post(
         endpoints.submitContactForm,
         {
           contact: {
-            ...marketingParams,
+            ...formattedMarketingParams,
             ...cookies,
             email: contact.email,
             phone: contact.phone,

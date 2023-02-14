@@ -10,7 +10,7 @@ const config = {
 
 const MarketingQueryStorage = {
   saveIfWithValue: (key: string, value: any) => {
-    // if (!value) return null;
+    if (!value) return null;
     window.localStorage.setItem(
       config.localStoreKey + key,
       JSON.stringify(value),
@@ -46,6 +46,7 @@ const retrieve = (): Record<string, any> => {
       if (value) {
         total[key] = MarketingQueryStorage.get(key);
       }
+
       return total;
     }, {});
 
