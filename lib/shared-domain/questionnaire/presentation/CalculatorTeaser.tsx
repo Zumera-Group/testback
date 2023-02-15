@@ -10,12 +10,13 @@ import { TitleWithSubtitleAndDescription } from 'lib/shared-domain/page/presenta
 import { colors } from 'styles/foundations/colors';
 import { TextBoxGroup } from './TextBoxGroup';
 
-// import resultTeaser from '../../../../public/contentModules/calculatorTeaserSection/result_teaser.svg';
+import resultTeaser from '../../../../public/contentModules/calculatorTeaserSection/result_teaser.svg';
 import { FlexCol } from '../../../../components/Layout/Flex/Flex';
 import { useRouter } from 'next/router';
 import { Beam } from 'components/Beam';
 import styles from './CalculatorTeaser.module.scss';
 import { HalfBeam } from 'components/HalfBeam';
+import { Button } from 'components/Button';
 
 const LineSpacerMobile = () => {
   return (
@@ -28,16 +29,16 @@ const LineSpacerMobile = () => {
   );
 };
 
-const TeaserBoxDesktop: React.FC<{}> = ({ children }) => {
-  const BOX_SPACE_HEIGHT = '25%';
-  return (
-    <FlexRow h={BOX_SPACE_HEIGHT}>
-      <Flex align="center" justify="center">
-        {children}
-      </Flex>
-    </FlexRow>
-  );
-};
+// const TeaserBoxDesktop: React.FC<{}> = ({ children }) => {
+//   const BOX_SPACE_HEIGHT = '25%';
+//   return (
+//     <FlexRow h={BOX_SPACE_HEIGHT}>
+//       <Flex align="center" justify="center">
+//         {children}
+//       </Flex>
+//     </FlexRow>
+//   );
+// };
 
 export const ResultTeaser: React.FC<{
   calculatorSteps: {
@@ -48,52 +49,34 @@ export const ResultTeaser: React.FC<{
   };
   isSectorSpecificEntry?: boolean;
 }> = ({ calculatorSteps, isSectorSpecificEntry }) => {
-  const BOX_SHADOW = '0px 20px 40px rgba(12, 78, 64, 0.35)';
   const isMobile = useBreakpointValue({ base: true, lg: false });
-  const MOBILE_VARIANT = 'mobileCalculatorTeaserSectionP';
-  const DESKTOP_VARIANT = 'websiteCalculatorTeaserSectionP';
   const isMobileOrisSectorSpecificEntry = isMobile || isSectorSpecificEntry;
 
   return (
-    <FlexRow
-      boxShadow={isSectorSpecificEntry ? '' : BOX_SHADOW}
-      bgColor={isSectorSpecificEntry ? colors.transparent : colors.white}
-      px={isMobile ? 2 : 5}
-      py={isMobile ? 5 : 7}
-      w={isMobileOrisSectorSpecificEntry ? '100%' : '60%'}
-      mt={isMobile ? 8 : 0}
-      className={styles.calculatorTeaserWrapper}
-    >
-      {/*{resultTeaser.src && <HalfBeam />}*/}
-      {/*<Hide below="md">*/}
-      {/*  <FlexCol ml={{ md: 6, lg: 3 }}>*/}
-      {/*    <TeaserBoxDesktop>*/}
-      {/*      <P variant={DESKTOP_VARIANT} className={styles.calculatorSteps}>*/}
-      {/*        <span className={styles.dash}>&mdash;</span>*/}
-      {/*        {calculatorSteps?.step4}*/}
-      {/*      </P>*/}
-      {/*    </TeaserBoxDesktop>*/}
-      {/*    <TeaserBoxDesktop>*/}
-      {/*      <P variant={DESKTOP_VARIANT} className={styles.calculatorSteps}>*/}
-      {/*        <span className={styles.dash}>&mdash;</span>*/}
-      {/*        {calculatorSteps?.step3}*/}
-      {/*      </P>*/}
-      {/*    </TeaserBoxDesktop>*/}
-      {/*    <TeaserBoxDesktop>*/}
-      {/*      <P variant={DESKTOP_VARIANT} className={styles.calculatorSteps}>*/}
-      {/*        <span className={styles.dash}>&mdash;</span>*/}
-      {/*        {calculatorSteps?.step2}*/}
-      {/*      </P>*/}
-      {/*    </TeaserBoxDesktop>*/}
-      {/*    <TeaserBoxDesktop>*/}
-      {/*      <P variant={DESKTOP_VARIANT} className={styles.calculatorSteps}>*/}
-      {/*        <span className={styles.dash}>&mdash;</span>*/}
-      {/*        {calculatorSteps?.step1}*/}
-      {/*      </P>*/}
-      {/*    </TeaserBoxDesktop>*/}
-      {/*  </FlexCol>*/}
-      {/*</Hide>*/}
-    </FlexRow>
+    <div className={styles.calculatorTeaserWrapper}>
+      <HalfBeam />
+      <div>
+        <p className={styles.calculatorSteps}>
+          <span className={styles.dash}>&mdash;</span>
+          {calculatorSteps?.step4}
+        </p>
+
+        <p className={styles.calculatorSteps}>
+          <span className={styles.dash}>&mdash;</span>
+          {calculatorSteps?.step3}
+        </p>
+
+        <p className={styles.calculatorSteps}>
+          <span className={styles.dash}>&mdash;</span>
+          {calculatorSteps?.step2}
+        </p>
+
+        <p className={styles.calculatorSteps}>
+          <span className={styles.dash}>&mdash;</span>
+          {calculatorSteps?.step1}
+        </p>
+      </div>
+    </div>
   );
 };
 
@@ -125,55 +108,35 @@ export const CalculatorTeaser: React.FC<{
   if (!questionnaireSlug) return null;
 
   return (
-    <SectionContainer py={isMobile ? 'md' : 'lg'}>
+    <div>
       <TitleWithSubtitleAndDescription
         color={{ description: colors.text.light }}
         title={title}
         description={description}
       />
-      <Flex
-        justify={isMobile ? 'flex-start' : 'space-between'}
-        alignItems="flex-start"
-        mt={MARGIN_TOP}
-      >
-        <FlexCol
-          width={{ base: '100%', lg: '35%' }}
-          mr={5}
-          mt={{ base: 4.5, lg: MARGIN_TOP }}
-        >
-          <VStack spacing={3} align="flex-start">
-            {checkmarkTexts?.map((c, index) => (
-              <TextBoxGroup
-                key={index}
-                text={c}
-                color={{
-                  tickColor: colors.primary.darkGreen,
-                  circleBgColor: colors.transparent,
-                }}
-                border={CIRCLE_BORDER}
-              />
-            ))}
-          </VStack>
-          <Box mt={4.5}>
-            <Link passHref href={`/${page}/${questionnaireSlug}`}>
-              <Btn
-                aria-label="Go to questionnaire button"
-                as="a"
-                cursor="pointer"
-                variant="solid"
-              >
-                {buttonText}
-              </Btn>
-            </Link>
-          </Box>
-        </FlexCol>
-        <Hide below="lg">
+      <div>
+        <div>
+          {checkmarkTexts?.map((c, index) => (
+            <TextBoxGroup key={index} text={c} />
+          ))}
+        </div>
+        <div>
+          <Button
+            variant={'primary'}
+            link={`/${page}/${questionnaireSlug}`}
+            aria-label="Go to questionnaire button"
+          >
+            {buttonText}
+          </Button>
+        </div>
+
+        <div>
           <ResultTeaser calculatorSteps={calculatorSteps} />
-        </Hide>
-      </Flex>
-      <Show below="lg">
+        </div>
+      </div>
+      <div>
         <ResultTeaser calculatorSteps={calculatorSteps} />
-      </Show>
-    </SectionContainer>
+      </div>
+    </div>
   );
 };
