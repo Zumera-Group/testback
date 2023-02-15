@@ -5,10 +5,6 @@ import { PageFooter } from 'lib/shared-domain/page/presentation/PageFooter';
 import { PageHeader } from 'lib/shared-domain/page/presentation/PageHeader';
 
 import { PageTransition } from 'components/PageTransition';
-// import { NewsArticleTeam } from './NewsArticleTeam';
-// import { NewsArticleMoreNews } from './NewsArticleMoreNews';
-// import { NewsArticleHero } from './NewsArticleHero';
-// import { NewsArticleDescription } from './NewsArticleDescription';
 import { SEO } from 'components/SEO';
 import { useFetchNewsArticles } from '../application/useGetNewsArticles';
 import { useFetchEmployees } from '../../employees/application/useGetEmployees';

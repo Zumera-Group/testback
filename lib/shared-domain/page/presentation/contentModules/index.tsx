@@ -9,37 +9,12 @@ import {
   TrustSectionModule,
   NewsGridSectionModule,
   TimelineSectionModule,
-  TransactionsCarouselSectionModule,
   SectorsSectionModule,
   CDIGlobalSectionModule,
   FactsAndFiguresSectionModule,
-  TitleAndDescriptionItemsGridModule,
-  CalculatorTeaserSectionModule,
   TransactionGridSectionModule,
   SectorHeaderSectionModule,
   AllTransactionsCarouselSectionModule,
-  OpenJobsListModule,
-  CenteredTitleWithSubtitleSectionModule,
-  HeadlineWithBackgroundSectionModule,
-  ImageSliderSectionModule,
-  IconRowSectionModule,
-  TabSectionModule,
-  JobListWithBgSectionModule,
-  TextSliderSectionModule,
-  EmployeeCarouselSectionModule,
-  PartnerHeroModule,
-  PartnerStrategyModule,
-  PartnerAboutModule,
-  PartnerLogosAndTextsModule,
-  PartnerAboutWithImageModule,
-  PartnerPersonQuoteModule,
-  PartnerVisionModule,
-  LandingPageEnterSurveySectionModule,
-  LandingPageTrackRecordModule,
-  LandingRoadmapModule,
-  LandingPageOurPromiseSectionModule,
-  BrandOverviewSectionModule,
-  ReferralSectionModule,
   AnchoredTextSectionModule,
   FiveStepsSectionModule,
   TextWithImageGridModule,
@@ -58,18 +33,7 @@ import {
   GlobalNetworkSectionModule,
   FactsAndNumbersCDISectionModule,
 } from '../../domain/contentModule';
-import {
-  TextElementSectionModule,
-  AboutTheToolSectionModule,
-} from '../../domain/contentModule';
-import {
-  HowCoolSectionModule,
-  LogosWithHeadlineSectionModule,
-} from '../../domain/contentModule';
-import {
-  LegalNoticeSectionModule,
-  DisclaimerSectionModule,
-} from '../../domain/contentModule';
+import { TextElementSectionModule } from '../../domain/contentModule';
 import {
   LeadershipTeamSectionModule,
   TeamSectionModule,
@@ -85,7 +49,6 @@ import FactsAndFiguresSection from './FactsAndFiguresSection';
 import FactsAndNumbersCDISection from './FactsAndNumbersCDISection';
 import GlobalNetworkSection from './GlobalNetworkSection';
 import LeadershipTeamSection from './LeadershipTeamSection';
-import SectorHeaderSection from './SectorHeaderSection';
 import SectorsSection from './SectorsSection';
 import ServicesLargeGridSection from './ServicesLargeGridSection';
 import TeamSection from './TeamSection';
@@ -377,16 +340,6 @@ export const getContentForContentModule = (
   if (contentModule.specificContentModule instanceof TeamSectionModule) {
     return (
       <TeamSection
-        specificContentModule={contentModule.specificContentModule}
-      />
-    );
-  }
-
-  if (
-    contentModule.specificContentModule instanceof SectorHeaderSectionModule
-  ) {
-    return (
-      <SectorHeaderSection
         specificContentModule={contentModule.specificContentModule}
       />
     );

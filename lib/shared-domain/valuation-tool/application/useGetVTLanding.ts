@@ -11,12 +11,3 @@ export const fetchValuationToolLanding = async (
 
   return await facade.getLanding(locale, slug, params);
 };
-
-export const useGetVTLanding = async (
-  locale: Locale,
-  slug: string,
-): Promise<{ landing: VTLanding; query: string }> => {
-  const { landing, query } = await fetchValuationToolLanding(locale, slug);
-
-  return { landing, query };
-};

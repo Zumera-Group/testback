@@ -1,10 +1,10 @@
 // import { Box, FlexCol } from 'components/Layout/Flex/Flex';
-import { H } from 'components/Typography/H';
+// import { H } from 'components/Typography/H';
 import React from 'react';
 // import { SectionContainer } from '../../../../components/Layout/SectionContainer';
 import { Transaction } from '../domain/index';
-import { P } from '../../../../components/Typography/P';
-import { TitleWithSubtitleAndDescription } from 'lib/shared-domain/page/presentation/components/TitleWithSubtitleAndDescription';
+// import { P } from '../../../../components/Typography/P';
+// import { TitleWithSubtitleAndDescription } from 'lib/shared-domain/page/presentation/components/TitleWithSubtitleAndDescription';
 import {
   fontSizes,
   fontWeights,

@@ -10,9 +10,3 @@ export const fetchServiceDetail = async (
 
   return await facade.getServiceDetail(locale, slug, preview);
 };
-
-export const useGetServiceDetail = async (locale: Locale, slug: string) => {
-  const serviceDetail = await fetchServiceDetail(locale, slug);
-
-  return { serviceDetail };
-};

@@ -1,8 +1,4 @@
-import { H } from 'components/Typography/H';
-import { P } from 'components/Typography/P';
 import styles from './StepsDownBulletsSection.module.scss';
-import { Icon } from 'components/Icon';
-import Link from 'next/link';
 
 interface IProps {
   step: any;
@@ -11,13 +7,9 @@ interface IProps {
 export const StepItem: React.FC<IProps> = ({ step, index }) => {
   return (
     <div className={styles.stepItem}>
-      <H variant={'h2'} className={styles.stepIndex}>
-        {index}
-      </H>
+      <h2 className={styles.stepIndex}>{index}</h2>
       <div className={styles.stepItemContent}>
-        <H variant={'h4'} color={'inherit'} className={styles.stepName}>
-          {step.title}
-        </H>
+        <h4 className={styles.stepName}>{step.title}</h4>
         {step?.bullets ? (
           <ul className={styles.stepsList}>
             {step?.bullets.map((fact, index) => (
@@ -25,9 +17,6 @@ export const StepItem: React.FC<IProps> = ({ step, index }) => {
             ))}
           </ul>
         ) : null}
-        {/*<P fontSize={'1rem'} color={'inherit'}>*/}
-        {/*  {step.shortDescription}*/}
-        {/*</P>*/}
       </div>
     </div>
   );

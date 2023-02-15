@@ -10,9 +10,3 @@ export const fetchNewsArticle = async (
 
   return await facade.getNewsArticle(locale, slug, preview);
 };
-
-export const useGetNewsArticle = async (locale: Locale, slug: string) => {
-  const site = await fetchNewsArticle(locale, slug);
-
-  return { site };
-};

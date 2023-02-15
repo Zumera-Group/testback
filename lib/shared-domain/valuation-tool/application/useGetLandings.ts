@@ -5,9 +5,3 @@ export const fetchLandings = async () => {
 
   return await facade.getLandings();
 };
-
-export const useGetLandings = async () => {
-  const landings = await fetchLandings();
-
-  return { landings };
-};

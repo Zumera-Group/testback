@@ -68,11 +68,6 @@ export const SectorDetailLayout: React.FC<{
             content={content?.infoSectionContent}
             sharedContent={sharedContent}
           />
-          {/* {sector?.industryReportSection && (
-            <IndustryReportSection
-              specificContentModule={sector.industryReportSection}
-            />
-          )} */}
           <SectorTeam sector={sector} />
           <SectorMoreDetails sector={sector} content={content} />
           <SectorNews

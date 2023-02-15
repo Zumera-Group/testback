@@ -11,7 +11,6 @@ import { fetchCDIOfficeDetailContent } from '../../lib/shared-domain/offices/app
 import { SharedContentFacade } from 'lib/shared-domain/page/infrastructure/sharedContent.facade';
 import { SharedContentContext } from 'lib/shared-domain/page/infrastructure/sharedContentContext';
 import { useRouter } from 'next/router';
-import { EmployeeHero } from 'lib/shared-domain/employees/presentation/EmployeeHero';
 // import { usePreviewSubscription } from '../../lib/sanity';
 import { filterDataToSingleItem } from '../../lib/shared-domain/page/infrastructure/page.facade';
 
