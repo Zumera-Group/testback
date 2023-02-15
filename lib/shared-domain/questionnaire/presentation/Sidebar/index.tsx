@@ -1,4 +1,3 @@
-import { VStack } from '@chakra-ui/react';
 import { ProgressBar } from 'components/Calculator/ProgressBar';
 import { useEffect, useState } from 'react';
 import { Category } from '../../domain';
@@ -7,6 +6,7 @@ import { INDUSTRY_QUESTION_ID, SECTOR_QUESTION_ID } from '../questions';
 import { SidebarStep } from './SidebarStep';
 import { SCREEN_SIZE_MD } from 'lib/constants';
 import { useMediaQuery } from 'lib/hooks/useMediaQuery';
+import styles from './SideBar.module.scss';
 
 const Sidebar = (): JSX.Element => {
   const isMobile = useMediaQuery(`(max-width: ${SCREEN_SIZE_MD})`);
@@ -70,7 +70,9 @@ const Sidebar = (): JSX.Element => {
     <>
       <ProgressBar progress={progress} isPercent color="white" />
       {!isMobile && (
-        <VStack spacing={0}>{categories && categories.map(renderSteps)}</VStack>
+        <div className={styles.categoriesWrapper}>
+          {categories && categories.map(renderSteps)}
+        </div>
       )}
     </>
   );
