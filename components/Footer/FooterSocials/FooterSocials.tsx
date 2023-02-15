@@ -17,17 +17,16 @@ export const FooterSocials = ({ socials }) => {
             href={link}
             target="_blank"
             rel="noopener noreferrer"
-            className={styles.link}>
-
+            className={styles.link}
+          >
             <Image
               unoptimized
               loading="lazy"
               src={icon?.iconImage?.asset?.url + `?h=400`}
               alt={link}
-              height="20px"
-              width="20px"
+              height="20"
+              width="20"
             />
-
           </Link>
         </li>
       ))}

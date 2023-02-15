@@ -39,8 +39,8 @@ export const ApproachListSection: React.FC<{
                   loading="lazy"
                   src={block.image?.asset?.url}
                   alt={block.image?.name}
-                  objectFit="contain"
-                  layout="fill"
+                  // objectFit="contain"
+                  // layout="fill"
                 />
               </div>
             </GridColumn>

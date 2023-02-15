@@ -67,9 +67,9 @@ export const EmployeeHero: React.FC<{
                   unoptimized
                   src={employee.detailPagePicture?.picture?.asset?.url}
                   alt={`${employee.firstName} ${employee.lastName}`}
-                  layout={'fill'}
-                  objectFit={'cover'}
-                  objectPosition={'center center'}
+                  // layout={'fill'}
+                  // objectFit={'cover'}
+                  // objectPosition={'center center'}
                 />
               </div>
             )}

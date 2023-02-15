@@ -37,17 +37,17 @@ export const NewsBig = ({ article }) => {
         href={href}
         className={styles.link}
         target={customLink ? '_blank' : ''}
-        rel={customLink ? 'noopener noreferrer' : ''}>
-
+        rel={customLink ? 'noopener noreferrer' : ''}
+      >
         <div className={styles.imageWrapper}>
           <div className={styles.imageWrapper_inner}>
             <Image
               unoptimized
               src={image}
               alt={title}
-              objectFit={'cover'}
-              objectPosition={'center center'}
-              layout="fill"
+              // objectFit={'cover'}
+              // objectPosition={'center center'}
+              // layout="fill"
               className={styles.image}
             />
           </div>
@@ -69,7 +69,6 @@ export const NewsBig = ({ article }) => {
             height={24}
           />
         </div>
-
       </Link>
     </article>
   );

@@ -51,8 +51,8 @@ export const TextWithImageGrid: React.FC<{
               loading="lazy"
               src={image?.asset?.url}
               alt={image?.name}
-              objectFit="contain"
-              layout="fill"
+              // objectFit="contain"
+              // layout="fill"
             />
           </GridColumn>
         </Grid>

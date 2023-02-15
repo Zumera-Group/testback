@@ -25,13 +25,13 @@ export const Logo: React.FC<Props> = ({
   src,
 }) => {
   return (
-    (<Link
+    <Link
       passHref
       href={slug}
       className={[styles.logo, classes ?? ''].join(' ')}
       rel="home"
-      title={title}>
-
+      title={title}
+    >
       {isAnimated ? (
         <AnimatedLogo isScrolled={isScrolled} isLightPage={isLightPage} />
       ) : (
@@ -39,15 +39,14 @@ export const Logo: React.FC<Props> = ({
           unoptimized
           priority
           loading="eager"
-          layout="fill"
-          objectFit="contain"
-          objectPosition="left center"
+          // layout="fill"
+          // objectFit="contain"
+          // objectPosition="left center"
           alt={`${title} logo`}
           src={src}
         />
       )}
-
-    </Link>)
+    </Link>
   );
 };
 

@@ -39,9 +39,6 @@ export const Employee: React.FC<{
                 unoptimized
                 src={image}
                 alt={name}
-                objectFit={'cover'}
-                objectPosition={'center center'}
-                layout="fill"
                 className={styles.image}
               />
             )}

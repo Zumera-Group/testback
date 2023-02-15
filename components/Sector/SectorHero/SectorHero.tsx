@@ -70,9 +70,9 @@ export const SectorHero = ({ sector, content }) => {
                   unoptimized
                   src={sector.detailPageHeroImage?.asset?.url}
                   alt={'sector.name'}
-                  layout={'fill'}
-                  objectFit={'contain'}
-                  objectPosition={'center center'}
+                  // layout={'fill'}
+                  // objectFit={'contain'}
+                  // objectPosition={'center center'}
                 />
               </div>
             )}

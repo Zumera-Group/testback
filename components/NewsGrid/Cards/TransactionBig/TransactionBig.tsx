@@ -29,7 +29,7 @@ export const TransactionBig = ({ article }) => {
       <div className={styles.transactionLogo}>
         <Image
           unoptimized
-          objectFit="contain"
+          // objectFit="contain"
           width={100}
           height={80}
           alt={`${name} logo`}
@@ -42,7 +42,6 @@ export const TransactionBig = ({ article }) => {
   return (
     <article key={`transactionBig-${_id}`} className={styles.transactionBig}>
       <Link passHref href={href} className={styles.link}>
-
         <div className={styles.logosCover}>
           <TransactionLogo
             url={article.companyLogo1?.asset?.url}
@@ -71,7 +70,6 @@ export const TransactionBig = ({ article }) => {
             height={24}
           />
         </div>
-
       </Link>
     </article>
   );

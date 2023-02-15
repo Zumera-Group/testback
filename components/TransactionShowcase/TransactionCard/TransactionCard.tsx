@@ -36,7 +36,7 @@ export const TransactionCard = ({ transaction }) => {
     ) : (
       <Image
         unoptimized
-        objectFit="contain"
+        // objectFit="contain"
         width={100}
         height={80}
         alt={`${name} logo`}
@@ -48,17 +48,10 @@ export const TransactionCard = ({ transaction }) => {
   return (
     <article className={styles.transaction}>
       <Link passHref href={href} className={styles.link}>
-
         <div className={styles.logosCover}>
-          <TransactionLogo
-            url={companyLogo1?.asset?.url}
-            name={companyName1}
-          />
+          <TransactionLogo url={companyLogo1?.asset?.url} name={companyName1} />
           <Beam color={'primary'} glow={false} classes={styles.beam} />
-          <TransactionLogo
-            url={companyLogo2?.asset?.url}
-            name={companyName2}
-          />
+          <TransactionLogo url={companyLogo2?.asset?.url} name={companyName2} />
         </div>
         <div className={styles.cover}>
           {coverImage?.asset?.url && (
@@ -68,9 +61,9 @@ export const TransactionCard = ({ transaction }) => {
                   unoptimized
                   src={coverImage?.asset?.url}
                   alt={coverImage?.asset?.altText || ''}
-                  objectFit={'cover'}
-                  objectPosition={'center center'}
-                  layout="fill"
+                  // objectFit={'cover'}
+                  // objectPosition={'center center'}
+                  // layout="fill"
                   className={styles.image}
                 />
               </div>
@@ -94,7 +87,6 @@ export const TransactionCard = ({ transaction }) => {
             />
           </div>
         </div>
-
       </Link>
     </article>
   );

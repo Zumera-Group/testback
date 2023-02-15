@@ -16,9 +16,9 @@ export const SecretKeyLockScreen = ({ siteSettings }) => {
           unoptimized
           priority
           loading="eager"
-          layout="fill"
-          objectFit="contain"
-          objectPosition="center center"
+          // layout="fill"
+          // objectFit="contain"
+          // objectPosition="center center"
           alt={`logo`}
           src={siteSettings?.logo?.asset?.url}
           onClick={() => setClicksCount(clicksCount + 1)}

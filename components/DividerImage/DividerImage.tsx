@@ -57,9 +57,9 @@ export const DividerImage: React.FC<Props> = ({ ...rest }) => {
         <Image
           loading="lazy"
           unoptimized
-          objectFit={isNoParalax ? 'contain' : 'cover'}
-          objectPosition="center"
-          layout="fill"
+          // objectFit={isNoParalax ? 'contain' : 'cover'}
+          // objectPosition="center"
+          // layout="fill"
           alt={''}
           src={dividerImage + `?h=1200`}
         />

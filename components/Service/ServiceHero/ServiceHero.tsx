@@ -30,9 +30,9 @@ export const ServiceHero = ({ service }) => {
                   unoptimized
                   src={service.detailPageHeroImage?.asset?.url}
                   alt={'service.name'}
-                  layout={'fill'}
-                  objectFit={'contain'}
-                  objectPosition={'center center'}
+                  // layout={'fill'}
+                  // objectFit={'contain'}
+                  // objectPosition={'center center'}
                 />
               </div>
             )}

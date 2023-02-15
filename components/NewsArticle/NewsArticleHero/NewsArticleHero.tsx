@@ -7,12 +7,14 @@ import { useFormatDate } from 'lib/shared-domain/useFormatDate';
 import styles from './NewsArticleHero.module.scss';
 
 interface Props {
-  newsArticle: any
+  newsArticle: any;
 }
 
 const NewsArticleHero: React.FC<Props> = ({ newsArticle }) => {
   const format = useFormatDate();
-  const dateFormatted = newsArticle.date ? format(new Date(newsArticle.date)) : null;
+  const dateFormatted = newsArticle.date
+    ? format(new Date(newsArticle.date))
+    : null;
   return (
     <Section
       as={'div'}
@@ -29,9 +31,7 @@ const NewsArticleHero: React.FC<Props> = ({ newsArticle }) => {
         >
           <GridColumn sm={12} md={6} lg={6}>
             <span className={styles.date}>{dateFormatted}</span>
-            <h4 className={styles.title}>
-              {newsArticle.title}
-            </h4>
+            <h4 className={styles.title}>{newsArticle.title}</h4>
             <p>{newsArticle.subtitle}</p>
           </GridColumn>
           <GridColumn sm={12} md={6} lg={6}>
@@ -41,9 +41,9 @@ const NewsArticleHero: React.FC<Props> = ({ newsArticle }) => {
                   unoptimized
                   src={newsArticle?.picture?.asset?.url}
                   alt={'name'}
-                  layout={'fill'}
-                  objectFit={'cover'}
-                  objectPosition={'center center'}
+                  // layout={'fill'}
+                  // objectFit={'cover'}
+                  // objectPosition={'center center'}
                 />
               </div>
             )}
