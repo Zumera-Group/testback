@@ -1,4 +1,3 @@
-import { extendTheme, ThemeConfig } from '@chakra-ui/react';
 import { colors } from './foundations/colors';
 import { appSpaces as space } from './foundations/spaces';
 import { components } from './components';
@@ -6,12 +5,12 @@ import { fontSizes, fonts } from './foundations/fontStyles';
 import { globalStyles as styles } from './foundations/global';
 import { borders } from './foundations/borderStyles';
 
-const config: ThemeConfig = {
+const config = {
   initialColorMode: 'light',
   useSystemColorMode: false,
 };
 
-export default extendTheme({
+export default {
   borders,
   colors,
   components,
@@ -20,4 +19,4 @@ export default extendTheme({
   space,
   styles,
   config,
-});
+};

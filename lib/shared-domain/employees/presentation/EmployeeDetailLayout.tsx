@@ -1,6 +1,5 @@
 import React from 'react';
 import { SiteSettings } from 'lib/shared-domain/page/domain';
-import { Box } from 'components/Layout/Flex/Flex';
 import { PageFooter } from 'lib/shared-domain/page/presentation/PageFooter';
 import { PageHeader } from 'lib/shared-domain/page/presentation/PageHeader';
 
@@ -18,7 +17,6 @@ import { useFetchEmployees } from '../application/useGetEmployees';
 import { useFetchNewsArticles } from '../../newsArticle/application/useGetNewsArticles';
 import { links } from 'lib/links';
 import { useRouter } from 'next/router';
-import { EmployeeReportDownload } from './EmployeeReportDownload';
 import { useFetchTransactions } from 'components/NewsArticle/NewsArticleMoreNews';
 
 export const EmployeeDetailLayout: React.FC<{
@@ -38,7 +36,7 @@ export const EmployeeDetailLayout: React.FC<{
     );
 
   return (
-    <Box minHeight="100vh" overflowX="hidden">
+    <div>
       <SEO
         seoTitle={getEmployeeFullName(employee)}
         seoDescription={employee.jobTitle}
@@ -59,7 +57,6 @@ export const EmployeeDetailLayout: React.FC<{
           employee={employee}
           content={employeeDetailContent?.backgroundSectionContent}
         />
-        <EmployeeReportDownload employee={employee} />
         <EmployeeNews
           employee={employee}
           newsArticles={newsArticles}
@@ -74,6 +71,6 @@ export const EmployeeDetailLayout: React.FC<{
         <EmployeeContact {...siteSettings.contactSectionContent} />
       </PageTransition>
       <PageFooter siteSettings={siteSettings} />
-    </Box>
+    </div>
   );
 };

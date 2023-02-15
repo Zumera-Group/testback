@@ -6,7 +6,7 @@ export const Tick: React.FC<{ color?: string; size?: any }> = ({
 }) => {
   return (
     <svg
-      minWidth={4}
+      // minWidth={4}
       width={size}
       height="auto"
       viewBox="0 0 10 8"

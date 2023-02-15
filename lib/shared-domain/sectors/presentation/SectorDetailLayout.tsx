@@ -1,6 +1,5 @@
 import React from 'react';
 import { Sector, SiteSettings } from 'lib/shared-domain/page/domain';
-import { Box } from 'components/Layout/Flex/Flex';
 import { PageFooter } from 'lib/shared-domain/page/presentation/PageFooter';
 import { PageHeader } from 'lib/shared-domain/page/presentation/PageHeader';
 
@@ -17,7 +16,6 @@ import { useFetchNewsArticles } from '../../newsArticle/application/useGetNewsAr
 import { useFetchEmployees } from '../../employees/application/useGetEmployees';
 import { links } from 'lib/links';
 import { useRouter } from 'next/router';
-import { IndustryReportSection } from '../../page/presentation/contentModules/IndustryReportSection';
 import ContactUsSection from 'lib/shared-domain/page/presentation/contentModules/ContactUsSection';
 import { useFetchTransactions } from 'components/NewsArticle/NewsArticleMoreNews';
 
