@@ -56,11 +56,8 @@
   }
 
   &.hideBorder {
-    .container {
-      border-style: unset !important;
-      @include breakpoint-up(md) {
-        border-style: solid !important;
-      }
+    .container:after {
+      transform: scaleX(0) !important;
     }
   }
 }

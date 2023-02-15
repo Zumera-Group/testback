@@ -22,16 +22,20 @@ export const TransactionBig = ({ article }) => {
 
   const TransactionLogo = ({ url, name }) => {
     return !url ? (
-      <p className={styles.transactionLogoFallback}>{name}</p>
+      <p className={styles.transactionLogoFallback}>
+        <span>{name}</span>
+      </p>
     ) : (
-      <Image
-        unoptimized
-        objectFit="contain"
-        width={100}
-        height={80}
-        alt={`${name} logo`}
-        src={`${url}`}
-      />
+      <div className={styles.transactionLogo}>
+        <Image
+          unoptimized
+          objectFit="contain"
+          width={100}
+          height={80}
+          alt={`${name} logo`}
+          src={`${url}`}
+        />
+      </div>
     );
   };
 

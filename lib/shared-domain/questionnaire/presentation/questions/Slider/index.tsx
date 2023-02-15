@@ -1,15 +1,5 @@
 import React, { useEffect, useState } from 'react';
-// import {
-//   Box,
-//   SliderFilledTrack,
-//   SliderTrack,
-//   Slider as ChakraSlider,
-//   SliderThumb,
-// } from '@chakra-ui/react';
-// import { FlexCol, FlexRow } from 'components/Layout/Flex/Flex';
-import { P } from 'components/Typography/P';
 import { Question } from '../../../domain/index';
-import { InputNumber } from 'components/Inputs';
 import { getTranslateByScope } from 'translation/i18n';
 import { useAnswers } from 'lib/shared-domain/questionnaire/application/useAnswers';
 import { QuestionText } from '../../Question/QuestionText';
@@ -23,7 +13,6 @@ import {
 } from 'date-fns';
 import { RequiredQuestionInfo } from '../../Question/RequiredQuestionInfo';
 import { DEFAULT_SLIDER_VALUES, VALUE_TYPE } from './constants';
-import onKeyDownEvent from './onKeyDownEvent';
 import styles from './Slider.module.css';
 
 const t = getTranslateByScope('answerTypes.slider');
@@ -103,91 +92,24 @@ export const Slider: React.FC<{
   useEffect(() => {
     setAutoMarginBoxValue(Number(getUnformattedAnswer()));
   }, []);
-  return null;
-  // return (
-  //   <QuestionAnimation>
-  //     <Box className={styles.questionTextContainer}>
-  //       <QuestionText title={question.questionText}>
-  //         <RequiredQuestionInfo isRequired={question?.isRequired} />
-  //       </QuestionText>
-  //     </Box>
-  //     <Box maxWidth={600} mt={8} mb={6} className={styles.sliderContainer}>
-  //       <ChakraSlider
-  //         focusThumbOnChange={false}
-  //         value={getUnformattedAnswer()}
-  //         onChange={(v) => {
-  //           formatToSalesforce(v);
-  //           setAutoMarginBoxValue(v);
-  //         }}
-  //         defaultValue={getUnformattedAnswer()}
-  //         min={from}
-  //         max={to}
-  //         step={getGapValue()}
-  //       >
-  //         <SliderTrack bg="sliderBgColor" height={2} borderRadius={4}>
-  //           <SliderFilledTrack bg="sliderActiveBgColor" />
-  //         </SliderTrack>
-  //         <SliderThumb height={4} width={4} bg="sliderThumbColor">
-  //           <Box
-  //             position="relative"
-  //             p={1}
-  //             ml={marginBoxValue}
-  //             top="-250%"
-  //             bg="sliderActiveBgColor"
-  //             width="fit-content"
-  //             transition="margin 0.5s"
-  //           >
-  //             <P color="white">
-  //               {getNumberFormat(Number(getUnformattedAnswer()) || 0)}
-  //             </P>
-  //           </Box>
-  //         </SliderThumb>
-  //       </ChakraSlider>
-  //       <FlexRow justify="space-between">
-  //         <P>{getNumberFormat(from)}</P>
-  //         <P>{getNumberFormat(to)}</P>
-  //       </FlexRow>
-  //       <FlexCol width={180} mt={5} mb={3} ml="auto" mr="auto">
-  //         <P pb={0.5} textAlign="left">
-  //           {t('inputLabel')}
-  //         </P>
-  //         <Box position="relative">
-  //           <InputNumber
-  //             clampValueOnBlur={false}
-  //             isInvalid={false}
-  //             min={from}
-  //             max={to}
-  //             value={
-  //               sign === VALUE_TYPE.EUR || sign === VALUE_TYPE.USD
-  //                 ? getNumberFormat(Number(getUnformattedAnswer()) || 0)
-  //                     ?.replace(sign, '')
-  //                     ?.trim()
-  //                 : getUnformattedAnswer() || 0
-  //             }
-  //             onChange={(valueAsString) => {
-  //               const newValue = Number(valueAsString?.replaceAll('.', ''));
-  //               if (newValue <= to) {
-  //                 formatToSalesforce(newValue);
-  //                 setAutoMarginBoxValue(newValue);
-  //               }
-  //             }}
-  //             onKeyDown={(evt) => onKeyDownEvent(evt)}
-  //           />
-  //           {sign && (
-  //             <Box position="absolute" right={-2} top={1}>
-  //               {sign}
-  //             </Box>
-  //           )}
-  //         </Box>
-  //       </FlexCol>
-  //     </Box>
-  //     <QuestionButtons
-  //       onNextQuestion={() => {
-  //         onNextQuestion();
-  //       }}
-  //       isRequired={question?.isRequired}
-  //       isAnswered={getUnformattedAnswer() != null}
-  //     />
-  //   </QuestionAnimation>
-  // );
+
+  return (
+    <QuestionAnimation>
+      <div className={styles.questionTextContainer}>
+        <QuestionText title={question.questionText}>
+          <RequiredQuestionInfo isRequired={question?.isRequired} />
+        </QuestionText>
+      </div>
+      <div className={styles.sliderContainer}>
+        <div>slider</div>
+      </div>
+      <QuestionButtons
+        onNextQuestion={() => {
+          onNextQuestion();
+        }}
+        isRequired={question?.isRequired}
+        isAnswered={getUnformattedAnswer() != null}
+      />
+    </QuestionAnimation>
+  );
 };
