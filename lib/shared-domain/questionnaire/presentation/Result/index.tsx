@@ -9,109 +9,24 @@ import {
   GridItem,
   Progress,
 } from '@chakra-ui/react';
-import Image from 'next/image';
-import firstLogoRowImage from '../../../../../public/logos_1.png';
-import secondLogoRowImage from '../../../../../public/logos_2.png';
+
 import { Box, FlexCol, FlexRow } from 'components/Layout/Flex/Flex';
-import { P } from 'components/Typography/P';
-import { colors } from 'styles/foundations/colors';
 import { getTranslateByScope } from 'translation/i18n';
 import { QuestionText } from '../Question/QuestionText';
 import { motion } from 'framer-motion';
 import { Button } from 'components/Button';
 import styles from './Result.module.scss';
-import {
-  fontSizes,
-  fontWeights,
-} from '../../../../../styles/foundations/fontStyles';
+
 import { useValuationStore } from '../../store';
 import { InputWithLabelAndError } from 'components/Inputs';
 import { Checkbox } from 'components/Form/Checkbox/';
 import { useGetSalesforceScore } from '../../application/useGetQuestionnaireScore';
 import { useSalesforceAnswerSync } from '../../application/useSalesforceAnswerSync';
 import { qLogs } from '../../application/log';
-import Lottie from 'react-lottie';
 import * as animationData from './loading.json';
 import { useRouter } from 'next/router';
-import { Beam } from 'components/Beam';
 
 const t = getTranslateByScope('result');
-
-const MT = { base: 5, lg: 5 };
-
-const PROGRESS_WHITE_OVERLAY_STYLE = {
-  content: '""" "',
-  position: 'absolute',
-  top: 0,
-  width: '63px',
-  height: '20px',
-  borderTop: '15px solid',
-  borderColor: colors.white,
-};
-
-const PROGRESS_BAR_STYLE = {
-  width: '230px',
-  height: '32px',
-  colorScheme: 'primary',
-  background: colors.gray[400],
-  isAnimated: true,
-};
-
-const ProgressX: React.FC<{ loadingPercentage: number }> = ({
-  loadingPercentage,
-}) => {
-  return (
-    <FlexRow
-      mt={MT}
-      flex={1}
-      left="20%"
-      bottom="100px"
-      position="relative"
-      _after={{
-        content: '""" "',
-        position: 'absolute',
-        top: '220%',
-        left: '125px',
-        width: '57px',
-        height: '20px',
-        transform: 'rotate(240deg)',
-        borderTop: '15px solid',
-        borderColor: colors.white,
-      }}
-    >
-      <Progress
-        {...PROGRESS_BAR_STYLE}
-        _after={{
-          ...PROGRESS_WHITE_OVERLAY_STYLE,
-          left: '-32px',
-          transform: 'rotate(240deg)',
-        }}
-        _before={{
-          ...PROGRESS_WHITE_OVERLAY_STYLE,
-          right: '-32px',
-          transform: 'rotate(240deg)',
-        }}
-        value={loadingPercentage}
-        transform="rotate(-60deg) translateX(-30%) translateY(200%)"
-      />
-      <Progress
-        {...PROGRESS_BAR_STYLE}
-        _after={{
-          ...PROGRESS_WHITE_OVERLAY_STYLE,
-          left: '-32px',
-          transform: 'rotate(-240deg)',
-        }}
-        _before={{
-          ...PROGRESS_WHITE_OVERLAY_STYLE,
-          right: '-32px',
-          transform: 'rotate(-240deg)',
-        }}
-        value={loadingPercentage}
-        transform="rotate(240deg) translateX(10%) translateY(-700%)"
-      />
-    </FlexRow>
-  );
-};
 
 const LoadingText: React.FC<{ isLoading: boolean; title: string }> = ({
   isLoading,
