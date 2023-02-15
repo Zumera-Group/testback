@@ -2,7 +2,7 @@ import { Container, Grid, GridColumn, Section } from 'components/Layout';
 import React, { useEffect, useState } from 'react';
 import { ImagesGridSectionModule } from 'lib/shared-domain/page/domain/contentModule';
 import styles from './ImagesGridSection.module.scss';
-import Image from 'next/image';
+import Image from "next/legacy/image";
 
 export const ImagesGridSection: React.FC<{
   specificContentModule: ImagesGridSectionModule;

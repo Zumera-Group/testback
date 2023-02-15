@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import Image from 'next/image';
+import Image from "next/legacy/image";
 
 import { Beam } from 'components/Beam';
 import { Icon } from 'components/Icon';

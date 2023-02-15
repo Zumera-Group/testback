@@ -1,4 +1,4 @@
-import Image from 'next/image';
+import Image from "next/legacy/image";
 import { Beam } from 'components/Beam';
 import { useSharedContentContext } from 'lib/shared-domain/page/infrastructure/sharedContentContext';
 import { useFormatDate } from 'lib/shared-domain/useFormatDate';

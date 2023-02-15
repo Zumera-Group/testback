@@ -1,6 +1,6 @@
 import { Container, Grid, Section } from 'components/Layout';
 import { optionalUI } from 'lib/shared-domain/transactions/domain';
-import Image from 'next/image';
+import Image from "next/legacy/image";
 import styles from './TransactionInvolvedParties.module.scss';
 export const TransactionInvolvedParties: React.FC<{
   optionalUI: optionalUI;

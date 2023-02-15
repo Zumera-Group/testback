@@ -2,7 +2,7 @@ import { Employee } from 'lib/shared-domain/employees/domain';
 import { Container, Grid, GridColumn, Section } from 'components/Layout';
 import baseStyles from 'components/Hero/Hero.module.scss';
 import styles from './EmployeeHero.module.scss';
-import Image from 'next/image';
+import Image from "next/legacy/image";
 
 const Detail = ({ as, title, text }) => {
   const Component = as || 'div';

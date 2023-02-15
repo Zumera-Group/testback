@@ -2,7 +2,7 @@ import { Container, Grid, GridColumn, Section } from 'components/Layout';
 import styles from './VTServicesSection.module.scss';
 import { SectionHeading } from 'components/SectionHeading';
 import { Button } from 'components/Button';
-import Image from 'next/image';
+import Image from "next/legacy/image";
 import { VTServicesSectionModule } from 'lib/shared-domain/page/domain/contentModule';
 
 export const VTServicesSection: React.FC<{

@@ -1,6 +1,6 @@
 import { ISectorsDropdown } from 'lib/shared-domain/page/domain/contentModule';
 import styles from './TransactionGridSection.module.scss';
-import Image from 'next/image';
+import Image from "next/legacy/image";
 import { useGetSectorDetail } from 'lib/shared-domain/sectors/application/useGetSectorDetail';
 import { Locale } from 'lib/locale';
 

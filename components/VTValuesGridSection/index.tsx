@@ -3,7 +3,7 @@ import { Container, Grid, GridColumn, Section } from 'components/Layout';
 import { SectionHeading } from 'components/SectionHeading';
 import { Button } from 'components/Button';
 import styles from './VTValuesGridSection.module.scss';
-import Image from 'next/image';
+import Image from "next/legacy/image";
 
 export const VTValuesGridSection: React.FC<{
   specificContentModule: VTValuesGridSectionModule;

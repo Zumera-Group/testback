@@ -2,7 +2,7 @@ import { Container, Grid, GridColumn, Section } from 'components/Layout';
 import { SectionHeading } from 'components/SectionHeading';
 import { ApproachListSectionModule } from 'lib/shared-domain/page/domain/contentModule';
 import styles from './ApproachListSection.module.scss';
-import Image from 'next/image';
+import Image from "next/legacy/image";
 
 export const ApproachListSection: React.FC<{
   specificContentModule: ApproachListSectionModule;

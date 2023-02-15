@@ -1,7 +1,7 @@
 import { Container, Grid, GridColumn, Section } from 'components/Layout';
 import styles from './TransactionCompany.module.scss';
 import { Transaction } from 'lib/shared-domain/transactions/domain';
-import Image from 'next/image';
+import Image from "next/legacy/image";
 import { SectionHeading } from 'components/SectionHeading';
 
 export const TransactionCompany: React.FC<{

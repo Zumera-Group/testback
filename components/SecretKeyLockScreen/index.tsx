@@ -1,4 +1,4 @@
-import Image from 'next/image';
+import Image from "next/legacy/image";
 import styles from './SecretKeyLockScreen.module.scss';
 import { useEffect, useState } from 'react';
 export const SecretKeyLockScreen = ({ siteSettings }) => {
