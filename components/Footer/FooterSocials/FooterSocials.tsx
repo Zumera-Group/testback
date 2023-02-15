@@ -14,21 +14,20 @@ export const FooterSocials = ({ socials }) => {
         >
           <Link
             passHref
-            href={link}>
-              <a
-                target="_blank"
-                rel="noopener noreferrer"
-                className={styles.link}
-              >
-                  <Image
-                    unoptimized
-                    loading="lazy"
-                    src={icon?.iconImage?.asset?.url + `?h=400`}
-                    alt={link}
-                    height="20px"
-                    width="20px"
-                  />
-              </a>
+            href={link}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={styles.link}>
+
+            <Image
+              unoptimized
+              loading="lazy"
+              src={icon?.iconImage?.asset?.url + `?h=400`}
+              alt={link}
+              height="20px"
+              width="20px"
+            />
+
           </Link>
         </li>
       ))}

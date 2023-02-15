@@ -50,7 +50,7 @@ export const Download = ({ article }) => {
                 sharedContent?.checkboxPrivacyPage?.slug?.current,
               )}
             >
-              <a>{' ' + sharedContent?.checkboxPrivacyText2}</a>
+              {' ' + sharedContent?.checkboxPrivacyText2}
             </Link>
             {' ' + sharedContent?.checkboxPrivacyText3}
           </label>

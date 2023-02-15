@@ -32,39 +32,44 @@ export const NewsBig = ({ article }) => {
 
   return (
     <article key={`newsBig-${_id}`} className={styles.newsBig}>
-      <Link passHref href={href}>
-        <a className={styles.link} target={customLink ? '_blank' : ''} rel={customLink ? 'noopener noreferrer' : ''}>
-          <div className={styles.imageWrapper}>
-            <div className={styles.imageWrapper_inner}>
-              <Image
-                unoptimized
-                src={image}
-                alt={title}
-                objectFit={'cover'}
-                objectPosition={'center center'}
-                layout="fill"
-                className={styles.image}
-              />
-            </div>
-          </div>
-          <div className={styles.body}>
-            {date && (
-              <time dateTime={date} className={styles.date}>
-                {dateFormatted}
-              </time>
-            )}
-            {title && <h2 className={styles.title}>{title}</h2>}
-            {hasCDIRelation ? (
-              <p className={styles.excerpt}>{sharedContent.cdiTextNews}</p>
-            ) : null}
-            <Icon
-              iconName={'arrow-circle'}
-              viewBox={'0 0 32 32'}
-              width={24}
-              height={24}
+      <Link
+        passHref
+        href={href}
+        className={styles.link}
+        target={customLink ? '_blank' : ''}
+        rel={customLink ? 'noopener noreferrer' : ''}>
+
+        <div className={styles.imageWrapper}>
+          <div className={styles.imageWrapper_inner}>
+            <Image
+              unoptimized
+              src={image}
+              alt={title}
+              objectFit={'cover'}
+              objectPosition={'center center'}
+              layout="fill"
+              className={styles.image}
             />
           </div>
-        </a>
+        </div>
+        <div className={styles.body}>
+          {date && (
+            <time dateTime={date} className={styles.date}>
+              {dateFormatted}
+            </time>
+          )}
+          {title && <h2 className={styles.title}>{title}</h2>}
+          {hasCDIRelation ? (
+            <p className={styles.excerpt}>{sharedContent.cdiTextNews}</p>
+          ) : null}
+          <Icon
+            iconName={'arrow-circle'}
+            viewBox={'0 0 32 32'}
+            width={24}
+            height={24}
+          />
+        </div>
+
       </Link>
     </article>
   );

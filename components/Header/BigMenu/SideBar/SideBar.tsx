@@ -40,8 +40,8 @@ export const SideBar = ({
               <Link
                 passHref
                 href={linkWithCurrentLocale(page?.slug?.current)}
-              >
-                <a className={styles.link}>{name}</a>
+                className={styles.link}>
+                {name}
               </Link>
             ) : (
               <button
@@ -69,7 +69,7 @@ export const SideBar = ({
         </li>
       </ul>
     </motion.div>
-  )
+  );
 };
 
 export default SideBar;

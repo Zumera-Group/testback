@@ -80,18 +80,19 @@ export const VTHero: React.FC<{
               <h4>{purposesTitle}</h4>
               <div className={styles.purposes}>
                 {purposes.map((purpose) => (
-                  <Link passHref href={questionnaire} key={purpose}>
-                    <a
-                      key={purpose}
-                      className={[
-                        styles.purpose,
-                        selectedPurpose === purpose ? styles.selected : '',
-                      ].join(' ')}
-                      onClick={() => setSelectedPurpose(purpose)}
-                    >
-                      {purpose}
-                    </a>
-                  </Link>
+                  (<Link
+                    passHref
+                    href={questionnaire}
+                    key={purpose}
+                    className={[
+                      styles.purpose,
+                      selectedPurpose === purpose ? styles.selected : '',
+                    ].join(' ')}
+                    onClick={() => setSelectedPurpose(purpose)}>
+
+                    {purpose}
+
+                  </Link>)
                 ))}
               </div>
             </div>

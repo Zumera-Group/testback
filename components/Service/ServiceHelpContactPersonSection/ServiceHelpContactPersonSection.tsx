@@ -65,17 +65,17 @@ export const ServiceHelpContactPersonSection: React.FC<IProps> = ({
                 </>
               ) : null}
               {appointmentLinkUrl && linkText && (
-                <Link passHref href={appointmentLinkUrl}>
-                  <a className={styles.bookLink}>
-                    {linkText}
-                    <Icon
-                      iconName={'arrow-circle'}
-                      viewBox={'0 0 32 32'}
-                      width={32}
-                      height={32}
-                    />
-                  </a>
-                </Link>
+                (<Link passHref href={appointmentLinkUrl} className={styles.bookLink}>
+
+                  {linkText}
+                  <Icon
+                    iconName={'arrow-circle'}
+                    viewBox={'0 0 32 32'}
+                    width={32}
+                    height={32}
+                  />
+
+                </Link>)
               )}
             </div>
           </GridColumn>

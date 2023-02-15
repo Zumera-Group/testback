@@ -25,28 +25,29 @@ export const Logo: React.FC<Props> = ({
   src,
 }) => {
   return (
-    <Link passHref href={slug}>
-      <a
-        className={[styles.logo, classes ?? ''].join(' ')}
-        rel="home"
-        title={title}
-      >
-        {isAnimated ? (
-          <AnimatedLogo isScrolled={isScrolled} isLightPage={isLightPage} />
-        ) : (
-          <Image
-            unoptimized
-            priority
-            loading="eager"
-            layout="fill"
-            objectFit="contain"
-            objectPosition="left center"
-            alt={`${title} logo`}
-            src={src}
-          />
-        )}
-      </a>
-    </Link>
+    (<Link
+      passHref
+      href={slug}
+      className={[styles.logo, classes ?? ''].join(' ')}
+      rel="home"
+      title={title}>
+
+      {isAnimated ? (
+        <AnimatedLogo isScrolled={isScrolled} isLightPage={isLightPage} />
+      ) : (
+        <Image
+          unoptimized
+          priority
+          loading="eager"
+          layout="fill"
+          objectFit="contain"
+          objectPosition="left center"
+          alt={`${title} logo`}
+          src={src}
+        />
+      )}
+
+    </Link>)
   );
 };
 

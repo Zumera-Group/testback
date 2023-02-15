@@ -41,37 +41,37 @@ export const TransactionBig = ({ article }) => {
 
   return (
     <article key={`transactionBig-${_id}`} className={styles.transactionBig}>
-      <Link passHref href={href}>
-        <a className={styles.link}>
-          <div className={styles.logosCover}>
-            <TransactionLogo
-              url={article.companyLogo1?.asset?.url}
-              name={article.companyName1}
-            />
-            <Beam color={'primary'} glow={false} classes={styles.beam} />
-            <TransactionLogo
-              url={article.companyLogo2?.asset?.url}
-              name={article.companyName2}
-            />
-          </div>
-          <div className={styles.body}>
-            {date && (
-              <time dateTime={date} className={styles.date}>
-                {dateFormatted}
-              </time>
-            )}
-            {headline && <h2 className={styles.title}>{headline}</h2>}
-            {hasCDIRelation ? (
-              <p className={styles.excerpt}>{sharedContent.cdiTextNews}</p>
-            ) : null}
-            <Icon
-              iconName={'arrow-circle'}
-              viewBox={'0 0 32 32'}
-              width={24}
-              height={24}
-            />
-          </div>
-        </a>
+      <Link passHref href={href} className={styles.link}>
+
+        <div className={styles.logosCover}>
+          <TransactionLogo
+            url={article.companyLogo1?.asset?.url}
+            name={article.companyName1}
+          />
+          <Beam color={'primary'} glow={false} classes={styles.beam} />
+          <TransactionLogo
+            url={article.companyLogo2?.asset?.url}
+            name={article.companyName2}
+          />
+        </div>
+        <div className={styles.body}>
+          {date && (
+            <time dateTime={date} className={styles.date}>
+              {dateFormatted}
+            </time>
+          )}
+          {headline && <h2 className={styles.title}>{headline}</h2>}
+          {hasCDIRelation ? (
+            <p className={styles.excerpt}>{sharedContent.cdiTextNews}</p>
+          ) : null}
+          <Icon
+            iconName={'arrow-circle'}
+            viewBox={'0 0 32 32'}
+            width={24}
+            height={24}
+          />
+        </div>
+
       </Link>
     </article>
   );

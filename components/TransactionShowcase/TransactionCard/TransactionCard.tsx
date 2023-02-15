@@ -47,54 +47,54 @@ export const TransactionCard = ({ transaction }) => {
 
   return (
     <article className={styles.transaction}>
-      <Link passHref href={href}>
-        <a className={styles.link}>
-          <div className={styles.logosCover}>
-            <TransactionLogo
-              url={companyLogo1?.asset?.url}
-              name={companyName1}
-            />
-            <Beam color={'primary'} glow={false} classes={styles.beam} />
-            <TransactionLogo
-              url={companyLogo2?.asset?.url}
-              name={companyName2}
-            />
-          </div>
-          <div className={styles.cover}>
-            {coverImage?.asset?.url && (
-              <div className={styles.imageWrapper}>
-                <div className={styles.imageWrapper_inner}>
-                  <Image
-                    unoptimized
-                    src={coverImage?.asset?.url}
-                    alt={coverImage?.asset?.altText || ''}
-                    objectFit={'cover'}
-                    objectPosition={'center center'}
-                    layout="fill"
-                    className={styles.image}
-                  />
-                </div>
+      <Link passHref href={href} className={styles.link}>
+
+        <div className={styles.logosCover}>
+          <TransactionLogo
+            url={companyLogo1?.asset?.url}
+            name={companyName1}
+          />
+          <Beam color={'primary'} glow={false} classes={styles.beam} />
+          <TransactionLogo
+            url={companyLogo2?.asset?.url}
+            name={companyName2}
+          />
+        </div>
+        <div className={styles.cover}>
+          {coverImage?.asset?.url && (
+            <div className={styles.imageWrapper}>
+              <div className={styles.imageWrapper_inner}>
+                <Image
+                  unoptimized
+                  src={coverImage?.asset?.url}
+                  alt={coverImage?.asset?.altText || ''}
+                  objectFit={'cover'}
+                  objectPosition={'center center'}
+                  layout="fill"
+                  className={styles.image}
+                />
               </div>
-            )}
-            <div className={styles.body}>
-              {date && (
-                <time dateTime={date} className={styles.date}>
-                  {dateFormatted}
-                </time>
-              )}
-              {headline && <h2 className={styles.title}>{headline}</h2>}
-              {hasCDIRelation ? (
-                <p className={styles.excerpt}>{sharedContent.cdiTextNews}</p>
-              ) : null}
-              <Icon
-                iconName={'arrow-circle'}
-                viewBox={'0 0 32 32'}
-                width={32}
-                height={32}
-              />
             </div>
+          )}
+          <div className={styles.body}>
+            {date && (
+              <time dateTime={date} className={styles.date}>
+                {dateFormatted}
+              </time>
+            )}
+            {headline && <h2 className={styles.title}>{headline}</h2>}
+            {hasCDIRelation ? (
+              <p className={styles.excerpt}>{sharedContent.cdiTextNews}</p>
+            ) : null}
+            <Icon
+              iconName={'arrow-circle'}
+              viewBox={'0 0 32 32'}
+              width={32}
+              height={32}
+            />
           </div>
-        </a>
+        </div>
+
       </Link>
     </article>
   );

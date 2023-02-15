@@ -18,25 +18,26 @@ export const TwoNews = ({ article }) => {
 
   return (
     <article key={`twoNews-${_id}`} className={styles.twoNews}>
-      <Link passHref href={href}>
-        <a
-          className={styles.link}
-          target={customLink ? '_blank' : ''}
-          rel={customLink ? 'noopener noreferrer' : ''}
-        >
-          {date && (
-            <time dateTime={date} className={styles.date}>
-              {dateFormatted}
-            </time>
-          )}
-          {title && <h2 className={styles.title}>{title}</h2>}
-          <Icon
-            iconName={'arrow-circle'}
-            viewBox={'0 0 32 32'}
-            width={24}
-            height={24}
-          />
-        </a>
+      <Link
+        passHref
+        href={href}
+        className={styles.link}
+        target={customLink ? '_blank' : ''}
+        rel={customLink ? 'noopener noreferrer' : ''}>
+
+        {date && (
+          <time dateTime={date} className={styles.date}>
+            {dateFormatted}
+          </time>
+        )}
+        {title && <h2 className={styles.title}>{title}</h2>}
+        <Icon
+          iconName={'arrow-circle'}
+          viewBox={'0 0 32 32'}
+          width={24}
+          height={24}
+        />
+
       </Link>
     </article>
   );

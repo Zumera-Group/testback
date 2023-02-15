@@ -27,16 +27,14 @@ export const Menu = ({ navigation }) => {
                   page.slug?.current,
                 ),
               )}
-            >
-              <a
-                className={[
-                  styles.link,
-                  isActive(page.slug?.current) ? styles.link__active : '',
-                ].join(' ')}
-                data-title={name}
-              >
-                {name}
-              </a>
+              className={[
+                styles.link,
+                isActive(page.slug?.current) ? styles.link__active : '',
+              ].join(' ')}
+              data-title={name}>
+
+              {name}
+
             </Link>
           </li>
         ))}
