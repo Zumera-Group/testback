@@ -80,7 +80,7 @@ export class PageFacade {
     );
 
     const data = await this.sanityService.fetch(query, preview);
-
+    console.log(data);
     if (!data) {
       throw new Error(SERVER_FETCHING_ERROR);
     }

@@ -1,5 +1,5 @@
 import { Locale } from 'lib/locale';
-import { getClient } from '../sanity.server';
+import { client } from 'lib/sanity.server';
 
 export type SanityLocale = 'de' | 'en_GB';
 
@@ -11,7 +11,7 @@ const langMap: Record<Locale, SanityLocale> = {
 export class SanityService {
   async fetch(query: string, preview?: boolean) {
     try {
-      return await getClient(preview).fetch(query);
+      return await client.fetch(query);
     } catch (error) {
       console.log(error);
     }

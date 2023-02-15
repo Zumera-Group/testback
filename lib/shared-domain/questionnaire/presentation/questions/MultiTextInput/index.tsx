@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import useBreakpointValue from 'lib/shared-domain/useBreakpoint';
 import Input from 'components/Form/Input/Input';
 import { getTranslateByScope } from 'translation/i18n';
 import { Question } from '../../../domain/index';
@@ -11,6 +10,7 @@ import { useEffect } from 'react';
 import { QuestionAnimation } from '../../Question/QuestionAnimation';
 import styles from './MultiTextInput.module.scss';
 import BackButton from 'components/Calculator/BackButton/BackButton';
+import useBreakpoints from 'lib/utils/useBreakpoints';
 
 const t = getTranslateByScope('answerTypes.textInput');
 const placeholder = t('basePlaceholder');
@@ -27,7 +27,8 @@ export const MultiTextInput: React.FC<{
     new Array(NUMBER_OF_ANSWERS).fill(''),
   );
 
-  const isMobile = useBreakpointValue({ base: true, lg: false });
+  const breakpoints = useBreakpoints();
+  const isMobile = breakpoints === 'sm';
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>, index: number) =>
     setAnswers((prevAnswers) => {
