@@ -1,6 +1,5 @@
 import { Container, Grid, GridColumn, Section } from 'components/Layout';
 import styles from './TextWithImageGrid.module.scss';
-import { Sector } from 'lib/shared-domain/page/domain';
 import { SectionHeading } from 'components/SectionHeading';
 import { Button } from 'components/Button';
 import Image from 'next/image';
