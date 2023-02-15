@@ -22,11 +22,13 @@ export const useSalesforceAnswerSync = () => {
     syncCurrentAnswersToSalesforce: async (
       uniqueId: string,
       currentSalesforceId: string,
+      currentProgress: number,
     ) => {
       sendQuestionnaireToAnalytics(currentSalesforceId);
 
       await facade.createOrUpdateLeadEntry(
         uniqueId,
+        currentProgress,
         answers,
         industryId,
         sectorId,

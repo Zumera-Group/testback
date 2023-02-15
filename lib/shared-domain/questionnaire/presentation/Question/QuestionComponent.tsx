@@ -47,6 +47,17 @@ export const QuestionComponent: React.FC<{
 
   const answerSelector = questionnaire && currentQuestion?.answerSelector;
 
+  const numberOfQuestionsInTotal = questionnaire?.questionsByCategory?.reduce(
+    (numberOfQuestions, currentCategory) => {
+      return numberOfQuestions + currentCategory.questions.length;
+    },
+    0,
+  );
+
+  const currentProgress = Math.round(
+    (currentPos / numberOfQuestionsInTotal) * 100,
+  );
+
   const buildSectorSpecificQuestions = () => {
     if (!questionnaire.sectorSpecific.hasSectorSpecificQuestions) return;
     const filteredSectorSpecificQuestions = sectorSpecificQuestions.filter(
@@ -106,15 +117,11 @@ export const QuestionComponent: React.FC<{
 
     qLogs('onNextQuestion');
 
-    const loadScore = async () => {
-      try {
-        const score = await getScore();
-        console.log(score);
-      } catch (e) {}
-    };
-    loadScore();
-
-    syncCurrentAnswersToSalesforce(uniqueId, currentQuestion?.salesforceId);
+    syncCurrentAnswersToSalesforce(
+      uniqueId,
+      currentQuestion?.salesforceId,
+      currentProgress,
+    );
     if (industryId && currentQuestion?.questionId === INDUSTRY_QUESTION_ID) {
       buildSectorSpecificQuestions();
     } else if (industryId && currentCategory?.categoryName === t('results')) {

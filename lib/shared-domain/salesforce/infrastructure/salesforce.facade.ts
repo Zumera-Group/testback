@@ -27,6 +27,7 @@ export class SalesforceFacade {
 
   async createOrUpdateLeadEntry(
     uniqueId: string,
+    currentProgress: number,
     fields: Record<string, any>,
     industryId: string,
     sectorId: string,
@@ -58,6 +59,7 @@ export class SalesforceFacade {
       const params = {
         lead_entry: {
           unique_id: uniqueId,
+          current_progress: currentProgress,
           data: {
             ...fields,
             ...formattedMarketingParams,
