@@ -10,7 +10,7 @@ import { SharedContentFacade } from 'lib/shared-domain/page/infrastructure/share
 import { SharedContentContext } from 'lib/shared-domain/page/infrastructure/sharedContentContext';
 import { useRouter } from 'next/router';
 import { EmployeeHero } from 'lib/shared-domain/employees/presentation/EmployeeHero';
-import { usePreviewSubscription } from '../../lib/sanity';
+// import { usePreviewSubscription } from '../../lib/sanity';
 import { filterDataToSingleItem } from '../../lib/shared-domain/page/infrastructure/page.facade';
 import {
   REVALIDATE_ON_FAILURE_TIME_IN_SECONDS,
@@ -108,12 +108,12 @@ export default function Index({
   employeeDetailContent,
   sharedContent,
 }: Props): JSX.Element {
-  const { data: previewData } = usePreviewSubscription(query, {
-    params: { slug: queryParams } ?? {},
-    initialData: selectedEmployee,
-    enabled: preview,
-  });
-  const previewEmployee = filterDataToSingleItem(previewData, preview);
+  // const { data: previewData } = usePreviewSubscription(query, {
+  //   params: { slug: queryParams } ?? {},
+  //   initialData: selectedEmployee,
+  //   enabled: preview,
+  // });
+  const previewEmployee = filterDataToSingleItem(selectedEmployee, preview);
   const router = useRouter();
 
   const [isSecretOpen, setIsSecretOpen] = useState(

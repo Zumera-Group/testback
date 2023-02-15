@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image from 'next/image';
 import styles from './SecretKeyLockScreen.module.scss';
 import { useEffect, useState } from 'react';
 export const SecretKeyLockScreen = ({ siteSettings }) => {
@@ -19,13 +19,16 @@ export const SecretKeyLockScreen = ({ siteSettings }) => {
           // layout="fill"
           // objectFit="contain"
           // objectPosition="center center"
+          width={200}
+          height={1200}
           alt={`logo`}
           src={siteSettings?.logo?.asset?.url}
           onClick={() => setClicksCount(clicksCount + 1)}
           style={{
-            maxWidth: "100%",
-            height: "auto"
-          }} />
+            maxWidth: '100%',
+            height: 'auto',
+          }}
+        />
       </div>
       <div className={styles.comingSoon}>Coming soon</div>
     </div>

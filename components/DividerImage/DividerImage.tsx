@@ -62,9 +62,12 @@ export const DividerImage: React.FC<Props> = ({ ...rest }) => {
           // layout="fill"
           alt={''}
           src={dividerImage + `?h=1200`}
+          // sizes={'100vw'}
+          fill
           style={{
             maxWidth: '100%',
-            height: 'auto',
+            objectFit: isNoParalax ? 'contain' : 'cover',
+            // height: 'auto',
           }}
         />
       </div>

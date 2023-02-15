@@ -10,7 +10,7 @@ import { SharedContentContext } from 'lib/shared-domain/page/infrastructure/shar
 import { SharedContentFacade } from 'lib/shared-domain/page/infrastructure/sharedContent.facade';
 import { useRouter } from 'next/router';
 import { EmployeeHero } from 'lib/shared-domain/employees/presentation/EmployeeHero';
-import { usePreviewSubscription } from '../../lib/sanity';
+// import { usePreviewSubscription } from '../../lib/sanity';
 import { filterDataToSingleItem } from '../../lib/shared-domain/page/infrastructure/page.facade';
 
 import {
@@ -99,13 +99,16 @@ export default function Index({
   transactionDetailContent,
   sharedContent,
 }: Props): JSX.Element {
-  const { data: previewData } = usePreviewSubscription(query, {
-    params: { slug: queryParams } ?? {},
-    initialData: selectedTransaction,
-    enabled: preview,
-  });
+  // const { data: previewData } = usePreviewSubscription(query, {
+  //   params: { slug: queryParams } ?? {},
+  //   initialData: selectedTransaction,
+  //   enabled: preview,
+  // });
 
-  const previewTransaction = filterDataToSingleItem(previewData, preview);
+  const previewTransaction = filterDataToSingleItem(
+    selectedTransaction,
+    preview,
+  );
   const router = useRouter();
 
   const [isSecretOpen, setIsSecretOpen] = useState(

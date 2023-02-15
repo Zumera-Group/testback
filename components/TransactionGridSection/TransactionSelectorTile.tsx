@@ -1,6 +1,6 @@
 import { ISectorsDropdown } from 'lib/shared-domain/page/domain/contentModule';
 import styles from './TransactionGridSection.module.scss';
-import Image from "next/image";
+import Image from 'next/image';
 import { useGetSectorDetail } from 'lib/shared-domain/sectors/application/useGetSectorDetail';
 import { Locale } from 'lib/locale';
 
@@ -46,11 +46,12 @@ export const TransactionSelectorTile: React.FC<IProps> = ({
             loading="lazy"
             src={sectorDetail.graphLight.iconImage?.asset?.url}
             alt={sector.name}
-            layout={'fill'}
+            fill
             style={{
-              maxWidth: "100%",
-              height: "auto"
-            }} />
+              maxWidth: '100%',
+              // height: 'auto',
+            }}
+          />
         </div>
       ) : null}
       <div

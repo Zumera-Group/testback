@@ -38,8 +38,8 @@ export const BoxSelectorItem = ({
         loading="lazy"
         src={iconUrl}
         alt={iconLabel}
-        height="42px"
-        width="42px"
+        width={42}
+        height={42}
       />
     );
   };

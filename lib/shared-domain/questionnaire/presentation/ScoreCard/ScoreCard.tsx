@@ -83,11 +83,14 @@ export const ScoreCard = () => {
               <Image
                 unoptimized
                 loading="lazy"
-                objectFit="cover"
+                // objectFit="cover"
                 alt={'booklet'}
                 src={'/calculator/booklet.png'}
-                height={217}
                 width={217}
+                height={217}
+                style={{
+                  objectFit: 'cover',
+                }}
               />
             </div>
           </>

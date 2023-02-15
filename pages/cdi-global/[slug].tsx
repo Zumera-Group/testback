@@ -12,7 +12,7 @@ import { SharedContentFacade } from 'lib/shared-domain/page/infrastructure/share
 import { SharedContentContext } from 'lib/shared-domain/page/infrastructure/sharedContentContext';
 import { useRouter } from 'next/router';
 import { EmployeeHero } from 'lib/shared-domain/employees/presentation/EmployeeHero';
-import { usePreviewSubscription } from '../../lib/sanity';
+// import { usePreviewSubscription } from '../../lib/sanity';
 import { filterDataToSingleItem } from '../../lib/shared-domain/page/infrastructure/page.facade';
 
 import { slugifyOffice } from 'lib/shared-domain/offices/application/slugifyOffice';
@@ -93,13 +93,13 @@ export default function Index({
   office,
   sharedContent,
 }: Props): JSX.Element {
-  const { data: previewData } = usePreviewSubscription(query, {
-    params: { slug: queryParams } ?? {},
-    initialData: office,
-    enabled: preview,
-  });
+  // const { data: previewData } = usePreviewSubscription(query, {
+  //   params: { slug: queryParams } ?? {},
+  //   initialData: office,
+  //   enabled: preview,
+  // });
 
-  const previewSelectedOffice = filterDataToSingleItem(previewData, preview);
+  const previewSelectedOffice = filterDataToSingleItem(office, preview);
 
   const router = useRouter();
 

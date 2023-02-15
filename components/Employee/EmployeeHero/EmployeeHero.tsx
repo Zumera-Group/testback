@@ -2,7 +2,7 @@ import { Employee } from 'lib/shared-domain/employees/domain';
 import { Container, Grid, GridColumn, Section } from 'components/Layout';
 import baseStyles from 'components/Hero/Hero.module.scss';
 import styles from './EmployeeHero.module.scss';
-import Image from "next/image";
+import Image from 'next/image';
 
 const Detail = ({ as, title, text }) => {
   const Component = as || 'div';
@@ -69,11 +69,14 @@ export const EmployeeHero: React.FC<{
                   // layout={'fill'}
                   // objectFit={'cover'}
                   // objectPosition={'center center'}
+                  width={200}
+                  height={1200}
                   alt={`${employee.firstName} ${employee.lastName}`}
                   style={{
-                    maxWidth: "100%",
-                    height: "auto"
-                  }} />
+                    maxWidth: '100%',
+                    height: 'auto',
+                  }}
+                />
               </div>
             )}
           </GridColumn>

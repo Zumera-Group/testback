@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image from 'next/image';
 import { Beam } from 'components/Beam';
 import { useSharedContentContext } from 'lib/shared-domain/page/infrastructure/sharedContentContext';
 import { useFormatDate } from 'lib/shared-domain/useFormatDate';
@@ -36,10 +36,11 @@ export const TransactionCard = ({ transaction }) => {
         alt={`${name} logo`}
         src={`${url}`}
         style={{
-          maxWidth: "100%",
-          height: "auto",
-          objectFit: "contain"
-        }} />
+          maxWidth: '100%',
+          height: 'auto',
+          objectFit: 'contain',
+        }}
+      />
     );
   };
 
@@ -58,11 +59,12 @@ export const TransactionCard = ({ transaction }) => {
                 unoptimized
                 src={coverImage?.asset?.url}
                 alt={coverImage?.asset?.altText || ''}
-                objectFit={'cover'}
-                objectPosition={'center center'}
+                // objectFit={'cover'}
+                // objectPosition={'center center'}
                 className={styles.image}
                 fill
-                sizes="100vw" />
+                sizes="100vw"
+              />
             </div>
           </div>
         )}

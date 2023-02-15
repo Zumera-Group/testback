@@ -14,10 +14,10 @@ import {
 } from '../../lib/shared-domain/page/domain/index';
 import { ErrorTrackingBoundary } from 'lib/ErrorTrackingBoundary';
 import { fetchSectorSpecificQuestions } from 'lib/shared-domain/questionnaire/application/useGetSectorSpecificQuestions';
-import { SanityIcon } from '../../lib/shared-domain/questionnaire/domain/index';
+// import { SanityIcon } from '../../lib/shared-domain/questionnaire/domain/index';
 import { SharedContentContext } from 'lib/shared-domain/page/infrastructure/sharedContentContext';
 import { SharedContentFacade } from 'lib/shared-domain/page/infrastructure/sharedContent.facade';
-import { usePreviewSubscription } from '../../lib/sanity';
+// import { usePreviewSubscription } from '../../lib/sanity';
 import { filterDataToSingleItem } from '../../lib/shared-domain/page/infrastructure/page.facade';
 
 import { fetchSectors } from '../../lib/shared-domain/sectors/application/useGetSectors';
@@ -112,13 +112,16 @@ export default function Index({
   sharedContent,
   locale,
 }: Props): JSX.Element {
-  const { data: previewData } = usePreviewSubscription(query, {
-    params: { slug: queryParams } ?? {},
-    initialData: selectedQuestionnaire,
-    enabled: preview,
-  });
+  // const { data: previewData } = usePreviewSubscription(query, {
+  //   params: { slug: queryParams } ?? {},
+  //   initialData: selectedQuestionnaire,
+  //   enabled: preview,
+  // });
 
-  const previewQuestionnaire = filterDataToSingleItem(previewData, preview);
+  const previewQuestionnaire = filterDataToSingleItem(
+    selectedQuestionnaire,
+    preview,
+  );
 
   const router = useRouter();
 

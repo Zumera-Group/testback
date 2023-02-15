@@ -9,7 +9,7 @@ import { SharedContentContext } from 'lib/shared-domain/page/infrastructure/shar
 import { useRouter } from 'next/router';
 import { EmployeeHero } from 'lib/shared-domain/employees/presentation/EmployeeHero';
 import { filterDataToSingleItem } from '../../lib/shared-domain/page/infrastructure/page.facade';
-import { usePreviewSubscription } from '../../lib/sanity';
+// import { usePreviewSubscription } from '../../lib/sanity';
 
 import { REVALIDATE_ON_FAILURE_TIME_IN_SECONDS } from '../../lib/shared-domain/page/constants';
 import { useEffect, useState } from 'react';
@@ -97,12 +97,12 @@ export default function Index({
   siteSettings,
   sharedContent,
 }: Props): JSX.Element {
-  const { data: previewData } = usePreviewSubscription(query, {
-    params: { slug: queryParams } ?? {},
-    initialData: selectedService,
-    enabled: preview,
-  });
-  const previewService = filterDataToSingleItem(previewData, preview);
+  // const { data: previewData } = usePreviewSubscription(query, {
+  //   params: { slug: queryParams } ?? {},
+  //   initialData: selectedService,
+  //   enabled: preview,
+  // });
+  const previewService = filterDataToSingleItem(selectedService, preview);
 
   const router = useRouter();
 

@@ -2,7 +2,7 @@ import { Container, Grid, GridColumn, Section } from 'components/Layout';
 import styles from './VTServicesSection.module.scss';
 import { SectionHeading } from 'components/SectionHeading';
 import { Button } from 'components/Button';
-import Image from "next/image";
+import Image from 'next/image';
 import { VTServicesSectionModule } from 'lib/shared-domain/page/domain/contentModule';
 
 export const VTServicesSection: React.FC<{
@@ -73,13 +73,15 @@ export const VTServicesSection: React.FC<{
                     unoptimized
                     src={service?.icon?.iconImage?.asset?.url}
                     alt={service?.icon?.iconImage?.name}
-                    layout={'fill'}
-                    objectFit={'contain'}
-                    objectPosition={'center center'}
+                    // layout={'fill'}
+                    // objectFit={'contain'}
+                    // objectPosition={'center center'}
+                    fill
                     style={{
-                      maxWidth: "100%",
-                      height: "auto"
-                    }} />
+                      maxWidth: '100%',
+                      // height: 'auto',
+                    }}
+                  />
                 </div>
                 <p>{service.title}</p>
               </div>

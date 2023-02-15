@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image from 'next/image';
 import { Section, Container, Grid, GridColumn } from 'components/Layout';
 
 import baseStyles from 'components/Hero/Hero.module.scss';
@@ -32,11 +32,14 @@ export const ServiceHero = ({ service }) => {
                   // layout={'fill'}
                   // objectFit={'contain'}
                   // objectPosition={'center center'}
+                  width={200}
+                  height={1200}
                   alt={'service.name'}
                   style={{
-                    maxWidth: "100%",
-                    height: "auto"
-                  }} />
+                    maxWidth: '100%',
+                    height: 'auto',
+                  }}
+                />
               </div>
             )}
           </GridColumn>

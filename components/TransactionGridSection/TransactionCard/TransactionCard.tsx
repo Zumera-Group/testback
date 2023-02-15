@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import Image from "next/image";
+import Image from 'next/image';
 
 import { Beam } from 'components/Beam';
 import { Icon } from 'components/Icon';
@@ -36,14 +36,16 @@ export const TransactionCard = ({ transaction }) => {
       <div className={styles.transactionLogo}>
         <Image
           unoptimized
-          layout={'fill'}
+          // layout={'fill'}
           alt={`${name} logo`}
           src={`${url}`}
+          fill
           style={{
-            maxWidth: "100%",
-            height: "auto",
-            objectFit: "contain"
-          }} />
+            maxWidth: '100%',
+            // height: 'auto',
+            objectFit: 'contain',
+          }}
+        />
       </div>
     );
   };
@@ -51,17 +53,10 @@ export const TransactionCard = ({ transaction }) => {
   return (
     <article className={styles.transaction}>
       <Link passHref href={href} className={styles.link}>
-
         <div className={styles.logosCover}>
-          <TransactionLogo
-            url={companyLogo1?.asset?.url}
-            name={companyName1}
-          />
+          <TransactionLogo url={companyLogo1?.asset?.url} name={companyName1} />
           <Beam color={'primary'} glow={false} classes={styles.beam} />
-          <TransactionLogo
-            url={companyLogo2?.asset?.url}
-            name={companyName2}
-          />
+          <TransactionLogo url={companyLogo2?.asset?.url} name={companyName2} />
         </div>
         <div className={styles.cover}>
           {coverImage?.asset?.url && (
@@ -71,11 +66,12 @@ export const TransactionCard = ({ transaction }) => {
                   unoptimized
                   src={coverImage?.asset?.url}
                   alt={coverImage?.asset?.altText || ''}
-                  objectFit={'cover'}
-                  objectPosition={'center center'}
+                  // objectFit={'cover'}
+                  // objectPosition={'center center'}
                   className={styles.image}
                   fill
-                  sizes="100vw" />
+                  sizes="100vw"
+                />
               </div>
             </div>
           )}
@@ -94,7 +90,6 @@ export const TransactionCard = ({ transaction }) => {
             />
           </div>
         </div>
-
       </Link>
     </article>
   );

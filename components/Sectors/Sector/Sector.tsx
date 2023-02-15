@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import Image from "next/image";
+import Image from 'next/image';
 
 import { links } from 'lib/links';
 
@@ -22,11 +22,14 @@ export const Sector = ({ sector }) => {
             // layout={'fill'}
             // objectFit={'contain'}
             // objectPosition={'center center'}
+            width={200}
+            height={1200}
             alt={graph?.iconImage?.name}
             style={{
-              maxWidth: "100%",
-              height: "auto"
-            }} />
+              maxWidth: '100%',
+              height: 'auto',
+            }}
+          />
         </div>
       )}
       <h3 className={styles.name}>{name}</h3>

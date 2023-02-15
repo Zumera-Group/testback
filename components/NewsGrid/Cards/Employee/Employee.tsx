@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import Image from "next/image";
+import Image from 'next/image';
 
 import { Icon } from 'components/Icon';
 
@@ -40,10 +40,16 @@ export const Employee: React.FC<{
                 src={image}
                 alt={name}
                 className={styles.image}
+                // width={200}
+                // height={1200}
+                fill
                 style={{
-                  maxWidth: "100%",
-                  height: "auto"
-                }} />
+                  maxWidth: '100%',
+                  objectFit: 'cover',
+                  // height: 'auto',
+                  // width: 'auto',
+                }}
+              />
             )}
           </div>
         </div>

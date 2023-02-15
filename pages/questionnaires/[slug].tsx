@@ -17,7 +17,7 @@ import { fetchSectorSpecificQuestions } from 'lib/shared-domain/questionnaire/ap
 import { SharedContentContext } from 'lib/shared-domain/page/infrastructure/sharedContentContext';
 import { SharedContentFacade } from 'lib/shared-domain/page/infrastructure/sharedContent.facade';
 import { filterDataToSingleItem } from '../../lib/shared-domain/page/infrastructure/page.facade';
-import { usePreviewSubscription } from '../../lib/sanity';
+// import { usePreviewSubscription } from '../../lib/sanity';
 
 import { fetchSectors } from 'lib/shared-domain/sectors/application/useGetSectors';
 import { REVALIDATE_ON_FAILURE_TIME_IN_SECONDS } from '../../lib/shared-domain/page/constants';
@@ -108,13 +108,16 @@ export default function Index({
   sharedContent,
   locale,
 }: Props): JSX.Element {
-  const { data: previewData } = usePreviewSubscription(query, {
-    params: { slug: queryParams } ?? {},
-    initialData: selectedQuestionnaire,
-    enabled: preview,
-  });
+  // const { data: previewData } = usePreviewSubscription(query, {
+  //   params: { slug: queryParams } ?? {},
+  //   initialData: selectedQuestionnaire,
+  //   enabled: preview,
+  // });
 
-  const previewQuestionnaire = filterDataToSingleItem(previewData, preview);
+  const previewQuestionnaire = filterDataToSingleItem(
+    selectedQuestionnaire,
+    preview,
+  );
 
   const router = useRouter();
 

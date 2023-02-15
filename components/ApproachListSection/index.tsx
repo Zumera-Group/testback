@@ -40,10 +40,14 @@ export const ApproachListSection: React.FC<{
                   src={block.image?.asset?.url}
                   // objectFit="contain"
                   // layout="fill"
+                  // width={200}
+                  // height={1200}
                   alt={block.image?.name}
+                  fill
                   style={{
                     maxWidth: '100%',
-                    height: 'auto',
+                    objectFit: 'contain',
+                    // height: 'auto',
                   }}
                 />
               </div>

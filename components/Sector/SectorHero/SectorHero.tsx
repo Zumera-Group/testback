@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image from 'next/image';
 import { Section, Container, Grid, GridColumn } from 'components/Layout';
 
 import { getEmployeeFullName } from 'lib/shared-domain/employees/domain/getEmployeeFullName';
@@ -73,10 +73,12 @@ export const SectorHero = ({ sector, content }) => {
                   // objectFit={'contain'}
                   // objectPosition={'center center'}
                   alt={'sector.name'}
+                  fill
                   style={{
-                    maxWidth: "100%",
-                    height: "auto"
-                  }} />
+                    maxWidth: '100%',
+                    // height: 'auto',
+                  }}
+                />
               </div>
             )}
           </GridColumn>

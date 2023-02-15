@@ -3,7 +3,7 @@ import { Container, Grid, GridColumn, Section } from 'components/Layout';
 import { SectionHeading } from 'components/SectionHeading';
 import { Button } from 'components/Button';
 import styles from './VTValuesGridSection.module.scss';
-import Image from "next/image";
+import Image from 'next/image';
 
 export const VTValuesGridSection: React.FC<{
   specificContentModule: VTValuesGridSectionModule;
@@ -50,13 +50,15 @@ export const VTValuesGridSection: React.FC<{
                       unoptimized
                       src={value?.icon?.iconImage?.asset?.url}
                       alt={value?.icon?.iconImage?.name}
-                      layout={'fill'}
-                      objectFit={'contain'}
-                      objectPosition={'center center'}
+                      // layout={'fill'}
+                      // objectFit={'contain'}
+                      // objectPosition={'center center'}
+                      fill
                       style={{
-                        maxWidth: "100%",
-                        height: "auto"
-                      }} />
+                        maxWidth: '100%',
+                        // height: 'auto',
+                      }}
+                    />
                   </div>
                   <SectionHeading
                     title={value.title}

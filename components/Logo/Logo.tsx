@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import Image from "next/image";
+import Image from 'next/image';
 
 import styles from './Logo.module.scss';
 import { AnimatedLogo } from 'components/Logo/AnimatedLogo';
@@ -42,12 +42,15 @@ export const Logo: React.FC<Props> = ({
           // layout="fill"
           // objectFit="contain"
           // objectPosition="left center"
+          width={200}
+          height={1200}
           alt={`${title} logo`}
           src={src}
           style={{
-            maxWidth: "100%",
-            height: "auto"
-          }} />
+            maxWidth: '100%',
+            height: 'auto',
+          }}
+        />
       )}
     </Link>
   );

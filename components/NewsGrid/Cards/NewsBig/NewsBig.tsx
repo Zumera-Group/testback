@@ -48,11 +48,13 @@ export const NewsBig = ({ article }) => {
               // objectFit={'cover'}
               // objectPosition={'center center'}
               // layout="fill"
+              width={200}
+              height={1200}
               className={styles.image}
               style={{
                 maxWidth: '100%',
                 height: 'auto',
-                width: '100%',
+                width: 'auto',
               }}
             />
           </div>

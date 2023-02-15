@@ -4,7 +4,7 @@ import { fetchSiteSettings } from 'lib/shared-domain/page/application/useGetSite
 import { SiteSettings } from 'lib/shared-domain/page/domain';
 import { VTLanding } from '../../lib/shared-domain/valuation-tool/domain/index';
 import { useRouter } from 'next/router';
-import { usePreviewSubscription } from '../../lib/sanity';
+// import { usePreviewSubscription } from '../../lib/sanity';
 import { filterDataToSingleItem } from '../../lib/shared-domain/page/infrastructure/page.facade';
 
 import { ErrorTrackingBoundary } from 'lib/ErrorTrackingBoundary';
@@ -72,13 +72,13 @@ export default function Index({
   siteSettings,
   sharedContent,
 }: Props): JSX.Element {
-  const { data: previewData } = usePreviewSubscription(query, {
-    params: { slug: queryParams } ?? {},
-    initialData: selectedLanding,
-    enabled: preview,
-  });
+  // const { data: previewData } = usePreviewSubscription(query, {
+  //   params: { slug: queryParams } ?? {},
+  //   initialData: selectedLanding,
+  //   enabled: preview,
+  // });
 
-  const previewPage = filterDataToSingleItem(previewData, preview);
+  const previewPage = filterDataToSingleItem(selectedLanding, preview);
   const router = useRouter();
 
   if (router.isFallback) {
