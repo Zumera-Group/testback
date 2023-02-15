@@ -6,6 +6,9 @@
 }
 
 .stepItem {
+  display: flex;
+  align-items: center;
+
   .stepItemName,
   .stepItemIndex {
     font-family: $font-family-sans-serif;
