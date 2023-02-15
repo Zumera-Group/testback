@@ -31,6 +31,7 @@ export const Logo: React.FC<Props> = ({
       className={[styles.logo, classes ?? ''].join(' ')}
       rel="home"
       title={title}
+      prefetch={false}
     >
       {isAnimated ? (
         <AnimatedLogo isScrolled={isScrolled} isLightPage={isLightPage} />

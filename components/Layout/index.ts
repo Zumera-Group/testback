@@ -5,6 +5,3 @@ export * from './Grid';
 export * from './SwiperPeople';
 export * from './SwiperTransactions';
 export * from './SwiperNavigationButtons';
-
-// import Layout from './Layout';
-// export default Layout;

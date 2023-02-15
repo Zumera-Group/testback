@@ -52,7 +52,7 @@ export const TransactionCard = ({ transaction }) => {
 
   return (
     <article className={styles.transaction}>
-      <Link passHref href={href} className={styles.link}>
+      <Link passHref href={href} className={styles.link} prefetch={false}>
         <div className={styles.logosCover}>
           <TransactionLogo url={companyLogo1?.asset?.url} name={companyName1} />
           <Beam color={'primary'} glow={false} classes={styles.beam} />

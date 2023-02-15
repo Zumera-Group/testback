@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import Image from "next/image";
+import Image from 'next/image';
 
 import { Beam } from 'components/Beam';
 import { Icon } from 'components/Icon';
@@ -42,15 +42,16 @@ export const TransactionCard = ({ transaction }) => {
         alt={`${name} logo`}
         src={`${url}`}
         style={{
-          maxWidth: "100%",
-          height: "auto"
-        }} />
+          maxWidth: '100%',
+          height: 'auto',
+        }}
+      />
     );
   };
 
   return (
     <article className={styles.transaction}>
-      <Link passHref href={href} className={styles.link}>
+      <Link passHref href={href} className={styles.link} prefetch={false}>
         <div className={styles.logosCover}>
           <TransactionLogo url={companyLogo1?.asset?.url} name={companyName1} />
           <Beam color={'primary'} glow={false} classes={styles.beam} />
@@ -69,9 +70,10 @@ export const TransactionCard = ({ transaction }) => {
                   // layout="fill"
                   className={styles.image}
                   style={{
-                    maxWidth: "100%",
-                    height: "auto"
-                  }} />
+                    maxWidth: '100%',
+                    height: 'auto',
+                  }}
+                />
               </div>
             </div>
           )}

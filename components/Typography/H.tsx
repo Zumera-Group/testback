@@ -1,5 +1,4 @@
 import React from 'react';
-// import { Heading, HeadingProps } from '@chakra-ui/react';
 
 export const H: React.FC<any> = ({
   color = 'black',

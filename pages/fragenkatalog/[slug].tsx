@@ -14,7 +14,6 @@ import {
 } from '../../lib/shared-domain/page/domain/index';
 import { ErrorTrackingBoundary } from 'lib/ErrorTrackingBoundary';
 import { fetchSectorSpecificQuestions } from 'lib/shared-domain/questionnaire/application/useGetSectorSpecificQuestions';
-// import { SanityIcon } from '../../lib/shared-domain/questionnaire/domain/index';
 import { SharedContentContext } from 'lib/shared-domain/page/infrastructure/sharedContentContext';
 import { SharedContentFacade } from 'lib/shared-domain/page/infrastructure/sharedContent.facade';
 // import { usePreviewSubscription } from '../../lib/sanity';

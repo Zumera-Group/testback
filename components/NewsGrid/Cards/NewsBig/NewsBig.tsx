@@ -38,6 +38,7 @@ export const NewsBig = ({ article }) => {
         className={styles.link}
         target={customLink ? '_blank' : ''}
         rel={customLink ? 'noopener noreferrer' : ''}
+        prefetch={false}
       >
         <div className={styles.imageWrapper}>
           <div className={styles.imageWrapper_inner}>

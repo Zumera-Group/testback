@@ -46,7 +46,7 @@ export const TransactionBig = ({ article }) => {
 
   return (
     <article key={`transactionBig-${_id}`} className={styles.transactionBig}>
-      <Link passHref href={href} className={styles.link}>
+      <Link passHref href={href} className={styles.link} prefetch={false}>
         <div className={styles.logosCover}>
           <TransactionLogo
             url={article.companyLogo1?.asset?.url}

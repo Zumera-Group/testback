@@ -46,7 +46,6 @@ export const GlobalNetworkSection: React.FC<any> = ({
 const AnswerComponent = ({ answer }) => (
   <div className={styles.officeGrid}>
     {answer.map((item) => {
-      // const link = 'cdi-global/' + slugifyOffice(item.city);
       return (
         <div key={item._id} className={styles.office}>
           <h5>{item.city}</h5>

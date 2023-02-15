@@ -1,5 +1,4 @@
 import React from 'react';
-// import { FlexCol } from '../components/Layout/Flex/Flex';
 import { PageHeader } from '../lib/shared-domain/page/presentation/PageHeader';
 import { SiteSettings } from '../lib/shared-domain/page/domain/index';
 import { fetchSiteSettings } from '../lib/shared-domain/page/application/useGetSiteSettings';

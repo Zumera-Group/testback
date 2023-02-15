@@ -13,6 +13,7 @@ export const Sector = ({ sector }) => {
       href={links().sectors(sector)}
       className={styles.sector}
       title={name}
+      prefetch={false}
     >
       {graph?.iconImage?.asset?.url && (
         <div className={styles.imageWrapper}>

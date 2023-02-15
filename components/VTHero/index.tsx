@@ -14,7 +14,6 @@ export const VTHero: React.FC<{
   const [selectedPurpose, setSelectedPurpose] = useState('');
   const { title, title2, description, buttons, purposesTitle, purposes } =
     specificContentModule;
-  // const questionnaire = `/questionnaires/${buttons[0]?.questionnaire?.questionnaireSlug?.current}`;
 
   const router = useRouter();
   const page = router.locale === 'en' ? 'questionnaires' : 'fragenkatalog';
@@ -80,7 +79,7 @@ export const VTHero: React.FC<{
               <h4>{purposesTitle}</h4>
               <div className={styles.purposes}>
                 {purposes.map((purpose) => (
-                  (<Link
+                  <Link
                     passHref
                     href={questionnaire}
                     key={purpose}
@@ -88,11 +87,10 @@ export const VTHero: React.FC<{
                       styles.purpose,
                       selectedPurpose === purpose ? styles.selected : '',
                     ].join(' ')}
-                    onClick={() => setSelectedPurpose(purpose)}>
-
+                    onClick={() => setSelectedPurpose(purpose)}
+                  >
                     {purpose}
-
-                  </Link>)
+                  </Link>
                 ))}
               </div>
             </div>

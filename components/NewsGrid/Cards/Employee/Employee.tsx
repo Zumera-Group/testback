@@ -26,7 +26,7 @@ export const Employee: React.FC<{
 
   return (
     <article className={styles.employee}>
-      <Link passHref href={href} className={styles.link}>
+      <Link passHref href={href} className={styles.link} prefetch={false}>
         <div className={styles.imageWrapper}>
           <div
             className={[

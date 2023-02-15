@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import Image from "next/image";
+import Image from 'next/image';
 
 import styles from './FooterSocials.module.scss';
 
@@ -18,6 +18,7 @@ export const FooterSocials = ({ socials }) => {
             target="_blank"
             rel="noopener noreferrer"
             className={styles.link}
+            prefetch={false}
           >
             <Image
               unoptimized
@@ -27,9 +28,10 @@ export const FooterSocials = ({ socials }) => {
               height="20"
               width="20"
               style={{
-                maxWidth: "100%",
-                height: "auto"
-              }} />
+                maxWidth: '100%',
+                height: 'auto',
+              }}
+            />
           </Link>
         </li>
       ))}
