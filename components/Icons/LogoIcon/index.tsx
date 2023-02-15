@@ -1,9 +1,8 @@
-import { Icon } from '@chakra-ui/react';
 import React from 'react';
 
 export const Logo = () => {
   return (
-    <Icon
+    <svg
       width="182px"
       height="22px"
       viewBox="0 0 182 22"
@@ -58,6 +57,6 @@ export const Logo = () => {
         d="M45.0737 6.32812L40.9261 12.718L39.3598 10.3045L39.0811 9.8755L41.3834 6.32812H45.0737Z"
         fill="#0C4E40"
       />
-    </Icon>
+    </svg>
   );
 };

@@ -1,9 +1,8 @@
 import React from 'react';
-import { Icon } from '@chakra-ui/react';
 
 export const Close = () => {
   return (
-    <Icon
+    <svg
       width="6"
       height="6"
       viewBox="0 0 24 24"
@@ -24,6 +23,6 @@ export const Close = () => {
         strokeLinecap="round"
         strokeLinejoin="round"
       />
-    </Icon>
+    </svg>
   );
 };

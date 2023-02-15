@@ -1,7 +1,6 @@
 import React from 'react';
-import { Text, TextProps } from '@chakra-ui/react';
 
-export const P: React.FC<TextProps> = ({
+export const P: React.FC<any> = ({
   fontWeight,
   fontSize,
   color = 'black',
@@ -9,15 +8,5 @@ export const P: React.FC<TextProps> = ({
   children,
   ...props
 }) => {
-  return (
-    <Text
-      color={color}
-      fontSize={fontSize}
-      fontWeight={fontWeight}
-      variant={variant}
-      {...props}
-    >
-      {children}
-    </Text>
-  );
+  return <div>{children}</div>;
 };

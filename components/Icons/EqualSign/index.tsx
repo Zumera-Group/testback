@@ -1,9 +1,8 @@
 import React from 'react';
-import { Icon } from '@chakra-ui/react';
 
 export const EqualSign: React.FC = () => {
   return (
-    <Icon
+    <svg
       width="31px"
       height="14px"
       viewBox="0 0 31 14"
@@ -22,6 +21,6 @@ export const EqualSign: React.FC = () => {
         strokeWidth="2"
         strokeMiterlimit="10"
       />
-    </Icon>
+    </svg>
   );
 };

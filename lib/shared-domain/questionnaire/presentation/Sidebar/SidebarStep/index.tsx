@@ -1,6 +1,6 @@
-import { Box, Flex } from '@chakra-ui/react';
+// import { Box, Flex } from '@chakra-ui/react';
 import { Tick } from 'components/Icons/Tick';
-import { FlexCol } from 'components/Layout/Flex/Flex';
+// import { FlexCol } from 'components/Layout/Flex/Flex';
 import { P } from 'components/Typography/P';
 import { Category, Question } from 'lib/shared-domain/questionnaire/domain';
 import { useValuationStore } from 'lib/shared-domain/questionnaire/store';
@@ -63,26 +63,26 @@ export const SidebarStep = ({
     (isLastQuestionFromPrevCategory && isNextCategory);
 
   const activeItem = isActive ? styles.active : styles.inactive;
-
-  return (
-    <FlexCol justify="center" w="100%" className={styles.sideBarWrapper}>
-      <Box>
-        <Flex className={[styles.stepItem].join(' ')}>
-          <P className={styles.stepItemIndex}>
-            {isClickable && !isActive && !isNextCategory ? (
-              <span className={styles.tick}>
-                <Tick color="#F0005C" size={18} />
-              </span>
-            ) : (
-              <span className={activeItem}>{`${categoryIndex + 1}.`}</span>
-            )}
-          </P>
-
-          <P className={[styles.stepItemName, activeItem].join(' ')}>
-            {category.categoryName}
-          </P>
-        </Flex>
-      </Box>
-    </FlexCol>
-  );
+  return null;
+  // return (
+  //   <FlexCol justify="center" w="100%" className={styles.sideBarWrapper}>
+  //     <Box>
+  //       <Flex className={[styles.stepItem].join(' ')}>
+  //         <P className={styles.stepItemIndex}>
+  //           {isClickable && !isActive && !isNextCategory ? (
+  //             <span className={styles.tick}>
+  //               <Tick color="#F0005C" size={18} />
+  //             </span>
+  //           ) : (
+  //             <span className={activeItem}>{`${categoryIndex + 1}.`}</span>
+  //           )}
+  //         </P>
+  //
+  //         <P className={[styles.stepItemName, activeItem].join(' ')}>
+  //           {category.categoryName}
+  //         </P>
+  //       </Flex>
+  //     </Box>
+  //   </FlexCol>
+  // );
 };

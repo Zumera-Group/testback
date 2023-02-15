@@ -1,15 +1,8 @@
 import Link from 'next/link';
-
 import { Icon } from 'components/Icon';
-
 import styles from './Button.module.scss';
-
 import { generateButtonVariant } from './utils';
-import { useEffect } from 'react';
-import { getClient } from 'lib/sanity.server';
-import { sanityImageUrlFor } from 'lib/sanity';
 import axios from 'axios';
-// import urlForImage from '@sanity/image-url/lib/types/urlForImage';
 
 interface Props {
   title?: string;

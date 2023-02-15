@@ -1,4 +1,3 @@
-import { Icon } from '@chakra-ui/react';
 import React from 'react';
 
 export const Tooltip: React.FC<{ color?: string; className?: string }> = ({
@@ -6,7 +5,7 @@ export const Tooltip: React.FC<{ color?: string; className?: string }> = ({
   className,
 }) => {
   return (
-    <Icon
+    <svg
       width="16px"
       height="16px"
       viewBox="0 0 16 16"
@@ -29,6 +28,6 @@ export const Tooltip: React.FC<{ color?: string; className?: string }> = ({
           <path fill={color || '#ffffff'} d="M0 0h16v16H0z" />
         </clipPath>
       </defs>
-    </Icon>
+    </svg>
   );
 };

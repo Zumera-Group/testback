@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react';
-import useBreakpointValue from 'lib/shared-domain/useBreakpoint';
+// import useBreakpointValue from 'lib/shared-domain/useBreakpoint';
 import { motion, useAnimation } from 'framer-motion';
-import { Box, FlexRow } from '../../components/Layout/Flex/Flex';
+// import { Box, FlexRow } from '../../components/Layout/Flex/Flex';
 import { H } from '../../components/Typography/H';
 import { colors } from '../../styles/foundations/colors';
 
@@ -14,9 +14,9 @@ function getRandomInt(min: number, max: number) {
 
 // Defines a height. Together with overflow='hidden' makes the effect possible
 function useItemHeight() {
-  const isMobile = useBreakpointValue({ base: true, lg: false });
-
-  return isMobile ? 65 : 70;
+  // const isMobile = useBreakpointValue({ base: true, lg: false });
+  return null;
+  // return isMobile ? 65 : 70;
 }
 
 const animationConfiguration = (itemsLength, maxHeight) => ({
@@ -108,31 +108,31 @@ export const SlotMachineAnimation: React.FC<{
       </H>
     );
   };
-
-  return (
-    <FlexRow
-      className="slotMachineWrapper"
-      h={itemMaxHeight}
-      overflow={getListOverflowToGiveAnimationEffect()}
-      position="relative"
-      align="center"
-    >
-      <motion.div animate={controls} style={{ position: 'absolute', top: 0 }}>
-        {listItems &&
-          listItems.map((item, index) => (
-            <Box
-              key={index}
-              maxH={itemMaxHeight}
-              minH={itemMaxHeight}
-              m={0}
-              py={0}
-              bgSize="contain"
-              w="100%"
-            >
-              {TextForIndex(item, index)}
-            </Box>
-          ))}
-      </motion.div>
-    </FlexRow>
-  );
+  return null;
+  // return (
+  //   <FlexRow
+  //     className="slotMachineWrapper"
+  //     h={itemMaxHeight}
+  //     overflow={getListOverflowToGiveAnimationEffect()}
+  //     position="relative"
+  //     align="center"
+  //   >
+  //     <motion.div animate={controls} style={{ position: 'absolute', top: 0 }}>
+  //       {listItems &&
+  //         listItems.map((item, index) => (
+  //           <Box
+  //             key={index}
+  //             maxH={itemMaxHeight}
+  //             minH={itemMaxHeight}
+  //             m={0}
+  //             py={0}
+  //             bgSize="contain"
+  //             w="100%"
+  //           >
+  //             {TextForIndex(item, index)}
+  //           </Box>
+  //         ))}
+  //     </motion.div>
+  //   </FlexRow>
+  // );
 };

@@ -1,9 +1,8 @@
-import { Icon } from '@chakra-ui/react';
 import React from 'react';
 
 export const Loader: React.FC<{ color?: string }> = ({ color }) => {
   return (
-    <Icon
+    <svg
       width="24px"
       height="24px"
       viewBox="0 0 24 24"
@@ -66,6 +65,6 @@ export const Loader: React.FC<{ color?: string }> = ({ color }) => {
         strokeLinecap="round"
         strokeLinejoin="round"
       />
-    </Icon>
+    </svg>
   );
 };

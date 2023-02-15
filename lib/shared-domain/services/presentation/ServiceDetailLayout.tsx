@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Service, SiteSettings, Tab } from 'lib/shared-domain/page/domain';
-import { Box } from 'components/Layout/Flex/Flex';
 import { PageFooter } from 'lib/shared-domain/page/presentation/PageFooter';
 import { PageHeader } from 'lib/shared-domain/page/presentation/PageHeader';
 
@@ -45,54 +44,54 @@ const displayServiceDetailSectionOrContentModule = ({
   selectedTab?.contentModules?.map((module) => {
     if (!serviceDetailSectionNames[module._type]) {
       return (
-        <Box key={module._key}>
+        <div key={module._key}>
           {getContentForContentModule(
             ContentModule.create(module),
             sharedContent,
           )}
-        </Box>
+        </div>
       );
     }
     const renderComponentBasedOnModuleType = (moduleType: string) =>
       ({
         [serviceDetailSectionNames.helpContactPerson]: (
-          <Box key={module._key}>
+          <div key={module._key}>
             <ServiceHelpContactPerson helpContactPerson={module as any} />
-          </Box>
+          </div>
         ),
         [serviceDetailSectionNames.processSection]: (
-          <Box key={module._key}>
+          <div key={module._key}>
             <ServiceProcess process={module} />
-          </Box>
+          </div>
         ),
         [serviceDetailSectionNames.serviceTransactionsSection]: (
-          <Box key={module._key}>
+          <div key={module._key}>
             <ServiceTransactions
               // @ts-ignore
               service={module}
               transactions={filteredTransactions}
               content={[]}
             />
-          </Box>
+          </div>
         ),
         [serviceDetailSectionNames.sectorsForThiServiceSection]: (
-          <Box key={module._key}>
+          <div key={module._key}>
             <ServiceSectors
               siteSettings={siteSettings}
               section={module}
               customHref={'/sectors'}
               displayMaxItems={4}
             />
-          </Box>
+          </div>
         ),
         [serviceDetailSectionNames.transactionShowcaseSection]: (
-          <Box key={module._key}>
+          <div key={module._key}>
             <ServiceTransactionShowcase
               siteSettings={siteSettings}
               transaction={filteredTransactions?.[0]}
               section={module}
             />
-          </Box>
+          </div>
         ),
       }[moduleType] || null);
 
@@ -125,7 +124,7 @@ export const ServiceDetailLayout: React.FC<ServiceDetailProps> = ({
   const onSelectTab = (t: Tab) => setSelectedTab(t);
 
   return (
-    <Box minHeight="100vh" overflowX="hidden">
+    <div>
       <SEO
         seoTitle={service?.name}
         seoDescription={service?.description}
@@ -160,6 +159,6 @@ export const ServiceDetailLayout: React.FC<ServiceDetailProps> = ({
         content={siteSettings.contactSectionContent}
       />
       <PageFooter siteSettings={siteSettings} />
-    </Box>
+    </div>
   );
 };

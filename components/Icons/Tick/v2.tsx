@@ -1,4 +1,3 @@
-import { Icon } from '@chakra-ui/react';
 import React from 'react';
 
 export const TickV2: React.FC<{ color?: string; size?: any }> = ({
@@ -6,7 +5,7 @@ export const TickV2: React.FC<{ color?: string; size?: any }> = ({
   size,
 }) => {
   return (
-    <Icon
+    <svg
       width={size || '1px'}
       height={size || '8px'}
       viewBox="0 0 10 8"
@@ -20,6 +19,6 @@ export const TickV2: React.FC<{ color?: string; size?: any }> = ({
         strokeLinecap="round"
         strokeLinejoin="round"
       />
-    </Icon>
+    </svg>
   );
 };

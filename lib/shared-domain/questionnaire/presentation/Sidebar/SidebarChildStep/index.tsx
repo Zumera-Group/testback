@@ -1,4 +1,4 @@
-import { Box, Flex, StylesProvider } from '@chakra-ui/react';
+// import { Box, Flex, StylesProvider } from '@chakra-ui/react';
 import { P } from 'components/Typography/P';
 import { Category, Question } from 'lib/shared-domain/questionnaire/domain';
 import { useValuationStore } from 'lib/shared-domain/questionnaire/store';
@@ -69,28 +69,28 @@ export const SidebarChildStep = ({
 
   const idForScrolling = question.navigationTitle + 'SidebarChildStep';
   useAutoScrollWhenActive(isActive, idForScrolling);
-
-  return (
-    <Flex ml={7} alignItems="center" justifyContent="flex-start">
-      <Box
-        onClick={() => {
-          if (!isClickable()) return;
-          pushQuestion(categoryIndex, index);
-        }}
-        mt={3}
-        as={isClickable() ? 'button' : null}
-      >
-        <P
-          id={idForScrolling}
-          textAlign="left"
-          color={color}
-          fontSize={fontSize}
-          fontWeight={fontWeight}
-          variant="pSemiBold"
-        >
-          {question.navigationTitle}
-        </P>
-      </Box>
-    </Flex>
-  );
+  return null;
+  // return (
+  //   <Flex ml={7} alignItems="center" justifyContent="flex-start">
+  //     <Box
+  //       onClick={() => {
+  //         if (!isClickable()) return;
+  //         pushQuestion(categoryIndex, index);
+  //       }}
+  //       mt={3}
+  //       as={isClickable() ? 'button' : null}
+  //     >
+  //       <P
+  //         id={idForScrolling}
+  //         textAlign="left"
+  //         color={color}
+  //         fontSize={fontSize}
+  //         fontWeight={fontWeight}
+  //         variant="pSemiBold"
+  //       >
+  //         {question.navigationTitle}
+  //       </P>
+  //     </Box>
+  //   </Flex>
+  // );
 };

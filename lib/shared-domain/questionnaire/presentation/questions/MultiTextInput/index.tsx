@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { VStack } from '@chakra-ui/react';
-import useBreakpointValue from 'lib/shared-domain/useBreakpoint';
+// import { VStack } from '@chakra-ui/react';
+// import useBreakpointValue from 'lib/shared-domain/useBreakpoint';
 import Input from 'components/Form/Input/Input';
 import { getTranslateByScope } from 'translation/i18n';
 import { Question } from '../../../domain/index';
@@ -29,7 +29,7 @@ export const MultiTextInput: React.FC<{
     new Array(NUMBER_OF_ANSWERS).fill(''),
   );
 
-  const isMobile = useBreakpointValue({ base: true, lg: false });
+  // const isMobile = useBreakpointValue({ base: true, lg: false });
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>, index: number) =>
     setAnswers((prevAnswers) => {
@@ -49,37 +49,37 @@ export const MultiTextInput: React.FC<{
 
   return (
     <>
-      {isMobile && (
-        <BackButton onPrevQuestion={onPrevQuestion} currentPos={currentPos} />
-      )}
+      {/*{isMobile && (*/}
+      {/*  <BackButton onPrevQuestion={onPrevQuestion} currentPos={currentPos} />*/}
+      {/*)}*/}
       <QuestionAnimation>
         <QuestionText title={question.questionText} />
         <div className={styles.multiTextInputWrapper}>
-          {question.answerSelector.multiTextInput?.map((field, index) => (
-            <VStack key={index} align="stretch" className={styles.inputItem}>
-              <P variant="multiTextInputP" color={'white'} mb={2}>
-                {field.fieldTitle}
-              </P>
-              <Input
-                value={answers[index]}
-                onChange={(e) => onChange(e, index)}
-                placeholder={field.fieldPlaceholder || placeholder}
-                type={'text'}
-                id={`${index}`}
-                hideLabel
-              />
-            </VStack>
-          ))}
+          {/*{question.answerSelector.multiTextInput?.map((field, index) => (*/}
+          {/*  <VStack key={index} align="stretch" className={styles.inputItem}>*/}
+          {/*    <P variant="multiTextInputP" color={'white'} mb={2}>*/}
+          {/*      {field.fieldTitle}*/}
+          {/*    </P>*/}
+          {/*    <Input*/}
+          {/*      value={answers[index]}*/}
+          {/*      onChange={(e) => onChange(e, index)}*/}
+          {/*      placeholder={field.fieldPlaceholder || placeholder}*/}
+          {/*      type={'text'}*/}
+          {/*      id={`${index}`}*/}
+          {/*      hideLabel*/}
+          {/*    />*/}
+          {/*  </VStack>*/}
+          {/*))}*/}
         </div>
       </QuestionAnimation>
       <QuestionButtonsWrapper>
         <div className={styles.buttonOuter}>
-          {!isMobile && (
-            <BackButton
-              onPrevQuestion={onPrevQuestion}
-              currentPos={currentPos}
-            />
-          )}
+          {/*{!isMobile && (*/}
+          {/*  <BackButton*/}
+          {/*    onPrevQuestion={onPrevQuestion}*/}
+          {/*    currentPos={currentPos}*/}
+          {/*  />*/}
+          {/*)}*/}
           <QuestionButtons
             onNextQuestion={onNextQuestion}
             isAnswered

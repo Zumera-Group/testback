@@ -1,4 +1,3 @@
-import { Icon } from '@chakra-ui/react';
 import Link from 'next/link';
 import React from 'react';
 import styles from './LogoExtended.module.scss';
@@ -12,10 +11,10 @@ export const LogoExtended: React.FC<Props> = ({ slug, title }) => {
   return (
     <Link passHref href={slug}>
       <a rel="home" title={title} className={styles.link}>
-        <Icon
+        <svg
           viewBox={'0 0 134 56'}
           xmlns="http://www.w3.org/2000/svg"
-          className={styles.icon}
+          className={styles.svg}
         >
           <g clipPath="url(#clip0_1526_47574)">
             <g clipPath="url(#clip1_1526_47574)">
@@ -211,7 +210,7 @@ export const LogoExtended: React.FC<Props> = ({ slug, title }) => {
               />
             </clipPath>
           </defs>
-        </Icon>
+        </svg>
       </a>
     </Link>
   );

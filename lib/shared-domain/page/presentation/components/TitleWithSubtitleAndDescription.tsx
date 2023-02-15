@@ -1,11 +1,12 @@
 import { H } from 'components/Typography/H';
-import { Box } from 'components/Layout/Flex/Flex';
+// import { Box } from 'components/Layout/Flex/Flex';
 import { SanityBlockContent } from 'components/SanityBlockContent';
 import { P } from 'components/Typography/P';
 import React from 'react';
 import { colors } from 'styles/foundations/colors';
 import { fontSizes } from '../../../../../styles/foundations/fontStyles';
 
+//TODO: To delete
 export const TitleWithSubtitleAndDescription: React.FC<{
   title?: string;
   subtitle?: string;
@@ -25,47 +26,48 @@ export const TitleWithSubtitleAndDescription: React.FC<{
   fontSizeDescription,
   headingType,
 }) => {
-  return (
-    <Box>
-      <Box>
-        {subtitle && (
-          <P
-            fontSize={fontSizes.h1_2}
-            color={color?.subtitle || colors.text.light}
-            mb={1.5}
-          >
-            {subtitle}
-          </P>
-        )}
-        {title && (
-          <>
-            <H
-              className="titleWithSubtitleAndDescriptionHeading"
-              color={color?.title}
-              as={headingType || 'h2'}
-              mb={4}
-            >
-              {title}
-            </H>
-          </>
-        )}
-      </Box>
-      {description && (
-        <Box>
-          <P
-            whiteSpace="pre-wrap"
-            color={color?.description || colors.text.light}
-            fontSize={fontSizeDescription || fontSizes.h3}
-            style={{ hyphens: 'manual', maxWidth: '100%' }}
-          >
-            {Array.isArray(description) ? (
-              <SanityBlockContent text={description} />
-            ) : (
-              description
-            )}
-          </P>
-        </Box>
-      )}
-    </Box>
-  );
+  return null;
+  // return (
+  //   <Box>
+  //     <Box>
+  //       {subtitle && (
+  //         <P
+  //           fontSize={fontSizes.h1_2}
+  //           color={color?.subtitle || colors.text.light}
+  //           mb={1.5}
+  //         >
+  //           {subtitle}
+  //         </P>
+  //       )}
+  //       {title && (
+  //         <>
+  //           <H
+  //             className="titleWithSubtitleAndDescriptionHeading"
+  //             color={color?.title}
+  //             as={headingType || 'h2'}
+  //             mb={4}
+  //           >
+  //             {title}
+  //           </H>
+  //         </>
+  //       )}
+  //     </Box>
+  //     {description && (
+  //       <Box>
+  //         <P
+  //           whiteSpace="pre-wrap"
+  //           color={color?.description || colors.text.light}
+  //           fontSize={fontSizeDescription || fontSizes.h3}
+  //           style={{ hyphens: 'manual', maxWidth: '100%' }}
+  //         >
+  //           {Array.isArray(description) ? (
+  //             <SanityBlockContent text={description} />
+  //           ) : (
+  //             description
+  //           )}
+  //         </P>
+  //       </Box>
+  //     )}
+  //   </Box>
+  // );
 };

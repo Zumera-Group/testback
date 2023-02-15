@@ -1,4 +1,4 @@
-import { theme as baseTheme } from '@chakra-ui/react';
+// import { theme as baseTheme } from '@chakra-ui/react';
 
 const palette = {
   green: {
@@ -29,7 +29,7 @@ const palette = {
 };
 
 export const colors = {
-  ...baseTheme.colors,
+  // ...baseTheme.colors,
   duckEgg: palette.duckEgg,
 
   primary: {

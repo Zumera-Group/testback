@@ -1,4 +1,4 @@
-import { VStack } from '@chakra-ui/react';
+// import { VStack } from '@chakra-ui/react';
 import { ProgressBar } from 'components/Calculator/ProgressBar';
 import { useEffect, useState } from 'react';
 import { Category } from '../../domain';
@@ -69,9 +69,9 @@ const Sidebar = (): JSX.Element => {
   return (
     <>
       <ProgressBar progress={progress} isPercent color="white" />
-      {!isMobile && (
-        <VStack spacing={0}>{categories && categories.map(renderSteps)}</VStack>
-      )}
+      {/*{!isMobile && (*/}
+      {/*  <VStack spacing={0}>{categories && categories.map(renderSteps)}</VStack>*/}
+      {/*)}*/}
     </>
   );
 };

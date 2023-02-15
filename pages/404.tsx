@@ -1,5 +1,5 @@
 import React from 'react';
-import { FlexCol } from '../components/Layout/Flex/Flex';
+// import { FlexCol } from '../components/Layout/Flex/Flex';
 import { PageHeader } from '../lib/shared-domain/page/presentation/PageHeader';
 import { SiteSettings } from '../lib/shared-domain/page/domain/index';
 import { fetchSiteSettings } from '../lib/shared-domain/page/application/useGetSiteSettings';
@@ -28,14 +28,7 @@ export const Custom404: React.FC<{
   sharedContent: any;
 }> = ({ siteSettings, sharedContent }) => {
   return (
-    <FlexCol
-      width="100%"
-      justifyContent="center"
-      align="center"
-      backgroundPosition="center"
-      backgroundSize="cover"
-      backgroundRepeat="no-repeat"
-    >
+    <div>
       <PageHeader
         contentModules={[]}
         siteSettings={siteSettings}
@@ -43,7 +36,7 @@ export const Custom404: React.FC<{
       />
       <FourOFour title={sharedContent.text404} />
       <PageFooter siteSettings={siteSettings} />
-    </FlexCol>
+    </div>
   );
 };
 

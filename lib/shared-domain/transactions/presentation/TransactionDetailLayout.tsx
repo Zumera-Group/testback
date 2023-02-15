@@ -1,8 +1,8 @@
 import React from 'react';
-import { AchievedMultipleTransactions } from './AchievedMultipleTransactions';
+// import { AchievedMultipleTransactions } from './AchievedMultipleTransactions';
 import { Transaction } from '../domain';
 import { SiteSettings } from 'lib/shared-domain/page/domain';
-import { Box } from 'components/Layout/Flex/Flex';
+// import { Box } from 'components/Layout/Flex/Flex';
 import { PageFooter } from 'lib/shared-domain/page/presentation/PageFooter';
 import { PageHeader } from 'lib/shared-domain/page/presentation/PageHeader';
 import { TransactionHero } from 'lib/shared-domain/transactions/presentation/TransactionHero';
@@ -32,7 +32,7 @@ export const TransactionDetailLayout: React.FC<{
       transaction?.queryOtherLangSlug?.slice(-1)[0] as any,
     );
   return (
-    <Box minHeight="100vh" overflowX="hidden">
+    <div>
       <SEO
         seoTitle={transaction.headline}
         seoDescription={transaction.description}
@@ -65,17 +65,17 @@ export const TransactionDetailLayout: React.FC<{
           transaction={transaction}
           content={transactionDetailContent.teamSection}
         />
-        {transaction?.optionalUI?.hasAchievedTransactionMultiples && (
-          <AchievedMultipleTransactions
-            content={
-              transactionDetailContent.averageMultipleTransactionsSection
-            }
-            sectorMultiple={transaction.optionalUI.sectorMultipleAverage}
-            transactionMultiple={
-              transaction.optionalUI.achievedTransactionMultiple
-            }
-          />
-        )}
+        {/*{transaction?.optionalUI?.hasAchievedTransactionMultiples && (*/}
+        {/*  <AchievedMultipleTransactions*/}
+        {/*    content={*/}
+        {/*      transactionDetailContent.averageMultipleTransactionsSection*/}
+        {/*    }*/}
+        {/*    sectorMultiple={transaction.optionalUI.sectorMultipleAverage}*/}
+        {/*    transactionMultiple={*/}
+        {/*      transaction.optionalUI.achievedTransactionMultiple*/}
+        {/*    }*/}
+        {/*  />*/}
+        {/*)}*/}
 
         {transaction?.optionalUI?.hasInvolvedParties && (
           <TransactionInvolvedParties optionalUI={transaction?.optionalUI} />
@@ -95,6 +95,6 @@ export const TransactionDetailLayout: React.FC<{
         content={siteSettings.contactSectionContent}
       />
       <PageFooter siteSettings={siteSettings} />
-    </Box>
+    </div>
   );
 };

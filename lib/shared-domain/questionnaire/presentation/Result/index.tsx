@@ -2,17 +2,17 @@ import React, { useState } from 'react';
 import { InlineWidget } from 'react-calendly';
 import * as EmailValidator from 'email-validator';
 
-import {
-  Flex,
-  FormControl,
-  FormErrorMessage,
-  GridItem,
-  Progress,
-} from '@chakra-ui/react';
+// import {
+//   Flex,
+//   FormControl,
+//   FormErrorMessage,
+//   GridItem,
+//   Progress,
+// } from '@chakra-ui/react';
 import Image from 'next/image';
 import firstLogoRowImage from '../../../../../public/logos_1.png';
 import secondLogoRowImage from '../../../../../public/logos_2.png';
-import { Box, FlexCol, FlexRow } from 'components/Layout/Flex/Flex';
+// import { Box, FlexCol, FlexRow } from 'components/Layout/Flex/Flex';
 import { P } from 'components/Typography/P';
 import { colors } from 'styles/foundations/colors';
 import { getTranslateByScope } from 'translation/i18n';
@@ -60,57 +60,58 @@ const PROGRESS_BAR_STYLE = {
 const ProgressX: React.FC<{ loadingPercentage: number }> = ({
   loadingPercentage,
 }) => {
-  return (
-    <FlexRow
-      mt={MT}
-      flex={1}
-      left="20%"
-      bottom="100px"
-      position="relative"
-      _after={{
-        content: '""" "',
-        position: 'absolute',
-        top: '220%',
-        left: '125px',
-        width: '57px',
-        height: '20px',
-        transform: 'rotate(240deg)',
-        borderTop: '15px solid',
-        borderColor: colors.white,
-      }}
-    >
-      <Progress
-        {...PROGRESS_BAR_STYLE}
-        _after={{
-          ...PROGRESS_WHITE_OVERLAY_STYLE,
-          left: '-32px',
-          transform: 'rotate(240deg)',
-        }}
-        _before={{
-          ...PROGRESS_WHITE_OVERLAY_STYLE,
-          right: '-32px',
-          transform: 'rotate(240deg)',
-        }}
-        value={loadingPercentage}
-        transform="rotate(-60deg) translateX(-30%) translateY(200%)"
-      />
-      <Progress
-        {...PROGRESS_BAR_STYLE}
-        _after={{
-          ...PROGRESS_WHITE_OVERLAY_STYLE,
-          left: '-32px',
-          transform: 'rotate(-240deg)',
-        }}
-        _before={{
-          ...PROGRESS_WHITE_OVERLAY_STYLE,
-          right: '-32px',
-          transform: 'rotate(-240deg)',
-        }}
-        value={loadingPercentage}
-        transform="rotate(240deg) translateX(10%) translateY(-700%)"
-      />
-    </FlexRow>
-  );
+  return null;
+  // return (
+  //   <FlexRow
+  //     mt={MT}
+  //     flex={1}
+  //     left="20%"
+  //     bottom="100px"
+  //     position="relative"
+  //     _after={{
+  //       content: '""" "',
+  //       position: 'absolute',
+  //       top: '220%',
+  //       left: '125px',
+  //       width: '57px',
+  //       height: '20px',
+  //       transform: 'rotate(240deg)',
+  //       borderTop: '15px solid',
+  //       borderColor: colors.white,
+  //     }}
+  //   >
+  //     <Progress
+  //       {...PROGRESS_BAR_STYLE}
+  //       _after={{
+  //         ...PROGRESS_WHITE_OVERLAY_STYLE,
+  //         left: '-32px',
+  //         transform: 'rotate(240deg)',
+  //       }}
+  //       _before={{
+  //         ...PROGRESS_WHITE_OVERLAY_STYLE,
+  //         right: '-32px',
+  //         transform: 'rotate(240deg)',
+  //       }}
+  //       value={loadingPercentage}
+  //       transform="rotate(-60deg) translateX(-30%) translateY(200%)"
+  //     />
+  //     <Progress
+  //       {...PROGRESS_BAR_STYLE}
+  //       _after={{
+  //         ...PROGRESS_WHITE_OVERLAY_STYLE,
+  //         left: '-32px',
+  //         transform: 'rotate(-240deg)',
+  //       }}
+  //       _before={{
+  //         ...PROGRESS_WHITE_OVERLAY_STYLE,
+  //         right: '-32px',
+  //         transform: 'rotate(-240deg)',
+  //       }}
+  //       value={loadingPercentage}
+  //       transform="rotate(240deg) translateX(10%) translateY(-700%)"
+  //     />
+  //   </FlexRow>
+  // );
 };
 
 const LoadingText: React.FC<{ isLoading: boolean; title: string }> = ({
@@ -260,96 +261,96 @@ const EvaluationScreen: React.FC<{
             description={t('evaluation.description')}
           />
 
-          <FlexCol maxWidth={700} className={styles.resultForm}>
-            <Flex direction={{ base: 'column', lg: 'row' }} flexWrap="wrap">
-              <FlexCol
-                ml={{ base: 0, lg: hasScoreAndPercentage ? 4 : 'auto' }}
-                flex={{ base: 1, lg: 0.6 }}
-                mr={!hasScoreAndPercentage && 'auto'}
-              >
-                <InputWithLabelAndError
-                  error={
-                    pressed &&
-                    !getAnswer(NAME_STORE_INDICATOR)?.trim() &&
-                    t('evaluation.form.name.error')
-                  }
-                  label={t('evaluation.form.name.label')}
-                  placeholder={t('evaluation.form.name.placeholder')}
-                  value={getAnswer(NAME_STORE_INDICATOR)}
-                  onChange={(value) =>
-                    setAnswer({ id: NAME_STORE_INDICATOR, value })
-                  }
-                  isRequired
-                />
+          {/*<FlexCol maxWidth={700} className={styles.resultForm}>*/}
+          {/*  <Flex direction={{ base: 'column', lg: 'row' }} flexWrap="wrap">*/}
+          {/*    <FlexCol*/}
+          {/*      ml={{ base: 0, lg: hasScoreAndPercentage ? 4 : 'auto' }}*/}
+          {/*      flex={{ base: 1, lg: 0.6 }}*/}
+          {/*      mr={!hasScoreAndPercentage && 'auto'}*/}
+          {/*    >*/}
+          {/*      <InputWithLabelAndError*/}
+          {/*        error={*/}
+          {/*          pressed &&*/}
+          {/*          !getAnswer(NAME_STORE_INDICATOR)?.trim() &&*/}
+          {/*          t('evaluation.form.name.error')*/}
+          {/*        }*/}
+          {/*        label={t('evaluation.form.name.label')}*/}
+          {/*        placeholder={t('evaluation.form.name.placeholder')}*/}
+          {/*        value={getAnswer(NAME_STORE_INDICATOR)}*/}
+          {/*        onChange={(value) =>*/}
+          {/*          setAnswer({ id: NAME_STORE_INDICATOR, value })*/}
+          {/*        }*/}
+          {/*        isRequired*/}
+          {/*      />*/}
 
-                <InputWithLabelAndError
-                  error={getEmailError()}
-                  label={t('evaluation.form.email.label')}
-                  placeholder={t('evaluation.form.email.placeholder')}
-                  value={getAnswer(EMAIL_STORE_INDICATOR)}
-                  onChange={(value) =>
-                    setAnswer({ id: EMAIL_STORE_INDICATOR, value })
-                  }
-                  isRequired
-                />
-                <InputWithLabelAndError
-                  error={
-                    pressed &&
-                    !getAnswer(PHONE_NUMBER_STORE_INDICATOR)?.trim() &&
-                    t('evaluation.form.phoneNumber.error')
-                  }
-                  label={t('evaluation.form.phoneNumber.label')}
-                  placeholder={t('evaluation.form.phoneNumber.placeholder')}
-                  value={getAnswer(PHONE_NUMBER_STORE_INDICATOR)}
-                  onChange={(value) =>
-                    setAnswer({ id: PHONE_NUMBER_STORE_INDICATOR, value })
-                  }
-                  isRequired
-                />
+          {/*      <InputWithLabelAndError*/}
+          {/*        error={getEmailError()}*/}
+          {/*        label={t('evaluation.form.email.label')}*/}
+          {/*        placeholder={t('evaluation.form.email.placeholder')}*/}
+          {/*        value={getAnswer(EMAIL_STORE_INDICATOR)}*/}
+          {/*        onChange={(value) =>*/}
+          {/*          setAnswer({ id: EMAIL_STORE_INDICATOR, value })*/}
+          {/*        }*/}
+          {/*        isRequired*/}
+          {/*      />*/}
+          {/*      <InputWithLabelAndError*/}
+          {/*        error={*/}
+          {/*          pressed &&*/}
+          {/*          !getAnswer(PHONE_NUMBER_STORE_INDICATOR)?.trim() &&*/}
+          {/*          t('evaluation.form.phoneNumber.error')*/}
+          {/*        }*/}
+          {/*        label={t('evaluation.form.phoneNumber.label')}*/}
+          {/*        placeholder={t('evaluation.form.phoneNumber.placeholder')}*/}
+          {/*        value={getAnswer(PHONE_NUMBER_STORE_INDICATOR)}*/}
+          {/*        onChange={(value) =>*/}
+          {/*          setAnswer({ id: PHONE_NUMBER_STORE_INDICATOR, value })*/}
+          {/*        }*/}
+          {/*        isRequired*/}
+          {/*      />*/}
 
-                <FormControl isInvalid={pressed && !checkboxIsChecked}>
-                  <Checkbox
-                    onChange={(e) => setCheckboxIsChecked(e.target.checked)}
-                    isChecked={checkboxIsChecked}
-                    id="result_checkBox"
-                  >
-                    <Box color="white" textAlign="left" mt={-0.5}>
-                      <span>{t('evaluation.form.checkbox.first')}</span>
-                      <a
-                        style={{
-                          display: 'inline-block',
-                          cursor: 'pointer',
-                          textDecoration: 'underline',
-                        }}
-                        target="_blank"
-                        rel="noreferrer"
-                        href={t('evaluation.form.checkbox.link')}
-                      >
-                        {t('evaluation.form.checkbox.second')}
-                      </a>
-                      <span>{t('evaluation.form.checkbox.third')}</span>
-                    </Box>
-                  </Checkbox>
-                  {pressed && !checkboxIsChecked && (
-                    <FormErrorMessage mt={20} mb={20} color={'white'}>
-                      {t('evaluation.form.checkboxError')}
-                    </FormErrorMessage>
-                  )}
-                </FormControl>
-                <Button
-                  type="submit"
-                  variant="primary"
-                  callBack={onSend}
-                  disabled={!checkboxIsChecked}
-                  onDark
-                  hideIcon
-                  classes={styles.submitButton}
-                >
-                  {t('evaluation.form.button')}
-                </Button>
-              </FlexCol>
-            </Flex>
-          </FlexCol>
+          {/*      <FormControl isInvalid={pressed && !checkboxIsChecked}>*/}
+          {/*        <Checkbox*/}
+          {/*          onChange={(e) => setCheckboxIsChecked(e.target.checked)}*/}
+          {/*          isChecked={checkboxIsChecked}*/}
+          {/*          id="result_checkBox"*/}
+          {/*        >*/}
+          {/*          <Box color="white" textAlign="left" mt={-0.5}>*/}
+          {/*            <span>{t('evaluation.form.checkbox.first')}</span>*/}
+          {/*            <a*/}
+          {/*              style={{*/}
+          {/*                display: 'inline-block',*/}
+          {/*                cursor: 'pointer',*/}
+          {/*                textDecoration: 'underline',*/}
+          {/*              }}*/}
+          {/*              target="_blank"*/}
+          {/*              rel="noreferrer"*/}
+          {/*              href={t('evaluation.form.checkbox.link')}*/}
+          {/*            >*/}
+          {/*              {t('evaluation.form.checkbox.second')}*/}
+          {/*            </a>*/}
+          {/*            <span>{t('evaluation.form.checkbox.third')}</span>*/}
+          {/*          </Box>*/}
+          {/*        </Checkbox>*/}
+          {/*        {pressed && !checkboxIsChecked && (*/}
+          {/*          <FormErrorMessage mt={20} mb={20} color={'white'}>*/}
+          {/*            {t('evaluation.form.checkboxError')}*/}
+          {/*          </FormErrorMessage>*/}
+          {/*        )}*/}
+          {/*      </FormControl>*/}
+          {/*      <Button*/}
+          {/*        type="submit"*/}
+          {/*        variant="primary"*/}
+          {/*        callBack={onSend}*/}
+          {/*        disabled={!checkboxIsChecked}*/}
+          {/*        onDark*/}
+          {/*        hideIcon*/}
+          {/*        classes={styles.submitButton}*/}
+          {/*      >*/}
+          {/*        {t('evaluation.form.button')}*/}
+          {/*      </Button>*/}
+          {/*    </FlexCol>*/}
+          {/*  </Flex>*/}
+          {/*</FlexCol>*/}
         </>
       ) : (
         <h3 className={styles.successMessage}>

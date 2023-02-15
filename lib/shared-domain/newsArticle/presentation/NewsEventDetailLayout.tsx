@@ -1,7 +1,7 @@
 import React from 'react';
 import { NewsArticle } from '../domain';
 import { SiteSettings } from 'lib/shared-domain/page/domain';
-import { Box } from 'components/Layout/Flex/Flex';
+// import { Box } from 'components/Layout/Flex/Flex';
 import { PageFooter } from 'lib/shared-domain/page/presentation/PageFooter';
 import { PageHeader } from 'lib/shared-domain/page/presentation/PageHeader';
 
@@ -11,12 +11,12 @@ import { PageTransition } from 'components/PageTransition';
 import NewsArticleHero from 'components/NewsArticle/NewsArticleHero';
 import NewsArticleTeam from 'components/NewsArticle/NewsArticleTeam';
 import { SEO } from 'components/SEO';
-import { NewsEventAbout } from './NewsEventAbout';
-import { NewsEventWhyToAttend } from './NewsEventWhyToAttend';
-import { NewsEventProgram } from './NewsEventProgram';
+// import { NewsEventAbout } from './NewsEventAbout';
+// import { NewsEventWhyToAttend } from './NewsEventWhyToAttend';
+// import { NewsEventProgram } from './NewsEventProgram';
 import { links } from 'lib/links';
 import { useRouter } from 'next/router';
-import { IndustryReportSection } from '../../page/presentation/contentModules/IndustryReportSection';
+// import { IndustryReportSection } from '../../page/presentation/contentModules/IndustryReportSection';
 
 export const NewsEventDetailLayout: React.FC<{
   newsEvent: NewsArticle;
@@ -30,7 +30,7 @@ export const NewsEventDetailLayout: React.FC<{
       newsEvent?.queryOtherLangSlug?.slice(-1)[0] as any,
     );
   return (
-    <Box minHeight="100vh" overflowX="hidden">
+    <div>
       <SEO
         seoTitle={newsEvent.title}
         seoDescription={newsEvent.subtitle}
@@ -44,30 +44,30 @@ export const NewsEventDetailLayout: React.FC<{
       />
       <PageTransition slug={newsEvent._id}>
         <NewsArticleHero newsArticle={newsEvent} />
-        {newsEvent?.aboutTheEvent && (
-          <NewsEventAbout newsEvent={newsEvent} content={content} />
-        )}
+        {/*{newsEvent?.aboutTheEvent && (*/}
+        {/*  <NewsEventAbout newsEvent={newsEvent} content={content} />*/}
+        {/*)}*/}
 
         <NewsArticleTeam
           employees={newsEvent?.eventRefereesSection}
           content={content?.refereeSectionContent}
         />
 
-        {newsEvent?.industryReportSection && (
-          <IndustryReportSection
-            specificContentModule={newsEvent.industryReportSection}
-          />
-        )}
+        {/*{newsEvent?.industryReportSection && (*/}
+        {/*  <IndustryReportSection*/}
+        {/*    specificContentModule={newsEvent.industryReportSection}*/}
+        {/*  />*/}
+        {/*)}*/}
 
         {/* {newsEvent?.eventPartnerRefereesSection &&
           newsEvent?.eventPartnerRefereesSection.map((s, index) => (
             <NewsArticleTeam key={index} partnerSection={s} />
           ))} */}
 
-        <NewsEventProgram content={content} newsEvent={newsEvent} />
-        <NewsEventWhyToAttend content={content} newsEvent={newsEvent} />
+        {/*<NewsEventProgram content={content} newsEvent={newsEvent} />*/}
+        {/*<NewsEventWhyToAttend content={content} newsEvent={newsEvent} />*/}
       </PageTransition>
       <PageFooter siteSettings={siteSettings} />
-    </Box>
+    </div>
   );
 };
