@@ -46,16 +46,11 @@ export const NewsBig = ({ article }) => {
               unoptimized
               src={image}
               alt={title}
-              // objectFit={'cover'}
-              // objectPosition={'center center'}
-              // layout="fill"
-              width={200}
-              height={1200}
               className={styles.image}
+              fill
               style={{
                 maxWidth: '100%',
-                height: 'auto',
-                width: 'auto',
+                objectFit: 'cover',
               }}
             />
           </div>

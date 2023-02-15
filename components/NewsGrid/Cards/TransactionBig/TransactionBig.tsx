@@ -29,15 +29,12 @@ export const TransactionBig = ({ article }) => {
       <div className={styles.transactionLogo}>
         <Image
           unoptimized
-          // objectFit="contain"
-          width={100}
-          height={80}
           alt={`${name} logo`}
           src={`${url}`}
+          fill
           style={{
             maxWidth: '100%',
-            height: 'auto',
-            width: 'auto',
+            objectFit: 'contain',
           }}
         />
       </div>
