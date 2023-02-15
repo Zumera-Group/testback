@@ -1,20 +1,6 @@
-import {
-  Box,
-  useDisclosure,
-  Progress,
-  GridItem,
-  Image,
-  Grid,
-} from '@chakra-ui/react';
-import { icons } from 'components/Icons';
-import { FlexRow } from 'components/Layout/Flex/Flex';
-import { P } from 'components/Typography/P';
 import { getTranslateByScope } from 'translation/i18n';
 import { useValuationStore } from '../../store';
-import { Modals } from '../Modal';
-import { colors } from '../../../../../styles/foundations/colors';
-import { ChatButton } from 'components/ChatButton';
-import { fontWeights, fontSizes } from 'styles/foundations/fontStyles';
+
 import React, { useLayoutEffect, useState } from 'react';
 import useBreakpointValue from 'lib/shared-domain/useBreakpoint';
 
@@ -50,8 +36,6 @@ const Header = ({ siteSettings }): JSX.Element => {
       return setStep(0, 0);
     }
   };
-
-  const quitDisclosure = useDisclosure();
 
   const numberOfQuestionsInTotal = questionnaire?.questionsByCategory?.reduce(
     (numberOfQuestions, currentCategory) => {
