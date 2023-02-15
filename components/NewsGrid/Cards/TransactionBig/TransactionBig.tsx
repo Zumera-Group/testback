@@ -1,4 +1,4 @@
-import Image from "next/legacy/image";
+import Image from "next/image";
 import Link from 'next/link';
 
 import { Beam } from 'components/Beam';
@@ -34,7 +34,10 @@ export const TransactionBig = ({ article }) => {
           height={80}
           alt={`${name} logo`}
           src={`${url}`}
-        />
+          style={{
+            maxWidth: "100%",
+            height: "auto"
+          }} />
       </div>
     );
   };

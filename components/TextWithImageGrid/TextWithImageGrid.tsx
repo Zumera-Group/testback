@@ -3,7 +3,7 @@ import styles from './TextWithImageGrid.module.scss';
 import { Sector } from 'lib/shared-domain/page/domain';
 import { SectionHeading } from 'components/SectionHeading';
 import { Button } from 'components/Button';
-import Image from "next/legacy/image";
+import Image from "next/image";
 import { TextWithImageGridModule } from 'lib/shared-domain/page/domain/contentModule';
 import { Icon } from 'components/Icon';
 
@@ -50,10 +50,13 @@ export const TextWithImageGrid: React.FC<{
               unoptimized
               loading="lazy"
               src={image?.asset?.url}
-              alt={image?.name}
               // objectFit="contain"
               // layout="fill"
-            />
+              alt={image?.name}
+              style={{
+                maxWidth: "100%",
+                height: "auto"
+              }} />
           </GridColumn>
         </Grid>
         {bullets && bullets.length ? (

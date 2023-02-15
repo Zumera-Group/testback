@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import Image from "next/legacy/image";
+import Image from 'next/image';
 
 import { Icon } from 'components/Icon';
 
@@ -49,6 +49,11 @@ export const NewsBig = ({ article }) => {
               // objectPosition={'center center'}
               // layout="fill"
               className={styles.image}
+              style={{
+                maxWidth: '100%',
+                height: 'auto',
+                width: '100%',
+              }}
             />
           </div>
         </div>

@@ -1,6 +1,6 @@
 import { Container, Grid, Section } from 'components/Layout';
 import { optionalUI } from 'lib/shared-domain/transactions/domain';
-import Image from "next/legacy/image";
+import Image from "next/image";
 import styles from './TransactionInvolvedParties.module.scss';
 export const TransactionInvolvedParties: React.FC<{
   optionalUI: optionalUI;
@@ -20,9 +20,11 @@ export const TransactionInvolvedParties: React.FC<{
                     loading="lazy"
                     src={party.companyLogo?.asset?.url}
                     alt={party.name}
-                    objectFit="cover"
-                    layout="fill"
-                  />
+                    fill
+                    sizes="100vw"
+                    style={{
+                      objectFit: "cover"
+                    }} />
                 </div>
                 <h4 className={styles.quote}>“{party.quote}”</h4>
                 <div>

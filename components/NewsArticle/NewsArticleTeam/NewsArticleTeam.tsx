@@ -1,4 +1,4 @@
-import Image from "next/legacy/image";
+import Image from "next/image";
 import { Container, Grid, GridColumn, Section } from 'components/Layout';
 
 import baseStyles from 'components/Hero/Hero.module.scss';

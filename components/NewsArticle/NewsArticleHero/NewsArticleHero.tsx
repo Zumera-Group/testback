@@ -1,4 +1,4 @@
-import Image from "next/legacy/image";
+import Image from "next/image";
 import { Container, Grid, GridColumn, Section } from 'components/Layout';
 
 import baseStyles from 'components/Hero/Hero.module.scss';
@@ -40,11 +40,14 @@ const NewsArticleHero: React.FC<Props> = ({ newsArticle }) => {
                 <Image
                   unoptimized
                   src={newsArticle?.picture?.asset?.url}
-                  alt={'name'}
                   // layout={'fill'}
                   // objectFit={'cover'}
                   // objectPosition={'center center'}
-                />
+                  alt={'name'}
+                  style={{
+                    maxWidth: "100%",
+                    height: "auto"
+                  }} />
               </div>
             )}
           </GridColumn>

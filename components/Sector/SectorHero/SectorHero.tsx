@@ -1,4 +1,4 @@
-import Image from "next/legacy/image";
+import Image from "next/image";
 import { Section, Container, Grid, GridColumn } from 'components/Layout';
 
 import { getEmployeeFullName } from 'lib/shared-domain/employees/domain/getEmployeeFullName';
@@ -69,11 +69,14 @@ export const SectorHero = ({ sector, content }) => {
                 <Image
                   unoptimized
                   src={sector.detailPageHeroImage?.asset?.url}
-                  alt={'sector.name'}
                   // layout={'fill'}
                   // objectFit={'contain'}
                   // objectPosition={'center center'}
-                />
+                  alt={'sector.name'}
+                  style={{
+                    maxWidth: "100%",
+                    height: "auto"
+                  }} />
               </div>
             )}
           </GridColumn>

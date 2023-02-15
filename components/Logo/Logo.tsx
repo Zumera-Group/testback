@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import Image from "next/legacy/image";
+import Image from "next/image";
 
 import styles from './Logo.module.scss';
 import { AnimatedLogo } from 'components/Logo/AnimatedLogo';
@@ -44,7 +44,10 @@ export const Logo: React.FC<Props> = ({
           // objectPosition="left center"
           alt={`${title} logo`}
           src={src}
-        />
+          style={{
+            maxWidth: "100%",
+            height: "auto"
+          }} />
       )}
     </Link>
   );

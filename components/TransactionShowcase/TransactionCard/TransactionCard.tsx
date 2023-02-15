@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import Image from "next/legacy/image";
+import Image from "next/image";
 
 import { Beam } from 'components/Beam';
 import { Icon } from 'components/Icon';
@@ -41,7 +41,10 @@ export const TransactionCard = ({ transaction }) => {
         height={80}
         alt={`${name} logo`}
         src={`${url}`}
-      />
+        style={{
+          maxWidth: "100%",
+          height: "auto"
+        }} />
     );
   };
 
@@ -65,7 +68,10 @@ export const TransactionCard = ({ transaction }) => {
                   // objectPosition={'center center'}
                   // layout="fill"
                   className={styles.image}
-                />
+                  style={{
+                    maxWidth: "100%",
+                    height: "auto"
+                  }} />
               </div>
             </div>
           )}

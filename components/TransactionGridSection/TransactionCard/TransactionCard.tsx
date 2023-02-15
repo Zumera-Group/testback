@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import Image from "next/legacy/image";
+import Image from "next/image";
 
 import { Beam } from 'components/Beam';
 import { Icon } from 'components/Icon';
@@ -36,11 +36,14 @@ export const TransactionCard = ({ transaction }) => {
       <div className={styles.transactionLogo}>
         <Image
           unoptimized
-          objectFit="contain"
           layout={'fill'}
           alt={`${name} logo`}
           src={`${url}`}
-        />
+          style={{
+            maxWidth: "100%",
+            height: "auto",
+            objectFit: "contain"
+          }} />
       </div>
     );
   };
@@ -70,9 +73,9 @@ export const TransactionCard = ({ transaction }) => {
                   alt={coverImage?.asset?.altText || ''}
                   objectFit={'cover'}
                   objectPosition={'center center'}
-                  layout="fill"
                   className={styles.image}
-                />
+                  fill
+                  sizes="100vw" />
               </div>
             </div>
           )}

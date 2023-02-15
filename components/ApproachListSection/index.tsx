@@ -2,7 +2,7 @@ import { Container, Grid, GridColumn, Section } from 'components/Layout';
 import { SectionHeading } from 'components/SectionHeading';
 import { ApproachListSectionModule } from 'lib/shared-domain/page/domain/contentModule';
 import styles from './ApproachListSection.module.scss';
-import Image from "next/legacy/image";
+import Image from 'next/image';
 
 export const ApproachListSection: React.FC<{
   specificContentModule: ApproachListSectionModule;
@@ -38,9 +38,13 @@ export const ApproachListSection: React.FC<{
                   unoptimized
                   loading="lazy"
                   src={block.image?.asset?.url}
-                  alt={block.image?.name}
                   // objectFit="contain"
                   // layout="fill"
+                  alt={block.image?.name}
+                  style={{
+                    maxWidth: '100%',
+                    height: 'auto',
+                  }}
                 />
               </div>
             </GridColumn>

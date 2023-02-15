@@ -1,4 +1,4 @@
-import Image from "next/legacy/image";
+import Image from 'next/image';
 
 import React, { useEffect, useRef } from 'react';
 import { useInView } from 'react-intersection-observer';
@@ -62,6 +62,10 @@ export const DividerImage: React.FC<Props> = ({ ...rest }) => {
           // layout="fill"
           alt={''}
           src={dividerImage + `?h=1200`}
+          style={{
+            maxWidth: '100%',
+            height: 'auto',
+          }}
         />
       </div>
     </div>
