@@ -1,5 +1,7 @@
 .calculatorTeaserWrapper {
-  justify-content: center;
+  justify-content: flex-start;
+  display: flex;
+  align-items: center;
 
   @include breakpoint-up(md) {
     justify-content: flex-start;
@@ -21,11 +23,11 @@
 }
 
 .calculatorSteps {
-  color: $white !important;
-  margin-bottom: 0;
+  color: $white;
+  margin: $gutter * 3 $gutter;
   display: flex;
-  justify-content: center;
   align-items: center;
+
   .dash {
     margin-right: $gutter;
     color: $accent;

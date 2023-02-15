@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { VStack } from '@chakra-ui/react';
 import useBreakpointValue from 'lib/shared-domain/useBreakpoint';
 import Input from 'components/Form/Input/Input';
 import { getTranslateByScope } from 'translation/i18n';
@@ -8,7 +7,6 @@ import { useAnswers } from 'lib/shared-domain/questionnaire/application/useAnswe
 import { QuestionText } from '../../Question/QuestionText';
 import { QuestionButtonsWrapper } from '../../Question/QuestionButtonsWrapper';
 import { QuestionButtons } from '../../Question/QuestionButtons';
-import { P } from '../../../../../../components/Typography/P';
 import { useEffect } from 'react';
 import { QuestionAnimation } from '../../Question/QuestionAnimation';
 import styles from './MultiTextInput.module.scss';
@@ -56,10 +54,8 @@ export const MultiTextInput: React.FC<{
         <QuestionText title={question.questionText} />
         <div className={styles.multiTextInputWrapper}>
           {question.answerSelector.multiTextInput?.map((field, index) => (
-            <VStack key={index} align="stretch" className={styles.inputItem}>
-              <P variant="multiTextInputP" color={'white'} mb={2}>
-                {field.fieldTitle}
-              </P>
+            <div key={index} className={styles.inputItem}>
+              <p>{field.fieldTitle}</p>
               <Input
                 value={answers[index]}
                 onChange={(e) => onChange(e, index)}
@@ -68,7 +64,7 @@ export const MultiTextInput: React.FC<{
                 id={`${index}`}
                 hideLabel
               />
-            </VStack>
+            </div>
           ))}
         </div>
       </QuestionAnimation>
