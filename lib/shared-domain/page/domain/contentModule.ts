@@ -228,13 +228,14 @@ export class TransactionGridSectionModule extends BaseModule {
     name: string;
   }[];
   dropdownsTitle: string;
-
+  hideSectorFilter: boolean;
   constructor(fields: Record<string, any>) {
     super();
     this.buttonText = fields.buttonText;
     this.sectorsDropdown = fields.sectorsDropdown;
     this.servicesDropdown = fields.servicesDropdown;
     this.dropdownsTitle = fields.dropdownsTitle;
+    this.hideSectorFilter = fields.hideSectorFilter;
   }
 
   get sortedSectors(): { name: string }[] {
