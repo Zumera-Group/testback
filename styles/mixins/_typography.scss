@@ -4,7 +4,7 @@
   font-weight: $font-weight-bold;
   & > span,
   & > em {
-    display: block;
+    display: inline-block;
     font-style: normal;
     font-weight: $font-weight-light;
   }
