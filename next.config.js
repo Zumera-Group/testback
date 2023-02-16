@@ -20,6 +20,7 @@ module.exports = {
   experimental: {
     nextScriptWorkers: true,
   },
+  swcMinify: true,
   async redirects() {
     return [
       {

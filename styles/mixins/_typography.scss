@@ -4,9 +4,10 @@
   font-weight: $font-weight-bold;
   & > span,
   & > em {
-    display: inline-block;
+    display: block;
     font-style: normal;
     font-weight: $font-weight-light;
+    width: fit-content;
   }
 }
 

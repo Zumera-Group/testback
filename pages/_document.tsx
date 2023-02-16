@@ -22,55 +22,51 @@ export default class MyDocument extends Document {
           {process.env.NEXT_PUBLIC_USE_NO_INDEX_TAG === 'true' && (
             <meta name="robots" content="noindex" />
           )}
-          <meta
-            name="viewport"
-            content="width=device-width, initial-scale=1, shrink-to-fit=no"
-          />
           {/*<link rel="preconnect" href="https://cdn.sanity.io" />*/}
           {/*<link rel="dns-prefetch" href="https://cdn.sanity.io" />*/}
           {/*<link rel="dns-prefetch" href="https://consent.cookiefirst.com" />*/}
-          <link
-            crossOrigin="anonymous"
-            rel="preload"
-            as="font"
-            type="font/woff2"
-            href="/fonts/Yellix-Bold.woff2"
-          />
-          <link
-            crossOrigin="anonymous"
-            rel="preload"
-            as="font"
-            type="font/woff2"
-            href="/fonts/Yellix-BoldItalic.woff2"
-          />
-          <link
-            crossOrigin="anonymous"
-            rel="preload"
-            as="font"
-            type="font/woff2"
-            href="/fonts/Yellix-Light.woff2"
-          />
-          <link
-            crossOrigin="anonymous"
-            rel="preload"
-            as="font"
-            type="font/woff2"
-            href="/fonts/Yellix-LightItalic.woff2"
-          />
-          <link
-            crossOrigin="anonymous"
-            rel="preload"
-            as="font"
-            type="font/woff2"
-            href="/fonts/Yellix-Medium.woff2"
-          />
-          <link
-            crossOrigin="anonymous"
-            rel="preload"
-            as="font"
-            type="font/woff2"
-            href="/fonts/Yellix-MediumItalic.woff2"
-          />
+          {/*<link*/}
+          {/*  crossOrigin="anonymous"*/}
+          {/*  rel="preload"*/}
+          {/*  as="font"*/}
+          {/*  type="font/woff2"*/}
+          {/*  href="/fonts/Yellix-Bold.woff2"*/}
+          {/*/>*/}
+          {/*<link*/}
+          {/*  crossOrigin="anonymous"*/}
+          {/*  rel="preload"*/}
+          {/*  as="font"*/}
+          {/*  type="font/woff2"*/}
+          {/*  href="/fonts/Yellix-BoldItalic.woff2"*/}
+          {/*/>*/}
+          {/*<link*/}
+          {/*  crossOrigin="anonymous"*/}
+          {/*  rel="preload"*/}
+          {/*  as="font"*/}
+          {/*  type="font/woff2"*/}
+          {/*  href="/fonts/Yellix-Light.woff2"*/}
+          {/*/>*/}
+          {/*<link*/}
+          {/*  crossOrigin="anonymous"*/}
+          {/*  rel="preload"*/}
+          {/*  as="font"*/}
+          {/*  type="font/woff2"*/}
+          {/*  href="/fonts/Yellix-LightItalic.woff2"*/}
+          {/*/>*/}
+          {/*<link*/}
+          {/*  crossOrigin="anonymous"*/}
+          {/*  rel="preload"*/}
+          {/*  as="font"*/}
+          {/*  type="font/woff2"*/}
+          {/*  href="/fonts/Yellix-Medium.woff2"*/}
+          {/*/>*/}
+          {/*<link*/}
+          {/*  crossOrigin="anonymous"*/}
+          {/*  rel="preload"*/}
+          {/*  as="font"*/}
+          {/*  type="font/woff2"*/}
+          {/*  href="/fonts/Yellix-MediumItalic.woff2"*/}
+          {/*/>*/}
           <link rel="shortcut icon" href="/favicon.ico" />
         </Head>
         <body>
