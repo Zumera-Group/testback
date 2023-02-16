@@ -1,5 +1,4 @@
-// import { TitleWithSubtitleAndDescription } from 'lib/shared-domain/page/presentation/components/TitleWithSubtitleAndDescription';
-// import { colors } from 'styles/foundations/colors';
+import { TitleWithSubtitleAndDescription } from 'lib/shared-domain/page/presentation/components/TitleWithSubtitleAndDescription';
 import { TextBoxGroup } from './TextBoxGroup';
 import { useRouter } from 'next/router';
 import styles from './CalculatorTeaser.module.scss';
@@ -69,11 +68,11 @@ export const CalculatorTeaser: React.FC<{
 
   return (
     <div>
-      {/*<TitleWithSubtitleAndDescription*/}
-      {/*  color={{ description: colors.text.light }}*/}
-      {/*  title={title}*/}
-      {/*  description={description}*/}
-      {/*/>*/}
+      <TitleWithSubtitleAndDescription
+        color={{ description: 'white' }}
+        title={title}
+        description={description}
+      />
       <div>
         <div>
           {checkmarkTexts?.map((c, index) => (

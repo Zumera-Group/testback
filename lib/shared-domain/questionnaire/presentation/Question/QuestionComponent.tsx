@@ -205,15 +205,6 @@ export const QuestionComponent: React.FC<{
           currentPos={currentPos}
         />
       );
-    } else if (answerType === 'slider') {
-      return (
-        <questions.Slider
-          onNextQuestion={onNextQuestion}
-          onPrevQuestion={onPreviousQuestion}
-          question={currentQuestion}
-          currentPos={currentPos}
-        />
-      );
     } else if (answerType === 'textInput') {
       return (
         <questions.TextInput

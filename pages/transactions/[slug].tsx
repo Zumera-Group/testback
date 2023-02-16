@@ -62,6 +62,14 @@ export async function getStaticProps({
       locale,
     );
 
+    if (transactionDetailContent.hidePage) {
+      return {
+        redirect: {
+          destination: `/${locale}/home`,
+        },
+      };
+    }
+
     return {
       props: {
         preview,

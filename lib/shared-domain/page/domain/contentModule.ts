@@ -227,13 +227,14 @@ export class TransactionGridSectionModule extends BaseModule {
     name: string;
   }[];
   dropdownsTitle: string;
-
+  hideSectorFilter: boolean;
   constructor(fields: Record<string, any>) {
     super();
     this.buttonText = fields.buttonText;
     this.sectorsDropdown = fields.sectorsDropdown;
     this.servicesDropdown = fields.servicesDropdown;
     this.dropdownsTitle = fields.dropdownsTitle;
+    this.hideSectorFilter = fields.hideSectorFilter;
   }
 
   get sortedSectors(): { name: string }[] {
@@ -475,6 +476,7 @@ export class NewsGridSectionModule extends BaseModule {
   shouldHidePeopleUpdates?: boolean;
   firstHighlightedArticleSection?: any;
   secondHighlightedArticleSection?: any;
+  tilesToShow: number;
   constructor(fields: Record<string, any>) {
     super();
 
@@ -495,6 +497,7 @@ export class NewsGridSectionModule extends BaseModule {
     this.firstHighlightedArticleSection = fields.firstHighlightedArticleSection;
     this.secondHighlightedArticleSection =
       fields.secondHighlightedArticleSection;
+    this.tilesToShow = fields.tilesToShow;
   }
 }
 

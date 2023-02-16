@@ -28,20 +28,11 @@ export interface BoxAnswer {
 export interface Answer {
   answerType:
     | 'boxSelector'
-    | 'slider'
     | 'textInput'
     | 'orbitSelector'
     | 'multiTextInput'
     | 'numberInput';
   boxSelector?: BoxAnswer[];
-  slider?: {
-    from: number;
-    gap: number;
-    to: number;
-    valueType: 'number' | 'EUR' | 'USD' | 'year' | 'age' | 'percent';
-    salesforceFormat: 'number' | 'date_year' | 'date_month' | 'date_day';
-    subGaps: { to: number; gap: number }[];
-  };
   textInput?: string;
   multiTextInput?: {
     fieldTitle: string;

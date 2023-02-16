@@ -69,6 +69,14 @@ export async function getStaticProps({
       };
     }
 
+    if (employeeDetail.hidePage) {
+      return {
+        redirect: {
+          destination: `/${locale}/home`,
+        },
+      };
+    }
+
     const employeeDetailContent = await fetchEmployeeDetailContent(locale);
 
     return {

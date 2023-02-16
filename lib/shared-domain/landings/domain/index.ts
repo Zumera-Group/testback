@@ -13,6 +13,7 @@ export interface Landings {
       url: string;
     };
   };
+  hidePage: boolean;
   seoDescription: string;
   description: Description[];
   contentModules: {

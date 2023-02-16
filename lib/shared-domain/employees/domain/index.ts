@@ -24,6 +24,7 @@ export interface Employee {
   slug: {
     current: string;
   };
+  hidePage: boolean;
   _createdAt: Date;
   title: string;
   firstName: string;

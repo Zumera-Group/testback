@@ -48,6 +48,14 @@ export async function getStaticProps({ locale, params, preview = false }) {
       };
     }
 
+    if (page.hidePage) {
+      return {
+        redirect: {
+          destination: `/${locale}/home`,
+        },
+      };
+    }
+
     return {
       props: {
         preview,

@@ -1,4 +1,4 @@
-import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Question } from 'lib/shared-domain/questionnaire/domain';
 import { useAnswers } from 'lib/shared-domain/questionnaire/application/useAnswers';
 import { QuestionButtonsWrapper } from '../../Question/QuestionButtonsWrapper';
@@ -125,7 +125,10 @@ export const OrbitSelector: React.FC<{
       <QuestionButtonsWrapper>
         <div className={styles.buttonOuter}>
           {!isMobile && (
-            <BackButton onPrevQuestion={onPrevQuestion} currentPos={currentPos} />
+            <BackButton
+              onPrevQuestion={onPrevQuestion}
+              currentPos={currentPos}
+            />
           )}
           <QuestionButtons
             onNextQuestion={onNextQuestion}

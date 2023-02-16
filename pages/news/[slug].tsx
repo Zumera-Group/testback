@@ -63,6 +63,15 @@ export async function getStaticProps({ locale, params, preview = false }) {
         },
       };
     }
+
+    if (newsArticle.hidePage) {
+      return {
+        redirect: {
+          destination: `/${locale}/home`,
+        },
+      };
+    }
+
     const siteSettings = await fetchSiteSettings(locale);
     const content = await fetchNewsArticleDetailContent(locale);
     const sharedContent =

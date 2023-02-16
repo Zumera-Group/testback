@@ -12,4 +12,5 @@ export interface Office {
     name: string;
   };
   calendlyLink: string;
+  hidePage: boolean;
 }

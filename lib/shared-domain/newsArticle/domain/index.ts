@@ -30,6 +30,7 @@ export interface NewsArticle {
   _lang: string;
   title: string;
   slug: { current: string };
+  hidePage: boolean;
   subtitle: string;
   date: Date;
   picture: {

@@ -8,7 +8,6 @@ import {
 import { SectionHeading } from 'components/SectionHeading';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import styles from './TransactionGridSection.module.scss';
-import { TransactionSelectorTile } from 'components/TransactionGridSection/TransactionSelectorTile';
 import { ISectorsDropdown } from 'lib/shared-domain/page/domain/contentModule';
 
 import { SwiperSlide } from 'swiper/react';
@@ -19,16 +18,28 @@ import { Loader } from 'components/Loader';
 import { SwiperTransactionsGrid } from 'components/Layout/SwiperTransactionsGrid';
 import { Locale } from 'lib/locale';
 import { Button } from 'components/Button';
+import dynamic from 'next/dynamic';
+
+const TransactionSelectorTile = dynamic(
+  () =>
+    import('./TransactionSelectorTile').then(
+      (mod) => mod.TransactionSelectorTile,
+    ),
+  {
+    loading: () => <>Loading...</>,
+  },
+);
 
 interface IProps {
   buttonText: string;
   dropdownsTitle: string;
   sectorsDropdown: ISectorsDropdown[];
+  hideSectorFilter: boolean;
 }
 
 export const TransactionGridSection: React.FC<IProps> = (props) => {
   const router = useRouter();
-  const { dropdownsTitle, sectorsDropdown } = props;
+  const { dropdownsTitle, sectorsDropdown, hideSectorFilter } = props;
   const [activeSector, setActiveSector] = useState('0');
   const [transactions, setTransaction] = useState([]);
   const swiperPrevRef = useRef();
@@ -37,7 +48,7 @@ export const TransactionGridSection: React.FC<IProps> = (props) => {
   const [activeChunk, setActiveChunk] = useState(1);
   const [displayTransaction, setDisplayTransaction] = useState([]);
   const [chunkLength, setChunkLength] = useState(0);
-
+  const TransactionSelectorTileComponent = TransactionSelectorTile as any;
   useEffect(() => {
     const transactionsToDisplay = transactions
       .filter((item) => {
@@ -98,67 +109,75 @@ export const TransactionGridSection: React.FC<IProps> = (props) => {
       classes={styles.sectionWrapper}
     >
       <Container>
-        <Grid
-          fullWidth={true}
-          justifyContent={'space-between'}
-          alignItems={'end'}
-          className={styles.sliderHeader}
-        >
-          <GridColumn xs={12} sm={6} md={6} lg={6}>
-            <SectionHeading title={dropdownsTitle} headingType={'h3'} />
-          </GridColumn>
-          <GridColumn
-            xs={12}
-            sm={6}
-            md={6}
-            lg={6}
-            className={styles.sliderButtons}
-          >
-            <SwiperNavigationButtons
-              prev={swiperPrevRef}
-              next={swiperNextRef}
-            />
-          </GridColumn>
-        </Grid>
-        <Grid
-          fullWidth={true}
-          justifyContent={'space-between'}
-          alignItems={'end'}
-        >
-          <GridColumn xs={12} sm={12} md={12} lg={12}>
-            <SwiperTransactionsGrid
-              prevButton={swiperPrevRef}
-              nextButton={swiperNextRef}
-              maxSlidesToShow={7}
-              classes={styles.swiper}
+        {!hideSectorFilter ? (
+          <>
+            <Grid
+              fullWidth={true}
+              justifyContent={'space-between'}
+              alignItems={'end'}
+              className={styles.sliderHeader}
             >
-              <SwiperSlide className={styles.swiperSlide}>
-                <TransactionSelectorTile
-                  sector={{ name: 'All', _id: '0', slug: { current: '' } }}
-                  activeSector={activeSector}
-                  clickHandler={sectorClickHandler}
-                  locale={router.locale as Locale}
+              <GridColumn xs={12} sm={6} md={6} lg={6}>
+                <SectionHeading title={dropdownsTitle} headingType={'h3'} />
+              </GridColumn>
+              <GridColumn
+                xs={12}
+                sm={6}
+                md={6}
+                lg={6}
+                className={styles.sliderButtons}
+              >
+                <SwiperNavigationButtons
+                  prev={swiperPrevRef}
+                  next={swiperNextRef}
                 />
-              </SwiperSlide>
-              {sectorsDropdown
-                .sort((a, b) => {
-                  if (a.name > b.name) return 1;
-                  if (a.name < b.name) return -1;
-                  return 0;
-                })
-                .map((sector) => (
-                  <SwiperSlide key={sector._id} className={styles.swiperSlide}>
-                    <TransactionSelectorTile
-                      sector={sector}
+              </GridColumn>
+            </Grid>
+            <Grid
+              fullWidth={true}
+              justifyContent={'space-between'}
+              alignItems={'end'}
+            >
+              <GridColumn xs={12} sm={12} md={12} lg={12}>
+                <SwiperTransactionsGrid
+                  prevButton={swiperPrevRef}
+                  nextButton={swiperNextRef}
+                  maxSlidesToShow={7}
+                  classes={styles.swiper}
+                >
+                  <SwiperSlide className={styles.swiperSlide}>
+                    <TransactionSelectorTileComponent
+                      sector={{ name: 'All', _id: '0', slug: { current: '' } }}
                       activeSector={activeSector}
                       clickHandler={sectorClickHandler}
                       locale={router.locale as Locale}
                     />
                   </SwiperSlide>
-                ))}
-            </SwiperTransactionsGrid>
-          </GridColumn>
-        </Grid>
+                  {sectorsDropdown
+                    .sort((a, b) => {
+                      if (a.name > b.name) return 1;
+                      if (a.name < b.name) return -1;
+                      return 0;
+                    })
+                    .map((sector) => (
+                      <SwiperSlide
+                        key={sector._id}
+                        className={styles.swiperSlide}
+                      >
+                        <TransactionSelectorTileComponent
+                          sector={sector}
+                          activeSector={activeSector}
+                          clickHandler={sectorClickHandler}
+                          locale={router.locale as Locale}
+                        />
+                      </SwiperSlide>
+                    ))}
+                </SwiperTransactionsGrid>
+              </GridColumn>
+            </Grid>
+          </>
+        ) : null}
+
         {!loading && transactions.length ? (
           <Grid
             fullWidth={true}

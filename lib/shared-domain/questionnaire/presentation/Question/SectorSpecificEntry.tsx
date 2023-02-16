@@ -38,7 +38,7 @@ export const SectorSpecificEntry: React.FC<{
       )}
       <QuestionAnimation>
         <QuestionText title={t('questionText')} />
-        <p color={'white'}>{t('subtitle')}</p>
+        <p>{t('subtitle')}</p>
         <ResultTeaser calculatorSteps={calculatorSteps} isSectorSpecificEntry />
       </QuestionAnimation>
       <QuestionButtonsWrapper>
