@@ -13,7 +13,6 @@ import { FormGroup, Input, Textarea, Checkbox, Message } from 'components/Form';
 import { useGetSalesforceScore } from '../../application/useGetQuestionnaireScore';
 import { useSalesforceAnswerSync } from '../../application/useSalesforceAnswerSync';
 import { qLogs } from '../../application/log';
-import { useRouter } from 'next/router';
 
 const t = getTranslateByScope('result');
 
@@ -69,12 +68,6 @@ const AppointmentBookingScreen: React.FC<{ userCalendlyLink?: string }> = ({
     <AnimateIn>
       <QuestionText title={t('appointment.title')} />
       <InlineWidget
-        // url={
-        //   !userCalendlyLink ||
-        //   userCalendlyLink === SALESFORCE_NO_CALENDLY_LINK_IDENTIFIER
-        //     ? process.env.NEXT_PUBLIC_CALENDLY_LINK
-        //     : userCalendlyLink
-        // }
         url={process.env.NEXT_PUBLIC_CALENDLY_LINK}
         prefill={prefill}
       />
@@ -92,7 +85,6 @@ const EvaluationScreen: React.FC<{
   score: { points: string; percentage: string; avg: number };
 }> = ({ onSuccess, score }) => {
   const { syncCurrentAnswersToSalesforce } = useSalesforceAnswerSync();
-  const { locale, push } = useRouter();
   const [isSubmit, setSubmit] = useState(false);
   const { getAnswer, setAnswer, uniqueId } = useValuationStore();
   const [checkboxIsChecked, setCheckboxIsChecked] = React.useState(false);
@@ -113,11 +105,6 @@ const EvaluationScreen: React.FC<{
     await syncCurrentAnswersToSalesforce(uniqueId, 'lastQuestion');
 
     if (!score || !score.avg || score?.avg < 5000000) {
-      // if (locale === 'de') {
-      //   push('https://www.zumera.com/de');
-      // } else {
-      //   push('https://www.zumera.com/');
-      // }
       setSubmit(true);
     } else {
       onSuccess();
@@ -133,28 +120,6 @@ const EvaluationScreen: React.FC<{
 
     return null;
   };
-
-  const Presenter = {
-    hasPoints: () => {
-      if (score.points === '#N/A' || !score.points) return false;
-      return true;
-    },
-
-    getFormattedPoints: () => {
-      return score.points;
-    },
-
-    getPercentage: () => {
-      try {
-        return Math.floor(Number(score.percentage) * 100);
-      } catch (e) {
-        return '';
-      }
-    },
-  };
-
-  const hasScoreAndPercentage =
-    Presenter.hasPoints() && Presenter.getPercentage();
 
   return (
     <AnimateIn>
