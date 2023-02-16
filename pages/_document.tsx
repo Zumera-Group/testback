@@ -26,9 +26,9 @@ export default class MyDocument extends Document {
             name="viewport"
             content="width=device-width, initial-scale=1, shrink-to-fit=no"
           />
-          <link rel="preconnect" href="https://cdn.sanity.io" />
-          <link rel="dns-prefetch" href="https://cdn.sanity.io" />
-          <link rel="dns-prefetch" href="https://consent.cookiefirst.com" />
+          {/*<link rel="preconnect" href="https://cdn.sanity.io" />*/}
+          {/*<link rel="dns-prefetch" href="https://cdn.sanity.io" />*/}
+          {/*<link rel="dns-prefetch" href="https://consent.cookiefirst.com" />*/}
           <link
             crossOrigin="anonymous"
             rel="preload"
