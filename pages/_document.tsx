@@ -28,6 +28,7 @@ export default class MyDocument extends Document {
           />
           <link rel="preconnect" href="https://cdn.sanity.io" />
           <link rel="dns-prefetch" href="https://cdn.sanity.io" />
+          <link rel="dns-prefetch" href="https://consent.cookiefirst.com" />
           <link
             crossOrigin="anonymous"
             rel="preload"
