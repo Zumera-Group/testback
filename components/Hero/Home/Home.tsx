@@ -1,7 +1,7 @@
 import { HeroComponent } from '../types';
 import { useRef } from 'react';
 
-import { Gradient } from './Gradient';
+// import { Gradient } from './Gradient';
 import { Container } from 'components/Layout';
 import { Button } from 'components/Button';
 import { Beam } from 'components/Beam';
@@ -16,7 +16,7 @@ export const Home: HeroComponent = ({ ...rest }) => {
 
   return (
     <div className={[baseStyles.hero, styles.hero].join(' ')} ref={heroRef}>
-      <Gradient parent={heroRef} />
+      {/*<Gradient parent={heroRef} />*/}
       <Container classes={styles.container}>
         <h1>
           {title && title}
@@ -25,13 +25,15 @@ export const Home: HeroComponent = ({ ...rest }) => {
         <SanityBlockContent text={description} />
         {button?.title && (
           <div className={baseStyles.btnWrapper}>
-            <Button {...button} onDark={true}>{button.title}</Button>
+            <Button {...button} onDark={true}>
+              {button.title}
+            </Button>
           </div>
         )}
         <Beam color={'white'} glow={true} classes={styles.beam} />
       </Container>
     </div>
   );
-}
+};
 
 export default Home;
