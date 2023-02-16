@@ -36,11 +36,11 @@ function MyApp({ Component, pageProps, router }) {
           content="width=device-width, initial-scale=1, shrink-to-fit=no"
         />
       </Head>
-      <Script
-        strategy="worker"
-        src="https://consent.cookiefirst.com/banner.js"
-        data-cookiefirst-key="187e6cb5-6683-48db-9a01-a5892c9f29d2"
-      />
+      {/*<Script*/}
+      {/*  strategy="worker"*/}
+      {/*  src="https://consent.cookiefirst.com/banner.js"*/}
+      {/*  data-cookiefirst-key="187e6cb5-6683-48db-9a01-a5892c9f29d2"*/}
+      {/*/>*/}
       {/*<IntercomProvider*/}
       {/*  initializeDelay={10000}*/}
       {/*  appId={INTERCOM_APP_ID}*/}
