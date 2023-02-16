@@ -5,11 +5,11 @@ import React from 'react';
 import { Transaction } from '../domain/index';
 // import { P } from '../../../../components/Typography/P';
 // import { TitleWithSubtitleAndDescription } from 'lib/shared-domain/page/presentation/components/TitleWithSubtitleAndDescription';
-import {
-  fontSizes,
-  fontWeights,
-} from '../../../../styles/foundations/fontStyles';
-import { colors } from '../../../../styles/foundations/colors';
+// import {
+//   fontSizes,
+//   fontWeights,
+// } from '../../../../styles/foundations/fontStyles';
+// import { colors } from '../../../../styles/foundations/colors';
 //TODO: To delete  (double check)
 export const TransactionKeyfacts: React.FC<{
   transaction: Transaction;

@@ -6,9 +6,9 @@ import React from 'react';
 import { Transaction } from '../domain/index';
 // import { P } from '../../../../components/Typography/P';
 // import { TitleWithSubtitleAndDescription } from 'lib/shared-domain/page/presentation/components/TitleWithSubtitleAndDescription';
-import { getTranslateByScope } from 'translation/i18n';
-import { fontWeights } from '../../../../styles/foundations/fontStyles';
-import { colors } from 'styles/foundations/colors';
+// import { getTranslateByScope } from 'translation/i18n';
+// import { fontWeights } from '../../../../styles/foundations/fontStyles';
+// import { colors } from 'styles/foundations/colors';
 // import { icons } from 'components/Icons';
 //TODO: To delete (double check)
 export const TransactionValues: React.FC<{

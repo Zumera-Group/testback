@@ -31,7 +31,7 @@ interface Props {
   titleAlign?: 'left' | 'center' | 'right';
   firstHighlightedArticleSection?: any;
   secondHighlightedArticleSection?: any;
-  tilesToShow: number;
+  tilesToShow?: number;
 }
 
 export const NewsGrid: React.FC<Props> = ({
@@ -52,7 +52,7 @@ export const NewsGrid: React.FC<Props> = ({
   titleAlign,
   firstHighlightedArticleSection,
   secondHighlightedArticleSection,
-  tilesToShow,
+  tilesToShow = 6,
 }) => {
   const [numberOfRepetitions, setNumberOfRepetitions] = useState(
     initialNumberOfRepetitions,

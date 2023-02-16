@@ -51,7 +51,7 @@ export async function getStaticProps({ locale, params, preview = false }) {
       preview,
     );
 
-    if (previewOffice.hidePage) {
+    if (previewOffice && previewOffice.hidePage) {
       return {
         redirect: {
           destination: `/${locale}/home`,

@@ -67,13 +67,13 @@ export async function getStaticProps({
       };
     }
 
-    if (serviceDetail.hidePage) {
-      return {
-        redirect: {
-          destination: `/${locale}/home`,
-        },
-      };
-    }
+    // if (serviceDetail && serviceDetail.hidePage) {
+    //   return {
+    //     redirect: {
+    //       destination: `/${locale}/home`,
+    //     },
+    //   };
+    // }
 
     return {
       props: {
