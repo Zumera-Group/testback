@@ -476,6 +476,7 @@ export class NewsGridSectionModule extends BaseModule {
   shouldHidePeopleUpdates?: boolean;
   firstHighlightedArticleSection?: any;
   secondHighlightedArticleSection?: any;
+  tilesToShow: number;
   constructor(fields: Record<string, any>) {
     super();
 
@@ -496,6 +497,7 @@ export class NewsGridSectionModule extends BaseModule {
     this.firstHighlightedArticleSection = fields.firstHighlightedArticleSection;
     this.secondHighlightedArticleSection =
       fields.secondHighlightedArticleSection;
+    this.tilesToShow = fields.tilesToShow;
   }
 }
 

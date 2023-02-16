@@ -31,6 +31,7 @@ interface Props {
   titleAlign?: 'left' | 'center' | 'right';
   firstHighlightedArticleSection?: any;
   secondHighlightedArticleSection?: any;
+  tilesToShow: number;
 }
 
 export const NewsGrid: React.FC<Props> = ({
@@ -51,6 +52,7 @@ export const NewsGrid: React.FC<Props> = ({
   titleAlign,
   firstHighlightedArticleSection,
   secondHighlightedArticleSection,
+  tilesToShow,
 }) => {
   const [numberOfRepetitions, setNumberOfRepetitions] = useState(
     initialNumberOfRepetitions,
@@ -142,7 +144,7 @@ export const NewsGrid: React.FC<Props> = ({
     }
     emptyNews[i] = item;
   }
-  const chunkedArray = sliceIntoChunks(emptyNews, 10);
+  const chunkedArray = sliceIntoChunks(emptyNews, tilesToShow);
   const displayItems = chunkedArray.slice(0, numberOfRepetitions);
 
   return (
