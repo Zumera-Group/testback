@@ -67,6 +67,14 @@ export async function getStaticProps({
       };
     }
 
+    if (serviceDetail.hidePage) {
+      return {
+        redirect: {
+          destination: `/${locale}/home`,
+        },
+      };
+    }
+
     return {
       props: {
         preview,

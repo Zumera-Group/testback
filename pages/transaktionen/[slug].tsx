@@ -50,17 +50,17 @@ export async function getStaticProps({
       preview,
     );
 
-    if (!transactionDetail) {
-      return {
-        redirect: {
-          destination: `/${locale}/404`,
-        },
-      };
-    }
-
     const transactionDetailContent = await fetchTransactionDetailContent(
       locale,
     );
+
+    if (transactionDetailContent.hidePage) {
+      return {
+        redirect: {
+          destination: `/${locale}/home`,
+        },
+      };
+    }
 
     return {
       props: {

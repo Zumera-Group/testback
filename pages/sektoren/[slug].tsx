@@ -58,6 +58,14 @@ export async function getStaticProps({
       };
     }
 
+    if (selectedSector.hidePage) {
+      return {
+        redirect: {
+          destination: `/${locale}/home`,
+        },
+      };
+    }
+
     const content = await fetchSectorDetailContent(locale);
 
     return {

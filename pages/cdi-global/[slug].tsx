@@ -52,6 +52,14 @@ export async function getStaticProps({ locale, params, preview = false }) {
       preview,
     );
 
+    if (previewOffice.hidePage) {
+      return {
+        redirect: {
+          destination: `/${locale}/home`,
+        },
+      };
+    }
+
     const content = await fetchCDIOfficeDetailContent(locale);
     return {
       props: {

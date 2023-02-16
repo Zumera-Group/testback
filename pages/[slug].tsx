@@ -57,6 +57,14 @@ export async function getStaticProps({ locale, params, preview = false }) {
       };
     }
 
+    if (page.hidePage) {
+      return {
+        redirect: {
+          destination: `/${locale}/home`,
+        },
+      };
+    }
+
     return {
       props: {
         preview,
@@ -96,9 +104,7 @@ export default function Index({
     initialData: page,
     enabled: preview,
   });
-
   const previewPage = filterDataToSingleItem(previewData, preview);
-
   const router = useRouter();
 
   useEffect(() => {
