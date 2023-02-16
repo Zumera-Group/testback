@@ -6,7 +6,6 @@ import Document, {
   NextScript,
   DocumentContext,
 } from 'next/document';
-import { IconSprite } from 'components/Icon';
 
 export default class MyDocument extends Document {
   static async getInitialProps(ctx: DocumentContext) {
@@ -75,7 +74,6 @@ export default class MyDocument extends Document {
           <link rel="shortcut icon" href="/favicon.ico" />
         </Head>
         <body>
-          <IconSprite />
           <Main />
           <NextScript />
         </body>

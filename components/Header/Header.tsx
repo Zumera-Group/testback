@@ -21,7 +21,7 @@ import {
   VTHeroModule,
 } from 'lib/shared-domain/page/domain/contentModule';
 
-// import { LogoExtended } from 'components/Icons/LogoExtended';
+import { LogoExtended } from 'components/Icons/LogoExtended';
 
 import styles from './Header.module.scss';
 
@@ -155,19 +155,19 @@ export const Header = ({
         style={{ '--scroll-position': scrollPosition } as React.CSSProperties}
       >
         <Container classes={[styles.container].join('')}>
-          {/*<div className={styles.logoWrapper}>*/}
-          {/*  {!staticExtended ? (*/}
-          {/*    <Logo*/}
-          {/*      slug={homeSlug}*/}
-          {/*      isScrolled={isScrolled}*/}
-          {/*      isLightPage={isLightPage()}*/}
-          {/*      title={siteName}*/}
-          {/*      isAnimated={true}*/}
-          {/*    />*/}
-          {/*  ) : (*/}
-          {/*    <LogoExtended slug={homeSlug} title={siteName} />*/}
-          {/*  )}*/}
-          {/*</div>*/}
+          <div className={styles.logoWrapper}>
+            {!staticExtended ? (
+              <Logo
+                slug={homeSlug}
+                isScrolled={isScrolled}
+                isLightPage={isLightPage()}
+                title={siteName}
+                isAnimated={true}
+              />
+            ) : (
+              <LogoExtended slug={homeSlug} title={siteName} />
+            )}
+          </div>
           {!hideHeader && !hideMenu && <Menu navigation={headerMenu} />}
 
           {!hideBurger && (

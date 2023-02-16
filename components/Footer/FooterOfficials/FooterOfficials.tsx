@@ -21,12 +21,12 @@ export const FooterOfficials = ({
 
   return (
     <div className={styles.officials}>
-      {/*<Logo*/}
-      {/*  slug={homeSlug}*/}
-      {/*  src={logo?.asset?.url}*/}
-      {/*  title={siteName}*/}
-      {/*  classes={styles.logo}*/}
-      {/*/>*/}
+      <Logo
+        slug={homeSlug}
+        src={logo?.asset?.url}
+        title={siteName}
+        classes={styles.logo}
+      />
       <div className={styles.policies}>
         <small>{copyright && copyright}</small>
         <FooterLink

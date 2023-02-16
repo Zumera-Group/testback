@@ -17,9 +17,8 @@ module.exports = {
   },
   sassOptions,
   trailingSlash: true,
-  webpack(config) {
-    config.experiments = { ...config.experiments, topLevelAwait: true };
-    return config;
+  experimental: {
+    nextScriptWorkers: true,
   },
   async redirects() {
     return [
