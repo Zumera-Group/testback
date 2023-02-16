@@ -1,5 +1,4 @@
 import { TitleWithSubtitleAndDescription } from 'lib/shared-domain/page/presentation/components/TitleWithSubtitleAndDescription';
-import { colors } from 'styles/foundations/colors';
 import { TextBoxGroup } from './TextBoxGroup';
 import { useRouter } from 'next/router';
 import styles from './CalculatorTeaser.module.scss';
@@ -70,7 +69,7 @@ export const CalculatorTeaser: React.FC<{
   return (
     <div>
       <TitleWithSubtitleAndDescription
-        color={{ description: colors.text.light }}
+        color={{ description: 'white' }}
         title={title}
         description={description}
       />

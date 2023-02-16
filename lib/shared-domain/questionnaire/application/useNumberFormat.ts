@@ -1,6 +1,11 @@
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-import { VALUE_TYPE } from '../presentation/questions/Slider/constants';
+
+export enum VALUE_TYPE {
+  EUR = '€',
+  USD = '$',
+  percent = '%',
+}
 
 export const useNumberFormat = (
   valueType: 'number' | 'EUR' | 'USD' | 'year' | 'age' | 'percent',
