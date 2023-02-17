@@ -62,14 +62,6 @@ export async function getStaticProps({
       locale,
     );
 
-    if (transactionDetailContent.hidePage) {
-      return {
-        redirect: {
-          destination: `/${locale}/home`,
-        },
-      };
-    }
-
     return {
       props: {
         preview,
@@ -124,6 +116,12 @@ export default function Index({
       setIsSecretOpen(true);
     }
   }, []);
+
+  useEffect(() => {
+    if (selectedTransaction?.hidePage) {
+      router.push(`/${router.locale}/home`);
+    }
+  }, [selectedTransaction?.hidePage, router]);
 
   if (router.isFallback) {
     return null;

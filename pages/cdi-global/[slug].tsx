@@ -52,14 +52,6 @@ export async function getStaticProps({ locale, params, preview = false }) {
       preview,
     );
 
-    if (previewOffice.hidePage) {
-      return {
-        redirect: {
-          destination: `/${locale}/home`,
-        },
-      };
-    }
-
     const content = await fetchCDIOfficeDetailContent(locale);
     return {
       props: {
@@ -119,6 +111,12 @@ export default function Index({
       setIsSecretOpen(true);
     }
   }, []);
+
+  useEffect(() => {
+    if (office?.hidePage) {
+      router.push(`/${router.locale}/home`);
+    }
+  }, [office?.hidePage, router]);
 
   if (router.isFallback) {
     return null;

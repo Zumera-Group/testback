@@ -38,6 +38,7 @@ export interface Transaction {
     current: string;
   };
   _lang: string;
+  hidePage: boolean;
   optionalUI?: optionalUI;
   sectors?: Sector[];
   typeOfService: {

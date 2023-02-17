@@ -31,7 +31,7 @@ interface Props {
   titleAlign?: 'left' | 'center' | 'right';
   firstHighlightedArticleSection?: any;
   secondHighlightedArticleSection?: any;
-  tilesToShow: number;
+  tilesToShow?: number;
 }
 
 export const NewsGrid: React.FC<Props> = ({

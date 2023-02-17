@@ -63,14 +63,6 @@ export async function getStaticProps({
       };
     }
 
-    if (serviceDetail.hidePage) {
-      return {
-        redirect: {
-          destination: `/${locale}/home`,
-        },
-      };
-    }
-
     return {
       props: {
         preview,
@@ -122,6 +114,12 @@ export default function Index({
       setIsSecretOpen(true);
     }
   }, []);
+
+  useEffect(() => {
+    if (selectedService?.hidePage) {
+      router.push(`/${router.locale}/home`);
+    }
+  }, [selectedService?.hidePage, router]);
 
   if (router.isFallback) {
     return null;

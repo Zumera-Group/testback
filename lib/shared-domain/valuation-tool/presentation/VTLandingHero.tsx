@@ -124,14 +124,17 @@ const QuestionTeaser: React.FC<{ urlToTool: string; question: Question }> = ({
     const answerType = question?.answerSelector?.answerType;
     if (answerType === 'boxSelector') {
       return <questions.BoxSelector question={question} />;
-    } else if (answerType === 'slider') {
-      // return <questions.Slider question={question} />;
-    } else if (answerType === 'textInput') {
-      // return <questions.TextInput question={question} />;
-    } else if (answerType === 'orbitSelector') {
-      // return <questions.OrbitSelector question={question} />;
-    } else if (answerType === 'multiTextInput') {
-      // return <questions.MultiTextInput question={question} />;
+    } else {
+      // @ts-ignore
+      if (answerType === 'slider') {
+        // return <questions.Slider question={question} />;
+      } else if (answerType === 'textInput') {
+        // return <questions.TextInput question={question} />;
+      } else if (answerType === 'orbitSelector') {
+        // return <questions.OrbitSelector question={question} />;
+      } else if (answerType === 'multiTextInput') {
+        // return <questions.MultiTextInput question={question} />;
+      }
     }
     return null;
   };
