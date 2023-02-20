@@ -53,6 +53,11 @@ export const contentModulesQuery = (
         url
       },
     },
+    photo {
+      asset->{
+        url
+      },
+    },
     logo1 {
       asset->{
         url

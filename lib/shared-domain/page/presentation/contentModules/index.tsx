@@ -52,6 +52,7 @@ import {
   VTServicesSectionModule,
   StepsDownBulletsSectionModule,
   StickyFooterModule,
+  TransactionQuoteModule,
 } from '../../domain/contentModule';
 
 import {
@@ -147,7 +148,7 @@ import { VTValuesGridSection } from 'components/VTValuesGridSection';
 import { VTServicesSection } from 'components/VTServicesSection/VTServicesSection';
 import { StepsDownBulletsSection } from 'components/StepsDownBulletsSection';
 import { StickyFooter } from 'components/StickyFooter';
-
+import { TransactionQuote } from 'components/TransactionQuote';
 import dynamic from 'next/dynamic';
 const NewsGridSection = dynamic(() => import('./NewsGridSection'), {
   ssr: false,
@@ -159,6 +160,13 @@ export const getContentForContentModule = (
   sharedContent?: any,
   allModulesData?: any,
 ): JSX.Element => {
+  if (contentModule.specificContentModule instanceof TransactionQuoteModule) {
+    return (
+      <TransactionQuote
+        specificContentModule={contentModule.specificContentModule}
+      />
+    );
+  }
   if (contentModule.specificContentModule instanceof StickyFooterModule) {
     return (
       <StickyFooter

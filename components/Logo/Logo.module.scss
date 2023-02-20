@@ -13,13 +13,7 @@
   }
   svg {
     &:last-of-type {
-      width: 112px;
-      margin-left: auto;
       margin-top: 8px;
-      @include breakpoint-down(md) {
-        width: 82px;
-        margin-top: 6px;
-      }
     }
   }
 }
