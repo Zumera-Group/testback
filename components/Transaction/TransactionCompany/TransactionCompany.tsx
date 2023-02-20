@@ -14,15 +14,28 @@ export const TransactionCompany: React.FC<{
   ) {
     return null;
   }
+  //
+  //   highlightSellersTitle,
+  // highlightSellers,
 
   return (
     <Section size={'md'} bg={'light'} color={'primary'}>
       <Container classes={styles.headingContainer}>
-        <SectionHeading
-          title={content.representedText}
-          headingType={'h3'}
-          align={'left'}
-        />
+        {transaction.highlightSellers?.length ? (
+          <h3>
+            <span className={styles.bodyTitle}>
+              {transaction.highlightSellersTitle}{' '}
+            </span>
+            <span className={styles.bodyValue}>
+              {transaction.highlightSellers.join(', ')}
+            </span>
+          </h3>
+        ) : null}
+        {/*<SectionHeading*/}
+        {/*  title={transaction.highlightSellersTitle}*/}
+        {/*  headingType={'h3'}*/}
+        {/*  align={'left'}*/}
+        {/*/>*/}
       </Container>
       <Container classes={styles.container}>
         <Grid

@@ -74,4 +74,6 @@ export interface Transaction {
   peopleInvolved: Employee[];
   hasCDIRelation: boolean;
   newsPressRelease: NewsArticle;
+  highlightSellers: string[];
+  highlightSellersTitle: string;
 }

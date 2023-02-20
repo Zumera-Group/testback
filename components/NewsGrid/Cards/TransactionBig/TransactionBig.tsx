@@ -16,7 +16,8 @@ export const TransactionBig = ({ article }) => {
 
   if (!article) return null;
 
-  const { _id, hasCDIRelation, headline, date } = article;
+  const { _id, headline, date, highlightSellersTitle, highlightSellers } =
+    article;
   const dateFormatted = date ? format(new Date(date)) : null;
   const href = links().transactions(article);
 
@@ -61,8 +62,11 @@ export const TransactionBig = ({ article }) => {
               </time>
             )}
             {headline && <h2 className={styles.title}>{headline}</h2>}
-            {hasCDIRelation ? (
-              <p className={styles.excerpt}>{sharedContent.cdiTextNews}</p>
+            {highlightSellers?.length ? (
+              <p className={styles.excerpt}>
+                <strong>{highlightSellersTitle} </strong>
+                {highlightSellers.join(', ')}
+              </p>
             ) : null}
             <Icon
               iconName={'arrow-circle'}

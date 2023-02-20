@@ -19,12 +19,13 @@ export const TransactionCard = ({ transaction }) => {
   const {
     date,
     headline,
-    hasCDIRelation,
     companyLogo1,
     companyName1,
     companyLogo2,
     companyName2,
     coverImage,
+    highlightSellersTitle,
+    highlightSellers,
   } = transaction;
 
   const dateFormatted = date ? format(new Date(date)) : null;
@@ -83,8 +84,11 @@ export const TransactionCard = ({ transaction }) => {
                 </time>
               )}
               {headline && <h2 className={styles.title}>{headline}</h2>}
-              {hasCDIRelation ? (
-                <p className={styles.excerpt}>{sharedContent.cdiTextNews}</p>
+              {highlightSellers?.length ? (
+                <p className={styles.excerpt}>
+                  <strong>{highlightSellersTitle} </strong>
+                  {highlightSellers.join(', ')}
+                </p>
               ) : null}
               <Icon
                 iconName={'arrow-circle'}
