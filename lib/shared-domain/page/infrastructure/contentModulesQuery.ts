@@ -397,7 +397,13 @@ export const contentModulesQuery = (
 				},
 			 },
       	}
-      }
+      },
+      sectors[]-> {
+        name
+      },
+      typeOfService-> {
+		name
+	  },
     },
     offices[]-> {
       ...,
