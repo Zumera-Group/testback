@@ -5,13 +5,11 @@ import { Beam } from 'components/Beam';
 import { Icon } from 'components/Icon';
 
 import { links } from 'lib/links';
-import { useSharedContentContext } from 'lib/shared-domain/page/infrastructure/sharedContentContext';
 import { useFormatDate } from 'lib/shared-domain/useFormatDate';
 
 import styles from './TransactionCard.module.scss';
 
 export const TransactionCard = ({ transaction }) => {
-  const sharedContent = useSharedContentContext();
   const format = useFormatDate();
 
   if (!transaction) return null;
@@ -24,6 +22,8 @@ export const TransactionCard = ({ transaction }) => {
     companyLogo2,
     companyName2,
     coverImage,
+    highlightSellersTitle,
+    highlightSellers,
   } = transaction;
 
   const dateFormatted = date ? format(new Date(date)) : null;
@@ -83,6 +83,14 @@ export const TransactionCard = ({ transaction }) => {
                 </time>
               )}
               {headline && <p className={styles.title}>{headline}</p>}
+              <p className={styles.excerpt}>
+                {highlightSellers?.length ? (
+                  <>
+                    <strong>{highlightSellersTitle} </strong>
+                    {highlightSellers.join(', ')}
+                  </>
+                ) : null}
+              </p>
               <Icon
                 iconName={'arrow-circle'}
                 viewBox={'0 0 32 32'}
