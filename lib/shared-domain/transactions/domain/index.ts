@@ -76,4 +76,5 @@ export interface Transaction {
   newsPressRelease: NewsArticle;
   highlightSellers: string[];
   highlightSellersTitle: string;
+  representationHeadline: string;
 }

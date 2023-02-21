@@ -14,9 +14,6 @@ export const TransactionCompany: React.FC<{
   ) {
     return null;
   }
-  //
-  //   highlightSellersTitle,
-  // highlightSellers,
 
   return (
     <Section size={'md'} bg={'light'} color={'primary'}>
@@ -24,18 +21,13 @@ export const TransactionCompany: React.FC<{
         {transaction.highlightSellers?.length ? (
           <h3>
             <span className={styles.bodyTitle}>
-              {transaction.highlightSellersTitle}{' '}
+              {transaction.representationHeadline}{' '}
             </span>
             <span className={styles.bodyValue}>
               {transaction.highlightSellers.join(', ')}
             </span>
           </h3>
         ) : null}
-        {/*<SectionHeading*/}
-        {/*  title={transaction.highlightSellersTitle}*/}
-        {/*  headingType={'h3'}*/}
-        {/*  align={'left'}*/}
-        {/*/>*/}
       </Container>
       <Container classes={styles.container}>
         <Grid
