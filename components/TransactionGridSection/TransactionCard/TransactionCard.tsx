@@ -87,7 +87,7 @@ export const TransactionCard = ({ transaction }) => {
                 {highlightSellers?.length ? (
                   <>
                     <strong>{highlightSellersTitle} </strong>
-                    {highlightSellers.join(', ')}
+                    {highlightSellers.filter((val) => !val.length).join(', ')}
                   </>
                 ) : null}
               </p>

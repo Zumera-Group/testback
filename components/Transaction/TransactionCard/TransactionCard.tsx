@@ -90,7 +90,7 @@ export const TransactionCard = ({ transaction }) => {
             <div>
               <div className={styles.bodyTitle}>{highlightSellersTitle} </div>
               <div className={styles.bodyValue}>
-                {highlightSellers.join(', ')}
+                {highlightSellers.filter((val) => !val.length).join(', ')}
               </div>
             </div>
           ) : null}

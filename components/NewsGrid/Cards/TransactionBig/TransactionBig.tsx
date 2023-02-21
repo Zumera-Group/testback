@@ -65,7 +65,7 @@ export const TransactionBig = ({ article }) => {
             {highlightSellers?.length ? (
               <p className={styles.excerpt}>
                 <strong>{highlightSellersTitle} </strong>
-                {highlightSellers.join(', ')}
+                {highlightSellers.filter((val) => !val.length).join(', ')}
               </p>
             ) : null}
             <Icon

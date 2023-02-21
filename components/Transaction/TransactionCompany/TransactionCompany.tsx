@@ -24,7 +24,9 @@ export const TransactionCompany: React.FC<{
               {transaction.representationHeadline}{' '}
             </span>
             <span className={styles.bodyValue}>
-              {transaction.highlightSellers.join(', ')}
+              {transaction.highlightSellers
+                .filter((val) => !val.length)
+                .join(', ')}
             </span>
           </h3>
         ) : null}
