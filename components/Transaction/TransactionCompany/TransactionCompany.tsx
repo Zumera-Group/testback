@@ -23,11 +23,6 @@ export const TransactionCompany: React.FC<{
             <span className={styles.bodyTitle}>
               {transaction.representationHeadline}{' '}
             </span>
-            <span className={styles.bodyValue}>
-              {transaction.highlightSellers
-                .filter((val) => !val.length)
-                .join(', ')}
-            </span>
           </h3>
         ) : null}
       </Container>
