@@ -42,7 +42,7 @@ export const AnimatedHeroImage: React.FC<IProps> = () => {
       />
       <dotlottie-player
         ref={ref}
-        src={'/lottie/transaction-hero.lottie'}
+        src={'/lottie/transaction-hero-v2.lottie'}
         class={styles.lottie}
         loop={true}
       />
