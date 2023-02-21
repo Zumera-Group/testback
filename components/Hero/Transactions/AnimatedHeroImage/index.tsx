@@ -36,7 +36,7 @@ export const AnimatedHeroImage: React.FC<IProps> = () => {
       )}
     >
       <img
-        src={'/lottie/transaction-hero-placeholder.png'}
+        src={'/lottie/transaction-hero-placeholder-v2.png'}
         alt={'partners'}
         className={styles.placeholder}
       />
