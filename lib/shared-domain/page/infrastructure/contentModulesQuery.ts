@@ -388,6 +388,16 @@ export const contentModulesQuery = (
           url
         },
       },
+      optionalUI {
+      	involvedParty1 {
+      		...,
+      		companyLogo {
+				asset->{
+				  url
+				},
+			 },
+      	}
+      }
     },
     offices[]-> {
       ...,
