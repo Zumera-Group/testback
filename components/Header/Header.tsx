@@ -24,6 +24,9 @@ import {
 import { LogoExtended } from 'components/Icons/LogoExtended';
 
 import styles from './Header.module.scss';
+import { getTranslateByScope } from 'translation/i18n';
+
+const t = getTranslateByScope('question');
 
 export const Header = ({
   siteSettings,
@@ -187,7 +190,7 @@ export const Header = ({
 
           {indicator && (
             <div className={styles.questionIndicator}>
-              Question{' '}
+              {t('question')}{' '}
               {indicator?.current > indicator?.total
                 ? indicator?.current - 1
                 : indicator?.current}{' '}
