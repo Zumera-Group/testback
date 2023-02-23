@@ -1,5 +1,5 @@
 import ErrorPage from 'next/error';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { fetchSiteSettings } from 'lib/shared-domain/page/application/useGetSiteSettings';
 import { SiteSettings } from 'lib/shared-domain/page/domain';
 import { VTLanding } from '../../lib/shared-domain/valuation-tool/domain/index';
@@ -16,6 +16,7 @@ import {
 } from '../../lib/shared-domain/page/constants';
 import { fetchLanding } from 'lib/shared-domain/landings/application/useGetVTLanding';
 import PageLayout from 'lib/shared-domain/page/presentation/PageLayout';
+import { Landings } from 'lib/shared-domain/landings/domain';
 
 export async function getStaticPaths() {
   return {
@@ -39,13 +40,6 @@ export async function getStaticProps({ locale, params, preview = false }) {
       };
     }
 
-    if (landing.hidePage) {
-      return {
-        redirect: {
-          destination: `/${locale}/home`,
-        },
-      };
-    }
     return {
       props: {
         preview,
@@ -67,7 +61,7 @@ interface Props {
   preview: boolean;
   query: string;
   queryParams: string;
-  selectedLanding: VTLanding;
+  selectedLanding: Landings;
   siteSettings: SiteSettings;
   sharedContent: any;
 }
@@ -88,6 +82,12 @@ export default function Index({
 
   const previewPage = filterDataToSingleItem(selectedLanding, preview);
   const router = useRouter();
+
+  useEffect(() => {
+    if (selectedLanding?.hidePage) {
+      router.push(`/${router.locale}/home`);
+    }
+  }, [selectedLanding?.hidePage, router]);
 
   if (router.isFallback) {
     return null;

@@ -158,7 +158,8 @@ const getHighlightedData = (highlightedSection) => {
     customLink: customTitleLink,
     date: date || highlightedPage?.date,
     picture: customTitleImage || highlightedPage?.picture,
-    _type: customTitle ? 'newsArticle' : highlightedPage?._type,
+    _type:
+      customTitle || customTitleLink ? 'newsArticle' : highlightedPage?._type,
   };
 };
 

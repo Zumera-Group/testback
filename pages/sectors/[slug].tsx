@@ -57,14 +57,6 @@ export async function getStaticProps({
       };
     }
 
-    if (selectedSector.hidePage) {
-      return {
-        redirect: {
-          destination: `/${locale}/home`,
-        },
-      };
-    }
-
     const content = await fetchSectorDetailContent(locale);
 
     return {
@@ -121,6 +113,12 @@ export default function Index({
       setIsSecretOpen(true);
     }
   }, []);
+
+  useEffect(() => {
+    if (selectedSector?.hidePage) {
+      router.push(`/${router.locale}/home`);
+    }
+  }, [selectedSector?.hidePage, router]);
 
   if (router.isFallback) {
     return null;

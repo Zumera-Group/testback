@@ -18,11 +18,13 @@ export const TransactionCompany: React.FC<{
   return (
     <Section size={'md'} bg={'light'} color={'primary'}>
       <Container classes={styles.headingContainer}>
-        <SectionHeading
-          title={content.representedText}
-          headingType={'h3'}
-          align={'left'}
-        />
+        {transaction.highlightSellers?.length ? (
+          <h3>
+            <span className={styles.bodyTitle}>
+              {transaction.representationHeadline}{' '}
+            </span>
+          </h3>
+        ) : null}
       </Container>
       <Container classes={styles.container}>
         <Grid

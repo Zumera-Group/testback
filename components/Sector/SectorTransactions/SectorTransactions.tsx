@@ -15,8 +15,10 @@ import { SwiperSlide } from 'swiper/react';
 import { Button } from 'components/Button';
 
 import styles from './SectorTransactions.module.scss';
+import { useRouter } from 'next/router';
 
 export const SectorTransactions = ({ transactions, sector, content }) => {
+  const router = useRouter();
   const swiperPrevRef = useRef();
   const swiperNextRef = useRef();
 
@@ -85,7 +87,14 @@ export const SectorTransactions = ({ transactions, sector, content }) => {
               {content?.linkText ? (
                 <Button
                   variant={'secondary'}
-                  link={{ slug: { current: `/transactions` } }}
+                  link={{
+                    slug: {
+                      current:
+                        router.locale === 'en'
+                          ? '/transactions'
+                          : '/transaktionen',
+                    },
+                  }}
                   classes={styles.button}
                 >
                   {content?.linkText}

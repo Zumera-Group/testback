@@ -58,7 +58,7 @@ export const AnimatedLogo: React.FC<any> = ({ isScrolled, isLightPage }) => {
         viewBox={'0 0 112 20'}
         xmlns="http://www.w3.org/2000/svg"
         animate={{
-          translateY: isScrolled && typeof isScrolled !== 'undefined' ? 0 : 20,
+          translateY: isScrolled && typeof isScrolled !== 'undefined' ? 0 : 30,
           display:
             isScrolled && typeof isScrolled !== 'undefined' ? 'none' : 'block',
           color: svgColor,
