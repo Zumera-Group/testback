@@ -52,7 +52,7 @@ export const TransactionCard = ({ transaction }) => {
 
   return (
     <article className={styles.transaction}>
-      <Link passHref href={href}>
+      <Link passHref href={href} legacyBehavior>
         <a className={styles.link}>
           <div className={styles.logosCover}>
             <TransactionLogo
@@ -69,16 +69,16 @@ export const TransactionCard = ({ transaction }) => {
             {coverImage?.asset?.url && (
               <div className={styles.imageWrapper}>
                 <div className={styles.imageWrapper_inner}>
-                 <Image
-                  unoptimized
-                  src={coverImage?.asset?.url}
-                  alt={coverImage?.asset?.altText || ''}
-                  // objectFit={'cover'}
-                  // objectPosition={'center center'}
-                  className={styles.image}
-                  fill
-                  sizes="100vw"
-                />
+                  <Image
+                    unoptimized
+                    src={coverImage?.asset?.url}
+                    alt={coverImage?.asset?.altText || ''}
+                    // objectFit={'cover'}
+                    // objectPosition={'center center'}
+                    className={styles.image}
+                    fill
+                    sizes="100vw"
+                  />
                 </div>
               </div>
             )}

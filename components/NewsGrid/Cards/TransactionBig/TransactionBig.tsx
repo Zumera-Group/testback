@@ -44,7 +44,7 @@ export const TransactionBig = ({ article }) => {
 
   return (
     <article key={`transactionBig-${_id}`} className={styles.transactionBig}>
-      <Link passHref href={href}>
+      <Link passHref href={href} legacyBehavior>
         <a className={styles.link}>
           <div className={styles.logosCover}>
             <TransactionLogo

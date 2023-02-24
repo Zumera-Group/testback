@@ -1,4 +1,3 @@
-import { Icon } from '@chakra-ui/react';
 import Link from 'next/link';
 import React from 'react';
 import styles from './LogoExtended.module.scss';
@@ -10,9 +9,9 @@ interface Props {
 
 export const LogoExtended: React.FC<Props> = ({ slug, title }) => {
   return (
-    <Link passHref href={slug}>
+    <Link passHref href={slug} legacyBehavior>
       <a rel="home" title={title} className={styles.link}>
-        <Icon
+        <svg
           viewBox={'0 0 765.66 270.15'}
           xmlns="http://www.w3.org/2000/svg"
           className={styles.icon}
@@ -133,7 +132,7 @@ export const LogoExtended: React.FC<Props> = ({ slug, title }) => {
               d="M210.07,104.12s0,.13,0,.14c-.12,17.79-15.65,33.06-32.95,33.06s-28.1-11.95-28.1-31.27l-.04-58.43h-20.97v62.28c0,13.91,3.94,28.48,14.25,38.35,6.17,5.91,14.26,9.7,22.7,11.06,7.66,1.24,15.68,.5,22.83-2.5,13.1-5.49,22.25-18.75,22.29-33.02v-.29s0,34.07,0,34.07h20.74s0-109.94,0-109.94h-20.74s0,56.5,0,56.5Z"
             />
           </g>
-        </Icon>
+        </svg>
       </a>
     </Link>
   );
