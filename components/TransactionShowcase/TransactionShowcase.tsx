@@ -17,7 +17,6 @@ interface Props {
 export const TransactionShowcase: React.FC<Props> = ({ ...rest }) => {
   const router = useRouter();
   const { title, subtitle, description, link, transaction } = rest;
-  console.log(transaction);
   return (
     <Section as={'section'} size={'md'} bg={'light'} color={'primary'}>
       <Container>
