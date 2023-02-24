@@ -38,15 +38,16 @@ const NewsArticleDescription: React.FC<Props> = ({ newsArticle, content }) => {
               )}
             </div>
             <div className={styles.links}>
-              {newArticleSection.links?.map((link, i) => (
-                <Button
-                  variant={'secondary'}
-                  link={link.url}
-                  key={`article-link-${i}`}
-                >
-                  {link.title}
-                </Button>
-              ))}
+              {newArticleSection &&
+                newArticleSection.links?.map((link, i) => (
+                  <Button
+                    variant={'secondary'}
+                    link={link.url}
+                    key={`article-link-${i}`}
+                  >
+                    {link.title}
+                  </Button>
+                ))}
             </div>
           </GridColumn>
         </Grid>
