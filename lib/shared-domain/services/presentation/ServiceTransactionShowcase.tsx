@@ -21,11 +21,6 @@ export const ServiceTransactionShowcase: React.FC<{
         title: section.linkText,
         page: siteSettings?.transactionsOverviewPage?.slug?.current,
       }}
-      // transactionLinkText={section.linkText}
-      // viewAllButton={{
-      //   href: siteSettings?.transactionsOverviewPage?.slug?.current,
-      //   title: section.linkTextInTransactionCard,
-      // }}
     />
   );
 };
