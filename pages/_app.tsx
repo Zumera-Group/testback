@@ -25,6 +25,9 @@ function MyApp({ Component, pageProps, router }) {
     }
   }, []);
 
+  // const lang = router.locale;
+  // const slug = router.state.asPath.
+
   return (
     <>
       <Head>
@@ -54,6 +57,7 @@ function MyApp({ Component, pageProps, router }) {
         defer
         src="https://assets.calendly.com/assets/external/widget.js"
       />
+      {/*<link rel="canonical" href={`https://www.zumera.com/${lang}/${slug}`} />*/}
     </>
   );
 }

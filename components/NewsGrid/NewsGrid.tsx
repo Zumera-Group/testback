@@ -29,7 +29,9 @@ interface Props {
   shouldHidePeopleUpdates?: boolean;
   initialNumberOfRepetitions?: number;
   titleAlign?: 'left' | 'center' | 'right';
-  highlightedArticleSection?: any;
+  firstHighlightedArticleSection?: any;
+  secondHighlightedArticleSection?: any;
+  tilesToShow?: number;
 }
 
 export const NewsGrid: React.FC<Props> = ({
@@ -48,7 +50,9 @@ export const NewsGrid: React.FC<Props> = ({
   shouldHidePeopleUpdates,
   initialNumberOfRepetitions = 1,
   titleAlign,
-  highlightedArticleSection,
+  firstHighlightedArticleSection,
+  secondHighlightedArticleSection,
+  tilesToShow = 6,
 }) => {
   const [numberOfRepetitions, setNumberOfRepetitions] = useState(
     initialNumberOfRepetitions,
@@ -111,6 +115,7 @@ export const NewsGrid: React.FC<Props> = ({
   }
 
   const all = [...transactions, ...news, ...employees];
+
   const emptyNews = new Array(all.length).fill(undefined);
   const sortedNews = [...transactions, ...news]
     .map((item) => ({
@@ -140,7 +145,8 @@ export const NewsGrid: React.FC<Props> = ({
     }
     emptyNews[i] = item;
   }
-  const chunkedArray = sliceIntoChunks(emptyNews, 10);
+
+  const chunkedArray = sliceIntoChunks(emptyNews, tilesToShow);
   const displayItems = chunkedArray.slice(0, numberOfRepetitions);
 
   return (
@@ -159,7 +165,8 @@ export const NewsGrid: React.FC<Props> = ({
             key={index}
             cardsRow={chunk}
             isFirstChunk={index === 0}
-            highlightedArticleSection={highlightedArticleSection}
+            firstHighlightedArticleSection={firstHighlightedArticleSection}
+            secondHighlightedArticleSection={secondHighlightedArticleSection}
           />
         ))}
 

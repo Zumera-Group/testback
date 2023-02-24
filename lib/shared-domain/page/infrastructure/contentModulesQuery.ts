@@ -53,6 +53,11 @@ export const contentModulesQuery = (
         url
       },
     },
+    photo {
+      asset->{
+        url
+      },
+    },
     logo1 {
       asset->{
         url
@@ -383,6 +388,22 @@ export const contentModulesQuery = (
           url
         },
       },
+      optionalUI {
+      	involvedParty1 {
+      		...,
+      		companyLogo {
+				asset->{
+				  url
+				},
+			 },
+      	}
+      },
+      sectors[]-> {
+        name
+      },
+      typeOfService-> {
+		name
+	  },
     },
     offices[]-> {
       ...,
@@ -490,7 +511,23 @@ export const contentModulesQuery = (
 		 ...,
 	   }
     },
-    highlightedArticleSection {
+    firstHighlightedArticleSection {
+    	...,
+		highlightedPage ->  {
+			...,
+			picture {
+				asset->{
+				  url
+				},
+			  },
+		},
+		customTitleImage { 
+			asset->{
+				  url
+				},
+		},
+    }, 
+    secondHighlightedArticleSection {
     	...,
 		highlightedPage ->  {
 			...,

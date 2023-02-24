@@ -12,8 +12,8 @@ import { Box } from '../../../../../components/Layout/Flex/Flex';
 import { SanityBlockContent } from '../../../../../components/SanityBlockContent';
 import { P } from 'components/Typography/P';
 import { CardDownload } from '../../../newsArticle/presentation/newsCards';
-import industryReportbgImage from '../../../../../public/contentModules/industryReportSection/bg.jpg';
-import industryReportbgMobileImage from '../../../../../public/contentModules/industryReportSection/bg-mobile.jpg';
+// import industryReportbgImage from '../../../../../public/contentModules/industryReportSection/bg.jpg';
+// import industryReportbgMobileImage from '../../../../../public/contentModules/industryReportSection/bg-mobile.jpg';
 
 export const IndustryReportSection: React.FC<{
   specificContentModule: IndustryReportSectionModule;
@@ -27,11 +27,11 @@ export const IndustryReportSection: React.FC<{
 
   return (
     <FlexCol
-      backgroundImage={
-        isMobile
-          ? `url(${industryReportbgMobileImage.src})`
-          : `url(${industryReportbgImage.src})`
-      }
+      // backgroundImage={
+      //   isMobile
+      //     ? `url(${industryReportbgMobileImage.src})`
+      //     : `url(${industryReportbgImage.src})`
+      // }
       backgroundPosition="center"
       backgroundSize="cover"
       backgroundRepeat="no-repeat"

@@ -1,5 +1,4 @@
 import React from 'react';
-import { Box } from '@chakra-ui/react';
 import { getTranslateByScope } from 'translation/i18n';
 import { Question } from '../../../domain/index';
 import { useAnswers } from 'lib/shared-domain/questionnaire/application/useAnswers';
@@ -37,14 +36,14 @@ export const TextInput: React.FC<{
           <RequiredQuestionInfo isRequired={question?.isRequired} />
         </QuestionText>
 
-        <Box mt={5} mb={6} className={styles.textInputWrapper}>
+        <div className={styles.textInputWrapper}>
           <Textarea
             id={question._id}
             value={getAnswer()}
             onChange={(e) => setAnswer(e.target.value)}
             placeholder={placeholder}
           />
-        </Box>
+        </div>
       </QuestionAnimation>
       <QuestionButtonsWrapper>
         <div className={styles.buttonOuter}>

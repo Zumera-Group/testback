@@ -4,35 +4,35 @@ import { TransactionBig } from 'components/NewsGrid/Cards/TransactionBig';
 import { Employee } from 'components/NewsGrid/Cards/Employee';
 import styles from './Cards.module.scss';
 import { Grid, GridColumn } from 'components/Layout';
+import { useSharedContentContext } from 'lib/shared-domain/page/infrastructure/sharedContentContext';
 
 export const CardsNew = ({
   cardsRow,
-  highlightedArticleSection,
+  firstHighlightedArticleSection,
+  secondHighlightedArticleSection,
   isFirstChunk,
 }) => {
-  const {
-    highLightedArticle,
-    customTitle,
-    customTitleLink,
-    customTitleImage,
-    date,
-  } = highlightedArticleSection || {};
-  const hasHighlighted = highLightedArticle;
-  const highlightedCard = {
-    ...highlightedArticleSection?.highlightedPage,
-    title: customTitle || highlightedArticleSection?.highlightedPage?.title,
-    customLink: customTitleLink,
-    date: date || highlightedArticleSection?.highlightedPage?.date,
-    picture:
-      customTitleImage || highlightedArticleSection?.highlightedPage?.picture,
-    _type: customTitle
-      ? 'newsArticle'
-      : highlightedArticleSection?.highlightedPage?._type,
-  };
+  const { downloadButtonContent } = useSharedContentContext();
+  // console.log(downloadButtonContent);
+  const { highLightedArticle } = firstHighlightedArticleSection || {};
+  const { highLightedArticle: secondHighLightedArticle } =
+    secondHighlightedArticleSection || {};
+  const hasFirstHighlightedCard = highLightedArticle;
+  const hasSecondHighlightedCard = secondHighLightedArticle;
+  const firstHighlightedCard = getHighlightedData(
+    firstHighlightedArticleSection,
+  );
+  const secondHighlightedCard = getHighlightedData(
+    secondHighlightedArticleSection,
+  );
 
-  const firstCard = hasHighlighted ? highlightedCard : cardsRow[0];
+  const firstCard = hasFirstHighlightedCard
+    ? firstHighlightedCard
+    : cardsRow[0];
+  const secondCard = hasSecondHighlightedCard ? secondHighlightedCard : false;
   const secondCards = [cardsRow[1], cardsRow[2]];
-  const othersCards = isFirstChunk ? cardsRow.slice(3) : cardsRow;
+  const othersCards =
+    isFirstChunk && !secondCard ? cardsRow.slice(3) : cardsRow;
 
   const cards = [];
   othersCards.forEach((item, index) => {
@@ -67,23 +67,37 @@ export const CardsNew = ({
         <Grid className={styles.grid}>
           <GridColumn
             sm={12}
-            md={hasHighlighted ? 6 : 5}
-            lg={hasHighlighted ? 6 : 5}
+            md={hasFirstHighlightedCard ? 6 : 5}
+            lg={hasFirstHighlightedCard ? 6 : 5}
             className={[
               styles.col,
-              hasHighlighted ? styles.highlighted : '',
+              hasFirstHighlightedCard ? styles.highlighted : '',
             ].join(' ')}
           >
             {getBigCardType(firstCard)}
           </GridColumn>
-          <GridColumn
-            sm={12}
-            md={hasHighlighted ? 6 : 7}
-            lg={hasHighlighted ? 6 : 7}
-            className={[styles.col, styles.twoNewsTile].join(' ')}
-          >
-            {secondCards.map((subArticle) => getSmallCardType(subArticle))}
-          </GridColumn>
+          {secondCard ? (
+            <GridColumn
+              sm={12}
+              md={6}
+              lg={6}
+              className={[
+                styles.col,
+                secondHighlightedCard ? styles.highlighted : '',
+              ].join(' ')}
+            >
+              {getBigCardType(secondCard)}
+            </GridColumn>
+          ) : (
+            <GridColumn
+              sm={12}
+              md={hasFirstHighlightedCard ? 6 : 7}
+              lg={hasFirstHighlightedCard ? 6 : 7}
+              className={[styles.col, styles.twoNewsTile].join(' ')}
+            >
+              {secondCards.map((subArticle) => getSmallCardType(subArticle))}
+            </GridColumn>
+          )}
         </Grid>
       ) : null}
       {sliceIntoChunks(cards, 2).map((row, i) => {
@@ -130,6 +144,25 @@ export const CardsNew = ({
   );
 };
 
+const getHighlightedData = (highlightedSection) => {
+  const {
+    highlightedPage,
+    customTitle,
+    customTitleLink,
+    customTitleImage,
+    date,
+  } = highlightedSection || {};
+  return {
+    ...highlightedPage,
+    title: customTitle || highlightedPage?.title,
+    customLink: customTitleLink,
+    date: date || highlightedPage?.date,
+    picture: customTitleImage || highlightedPage?.picture,
+    _type:
+      customTitle || customTitleLink ? 'newsArticle' : highlightedPage?._type,
+  };
+};
+
 function sliceIntoChunks(arr, chunkSize) {
   const res = [];
   for (let i = 0; i < arr.length; i += chunkSize) {
@@ -144,13 +177,13 @@ const getBigCardType = (card) => {
     return null;
   }
   if (card._type === 'newsArticle') {
-    return <NewsBig article={card} />;
+    return <NewsBig article={card} key={card._id} />;
   }
   if (card._type === 'employee') {
-    return <Employee article={card} />;
+    return <Employee article={card} key={card._id} />;
   }
   if (card._type === 'transaction') {
-    return <TransactionBig article={card} />;
+    return <TransactionBig article={card} key={card._id} />;
   }
 };
 
@@ -160,16 +193,15 @@ const getSmallCardType = (card) => {
   }
   if (card._type === 'newsArticle') {
     return card.secondPicture || card.picture ? (
-      <NewsBig article={card} />
+      <NewsBig article={card} key={card._id} />
     ) : (
-      <TwoNews article={card} />
+      <TwoNews article={card} key={card._id} />
     );
-    // return <TwoNews article={card} />;
   }
   if (card._type === 'employee') {
-    return <Employee article={card} />;
+    return <Employee article={card} key={card._id} />;
   }
   if (card._type === 'transaction') {
-    return <TransactionBig article={card} />;
+    return <TransactionBig article={card} key={card._id} />;
   }
 };

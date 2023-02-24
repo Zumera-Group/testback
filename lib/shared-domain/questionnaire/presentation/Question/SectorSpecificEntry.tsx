@@ -1,8 +1,6 @@
 import React from 'react';
 import { QuestionText } from './QuestionText/index';
 import { getTranslateByScope } from '../../../../../translation/i18n';
-import { P } from 'components/Typography/P';
-import { colors } from '../../../../../styles/foundations/colors';
 import { ResultTeaser } from '../CalculatorTeaser';
 import { QuestionButtons } from './QuestionButtons';
 import { useValuationStore } from '../../store/index';
@@ -41,9 +39,7 @@ export const SectorSpecificEntry: React.FC<{
       )}
       <QuestionAnimation>
         <QuestionText title={t('questionText')} />
-        <P variant="mobileSectorSpecificEntryP" color={'white'} pl={'0.75rem'}>
-          {t('subtitle')}
-        </P>
+        <p>{t('subtitle')}</p>
         <ResultTeaser calculatorSteps={calculatorSteps} isSectorSpecificEntry />
       </QuestionAnimation>
       <QuestionButtonsWrapper>

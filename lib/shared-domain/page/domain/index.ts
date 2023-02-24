@@ -28,6 +28,7 @@ export interface Page {
       url: string;
     };
   };
+  hidePage: boolean;
   contentModules: {
     _key: string;
     _type: ContentModuleType;
@@ -223,6 +224,7 @@ export interface Sector {
   _id: string;
   _lang: string;
   description: string;
+  hidePage: boolean;
   heroSectionSubtitles: string[];
   growthRatesTable: {
     growthRatesTableTitle: string;
@@ -414,6 +416,7 @@ export interface Service {
   slug: {
     current: string;
   };
+  hidePage: boolean;
   tabs: Tab[];
 }
 

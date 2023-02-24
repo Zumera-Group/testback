@@ -12,22 +12,20 @@ export const TwoNews = ({ article }) => {
 
   if (!article) return null;
 
-  const { _id, title, date } = article;
-  const href = links().newsArticles(article);
+  const { _id, title, date, customLink } = article;
+  const href = customLink ? customLink : links().newsArticles(article);
   const dateFormatted = date ? format(new Date(date)) : null;
 
   return (
     <article key={`twoNews-${_id}`} className={styles.twoNews}>
-      <Link
-        passHref
-        href={href}
-      >
-        <a className={styles.link}>
+      <Link passHref href={href}>
+        <a
+          className={styles.link}
+          target={customLink ? '_blank' : ''}
+          rel={customLink ? 'noopener noreferrer' : ''}
+        >
           {date && (
-            <time
-              dateTime={date}
-              className={styles.date}
-            >
+            <time dateTime={date} className={styles.date}>
               {dateFormatted}
             </time>
           )}

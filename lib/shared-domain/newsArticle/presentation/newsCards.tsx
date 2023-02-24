@@ -14,8 +14,8 @@ import { FlexCol } from '../../../../components/Layout/Flex/Flex';
 import Link from 'next/link';
 import { Btn } from 'components/Buttons/Button';
 import { icons } from 'components/Icons';
-import downloadBgImage from '../../../../public/contentModules/newsGridSection/download-bg.png';
-import fallback from '../../employees/fallback_squared.jpg';
+// import downloadBgImage from '../../../../public/contentModules/newsGridSection/download-bg.png';
+// import fallback from '../../employees/fallback_squared.jpg';
 import { Input } from 'components/Inputs';
 import { useSharedContentContext } from 'lib/shared-domain/page/infrastructure/sharedContentContext';
 import { MarketingParamsService } from 'lib/shared-domain/salesforce/application/marketingParamsService';
@@ -365,13 +365,13 @@ const EmployeeCard: React.FC<{ image: string } & Props> = ({ ...props }) => (
           />
         ) : (
           <Flex inset={0} position="absolute">
-            <Image
-              loading="lazy"
-              unoptimized
-              objectFit="cover"
-              src={fallback}
-              alt={''}
-            />
+            {/*<Image*/}
+            {/*  loading="lazy"*/}
+            {/*  unoptimized*/}
+            {/*  objectFit="cover"*/}
+            {/*  src={fallback}*/}
+            {/*  alt={''}*/}
+            {/*/>*/}
           </Flex>
         )}
         <FlexCol
@@ -445,7 +445,7 @@ export const CardDownload: React.FC<{
   const BG = bgLight
     ? { background: colors.white }
     : {
-        backgroundImage: `url(${noBg ? '' : downloadBgImage.src})`,
+        // backgroundImage: `url(${noBg ? '' : downloadBgImage.src})`,
         backgroundPosition: 'center',
         backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat',

@@ -115,6 +115,12 @@ export default function Index({
     }
   }, []);
 
+  useEffect(() => {
+    if (selectedSector?.hidePage) {
+      router.push(`/${router.locale}/home`);
+    }
+  }, [selectedSector?.hidePage, router]);
+
   if (router.isFallback) {
     return null;
   }

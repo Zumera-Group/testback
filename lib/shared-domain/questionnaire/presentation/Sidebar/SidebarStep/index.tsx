@@ -1,11 +1,7 @@
-import { Box, Flex } from '@chakra-ui/react';
-import { Tick } from 'components/Icons/Tick';
-import { FlexCol } from 'components/Layout/Flex/Flex';
-import { P } from 'components/Typography/P';
 import { Category, Question } from 'lib/shared-domain/questionnaire/domain';
 import { useValuationStore } from 'lib/shared-domain/questionnaire/store';
 import React, { useEffect, useState } from 'react';
-import { SidebarChildStep } from '../SidebarChildStep';
+
 import styles from './SidebarStep.module.scss';
 
 interface Props {
@@ -32,28 +28,6 @@ export const SidebarStep = ({
     if (!isActive && isOpen) setIsOpen(false);
   }, [isActive, isOpen, mainStep]);
 
-  const renderSubSteps = (question: Question, index: number) => {
-    const prevQuestion = category.questions[index - 1];
-
-    const prevQuestionHasSameName =
-      prevQuestion?.navigationTitle === question?.navigationTitle;
-
-    if (prevQuestionHasSameName) return;
-
-    return (
-      <>
-        <SidebarChildStep
-          categoryIndex={categoryIndex}
-          category={category}
-          key={index}
-          question={question}
-          index={index}
-          currentQuestion={currentQuestion}
-        />
-      </>
-    );
-  };
-
   const isCurrentOrPrevCategory = categoryIndex <= mainStep;
   const isLastQuestionFromPrevCategory = !prevCategory?.questions[subStep + 1];
   const isNextCategory = categoryIndex === mainStep + 1;
@@ -64,25 +38,41 @@ export const SidebarStep = ({
 
   const activeItem = isActive ? styles.active : styles.inactive;
 
-  return (
-    <FlexCol justify="center" w="100%" className={styles.sideBarWrapper}>
-      <Box>
-        <Flex className={[styles.stepItem].join(' ')}>
-          <P className={styles.stepItemIndex}>
-            {isClickable && !isActive && !isNextCategory ? (
-              <span className={styles.tick}>
-                <Tick color="#F0005C" size={18} />
-              </span>
-            ) : (
-              <span className={activeItem}>{`${categoryIndex + 1}.`}</span>
-            )}
-          </P>
+  const Tick = () => {
+    return (
+      <svg
+        viewBox="0 0 10 8"
+        focusable="false"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M9 1L3.5 6.5L1 4"
+          stroke="#F0005C"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        ></path>
+      </svg>
+    );
+  };
 
-          <P className={[styles.stepItemName, activeItem].join(' ')}>
-            {category.categoryName}
-          </P>
-        </Flex>
-      </Box>
-    </FlexCol>
+  return (
+    <div className={styles.sideBarWrapper}>
+      <div className={[styles.stepItem].join(' ')}>
+        <p className={styles.stepItemIndex}>
+          {isClickable && !isActive && !isNextCategory ? (
+            <span className={styles.tick}>
+              <Tick />
+            </span>
+          ) : (
+            <span className={activeItem}>{`${categoryIndex + 1}.`}</span>
+          )}
+        </p>
+
+        <p className={[styles.stepItemName, activeItem].join(' ')}>
+          {category.categoryName}
+        </p>
+      </div>
+    </div>
   );
 };

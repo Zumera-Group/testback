@@ -5,7 +5,7 @@ import { SimpleGrid } from '@chakra-ui/react';
 import useBreakpointValue from 'lib/shared-domain/useBreakpoint';
 import { P } from '../../../../components/Typography/P';
 import { NewsArticle } from '../domain/index';
-import reportDownloadBg from 'public/newsDetail/reportDownloadBg-min.jpg';
+// import reportDownloadBg from 'public/newsDetail/reportDownloadBg-min.jpg';
 import { colors } from '../../../../styles/foundations/colors';
 import { CardDownload } from './newsCards';
 
@@ -27,7 +27,7 @@ export const NewsArticleReportDownload: React.FC<{
     : 'reportDownloadDescription';
   return (
     <FlexCol
-      backgroundImage={`url(${reportDownloadBg.src})`}
+      // backgroundImage={`url(${reportDownloadBg.src})`}
       backgroundPosition="center"
       backgroundSize="cover"
       backgroundRepeat="no-repeat"

@@ -13,7 +13,6 @@ interface Props {
 
 export const Sectors: React.FC<Props> = ({ ...rest }) => {
   const { title, subtitle, description, sectors } = rest;
-
   return (
     <Section size={'md'} bg={'light'} color={'primary'}>
       <Container classes={styles.container}>

@@ -112,9 +112,9 @@ const Card: React.FC<{
 export const EmployeeCarouselSection: React.FC<{
   specificContentModule: EmployeeCarouselSectionModule;
 }> = ({ specificContentModule }) => {
-  const Carousel = dynamic(() => import('./SpringCarousel'), {
-    ssr: false,
-  });
+  // const Carousel = dynamic(() => import('./SpringCarousel'), {
+  //   ssr: false,
+  // });
   const jobs = useFetchJobs();
   const [slides, setSlides] = React.useState([]);
 
@@ -211,13 +211,13 @@ export const EmployeeCarouselSection: React.FC<{
           height="550px"
         >
           {/*// @ts-ignore*/}
-          <Carousel
-            offsetRadius={2}
-            animationConfig={{ tension: 120, friction: 14 }}
-            showNavigation={true}
-            slides={slides}
-            goToSlideDelay={200}
-          />
+          {/*<Carousel*/}
+          {/*  offsetRadius={2}*/}
+          {/*  animationConfig={{ tension: 120, friction: 14 }}*/}
+          {/*  showNavigation={true}*/}
+          {/*  slides={slides}*/}
+          {/*  goToSlideDelay={200}*/}
+          {/*/>*/}
         </FlexCol>
       </Flex>
     </SectionContainer>

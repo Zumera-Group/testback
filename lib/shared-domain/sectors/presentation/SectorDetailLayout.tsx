@@ -13,13 +13,13 @@ import { SectorNews } from './SectorNews';
 import { SectorMoreDetails } from './SectorMoreDetails';
 import { SEO } from 'components/SEO';
 import { ServiceQuestionnaire } from 'lib/shared-domain/services/presentation/ServiceQuestionnaire';
-import { useFetchTransactions } from '../../newsArticle/presentation/NewsArticleMoreNews_DISABLED';
 import { useFetchNewsArticles } from '../../newsArticle/application/useGetNewsArticles';
 import { useFetchEmployees } from '../../employees/application/useGetEmployees';
 import { links } from 'lib/links';
 import { useRouter } from 'next/router';
 import { IndustryReportSection } from '../../page/presentation/contentModules/IndustryReportSection';
 import ContactUsSection from 'lib/shared-domain/page/presentation/contentModules/ContactUsSection';
+import { useFetchTransactions } from 'components/NewsArticle/NewsArticleMoreNews';
 
 export const SectorDetailLayout: React.FC<{
   sector: Sector;

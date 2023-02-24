@@ -228,13 +228,14 @@ export class TransactionGridSectionModule extends BaseModule {
     name: string;
   }[];
   dropdownsTitle: string;
-
+  hideSectorFilter: boolean;
   constructor(fields: Record<string, any>) {
     super();
     this.buttonText = fields.buttonText;
     this.sectorsDropdown = fields.sectorsDropdown;
     this.servicesDropdown = fields.servicesDropdown;
     this.dropdownsTitle = fields.dropdownsTitle;
+    this.hideSectorFilter = fields.hideSectorFilter;
   }
 
   get sortedSectors(): { name: string }[] {
@@ -316,10 +317,6 @@ export class CDIGlobalSectionModule extends BaseModule {
     this.locations = fields.locations;
     this.sectionType = fields.sectionType;
   }
-
-  getSectionImage(image: 'bg' | 'bubble' | 'map'): string {
-    return sectionImages.cdiGlobalSection[image].src;
-  }
 }
 
 export class SectorHeaderSectionModule extends BaseModule {
@@ -371,10 +368,6 @@ export class TransactionsCarouselSectionModule extends BaseModule {
     this.linkText = fields.linkText;
     this.transactions = fields.transactions;
   }
-
-  getTransactionBg(): string {
-    return sectionImages.trustSectionBgImage.src;
-  }
 }
 
 export class AllTransactionsCarouselSectionModule extends BaseModule {
@@ -397,10 +390,6 @@ export class AllTransactionsCarouselSectionModule extends BaseModule {
     this.showAll = fields.showAll;
     this.sectors = fields.sectors;
     this.button = fields.button;
-  }
-
-  getTransactionBg(): string {
-    return sectionImages.trustSectionBgImage.src;
   }
 }
 
@@ -486,7 +475,9 @@ export class NewsGridSectionModule extends BaseModule {
   displayDownload: boolean;
   shouldHideCDITransactions?: boolean;
   shouldHidePeopleUpdates?: boolean;
-  highlightedArticleSection?: any;
+  firstHighlightedArticleSection?: any;
+  secondHighlightedArticleSection?: any;
+  tilesToShow: number;
   constructor(fields: Record<string, any>) {
     super();
 
@@ -504,7 +495,10 @@ export class NewsGridSectionModule extends BaseModule {
 
     this.displayDownload = fields.displayDownload;
 
-    this.highlightedArticleSection = fields.highlightedArticleSection;
+    this.firstHighlightedArticleSection = fields.firstHighlightedArticleSection;
+    this.secondHighlightedArticleSection =
+      fields.secondHighlightedArticleSection;
+    this.tilesToShow = fields.tilesToShow;
   }
 }
 
@@ -851,6 +845,7 @@ export enum serviceDetailSectionNames {
 }
 
 export type ContentModuleType =
+  | 'transactionQuote'
   | 'stickyFooter'
   | 'stepsDownBulletsSection'
   | 'vtServicesSection'
@@ -926,6 +921,7 @@ export type ContentModuleType =
 abstract class ContentModuleTypeFactory {
   static createInstance(type: ContentModuleType, fields: Record<string, any>) {
     if (type === 'stickyFooter') return new StickyFooterModule(fields);
+    if (type === 'transactionQuote') return new TransactionQuoteModule(fields);
     if (type === 'stepsDownBulletsSection')
       return new StepsDownBulletsSectionModule(fields);
     if (type === 'vtServicesSection')
@@ -1612,5 +1608,25 @@ export class StickyFooterModule extends BaseModule {
   constructor(fields: Record<string, any>) {
     super();
     this.button = fields.button;
+  }
+}
+
+export class TransactionQuoteModule extends BaseModule {
+  title: string;
+  subtitle: string;
+  quoteText: string;
+  name: string;
+  position: string;
+  photo: any;
+  transaction: Transaction;
+  constructor(fields: Record<string, any>) {
+    super();
+    this.title = fields.title;
+    this.subtitle = fields.subtitle;
+    this.quoteText = fields.quoteText;
+    this.position = fields.position;
+    this.name = fields.name;
+    this.photo = fields.photo;
+    this.transaction = fields.transaction;
   }
 }

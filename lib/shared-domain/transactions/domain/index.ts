@@ -38,6 +38,7 @@ export interface Transaction {
     current: string;
   };
   _lang: string;
+  hidePage: boolean;
   optionalUI?: optionalUI;
   sectors?: Sector[];
   typeOfService: {
@@ -73,4 +74,7 @@ export interface Transaction {
   peopleInvolved: Employee[];
   hasCDIRelation: boolean;
   newsPressRelease: NewsArticle;
+  highlightSellers: string[];
+  highlightSellersTitle: string;
+  representationHeadline: string;
 }

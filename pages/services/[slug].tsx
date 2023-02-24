@@ -119,6 +119,12 @@ export default function Index({
     }
   }, []);
 
+  useEffect(() => {
+    if (selectedService?.hidePage) {
+      router.push(`/${router.locale}/home`);
+    }
+  }, [selectedService?.hidePage, router]);
+
   if (router.isFallback) {
     return null;
   }

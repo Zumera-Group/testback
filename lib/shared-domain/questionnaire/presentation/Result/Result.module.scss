@@ -18,8 +18,10 @@
 }
 
 .resultForm {
+  width: 100%;
+  max-width: 700px;
   @include breakpoint-down(md) {
-    padding: 0 $gutter;
+    padding: 0;
   }
 }
 

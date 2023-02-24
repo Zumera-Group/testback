@@ -30,7 +30,6 @@ export const NewsGridSection: React.FC<{
       setEmployees(t);
     });
   }, [router.locale]);
-
   return (
     <NewsGrid
       {...specificContentModule}

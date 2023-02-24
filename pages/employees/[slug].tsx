@@ -125,6 +125,12 @@ export default function Index({
     }
   }, []);
 
+  useEffect(() => {
+    if (selectedEmployee?.hidePage) {
+      router.push(`/${router.locale}/home`);
+    }
+  }, [selectedEmployee?.hidePage, router]);
+
   if (router.isFallback) {
     return (
       <>

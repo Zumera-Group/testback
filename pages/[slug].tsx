@@ -25,6 +25,7 @@ import { enPaths as en, dePaths as de } from '../lib/shared-domain/page/paths';
 import { REVALIDATE_ON_SUCCESS_IN_SECONDS } from '../lib/shared-domain/page/constants';
 import { useEffect, useState } from 'react';
 import { SecretKeyLockScreen } from 'components/SecretKeyLockScreen';
+import Custom404Page from 'pages/404';
 
 export async function getStaticPaths() {
   const enPaths = en.map((slug) => ({
@@ -47,13 +48,11 @@ export async function getStaticProps({ locale, params, preview = false }) {
   try {
     const data = await fetchPage(locale, params.slug, preview);
 
-    const { page, query, siteSettings, sharedContent } = data;
+    const { page, query, siteSettings = {}, sharedContent } = data;
 
     if (!page) {
       return {
-        redirect: {
-          destination: `/${locale}/404`,
-        },
+        notFound: true,
       };
     }
 
@@ -96,9 +95,7 @@ export default function Index({
     initialData: page,
     enabled: preview,
   });
-
   const previewPage = filterDataToSingleItem(previewData, preview);
-
   const router = useRouter();
 
   useEffect(() => {
@@ -121,6 +118,19 @@ export default function Index({
       setIsSecretOpen(true);
     }
   }, []);
+
+  useEffect(() => {
+    if (router.isFallback) {
+      router.push(`/${router.locale}/404`);
+    }
+  }, [router]);
+
+  useEffect(() => {
+    if (page?.hidePage) {
+      router.push(`/${router.locale}/home`);
+      return;
+    }
+  }, [page, router]);
 
   if (router.isFallback) {
     return null;

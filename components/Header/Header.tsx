@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { AnimatePresence } from 'framer-motion';
 
@@ -6,7 +6,13 @@ import { useRouter } from 'next/router';
 
 import { Logo } from 'components/Logo';
 import { Container } from 'components/Layout';
-import { Hamburger, Menu, BigMenu, LanguageSwitcher, AnnouncementTopBanner } from 'components/Header';
+import {
+  Hamburger,
+  Menu,
+  BigMenu,
+  LanguageSwitcher,
+  AnnouncementTopBanner,
+} from 'components/Header';
 
 import { useLinkWithCurrentLocale } from 'lib/shared-domain/useLinkWithCurrentLocale';
 import {
@@ -18,6 +24,9 @@ import {
 import { LogoExtended } from 'components/Icons/LogoExtended';
 
 import styles from './Header.module.scss';
+import { getTranslateByScope } from 'translation/i18n';
+
+const t = getTranslateByScope('question');
 
 export const Header = ({
   siteSettings,
@@ -33,14 +42,15 @@ export const Header = ({
 }) => {
   const [bigMenuOpen, setBigMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-
+  const [scrollPosition, setScrollPosition] = useState(0);
   const { headerMenu, siteName } = siteSettings;
 
   const router = useRouter();
   const linkWithCurrentLocale = useLinkWithCurrentLocale();
   const homeSlug = linkWithCurrentLocale(siteSettings?.homePage?.slug?.current);
-  
-  const isQuestionnaire = () => router.locale === 'en' ? '/questionnaires/' : '/fragenkatalog/';
+
+  const isQuestionnaire = () =>
+    router.locale === 'en' ? '/questionnaires/' : '/fragenkatalog/';
   const hideTopBanner = router.asPath.includes(isQuestionnaire());
 
   const isLightPage = () => {
@@ -110,6 +120,20 @@ export const Header = ({
     }
   }, [bigMenuOpen]);
 
+  const setScroll = () => {
+    let offset =
+      window.scrollY / (document.body.offsetHeight - window.innerHeight);
+    setScrollPosition(offset);
+  };
+
+  useEffect(() => {
+    document.addEventListener('scroll', setScroll);
+
+    return () => {
+      document.removeEventListener('scroll', setScroll);
+    };
+  }, []);
+
   return (
     <>
       {siteSettings?.announcementTopBanner?.isEnabled && !hideTopBanner && (
@@ -131,6 +155,7 @@ export const Header = ({
             !hideTopBanner &&
             styles.withBanner,
         ].join(' ')}
+        style={{ '--scroll-position': scrollPosition } as React.CSSProperties}
       >
         <Container classes={[styles.container].join('')}>
           <div className={styles.logoWrapper}>
@@ -165,7 +190,7 @@ export const Header = ({
 
           {indicator && (
             <div className={styles.questionIndicator}>
-              Question{' '}
+              {t('question')}{' '}
               {indicator?.current > indicator?.total
                 ? indicator?.current - 1
                 : indicator?.current}{' '}

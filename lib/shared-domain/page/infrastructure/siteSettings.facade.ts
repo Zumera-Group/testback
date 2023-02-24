@@ -61,7 +61,8 @@ export const querySiteSettings = (
     menuItems[] {
       name,
       page->{
-        slug
+        slug,
+        _type
       }
     },
     toolsMenuItems[] {
@@ -81,14 +82,16 @@ export const querySiteSettings = (
     ...,
     name,
     page->{
-      slug
+      slug,
+       _type
     }
   },
   hamburgerMenu[] {
     ...,
     name,
     page->{
-      slug
+      slug,
+       _type
     },
     serviceMenuItems[]-> {
       ...,

@@ -7,7 +7,7 @@ import { FlexCol, Box } from 'components/Layout/Flex/Flex';
 import { SectionContainer } from 'components/Layout/SectionContainer';
 import { LinkWithArrow } from 'lib/shared-domain/page/presentation/components/LinkWithArrow';
 import { TitleWithSubtitleAndDescription } from 'lib/shared-domain/page/presentation/components/TitleWithSubtitleAndDescription';
-import backgroundImage from '../../../../../public/transactionDetail/sector-section-bg.png';
+// import backgroundImage from '../../../../../public/transactionDetail/sector-section-bg.png';
 import { colors } from 'styles/foundations/colors';
 
 export const SectorHeader: React.FC<{
@@ -25,7 +25,7 @@ export const SectorHeader: React.FC<{
       position="relative"
       width="100%"
       justifyContent="center"
-      backgroundImage={`url(${backgroundImage.src})`}
+      // backgroundImage={`url(${backgroundImage.src})`}
       backgroundSize="cover"
       backgroundRepeat="no-repeat"
       backgroundAttachment={!isMobile && 'fixed'}

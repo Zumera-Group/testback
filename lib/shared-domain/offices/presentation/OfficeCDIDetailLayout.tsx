@@ -10,7 +10,7 @@ import { ContactUsSection } from 'lib/shared-domain/page/presentation/contentMod
 import { PageFooter } from '../../page/presentation/PageFooter';
 import { OfficeCDINews } from './OfficeCDINews';
 import { useFetchNewsArticles } from '../../newsArticle/application/useGetNewsArticles';
-import { useFetchTransactions } from '../../newsArticle/presentation/NewsArticleMoreNews_DISABLED';
+import { useFetchTransactions } from 'components/NewsArticle/NewsArticleMoreNews';
 
 export const OfficeCDIDetailLayout: React.FC<{
   siteSettings: SiteSettings;

@@ -4,6 +4,7 @@ import { Button } from 'components/Button';
 import { TransactionCard } from './TransactionCard';
 
 import styles from './TransactionShowcase.module.scss';
+import { useRouter } from 'next/router';
 
 interface Props {
   title?: string;
@@ -14,8 +15,8 @@ interface Props {
 }
 
 export const TransactionShowcase: React.FC<Props> = ({ ...rest }) => {
+  const router = useRouter();
   const { title, subtitle, description, link, transaction } = rest;
-
   return (
     <Section as={'section'} size={'md'} bg={'light'} color={'primary'}>
       <Container>
@@ -33,7 +34,17 @@ export const TransactionShowcase: React.FC<Props> = ({ ...rest }) => {
             />
             {link?.title && (
               <div className={styles.btnWrapper}>
-                <Button variant={'secondary'} link={link.page}>
+                <Button
+                  variant={'secondary'}
+                  link={{
+                    slug: {
+                      current:
+                        router.locale === 'en'
+                          ? '/transactions'
+                          : '/transaktionen',
+                    },
+                  }}
+                >
                   {link?.title}
                 </Button>
               </div>
@@ -44,7 +55,10 @@ export const TransactionShowcase: React.FC<Props> = ({ ...rest }) => {
               <TransactionCard transaction={transaction} />
               {link?.title && (
                 <div className={styles.btnWrapperMobile}>
-                  <Button variant={'secondary'} link={link.page}>
+                  <Button
+                    variant={'secondary'}
+                    link={{ slug: { current: transaction?.slug?.current } }}
+                  >
                     {link?.title}
                   </Button>
                 </div>

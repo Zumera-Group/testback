@@ -63,6 +63,7 @@ export async function getStaticProps({ locale, params, preview = false }) {
         },
       };
     }
+
     const siteSettings = await fetchSiteSettings(locale);
     const content = await fetchNewsArticleDetailContent(locale);
     const sharedContent =
@@ -122,6 +123,12 @@ export default function Index({
       setIsSecretOpen(true);
     }
   }, []);
+
+  useEffect(() => {
+    if (selectedNewsArticle?.hidePage) {
+      router.push(`/${router.locale}/home`);
+    }
+  }, [selectedNewsArticle?.hidePage, router]);
 
   if (router.isFallback) {
     return null;

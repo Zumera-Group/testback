@@ -117,6 +117,12 @@ export default function Index({
     }
   }, []);
 
+  useEffect(() => {
+    if (selectedTransaction?.hidePage) {
+      router.push(`/${router.locale}/home`);
+    }
+  }, [selectedTransaction?.hidePage, router]);
+
   if (router.isFallback) {
     return null;
   }

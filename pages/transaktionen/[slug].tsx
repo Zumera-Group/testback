@@ -50,14 +50,6 @@ export async function getStaticProps({
       preview,
     );
 
-    if (!transactionDetail) {
-      return {
-        redirect: {
-          destination: `/${locale}/404`,
-        },
-      };
-    }
-
     const transactionDetailContent = await fetchTransactionDetailContent(
       locale,
     );
@@ -116,6 +108,12 @@ export default function Index({
       setIsSecretOpen(true);
     }
   }, []);
+
+  useEffect(() => {
+    if (selectedTransaction?.hidePage) {
+      router.push(`/${router.locale}/home`);
+    }
+  }, [selectedTransaction?.hidePage, router]);
 
   if (router.isFallback) {
     return null;

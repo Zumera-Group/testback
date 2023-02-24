@@ -24,8 +24,20 @@
     }
   }
 
+  .container:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: $border-width;
+    transform-origin: 50% 50%;
+    // Set the '--scroll-position' CSS var in the tsx component (0 - 1) based on page progress
+    transform: scaleX(var(--scroll-position));
+  }
+
   &:not(&__light):not(&__scrolled) {
-    .container {
+    .container:after {
       @include divider(bottom, $white);
     }
   }
@@ -38,17 +50,14 @@
     svg {
       fill: currentColor;
     }
-    .container {
+    .container:after {
       @include divider(bottom, $primary);
     }
   }
 
   &.hideBorder {
-    .container {
-      border-style: unset !important;
-      @include breakpoint-up(md) {
-        border-style: solid !important;
-      }
+    .container:after {
+      transform: scaleX(0) !important;
     }
   }
 }

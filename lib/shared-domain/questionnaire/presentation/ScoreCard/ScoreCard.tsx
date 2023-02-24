@@ -85,7 +85,7 @@ export const ScoreCard = () => {
                 loading="lazy"
                 objectFit="cover"
                 alt={'booklet'}
-                src={'/booklet.png'}
+                src={'/calculator/booklet.png'}
                 height={217}
                 width={217}
               />

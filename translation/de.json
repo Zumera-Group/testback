@@ -56,7 +56,8 @@
     "nextBtn": "Weiter",
     "skipBtn": "Überspringen",
     "required": "Eine Antwort wird benötigt",
-    "backBtn": "Zurück"
+    "backBtn": "Zurück",
+    "question": "Frage"
   },
   "result": {
     "loading": {

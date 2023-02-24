@@ -125,6 +125,13 @@ export default function Index({
       setIsSecretOpen(true);
     }
   }, []);
+
+  useEffect(() => {
+    if (selectedEmployee?.hidePage) {
+      router.push(`/${router.locale}/home`);
+    }
+  }, [selectedEmployee?.hidePage, router]);
+
   if (router.isFallback) {
     return (
       <>

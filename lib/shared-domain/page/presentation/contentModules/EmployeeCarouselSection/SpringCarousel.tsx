@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import styled from '@emotion/styled';
-import Slide from './SpringCarouselSlide';
-import leftNavigation from '../../../../../../public/contentModules/imageSliderSection/arrowLeft.svg';
-import rightNavigation from '../../../../../../public/contentModules/imageSliderSection/arrowRight.svg';
+// import Slide from './SpringCarouselSlide';
+// import leftNavigation from '../../../../../../public/contentModules/imageSliderSection/arrowLeft.svg';
+// import rightNavigation from '../../../../../../public/contentModules/imageSliderSection/arrowRight.svg';
 
 import PropTypes from 'prop-types';
 import { FlexCol } from 'components/Layout/Flex/Flex';
@@ -207,10 +207,10 @@ class Carousel extends Component<IProps, IState> {
             onClick={() => this.moveSlide(-1)}
             mr={3}
           >
-            <img
-              style={{ width: '8px', height: '14px' }}
-              src={leftNavigation.src}
-            />
+            {/*<img*/}
+            {/*  style={{ width: '8px', height: '14px' }}*/}
+            {/*  src={leftNavigation.src}*/}
+            {/*/>*/}
           </FlexCol>
           <FlexCol
             backgroundColor="white"
@@ -223,10 +223,10 @@ class Carousel extends Component<IProps, IState> {
             height="40px"
             onClick={() => this.moveSlide(1)}
           >
-            <img
-              style={{ width: '8px', height: '14px' }}
-              src={rightNavigation.src}
-            />
+            {/*<img*/}
+            {/*  style={{ width: '8px', height: '14px' }}*/}
+            {/*  src={rightNavigation.src}*/}
+            {/*/>*/}
           </FlexCol>
         </NavigationButtons>
       );
@@ -234,18 +234,18 @@ class Carousel extends Component<IProps, IState> {
     return (
       <React.Fragment>
         <Wrapper>
-          {this.getPresentableSlides().map(
-            (slide: any, presentableIndex: number) => (
-              <Slide
-                key={slide.key}
-                content={slide.content}
-                onClick={slide.onClick}
-                offsetRadius={this.clampOffsetRadius(offsetRadius)}
-                index={presentableIndex}
-                animationConfig={animationConfig}
-              />
-            ),
-          )}
+          {/*{this.getPresentableSlides().map(*/}
+          {/*  (slide: any, presentableIndex: number) => (*/}
+          {/*    <Slide*/}
+          {/*      key={slide.key}*/}
+          {/*      content={slide.content}*/}
+          {/*      onClick={slide.onClick}*/}
+          {/*      offsetRadius={this.clampOffsetRadius(offsetRadius)}*/}
+          {/*      index={presentableIndex}*/}
+          {/*      animationConfig={animationConfig}*/}
+          {/*    />*/}
+          {/*  ),*/}
+          {/*)}*/}
         </Wrapper>
         {navigationButtons}
       </React.Fragment>

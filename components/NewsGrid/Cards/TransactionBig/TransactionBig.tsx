@@ -16,22 +16,27 @@ export const TransactionBig = ({ article }) => {
 
   if (!article) return null;
 
-  const { _id, hasCDIRelation, headline, date } = article;
+  const { _id, headline, date, highlightSellersTitle, highlightSellers } =
+    article;
   const dateFormatted = date ? format(new Date(date)) : null;
   const href = links().transactions(article);
 
   const TransactionLogo = ({ url, name }) => {
     return !url ? (
-      <p className={styles.transactionLogoFallback}>{name}</p>
+      <p className={styles.transactionLogoFallback}>
+        <span>{name}</span>
+      </p>
     ) : (
-      <Image
-        unoptimized
-        objectFit="contain"
-        width={100}
-        height={80}
-        alt={`${name} logo`}
-        src={`${url}`}
-      />
+      <div className={styles.transactionLogo}>
+        <Image
+          unoptimized
+          objectFit="contain"
+          width={100}
+          height={80}
+          alt={`${name} logo`}
+          src={`${url}`}
+        />
+      </div>
     );
   };
 
@@ -57,8 +62,11 @@ export const TransactionBig = ({ article }) => {
               </time>
             )}
             {headline && <h2 className={styles.title}>{headline}</h2>}
-            {hasCDIRelation ? (
-              <p className={styles.excerpt}>{sharedContent.cdiTextNews}</p>
+            {highlightSellers?.length ? (
+              <p className={styles.excerpt}>
+                <strong>{highlightSellersTitle} </strong>
+                {highlightSellers.filter((val) => !val.length).join(', ')}
+              </p>
             ) : null}
             <Icon
               iconName={'arrow-circle'}

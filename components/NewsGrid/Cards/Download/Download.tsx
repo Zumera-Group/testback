@@ -19,7 +19,8 @@ export const Download = ({ article }) => {
   const sharedContent = useSharedContentContext();
   const linkWithCurrentLocale = useLinkWithCurrentLocale();
 
-  const { title, description, file, emailLabel, hideIconBtn, buttonCaption } = article;
+  const { title, description, file, emailLabel, hideIconBtn, buttonCaption } =
+    article;
 
   return (
     <article className={styles.download}>
@@ -27,11 +28,7 @@ export const Download = ({ article }) => {
       {description && <p className={styles.excerpt}>{description}</p>}
       <form action={process.env.NEXT_PUBLIC_DOWNLOAD_REPORT_URL} method="POST">
         {MarketingParamsService.renderHiddenInputElements()}
-        <input
-          type="hidden"
-          name="file_url"
-          value={file?.asset?.url}
-        />
+        <input type="hidden" name="file_url" value={file?.asset?.url} />
         <div>
           <input
             name="email"
@@ -49,7 +46,9 @@ export const Download = ({ article }) => {
             {sharedContent?.checkboxPrivacyText1}
             <Link
               passHref
-              href={linkWithCurrentLocale(sharedContent?.checkboxPrivacyPage?.slug?.current,)}
+              href={linkWithCurrentLocale(
+                sharedContent?.checkboxPrivacyPage?.slug?.current,
+              )}
             >
               <a>{' ' + sharedContent?.checkboxPrivacyText2}</a>
             </Link>
