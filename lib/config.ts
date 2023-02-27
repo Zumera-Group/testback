@@ -4,7 +4,8 @@ export const sanityConfig = {
   projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
   useCdn: false,
   // useCdn: process.env.NODE_ENV === 'production',
-  apiVersion: process.env.NEXT_PUBLIC_SANITY_API_VERSION ,
+  apiVersion: process.env.NEXT_PUBLIC_SANITY_API_VERSION,
+  documentLimit: 10000,
   // useCdn == true gives fast, cheap responses using a globally distributed cache.
   // Set this to false if your application require the freshest possible
   // data always (potentially slightly slower and a bit more expensive).

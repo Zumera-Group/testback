@@ -5,14 +5,17 @@
  */
 import { createClient } from 'next-sanity';
 import { sanityConfig } from './config';
+import * as process from 'process';
 
 export const sanityClient = createClient(sanityConfig);
 export const sanityClientForPreview = createClient({
   ...sanityConfig,
   useCdn: false,
-  withCredentials: true,
+  apiVersion: process.env.NEXT_PUBLIC_SANITY_API_VERSION,
+  withCredentials: false,
   token: process.env.NEXT_PUBLIC_SANITY_API_TOKEN_PREVIEW,
 });
 
-export const getClient = (usePreview) =>
-  usePreview ? sanityClientForPreview : sanityClient;
+export const getClient = (usePreview) => {
+  return usePreview ? sanityClientForPreview : sanityClient;
+};
