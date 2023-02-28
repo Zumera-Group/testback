@@ -177,7 +177,7 @@ export const BoxSelector = ({
           <div className={styles.boxRow}>
             {allBoxes?.slice(0, boxesToShow).map((box, index) => (
               <BoxSelectorItem
-                key={box._key}
+                key={`${box._key}_${index}`}
                 question={question}
                 box={box}
                 refEl={buttonRef}
@@ -189,7 +189,7 @@ export const BoxSelector = ({
             {allBoxes?.slice(0, boxesToShow).map((box, index) => (
               <SwiperSlide key={index} className={styles.swiperSlide}>
                 <BoxSelectorItem
-                  key={box._key}
+                  key={`${box._key}_${index}`}
                   question={question}
                   box={box}
                   refEl={buttonRef}
