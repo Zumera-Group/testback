@@ -10,8 +10,8 @@ const langs = {
 export default async function preview(req, res) {
   const corsOrigin =
     process.env.NODE_ENV === 'development'
-      ? `http://localhost:3333`
-      : `https://saxenhammer-sanity-staging.herokuapp.com`;
+      ? `http://localhost:3000`
+      : `https://zumera-sanity-staging.herokuapp.com`;
 
   res.setHeader('Access-Control-Allow-Origin', corsOrigin);
   res.setHeader('Access-Control-Allow-Credentials', true);
@@ -29,7 +29,7 @@ export default async function preview(req, res) {
   }
 
   // Enable Preview Mode by setting the cookies
-  res.setPreviewData({});
+  res.setPreviewData({ preview: true });
 
   if (req?.query?.type === 'valueCalculator') {
     const pageSlug =
