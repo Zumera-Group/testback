@@ -35,11 +35,10 @@ export const TransactionQuote: React.FC<any> = ({ specificContentModule }) => {
                 <div>
                   <div className={styles.image}>
                     <Image
-                      unoptimized
-                      loading="lazy"
                       src={optionalUI?.involvedParty1?.companyLogo?.asset?.url}
-                      layout={'fill'}
-                      objectFit={'cover'}
+                      fill
+                      style={{ objectFit: 'cover' }}
+                      alt={'Company Logo'}
                     />
                   </div>
                 </div>
