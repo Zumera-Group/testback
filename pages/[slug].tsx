@@ -38,13 +38,11 @@ export async function getStaticProps({ locale, params, preview = false }) {
   try {
     const data = await fetchPage(locale, params.slug, preview);
 
-    const { page, query, siteSettings, sharedContent } = data;
+    const { page, query, siteSettings = {}, sharedContent } = data;
 
     if (!page) {
       return {
-        redirect: {
-          destination: `/${locale}/404`,
-        },
+        notFound: true,
       };
     }
 
@@ -109,6 +107,19 @@ export default function Index({
     }
   }, []);
 
+  useEffect(() => {
+    if (router.isFallback) {
+      router.push(`/${router.locale}/404`);
+    }
+  }, [router]);
+
+  useEffect(() => {
+    if (page?.hidePage) {
+      router.push(`/${router.locale}/home`);
+      return;
+    }
+  }, [page, router]);
+
   if (router.isFallback) {
     return null;
   }
@@ -121,14 +132,6 @@ export default function Index({
   ) {
     return <SecretKeyLockScreen siteSettings={siteSettings} />;
   }
-
-  //  if (preview) {
-  //   return (
-  //     <PreviewSuspense fallback={<DocumentsCount data={data} />}>
-  //       <PreviewDocumentsCount />
-  //     </PreviewSuspense>
-  //   )
-  // }
 
   return (
     <SharedContentContext value={sharedContent}>
