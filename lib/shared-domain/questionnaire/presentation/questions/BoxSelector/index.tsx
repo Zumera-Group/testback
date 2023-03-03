@@ -64,7 +64,7 @@ export const BoxSelector = ({
   // Map the selections
   useEffect(() => {
     // Prevent the useEffect from firing multiple times
-    // if (!boxAnswers || selectionsLoaded) return;
+    if (!boxAnswers || selectionsLoaded) return;
     setSelectionsLoaded(true);
 
     if (!sectors && !industries) setAllBoxes(boxAnswers);
