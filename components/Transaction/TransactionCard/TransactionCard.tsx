@@ -19,6 +19,8 @@ export const TransactionCard = ({ transaction }) => {
     companyName2,
     coverImage,
     sectors,
+    highlightSellersTitle,
+    highlightSellers,
   } = transaction;
 
   const sectorsName = sectors?.map((sector) => sector.name) || [];
@@ -89,6 +91,14 @@ export const TransactionCard = ({ transaction }) => {
             </div>
             <div className={styles.bodyValue}>{dateFormatted}</div>
           </div>
+          {highlightSellers?.length ? (
+            <div>
+              <div className={styles.bodyTitle}>{highlightSellersTitle} </div>
+              <div className={styles.bodyValue}>
+                {highlightSellers.filter((val) => !val.length).join(', ')}
+              </div>
+            </div>
+          ) : null}
         </div>
       </div>
     </article>

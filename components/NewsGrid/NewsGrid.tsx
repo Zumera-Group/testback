@@ -115,6 +115,7 @@ export const NewsGrid: React.FC<Props> = ({
   }
 
   const all = [...transactions, ...news, ...employees];
+
   const emptyNews = new Array(all.length).fill(undefined);
   const sortedNews = [...transactions, ...news]
     .map((item) => ({
@@ -144,6 +145,7 @@ export const NewsGrid: React.FC<Props> = ({
     }
     emptyNews[i] = item;
   }
+
   const chunkedArray = sliceIntoChunks(emptyNews, tilesToShow);
   const displayItems = chunkedArray.slice(0, numberOfRepetitions);
   return (

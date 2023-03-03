@@ -19,12 +19,13 @@ export const TransactionCard = ({ transaction }) => {
   const {
     date,
     headline,
-    hasCDIRelation,
     companyLogo1,
     companyName1,
     companyLogo2,
     companyName2,
     coverImage,
+    highlightSellersTitle,
+    highlightSellers,
   } = transaction;
 
   const dateFormatted = date ? format(new Date(date)) : null;
@@ -51,50 +52,61 @@ export const TransactionCard = ({ transaction }) => {
 
   return (
     <article className={styles.transaction}>
-      <Link passHref href={href} className={styles.link} prefetch={false}>
-        <div className={styles.logosCover}>
-          <TransactionLogo url={companyLogo1?.asset?.url} name={companyName1} />
-          <Beam color={'primary'} glow={false} classes={styles.beam} />
-          <TransactionLogo url={companyLogo2?.asset?.url} name={companyName2} />
-        </div>
-        <div className={styles.cover}>
-          {coverImage?.asset?.url && (
-            <div className={styles.imageWrapper}>
-              <div className={styles.imageWrapper_inner}>
-                <Image
-                  unoptimized
-                  src={coverImage?.asset?.url}
-                  alt={coverImage?.asset?.altText || ''}
-                  // objectFit={'cover'}
-                  // objectPosition={'center center'}
-                  // layout="fill"
-                  className={styles.image}
-                  style={{
-                    maxWidth: '100%',
-                    height: 'auto',
-                  }}
-                />
-              </div>
-            </div>
-          )}
-          <div className={styles.body}>
-            {date && (
-              <time dateTime={date} className={styles.date}>
-                {dateFormatted}
-              </time>
-            )}
-            {headline && <h2 className={styles.title}>{headline}</h2>}
-            {hasCDIRelation ? (
-              <p className={styles.excerpt}>{sharedContent.cdiTextNews}</p>
-            ) : null}
-            <Icon
-              iconName={'arrow-circle'}
-              viewBox={'0 0 32 32'}
-              width={32}
-              height={32}
+      <Link passHref href={href} legacyBehavior>
+        <a className={styles.link}>
+          <div className={styles.logosCover}>
+            <TransactionLogo
+              url={companyLogo1?.asset?.url}
+              name={companyName1}
+            />
+            <Beam color={'primary'} glow={false} classes={styles.beam} />
+            <TransactionLogo
+              url={companyLogo2?.asset?.url}
+              name={companyName2}
             />
           </div>
-        </div>
+          <div className={styles.cover}>
+            {coverImage?.asset?.url && (
+              <div className={styles.imageWrapper}>
+                <div className={styles.imageWrapper_inner}>
+                  <Image
+                    unoptimized
+                    src={coverImage?.asset?.url}
+                    alt={coverImage?.asset?.altText || ''}
+                    // objectFit={'cover'}
+                    // objectPosition={'center center'}
+                    // layout="fill"
+                    className={styles.image}
+                    style={{
+                      maxWidth: '100%',
+                      height: 'auto',
+                    }}
+                  />
+                </div>
+              </div>
+            )}
+            <div className={styles.body}>
+              {date && (
+                <time dateTime={date} className={styles.date}>
+                  {dateFormatted}
+                </time>
+              )}
+              {headline && <h2 className={styles.title}>{headline}</h2>}
+              {highlightSellers?.length ? (
+                <p className={styles.excerpt}>
+                  <strong>{highlightSellersTitle} </strong>
+                  {highlightSellers.filter((val) => !val.length).join(', ')}
+                </p>
+              ) : null}
+              <Icon
+                iconName={'arrow-circle'}
+                viewBox={'0 0 32 32'}
+                width={32}
+                height={32}
+              />
+            </div>
+          </div>
+        </a>
       </Link>
     </article>
   );

@@ -69,14 +69,6 @@ export async function getStaticProps({
       };
     }
 
-    if (employeeDetail.hidePage) {
-      return {
-        redirect: {
-          destination: `/${locale}/home`,
-        },
-      };
-    }
-
     const employeeDetailContent = await fetchEmployeeDetailContent(locale);
 
     return {
@@ -133,6 +125,13 @@ export default function Index({
       setIsSecretOpen(true);
     }
   }, []);
+
+  useEffect(() => {
+    if (selectedEmployee?.hidePage) {
+      router.push(`/${router.locale}/home`);
+    }
+  }, [selectedEmployee?.hidePage, router]);
+
   if (router.isFallback) {
     return (
       <>

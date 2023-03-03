@@ -3,7 +3,8 @@ import styles from './TransactionSector.module.scss';
 import { Sector } from 'lib/shared-domain/page/domain';
 import { SectionHeading } from 'components/SectionHeading';
 import { Button } from 'components/Button';
-import Image from "next/image";
+import Image from 'next/image';
+import { useRouter } from 'next/router';
 interface IProps {
   sector: Sector;
   linkText: string;
@@ -14,6 +15,7 @@ export const TransactionSector: React.FC<IProps> = ({
   linkText,
   subtitle,
 }) => {
+  const router = useRouter();
   return (
     <Section size={'sm'} bg={'light'} color={'white'}>
       <Container classes={styles.gridContainer}>
@@ -33,7 +35,13 @@ export const TransactionSector: React.FC<IProps> = ({
             />
             <Button
               variant={'secondary'}
-              link={{ slug: { current: `/sectors/${sector?.slug?.current}` } }}
+              link={{
+                slug: {
+                  current: `/${
+                    router.locale === 'en' ? '/sectors' : '/sektoren'
+                  }/${sector?.slug?.current}`,
+                },
+              }}
               onDark={true}
               classes={styles.button}
             >

@@ -126,7 +126,7 @@ export const CardsNew = ({
                 </GridColumn>
               ) : (
                 <GridColumn
-                  key={article?._id}
+                  key={index}
                   sm={12}
                   md={isEven ? wideColl : smallColl}
                   lg={isEven ? wideColl : smallColl}
@@ -158,7 +158,8 @@ const getHighlightedData = (highlightedSection) => {
     customLink: customTitleLink,
     date: date || highlightedPage?.date,
     picture: customTitleImage || highlightedPage?.picture,
-    _type: customTitle ? 'newsArticle' : highlightedPage?._type,
+    _type:
+      customTitle || customTitleLink ? 'newsArticle' : highlightedPage?._type,
   };
 };
 
