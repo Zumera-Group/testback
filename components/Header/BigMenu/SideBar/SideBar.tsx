@@ -10,6 +10,8 @@ import { animationProps } from './animationProps';
 import { useLinkWithCurrentLocale } from 'lib/shared-domain/useLinkWithCurrentLocale';
 
 import styles from './SideBar.module.scss';
+import { getLinksByPageType } from 'lib/utils/getLinksByPageType';
+import { useRouter } from 'next/router';
 
 export const SideBar = ({
   logo,
@@ -17,50 +19,56 @@ export const SideBar = ({
   showMode,
   setShowMode,
   close,
-  otherLangSlug
+  otherLangSlug,
 }) => {
-
+  const router = useRouter();
   const linkWithCurrentLocale = useLinkWithCurrentLocale();
-
+  console.log(menu);
   return (
-    <motion.div
-      {...animationProps}
-      className={styles.sideBar}>
+    <motion.div {...animationProps} className={styles.sideBar}>
       <div className={styles.logo}>
         {logo}
-        <Close
-          mobile={true}
-          callBack={close}
-        />
+        <Close mobile={true} callBack={close} />
       </div>
       <ul className={styles.navigation}>
-        {menu?.map(({ _key, name, page, type }, index: number) => (
-          <li key={`sideBar-item-${_key}-${index}`} className={styles.item}>
-            {type === 'normal' ? (
-              <Link
-                passHref
-                href={linkWithCurrentLocale(page?.slug?.current)}
-                className={styles.link}>
-                {name}
-              </Link>
-            ) : (
-              <button
-                className={[
-                  styles.link,
-                  type === showMode && styles.link__active
-                ].join(' ')}
-                onClick={() => {setShowMode(type)}}
-              >
-                {name}
-                <Icon
-                  iconName="arrow"
-                  viewBox="0 0 120 120"
-                  width={10}
-                  height={10} />
-              </button>
-            )}
-          </li>
-        ))}
+        {menu
+          ?.filter((item) => item.page)
+          ?.map(({ _key, name, page, type }, index: number) => (
+            <li key={`sideBar-item-${_key}-${index}`} className={styles.item}>
+              {type === 'normal' ? (
+                <Link
+                  passHref
+                  href={linkWithCurrentLocale(
+                    getLinksByPageType(
+                      router.locale,
+                      page?._type,
+                      page.slug?.current,
+                    ),
+                  )}
+                >
+                  <a className={styles.link}>{name}</a>
+                </Link>
+              ) : (
+                <button
+                  className={[
+                    styles.link,
+                    type === showMode && styles.link__active,
+                  ].join(' ')}
+                  onClick={() => {
+                    setShowMode(type);
+                  }}
+                >
+                  {name}
+                  <Icon
+                    iconName="arrow"
+                    viewBox="0 0 120 120"
+                    width={10}
+                    height={10}
+                  />
+                </button>
+              )}
+            </li>
+          ))}
         <li className={[styles.item, styles.item__divider].join(' ')}>
           <LanguageSwitcher
             otherLangSlug={otherLangSlug}

@@ -13,7 +13,8 @@ const queryPage = (
   otherLangSlugQuery,
   querySiteSettings,
   querySharedContent,
-) => `*[_type == "page" && _lang == "${lang}" && slug.current == "${slug}"] {
+) => `*[_type == "page" && _lang == "${lang}" && slug.current == "${slug}"]
+ {
   ...,
   _id,
   _lang,
@@ -43,7 +44,6 @@ const queryPages = () => `*[_type == "page"] {
 
 export function filterDataToSingleItem(data, preview) {
   if (!Array.isArray(data)) return data;
-
   return data?.length > 1 && preview
     ? data?.filter((item) => item._id.startsWith(`drafts.`))?.slice(-1)?.[0]
     : data?.slice(-1)[0];
