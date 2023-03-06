@@ -185,9 +185,14 @@ export class QuestionnaireFacade {
     return questionnaires;
   }
 
-  async getSectorSpecificQuestions(lang: Locale): Promise<Question[]> {
+  async getSectorSpecificQuestions(
+    lang: Locale,
+    slug: string,
+    preview?: boolean,
+  ): Promise<Question[]> {
     const sectorSpecificQuestions = await this.sanityService.fetch(
       querySectorSpecificQuestions(this.sanityService.getSanityLocale(lang)),
+      preview,
     );
 
     return sectorSpecificQuestions;
