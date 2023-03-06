@@ -179,6 +179,16 @@ const QuestionnaireLayout: React.FC<{
     currentQuestion?.questionId === SECTOR_QUESTION_ID;
 
   const pageRef = useRef(null);
+  const [isLanding, setIsLanding] = useState(false);
+
+  useEffect(() => {
+    const session = sessionStorage.getItem('isLanding');
+    if (session === 'true') {
+      setIsLanding(true);
+    } else {
+      setIsLanding(false);
+    }
+  }, []);
 
   return (
     <>
@@ -204,8 +214,8 @@ const QuestionnaireLayout: React.FC<{
             contentModules={[]}
             siteSettings={siteSettings}
             darkBg
-            hideHeader={isOnResultScreen ? false : true}
-            hideBurger={isOnResultScreen ? false : true}
+            hideHeader={isOnResultScreen && !isLanding ? false : true}
+            hideBurger={isOnResultScreen && !isLanding ? false : true}
             staticExtended
             indicator={
               !isOnResultScreen && {

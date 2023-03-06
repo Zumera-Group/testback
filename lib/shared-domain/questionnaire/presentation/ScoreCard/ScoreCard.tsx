@@ -84,9 +84,9 @@ export const ScoreCard = () => {
                 unoptimized
                 loading="lazy"
                 objectFit="cover"
-                alt={'booklet'}
-                src={'/calculator/booklet.png'}
-                height={217}
+                alt={'report'}
+                src={'/calculator/zumera_example_report.png'}
+                height={289}
                 width={217}
               />
             </div>

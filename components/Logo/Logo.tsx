@@ -8,7 +8,7 @@ interface Props {
   slug: string;
   title: string;
   classes?: string;
-
+  isLanding?: boolean;
   isScrolled?: boolean;
   isLightPage?: boolean;
   isAnimated?: boolean;
@@ -23,30 +23,56 @@ export const Logo: React.FC<Props> = ({
   isLightPage,
   isAnimated,
   src,
+  isLanding,
 }) => {
   return (
-    <Link passHref href={slug}>
-      <a
-        className={[styles.logo, classes ?? ''].join(' ')}
-        rel="home"
-        title={title}
-      >
-        {isAnimated ? (
-          <AnimatedLogo isScrolled={isScrolled} isLightPage={isLightPage} />
-        ) : (
-          <Image
-            unoptimized
-            priority
-            loading="eager"
-            layout="fill"
-            objectFit="contain"
-            objectPosition="left center"
-            alt={`${title} logo`}
-            src={src}
-          />
-        )}
-      </a>
-    </Link>
+    <>
+      {isLanding ? (
+        <a
+          className={[styles.logo, classes ?? ''].join(' ')}
+          rel="home"
+          title={title}
+        >
+          {isAnimated ? (
+            <AnimatedLogo isScrolled={isScrolled} isLightPage={isLightPage} />
+          ) : (
+            <Image
+              unoptimized
+              priority
+              loading="eager"
+              layout="fill"
+              objectFit="contain"
+              objectPosition="left center"
+              alt={`${title} logo`}
+              src={src}
+            />
+          )}
+        </a>
+      ) : (
+        <Link passHref href={slug}>
+          <a
+            className={[styles.logo, classes ?? ''].join(' ')}
+            rel="home"
+            title={title}
+          >
+            {isAnimated ? (
+              <AnimatedLogo isScrolled={isScrolled} isLightPage={isLightPage} />
+            ) : (
+              <Image
+                unoptimized
+                priority
+                loading="eager"
+                layout="fill"
+                objectFit="contain"
+                objectPosition="left center"
+                alt={`${title} logo`}
+                src={src}
+              />
+            )}
+          </a>
+        </Link>
+      )}
+    </>
   );
 };
 

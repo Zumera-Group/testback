@@ -134,6 +134,17 @@ export const Header = ({
     };
   }, []);
 
+  const [isLanding, setIsLanding] = useState(false);
+
+  useEffect(() => {
+    const session = sessionStorage.getItem('isLanding');
+    if (session === 'true') {
+      setIsLanding(true);
+    } else {
+      setIsLanding(false);
+    }
+  }, []);
+
   return (
     <>
       {siteSettings?.announcementTopBanner?.isEnabled && !hideTopBanner && (
@@ -166,11 +177,17 @@ export const Header = ({
                 isLightPage={isLightPage()}
                 title={siteName}
                 isAnimated={true}
+                isLanding={isLanding}
               />
             ) : (
-              <LogoExtended slug={homeSlug} title={siteName} />
+              <LogoExtended
+                slug={homeSlug}
+                title={siteName}
+                isLanding={isLanding}
+              />
             )}
           </div>
+
           {!hideHeader && !hideMenu && <Menu navigation={headerMenu} />}
 
           {!hideBurger && (
@@ -179,6 +196,7 @@ export const Header = ({
                 otherLangSlug={otherLangSlug}
                 classes={styles.languageSelector}
               />
+
               {!hideMenu ? (
                 <Hamburger
                   callBack={() => setBigMenuOpen(true)}
@@ -187,7 +205,6 @@ export const Header = ({
               ) : null}
             </div>
           )}
-
           {indicator && (
             <div className={styles.questionIndicator}>
               {t('question')}{' '}
