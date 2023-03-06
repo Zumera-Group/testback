@@ -17,9 +17,6 @@ module.exports = {
   },
   sassOptions,
   trailingSlash: true,
-  experimental: {
-    nextScriptWorkers: true,
-  },
   swcMinify: true,
   async redirects() {
     return [

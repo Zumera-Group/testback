@@ -7,7 +7,7 @@ const langs = {
   de: dePaths,
 };
 
-export default async function _preview(req, res) {
+export default async function preview(req, res) {
   const corsOrigin =
     process.env.NODE_ENV === 'development'
       ? `http://localhost:3000`
