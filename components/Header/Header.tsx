@@ -44,7 +44,6 @@ export const Header = ({
   const [isScrolled, setIsScrolled] = useState(false);
   const [scrollPosition, setScrollPosition] = useState(0);
   const { headerMenu, siteName } = siteSettings;
-  const [isLanding, setIsLanding] = useState(false);
 
   const router = useRouter();
   const linkWithCurrentLocale = useLinkWithCurrentLocale();
@@ -113,15 +112,6 @@ export const Header = ({
   }, [router.query.slug, router.locale]);
 
   useEffect(() => {
-    const session = sessionStorage.getItem('isLanding');
-    if (session === 'true') {
-      setIsLanding(true);
-    } else {
-      setIsLanding(false);
-    }
-  }, []);
-
-  useEffect(() => {
     const body = document?.body;
     if (bigMenuOpen) {
       body?.classList?.add?.('no-scroll');
@@ -142,6 +132,17 @@ export const Header = ({
     return () => {
       document.removeEventListener('scroll', setScroll);
     };
+  }, []);
+
+  const [isLanding, setIsLanding] = useState(false);
+
+  useEffect(() => {
+    const session = sessionStorage.getItem('isLanding');
+    if (session === 'true') {
+      setIsLanding(true);
+    } else {
+      setIsLanding(false);
+    }
   }, []);
 
   return (
@@ -176,15 +177,18 @@ export const Header = ({
                 isLightPage={isLightPage()}
                 title={siteName}
                 isAnimated={true}
+                isLanding={isLanding}
               />
             ) : (
-              <LogoExtended slug={homeSlug} title={siteName} />
+              <LogoExtended
+                slug={homeSlug}
+                title={siteName}
+                isLanding={isLanding}
+              />
             )}
           </div>
 
-          {!hideHeader && !hideMenu && !isLanding && (
-            <Menu navigation={headerMenu} />
-          )}
+          {!hideHeader && !hideMenu && <Menu navigation={headerMenu} />}
 
           {!hideBurger && (
             <div className={styles.actionsWrapper}>
@@ -193,7 +197,7 @@ export const Header = ({
                 classes={styles.languageSelector}
               />
 
-              {!hideMenu && !isLanding ? (
+              {!hideMenu ? (
                 <Hamburger
                   callBack={() => setBigMenuOpen(true)}
                   bigMenuOpen={bigMenuOpen}
@@ -201,7 +205,6 @@ export const Header = ({
               ) : null}
             </div>
           )}
-
           {indicator && (
             <div className={styles.questionIndicator}>
               {t('question')}{' '}
