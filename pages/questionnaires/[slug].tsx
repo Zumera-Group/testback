@@ -49,11 +49,7 @@ export async function getStaticProps({
     }
     const { questionnaireWithCategories: questionnaire, query } =
       await fetchQuestionnaire(locale, params.slug, preview);
-    const sectorSpecificQuestions = await fetchSectorSpecificQuestions(
-      locale,
-      params.slug,
-      preview,
-    );
+    const sectorSpecificQuestions = await fetchSectorSpecificQuestions(locale);
 
     const sectors = await fetchSectors(locale);
 
@@ -118,7 +114,7 @@ export default function Index({
     enabled: preview,
   });
   const previewQuestionnaire = filterDataToSingleItem(previewData, preview);
-
+  // console.log(previewQuestionnaire);
   const router = useRouter();
 
   const [isSecretOpen, setIsSecretOpen] = useState(
@@ -137,7 +133,7 @@ export default function Index({
   if (siteSettings && siteSettings?.isUnderSecretKey && !isSecretOpen) {
     return <SecretKeyLockScreen siteSettings={siteSettings} />;
   }
-
+  // console.log(sectorSpecificQuestions);
   return (
     <SharedContentContext value={sharedContent}>
       <ErrorTrackingBoundary>

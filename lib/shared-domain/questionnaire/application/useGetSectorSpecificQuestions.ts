@@ -1,12 +1,8 @@
 import { Locale } from 'lib/locale';
 import { QuestionnaireFacade } from '../infrastructure/questionnaire.facade';
 
-export const fetchSectorSpecificQuestions = async (
-  locale: Locale,
-  slug: string,
-  preview?: boolean,
-) => {
+export const fetchSectorSpecificQuestions = async (locale: Locale) => {
   const facade = new QuestionnaireFacade();
 
-  return await facade.getSectorSpecificQuestions(locale, slug, preview);
+  return await facade.getSectorSpecificQuestions(locale);
 };
