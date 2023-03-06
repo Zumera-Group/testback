@@ -13,7 +13,6 @@ import {
   CDIGlobalSectionModule,
   FactsAndFiguresSectionModule,
   TransactionGridSectionModule,
-  SectorHeaderSectionModule,
   AllTransactionsCarouselSectionModule,
   AnchoredTextSectionModule,
   FiveStepsSectionModule,

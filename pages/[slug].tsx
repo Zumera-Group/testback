@@ -4,18 +4,12 @@ import PageLayout from 'lib/shared-domain/page/presentation/PageLayout';
 import { ErrorTrackingBoundary } from 'lib/ErrorTrackingBoundary';
 import { SharedContentContext } from 'lib/shared-domain/page/infrastructure/sharedContentContext';
 import { useRouter } from 'next/router';
-// import { usePreviewSubscription } from '../lib/sanity';
+import { usePreviewSubscription } from '../lib/sanity';
 import { filterDataToSingleItem } from '../lib/shared-domain/page/infrastructure/page.facade';
 import { enPaths as en, dePaths as de } from '../lib/shared-domain/page/paths';
 import { REVALIDATE_ON_SUCCESS_IN_SECONDS } from '../lib/shared-domain/page/constants';
-import { lazy, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { SecretKeyLockScreen } from 'components/SecretKeyLockScreen';
-import { usePreview } from 'lib/sanity';
-import { PreviewSuspense } from 'next-sanity/preview';
-import { DocumentsCount } from 'components/DocumentsCount';
-const PreviewDocumentsCount = lazy(
-  () => import('components/PreviewDocumentCount'),
-);
 
 export async function getStaticPaths() {
   const enPaths = en.map((slug) => ({
@@ -80,10 +74,12 @@ export default function Index({
   siteSettings,
   sharedContent,
 }: Props): JSX.Element {
-  // const { data: previewData } = usePreview(null, query);
-
-  const previewPage = filterDataToSingleItem(page, preview);
-
+  const { data: previewData } = usePreviewSubscription(query, {
+    params: { slug: queryParams } ?? {},
+    initialData: page,
+    enabled: preview,
+  });
+  const previewPage = filterDataToSingleItem(previewData, preview);
   const router = useRouter();
 
   useEffect(() => {

@@ -1,18 +1,27 @@
-// import // createPortableTextComponent,
-// // createPreviewSubscriptionHook,
-// // createCurrentUserHook,
-// //   definePreview
-// 'next-sanity';
-// import { sanityConfig } from './config';
+import {
+  createPortableTextComponent,
+  createPreviewSubscriptionHook,
+  createCurrentUserHook,
+} from 'next-sanity';
+import { sanityConfig } from './config';
+import { sanityClient } from './sanity.server';
 import imageUrlBuilder from '@sanity/image-url';
-// import { PortableText as PortableTextComponent } from '@portabletext/react';
-import { definePreview } from 'next-sanity/preview';
-import { projectId, dataset, client } from 'lib/sanity.client';
 
 // Set up the live preview subscription hook
-export const usePreview = definePreview({ projectId, dataset });
+export const usePreviewSubscription =
+  createPreviewSubscriptionHook(sanityConfig);
 
-const builder = imageUrlBuilder(client);
+// Set up Portable Text serialization
+export const PortableText = createPortableTextComponent({
+  ...sanityConfig,
+  // Serializers passed to @sanity/block-content-to-react
+  // (https://github.com/sanity-io/block-content-to-react)
+  serializers: {},
+});
+
+export const useCurrentUser = createCurrentUserHook(sanityConfig);
+
+const builder = imageUrlBuilder(sanityClient);
 
 export function sanityImageUrlFor(source) {
   if (!source) return;
