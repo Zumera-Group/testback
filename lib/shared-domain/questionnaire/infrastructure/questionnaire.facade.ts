@@ -170,8 +170,6 @@ export class QuestionnaireFacade {
       questionnaire?.categories ?? [],
     );
 
-    console.log(questionsByCategory);
-
     const questionnaireWithCategories = {
       ...questionnaire,
       questionsByCategory,

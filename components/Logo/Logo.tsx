@@ -39,10 +39,6 @@ export const Logo: React.FC<Props> = ({
         <Image
           unoptimized
           priority
-          loading="eager"
-          // layout="fill"
-          // objectFit="contain"
-          // objectPosition="left center"
           width={200}
           height={1200}
           alt={`${title} logo`}
