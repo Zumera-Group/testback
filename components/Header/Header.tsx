@@ -44,6 +44,7 @@ export const Header = ({
   const [isScrolled, setIsScrolled] = useState(false);
   const [scrollPosition, setScrollPosition] = useState(0);
   const { headerMenu, siteName } = siteSettings;
+  const [isLanding, setIsLanding] = useState(false);
 
   const router = useRouter();
   const linkWithCurrentLocale = useLinkWithCurrentLocale();
@@ -112,6 +113,15 @@ export const Header = ({
   }, [router.query.slug, router.locale]);
 
   useEffect(() => {
+    const session = sessionStorage.getItem('isLanding');
+    if (session === 'true') {
+      setIsLanding(true);
+    } else {
+      setIsLanding(false);
+    }
+  }, []);
+
+  useEffect(() => {
     const body = document?.body;
     if (bigMenuOpen) {
       body?.classList?.add?.('no-scroll');
@@ -171,7 +181,10 @@ export const Header = ({
               <LogoExtended slug={homeSlug} title={siteName} />
             )}
           </div>
-          {!hideHeader && !hideMenu && <Menu navigation={headerMenu} />}
+
+          {!hideHeader && !hideMenu && !isLanding && (
+            <Menu navigation={headerMenu} />
+          )}
 
           {!hideBurger && (
             <div className={styles.actionsWrapper}>
@@ -179,7 +192,8 @@ export const Header = ({
                 otherLangSlug={otherLangSlug}
                 classes={styles.languageSelector}
               />
-              {!hideMenu ? (
+
+              {!hideMenu && !isLanding ? (
                 <Hamburger
                   callBack={() => setBigMenuOpen(true)}
                   bigMenuOpen={bigMenuOpen}
