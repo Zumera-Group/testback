@@ -23,6 +23,7 @@ export const ScoreCard = () => {
     const loadScore = async () => {
       try {
         const score = await getScore();
+
         setScore(score);
         setHasError(false);
       } catch (e) {
@@ -48,6 +49,7 @@ export const ScoreCard = () => {
       }
     },
   };
+
   const hasScoreAndPercentage =
     presenter.hasPoints() && presenter.getPercentage();
   const points = tr('evaluation.resultBox.points', {

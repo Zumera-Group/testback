@@ -117,6 +117,7 @@ export class SalesforceFacade {
       };
     } catch (e) {
       trackApplicationError('getLeadEntryScore', e);
+      return e;
     }
   }
 

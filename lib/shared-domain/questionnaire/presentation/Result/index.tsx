@@ -261,7 +261,9 @@ export const Result: React.FC = () => {
           'Score: calculate - showing screen to book an appointment' + score,
         );
         setScore(score);
-        setHasError(false);
+
+        const status = score + 'status';
+        status.includes('Error') ? setHasError(true) : setHasError(false);
       } catch (e) {
         qLogs('Score: something went wrong');
         setHasError(true);
@@ -279,7 +281,7 @@ export const Result: React.FC = () => {
     return () => clearInterval(interval);
   }, [loadingPercentage]);
 
-  if (score && loadingPercentage >= 100)
+  if (score && !hasError && loadingPercentage >= 100)
     return (
       <>
         {!showAppointmentBooking ? (
