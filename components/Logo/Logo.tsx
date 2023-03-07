@@ -9,7 +9,7 @@ interface Props {
   slug: string;
   title: string;
   classes?: string;
-
+  isLanding?: boolean;
   isScrolled?: boolean;
   isLightPage?: boolean;
   isAnimated?: boolean;
@@ -24,15 +24,11 @@ export const Logo: React.FC<Props> = ({
   isLightPage,
   isAnimated,
   src,
+  isLanding,
 }) => {
-  const router = useRouter();
-
-  const isLanding = router.route.includes('landing');
-  const valueTool = 'valuation-tool';
-
   return (
     <>
-      {isLanding && router.query.slug !== valueTool ? (
+      {isLanding ? (
         <a
           className={[styles.logo, classes ?? ''].join(' ')}
           rel="home"
