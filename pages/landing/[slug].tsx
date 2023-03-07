@@ -89,6 +89,13 @@ export default function Index({
     }
   }, [selectedLanding?.hidePage, router]);
 
+  useEffect(() => {
+    const valueTool = 'valuation-tool';
+    if (router.query.slug !== valueTool) {
+      sessionStorage.setItem('isLanding', 'true');
+    }
+  }, [router]);
+
   if (router.isFallback) {
     return null;
   }

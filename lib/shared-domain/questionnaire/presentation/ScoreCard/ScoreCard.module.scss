@@ -4,7 +4,7 @@
   flex-direction: column;
   min-height: 18rem;
   @include breakpoint-up(md) {
-    min-height: 37rem;
+    min-height: 41rem;
   }
 
   @include breakpoint-down(md) {
