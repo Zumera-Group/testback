@@ -25,58 +25,55 @@ export const Logo: React.FC<Props> = ({
   src,
   isLanding,
 }) => {
-  return (
-    <>
-      {isLanding ? (
-        <a
-          className={[styles.logo, classes ?? ''].join(' ')}
-          rel="home"
-          title={title}
-        >
-          {isAnimated ? (
-            <AnimatedLogo isScrolled={isScrolled} isLightPage={isLightPage} />
-          ) : (
-             <Image
-                unoptimized
-                priority
-                width={200}
-                height={1200}
-                alt={`${title} logo`}
-                src={src}
-                style={{
-                  maxWidth: '100%',
-                  height: 'auto',
-                }}
-              />
-          )}
-        </a>
+  return isLanding ? (
+    <a
+      className={[styles.logo, classes ?? ''].join(' ')}
+      rel="home"
+      title={title}
+    >
+      {isAnimated ? (
+        <AnimatedLogo isScrolled={isScrolled} isLightPage={isLightPage} />
       ) : (
-        <Link passHref href={slug}>
-          <a
-            className={[styles.logo, classes ?? ''].join(' ')}
-            rel="home"
-            title={title}
-          >
-            {isAnimated ? (
-              <AnimatedLogo isScrolled={isScrolled} isLightPage={isLightPage} />
-            ) : (
-               <Image
-                unoptimized
-                priority
-                width={200}
-                height={1200}
-                alt={`${title} logo`}
-                src={src}
-                style={{
-                  maxWidth: '100%',
-                  height: 'auto',
-                }}
-              />
-            )}
-          </a>
-        </Link>
+        <Image
+          unoptimized
+          priority
+          width={200}
+          height={1200}
+          alt={`${title} logo`}
+          src={src}
+          style={{
+            maxWidth: '100%',
+            height: 'auto',
+          }}
+        />
       )}
-    </>
+    </a>
+  ) : (
+    <Link
+      passHref
+      href={slug}
+      className={[styles.logo, classes ?? ''].join(' ')}
+      rel="home"
+      title={title}
+      prefetch={false}
+    >
+      {isAnimated ? (
+        <AnimatedLogo isScrolled={isScrolled} isLightPage={isLightPage} />
+      ) : (
+        <Image
+          unoptimized
+          priority
+          width={200}
+          height={1200}
+          alt={`${title} logo`}
+          src={src}
+          style={{
+            maxWidth: '100%',
+            height: 'auto',
+          }}
+        />
+      )}
+    </Link>
   );
 };
 

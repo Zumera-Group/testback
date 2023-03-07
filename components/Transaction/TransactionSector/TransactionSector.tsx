@@ -5,6 +5,7 @@ import { SectionHeading } from 'components/SectionHeading';
 import { Button } from 'components/Button';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
+import { sanityImageUrlFor } from 'lib/sanity';
 interface IProps {
   sector: Sector;
   linkText: string;
@@ -53,13 +54,16 @@ export const TransactionSector: React.FC<IProps> = ({
               <Image
                 unoptimized
                 loading="lazy"
-                src={sector?.detailPageHeroImage?.asset?.url}
+                src={sanityImageUrlFor(
+                  sector?.detailPageHeroImage?.asset?.url,
+                ).url()}
                 alt={sector?.name}
                 fill
                 sizes="100vw"
                 style={{
-                  objectFit: "contain"
-                }} />
+                  objectFit: 'contain',
+                }}
+              />
             </GridColumn>
           )}
         </Grid>

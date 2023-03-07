@@ -10,13 +10,11 @@ export const EmployeeNews: React.FC<{
   newsArticles: NewsArticle[];
   transactions: Transaction[];
   content: any;
-}> = ({ employee, newsArticles, transactions, content }) => {
-  return (
-    <ENews
-      employee={employee}
-      newsArticles={newsArticles}
-      transactions={transactions}
-      content={content}
-    />
-  );
-};
+}> = ({ employee, newsArticles, transactions, content }) => (
+  <ENews
+    employee={employee}
+    newsArticles={newsArticles}
+    transactions={transactions}
+    content={content}
+  />
+);

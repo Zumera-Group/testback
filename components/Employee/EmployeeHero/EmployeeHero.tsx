@@ -3,6 +3,7 @@ import { Container, Grid, GridColumn, Section } from 'components/Layout';
 import baseStyles from 'components/Hero/Hero.module.scss';
 import styles from './EmployeeHero.module.scss';
 import Image from 'next/image';
+import { sanityImageUrlFor } from 'lib/sanity';
 
 const Detail = ({ as, title, text }) => {
   const Component = as || 'div';
@@ -65,16 +66,13 @@ export const EmployeeHero: React.FC<{
               <div className={styles.imageWrapper}>
                 <Image
                   unoptimized
-                  src={employee.detailPagePicture?.picture?.asset?.url}
-                  // layout={'fill'}
-                  // objectFit={'cover'}
-                  // objectPosition={'center center'}
-                  width={200}
-                  height={1200}
+                  src={sanityImageUrlFor(
+                    employee.detailPagePicture?.picture?.asset?.url,
+                  ).url()}
+                  fill={true}
                   alt={`${employee.firstName} ${employee.lastName}`}
                   style={{
                     maxWidth: '100%',
-                    height: 'auto',
                   }}
                 />
               </div>

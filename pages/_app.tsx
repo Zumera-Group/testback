@@ -9,6 +9,7 @@ import TagManager from 'react-gtm-module';
 
 import '../styles/globals.scss';
 import localFont from '@next/font/local';
+import { IconSprite } from 'components/Icon';
 
 const INTERCOM_APP_ID = 'lwrptr1h';
 
@@ -74,6 +75,7 @@ function MyApp({ Component, pageProps, router }) {
         // strategy="worker"
       />
       {/*<link rel="canonical" href={`https://www.zumera.com/${lang}/${slug}`} />*/}
+      <IconSprite />
     </>
   );
 }

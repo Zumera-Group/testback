@@ -3,6 +3,7 @@ import styles from './TransactionCompany.module.scss';
 import { Transaction } from 'lib/shared-domain/transactions/domain';
 import Image from 'next/image';
 import { SectionHeading } from 'components/SectionHeading';
+import { sanityImageUrlFor } from 'lib/sanity';
 
 export const TransactionCompany: React.FC<{
   transaction: Transaction;
@@ -56,7 +57,7 @@ const Company = ({ companyImage, companyDescription }) => (
         width={'200'}
         height={'64'}
         alt=""
-        src={companyImage}
+        src={sanityImageUrlFor(companyImage).url()}
         sizes="100vw"
         style={{
           width: '100%',

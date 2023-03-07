@@ -7,6 +7,7 @@ import { animationProps } from './animationProps';
 
 import styles from './Offices.module.scss';
 import Image from 'next/image';
+import { sanityImageUrlFor } from 'lib/sanity';
 
 export const Offices = ({ offices, appointmentLinkText }) => {
   const [selectedOffice, setSelectedOffice] = useState(offices[0]);
@@ -76,7 +77,10 @@ export const Offices = ({ offices, appointmentLinkText }) => {
             <div className={styles.building}>
               {selectedOffice?.image?.asset?.url ? (
                 <Image
-                  src={selectedOffice?.image?.asset?.url}
+                  unoptimized
+                  src={sanityImageUrlFor(
+                    selectedOffice?.image?.asset?.url,
+                  ).url()}
                   alt={'Zumera Office'}
                   fill
                   style={{

@@ -79,12 +79,6 @@ export const Header = ({
     );
   };
 
-  const getLogoAsset = () => {
-    return !isScrolled && !isLightPage()
-      ? siteSettings?.logo?.asset?.url
-      : siteSettings?.darkLogo?.asset?.url;
-  };
-
   const services = siteSettings?.hamburgerMenu.find(
     (h) => h.type === 'services',
   )?.serviceMenuItems;

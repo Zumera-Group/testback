@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { links } from 'lib/links';
 
 import styles from './Sector.module.scss';
+import { sanityImageUrlFor } from 'lib/sanity';
 
 export const Sector = ({ sector }) => {
   const { name, graph } = sector;
@@ -19,10 +20,7 @@ export const Sector = ({ sector }) => {
         <div className={styles.imageWrapper}>
           <Image
             unoptimized
-            src={graph?.iconImage?.asset?.url}
-            // layout={'fill'}
-            // objectFit={'contain'}
-            // objectPosition={'center center'}
+            src={sanityImageUrlFor(graph?.iconImage?.asset?.url).url()}
             width={200}
             height={1200}
             alt={graph?.iconImage?.name}

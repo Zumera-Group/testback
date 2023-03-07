@@ -16,14 +16,9 @@ import { ErrorTrackingBoundary } from 'lib/ErrorTrackingBoundary';
 import { fetchSectorSpecificQuestions } from 'lib/shared-domain/questionnaire/application/useGetSectorSpecificQuestions';
 import { SharedContentContext } from 'lib/shared-domain/page/infrastructure/sharedContentContext';
 import { SharedContentFacade } from 'lib/shared-domain/page/infrastructure/sharedContent.facade';
-// import { usePreviewSubscription } from '../../lib/sanity';
-import { filterDataToSingleItem } from '../../lib/shared-domain/page/infrastructure/page.facade';
 
 import { fetchSectors } from '../../lib/shared-domain/sectors/application/useGetSectors';
-import {
-  REVALIDATE_ON_FAILURE_TIME_IN_SECONDS,
-  REVALIDATE_ON_SUCCESS_IN_SECONDS,
-} from '../../lib/shared-domain/page/constants';
+import { REVALIDATE_ON_SUCCESS_IN_SECONDS } from '../../lib/shared-domain/page/constants';
 import { SecretKeyLockScreen } from 'components/SecretKeyLockScreen';
 
 export async function getStaticPaths() {
@@ -101,9 +96,6 @@ interface Props {
 }
 
 export default function Index({
-  preview,
-  query,
-  queryParams,
   selectedQuestionnaire,
   siteSettings,
   sectorSpecificQuestions,
@@ -111,16 +103,7 @@ export default function Index({
   sharedContent,
   locale,
 }: Props): JSX.Element {
-  // const { data: previewData } = usePreviewSubscription(query, {
-  //   params: { slug: queryParams } ?? {},
-  //   initialData: selectedQuestionnaire,
-  //   enabled: preview,
-  // });
-
-  const previewQuestionnaire = filterDataToSingleItem(
-    selectedQuestionnaire,
-    preview,
-  );
+  const previewQuestionnaire = selectedQuestionnaire;
 
   const router = useRouter();
 

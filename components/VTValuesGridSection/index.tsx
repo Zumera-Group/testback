@@ -4,6 +4,7 @@ import { SectionHeading } from 'components/SectionHeading';
 import { Button } from 'components/Button';
 import styles from './VTValuesGridSection.module.scss';
 import Image from 'next/image';
+import { sanityImageUrlFor } from 'lib/sanity';
 
 export const VTValuesGridSection: React.FC<{
   specificContentModule: VTValuesGridSectionModule;
@@ -48,15 +49,13 @@ export const VTValuesGridSection: React.FC<{
                   <div className={styles.imageWrapper}>
                     <Image
                       unoptimized
-                      src={value?.icon?.iconImage?.asset?.url}
+                      src={sanityImageUrlFor(
+                        value?.icon?.iconImage?.asset?.url,
+                      ).url()}
                       alt={value?.icon?.iconImage?.name}
-                      // layout={'fill'}
-                      // objectFit={'contain'}
-                      // objectPosition={'center center'}
                       fill
                       style={{
                         maxWidth: '100%',
-                        // height: 'auto',
                       }}
                     />
                   </div>

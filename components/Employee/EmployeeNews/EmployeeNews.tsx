@@ -32,6 +32,7 @@ export const EmployeeNews: React.FC<{
       news={filteredNewsArticles}
       transactions={filteredTransactions}
       titleAlign={'left'}
+      loadMoreText={t('allNewsLinkText')}
     />
   );
 };

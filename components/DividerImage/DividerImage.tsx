@@ -5,6 +5,7 @@ import { useInView } from 'react-intersection-observer';
 
 import styles from './DividerImage.module.scss';
 import { Container, Section } from 'components/Layout';
+import { sanityImageUrlFor } from 'lib/sanity';
 
 interface Props {
   dividerImage?: string;
@@ -57,17 +58,12 @@ export const DividerImage: React.FC<Props> = ({ ...rest }) => {
         <Image
           loading="lazy"
           unoptimized
-          // objectFit={isNoParalax ? 'contain' : 'cover'}
-          // objectPosition="center"
-          // layout="fill"
           alt={''}
-          src={dividerImage + `?h=1200`}
-          // sizes={'100vw'}
+          src={sanityImageUrlFor(dividerImage).url()}
           fill
           style={{
             maxWidth: '100%',
             objectFit: isNoParalax ? 'contain' : 'cover',
-            // height: 'auto',
           }}
         />
       </div>

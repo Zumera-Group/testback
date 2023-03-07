@@ -1,5 +1,4 @@
 import BlockContent from '@sanity/block-content-to-react';
-import urlForImage from '@sanity/image-url/lib/types/urlForImage';
 import { Button } from 'components/Button';
 
 function ImageRenderer({ node }) {

@@ -12,9 +12,8 @@ import { NewsEventDetailLayout } from '../../lib/shared-domain/newsArticle/prese
 import { SharedContentContext } from 'lib/shared-domain/page/infrastructure/sharedContentContext';
 import { SharedContentFacade } from 'lib/shared-domain/page/infrastructure/sharedContent.facade';
 import { useRouter } from 'next/router';
-import { EmployeeHero } from 'lib/shared-domain/employees/presentation/EmployeeHero';
 import { filterDataToSingleItem } from '../../lib/shared-domain/page/infrastructure/page.facade';
-// import { usePreviewSubscription } from '../../lib/sanity';
+import { usePreviewSubscription } from '../../lib/sanity';
 
 import { REVALIDATE_ON_FAILURE_TIME_IN_SECONDS } from '../../lib/shared-domain/page/constants';
 import { SecretKeyLockScreen } from 'components/SecretKeyLockScreen';
@@ -106,15 +105,12 @@ export default function Index({
   content,
   sharedContent,
 }: Props): JSX.Element {
-  // const { data: previewData } = usePreviewSubscription(query, {
-  //   params: { slug: queryParams } ?? {},
-  //   initialData: selectedNewsArticle,
-  //   enabled: preview,
-  // });
-  const previewNewsArticle = filterDataToSingleItem(
-    selectedNewsArticle,
-    preview,
-  );
+  const { data: previewData } = usePreviewSubscription(query, {
+    params: { slug: queryParams } ?? {},
+    initialData: selectedNewsArticle,
+    enabled: preview,
+  });
+  const previewNewsArticle = filterDataToSingleItem(previewData, preview);
 
   const router = useRouter();
 

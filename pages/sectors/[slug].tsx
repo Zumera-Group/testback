@@ -9,7 +9,7 @@ import { ErrorTrackingBoundary } from 'lib/ErrorTrackingBoundary';
 import { SharedContentFacade } from 'lib/shared-domain/page/infrastructure/sharedContent.facade';
 import { SharedContentContext } from 'lib/shared-domain/page/infrastructure/sharedContentContext';
 import { useRouter } from 'next/router';
-// import { usePreviewSubscription } from '../../lib/sanity';
+import { usePreviewSubscription } from '../../lib/sanity';
 import { filterDataToSingleItem } from '../../lib/shared-domain/page/infrastructure/page.facade';
 
 import {
@@ -96,12 +96,12 @@ export default function Index({
   content,
   sharedContent,
 }: Props): JSX.Element {
-  // const { data: previewData } = usePreviewSubscription(query, {
-  //   params: { slug: queryParams } ?? {},
-  //   initialData: selectedSector,
-  //   enabled: preview,
-  // });
-  const previewSector = filterDataToSingleItem(selectedSector, preview);
+  const { data: previewData } = usePreviewSubscription(query, {
+    params: { slug: queryParams } ?? {},
+    initialData: selectedSector,
+    enabled: preview,
+  });
+  const previewSector = filterDataToSingleItem(previewData, preview);
 
   const router = useRouter();
 

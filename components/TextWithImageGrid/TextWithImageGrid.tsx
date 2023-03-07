@@ -5,6 +5,7 @@ import { Button } from 'components/Button';
 import Image from 'next/image';
 import { TextWithImageGridModule } from 'lib/shared-domain/page/domain/contentModule';
 import { Icon } from 'components/Icon';
+import { sanityImageUrlFor } from 'lib/sanity';
 
 export const TextWithImageGrid: React.FC<{
   specificContentModule: TextWithImageGridModule;
@@ -48,14 +49,12 @@ export const TextWithImageGrid: React.FC<{
             <Image
               unoptimized
               loading="lazy"
-              src={image?.asset?.url}
-              // objectFit="contain"
-              // layout="fill"
+              src={sanityImageUrlFor(image?.asset?.url).url()}
               fill
               alt={image?.name}
               style={{
                 maxWidth: '100%',
-                // height: 'auto',
+                objectFit: 'contain',
               }}
             />
           </GridColumn>

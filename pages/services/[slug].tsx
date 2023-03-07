@@ -8,8 +8,7 @@ import { ErrorTrackingBoundary } from 'lib/ErrorTrackingBoundary';
 import { SharedContentFacade } from 'lib/shared-domain/page/infrastructure/sharedContent.facade';
 import { SharedContentContext } from 'lib/shared-domain/page/infrastructure/sharedContentContext';
 import { useRouter } from 'next/router';
-import { EmployeeHero } from 'lib/shared-domain/employees/presentation/EmployeeHero';
-// import { usePreviewSubscription } from '../../lib/sanity';
+import { usePreviewSubscription } from '../../lib/sanity';
 import { filterDataToSingleItem } from '../../lib/shared-domain/page/infrastructure/page.facade';
 
 import {
@@ -109,12 +108,12 @@ export default function Index({
   siteSettings,
   sharedContent,
 }: Props): JSX.Element {
-  // const { data: previewData } = usePreviewSubscription(query, {
-  //   params: { slug: queryParams } ?? {},
-  //   initialData: selectedService,
-  //   enabled: preview,
-  // });
-  const previewService = filterDataToSingleItem(selectedService, preview);
+  const { data: previewData } = usePreviewSubscription(query, {
+    params: { slug: queryParams } ?? {},
+    initialData: selectedService,
+    enabled: preview,
+  });
+  const previewService = filterDataToSingleItem(previewData, preview);
 
   const router = useRouter();
 

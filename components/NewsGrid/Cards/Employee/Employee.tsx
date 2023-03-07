@@ -40,14 +40,10 @@ export const Employee: React.FC<{
                 src={image}
                 alt={name}
                 className={styles.image}
-                // width={200}
-                // height={1200}
                 fill
                 style={{
                   maxWidth: '100%',
                   objectFit: 'cover',
-                  // height: 'auto',
-                  // width: 'auto',
                 }}
               />
             )}

@@ -2,6 +2,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 
 import styles from './FooterSocials.module.scss';
+import { sanityImageUrlFor } from 'lib/sanity';
 
 export const FooterSocials = ({ socials }) => {
   if (!socials.length) return null;
@@ -21,9 +22,8 @@ export const FooterSocials = ({ socials }) => {
             prefetch={false}
           >
             <Image
-              unoptimized
               loading="lazy"
-              src={icon?.iconImage?.asset?.url + `?h=400`}
+              src={sanityImageUrlFor(icon?.iconImage?.asset?.url).url()}
               alt={link}
               height="20"
               width="20"

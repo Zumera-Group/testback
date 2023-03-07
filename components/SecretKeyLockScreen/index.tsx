@@ -16,9 +16,6 @@ export const SecretKeyLockScreen = ({ siteSettings }) => {
           unoptimized
           priority
           loading="eager"
-          // layout="fill"
-          // objectFit="contain"
-          // objectPosition="center center"
           width={200}
           height={1200}
           alt={`logo`}

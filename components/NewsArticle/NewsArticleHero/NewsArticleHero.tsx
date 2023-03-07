@@ -5,6 +5,7 @@ import baseStyles from 'components/Hero/Hero.module.scss';
 import { useFormatDate } from 'lib/shared-domain/useFormatDate';
 
 import styles from './NewsArticleHero.module.scss';
+import { sanityImageUrlFor } from 'lib/sanity';
 
 interface Props {
   newsArticle: any;
@@ -39,10 +40,9 @@ const NewsArticleHero: React.FC<Props> = ({ newsArticle }) => {
               <div className={styles.imageWrapper}>
                 <Image
                   unoptimized
-                  src={newsArticle?.picture?.asset?.url}
-                  // layout={'fill'}
-                  // objectFit={'cover'}
-                  // objectPosition={'center center'}
+                  src={sanityImageUrlFor(
+                    newsArticle?.picture?.asset?.url,
+                  ).url()}
                   width={200}
                   height={1200}
                   alt={'name'}
