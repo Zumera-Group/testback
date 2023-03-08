@@ -5,17 +5,23 @@ import { Button } from 'components/Button';
 import styles from './VTValuesGridSection.module.scss';
 import Image from 'next/image';
 import { sanityImageUrlFor } from 'lib/sanity';
+import { getLinksByPageType } from 'lib/utils/getLinksByPageType';
+import { useRouter } from 'next/router';
 
 export const VTValuesGridSection: React.FC<{
   specificContentModule: VTValuesGridSectionModule;
 }> = ({ specificContentModule }) => {
   const { title, description, button, values } = specificContentModule;
-
+  const router = useRouter();
   const ButtonComp = () => {
     if (!button?.title) {
       return null;
     }
-    const qLink = `/questionnaires/${button?.questionnaire?.questionnaireSlug?.current}`;
+    const qLink = getLinksByPageType(
+      router.locale,
+      'valueCalculator',
+      button?.questionnaire?.questionnaireSlug?.current,
+    );
     return button?.questionnaire?.questionnaireSlug ? (
       <Button {...button} link={{ slug: { current: qLink } }}>
         {button?.title}

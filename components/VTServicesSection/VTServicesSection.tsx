@@ -5,6 +5,8 @@ import { Button } from 'components/Button';
 import Image from 'next/image';
 import { VTServicesSectionModule } from 'lib/shared-domain/page/domain/contentModule';
 import { sanityImageUrlFor } from 'lib/sanity';
+import { getLinksByPageType } from 'lib/utils/getLinksByPageType';
+import { useRouter } from 'next/router';
 
 export const VTServicesSection: React.FC<{
   specificContentModule: VTServicesSectionModule;
@@ -20,6 +22,8 @@ export const VTServicesSection: React.FC<{
     isFullWidth,
   } = specificContentModule;
 
+  const router = useRouter();
+
   const sectionStyles = [
     styles.gridContainer,
     !isFullWidth ? styles[`bg-${background}`] || styles['bg-light'] : '',
@@ -30,7 +34,11 @@ export const VTServicesSection: React.FC<{
     if (!button?.title) {
       return null;
     }
-    const qLink = `/questionnaires/${button?.questionnaire?.questionnaireSlug?.current}`;
+    const qLink = getLinksByPageType(
+      router.locale,
+      'valueCalculator',
+      button?.questionnaire?.questionnaireSlug?.current,
+    );
     return button?.questionnaire?.questionnaireSlug ? (
       <Button {...button} link={{ slug: { current: qLink } }} onDark={true}>
         {button?.title}
@@ -79,7 +87,6 @@ export const VTServicesSection: React.FC<{
                     fill
                     style={{
                       maxWidth: '100%',
-                      // height: 'auto',
                     }}
                   />
                 </div>

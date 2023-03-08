@@ -10,5 +10,5 @@ export const getLinksByPageType = (locale, pageType, slug) => {
     page: '',
   }[pageType];
 
-  return `${linkTypePart ? linkTypePart + '/' : ''}${slug}`;
+  return `${linkTypePart ? '/' + linkTypePart + '/' : ''}${slug}`;
 };
