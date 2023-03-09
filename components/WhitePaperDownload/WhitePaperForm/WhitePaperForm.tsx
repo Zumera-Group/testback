@@ -1,87 +1,86 @@
 import { useState } from 'react';
-
 import Link from 'next/link';
-
 import { Button } from 'components/Button';
-import { FormGroup, Input, Textarea, Checkbox, Message } from 'components/Form';
-import { SanityBlockContent } from 'components/SanityBlockContent';
-
+import {
+  FormGroup,
+  Input,
+  Textarea,
+  Checkbox,
+  Message,
+  Label,
+} from 'components/Form';
+import styles from './WhitePaperForm.module.scss';
 import { useSharedContentContext } from 'lib/shared-domain/page/infrastructure/sharedContentContext';
 import { useLinkWithCurrentLocale } from 'lib/shared-domain/useLinkWithCurrentLocale';
 import { useContactFormSubmit } from 'lib/shared-domain/salesforce/application/useContactFormSubmit';
+import dynamic from 'next/dynamic';
+import { useRouter } from 'next/router';
+import { SanityBlockContent } from 'components/SanityBlockContent';
 
-import styles from './WhitePaperForm.module.scss';
+const PhoneInput = dynamic(() => import('react-phone-number-input'));
 
 export const WhitePaperForm = ({
   buttonText,
   namePlaceholder,
   emailPlaceholder,
+  termsAndConditionsLabel,
 }) => {
+  const router = useRouter();
   const [checkboxIsChecked, setCheckboxIsChecked] = useState(false);
-  const sharedContent = useSharedContentContext();
-  const linkWithCurrentLocale = useLinkWithCurrentLocale();
-  const form = useContactFormSubmit();
 
-  const {
-    name: nameProps,
-    email: emailProps,
-    phone: phoneProps,
-    message: messageProps,
-    isSuccess,
-    isError,
-  } = form;
+  const [value, setValue] = useState();
+  const PhoneInputComponent = PhoneInput as any;
+
+  // const {
+  //   name: nameProps,
+  //   email: emailProps,
+  //   phone: phoneProps,
+  //   message: messageProps,
+  //   isSuccess,
+  //   isError,
+  // } = form;
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    form.submit();
   };
 
   return (
     <form className={styles.form} onSubmit={(e) => handleSubmit(e)}>
       <FormGroup>
         <Input
-          id={'firstLastName'}
+          id={'whitePaperFirstLastName'}
           type={'text'}
           required={true}
           placeholder={namePlaceholder}
-          {...nameProps}
         />
       </FormGroup>
       <FormGroup>
         <Input
-          id={'contactFormEmail'}
+          id={'whitePaperEmail'}
           type={'email'}
           required={true}
           placeholder={emailPlaceholder}
-          {...emailProps}
         />
       </FormGroup>
-      {/*<FormGroup>*/}
-      {/*  <Input*/}
-      {/*    id={'contactFormPhone'}*/}
-      {/*    type={'tel'}*/}
-      {/*    required={true}*/}
-      {/*    placeholder={phoneNumberPlaceholder}*/}
-      {/*    {...phoneProps}*/}
-      {/*  />*/}
-      {/*</FormGroup>*/}
+      <FormGroup classes={styles.phoneNum}>
+        <Label text={'Phone number'} required={true} />
+        <PhoneInputComponent
+          defaultCountry={router.locale === 'en' ? 'GB' : 'DE'}
+          international
+          placeholder="Enter phone number"
+          value={value}
+          countryCallingCodeEditable={false}
+          onChange={setValue}
+        />
+      </FormGroup>
       <FormGroup>
         <Checkbox
-          id={'contactFormTerms'}
+          id={'whitePaperCheckbox'}
           onChange={(e) => setCheckboxIsChecked(e.target.checked)}
           isChecked={checkboxIsChecked}
           required={true}
         >
-          {sharedContent?.checkboxPrivacyText1}{' '}
-          <Link
-            passHref
-            href={linkWithCurrentLocale(
-              sharedContent?.checkboxPrivacyPage?.slug?.current,
-            )}
-          >
-            {sharedContent?.checkboxPrivacyText2}
-          </Link>
-          {' ' + sharedContent?.checkboxPrivacyText3}
+          <SanityBlockContent text={termsAndConditionsLabel} />
         </Checkbox>
       </FormGroup>
       <FormGroup>
