@@ -844,6 +844,7 @@ export enum serviceDetailSectionNames {
 }
 
 export type ContentModuleType =
+  | 'whitePaperDownload'
   | 'transactionQuote'
   | 'stickyFooter'
   | 'stepsDownBulletsSection'
@@ -919,6 +920,8 @@ export type ContentModuleType =
 
 abstract class ContentModuleTypeFactory {
   static createInstance(type: ContentModuleType, fields: Record<string, any>) {
+    if (type === 'whitePaperDownload')
+      return new WhitePaperDownloadModule(fields);
     if (type === 'stickyFooter') return new StickyFooterModule(fields);
     if (type === 'transactionQuote') return new TransactionQuoteModule(fields);
     if (type === 'stepsDownBulletsSection')
@@ -1627,5 +1630,23 @@ export class TransactionQuoteModule extends BaseModule {
     this.name = fields.name;
     this.photo = fields.photo;
     this.transaction = fields.transaction;
+  }
+}
+
+export class WhitePaperDownloadModule extends BaseModule {
+  title: string;
+  subtitle: string;
+  description: string;
+  image: any;
+  file: any;
+  whitePaperFormFields: any[];
+  constructor(fields: Record<string, any>) {
+    super();
+    this.title = fields.title;
+    this.subtitle = fields.subtitle;
+    this.description = fields.description;
+    this.image = fields.image;
+    this.file = fields.file;
+    this.whitePaperFormFields = fields.whitePaperFormFields;
   }
 }

@@ -27,6 +27,7 @@ import {
   StepsDownBulletsSectionModule,
   StickyFooterModule,
   TransactionQuoteModule,
+  WhitePaperDownloadModule,
 } from '../../domain/contentModule';
 
 import {
@@ -70,6 +71,8 @@ import { VTServicesSection } from 'components/VTServicesSection/VTServicesSectio
 import { StepsDownBulletsSection } from 'components/StepsDownBulletsSection';
 import { StickyFooter } from 'components/StickyFooter';
 import { TransactionQuote } from 'components/TransactionQuote';
+import { WhitePaperDownload } from 'components/WhitePaperDownload';
+
 import dynamic from 'next/dynamic';
 const NewsGridSection = dynamic(() => import('./NewsGridSection'), {
   ssr: false,
@@ -81,6 +84,13 @@ export const getContentForContentModule = (
   sharedContent?: any,
   allModulesData?: any,
 ): JSX.Element => {
+  if (contentModule.specificContentModule instanceof WhitePaperDownloadModule) {
+    return (
+      <WhitePaperDownload
+        specificContentModule={contentModule.specificContentModule}
+      />
+    );
+  }
   if (contentModule.specificContentModule instanceof TransactionQuoteModule) {
     return (
       <TransactionQuote

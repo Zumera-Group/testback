@@ -1,0 +1,32 @@
+.form {
+  //--padding: #{$gutter * 1.5};
+  margin-top: $gutter * 3;
+  @include breakpoint-up(md) {
+    margin-top: 0;
+  }
+  @include breakpoint-up(lg) {
+    //--padding: #{$gutter * 3};
+  }
+  display: block;
+}
+
+.formHeader {
+  margin: 0 0 $form-group-margin-bottom * 1.25 0;
+  p {
+    font-size: $font-size-small;
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.title {
+  font-size: $h5-font-size;
+  font-weight: $font-weight-bold;
+  margin: 0 0 $headings-margin-bottom * 0.5;
+}
+
+.submitBtn {
+  text-align: center;
+  justify-content: center;
+}
