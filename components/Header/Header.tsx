@@ -48,7 +48,7 @@ export const Header = ({
   const router = useRouter();
   const linkWithCurrentLocale = useLinkWithCurrentLocale();
   const homeSlug = linkWithCurrentLocale(siteSettings?.homePage?.slug?.current);
-
+  const [isLanding, setIsLanding] = useState(false);
   const isQuestionnaire = () =>
     router.locale === 'en' ? '/questionnaires/' : '/fragenkatalog/';
   const hideTopBanner = router.asPath.includes(isQuestionnaire());
@@ -128,16 +128,26 @@ export const Header = ({
     };
   }, []);
 
-  const [isLanding, setIsLanding] = useState(false);
-
+  //set session storage for campaign landing page joruney to calculator
   useEffect(() => {
+    const isLandingRoute = router.route.includes('landing');
+    const isQuestionnaireRoute =
+      router.route.includes('questionnaires') ||
+      router.route.includes('fragenkatalog');
     const session = sessionStorage.getItem('isLanding');
-    if (session === 'true') {
+
+    if (
+      (session === 'true' &&
+        router.query.slug !== 'valuation-tool' &&
+        isLandingRoute) ||
+      (session === 'true' && isQuestionnaireRoute)
+    ) {
       setIsLanding(true);
     } else {
       setIsLanding(false);
+      sessionStorage.removeItem('isLanding');
     }
-  }, []);
+  }, [router.query.slug, router.route]);
 
   return (
     <>
