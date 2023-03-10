@@ -87,7 +87,7 @@ export const BoxSelector = ({
       setAllBoxes(
         industries?.map((i, index) => ({
           _key: i.id,
-          boxContent: `${i.id}_${index}`,
+          boxContent: i.id,
           label: i.name,
           sheetName: i.industrySheetName,
         })),
