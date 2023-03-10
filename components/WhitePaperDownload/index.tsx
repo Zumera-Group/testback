@@ -1,15 +1,17 @@
-import React from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { Container, Grid, GridColumn, Section } from 'components/Layout';
 import { SectionHeading } from 'components/SectionHeading';
 import styles from './WhitePaperDownload.module.scss';
 import { WhitePaperForm } from 'components/WhitePaperDownload/WhitePaperForm';
 import Image from 'next/image';
 import { sanityImageUrlFor } from 'lib/sanity';
+import axios from 'axios';
 export const WhitePaperDownload: React.FC<any> = ({
   specificContentModule,
 }) => {
-  const { title, subtitle, description, whitePaperFormFields, image } =
+  const { title, subtitle, description, whitePaperFormFields, image, file } =
     specificContentModule;
+
   console.log(specificContentModule);
   return (
     <Section size={'md'} bg={'light'} color={'primary'}>
@@ -43,7 +45,7 @@ export const WhitePaperDownload: React.FC<any> = ({
               </div>
             </GridColumn>
             <GridColumn sm={12} md={6} lg={6}>
-              <WhitePaperForm {...whitePaperFormFields} />
+              <WhitePaperForm {...whitePaperFormFields} file={file} />
             </GridColumn>
           </Grid>
         </div>

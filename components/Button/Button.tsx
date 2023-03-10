@@ -67,7 +67,7 @@ export const Button: React.FC<Props> = ({
   };
 
   return isLink && !downloadImage ? (
-    (<Link
+    <Link
       href={externalUrl || link?.slug?.current || '#'}
       passHref
       id={id}
@@ -75,12 +75,11 @@ export const Button: React.FC<Props> = ({
       className={[styles.button, btnVariant, classes ?? ''].join(' ')}
       target={externalUrl ? '_blank' : undefined}
       rel={externalUrl ? 'noopener noreferrer' : undefined}
-      {...rest}>
-
+      {...rest}
+    >
       <span>{children}</span>
       <ButtonIcon />
-
-    </Link>)
+    </Link>
   ) : (
     <button
       id={id}
