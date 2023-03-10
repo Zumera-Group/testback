@@ -4,6 +4,9 @@ import { SectionHeading } from 'components/SectionHeading';
 import { Button } from 'components/Button';
 import Image from 'next/image';
 import { VTServicesSectionModule } from 'lib/shared-domain/page/domain/contentModule';
+import { sanityImageUrlFor } from 'lib/sanity';
+import { getLinksByPageType } from 'lib/utils/getLinksByPageType';
+import { useRouter } from 'next/router';
 
 export const VTServicesSection: React.FC<{
   specificContentModule: VTServicesSectionModule;
@@ -19,6 +22,8 @@ export const VTServicesSection: React.FC<{
     isFullWidth,
   } = specificContentModule;
 
+  const router = useRouter();
+
   const sectionStyles = [
     styles.gridContainer,
     !isFullWidth ? styles[`bg-${background}`] || styles['bg-light'] : '',
@@ -29,7 +34,11 @@ export const VTServicesSection: React.FC<{
     if (!button?.title) {
       return null;
     }
-    const qLink = `/questionnaires/${button?.questionnaire?.questionnaireSlug?.current}`;
+    const qLink = getLinksByPageType(
+      router.locale,
+      'valueCalculator',
+      button?.questionnaire?.questionnaireSlug?.current,
+    );
     return button?.questionnaire?.questionnaireSlug ? (
       <Button {...button} link={{ slug: { current: qLink } }} onDark={true}>
         {button?.title}
@@ -71,11 +80,14 @@ export const VTServicesSection: React.FC<{
                 <div className={styles.imageWrapper}>
                   <Image
                     unoptimized
-                    src={service?.icon?.iconImage?.asset?.url}
+                    src={sanityImageUrlFor(
+                      service?.icon?.iconImage?.asset?.url,
+                    ).url()}
                     alt={service?.icon?.iconImage?.name}
-                    layout={'fill'}
-                    objectFit={'contain'}
-                    objectPosition={'center center'}
+                    fill
+                    style={{
+                      maxWidth: '100%',
+                    }}
                   />
                 </div>
                 <p>{service.title}</p>

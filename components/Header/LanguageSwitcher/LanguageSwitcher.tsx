@@ -76,8 +76,12 @@ export const LanguageSwitcher: React.FC<Props> = ({
   };
 
   return (
-    <Link passHref locale={getLocale()} href={getSlug()}>
-      <a className={[styles.link, classes ?? ''].join(' ')}>{localeLabel()}</a>
+    <Link
+      passHref
+      locale={getLocale()}
+      href={getSlug()}
+      className={[styles.link, classes ?? ''].join(' ')}>
+      {localeLabel()}
     </Link>
   );
 };

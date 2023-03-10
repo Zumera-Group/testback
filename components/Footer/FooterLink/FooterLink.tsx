@@ -9,13 +9,11 @@ interface Props {
 
 export const FooterLink: React.FC<Props> = ({ title, href }) => {
   return (
-    <Link
-      passHref
-      href={href}>
-        <a className={styles.link}>
-          {title}
-        </a>
-    </Link>
+    (<Link passHref href={href} className={styles.link}>
+
+      {title}
+
+    </Link>)
   );
 };
 

@@ -10,9 +10,3 @@ export const fetchTransactionDetail = async (
 
   return await facade.getTransactionDetail(locale, slug, preview);
 };
-
-export const useGetTransactionDetail = async (locale: Locale, slug: string) => {
-  const transactionDetail = await fetchTransactionDetail(locale, slug);
-
-  return { transactionDetail };
-};

@@ -2,6 +2,7 @@ import { Container, Grid, Section } from 'components/Layout';
 import { optionalUI } from 'lib/shared-domain/transactions/domain';
 import Image from 'next/image';
 import styles from './TransactionInvolvedParties.module.scss';
+import { sanityImageUrlFor } from 'lib/sanity';
 export const TransactionInvolvedParties: React.FC<{
   optionalUI: optionalUI;
 }> = ({ optionalUI }) => {
@@ -18,10 +19,13 @@ export const TransactionInvolvedParties: React.FC<{
                   <Image
                     unoptimized
                     loading="lazy"
-                    src={party.companyLogo?.asset?.url}
+                    src={sanityImageUrlFor(party.companyLogo?.asset?.url).url()}
                     alt={party.name}
-                    objectFit="cover"
-                    layout="fill"
+                    fill
+                    sizes="100vw"
+                    style={{
+                      objectFit: 'cover',
+                    }}
                   />
                 </div>
                 <h4 className={styles.quote}>“{party.quote}”</h4>

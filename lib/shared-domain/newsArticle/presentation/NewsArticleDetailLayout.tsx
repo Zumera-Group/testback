@@ -1,22 +1,15 @@
 import React from 'react';
 import { NewsArticle } from '../domain';
 import { SiteSettings } from 'lib/shared-domain/page/domain';
-import { Box } from 'components/Layout/Flex/Flex';
 import { PageFooter } from 'lib/shared-domain/page/presentation/PageFooter';
 import { PageHeader } from 'lib/shared-domain/page/presentation/PageHeader';
 
 import { PageTransition } from 'components/PageTransition';
-// import { NewsArticleTeam } from './NewsArticleTeam';
-// import { NewsArticleMoreNews } from './NewsArticleMoreNews';
-// import { NewsArticleHero } from './NewsArticleHero';
-// import { NewsArticleDescription } from './NewsArticleDescription';
 import { SEO } from 'components/SEO';
-import { NewsArticleReportDownload } from './NewsArticleReportDownload';
 import { useFetchNewsArticles } from '../application/useGetNewsArticles';
 import { useFetchEmployees } from '../../employees/application/useGetEmployees';
 import { links } from 'lib/links';
 import { useRouter } from 'next/router';
-import { IndustryReportSection } from '../../page/presentation/contentModules/IndustryReportSection';
 
 import NewsArticleHero from 'components/NewsArticle/NewsArticleHero';
 import NewsArticleDescription from 'components/NewsArticle/NewsArticleDescription';
@@ -42,7 +35,7 @@ export const NewsArticleDetailLayout: React.FC<{
     );
 
   return (
-    <Box minHeight="100vh" overflowX="hidden">
+    <div>
       <SEO
         seoTitle={newsArticle.title}
         seoDescription={newsArticle.subtitle}
@@ -60,18 +53,12 @@ export const NewsArticleDetailLayout: React.FC<{
           newsArticle={newsArticle}
           content={content?.articleTextSectionContent}
         />
-        {newsArticle?.industryReportSection && (
-          <IndustryReportSection
-            specificContentModule={newsArticle.industryReportSection}
-          />
-        )}
         {newsArticle?.team && !!newsArticle?.team.length && (
           <NewsArticleTeam
             employees={newsArticle?.team}
             content={content?.teamSectionContent}
           />
         )}
-        <NewsArticleReportDownload newsArticle={newsArticle} />
         <NewsArticleMoreNews
           newsArticles={filteredNewsArticles}
           employees={employees}
@@ -79,6 +66,6 @@ export const NewsArticleDetailLayout: React.FC<{
         />
       </PageTransition>
       <PageFooter siteSettings={siteSettings} />
-    </Box>
+    </div>
   );
 };

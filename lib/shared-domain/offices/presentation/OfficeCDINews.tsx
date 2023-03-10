@@ -1,5 +1,3 @@
-import { NewsGrid } from 'lib/shared-domain/newsArticle/presentation/NewsGrid';
-import { SiteSettings } from 'lib/shared-domain/page/domain';
 import { Transaction } from 'lib/shared-domain/transactions/domain';
 import React from 'react';
 

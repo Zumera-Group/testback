@@ -10,9 +10,3 @@ export const fetchPage = async (
 
   return await facade.getPage(locale, slug, preview);
 };
-
-export const useGetPage = async (locale: Locale, slug: string) => {
-  const site = await fetchPage(locale, slug);
-
-  return { site };
-};

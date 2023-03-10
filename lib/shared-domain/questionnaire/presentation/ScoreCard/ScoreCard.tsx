@@ -85,11 +85,14 @@ export const ScoreCard = () => {
               <Image
                 unoptimized
                 loading="lazy"
-                objectFit="cover"
-                alt={'report'}
-                src={'/calculator/zumera_example_report.png'}
-                height={289}
-                width={217}
+                // objectFit="cover"
+                alt={'booklet'}
+                src={'/calculator/booklet.png'}
+                width={237}
+                height={200}
+                style={{
+                  objectFit: 'cover',
+                }}
               />
             </div>
           </>

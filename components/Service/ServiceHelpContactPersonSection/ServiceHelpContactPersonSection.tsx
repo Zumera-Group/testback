@@ -3,7 +3,6 @@ import { Container, Grid, GridColumn, Section } from 'components/Layout';
 import styles from './ServiceHelpContactPersonSection.module.scss';
 import { SectionHeading } from 'components/SectionHeading';
 import { Icon } from 'components/Icon';
-import { H } from 'components/Typography/H';
 import Link from 'next/link';
 
 interface IProps {
@@ -58,23 +57,25 @@ export const ServiceHelpContactPersonSection: React.FC<IProps> = ({
               <p className={styles.cardTitle}>{cardTitle}</p>
               {employee ? (
                 <>
-                  <H variant={'h4'} color={'white'} className={styles.name}>
+                  <h4 className={styles.name}>
                     {employee.title} {employee.firstName} {employee.lastName}
-                  </H>
+                  </h4>
                   <p className={styles.jobTitle}>{employee.jobTitle}</p>
                 </>
               ) : null}
               {appointmentLinkUrl && linkText && (
-                <Link passHref href={appointmentLinkUrl}>
-                  <a className={styles.bookLink}>
-                    {linkText}
-                    <Icon
-                      iconName={'arrow-circle'}
-                      viewBox={'0 0 32 32'}
-                      width={32}
-                      height={32}
-                    />
-                  </a>
+                <Link
+                  passHref
+                  href={appointmentLinkUrl}
+                  className={styles.bookLink}
+                >
+                  {linkText}
+                  <Icon
+                    iconName={'arrow-circle'}
+                    viewBox={'0 0 32 32'}
+                    width={32}
+                    height={32}
+                  />
                 </Link>
               )}
             </div>

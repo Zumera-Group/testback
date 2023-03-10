@@ -7,7 +7,6 @@ import { ErrorTrackingBoundary } from 'lib/ErrorTrackingBoundary';
 import { SharedContentFacade } from 'lib/shared-domain/page/infrastructure/sharedContent.facade';
 import { SharedContentContext } from 'lib/shared-domain/page/infrastructure/sharedContentContext';
 import { useRouter } from 'next/router';
-import { EmployeeHero } from 'lib/shared-domain/employees/presentation/EmployeeHero';
 import { filterDataToSingleItem } from '../../lib/shared-domain/page/infrastructure/page.facade';
 import { usePreviewSubscription } from '../../lib/sanity';
 

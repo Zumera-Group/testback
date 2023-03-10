@@ -169,6 +169,7 @@ export class QuestionnaireFacade {
     const questionsByCategory = await this.getQuestions(
       questionnaire?.categories ?? [],
     );
+
     const questionnaireWithCategories = {
       ...questionnaire,
       questionsByCategory,

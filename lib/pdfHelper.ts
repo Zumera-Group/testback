@@ -1,5 +1,5 @@
 import { renderToStaticMarkup } from 'react-dom/server';
-import pdf from 'html-pdf';
+// import pdf from 'html-pdf';
 import axios from 'axios';
 
 export const componentToPDFBuffer = (component) => {
@@ -18,19 +18,18 @@ export const componentToPDFBuffer = (component) => {
       localUrlAccess: true,
       phantomArgs: ['--ignore-ssl-errors=yes'],
     };
-
-    return pdf.create(html, options).toBuffer((err, buffer) => {
-      if (err) {
-        return reject(err);
-      }
-
-      return resolve(buffer);
-    });
+    return null;
+    // return pdf.create(html, options).toBuffer((err, buffer) => {
+    //   if (err) {
+    //     return reject(err);
+    //   }
+    //
+    //   return resolve(buffer);
+    // });
   });
 };
 
-const BASE_URL =
-  'https://zumera-frontend-staging.herokuapp.com/static/pdf/';
+const BASE_URL = 'https://zumera-frontend-staging.herokuapp.com/static/pdf/';
 // const BASE_URL = 'http://localhost:3000/static/pdf/';
 
 export const getPDFUrl = (url: string) => `${BASE_URL}${url}`;

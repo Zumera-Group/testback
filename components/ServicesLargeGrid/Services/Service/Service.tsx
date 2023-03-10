@@ -28,17 +28,19 @@ export const Service: React.FC<Props> = ({
     <Component className={styles.service}>
       <Link
         passHref
-        href={href}>
-          <a className={styles.link} title={linkText ? linkText : ''}>
-            {name && <h5 className={styles.name}>{name}</h5>}
-            {shortDescription && <p className={styles.description}>{shortDescription}</p>}
-            <Icon
-              iconName={'arrow-circle'}
-              viewBox={'0 0 32 32'}
-              width={24}
-              height={24}
-            />
-          </a>
+        href={href}
+        className={styles.link}
+        title={linkText ? linkText : ''}>
+
+        {name && <h5 className={styles.name}>{name}</h5>}
+        {shortDescription && <p className={styles.description}>{shortDescription}</p>}
+        <Icon
+          iconName={'arrow-circle'}
+          viewBox={'0 0 32 32'}
+          width={24}
+          height={24}
+        />
+
       </Link>
     </Component>
   );

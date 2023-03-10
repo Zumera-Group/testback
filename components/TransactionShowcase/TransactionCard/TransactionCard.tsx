@@ -5,13 +5,12 @@ import { Beam } from 'components/Beam';
 import { Icon } from 'components/Icon';
 
 import { links } from 'lib/links';
-import { useSharedContentContext } from 'lib/shared-domain/page/infrastructure/sharedContentContext';
 import { useFormatDate } from 'lib/shared-domain/useFormatDate';
 
 import styles from './TransactionCard.module.scss';
+import { sanityImageUrlFor } from 'lib/sanity';
 
 export const TransactionCard = ({ transaction }) => {
-  const sharedContent = useSharedContentContext();
   const format = useFormatDate();
 
   if (!transaction) return null;
@@ -35,20 +34,24 @@ export const TransactionCard = ({ transaction }) => {
     return !url ? (
       <p className={styles.transactionLogoFallback}>{name}</p>
     ) : (
-      <Image
-        unoptimized
-        objectFit="contain"
-        width={100}
-        height={80}
-        alt={`${name} logo`}
-        src={`${url}`}
-      />
+      <div className={styles.transactionLogo}>
+        <Image
+          unoptimized
+          src={sanityImageUrlFor(url).url()}
+          alt={`${name} logo`}
+          fill
+          style={{
+            maxWidth: '100%',
+            objectFit: 'contain',
+          }}
+        />
+      </div>
     );
   };
 
   return (
     <article className={styles.transaction}>
-      <Link passHref href={href}>
+      <Link passHref href={href} legacyBehavior>
         <a className={styles.link}>
           <div className={styles.logosCover}>
             <TransactionLogo
@@ -67,12 +70,13 @@ export const TransactionCard = ({ transaction }) => {
                 <div className={styles.imageWrapper_inner}>
                   <Image
                     unoptimized
-                    src={coverImage?.asset?.url}
+                    src={sanityImageUrlFor(coverImage?.asset?.url).url()}
                     alt={coverImage?.asset?.altText || ''}
-                    objectFit={'cover'}
-                    objectPosition={'center center'}
-                    layout="fill"
                     className={styles.image}
+                    style={{
+                      maxWidth: '100%',
+                      height: 'auto',
+                    }}
                   />
                 </div>
               </div>

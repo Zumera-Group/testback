@@ -4,6 +4,7 @@ import { useSharedContentContext } from 'lib/shared-domain/page/infrastructure/s
 import { useFormatDate } from 'lib/shared-domain/useFormatDate';
 
 import styles from './TransactionCard.module.scss';
+import { sanityImageUrlFor } from 'lib/sanity';
 
 export const TransactionCard = ({ transaction }) => {
   const sharedContent = useSharedContentContext();
@@ -33,11 +34,15 @@ export const TransactionCard = ({ transaction }) => {
     ) : (
       <Image
         unoptimized
-        objectFit="contain"
         width={100}
         height={80}
         alt={`${name} logo`}
-        src={`${url}`}
+        src={sanityImageUrlFor(url).url()}
+        style={{
+          maxWidth: '100%',
+          height: 'auto',
+          objectFit: 'contain',
+        }}
       />
     );
   };
@@ -55,12 +60,11 @@ export const TransactionCard = ({ transaction }) => {
             <div className={styles.imageWrapper_inner}>
               <Image
                 unoptimized
-                src={coverImage?.asset?.url}
+                src={sanityImageUrlFor(coverImage?.asset?.url).url()}
                 alt={coverImage?.asset?.altText || ''}
-                objectFit={'cover'}
-                objectPosition={'center center'}
-                layout="fill"
                 className={styles.image}
+                fill
+                sizes="100vw"
               />
             </div>
           </div>

@@ -7,7 +7,7 @@ import { QuestionButtonsWrapper } from '../../Question/QuestionButtonsWrapper';
 import { QuestionButtons } from '../../Question/QuestionButtons';
 import { QuestionAnimation } from '../../Question/QuestionAnimation';
 import { RequiredQuestionInfo } from '../../Question/RequiredQuestionInfo';
-import Textarea from 'components/Form/Textarea/Textarea';
+import { Textarea } from 'components/Form';
 import styles from './TextInput.module.scss';
 import BackButton from 'components/Calculator/BackButton/BackButton';
 import { useMediaQuery } from 'lib/hooks/useMediaQuery';

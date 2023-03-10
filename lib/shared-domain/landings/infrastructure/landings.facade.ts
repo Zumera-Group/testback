@@ -54,8 +54,4 @@ export class LandingsFacade {
 
     return { landing, query };
   }
-
-  async getLandings(): Promise<Landings[]> {
-    return await this.sanityService.fetch(queryLandings());
-  }
 }

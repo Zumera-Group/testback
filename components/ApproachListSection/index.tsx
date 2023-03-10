@@ -3,6 +3,7 @@ import { SectionHeading } from 'components/SectionHeading';
 import { ApproachListSectionModule } from 'lib/shared-domain/page/domain/contentModule';
 import styles from './ApproachListSection.module.scss';
 import Image from 'next/image';
+import { sanityImageUrlFor } from 'lib/sanity';
 
 export const ApproachListSection: React.FC<{
   specificContentModule: ApproachListSectionModule;
@@ -37,10 +38,13 @@ export const ApproachListSection: React.FC<{
                 <Image
                   unoptimized
                   loading="lazy"
-                  src={block.image?.asset?.url}
+                  src={sanityImageUrlFor(block.image?.asset?.url).url()}
                   alt={block.image?.name}
-                  objectFit="contain"
-                  layout="fill"
+                  fill
+                  style={{
+                    maxWidth: '100%',
+                    objectFit: 'contain',
+                  }}
                 />
               </div>
             </GridColumn>

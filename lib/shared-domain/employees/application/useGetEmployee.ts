@@ -10,9 +10,3 @@ export const fetchEmployee = async (
 
   return await facade.getEmployee(locale, slug, preview);
 };
-
-export const useGetEmployee = async (locale: Locale, slug: string) => {
-  const employee = await fetchEmployee(locale, slug);
-
-  return { employee };
-};

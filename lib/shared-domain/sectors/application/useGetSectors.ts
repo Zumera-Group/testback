@@ -8,18 +8,3 @@ export const fetchSectors = async (locale: Locale) => {
 
   return await facade.getSectors(locale);
 };
-
-export const useFetchSectors = () => {
-  const router = useRouter();
-  const [sectors, setSectors] = useState([]);
-
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      fetchSectors(router.locale as any).then((t) => {
-        setSectors(t);
-      });
-    }
-  }, []);
-
-  return sectors;
-};

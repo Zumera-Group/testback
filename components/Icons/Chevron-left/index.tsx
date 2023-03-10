@@ -1,4 +1,3 @@
-import { Icon } from '@chakra-ui/react';
 import React from 'react';
 
 export const ChevronLeft: React.FC<{ color?: string; size?: string }> = ({
@@ -6,7 +5,7 @@ export const ChevronLeft: React.FC<{ color?: string; size?: string }> = ({
   size,
 }) => {
   return (
-    <Icon
+    <svg
       width={size || '8px'}
       height={size || '14px'}
       viewBox="0 0 8 14"
@@ -20,6 +19,6 @@ export const ChevronLeft: React.FC<{ color?: string; size?: string }> = ({
         strokeLinecap="round"
         strokeLinejoin="round"
       />
-    </Icon>
+    </svg>
   );
 };

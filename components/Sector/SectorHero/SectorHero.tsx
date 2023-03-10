@@ -6,6 +6,7 @@ import { useFormatDate } from 'lib/shared-domain/useFormatDate';
 
 import baseStyles from 'components/Hero/Hero.module.scss';
 import styles from './SectorHero.module.scss';
+import { sanityImageUrlFor } from 'lib/sanity';
 
 export const SectorHero = ({ sector, content }) => {
   const format = useFormatDate();
@@ -68,11 +69,16 @@ export const SectorHero = ({ sector, content }) => {
               <div className={styles.imageWrapper}>
                 <Image
                   unoptimized
-                  src={sector.detailPageHeroImage?.asset?.url}
+                  src={sanityImageUrlFor(
+                    sector.detailPageHeroImage?.asset?.url,
+                  ).url()}
                   alt={'sector.name'}
-                  layout={'fill'}
-                  objectFit={'contain'}
-                  objectPosition={'center center'}
+                  fill
+                  style={{
+                    maxWidth: '100%',
+                    objectFit: 'contain',
+                    objectPosition: 'center',
+                  }}
                 />
               </div>
             )}

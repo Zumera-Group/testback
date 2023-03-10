@@ -22,9 +22,13 @@
 
 .imageCol {
   align-self: stretch;
+  aspect-ratio: 3/2;
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
   @include breakpoint-down(md) {
     margin-top: 2rem;
-    aspect-ratio: 3/2;
+    aspect-ratio: 1/1;
   }
 }
 

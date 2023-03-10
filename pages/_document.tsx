@@ -6,7 +6,8 @@ import Document, {
   NextScript,
   DocumentContext,
 } from 'next/document';
-import { IconSprite } from 'components/Icon';
+// eslint-disable-next-line @next/next/no-script-in-document
+import Script from 'next/script';
 
 export default class MyDocument extends Document {
   static async getInitialProps(ctx: DocumentContext) {
@@ -23,61 +24,20 @@ export default class MyDocument extends Document {
           {process.env.NEXT_PUBLIC_USE_NO_INDEX_TAG === 'true' && (
             <meta name="robots" content="noindex" />
           )}
-          <meta
-            name="viewport"
-            content="width=device-width, initial-scale=1, shrink-to-fit=no"
-          />
-          <link rel="preconnect" href="https://cdn.sanity.io" />
-          <link rel="dns-prefetch" href="https://cdn.sanity.io" />
-          <link rel="dns-prefetch" href="https://consent.cookiefirst.com" />
-          <link
-            crossOrigin="anonymous"
-            rel="preload"
-            as="font"
-            type="font/woff2"
-            href="/fonts/Yellix-Bold.woff2"
-          />
-          <link
-            crossOrigin="anonymous"
-            rel="preload"
-            as="font"
-            type="font/woff2"
-            href="/fonts/Yellix-BoldItalic.woff2"
-          />
-          <link
-            crossOrigin="anonymous"
-            rel="preload"
-            as="font"
-            type="font/woff2"
-            href="/fonts/Yellix-Light.woff2"
-          />
-          <link
-            crossOrigin="anonymous"
-            rel="preload"
-            as="font"
-            type="font/woff2"
-            href="/fonts/Yellix-LightItalic.woff2"
-          />
-          <link
-            crossOrigin="anonymous"
-            rel="preload"
-            as="font"
-            type="font/woff2"
-            href="/fonts/Yellix-Medium.woff2"
-          />
-          <link
-            crossOrigin="anonymous"
-            rel="preload"
-            as="font"
-            type="font/woff2"
-            href="/fonts/Yellix-MediumItalic.woff2"
-          />
+          {/*<link rel="preconnect" href="https://cdn.sanity.io" />*/}
+          {/*<link rel="dns-prefetch" href="https://cdn.sanity.io" />*/}
+          {/*<link rel="dns-prefetch" href="https://consent.cookiefirst.com" />*/}
           <link rel="shortcut icon" href="/favicon.ico" />
         </Head>
         <body>
-          <IconSprite />
           <Main />
           <NextScript />
+          <Script
+            // strategy="worker"
+            strategy="beforeInteractive"
+            src="https://consent.cookiefirst.com/banner.js"
+            data-cookiefirst-key="187e6cb5-6683-48db-9a01-a5892c9f29d2"
+          />
         </body>
       </Html>
     );

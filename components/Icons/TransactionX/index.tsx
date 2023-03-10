@@ -1,14 +1,13 @@
-import { Icon } from '@chakra-ui/react';
 import React from 'react';
 
 export const TransactionX: React.FC<{
   size?: string;
   color?: string;
   strokeW?: string;
-  style?: any
+  style?: any;
 }> = ({ size, color, strokeW, style }) => {
   return (
-    <Icon
+    <svg
       style={style}
       width={size || '120px'}
       height={size || '120px'}
@@ -40,6 +39,6 @@ export const TransactionX: React.FC<{
         strokeWidth={strokeW || '1.81023'}
         strokeMiterlimit="10"
       />
-    </Icon>
+    </svg>
   );
 };

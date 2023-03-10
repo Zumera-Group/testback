@@ -12,26 +12,29 @@ export const ServiceItem: React.FC<IProps> = ({ service, index }) => {
   const route = useRouter();
   return (
     <div className={styles.serviceItem}>
-      <Link passHref href={`${route.asPath}${service.slug?.current}`}>
-        <a className={styles.serviceLink}>
-          <h2 className={styles.serviceIndex}>
-            {index}
-          </h2>
-          <div className={styles.serviceItemContent}>
-            <h4 className={styles.serviceName}>
-              {service.name}
-            </h4>
-            <p>
-              {service.shortDescription}
-            </p>
-            <Icon
-              iconName={'arrow-circle'}
-              viewBox={'0 0 32 32'}
-              width={24}
-              height={24}
-            />
-          </div>
-        </a>
+      <Link
+        passHref
+        href={`${route.asPath}${service.slug?.current}`}
+        className={styles.serviceLink}>
+
+        <h2 className={styles.serviceIndex}>
+          {index}
+        </h2>
+        <div className={styles.serviceItemContent}>
+          <h4 className={styles.serviceName}>
+            {service.name}
+          </h4>
+          <p>
+            {service.shortDescription}
+          </p>
+          <Icon
+            iconName={'arrow-circle'}
+            viewBox={'0 0 32 32'}
+            width={24}
+            height={24}
+          />
+        </div>
+
       </Link>
     </div>
   );

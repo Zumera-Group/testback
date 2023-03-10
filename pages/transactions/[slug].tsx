@@ -5,11 +5,9 @@ import { TransactionDetailLayout } from 'lib/shared-domain/transactions/presenta
 import { fetchSiteSettings } from 'lib/shared-domain/page/application/useGetSiteSettings';
 import { SiteSettings } from 'lib/shared-domain/page/domain';
 import { ErrorTrackingBoundary } from '../../lib/ErrorTrackingBoundary';
-import { Custom404 } from 'pages/404';
 import { SharedContentContext } from 'lib/shared-domain/page/infrastructure/sharedContentContext';
 import { SharedContentFacade } from 'lib/shared-domain/page/infrastructure/sharedContent.facade';
 import { useRouter } from 'next/router';
-import { EmployeeHero } from 'lib/shared-domain/employees/presentation/EmployeeHero';
 import { usePreviewSubscription } from '../../lib/sanity';
 import { filterDataToSingleItem } from '../../lib/shared-domain/page/infrastructure/page.facade';
 

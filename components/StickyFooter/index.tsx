@@ -5,6 +5,7 @@ import { Button } from 'components/Button';
 import { useEffect, useState } from 'react';
 
 import { useRouter } from 'next/router';
+import { getLinksByPageType } from 'lib/utils/getLinksByPageType';
 
 export const StickyFooter: React.FC<{
   specificContentModule: StickyFooterModule;
@@ -12,14 +13,13 @@ export const StickyFooter: React.FC<{
   const { button } = specificContentModule;
   const [isScrolled, setIsScrolled] = useState(false);
   const router = useRouter();
-  const page = router.locale === 'en' ? 'questionnaires' : 'fragenkatalog';
-  const url =
-    '/' +
-    router.locale +
-    '/' +
-    page +
-    '/' +
-    button?.questionnaire?.questionnaireSlug?.current;
+  const url = getLinksByPageType(
+    router.locale,
+    'valueCalculator',
+    button?.questionnaire?.questionnaireSlug?.current ||
+      button?.page?.slug?.current ||
+      button?.link?.slug?.current,
+  );
 
   useEffect(() => {
     const handleScroll = () => {

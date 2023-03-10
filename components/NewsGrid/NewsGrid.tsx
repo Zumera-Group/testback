@@ -148,7 +148,6 @@ export const NewsGrid: React.FC<Props> = ({
 
   const chunkedArray = sliceIntoChunks(emptyNews, tilesToShow);
   const displayItems = chunkedArray.slice(0, numberOfRepetitions);
-
   return (
     <Section size={'md'} bg={'light'} color={'primary'} divider={true}>
       <Container>

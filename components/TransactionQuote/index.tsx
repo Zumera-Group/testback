@@ -3,6 +3,7 @@ import { SectionHeading } from 'components/SectionHeading';
 import { TransactionCard } from 'components/Transaction/TransactionCard';
 import styles from './TransactionQuote.module.scss';
 import Image from 'next/image';
+import { sanityImageUrlFor } from 'lib/sanity';
 export const TransactionQuote: React.FC<any> = ({ specificContentModule }) => {
   const { subtitle, title, transaction } = specificContentModule;
 
@@ -36,10 +37,12 @@ export const TransactionQuote: React.FC<any> = ({ specificContentModule }) => {
                   <div className={styles.image}>
                     <Image
                       unoptimized
-                      loading="lazy"
-                      src={optionalUI?.involvedParty1?.companyLogo?.asset?.url}
-                      layout={'fill'}
-                      objectFit={'cover'}
+                      src={sanityImageUrlFor(
+                        optionalUI?.involvedParty1?.companyLogo?.asset?.url,
+                      ).url()}
+                      fill
+                      style={{ objectFit: 'cover' }}
+                      alt={'Company Logo'}
                     />
                   </div>
                 </div>

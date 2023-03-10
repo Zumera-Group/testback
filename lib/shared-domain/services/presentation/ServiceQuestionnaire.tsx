@@ -2,10 +2,7 @@ import React from 'react';
 import { getTranslateByScope } from 'translation/i18n';
 
 import { CalculatorTeaser } from '../../questionnaire/presentation/CalculatorTeaser';
-import {
-  Service,
-  ServiceCalculatorTeaserSection,
-} from '../../page/domain/index';
+import { ServiceCalculatorTeaserSection } from '../../page/domain/index';
 
 const t = getTranslateByScope('website.serviceDetails.questionnaire');
 

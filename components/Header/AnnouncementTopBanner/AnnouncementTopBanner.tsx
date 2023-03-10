@@ -42,7 +42,7 @@ export const AnnouncementTopBanner = ({
           <>
             {' '}
             <Link href={getBannerLink()} passHref={true}>
-              <a>{announcementTopBanner.buttonText}</a>
+              {announcementTopBanner.buttonText}
             </Link>
           </>
         )}

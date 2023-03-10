@@ -1,6 +1,5 @@
 import { Transaction } from 'lib/shared-domain/transactions/domain';
 import { Fact, TitleAndDescriptionItem } from '.';
-import { sectionImages } from '../presentation/contentModules/sectionImages';
 import { Sector, Service, Description, IndustryReport } from './index';
 import { Office } from 'lib/shared-domain/offices/domain/index';
 import { Employee } from 'lib/shared-domain/employees/domain';

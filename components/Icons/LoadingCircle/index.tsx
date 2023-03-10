@@ -1,4 +1,3 @@
-import { Icon } from '@chakra-ui/react';
 import React from 'react';
 
 export const LoadingCircle: React.FC<{
@@ -6,7 +5,7 @@ export const LoadingCircle: React.FC<{
   className?: string;
 }> = ({ color, className }) => {
   return (
-    <Icon
+    <svg
       xmlns="http://www.w3.org/2000/svg"
       x="0px"
       y="0px"
@@ -29,6 +28,6 @@ export const LoadingCircle: React.FC<{
           repeatCount="indefinite"
         ></animateTransform>
       </path>
-    </Icon>
+    </svg>
   );
 };

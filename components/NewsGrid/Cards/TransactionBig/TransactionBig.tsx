@@ -9,6 +9,7 @@ import { useSharedContentContext } from 'lib/shared-domain/page/infrastructure/s
 import { useFormatDate } from 'lib/shared-domain/useFormatDate';
 
 import styles from './TransactionBig.module.scss';
+import { sanityImageUrlFor } from 'lib/sanity';
 
 export const TransactionBig = ({ article }) => {
   const format = useFormatDate();
@@ -30,11 +31,13 @@ export const TransactionBig = ({ article }) => {
       <div className={styles.transactionLogo}>
         <Image
           unoptimized
-          objectFit="contain"
-          width={100}
-          height={80}
+          src={sanityImageUrlFor(url).url()}
           alt={`${name} logo`}
-          src={`${url}`}
+          fill
+          style={{
+            maxWidth: '100%',
+            objectFit: 'contain',
+          }}
         />
       </div>
     );
@@ -42,7 +45,7 @@ export const TransactionBig = ({ article }) => {
 
   return (
     <article key={`transactionBig-${_id}`} className={styles.transactionBig}>
-      <Link passHref href={href}>
+      <Link passHref href={href} legacyBehavior>
         <a className={styles.link}>
           <div className={styles.logosCover}>
             <TransactionLogo

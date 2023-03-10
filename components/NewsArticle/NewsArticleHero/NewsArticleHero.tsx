@@ -5,14 +5,17 @@ import baseStyles from 'components/Hero/Hero.module.scss';
 import { useFormatDate } from 'lib/shared-domain/useFormatDate';
 
 import styles from './NewsArticleHero.module.scss';
+import { sanityImageUrlFor } from 'lib/sanity';
 
 interface Props {
-  newsArticle: any
+  newsArticle: any;
 }
 
 const NewsArticleHero: React.FC<Props> = ({ newsArticle }) => {
   const format = useFormatDate();
-  const dateFormatted = newsArticle.date ? format(new Date(newsArticle.date)) : null;
+  const dateFormatted = newsArticle.date
+    ? format(new Date(newsArticle.date))
+    : null;
   return (
     <Section
       as={'div'}
@@ -29,9 +32,7 @@ const NewsArticleHero: React.FC<Props> = ({ newsArticle }) => {
         >
           <GridColumn sm={12} md={6} lg={6}>
             <span className={styles.date}>{dateFormatted}</span>
-            <h4 className={styles.title}>
-              {newsArticle.title}
-            </h4>
+            <h4 className={styles.title}>{newsArticle.title}</h4>
             <p>{newsArticle.subtitle}</p>
           </GridColumn>
           <GridColumn sm={12} md={6} lg={6}>
@@ -39,11 +40,16 @@ const NewsArticleHero: React.FC<Props> = ({ newsArticle }) => {
               <div className={styles.imageWrapper}>
                 <Image
                   unoptimized
-                  src={newsArticle?.picture?.asset?.url}
+                  src={sanityImageUrlFor(
+                    newsArticle?.picture?.asset?.url,
+                  ).url()}
+                  width={200}
+                  height={1200}
                   alt={'name'}
-                  layout={'fill'}
-                  objectFit={'cover'}
-                  objectPosition={'center center'}
+                  style={{
+                    maxWidth: '100%',
+                    height: 'auto',
+                  }}
                 />
               </div>
             )}

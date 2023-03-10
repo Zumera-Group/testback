@@ -1,9 +1,8 @@
-import { Icon } from '@chakra-ui/react';
 import React from 'react';
 
 export const ArrowLeft: React.FC = () => {
   return (
-    <Icon
+    <svg
       width="22px"
       height="21px"
       viewBox="0 0 22 21"
@@ -21,6 +20,6 @@ export const ArrowLeft: React.FC = () => {
         stroke="#595959"
         strokeWidth="1.5"
       />
-    </Icon>
+    </svg>
   );
 };

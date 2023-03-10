@@ -1,9 +1,8 @@
-import { Icon } from '@chakra-ui/react';
 import React from 'react';
 
 export const User: React.FC<{ size?: string }> = ({ size }) => {
   return (
-    <Icon
+    <svg
       width={size || '16px'}
       height={size || '16px'}
       viewBox="0 0 16 16"
@@ -14,6 +13,6 @@ export const User: React.FC<{ size?: string }> = ({ size }) => {
         d="M8 8C10.21 8 12 6.21 12 4C12 1.79 10.21 0 8 0C5.79 0 4 1.79 4 4C4 6.21 5.79 8 8 8ZM8 10C5.33 10 0 11.34 0 14V16H16V14C16 11.34 10.67 10 8 10Z"
         fill="white"
       />
-    </Icon>
+    </svg>
   );
 };

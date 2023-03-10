@@ -7,6 +7,7 @@ import { VTHeroModule } from 'lib/shared-domain/page/domain/contentModule';
 import { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { getLinksByPageType } from 'lib/utils/getLinksByPageType';
 
 export const VTHero: React.FC<{
   specificContentModule: VTHeroModule;
@@ -14,18 +15,14 @@ export const VTHero: React.FC<{
   const [selectedPurpose, setSelectedPurpose] = useState('');
   const { title, title2, description, buttons, purposesTitle, purposes } =
     specificContentModule;
-  // const questionnaire = `/questionnaires/${buttons[0]?.questionnaire?.questionnaireSlug?.current}`;
 
   const router = useRouter();
-  const page = router.locale === 'en' ? 'questionnaires' : 'fragenkatalog';
-  const questionnaire =
-    '/' +
-    router.locale +
-    '/' +
-    page +
-    '/' +
-    buttons[0]?.questionnaire?.questionnaireSlug?.current;
 
+  const questionnaire = getLinksByPageType(
+    router.locale,
+    'valueCalculator',
+    buttons[0]?.questionnaire?.questionnaireSlug?.current,
+  );
   return (
     <Section
       as={'div'}
@@ -48,13 +45,11 @@ export const VTHero: React.FC<{
             <SanityBlockContent text={description} />
             <div className={styles.btnWrapper}>
               {buttons.map((button) => {
-                const qLink =
-                  '/' +
-                  router.locale +
-                  '/' +
-                  page +
-                  '/' +
-                  button?.questionnaire?.questionnaireSlug?.current;
+                const qLink = getLinksByPageType(
+                  router.locale,
+                  'valueCalculator',
+                  button?.questionnaire?.questionnaireSlug?.current,
+                );
                 if (qLink) {
                   return (
                     <Button
@@ -80,17 +75,17 @@ export const VTHero: React.FC<{
               <h4>{purposesTitle}</h4>
               <div className={styles.purposes}>
                 {purposes.map((purpose) => (
-                  <Link passHref href={questionnaire} key={purpose}>
-                    <a
-                      key={purpose}
-                      className={[
-                        styles.purpose,
-                        selectedPurpose === purpose ? styles.selected : '',
-                      ].join(' ')}
-                      onClick={() => setSelectedPurpose(purpose)}
-                    >
-                      {purpose}
-                    </a>
+                  <Link
+                    passHref
+                    href={questionnaire}
+                    key={purpose}
+                    className={[
+                      styles.purpose,
+                      selectedPurpose === purpose ? styles.selected : '',
+                    ].join(' ')}
+                    onClick={() => setSelectedPurpose(purpose)}
+                  >
+                    {purpose}
                   </Link>
                 ))}
               </div>

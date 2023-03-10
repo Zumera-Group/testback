@@ -3,7 +3,6 @@ import { useRef } from 'react';
 import { Gradient } from './Gradient';
 import { Container } from 'components/Layout';
 import { Button } from 'components/Button';
-import { Beam } from 'components/Beam';
 
 import styles from './FourOFour.module.scss';
 

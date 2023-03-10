@@ -1,7 +1,6 @@
 import React from 'react';
 import { SiteSettings } from '../../page/domain/index';
 import { Office } from '../domain/index';
-import { Box } from '../../../../components/Layout/Flex/Flex';
 import { SEO } from '../../../../components/SEO';
 import { PageHeader } from '../../page/presentation/PageHeader';
 import { PageTransition } from '../../../../components/PageTransition';
@@ -20,7 +19,7 @@ export const OfficeCDIDetailLayout: React.FC<{
   const newsArticles = useFetchNewsArticles();
   const transactions = useFetchTransactions();
   return (
-    <Box minHeight="100vh" overflowX="hidden">
+    <div>
       <SEO
         seoTitle={office.city}
         seoDescription={office.city}
@@ -42,6 +41,6 @@ export const OfficeCDIDetailLayout: React.FC<{
         />
       </PageTransition>
       <PageFooter siteSettings={siteSettings} />
-    </Box>
+    </div>
   );
 };

@@ -15,7 +15,7 @@ import { ArrowLeft } from './ArrowLeft/index';
 import { Download } from './Download/index';
 import { Location } from './Location/index';
 
-export const icons = {
+export const svgs = {
   ChevronLeft,
   Logo,
   Tick,

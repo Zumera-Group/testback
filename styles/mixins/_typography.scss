@@ -7,8 +7,9 @@
     display: block;
     font-style: normal;
     font-weight: $font-weight-light;
+    width: fit-content;
   }
-};
+}
 
 // Subheading
 @mixin sub-heading() {

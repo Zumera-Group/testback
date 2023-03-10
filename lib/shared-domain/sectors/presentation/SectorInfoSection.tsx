@@ -17,9 +17,7 @@ export const SectorInfoSection: React.FC<{
     <SectorInfo
       sector={sector}
       sectorTransactions={sectorTransactions}
-      // siteSettings={sectorTransactions}
       content={content}
-      // sharedContent={sharedContent}
     />
   );
 };

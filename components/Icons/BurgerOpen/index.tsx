@@ -1,4 +1,3 @@
-import { Icon } from '@chakra-ui/react';
 import React from 'react';
 
 export const BurgerOpen: React.FC<{ color?: string; size?: string }> = ({
@@ -6,7 +5,7 @@ export const BurgerOpen: React.FC<{ color?: string; size?: string }> = ({
   size,
 }) => {
   return (
-    <Icon
+    <svg
       width={size || '43px'}
       height={size || '43px'}
       viewBox="0 0 43 43"
@@ -37,6 +36,6 @@ export const BurgerOpen: React.FC<{ color?: string; size?: string }> = ({
         strokeWidth="2"
         strokeMiterlimit="10"
       />
-    </Icon>
+    </svg>
   );
 };

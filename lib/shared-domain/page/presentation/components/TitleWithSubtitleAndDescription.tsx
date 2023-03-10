@@ -1,10 +1,5 @@
-import { H } from 'components/Typography/H';
-import { Box } from 'components/Layout/Flex/Flex';
 import { SanityBlockContent } from 'components/SanityBlockContent';
-import { P } from 'components/Typography/P';
 import React from 'react';
-import { colors } from 'styles/foundations/colors';
-import { fontSizes } from '../../../../../styles/foundations/fontStyles';
 
 export const TitleWithSubtitleAndDescription: React.FC<{
   title?: string;
@@ -17,45 +12,26 @@ export const TitleWithSubtitleAndDescription: React.FC<{
   };
   fontSizeDescription?: string;
   headingType?: 'h1' | 'h2' | 'h3';
-}> = ({
-  title,
-  subtitle,
-  description,
-  color,
-  fontSizeDescription,
-  headingType,
-}) => {
+}> = ({ title, subtitle, description, color }) => {
   return (
-    <Box>
-      <Box>
-        {subtitle && (
-          <P
-            fontSize={fontSizes.h1_2}
-            color={color?.subtitle || colors.text.light}
-            mb={1.5}
-          >
-            {subtitle}
-          </P>
-        )}
+    <div>
+      <div>
+        {subtitle && <p color={color?.subtitle || 'white'}>{subtitle}</p>}
         {title && (
           <>
-            <H
+            <h2
               className="titleWithSubtitleAndDescriptionHeading"
               color={color?.title}
-              as={headingType || 'h2'}
-              mb={4}
             >
               {title}
-            </H>
+            </h2>
           </>
         )}
-      </Box>
+      </div>
       {description && (
-        <Box>
-          <P
-            whiteSpace="pre-wrap"
-            color={color?.description || colors.text.light}
-            fontSize={fontSizeDescription || fontSizes.h3}
+        <div>
+          <p
+            color={color?.description || 'white'}
             style={{ hyphens: 'manual', maxWidth: '100%' }}
           >
             {Array.isArray(description) ? (
@@ -63,9 +39,9 @@ export const TitleWithSubtitleAndDescription: React.FC<{
             ) : (
               description
             )}
-          </P>
-        </Box>
+          </p>
+        </div>
       )}
-    </Box>
+    </div>
   );
 };

@@ -126,7 +126,7 @@ export const CardsNew = ({
                 </GridColumn>
               ) : (
                 <GridColumn
-                  key={article?._id}
+                  key={index}
                   sm={12}
                   md={isEven ? wideColl : smallColl}
                   lg={isEven ? wideColl : smallColl}

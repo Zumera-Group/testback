@@ -4,17 +4,24 @@ import { SectionHeading } from 'components/SectionHeading';
 import { Button } from 'components/Button';
 import styles from './VTValuesGridSection.module.scss';
 import Image from 'next/image';
+import { sanityImageUrlFor } from 'lib/sanity';
+import { getLinksByPageType } from 'lib/utils/getLinksByPageType';
+import { useRouter } from 'next/router';
 
 export const VTValuesGridSection: React.FC<{
   specificContentModule: VTValuesGridSectionModule;
 }> = ({ specificContentModule }) => {
   const { title, description, button, values } = specificContentModule;
-
+  const router = useRouter();
   const ButtonComp = () => {
     if (!button?.title) {
       return null;
     }
-    const qLink = `/questionnaires/${button?.questionnaire?.questionnaireSlug?.current}`;
+    const qLink = getLinksByPageType(
+      router.locale,
+      'valueCalculator',
+      button?.questionnaire?.questionnaireSlug?.current,
+    );
     return button?.questionnaire?.questionnaireSlug ? (
       <Button {...button} link={{ slug: { current: qLink } }}>
         {button?.title}
@@ -48,11 +55,14 @@ export const VTValuesGridSection: React.FC<{
                   <div className={styles.imageWrapper}>
                     <Image
                       unoptimized
-                      src={value?.icon?.iconImage?.asset?.url}
+                      src={sanityImageUrlFor(
+                        value?.icon?.iconImage?.asset?.url,
+                      ).url()}
                       alt={value?.icon?.iconImage?.name}
-                      layout={'fill'}
-                      objectFit={'contain'}
-                      objectPosition={'center center'}
+                      fill
+                      style={{
+                        maxWidth: '100%',
+                      }}
                     />
                   </div>
                   <SectionHeading

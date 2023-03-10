@@ -6,6 +6,8 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { animationProps } from './animationProps';
 
 import styles from './Offices.module.scss';
+import Image from 'next/image';
+import { sanityImageUrlFor } from 'lib/sanity';
 
 export const Offices = ({ offices, appointmentLinkText }) => {
   const [selectedOffice, setSelectedOffice] = useState(offices[0]);
@@ -72,19 +74,32 @@ export const Offices = ({ offices, appointmentLinkText }) => {
                 </Button>
               </div>
             )}
-            {selectedOffice?.image?.asset?.url ? (
-              <img
-                src={selectedOffice?.image?.asset?.url}
-                alt={'Zumera Office'}
-                className={styles.building}
-              />
-            ) : (
-              <img
-                src={'/contentModules/contactUsSection/footer_cta-building.svg'}
-                alt={'Zumera Office'}
-                className={styles.building}
-              />
-            )}
+            <div className={styles.building}>
+              {selectedOffice?.image?.asset?.url ? (
+                <Image
+                  unoptimized
+                  src={sanityImageUrlFor(
+                    selectedOffice?.image?.asset?.url,
+                  ).url()}
+                  alt={'Zumera Office'}
+                  fill
+                  style={{
+                    maxWidth: '100%',
+                  }}
+                />
+              ) : (
+                <Image
+                  src={
+                    '/contentModules/contactUsSection/footer_cta-building.svg'
+                  }
+                  alt={'Zumera Office'}
+                  fill
+                  style={{
+                    maxWidth: '100%',
+                  }}
+                />
+              )}
+            </div>
           </motion.div>
         )}
       </AnimatePresence>

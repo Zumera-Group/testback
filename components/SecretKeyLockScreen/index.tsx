@@ -16,12 +16,15 @@ export const SecretKeyLockScreen = ({ siteSettings }) => {
           unoptimized
           priority
           loading="eager"
-          layout="fill"
-          objectFit="contain"
-          objectPosition="center center"
+          width={200}
+          height={1200}
           alt={`logo`}
           src={siteSettings?.logo?.asset?.url}
           onClick={() => setClicksCount(clicksCount + 1)}
+          style={{
+            maxWidth: '100%',
+            height: 'auto',
+          }}
         />
       </div>
       <div className={styles.comingSoon}>Coming soon</div>

@@ -2,12 +2,11 @@
   &:hover {
     color: $white;
   }
-}
-
-.icon {
-  height: auto !important;
-  width: 6rem !important;
-  @include breakpoint-up(md) {
-    width: 9rem !important;
+  svg {
+    height: auto;
+    width: 6rem;
+    @include breakpoint-up(md) {
+      width: 9rem;
+    }
   }
 }

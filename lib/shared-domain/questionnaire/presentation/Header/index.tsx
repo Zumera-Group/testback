@@ -2,10 +2,9 @@ import { getTranslateByScope } from 'translation/i18n';
 import { useValuationStore } from '../../store';
 
 import React, { useLayoutEffect, useState } from 'react';
-import useBreakpointValue from 'lib/shared-domain/useBreakpoint';
+import useBreakpoint from 'lib/utils/useBreakpoints';
 
 const Header = ({ siteSettings }): JSX.Element => {
-  const isMobile = useBreakpointValue({ base: true, lg: false });
   const t = getTranslateByScope('header');
   const {
     mainStep,
@@ -18,6 +17,9 @@ const Header = ({ siteSettings }): JSX.Element => {
   } = useValuationStore();
   const currentCategory = questionnaire?.questionsByCategory?.[mainStep];
   const categoryQuestions = questionnaire && currentCategory?.questions;
+
+  const breakpoints = useBreakpoint();
+  const isMobile = breakpoints === 'sm';
 
   const onPreviousQuestion = () => {
     if (isOnResultScreen) {

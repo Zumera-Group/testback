@@ -25,13 +25,15 @@ export const Home: HeroComponent = ({ ...rest }) => {
         <SanityBlockContent text={description} />
         {button?.title && (
           <div className={baseStyles.btnWrapper}>
-            <Button {...button} onDark={true}>{button.title}</Button>
+            <Button {...button} onDark={true}>
+              {button.title}
+            </Button>
           </div>
         )}
         <Beam color={'white'} glow={true} classes={styles.beam} />
       </Container>
     </div>
   );
-}
+};
 
 export default Home;

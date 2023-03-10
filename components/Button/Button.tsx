@@ -1,15 +1,8 @@
 import Link from 'next/link';
-
 import { Icon } from 'components/Icon';
-
 import styles from './Button.module.scss';
-
 import { generateButtonVariant } from './utils';
-import { useEffect } from 'react';
-import { getClient } from 'lib/sanity.server';
-import { sanityImageUrlFor } from 'lib/sanity';
 import axios from 'axios';
-// import urlForImage from '@sanity/image-url/lib/types/urlForImage';
 
 interface Props {
   title?: string;
@@ -74,19 +67,20 @@ export const Button: React.FC<Props> = ({
   };
 
   return isLink && !downloadImage ? (
-    <Link href={externalUrl || link?.slug?.current || '#'} passHref>
-      <a
-        id={id}
-        title={title}
-        className={[styles.button, btnVariant, classes ?? ''].join(' ')}
-        target={externalUrl ? '_blank' : undefined}
-        rel={externalUrl ? 'noopener noreferrer' : undefined}
-        {...rest}
-      >
-        <span>{children}</span>
-        <ButtonIcon />
-      </a>
-    </Link>
+    (<Link
+      href={externalUrl || link?.slug?.current || '#'}
+      passHref
+      id={id}
+      title={title}
+      className={[styles.button, btnVariant, classes ?? ''].join(' ')}
+      target={externalUrl ? '_blank' : undefined}
+      rel={externalUrl ? 'noopener noreferrer' : undefined}
+      {...rest}>
+
+      <span>{children}</span>
+      <ButtonIcon />
+
+    </Link>)
   ) : (
     <button
       id={id}

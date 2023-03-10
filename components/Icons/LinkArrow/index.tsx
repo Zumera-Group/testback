@@ -1,12 +1,11 @@
 import React from 'react';
-import { Icon } from '@chakra-ui/react';
 
 export const LinkArrow: React.FC<{ color?: string; size?: string }> = ({
   color,
   size,
 }) => {
   return (
-    <Icon
+    <svg
       width={size || '12px'}
       height={size || '12px'}
       viewBox="0 0 12 11"
@@ -24,6 +23,6 @@ export const LinkArrow: React.FC<{ color?: string; size?: string }> = ({
         stroke={color || 'black'}
         strokeWidth="1.35767"
       />
-    </Icon>
+    </svg>
   );
 };

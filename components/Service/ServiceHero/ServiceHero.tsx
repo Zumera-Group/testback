@@ -3,6 +3,7 @@ import { Section, Container, Grid, GridColumn } from 'components/Layout';
 
 import baseStyles from 'components/Hero/Hero.module.scss';
 import styles from './ServiceHero.module.scss';
+import { sanityImageUrlFor } from 'lib/sanity';
 
 export const ServiceHero = ({ service }) => {
   return (
@@ -28,11 +29,18 @@ export const ServiceHero = ({ service }) => {
               <div className={styles.imageWrapper}>
                 <Image
                   unoptimized
-                  src={service.detailPageHeroImage?.asset?.url}
+                  src={sanityImageUrlFor(
+                    service.detailPageHeroImage?.asset?.url,
+                  ).url()}
+                  width={200}
+                  height={1200}
                   alt={'service.name'}
-                  layout={'fill'}
-                  objectFit={'contain'}
-                  objectPosition={'center center'}
+                  fill
+                  style={{
+                    maxWidth: '100%',
+                    objectFit: 'contain',
+                    objectPosition: 'center',
+                  }}
                 />
               </div>
             )}

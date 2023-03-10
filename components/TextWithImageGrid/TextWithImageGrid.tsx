@@ -1,11 +1,11 @@
 import { Container, Grid, GridColumn, Section } from 'components/Layout';
 import styles from './TextWithImageGrid.module.scss';
-import { Sector } from 'lib/shared-domain/page/domain';
 import { SectionHeading } from 'components/SectionHeading';
 import { Button } from 'components/Button';
 import Image from 'next/image';
 import { TextWithImageGridModule } from 'lib/shared-domain/page/domain/contentModule';
 import { Icon } from 'components/Icon';
+import { sanityImageUrlFor } from 'lib/sanity';
 
 export const TextWithImageGrid: React.FC<{
   specificContentModule: TextWithImageGridModule;
@@ -45,14 +45,17 @@ export const TextWithImageGrid: React.FC<{
               </Button>
             ) : null}
           </GridColumn>
-          <GridColumn sm={12} md={6} lg={6} className={styles.imageCol}>
+          <GridColumn sm={12} md={5} lg={5} className={styles.imageCol}>
             <Image
               unoptimized
               loading="lazy"
-              src={image?.asset?.url}
+              src={sanityImageUrlFor(image?.asset?.url).url()}
+              fill
               alt={image?.name}
-              objectFit="contain"
-              layout="fill"
+              style={{
+                maxWidth: '100%',
+                objectFit: 'contain',
+              }}
             />
           </GridColumn>
         </Grid>

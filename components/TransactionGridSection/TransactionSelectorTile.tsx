@@ -3,6 +3,7 @@ import styles from './TransactionGridSection.module.scss';
 import Image from 'next/image';
 import { useGetSectorDetail } from 'lib/shared-domain/sectors/application/useGetSectorDetail';
 import { Locale } from 'lib/locale';
+import { sanityImageUrlFor } from 'lib/sanity';
 
 interface IProps {
   sector: ISectorsDropdown;
@@ -44,9 +45,14 @@ export const TransactionSelectorTile: React.FC<IProps> = ({
           <Image
             unoptimized
             loading="lazy"
-            src={sectorDetail.graphLight.iconImage?.asset?.url}
+            src={sanityImageUrlFor(
+              sectorDetail.graphLight.iconImage?.asset?.url,
+            ).url()}
             alt={sector.name}
-            layout={'fill'}
+            fill
+            style={{
+              maxWidth: '100%',
+            }}
           />
         </div>
       ) : null}

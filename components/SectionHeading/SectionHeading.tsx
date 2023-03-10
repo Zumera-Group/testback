@@ -1,7 +1,6 @@
 import { SanityBlockContent } from 'components/SanityBlockContent';
 
 import styles from './SectionHeading.module.scss';
-import { H } from 'components/Typography/H';
 
 interface Props {
   title?: string;

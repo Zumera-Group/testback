@@ -108,7 +108,7 @@ export const ContactForm = ({ contactForm }) => {
               sharedContent?.checkboxPrivacyPage?.slug?.current,
             )}
           >
-            <a>{sharedContent?.checkboxPrivacyText2}</a>
+            {sharedContent?.checkboxPrivacyText2}
           </Link>
           {' ' + sharedContent?.checkboxPrivacyText3}
         </Checkbox>

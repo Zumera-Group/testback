@@ -43,8 +43,8 @@ export const Navigation = ({
       <ul className={styles.items}>
         {currentNavigation?.map((item, index: number) => (
           <li key={`navigation-${item?._id}-${index}`} className={styles.item}>
-            <Link passHref href={link[showMode](item)}>
-              <a className={styles.link}>{item?.name}</a>
+            <Link passHref href={link[showMode](item)} className={styles.link}>
+              {item?.name}
             </Link>
           </li>
         ))}
@@ -77,7 +77,7 @@ export const Navigation = ({
             passHref
             href={linkWithCurrentLocale(navigationHeading.toLowerCase())}
           >
-            <a>{navigationHeading}</a>
+            {navigationHeading}
           </Link>
         </motion.h2>
       )}

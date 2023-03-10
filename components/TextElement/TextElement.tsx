@@ -2,7 +2,6 @@ import { Section, Container, Grid, GridColumn } from 'components/Layout';
 import { SanityBlockContent } from 'components/SanityBlockContent';
 
 import styles from './TextElement.module.scss';
-import { H } from 'components/Typography/H';
 
 export const TextElement = ({ firstBlock, secondBlock, title }) => {
   const TextColumn = ({ content }) => {

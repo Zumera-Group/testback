@@ -38,6 +38,7 @@ export const SideBar = ({
               {type === 'normal' ? (
                 <Link
                   passHref
+                  className={styles.link}
                   href={linkWithCurrentLocale(
                     getLinksByPageType(
                       router.locale,
@@ -46,7 +47,7 @@ export const SideBar = ({
                     ),
                   )}
                 >
-                  <a className={styles.link}>{name}</a>
+                  {name}
                 </Link>
               ) : (
                 <button
