@@ -6,6 +6,7 @@ import Image from 'next/image';
 import styles from './ScoreCard.module.scss';
 import * as animationData from './loading-wheel.json';
 import Lottie from 'react-lottie';
+import { motion } from 'framer-motion';
 
 export const ScoreCard = () => {
   const tr = getTranslateByScope('result');
@@ -69,45 +70,67 @@ export const ScoreCard = () => {
     },
   };
 
+  const animationVariants = {
+    initial: { opacity: 0 },
+    in: { opacity: 1 },
+  };
+
+  const AnimateIn: React.FC = ({ children }) => {
+    return (
+      <motion.div
+        style={{ height: '100%' }}
+        transition={{ delay: 0.2, duration: 0.4 }}
+        initial="initial"
+        animate="in"
+        variants={animationVariants}
+      >
+        {children}
+      </motion.div>
+    );
+  };
+
   return (
     <>
-      <div className={styles.scoreCardWrapper}>
-        {hasScoreAndPercentage && (
-          <>
-            <span className={styles.scoreCardTitle}>{title}</span>
-            <ProgressBar
-              isPoint
-              progress={points.substring(0, points.length - 2)}
-              color="gradient"
-            />
-            <p className={styles.betterThan}>{betterThan}</p>
-            <div className={styles.booklet}>
-              <Image
-                unoptimized
-                loading="lazy"
-                // objectFit="cover"
-                alt={'booklet'}
-                src={'/calculator/booklet.png'}
-                width={237}
-                height={200}
-                style={{
-                  objectFit: 'cover',
-                }}
+      <AnimateIn>
+        <div className={styles.scoreCardWrapper}>
+          {hasScoreAndPercentage && (
+            <>
+              <span className={styles.scoreCardTitle}>{title}</span>
+              <ProgressBar
+                isPoint
+                progress={points.substring(0, points.length - 2)}
+                color="gradient"
               />
-            </div>
-          </>
-        )}
-        {!score && (
-          <Lottie
-            options={defaultOptions}
-            width="100%"
-            height={'auto'}
-            style={{ maxWidth: 194, marginLeft: 'auto' }}
-            isStopped={false}
-            isPaused={false}
-          />
-        )}
-      </div>
+              <p className={styles.betterThan}>{betterThan}</p>
+              <div className={styles.booklet}>
+                <Image
+                  unoptimized
+                  loading="lazy"
+                  // objectFit="cover"
+                  alt={'booklet'}
+                  src={'/calculator/booklet.png'}
+                  width={237}
+                  height={200}
+                  style={{
+                    objectFit: 'cover',
+                  }}
+                />
+              </div>
+            </>
+          )}
+
+          {!score && (
+            <Lottie
+              options={defaultOptions}
+              width="100%"
+              height={'auto'}
+              style={{ maxWidth: 194, marginLeft: 'auto' }}
+              isStopped={false}
+              isPaused={false}
+            />
+          )}
+        </div>
+      </AnimateIn>
     </>
   );
 };
