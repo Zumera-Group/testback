@@ -1,5 +1,5 @@
 import { ProgressBar } from 'components/Calculator/ProgressBar';
-import React from 'react';
+import React, { memo } from 'react';
 import { getTranslateByScope } from 'translation/i18n';
 import { useGetSalesforceScore } from '../../application/useGetQuestionnaireScore';
 import Image from 'next/image';
@@ -75,62 +75,46 @@ export const ScoreCard = () => {
     in: { opacity: 1 },
   };
 
-  const AnimateIn: React.FC = ({ children }) => {
-    return (
-      <motion.div
-        style={{ height: '100%' }}
-        transition={{ delay: 0.2, duration: 0.4 }}
-        initial="initial"
-        animate="in"
-        variants={animationVariants}
-      >
-        {children}
-      </motion.div>
-    );
-  };
-
   return (
     <>
-      <AnimateIn>
-        <div className={styles.scoreCardWrapper}>
-          {hasScoreAndPercentage && (
-            <>
-              <span className={styles.scoreCardTitle}>{title}</span>
-              <ProgressBar
-                isPoint
-                progress={points.substring(0, points.length - 2)}
-                color="gradient"
-              />
-              <p className={styles.betterThan}>{betterThan}</p>
-              <div className={styles.booklet}>
-                <Image
-                  unoptimized
-                  loading="lazy"
-                  // objectFit="cover"
-                  alt={'booklet'}
-                  src={'/calculator/booklet.png'}
-                  width={237}
-                  height={200}
-                  style={{
-                    objectFit: 'cover',
-                  }}
-                />
-              </div>
-            </>
-          )}
-
-          {!score && (
-            <Lottie
-              options={defaultOptions}
-              width="100%"
-              height={'auto'}
-              style={{ maxWidth: 194, marginLeft: 'auto' }}
-              isStopped={false}
-              isPaused={false}
+      <div className={styles.scoreCardWrapper}>
+        {hasScoreAndPercentage && (
+          <>
+            <span className={styles.scoreCardTitle}>{title}</span>
+            <ProgressBar
+              isPoint
+              progress={points.substring(0, points.length - 2)}
+              color="gradient"
             />
-          )}
-        </div>
-      </AnimateIn>
+            <p className={styles.betterThan}>{betterThan}</p>
+            <div className={styles.booklet}>
+              <Image
+                unoptimized
+                loading="lazy"
+                // objectFit="cover"
+                alt={'booklet'}
+                src={'/calculator/booklet.png'}
+                width={237}
+                height={200}
+                style={{
+                  objectFit: 'cover',
+                }}
+              />
+            </div>
+          </>
+        )}
+
+        {!score && (
+          <Lottie
+            options={defaultOptions}
+            width="100%"
+            height={'auto'}
+            style={{ maxWidth: 194, marginLeft: 'auto' }}
+            isStopped={false}
+            isPaused={false}
+          />
+        )}
+      </div>
     </>
   );
 };
