@@ -46,7 +46,6 @@ export const useSalesforceAnswerSync = () => {
       setSectorId(answers?.sector_id);
       setSectorSheetName(answers?.sector_sheet_name);
       setIndustrySheetName(answers?.industry_sheet_name);
-      // setAssessmentPurpose(assessmentPurpose);
     },
   };
 };

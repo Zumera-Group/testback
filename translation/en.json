@@ -95,7 +95,12 @@
           "placeholder": "Phone number",
           "error": "Phone number is required"
         },
-        "checkbox": "I agree with the processing of the given data for the creation of the evaluation as well as the contacting by Zumera.",
+        "checkbox": {
+          "first": "I agree with the processing of the ",
+          "second": "given data for the creation of the evaluation as well as",
+          "third": "the contacting by Zumera.",
+          "link": "/en/privacy-policy/"
+        },
         "checkboxError": "This is required",
         "button": "Send",
         "successMessage": "Thank you for filling out your information."
