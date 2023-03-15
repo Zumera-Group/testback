@@ -15,6 +15,8 @@ export const useSalesforceAnswerSync = () => {
     industrySheetName,
     setIndustrySheetName,
     setSectorSheetName,
+    assessmentPurpose,
+    setAssessmentPurpose,
   } = useValuationStore();
   const { sendQuestionnaireToAnalytics } = useSendQuestionnaireToAnalytics();
 
@@ -34,6 +36,7 @@ export const useSalesforceAnswerSync = () => {
         sectorId,
         industrySheetName,
         sectorSheetName,
+        assessmentPurpose,
       );
     },
     syncCurrentAnswersFromSalesforce: async (uniqueId: string) => {
@@ -43,6 +46,7 @@ export const useSalesforceAnswerSync = () => {
       setSectorId(answers?.sector_id);
       setSectorSheetName(answers?.sector_sheet_name);
       setIndustrySheetName(answers?.industry_sheet_name);
+      // setAssessmentPurpose(assessmentPurpose);
     },
   };
 };

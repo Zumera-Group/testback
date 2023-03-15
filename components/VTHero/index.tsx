@@ -4,10 +4,11 @@ import { SanityBlockContent } from 'components/SanityBlockContent';
 
 import styles from './VTHero.module.scss';
 import { VTHeroModule } from 'lib/shared-domain/page/domain/contentModule';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { getLinksByPageType } from 'lib/utils/getLinksByPageType';
+import { useValuationStore } from 'lib/shared-domain/questionnaire/store';
 
 export const VTHero: React.FC<{
   specificContentModule: VTHeroModule;
@@ -23,6 +24,9 @@ export const VTHero: React.FC<{
     'valueCalculator',
     buttons[0]?.questionnaire?.questionnaireSlug?.current,
   );
+
+  const { setAssessmentPurpose, assessmentPurpose } = useValuationStore();
+
   return (
     <Section
       as={'div'}
@@ -83,7 +87,10 @@ export const VTHero: React.FC<{
                       styles.purpose,
                       selectedPurpose === purpose ? styles.selected : '',
                     ].join(' ')}
-                    onClick={() => setSelectedPurpose(purpose)}
+                    onClick={() => {
+                      setAssessmentPurpose(purpose);
+                      setSelectedPurpose(purpose);
+                    }}
                   >
                     {purpose}
                   </Link>

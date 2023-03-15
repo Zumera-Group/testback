@@ -33,12 +33,13 @@ export class SalesforceFacade {
     sectorId: string,
     industrySheetName: string,
     sectorSheetName: string,
+    assessmentPurpose: string,
   ): Promise<void> {
     try {
       const marketingParams = MarketingParamsService.retrieve();
       const cookies = MarketingParamsService.getCookies();
 
-      let keyMap = {
+      const keyMap = {
         [unformattedParams[0]]: 'UTMSource__c',
         [unformattedParams[1]]: 'UTMMedium__c',
         [unformattedParams[2]]: 'UTMCampaign__c',
@@ -61,6 +62,7 @@ export class SalesforceFacade {
           unique_id: uniqueId,
           current_progress: currentProgress,
           data: {
+            Assessment_Purpose__c: assessmentPurpose,
             ...fields,
             ...formattedMarketingParams,
             ...cookies,
@@ -76,6 +78,8 @@ export class SalesforceFacade {
         'SalesforceFacade.createOrUpdateLeadEntry ' + JSON.stringify(fields),
       );
       qLogs(marketingParams); //console.log
+      qLogs(fields);
+      qLogs(assessmentPurpose);
 
       await this.httpService.post(
         endpoints.createOrUpdateLeadEntry,
@@ -132,7 +136,7 @@ export class SalesforceFacade {
       const marketingParams = MarketingParamsService.retrieve();
       const cookies = MarketingParamsService.getCookies();
 
-      let keyMap = {
+      const keyMap = {
         [unformattedParams[0]]: 'UTMSource__c',
         [unformattedParams[1]]: 'UTMMedium__c',
         [unformattedParams[2]]: 'UTMCampaign__c',
