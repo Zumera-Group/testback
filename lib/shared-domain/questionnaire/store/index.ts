@@ -25,8 +25,10 @@ interface ValuationState {
   setIsOnResultScreen: (arg: boolean) => void;
   sectorId: string | null;
   industryId: string | null;
+  assessmentPurpose: string | null;
   setSectorId: (sectorId: string) => void;
   setIndustryId: (industryId: string) => void;
+  setAssessmentPurpose: (assessmentPurpose: string) => void;
   sectorSheetName: string | null;
   industrySheetName: string | null;
   setSectorSheetName: (sectorSheetName: string) => void;
@@ -66,6 +68,10 @@ export const useValuationStore = create<ValuationState>(
       sectorSheetName: null,
       setSectorSheetName: (sectorSheetName: string) => {
         set({ sectorSheetName });
+      },
+      assessmentPurpose: null,
+      setAssessmentPurpose: (assessmentPurpose: string) => {
+        set({ assessmentPurpose });
       },
       industrySheetName: null,
       setIndustrySheetName: (industrySheetName: string) => {
