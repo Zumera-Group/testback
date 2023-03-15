@@ -13,6 +13,7 @@ import { FormGroup, Input, Textarea, Checkbox, Message } from 'components/Form';
 import { useGetSalesforceScore } from '../../application/useGetQuestionnaireScore';
 import { useSalesforceAnswerSync } from '../../application/useSalesforceAnswerSync';
 import { qLogs } from '../../application/log';
+import { useRouter } from 'next/router';
 
 const t = getTranslateByScope('result');
 
@@ -89,7 +90,7 @@ const EvaluationScreen: React.FC<{
   const { getAnswer, setAnswer, uniqueId } = useValuationStore();
   const [checkboxIsChecked, setCheckboxIsChecked] = React.useState(false);
   const [pressed, setPressed] = React.useState(false);
-
+  const { locale } = useRouter();
   const SEND_IS_ALLOWED =
     checkboxIsChecked &&
     getAnswer(NAME_STORE_INDICATOR)?.trim() &&
@@ -195,7 +196,12 @@ const EvaluationScreen: React.FC<{
               isChecked={checkboxIsChecked}
               id="result_checkBox"
             >
-              <div className={styles.termsWrapper}>
+              <div
+                className={[
+                  styles.termsWrapper,
+                  locale === 'en' ? styles.enTerms : '',
+                ].join(' ')}
+              >
                 <span>{t('evaluation.form.checkbox.first')}</span>
                 <a
                   style={{

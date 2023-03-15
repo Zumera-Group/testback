@@ -96,10 +96,10 @@
           "error": "Phone number is required"
         },
         "checkbox": {
-          "first": "Hiermit stimme ich, ",
-          "second": "gemäß unserer Datenschutzerklärung",
-          "third": ", der Verarbeitung meiner Daten zu.",
-          "link": "/de/datenschutzerklarung/"
+          "first": "I agree with the processing of the given ",
+          "second": "data",
+          "third": " for the creation of the evaluation as well as the contacting by Zumera.",
+          "link": "/en/privacy-policy/"
         },
         "checkboxError": "This is required",
         "button": "Send",

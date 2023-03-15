@@ -96,9 +96,9 @@
           "error": "Phone number is required"
         },
         "checkbox": {
-          "first": "I agree with the processing of the ",
-          "second": "given data for the creation",
-          "third": " of the evaluation as well as the contacting by Zumera.",
+          "first": "I agree with the processing of the given ",
+          "second": "data",
+          "third": " for the creation of the evaluation as well as the contacting by Zumera.",
           "link": "/en/privacy-policy/"
         },
         "checkboxError": "This is required",
