@@ -20,6 +20,8 @@ const calculatorSteps = {
   step4: t('step4'),
 };
 
+console.log(calculatorSteps);
+
 export const SectorSpecificEntry: React.FC<{
   onNextQuestion(): void;
   onPrevQuestion(): void;
