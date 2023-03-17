@@ -81,11 +81,7 @@ export const ScoreCard = () => {
         {hasScoreAndPercentage && (
           <>
             <span className={styles.scoreCardTitle}>{title}</span>
-            <ProgressBar
-              isPoint
-              progress={points.substring(0, points.length - 2)}
-              color="gradient"
-            />
+            <ProgressBar isPoint progress={points} color="gradient" />
             <p className={styles.betterThan}>{betterThan}</p>
             <div className={styles.booklet}>
               <Image

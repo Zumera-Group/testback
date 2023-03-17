@@ -75,7 +75,7 @@
       "description": "Um eine fundierte Einschätzung der Unternehmenswertes zu erhalten, wird ein Berater die Eingaben prüfen und Sie kontaktieren.",
       "resultBox": {
         "title": "Ihr vorläufiges Ergebnis",
-        "points": "{{points}} Pkt.",
+        "points": "{{points}}",
         "betterThen": "Besser als {{percentage}}% im Sektorvergleich."
       },
       "form": {
