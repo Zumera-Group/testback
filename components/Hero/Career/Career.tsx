@@ -50,19 +50,22 @@ export const Career: HeroComponent = ({ ...rest }) => {
                   {button.title}
                 </Button>
               )}
-              <Button
-                variant={'secondary'}
-                callBack={() => {
-                  window.Calendly.showPopupWidget(
-                    `${appointment?.calendlyURL}?embed_domain=zumera.com/&amp;embed_type=PopupText`,
-                  );
-                  const calendly = document.querySelector('.calendly-overlay');
-                  calendly.addEventListener('click', closeCalendly);
-                }}
-                onDark={true}
-              >
-                {appointment?.title}
-              </Button>
+              {appointment?.title && (
+                <Button
+                  variant={'secondary'}
+                  callBack={() => {
+                    window.Calendly.showPopupWidget(
+                      `${appointment?.calendlyURL}?embed_domain=zumera.com/&amp;embed_type=PopupText`,
+                    );
+                    const calendly =
+                      document.querySelector('.calendly-overlay');
+                    calendly.addEventListener('click', closeCalendly);
+                  }}
+                  onDark={true}
+                >
+                  {appointment?.title}
+                </Button>
+              )}
             </div>
           </GridColumn>
         </Grid>
