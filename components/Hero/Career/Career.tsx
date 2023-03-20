@@ -7,7 +7,7 @@ import baseStyles from '../Hero.module.scss';
 import styles from './Career.module.scss';
 
 export const Career: HeroComponent = ({ ...rest }) => {
-  const { title, title2, description, button } = rest;
+  const { title, title2, description, button, appointment } = rest;
   const closeCalendly = () => {
     const calendly = document.querySelector('.calendly-overlay');
     if (calendly) {
@@ -15,6 +15,8 @@ export const Career: HeroComponent = ({ ...rest }) => {
     }
     window.Calendly.closePopupWidget();
   };
+
+  console.log(appointment.calendly);
 
   return (
     <Section
@@ -52,14 +54,14 @@ export const Career: HeroComponent = ({ ...rest }) => {
                 variant={'secondary'}
                 callBack={() => {
                   window.Calendly.showPopupWidget(
-                    'https://calendly.com/thorebehrens/15min?embed_domain=opportunities.saxenhammer-co.com&amp;embed_type=PopupText',
+                    `${appointment?.calendlyURL}?embed_domain=zumera.com/&amp;embed_type=PopupText`,
                   );
                   const calendly = document.querySelector('.calendly-overlay');
                   calendly.addEventListener('click', closeCalendly);
                 }}
                 onDark={true}
               >
-                Book an appointment
+                {appointment?.title}
               </Button>
             </div>
           </GridColumn>

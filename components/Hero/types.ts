@@ -4,6 +4,7 @@ export type HeroComponentProps = React.PropsWithChildren<{
   description?: any;
   button?: any;
   heroImage?: any;
+  appointment?: any;
 }>;
 
 export type HeroComponent = React.FC<HeroComponentProps>;

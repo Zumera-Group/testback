@@ -519,6 +519,10 @@ export class HeroSectionModule extends BaseModule {
     link: { slug: { current: string } };
     type: 'normal' | 'underline';
   };
+  appointment?: {
+    title: string;
+    calendlyURL: string;
+  };
 
   constructor(fields: Record<string, any>) {
     super();
@@ -527,6 +531,7 @@ export class HeroSectionModule extends BaseModule {
     this.description = fields.description;
     this.type = fields.type;
     this.button = fields.button;
+    this.appointment = fields.appointment;
     this.heroImage = fields.heroImage;
   }
 }
