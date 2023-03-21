@@ -17,6 +17,7 @@ import { DEFAULT_VALUES } from './constants';
 import BackButton from 'components/Calculator/BackButton/BackButton';
 import { useMediaQuery } from 'lib/hooks/useMediaQuery';
 import { SCREEN_SIZE_MD } from 'lib/constants';
+import router from 'next/router';
 
 export const NumberInput: React.FC<{
   question: Question;
@@ -32,6 +33,17 @@ export const NumberInput: React.FC<{
   const [inputLength, setInputLength] = useState(0);
   const isYear = valueType === 'year';
   const fieldWrapperRef = useRef(null);
+
+  const longFormatType =
+    valueType !== 'year' &&
+    valueType !== 'age' &&
+    salesforceFormat !== 'date_year' &&
+    salesforceFormat !== 'date_month' &&
+    salesforceFormat !== 'date_day'
+      ? true
+      : false;
+
+  const localeFormat = router.locale === 'en' ? 'en-GB' : 'de-DE';
 
   const formatToSalesforce = (v: number) => {
     const today = new Date();
@@ -99,7 +111,7 @@ export const NumberInput: React.FC<{
               <span className={styles.sign}> {sign}</span>
             )}
             <Input
-              type="number"
+              type={longFormatType ? 'text' : 'number'}
               id={question._id}
               placeholder={placeholder ? placeholder : '0'}
               hideLabel
@@ -109,9 +121,13 @@ export const NumberInput: React.FC<{
                 shortBox ? styles.numberInput__shortBox : '',
                 !sign || sign === '%' ? styles.numberInput__noSign : '',
               ].join(' ')}
-              value={getUnformattedAnswer() || ''}
+              value={
+                longFormatType
+                  ? getUnformattedAnswer()?.toLocaleString(localeFormat) || ''
+                  : getUnformattedAnswer() || ''
+              }
               onChange={(e) => {
-                formatToSalesforce(Number(e.target.value));
+                formatToSalesforce(Number(e.target.value.replace(/[.,]/g, '')));
                 setInputLength(e.target.value.length);
               }}
             />
