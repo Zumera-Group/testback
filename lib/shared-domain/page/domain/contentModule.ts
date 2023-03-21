@@ -194,7 +194,6 @@ export class OpenJobsListModule extends BaseModule {
     this.subtitle = fields.subtitle;
     this.title = fields.title;
     this.description = fields.description;
-    this.unit = fields.unit;
   }
 }
 

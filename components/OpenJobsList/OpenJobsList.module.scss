@@ -1,0 +1,41 @@
+.job {
+  display: flex;
+  width: 100%;
+  padding: $gutter * 1.2 0;
+  align-items: center;
+  border-top: 1px solid $secondary;
+  cursor: pointer;
+  @include breakpoint-down(md) {
+    flex-wrap: wrap;
+  }
+  &:hover {
+    color: $tertiary;
+    svg {
+      color: $tertiary;
+    }
+  }
+  span {
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    width: 100%;
+    @include breakpoint-down(md) {
+      justify-content: flex-start;
+    }
+    &:first-child {
+      justify-content: flex-start;
+      font-weight: bold;
+      @include breakpoint-down(md) {
+        flex: 0 0 auto;
+        margin-bottom: $gutter * 1;
+      }
+    }
+    &:last-child {
+      justify-content: flex-end;
+      font-weight: bold;
+    }
+  }
+  svg {
+    color: $primary;
+  }
+}

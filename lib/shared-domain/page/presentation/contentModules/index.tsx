@@ -27,6 +27,7 @@ import {
   StepsDownBulletsSectionModule,
   StickyFooterModule,
   TransactionQuoteModule,
+  OpenJobsListModule,
 } from '../../domain/contentModule';
 
 import {
@@ -71,6 +72,7 @@ import { StepsDownBulletsSection } from 'components/StepsDownBulletsSection';
 import { StickyFooter } from 'components/StickyFooter';
 import { TransactionQuote } from 'components/TransactionQuote';
 import dynamic from 'next/dynamic';
+import { OpenJobsList } from 'components/OpenJobsList';
 const NewsGridSection = dynamic(() => import('./NewsGridSection'), {
   ssr: false,
 });
@@ -81,6 +83,13 @@ export const getContentForContentModule = (
   sharedContent?: any,
   allModulesData?: any,
 ): JSX.Element => {
+  if (contentModule.specificContentModule instanceof OpenJobsListModule) {
+    return (
+      <OpenJobsList
+        specificContentModule={contentModule.specificContentModule}
+      />
+    );
+  }
   if (contentModule.specificContentModule instanceof TransactionQuoteModule) {
     return (
       <TransactionQuote
