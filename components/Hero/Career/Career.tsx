@@ -7,7 +7,9 @@ import baseStyles from '../Hero.module.scss';
 import styles from './Career.module.scss';
 
 export const Career: HeroComponent = ({ ...rest }) => {
-  const { title, title2, description, button, appointment } = rest;
+  const { title, title2, description, button, appointment, bottomBackground } =
+    rest;
+  console.log(bottomBackground);
   const closeCalendly = () => {
     const calendly = document.querySelector('.calendly-overlay');
     if (calendly) {
@@ -16,15 +18,23 @@ export const Career: HeroComponent = ({ ...rest }) => {
     window.Calendly.closePopupWidget();
   };
 
-  console.log(appointment.calendly);
+  console.log(appointment?.calendly);
 
   return (
     <Section
       as={'div'}
-      classes={[baseStyles.hero, styles.hero].join(' ')}
+      classes={[
+        baseStyles.hero,
+        styles.hero,
+        bottomBackground?.asset?.url ? baseStyles.heroBottomBackground : '',
+      ].join(' ')}
       size={'xl'}
       bg={'primary'}
       color={'white'}
+      // @ts-ignore
+      style={{
+        backgroundImage: `url(${bottomBackground?.asset?.url || ''})`,
+      }}
     >
       <Container classes={styles.container}>
         <Grid

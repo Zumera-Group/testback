@@ -446,6 +446,11 @@ export const contentModulesQuery = (
         url
       }
     },
+     bottomBackground {
+      asset->{
+        url
+      }
+    },
     heroMobileBgImage {
       asset->{
         url

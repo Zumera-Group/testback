@@ -7,14 +7,23 @@ import baseStyles from '../Hero.module.scss';
 import styles from './Primary.module.scss';
 
 export const Primary: HeroComponent = ({ ...rest }) => {
-  const { title, title2, description, button, heroImage } = rest;
+  const { title, title2, description, button, heroImage, bottomBackground } =
+    rest;
   return (
     <Section
       as={'div'}
-      classes={[baseStyles.hero, styles.hero].join(' ')}
+      classes={[
+        baseStyles.hero,
+        styles.hero,
+        bottomBackground?.asset?.url ? baseStyles.heroBottomBackground : '',
+      ].join(' ')}
       size={'xl'}
       bg={'primary'}
       color={'white'}
+      // @ts-ignore
+      style={{
+        backgroundImage: `url(${bottomBackground?.asset?.url || ''})`,
+      }}
     >
       <Container classes={styles.container}>
         <Grid

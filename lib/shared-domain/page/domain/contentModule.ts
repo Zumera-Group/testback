@@ -508,7 +508,7 @@ export class HeroSectionModule extends BaseModule {
   heroImage: {
     asset: { url: string };
   };
-  heroMobileBgImage: {
+  bottomBackground: {
     asset: { url: string };
   };
   buttonText: string;
@@ -532,6 +532,7 @@ export class HeroSectionModule extends BaseModule {
     this.button = fields.button;
     this.appointment = fields.appointment;
     this.heroImage = fields.heroImage;
+    this.bottomBackground = fields.bottomBackground;
   }
 }
 
