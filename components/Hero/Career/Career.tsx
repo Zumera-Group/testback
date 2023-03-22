@@ -9,7 +9,7 @@ import styles from './Career.module.scss';
 export const Career: HeroComponent = ({ ...rest }) => {
   const { title, title2, description, button, appointment, bottomBackground } =
     rest;
-  console.log(bottomBackground);
+
   const closeCalendly = () => {
     const calendly = document.querySelector('.calendly-overlay');
     if (calendly) {
