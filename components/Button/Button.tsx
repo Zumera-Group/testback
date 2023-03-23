@@ -18,6 +18,7 @@ interface Props {
   callBack?: (event: React.MouseEvent<HTMLButtonElement>) => void;
   children: any;
   type?: 'button' | 'submit' | 'reset';
+  anchorId?: string;
 }
 
 export const Button: React.FC<Props> = ({
@@ -34,9 +35,10 @@ export const Button: React.FC<Props> = ({
   callBack,
   children,
   type,
+  anchorId,
   ...rest
 }) => {
-  const isLink = externalUrl || link?.slug?.current;
+  const isLink = externalUrl || link?.slug?.current || anchorId;
   const btnVariant = generateButtonVariant({ variant, onDark });
   // @ts-ignore
   const downloadImage = rest?.image?.asset?.url;
@@ -67,20 +69,19 @@ export const Button: React.FC<Props> = ({
   };
 
   return isLink && !downloadImage ? (
-    (<Link
-      href={externalUrl || link?.slug?.current || '#'}
+    <Link
+      href={externalUrl || link?.slug?.current || `#${anchorId}` || '#'}
       passHref
       id={id}
       title={title}
       className={[styles.button, btnVariant, classes ?? ''].join(' ')}
       target={externalUrl ? '_blank' : undefined}
       rel={externalUrl ? 'noopener noreferrer' : undefined}
-      {...rest}>
-
+      {...rest}
+    >
       <span>{children}</span>
       <ButtonIcon />
-
-    </Link>)
+    </Link>
   ) : (
     <button
       id={id}

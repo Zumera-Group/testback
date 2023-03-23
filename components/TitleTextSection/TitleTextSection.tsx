@@ -10,7 +10,7 @@ export const TitleTextSection: React.FC<{
 }> = ({ specificContentModule }) => {
   const { title, subtitle, description, leftButtons, rightButtons } =
     specificContentModule;
-
+  console.log(specificContentModule);
   return (
     <Section size={'md'} bg={'light'} color={'primary'}>
       <Container>

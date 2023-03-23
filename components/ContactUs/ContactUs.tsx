@@ -31,6 +31,7 @@ export const ContactUs: React.FC<Props> = (props) => {
       bg={'gradient'}
       color={'white'}
       classes={styles.contactUs}
+      id={'contact-us'}
     >
       <Container>
         <Grid

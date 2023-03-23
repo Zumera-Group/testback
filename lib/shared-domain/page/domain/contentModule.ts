@@ -1519,6 +1519,7 @@ export class TitleTextSectionModule extends BaseModule {
   description: any[];
   leftButtons: any[];
   rightButtons: any[];
+  servicesCards: any[];
   constructor(fields: Record<string, any>) {
     super();
     this.title = fields.title;
@@ -1527,6 +1528,7 @@ export class TitleTextSectionModule extends BaseModule {
     this.leftButtons = fields.leftButtons;
     this.leftButtons = fields.leftButtons;
     this.rightButtons = fields.rightButtons;
+    this.servicesCards = fields.servicesCards;
   }
 }
 

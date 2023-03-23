@@ -1,0 +1,69 @@
+import { HeroComponent } from '../types';
+import { Section, Container, Grid, GridColumn } from 'components/Layout';
+import { Button } from 'components/Button';
+import { SanityBlockContent } from 'components/SanityBlockContent';
+
+import baseStyles from '../Hero.module.scss';
+import styles from './Landing.module.scss';
+
+export const Landing: HeroComponent = ({ ...rest }) => {
+  const { title, title2, description, button, heroImage, bottomBackground } =
+    rest;
+  return (
+    <Section
+      as={'div'}
+      classes={[
+        baseStyles.hero,
+        styles.hero,
+        bottomBackground?.asset?.url ? baseStyles.heroBottomBackground : '',
+      ].join(' ')}
+      size={'xl'}
+      bg={'primary'}
+      color={'white'}
+      // @ts-ignore
+      style={{
+        backgroundImage: `url(${bottomBackground?.asset?.url || ''})`,
+      }}
+    >
+      <Container classes={styles.container}>
+        <Grid
+          fullWidth={true}
+          justifyContent={'center'}
+          alignItems={'center'}
+          className={styles.grid}
+        >
+          <GridColumn
+            sm={12}
+            md={7}
+            lg={7}
+            className={styles.primaryDescription}
+          >
+            <h1 className={styles.title}>
+              {title && title}
+              {title2 && <span>{title2}</span>}
+            </h1>
+            <SanityBlockContent text={description} />
+            {button?.title && (
+              <div className={baseStyles.btnWrapper}>
+                <Button {...button} onDark={true}>
+                  {button.title}
+                </Button>
+              </div>
+            )}
+          </GridColumn>
+          {heroImage?.asset?.url ? (
+            <GridColumn sm={12} md={5} lg={5}>
+              <img
+                src={heroImage.asset.url}
+                alt={`${title}${title2 ? ` ${title2}` : ''}`}
+                className={styles.primaryHeroImage}
+              />
+            </GridColumn>
+          ) : null}
+        </Grid>
+      </Container>
+    </Section>
+  );
+};
+
+export default Landing;
