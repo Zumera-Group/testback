@@ -915,6 +915,7 @@ export type ContentModuleType =
   | 'landingRoadmap'
   | 'brandOverviewSection'
   | 'referralSection'
+  | 'dividerLine'
   // service detail sections
   | serviceDetailSectionNames.processSection
   | serviceDetailSectionNames.helpContactPerson
@@ -924,6 +925,7 @@ export type ContentModuleType =
 
 abstract class ContentModuleTypeFactory {
   static createInstance(type: ContentModuleType, fields: Record<string, any>) {
+    if (type === 'dividerLine') return new DividerLineModule();
     if (type === 'stickyFooter') return new StickyFooterModule(fields);
     if (type === 'transactionQuote') return new TransactionQuoteModule(fields);
     if (type === 'stepsDownBulletsSection')
@@ -1634,5 +1636,11 @@ export class TransactionQuoteModule extends BaseModule {
     this.name = fields.name;
     this.photo = fields.photo;
     this.transaction = fields.transaction;
+  }
+}
+
+export class DividerLineModule extends BaseModule {
+  constructor() {
+    super();
   }
 }

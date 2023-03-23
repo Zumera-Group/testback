@@ -4,13 +4,21 @@ import { Button } from 'components/Button';
 import { SanityBlockContent } from 'components/SanityBlockContent';
 import styles from './TitleTextSection.module.scss';
 import { TitleTextSectionModule } from 'lib/shared-domain/page/domain/contentModule';
+import Image from 'next/image';
+import { sanityImageUrlFor } from 'lib/sanity';
 
 export const TitleTextSection: React.FC<{
   specificContentModule: TitleTextSectionModule;
 }> = ({ specificContentModule }) => {
-  const { title, subtitle, description, leftButtons, rightButtons } =
-    specificContentModule;
-  console.log(specificContentModule);
+  const {
+    title,
+    subtitle,
+    description,
+    leftButtons,
+    rightButtons,
+    servicesCards,
+  } = specificContentModule;
+
   return (
     <Section size={'md'} bg={'light'} color={'primary'}>
       <Container>
@@ -54,6 +62,37 @@ export const TitleTextSection: React.FC<{
           </GridColumn>
         </Grid>
       </Container>
+      {servicesCards?.length ? (
+        <Container>
+          <div className={styles.servicesCards}>
+            {servicesCards.map((card) => (
+              <div key={card._key} className={styles.servicesCard}>
+                <div className={styles.icon}>
+                  <Image
+                    loading="lazy"
+                    src={sanityImageUrlFor(
+                      card.cardIcon?.iconImage?.asset?.url,
+                    ).url()}
+                    alt={'icon'}
+                    height="48"
+                    width="48"
+                    style={{
+                      maxWidth: '100%',
+                      height: 'auto',
+                    }}
+                  />
+                </div>
+                <div>
+                  <SanityBlockContent text={card.title} />
+                </div>
+                <div>
+                  <SanityBlockContent text={card.description} />
+                </div>
+              </div>
+            ))}
+          </div>
+        </Container>
+      ) : null}
     </Section>
   );
 };

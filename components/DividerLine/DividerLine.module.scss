@@ -1,0 +1,3 @@
+.dividerLine {
+  @include divider('bottom', $primary);
+}

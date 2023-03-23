@@ -28,6 +28,8 @@ import {
   StickyFooterModule,
   TransactionQuoteModule,
   OpenJobsListModule,
+  PartnerLogosAndTextsModule,
+  DividerLineModule,
 } from '../../domain/contentModule';
 
 import {
@@ -73,6 +75,8 @@ import { StickyFooter } from 'components/StickyFooter';
 import { TransactionQuote } from 'components/TransactionQuote';
 import dynamic from 'next/dynamic';
 import { OpenJobsList } from 'components/OpenJobsList';
+import { PartnerLogoAndTextSection } from 'components/PartnerLogoAndTextSection';
+import { DividerLine } from 'components/DividerLine';
 const NewsGridSection = dynamic(() => import('./NewsGridSection'), {
   ssr: false,
 });
@@ -83,6 +87,18 @@ export const getContentForContentModule = (
   sharedContent?: any,
   allModulesData?: any,
 ): JSX.Element => {
+  if (contentModule.specificContentModule instanceof DividerLineModule) {
+    return <DividerLine />;
+  }
+  if (
+    contentModule.specificContentModule instanceof PartnerLogosAndTextsModule
+  ) {
+    return (
+      <PartnerLogoAndTextSection
+        specificContentModule={contentModule.specificContentModule}
+      />
+    );
+  }
   if (contentModule.specificContentModule instanceof OpenJobsListModule) {
     return (
       <OpenJobsList

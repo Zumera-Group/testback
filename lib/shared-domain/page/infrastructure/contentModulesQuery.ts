@@ -464,6 +464,16 @@ export const contentModulesQuery = (
         }
       }
     },
+    servicesCards[] {
+      ...,
+      cardIcon {
+		iconImage {
+			asset->{
+			  url,
+			}
+		}
+      },
+    },
     values[] {
       ...,
       icon-> {

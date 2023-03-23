@@ -8,3 +8,36 @@
     margin-top: $gutter;
   }
 }
+
+.servicesCards {
+  margin-top: $gutter * 2;
+  display: flex;
+  @include divider('bottom', $primary);
+  padding-bottom: $gutter * 4;
+  @include breakpoint-up(md) {
+    margin-top: $gutter * 3;
+  }
+  @include breakpoint-down(md) {
+    flex-direction: column;
+    border-bottom: none;
+  }
+}
+
+.servicesCard {
+  @include divider('right', $primary);
+  flex: 1;
+  padding: 0 $gutter * 2;
+  h4 {
+    margin-top: 12px;
+  }
+  &:last-child {
+    @include divider('right', transparent);
+    @include breakpoint-down(md) {
+      @include divider('bottom', $primary);
+    }
+  }
+  @include breakpoint-down(md) {
+    @include divider('bottom', $primary);
+    padding: $gutter * 1.2 0;
+  }
+}
