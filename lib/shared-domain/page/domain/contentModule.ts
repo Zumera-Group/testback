@@ -1276,8 +1276,7 @@ export class ReferralSectionModule extends BaseModule {
 export class PartnerLogosAndTextsModule extends BaseModule {
   title: string;
   subtitle: string;
-  firstText: string;
-  secondText: string;
+  description: string;
   logo1: any;
   logo2: any;
   logo3: any;
@@ -1286,8 +1285,7 @@ export class PartnerLogosAndTextsModule extends BaseModule {
     super();
     this.title = fields.title;
     this.subtitle = fields.subtitle;
-    this.firstText = fields.firstText;
-    this.secondText = fields.secondText;
+    this.description = fields.description;
     this.logo1 = fields.logo1;
     this.logo2 = fields.logo2;
     this.logo3 = fields.logo3;

@@ -1,0 +1,39 @@
+.logosWrapper {
+  display: flex;
+  justify-content: space-between;
+  margin-top: $gutter * 2;
+  @include breakpoint-down(md) {
+    flex-direction: column;
+  }
+}
+.logo {
+  position: relative;
+  height: 174px;
+  width: 30%;
+  @include breakpoint-down(md) {
+    width: 100%;
+    margin-bottom: $gutter * 2;
+  }
+  &:before {
+    content: '';
+    @include divider(left, $primary);
+    display: block;
+    height: 125%;
+    position: absolute;
+    left: 0;
+    top: -25px;
+    width: 2px;
+    z-index: 2;
+  }
+  &:after {
+    content: '';
+    @include divider(top, $primary);
+    display: block;
+    height: 2px;
+    position: absolute;
+    left: -40px;
+    top: 0;
+    width: 100%;
+    z-index: 2;
+  }
+}
