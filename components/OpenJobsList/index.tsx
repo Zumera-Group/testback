@@ -9,6 +9,10 @@ export const OpenJobsList: React.FC<any> = ({ specificContentModule }) => {
   const jobs = useFetchJobs();
   const { query } = useRouter();
   const personioTrackingID = query?._pc;
+  const sortedJobs = jobs.sort((a, b) =>
+    a.department > b.department ? 1 : -1,
+  );
+  console.log(sortedJobs);
   return (
     <Section size={'md'} bg={'light'} color={'primary'}>
       <Container>
@@ -27,7 +31,7 @@ export const OpenJobsList: React.FC<any> = ({ specificContentModule }) => {
             />
           </GridColumn>
           <GridColumn sm={12} md={12} lg={12}>
-            {jobs.map((item) => (
+            {sortedJobs.map((item) => (
               <JobItem
                 key={item._id}
                 job={item}
