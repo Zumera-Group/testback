@@ -10,7 +10,7 @@ export const OpenJobsList: React.FC<any> = ({ specificContentModule }) => {
   const { query } = useRouter();
   const personioTrackingID = query?._pc;
   return (
-    <Section size={'md'} bg={'light'} color={'primary'}>
+    <Section size={'md'} bg={'light'} color={'primary'} id={'jobsList'}>
       <Container>
         <Grid
           justifyContent={'space-between'}

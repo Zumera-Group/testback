@@ -8,6 +8,7 @@ export const FiveSteps: React.FC<{
   specificContentModule: FiveStepsSectionModule;
 }> = ({ specificContentModule }) => {
   const { title, subtitle, steps, bottomTitle, button } = specificContentModule;
+
   return (
     <Section size={'md'} bg={'light'} color={'primary'}>
       <Container classes={styles.container}>
