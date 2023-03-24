@@ -90,7 +90,8 @@ export const contentModulesQuery = (
       ...,
       link->{
         slug
-      },
+      }
+    },
     leftButtons[] {
       ...,
       link->{
