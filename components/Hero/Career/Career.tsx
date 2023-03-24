@@ -18,8 +18,6 @@ export const Career: HeroComponent = ({ ...rest }) => {
     window.Calendly.closePopupWidget();
   };
 
-  console.log(appointment?.calendly);
-
   return (
     <Section
       as={'div'}

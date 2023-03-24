@@ -14,6 +14,7 @@ interface Props {
   classes?: string;
   link?: any;
   externalUrl?: string | null;
+  internalAnchor?: string | null;
   disabled?: boolean;
   callBack?: (event: React.MouseEvent<HTMLButtonElement>) => void;
   children: any;
@@ -30,6 +31,7 @@ export const Button: React.FC<Props> = ({
   classes,
   link,
   externalUrl,
+  internalAnchor,
   disabled,
   callBack,
   children,
@@ -37,6 +39,11 @@ export const Button: React.FC<Props> = ({
   ...rest
 }) => {
   const isLink = externalUrl || link?.slug?.current;
+  const internalLink =
+    link?.slug?.current && !internalAnchor
+      ? link?.slug?.current
+      : `${link?.slug?.current}#${internalAnchor}`;
+
   const btnVariant = generateButtonVariant({ variant, onDark });
   // @ts-ignore
   const downloadImage = rest?.image?.asset?.url;
@@ -67,20 +74,19 @@ export const Button: React.FC<Props> = ({
   };
 
   return isLink && !downloadImage ? (
-    (<Link
-      href={externalUrl || link?.slug?.current || '#'}
+    <Link
+      href={externalUrl || internalLink || '#'}
       passHref
       id={id}
       title={title}
       className={[styles.button, btnVariant, classes ?? ''].join(' ')}
       target={externalUrl ? '_blank' : undefined}
       rel={externalUrl ? 'noopener noreferrer' : undefined}
-      {...rest}>
-
+      {...rest}
+    >
       <span>{children}</span>
       <ButtonIcon />
-
-    </Link>)
+    </Link>
   ) : (
     <button
       id={id}
