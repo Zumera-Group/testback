@@ -17,8 +17,10 @@
 
 .primaryHeroImage {
   position: relative;
-  right: 9vw;
   width: 38vw;
+  img {
+    width: 100%;
+  }
   @include breakpoint-down(md) {
     right: 0;
     margin: $gutter * 3 auto 0;
@@ -30,5 +32,22 @@
 .primaryDescription {
   p {
     max-width: 80%;
+  }
+}
+.heroLight {
+  background-color: $light;
+  color: $black;
+  .title {
+    color: $black;
+  }
+  .primaryDescription {
+    p {
+      color: $black;
+    }
+  }
+  .primaryHeroImage {
+    img {
+      filter: brightness(0) invert(1);
+    }
   }
 }

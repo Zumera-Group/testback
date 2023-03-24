@@ -1518,6 +1518,8 @@ export class TitleTextSectionModule extends BaseModule {
   leftButtons: any[];
   rightButtons: any[];
   servicesCards: any[];
+  alignServicesCenter: boolean;
+  noServiceCardsBoldTitle: boolean;
   constructor(fields: Record<string, any>) {
     super();
     this.title = fields.title;
@@ -1527,6 +1529,8 @@ export class TitleTextSectionModule extends BaseModule {
     this.leftButtons = fields.leftButtons;
     this.rightButtons = fields.rightButtons;
     this.servicesCards = fields.servicesCards;
+    this.alignServicesCenter = fields.alignServicesCenter;
+    this.noServiceCardsBoldTitle = fields.noServiceCardsBoldTitle;
   }
 }
 

@@ -1,11 +1,12 @@
 .heading {
   max-width: 40rem !important;
+  margin-bottom: $gutter * 2;
 }
 .logo {
   position: relative;
   width: 120px;
   height: 120px;
-  margin: $gutter * 2 0;
+  margin-bottom: $gutter * 2;
 }
 .container {
   display: flex;

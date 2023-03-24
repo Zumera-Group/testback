@@ -7,8 +7,16 @@ import baseStyles from '../Hero.module.scss';
 import styles from './Landing.module.scss';
 
 export const Landing: HeroComponent = ({ ...rest }) => {
-  const { title, title2, description, button, heroImage, bottomBackground } =
-    rest;
+  const {
+    title,
+    title2,
+    description,
+    button,
+    heroImage,
+    bottomBackground,
+    type,
+  } = rest;
+  console.log(type);
   return (
     <Section
       as={'div'}
@@ -18,8 +26,8 @@ export const Landing: HeroComponent = ({ ...rest }) => {
         bottomBackground?.asset?.url ? baseStyles.heroBottomBackground : '',
       ].join(' ')}
       size={'xl'}
-      bg={'primary'}
-      color={'white'}
+      bg={type === 'light' ? 'light' : 'primary'}
+      color={type === 'light' ? 'primary' : 'white'}
       // @ts-ignore
       style={{
         backgroundImage: `url(${bottomBackground?.asset?.url || ''})`,

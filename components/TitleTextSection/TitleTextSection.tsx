@@ -17,6 +17,8 @@ export const TitleTextSection: React.FC<{
     leftButtons,
     rightButtons,
     servicesCards,
+    alignServicesCenter,
+    noServiceCardsBoldTitle,
   } = specificContentModule;
 
   return (
@@ -64,7 +66,13 @@ export const TitleTextSection: React.FC<{
       </Container>
       {servicesCards?.length ? (
         <Container>
-          <div className={styles.servicesCards}>
+          <div
+            className={[
+              styles.servicesCards,
+              alignServicesCenter ? styles.centered : '',
+              noServiceCardsBoldTitle ? styles.noBoldTitle : '',
+            ].join(' ')}
+          >
             {servicesCards.map((card) => (
               <div key={card._key} className={styles.servicesCard}>
                 <div className={styles.icon}>
