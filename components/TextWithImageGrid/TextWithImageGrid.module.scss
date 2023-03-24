@@ -13,6 +13,8 @@
     &.bg-#{$name} {
       @if ($name == 'gradient') {
         @include zumera-gradient(100%, 0%);
+      } @else if($name == 'light') {
+        color: $primary;
       } @else {
         background-color: $bg;
       }

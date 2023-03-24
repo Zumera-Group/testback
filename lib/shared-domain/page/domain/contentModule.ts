@@ -1293,7 +1293,7 @@ export class PartnerLogosAndTextsModule extends BaseModule {
 }
 
 export class PartnerPersonQuoteModule extends BaseModule {
-  subtitle: string;
+  quoteOwnerPosition: string;
   title: any;
   partnerImageLabel: string;
   quoteText: string;
@@ -1301,17 +1301,15 @@ export class PartnerPersonQuoteModule extends BaseModule {
   image: {
     asset: { url: string };
   };
-  bullets: string[];
 
   constructor(fields: Record<string, any>) {
     super();
     this.title = fields.title;
-    this.subtitle = fields.subtitle;
+    this.quoteOwnerPosition = fields.quoteOwnerPosition;
     this.quoteOwner = fields.quoteOwner;
     this.partnerImageLabel = fields.partnerImageLabel;
     this.quoteText = fields.quoteText;
     this.image = fields.image;
-    this.bullets = fields.bullets;
   }
 }
 
