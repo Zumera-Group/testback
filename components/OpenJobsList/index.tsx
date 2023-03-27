@@ -4,6 +4,7 @@ import { useFetchJobs } from 'lib/shared-domain/jobs/application/useGetJobs';
 import { JobItem } from 'components/OpenJobsList/JobItem';
 import { useRouter } from 'next/router';
 import styles from './OpenJobsList.module.scss';
+import { useEffect } from 'react';
 
 export const OpenJobsList: React.FC<any> = ({ specificContentModule }) => {
   const { title, subtitle, description } = specificContentModule;
@@ -13,7 +14,16 @@ export const OpenJobsList: React.FC<any> = ({ specificContentModule }) => {
   const sortedJobs = jobs.sort((a, b) =>
     a.department > b.department ? 1 : -1,
   );
-  console.log(sortedJobs);
+  useEffect(() => {
+    if (personioTrackingID) {
+      // @ts-ignore
+      localStorage.setItem('personioTrackingID', personioTrackingID);
+    }
+    return () => {
+      localStorage.removeItem('personioTrackingID');
+    };
+  }, [personioTrackingID]);
+
   return (
     <>
       <div id="jobsList" className={styles.empty}></div>
@@ -35,11 +45,7 @@ export const OpenJobsList: React.FC<any> = ({ specificContentModule }) => {
             </GridColumn>
             <GridColumn sm={12} md={12} lg={12}>
               {sortedJobs.map((item) => (
-                <JobItem
-                  key={item._id}
-                  job={item}
-                  personioTrackingID={personioTrackingID}
-                />
+                <JobItem key={item._id} job={item} />
               ))}
             </GridColumn>
           </Grid>

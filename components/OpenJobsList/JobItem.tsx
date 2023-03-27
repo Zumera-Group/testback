@@ -1,8 +1,9 @@
 import React from 'react';
 import styles from './OpenJobsList.module.scss';
 import { Icon } from 'components/Icon';
-export const JobItem: React.FC<any> = ({ job, personioTrackingID }) => {
+export const JobItem: React.FC<any> = ({ job }) => {
   const { title, office, employmentType, link } = job;
+  const personioTrackingID = localStorage.getItem('personioTrackingID');
   const personioLink = personioTrackingID ? `?_pc=${personioTrackingID}` : '';
   return (
     <a
