@@ -86,6 +86,18 @@ export const contentModulesQuery = (
          url,
        }
     },
+    rightButtons[] {
+      ...,
+      link->{
+        slug
+      }
+    },
+    leftButtons[] {
+      ...,
+      link->{
+        slug
+      },
+    },
     // textBlocks[] {
     //   ...,
     //   image{

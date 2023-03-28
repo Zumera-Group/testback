@@ -14,11 +14,11 @@ interface Props {
   classes?: string;
   link?: any;
   externalUrl?: string | null;
+  internalAnchor?: string | null;
   disabled?: boolean;
   callBack?: (event: React.MouseEvent<HTMLButtonElement>) => void;
   children: any;
   type?: 'button' | 'submit' | 'reset';
-  anchorId?: string;
 }
 
 export const Button: React.FC<Props> = ({
@@ -31,14 +31,19 @@ export const Button: React.FC<Props> = ({
   classes,
   link,
   externalUrl,
+  internalAnchor,
   disabled,
   callBack,
   children,
   type,
-  anchorId,
   ...rest
 }) => {
-  const isLink = externalUrl || link?.slug?.current || anchorId;
+  const isLink = externalUrl || link?.slug?.current;
+  const internalLink =
+    link?.slug?.current && !internalAnchor
+      ? link?.slug?.current
+      : `${link?.slug?.current}#${internalAnchor}`;
+
   const btnVariant = generateButtonVariant({ variant, onDark });
   // @ts-ignore
   const downloadImage = rest?.image?.asset?.url;
@@ -70,7 +75,7 @@ export const Button: React.FC<Props> = ({
 
   return isLink && !downloadImage ? (
     <Link
-      href={externalUrl || link?.slug?.current || `#${anchorId}` || '#'}
+      href={externalUrl || internalLink || '#'}
       passHref
       id={id}
       title={title}
