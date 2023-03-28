@@ -31,6 +31,7 @@ import {
   PartnerLogosAndTextsModule,
   DividerLineModule,
   PartnerPersonQuoteModule,
+  PartnerReviewModule,
 } from '../../domain/contentModule';
 
 import {
@@ -79,6 +80,7 @@ import { OpenJobsList } from 'components/OpenJobsList';
 import { PartnerLogoAndTextSection } from 'components/PartnerLogoAndTextSection';
 import { DividerLine } from 'components/DividerLine';
 import { PartnerPersonQuote } from 'components/PartnerPersonQuote';
+import { PartnerReviewSection } from 'components/PartnerReviewSection';
 const NewsGridSection = dynamic(() => import('./NewsGridSection'), {
   ssr: false,
 });
@@ -89,6 +91,13 @@ export const getContentForContentModule = (
   sharedContent?: any,
   allModulesData?: any,
 ): JSX.Element => {
+  if (contentModule.specificContentModule instanceof PartnerReviewModule) {
+    return (
+      <PartnerReviewSection
+        specificContentModule={contentModule.specificContentModule}
+      />
+    );
+  }
   if (contentModule.specificContentModule instanceof PartnerPersonQuoteModule) {
     return (
       <PartnerPersonQuote

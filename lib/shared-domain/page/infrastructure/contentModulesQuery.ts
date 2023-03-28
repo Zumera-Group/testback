@@ -570,5 +570,13 @@ export const contentModulesQuery = (
 				},
 		},
     }, 
+    partnerItem[] {
+		...,
+		image {
+			asset->{
+			  url
+			},
+		},
+   }
 ${extraQuery || ''}
   }`;

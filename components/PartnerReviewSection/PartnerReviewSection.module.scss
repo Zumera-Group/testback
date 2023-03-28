@@ -1,0 +1,26 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.heading {
+  max-width: 43rem !important;
+  margin-bottom: $gutter * 3;
+}
+.partnerItems {
+  background: $white;
+  padding: $gutter * 3.2;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-row-gap: $gutter * 2;
+  grid-column-gap: $gutter * 1.5;
+  @include breakpoint-down(md) {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+.partnerLogo {
+  position: relative;
+  height: 63px;
+  margin-bottom: $gutter * 2;
+}

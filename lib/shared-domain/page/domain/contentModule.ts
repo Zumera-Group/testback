@@ -916,6 +916,7 @@ export type ContentModuleType =
   | 'brandOverviewSection'
   | 'referralSection'
   | 'dividerLine'
+  | 'partnerReviewSection'
   // service detail sections
   | serviceDetailSectionNames.processSection
   | serviceDetailSectionNames.helpContactPerson
@@ -925,6 +926,7 @@ export type ContentModuleType =
 
 abstract class ContentModuleTypeFactory {
   static createInstance(type: ContentModuleType, fields: Record<string, any>) {
+    if (type === 'partnerReviewSection') return new PartnerReviewModule(fields);
     if (type === 'dividerLine') return new DividerLineModule();
     if (type === 'stickyFooter') return new StickyFooterModule(fields);
     if (type === 'transactionQuote') return new TransactionQuoteModule(fields);
@@ -1325,6 +1327,18 @@ export class PartnerAboutWithImageModule extends BaseModule {
     this.title = fields.title;
     this.description = fields.description;
     this.image = fields.image;
+  }
+}
+
+export class PartnerReviewModule extends BaseModule {
+  title: string;
+  subtitle: string;
+  partnerItem: any[];
+  constructor(fields: Record<string, any>) {
+    super();
+    this.title = fields.title;
+    this.subtitle = fields.subtitle;
+    this.partnerItem = fields.partnerItem;
   }
 }
 
