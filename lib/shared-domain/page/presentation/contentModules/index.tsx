@@ -32,6 +32,7 @@ import {
   DividerLineModule,
   PartnerPersonQuoteModule,
   PartnerReviewModule,
+  PartnerVisionModule,
 } from '../../domain/contentModule';
 
 import {
@@ -81,16 +82,23 @@ import { PartnerLogoAndTextSection } from 'components/PartnerLogoAndTextSection'
 import { DividerLine } from 'components/DividerLine';
 import { PartnerPersonQuote } from 'components/PartnerPersonQuote';
 import { PartnerReviewSection } from 'components/PartnerReviewSection';
+import { PartnerVisionSection } from 'components/PartnerVisionSection';
 const NewsGridSection = dynamic(() => import('./NewsGridSection'), {
   ssr: false,
 });
-
 export const getContentForContentModule = (
   contentModule: ContentModule,
   siteSettings: any,
   sharedContent?: any,
   allModulesData?: any,
 ): JSX.Element => {
+  if (contentModule.specificContentModule instanceof PartnerVisionModule) {
+    return (
+      <PartnerVisionSection
+        specificContentModule={contentModule.specificContentModule}
+      />
+    );
+  }
   if (contentModule.specificContentModule instanceof PartnerReviewModule) {
     return (
       <PartnerReviewSection

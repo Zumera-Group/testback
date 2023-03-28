@@ -1196,25 +1196,19 @@ export class PartnerAboutModule extends BaseModule {
 }
 
 export class PartnerVisionModule extends BaseModule {
-  image: {
-    asset: {
-      url: string;
-    };
-  };
   title: string;
   subtitle: string;
-  boldText: string;
-  normalText: string;
+  description: string;
+  bulletTitle: string;
   bulletPoints: { title: string; description: any[] }[];
 
   constructor(fields: Record<string, any>) {
     super();
     this.bulletPoints = fields.bulletPoints;
-    this.image = fields.image;
     this.title = fields.title;
     this.subtitle = fields.subtitle;
-    this.boldText = fields.boldText;
-    this.normalText = fields.normalText;
+    this.description = fields.description;
+    this.bulletTitle = fields.bulletTitle;
   }
 }
 
@@ -1485,6 +1479,10 @@ export class TextWithImageGridModule extends BaseModule {
   image: any;
 
   bullets: any[];
+  servicesCards: any[];
+  alignServicesCenter: boolean;
+  noServiceCardsBoldTitle: boolean;
+
   constructor(fields: Record<string, any>) {
     super();
     this.title = fields.title;
@@ -1494,6 +1492,9 @@ export class TextWithImageGridModule extends BaseModule {
     this.button = fields.button;
     this.image = fields.image;
     this.bullets = fields.bullets;
+    this.servicesCards = fields.servicesCards;
+    this.alignServicesCenter = fields.alignServicesCenter;
+    this.noServiceCardsBoldTitle = fields.noServiceCardsBoldTitle;
   }
 }
 
