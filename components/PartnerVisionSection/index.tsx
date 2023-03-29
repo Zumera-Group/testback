@@ -7,7 +7,7 @@ export const PartnerVisionSection: React.FC<any> = ({
 }) => {
   const { title, subtitle, description, bulletTitle, bulletPoints } =
     specificContentModule;
-  console.log(specificContentModule);
+  // console.log(specificContentModule);
   return (
     <Section size={'md'} bg={'light'} color={'primary'}>
       <Container>

@@ -52,7 +52,7 @@ export const Landing: HeroComponent = ({ ...rest }) => {
             <SanityBlockContent text={description} />
             {button?.title && (
               <div className={baseStyles.btnWrapper}>
-                <Button {...button} onDark={type === 'landing_dark'}>
+                <Button {...button} onDark={type === 'dark'}>
                   {button.title}
                 </Button>
               </div>

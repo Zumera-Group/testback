@@ -4,7 +4,7 @@
   }
 }
 .gridContainer {
-  padding: $gutter * 2;
+  //padding: $gutter * 2;
   @include breakpoint-up(lg) {
     padding: $gutter * 3;
   }

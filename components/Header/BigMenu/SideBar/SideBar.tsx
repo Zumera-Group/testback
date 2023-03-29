@@ -23,7 +23,7 @@ export const SideBar = ({
 }) => {
   const router = useRouter();
   const linkWithCurrentLocale = useLinkWithCurrentLocale();
-  console.log(menu);
+  // console.log(menu);
   return (
     <motion.div {...animationProps} className={styles.sideBar}>
       <div className={styles.logo}>
