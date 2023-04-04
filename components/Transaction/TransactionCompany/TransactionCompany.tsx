@@ -57,11 +57,10 @@ const Company = ({ companyImage, companyDescription }) => (
         width={'200'}
         height={'64'}
         alt=""
-        src={sanityImageUrlFor(companyImage).url()}
+        src={sanityImageUrlFor(companyImage)?.url()}
         sizes="100vw"
         style={{
-          width: '100%',
-          height: 'auto',
+          height: '70px',
           objectFit: 'contain',
           objectPosition: 'left',
         }}
