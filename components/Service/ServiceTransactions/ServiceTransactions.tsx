@@ -15,12 +15,12 @@ import { SwiperSlide } from 'swiper/react';
 import { Button } from 'components/Button';
 
 import styles from './ServiceTransactions.module.scss';
-import router from 'next/router';
+import { useRouter } from 'next/router';
 
 export const ServiceTransactions = ({ transactions, service, content }) => {
   const swiperPrevRef = useRef();
   const swiperNextRef = useRef();
-
+  const router = useRouter();
   const transactionSlug =
     router.locale === 'en' ? '/transactions' : '/transaktionen';
 

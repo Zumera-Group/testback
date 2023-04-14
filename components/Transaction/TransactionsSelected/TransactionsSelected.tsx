@@ -14,7 +14,7 @@ import { TransactionBig } from 'components/NewsGrid/Cards';
 import { SwiperSlide } from 'swiper/react';
 
 import styles from './TransactionsSelected.module.scss';
-import router, { useRouter } from 'next/router';
+import { useRouter } from 'next/router';
 import { fetchTransactions } from 'lib/shared-domain/transactions/application/useGetTransactions';
 import { Transaction } from 'lib/shared-domain/transactions/domain';
 import { Button } from 'components/Button';
@@ -23,6 +23,7 @@ export const TransactionsSelected: React.FC<{
   transaction: Transaction;
   content: any;
 }> = ({ transaction, content }) => {
+  const router = useRouter();
   const transactions = useFetchTransactions();
   const swiperPrevRef = useRef();
   const swiperNextRef = useRef();
@@ -35,8 +36,6 @@ export const TransactionsSelected: React.FC<{
 
   const transactionSlug =
     router.locale === 'en' ? '/transactions' : '/transaktionen';
-
-  console.log(content);
 
   return (
     <Section size={'md'} bg={'light'} color={'primary'}>
