@@ -15,10 +15,14 @@ import { SwiperSlide } from 'swiper/react';
 import { Button } from 'components/Button';
 
 import styles from './ServiceTransactions.module.scss';
+import router from 'next/router';
 
 export const ServiceTransactions = ({ transactions, service, content }) => {
   const swiperPrevRef = useRef();
   const swiperNextRef = useRef();
+
+  const transactionSlug =
+    router.locale === 'en' ? '/transactions' : '/transaktionen';
 
   if (!transactions || transactions.length === 0) return null;
 
@@ -72,7 +76,7 @@ export const ServiceTransactions = ({ transactions, service, content }) => {
               {service?.viewAllLinkText ? (
                 <Button
                   variant={'secondary'}
-                  link={{ slug: { current: `/transactions` } }}
+                  link={{ slug: { current: transactionSlug } }}
                   classes={styles.button}
                 >
                   {service?.viewAllLinkText}
