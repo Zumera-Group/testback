@@ -8,7 +8,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { menuAnimationProps, toggleIconVariants } from './animationProps';
 
 import { SCREEN_SIZE_SM } from 'lib/constants';
-import { useMediaQuery } from 'lib/hooks/useMediaQuery'
+import { useMediaQuery } from 'lib/hooks/useMediaQuery';
 import { links } from 'lib/links';
 import { useLinkWithCurrentLocale } from 'lib/shared-domain/useLinkWithCurrentLocale';
 import { Service, Sector } from 'lib/shared-domain/page/domain/index';
@@ -43,24 +43,21 @@ interface Props {
   index: number;
 }
 
-export const FooterMenu: React.FC<Props> = ({
-  type,
-  title,
-  items,
-  index
-}) => {
-
+export const FooterMenu: React.FC<Props> = ({ type, title, items, index }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const linkWithCurrentLocale = useLinkWithCurrentLocale();
   const isMobile = useMediaQuery(`(max-width: ${SCREEN_SIZE_SM})`);
 
   const getHref = (item) => {
-    if (type === 'normal') return linkWithCurrentLocale(item?.page?.slug?.current);
+    if (type === 'normal')
+      return linkWithCurrentLocale(item?.page?.slug?.current);
     if (type === 'services') return links().services(item);
     if (type === 'sectors') return links().sectors(item);
     if (type === 'tools') return links().questionnaires(item.page);
-    return linkWithCurrentLocale(item?.page?.slug?.current || item?.slug.current || '#');
-  }
+    return linkWithCurrentLocale(
+      item?.page?.slug?.current || item?.slug.current || '#',
+    );
+  };
 
   const MenuTitle = () => {
     return <h4 className={styles.title}>{title}</h4>;
@@ -85,36 +82,29 @@ export const FooterMenu: React.FC<Props> = ({
           />
         </motion.span>
       </button>
-    )
-  }
+    );
+  };
 
   return (
     <>
-      {isMobile ? (
-        <MenuToggle />
-      ) : (
-        <MenuTitle />
-      )}
+      {isMobile ? <MenuToggle /> : <MenuTitle />}
       <AnimatePresence>
         {(mobileMenuOpen || !isMobile) && (
-        <motion.div {...menuAnimationProps}>
-          <ul className={styles.menu}>
-            {items.map((item: any, itemIndex: number) => (
-              <li
-                key={`menuItem-${index}-${itemIndex}`}
-                className={styles.item}>
-                <FooterLink
-                  title={item?.name}
-                  href={getHref(item)}
-                />
-              </li>
-            ))}
-          </ul>
-        </motion.div>
+          <motion.div {...menuAnimationProps}>
+            <ul className={styles.menu}>
+              {items.map((item: any, itemIndex: number) => (
+                <li
+                  key={`menuItem-${index}-${itemIndex}`}
+                  className={styles.item}
+                >
+                  <FooterLink title={item?.name} href={getHref(item)} />
+                </li>
+              ))}
+            </ul>
+          </motion.div>
         )}
       </AnimatePresence>
     </>
-
   );
 };
 
