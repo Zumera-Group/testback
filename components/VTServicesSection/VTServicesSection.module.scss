@@ -46,7 +46,6 @@
 .leftCol {
   align-items: flex-start;
   @include breakpoint-down(md) {
-    align-items: center;
     padding-bottom: 2rem;
   }
 }

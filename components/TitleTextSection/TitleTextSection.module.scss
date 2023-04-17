@@ -8,3 +8,47 @@
     margin-top: $gutter;
   }
 }
+
+.servicesCards {
+  margin-top: $gutter * 2;
+  display: flex;
+  padding-bottom: $gutter * 4;
+  @include breakpoint-up(md) {
+    margin-top: $gutter * 3;
+  }
+  @include breakpoint-down(md) {
+    flex-direction: column;
+  }
+  &.noBoldTitle {
+    h4 {
+      font-weight: normal;
+    }
+  }
+  &.centered {
+    .servicesCard {
+      text-align: center;
+    }
+  }
+}
+
+.servicesCard {
+  @include divider('right', $primary);
+  flex: 1;
+  padding: 0 $gutter * 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  h4 {
+    margin-top: 12px;
+  }
+  &:last-child {
+    @include divider('right', transparent);
+    @include breakpoint-down(md) {
+      @include divider('bottom', $primary);
+    }
+  }
+  @include breakpoint-down(md) {
+    @include divider('bottom', $primary);
+    padding: $gutter * 1.2 0;
+  }
+}

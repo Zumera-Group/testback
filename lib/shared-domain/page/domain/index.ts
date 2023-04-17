@@ -36,6 +36,8 @@ export interface Page {
   queryOtherLangSlug: {
     slug: { current: string };
   }[];
+
+  darkBg: boolean;
 }
 
 export interface IAnnouncementTopBanner {

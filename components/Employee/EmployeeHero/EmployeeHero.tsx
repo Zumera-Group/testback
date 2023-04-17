@@ -73,6 +73,7 @@ export const EmployeeHero: React.FC<{
                   alt={`${employee.firstName} ${employee.lastName}`}
                   style={{
                     maxWidth: '100%',
+                    objectFit: 'cover',
                   }}
                 />
               </div>

@@ -4,11 +4,18 @@ import { Button } from 'components/Button';
 import { SanityBlockContent } from 'components/SanityBlockContent';
 
 import baseStyles from '../Hero.module.scss';
-import styles from './Primary.module.scss';
+import styles from './Landing.module.scss';
 
-export const Primary: HeroComponent = ({ ...rest }) => {
-  const { title, title2, description, button, heroImage, bottomBackground } =
-    rest;
+export const Landing: HeroComponent = ({ ...rest }) => {
+  const {
+    title,
+    title2,
+    description,
+    button,
+    heroImage,
+    bottomBackground,
+    type,
+  } = rest;
   return (
     <Section
       as={'div'}
@@ -18,8 +25,8 @@ export const Primary: HeroComponent = ({ ...rest }) => {
         bottomBackground?.asset?.url ? baseStyles.heroBottomBackground : '',
       ].join(' ')}
       size={'xl'}
-      bg={'primary'}
-      color={'white'}
+      bg={type === 'light' ? 'light' : 'primary'}
+      color={type === 'light' ? 'primary' : 'white'}
       // @ts-ignore
       style={{
         backgroundImage: `url(${bottomBackground?.asset?.url || ''})`,
@@ -34,8 +41,8 @@ export const Primary: HeroComponent = ({ ...rest }) => {
         >
           <GridColumn
             sm={12}
-            md={8}
-            lg={8}
+            md={7}
+            lg={7}
             className={styles.primaryDescription}
           >
             <h1 className={styles.title}>
@@ -45,14 +52,14 @@ export const Primary: HeroComponent = ({ ...rest }) => {
             <SanityBlockContent text={description} />
             {button?.title && (
               <div className={baseStyles.btnWrapper}>
-                <Button {...button} onDark={true}>
+                <Button {...button} onDark={type === 'dark'}>
                   {button.title}
                 </Button>
               </div>
             )}
           </GridColumn>
           {heroImage?.asset?.url ? (
-            <GridColumn sm={12} md={4} lg={4}>
+            <GridColumn sm={12} md={5} lg={5}>
               <img
                 src={heroImage.asset.url}
                 alt={`${title}${title2 ? ` ${title2}` : ''}`}
@@ -66,4 +73,4 @@ export const Primary: HeroComponent = ({ ...rest }) => {
   );
 };
 
-export default Primary;
+export default Landing;
