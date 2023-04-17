@@ -46,21 +46,6 @@ export const GlobeAnimation = ({ onDark }) => {
     );
   };
 
-  const LocationPoints = () => {
-    return (
-      <>
-        {locationPoints.map((props, i) => (
-          <motion.circle
-            key={`globeAnimationLocationPoints-${i}`}
-            //@ts-ignore
-            variants={locationPointAnimationProps}
-            {...props}
-          />
-        ))}
-      </>
-    );
-  };
-
   const LocationLines = () => {
     return (
       <>
@@ -75,6 +60,21 @@ export const GlobeAnimation = ({ onDark }) => {
       </>
     )
   }
+
+  const LocationPoints = () => {
+    return (
+      <>
+        {locationPoints.map((props, i) => (
+          <motion.circle
+            key={`globeAnimationLocationPoints-${i}`}
+            //@ts-ignore
+            variants={locationPointAnimationProps}
+            {...props}
+          />
+        ))}
+      </>
+    );
+  };
 
   return (
     <motion.svg
@@ -199,17 +199,17 @@ export const GlobeAnimation = ({ onDark }) => {
       </motion.g>
 
       <motion.g
-        className={styles.locationPoints}
-        variants={staggerLocationsAnimationProps}
-      >
-        <LocationPoints />
-      </motion.g>
-
-      <motion.g
         className={styles.locationLines}
         variants={staggerLocationLinesAnimationProps}
       >
         <LocationLines />
+      </motion.g>
+
+      <motion.g
+        className={styles.locationPoints}
+        variants={staggerLocationsAnimationProps}
+      >
+        <LocationPoints />
       </motion.g>
 
     </motion.svg>
