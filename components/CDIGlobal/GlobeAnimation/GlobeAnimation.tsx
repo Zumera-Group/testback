@@ -5,6 +5,8 @@ import { useInView } from 'react-intersection-observer';
 
 import { linearGradients } from './linearGraidents';
 import { locationPoints } from './locationPoints';
+import { locationLines } from './locationLines';
+
 import {
   staggerChildrenAnimationProps,
   verticalLineAnimationProps,
@@ -12,6 +14,8 @@ import {
   regionAnimationProps,
   staggerLocationsAnimationProps,
   locationPointAnimationProps,
+  staggerLocationLinesAnimationProps,
+  locationLineAnimationProps,
 } from './animationProps';
 
 import styles from './GlobeAnimation.module.scss';
@@ -56,6 +60,21 @@ export const GlobeAnimation = ({ onDark }) => {
       </>
     );
   };
+
+  const LocationLines = () => {
+    return (
+      <>
+        {locationLines.map((props, i) => (
+          <motion.path
+            key={`globeAnimationLocationLines-${i}`}
+            //@ts-ignore
+            variants={locationLineAnimationProps}
+            d={props}
+          />
+        ))}
+      </>
+    )
+  }
 
   return (
     <motion.svg
@@ -185,6 +204,14 @@ export const GlobeAnimation = ({ onDark }) => {
       >
         <LocationPoints />
       </motion.g>
+
+      <motion.g
+        className={styles.locationLines}
+        variants={staggerLocationLinesAnimationProps}
+      >
+        <LocationLines />
+      </motion.g>
+
     </motion.svg>
   );
 };

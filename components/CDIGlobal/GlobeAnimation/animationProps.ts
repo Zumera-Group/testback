@@ -65,8 +65,9 @@ export const staggerLocationsAnimationProps = {
     transition: {
       delay: durations.xl * 2,
       ease: eases.in,
-      duration: durations.xl,
-      staggerChildren: durations.sm * 2,
+      duration: durations.md,
+      // duration: durations.xl,
+      // staggerChildren: durations.sm * 2,
     }
   },
 };
@@ -74,17 +75,49 @@ export const staggerLocationsAnimationProps = {
 export const locationPointAnimationProps = {
   initial: {
     opacity: 0,
-    scale: 0.8,
+    scale: 0.9,
   },
   animate: {
     opacity: 1,
-    scale: 1.2,
+    scale: 1.3,
     transition: {
-      duration: durations.xl,
+      // duration: durations.xl,
+      duration: durations.md,
       eases: eases.in,
-      repeat: Infinity,
-      repeatType: "mirror",
-      repeatDelay: durations.sm * 4,
+      // repeat: Infinity,
+      // repeatType: "mirror",
+      // repeatDelay: durations.sm * 4,
     }
   }
 };
+
+export const staggerLocationLinesAnimationProps = {
+  initial: {
+    opacity: 0,
+  },
+  animate: {
+    opacity: 1,
+    transition: {
+      delay: durations.xl * 2,
+      ease: eases.in,
+      duration: durations.xl,
+      staggerChildren: durations.xl * 2,
+    }
+  },
+};
+
+export const locationLineAnimationProps = {
+  initial: {
+    pathLength: 0,
+  },
+  animate: {
+    pathLength: 1,
+    transition: {
+      duration: durations.xl * 2,
+      eases: eases.inOut,
+      repeat: Infinity,
+      repeatType: "mirror",
+      repeatDelay: durations.xl * 2,
+    }
+  },
+}
