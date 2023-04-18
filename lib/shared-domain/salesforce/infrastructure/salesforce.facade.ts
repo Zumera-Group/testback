@@ -99,8 +99,6 @@ export class SalesforceFacade {
     uniqueId: string,
     fields: Record<string, any>,
   ): Promise<void> {
-    console.log('hey there');
-    console.log(fields);
     try {
       const leadParams = {
         lead_entry: {
