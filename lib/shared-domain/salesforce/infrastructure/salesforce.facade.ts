@@ -77,6 +77,7 @@ export class SalesforceFacade {
       qLogs(
         'SalesforceFacade.createOrUpdateLeadEntry ' + JSON.stringify(fields),
       );
+
       qLogs(marketingParams); //console.log
       qLogs(fields);
       qLogs(assessmentPurpose);
@@ -91,6 +92,31 @@ export class SalesforceFacade {
       trackApplicationError('createOrUpdateLeadEntry', e);
 
       throw new Error(e);
+    }
+  }
+
+  async leadDetailsSubmission(
+    uniqueId: string,
+    fields: Record<string, any>,
+  ): Promise<void> {
+    console.log('hey there');
+    console.log(fields);
+    try {
+      const leadParams = {
+        lead_entry: {
+          email: fields.email,
+          last_name: fields.LastName,
+          phone: fields.phone,
+        },
+      };
+      await this.httpService.put(
+        `lead_entries/${uniqueId}/salesforce`,
+        leadParams,
+        requestsConfig,
+      );
+    } catch (e) {
+      trackApplicationError('leadDetailsSubmission', e);
+      return e;
     }
   }
 
