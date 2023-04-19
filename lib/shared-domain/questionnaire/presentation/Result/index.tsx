@@ -12,6 +12,7 @@ import { useValuationStore } from '../../store';
 import { FormGroup, Input, Textarea, Checkbox, Message } from 'components/Form';
 import { useGetSalesforceScore } from '../../application/useGetQuestionnaireScore';
 import { useSalesforceAnswerSync } from '../../application/useSalesforceAnswerSync';
+import { useSalesforceLeadSync } from '../../application/useSaleforceLeadSync';
 import { qLogs } from '../../application/log';
 import { useRouter } from 'next/router';
 
@@ -86,6 +87,7 @@ const EvaluationScreen: React.FC<{
   score: { points: string; percentage: string; avg: number };
 }> = ({ onSuccess, score }) => {
   const { syncCurrentAnswersToSalesforce } = useSalesforceAnswerSync();
+  const { syncLeadToSalesforce } = useSalesforceLeadSync();
   const [isSubmit, setSubmit] = useState(false);
   const { getAnswer, setAnswer, uniqueId } = useValuationStore();
   const [checkboxIsChecked, setCheckboxIsChecked] = React.useState(false);
@@ -104,6 +106,7 @@ const EvaluationScreen: React.FC<{
 
     if (!SEND_IS_ALLOWED) return;
     await syncCurrentAnswersToSalesforce(uniqueId, 'lastQuestion', 100);
+    await syncLeadToSalesforce(uniqueId);
 
     if (!score || !score.avg || score?.avg < 5000000) {
       setSubmit(true);

@@ -38,7 +38,6 @@ export const useSalesforceAnswerSync = () => {
         sectorSheetName,
         assessmentPurpose,
       );
-      await facade.leadDetailsSubmission(uniqueId, answers);
     },
     syncCurrentAnswersFromSalesforce: async (uniqueId: string) => {
       const answers = await facade.getLeadEntry(uniqueId);
