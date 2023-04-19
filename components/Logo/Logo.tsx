@@ -3,6 +3,7 @@ import Image from 'next/image';
 
 import styles from './Logo.module.scss';
 import { AnimatedLogo } from 'components/Logo/AnimatedLogo';
+import { useRouter } from 'next/router';
 
 interface Props {
   slug: string;

@@ -11,6 +11,8 @@ import { QuestionAnimation } from '../../Question/QuestionAnimation';
 import styles from './MultiTextInput.module.scss';
 import BackButton from 'components/Calculator/BackButton/BackButton';
 import useBreakpoints from 'lib/utils/useBreakpoints';
+import { useMediaQuery } from 'lib/hooks/useMediaQuery';
+import { SCREEN_SIZE_MD } from 'lib/constants';
 
 const t = getTranslateByScope('answerTypes.textInput');
 const placeholder = t('basePlaceholder');
@@ -27,8 +29,7 @@ export const MultiTextInput: React.FC<{
     new Array(NUMBER_OF_ANSWERS).fill(''),
   );
 
-  const breakpoints = useBreakpoints();
-  const isMobile = breakpoints === 'sm';
+  const isMobile = useMediaQuery(`(max-width: ${SCREEN_SIZE_MD})`);
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>, index: number) =>
     setAnswers((prevAnswers) => {

@@ -9,6 +9,7 @@
 
   @include breakpoint-down(md) {
     margin: $gutter * 1.5 0;
+    align-items: center;
   }
 
   @include breakpoint-up(md) {

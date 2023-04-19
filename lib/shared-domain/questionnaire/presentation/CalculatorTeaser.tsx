@@ -1,6 +1,6 @@
 import { TitleWithSubtitleAndDescription } from 'lib/shared-domain/page/presentation/components/TitleWithSubtitleAndDescription';
 import { TextBoxGroup } from './TextBoxGroup';
-import { useRouter } from 'next/router';
+import router, { useRouter } from 'next/router';
 import styles from './CalculatorTeaser.module.scss';
 import { HalfBeam } from 'components/HalfBeam';
 import { Button } from 'components/Button';
@@ -14,28 +14,43 @@ export const ResultTeaser: React.FC<{
   };
   isSectorSpecificEntry?: boolean;
 }> = ({ calculatorSteps, isSectorSpecificEntry }) => {
+  const enSteps = {
+    step1: 'General Information',
+    step2: 'Company specifics',
+    step3: 'Sector Specifics',
+    step4: 'Zumera Evaluation',
+  };
+
+  const deSteps = {
+    step1: 'Allgemeine Informationen',
+    step2: 'Spezifische Angaben zum Unternehmen',
+    step3: 'Besonderheiten des Sektors',
+    step4: 'Zumera Bewertung',
+  };
+
+  const steps = router.locale === 'en' ? enSteps : deSteps;
   return (
     <div className={styles.calculatorTeaserWrapper}>
       <HalfBeam />
       <div>
         <p className={styles.calculatorSteps}>
           <span className={styles.dash}>&mdash;</span>
-          {calculatorSteps?.step4}
+          {steps?.step4}
         </p>
 
         <p className={styles.calculatorSteps}>
           <span className={styles.dash}>&mdash;</span>
-          {calculatorSteps?.step3}
+          {steps?.step3}
         </p>
 
         <p className={styles.calculatorSteps}>
           <span className={styles.dash}>&mdash;</span>
-          {calculatorSteps?.step2}
+          {steps?.step2}
         </p>
 
         <p className={styles.calculatorSteps}>
           <span className={styles.dash}>&mdash;</span>
-          {calculatorSteps?.step1}
+          {steps?.step1}
         </p>
       </div>
     </div>

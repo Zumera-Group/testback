@@ -12,7 +12,9 @@ import { useValuationStore } from '../../store';
 import { FormGroup, Input, Textarea, Checkbox, Message } from 'components/Form';
 import { useGetSalesforceScore } from '../../application/useGetQuestionnaireScore';
 import { useSalesforceAnswerSync } from '../../application/useSalesforceAnswerSync';
+import { useSalesforceLeadSync } from '../../application/useSaleforceLeadSync';
 import { qLogs } from '../../application/log';
+import { useRouter } from 'next/router';
 
 const t = getTranslateByScope('result');
 
@@ -85,11 +87,12 @@ const EvaluationScreen: React.FC<{
   score: { points: string; percentage: string; avg: number };
 }> = ({ onSuccess, score }) => {
   const { syncCurrentAnswersToSalesforce } = useSalesforceAnswerSync();
+  const { syncLeadToSalesforce } = useSalesforceLeadSync();
   const [isSubmit, setSubmit] = useState(false);
   const { getAnswer, setAnswer, uniqueId } = useValuationStore();
   const [checkboxIsChecked, setCheckboxIsChecked] = React.useState(false);
   const [pressed, setPressed] = React.useState(false);
-
+  const { locale } = useRouter();
   const SEND_IS_ALLOWED =
     checkboxIsChecked &&
     getAnswer(NAME_STORE_INDICATOR)?.trim() &&
@@ -102,7 +105,8 @@ const EvaluationScreen: React.FC<{
     setPressed(true);
 
     if (!SEND_IS_ALLOWED) return;
-    await syncCurrentAnswersToSalesforce(uniqueId, 'lastQuestion');
+    await syncCurrentAnswersToSalesforce(uniqueId, 'lastQuestion', 100);
+    await syncLeadToSalesforce(uniqueId);
 
     if (!score || !score.avg || score?.avg < 5000000) {
       setSubmit(true);
@@ -195,7 +199,12 @@ const EvaluationScreen: React.FC<{
               isChecked={checkboxIsChecked}
               id="result_checkBox"
             >
-              <div className={styles.termsWrapper}>
+              <div
+                className={[
+                  styles.termsWrapper,
+                  locale === 'en' ? styles.enTerms : '',
+                ].join(' ')}
+              >
                 <span>{t('evaluation.form.checkbox.first')}</span>
                 <a
                   style={{
@@ -261,7 +270,9 @@ export const Result: React.FC = () => {
           'Score: calculate - showing screen to book an appointment' + score,
         );
         setScore(score);
-        setHasError(false);
+
+        const status = score + 'status';
+        status.includes('Error') ? setHasError(true) : setHasError(false);
       } catch (e) {
         qLogs('Score: something went wrong');
         setHasError(true);
@@ -279,7 +290,7 @@ export const Result: React.FC = () => {
     return () => clearInterval(interval);
   }, [loadingPercentage]);
 
-  if (score && loadingPercentage >= 100)
+  if (score && !hasError && loadingPercentage >= 100)
     return (
       <>
         {!showAppointmentBooking ? (
