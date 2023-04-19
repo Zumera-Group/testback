@@ -15,6 +15,8 @@ export const useSalesforceAnswerSync = () => {
     industrySheetName,
     setIndustrySheetName,
     setSectorSheetName,
+    assessmentPurpose,
+    setAssessmentPurpose,
   } = useValuationStore();
   const { sendQuestionnaireToAnalytics } = useSendQuestionnaireToAnalytics();
 
@@ -22,16 +24,19 @@ export const useSalesforceAnswerSync = () => {
     syncCurrentAnswersToSalesforce: async (
       uniqueId: string,
       currentSalesforceId: string,
+      currentProgress: number,
     ) => {
       sendQuestionnaireToAnalytics(currentSalesforceId);
 
       await facade.createOrUpdateLeadEntry(
         uniqueId,
+        currentProgress,
         answers,
         industryId,
         sectorId,
         industrySheetName,
         sectorSheetName,
+        assessmentPurpose,
       );
     },
     syncCurrentAnswersFromSalesforce: async (uniqueId: string) => {
