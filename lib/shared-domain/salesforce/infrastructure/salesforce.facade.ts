@@ -7,6 +7,8 @@ import {
 import { MarketingParamsService } from '../application/marketingParamsService';
 
 const BASE_URL = process.env.NEXT_PUBLIC_SALESFORCE_API_BASE_URL;
+const unformattedParams =
+  process.env.NEXT_PUBLIC_MARKETING_QUERY_PARAMS?.split(',') || [];
 
 const endpoints = {
   getSectionsAndIndustries: 'overview',
@@ -25,22 +27,44 @@ export class SalesforceFacade {
 
   async createOrUpdateLeadEntry(
     uniqueId: string,
+    currentProgress: number,
     fields: Record<string, any>,
     industryId: string,
     sectorId: string,
     industrySheetName: string,
     sectorSheetName: string,
+    assessmentPurpose: string,
   ): Promise<void> {
     try {
       const marketingParams = MarketingParamsService.retrieve();
       const cookies = MarketingParamsService.getCookies();
 
+      const keyMap = {
+        [unformattedParams[0]]: 'UTMSource__c',
+        [unformattedParams[1]]: 'UTMMedium__c',
+        [unformattedParams[2]]: 'UTMCampaign__c',
+        [unformattedParams[3]]: 'UTM_ID__c',
+        [unformattedParams[4]]: 'UTM_Source_Platform__c',
+        [unformattedParams[5]]: 'UTMTerm__c',
+        [unformattedParams[6]]: 'UTM_Content__c',
+      };
+      const formattedMarketingParams = Object.keys(marketingParams).reduce(
+        (acc, key) => {
+          const newKey = keyMap[key] || key;
+          acc[newKey] = marketingParams[key];
+          return acc;
+        },
+        {},
+      );
+
       const params = {
         lead_entry: {
           unique_id: uniqueId,
+          current_progress: currentProgress,
           data: {
+            Assessment_Purpose__c: assessmentPurpose,
             ...fields,
-            ...marketingParams,
+            ...formattedMarketingParams,
             ...cookies,
             industry_id: industryId,
             sector_id: sectorId,
@@ -54,6 +78,10 @@ export class SalesforceFacade {
         'SalesforceFacade.createOrUpdateLeadEntry ' + JSON.stringify(fields),
       );
 
+      qLogs(marketingParams); //console.log
+      qLogs(fields);
+      qLogs(assessmentPurpose);
+
       await this.httpService.post(
         endpoints.createOrUpdateLeadEntry,
         params,
@@ -64,6 +92,29 @@ export class SalesforceFacade {
       trackApplicationError('createOrUpdateLeadEntry', e);
 
       throw new Error(e);
+    }
+  }
+
+  async leadDetailsSubmission(
+    uniqueId: string,
+    fields: Record<string, any>,
+  ): Promise<void> {
+    try {
+      const leadParams = {
+        lead_entry: {
+          email: fields.email,
+          last_name: fields.LastName,
+          phone: fields.phone,
+        },
+      };
+      await this.httpService.put(
+        `lead_entries/${uniqueId}/salesforce`,
+        leadParams,
+        requestsConfig,
+      );
+    } catch (e) {
+      trackApplicationError('leadDetailsSubmission', e);
+      return e;
     }
   }
 
@@ -94,6 +145,7 @@ export class SalesforceFacade {
       };
     } catch (e) {
       trackApplicationError('getLeadEntryScore', e);
+      return e;
     }
   }
 
@@ -108,11 +160,29 @@ export class SalesforceFacade {
       const marketingParams = MarketingParamsService.retrieve();
       const cookies = MarketingParamsService.getCookies();
 
+      const keyMap = {
+        [unformattedParams[0]]: 'UTMSource__c',
+        [unformattedParams[1]]: 'UTMMedium__c',
+        [unformattedParams[2]]: 'UTMCampaign__c',
+        [unformattedParams[3]]: 'UTM_ID__c',
+        [unformattedParams[4]]: 'UTM_Source_Platform__c',
+        [unformattedParams[5]]: 'UTMTerm__c',
+        [unformattedParams[6]]: 'UTM_Content__c',
+      };
+      const formattedMarketingParams = Object.keys(marketingParams).reduce(
+        (acc, key) => {
+          const newKey = keyMap[key] || key;
+          acc[newKey] = marketingParams[key];
+          return acc;
+        },
+        {},
+      );
+
       await this.httpService.post(
         endpoints.submitContactForm,
         {
           contact: {
-            ...marketingParams,
+            ...formattedMarketingParams,
             ...cookies,
             email: contact.email,
             phone: contact.phone,

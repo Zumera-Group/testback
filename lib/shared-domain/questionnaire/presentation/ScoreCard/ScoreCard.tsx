@@ -1,11 +1,12 @@
 import { ProgressBar } from 'components/Calculator/ProgressBar';
-import React from 'react';
+import React, { memo } from 'react';
 import { getTranslateByScope } from 'translation/i18n';
 import { useGetSalesforceScore } from '../../application/useGetQuestionnaireScore';
 import Image from 'next/image';
 import styles from './ScoreCard.module.scss';
 import * as animationData from './loading-wheel.json';
 import Lottie from 'react-lottie';
+import { motion } from 'framer-motion';
 
 export const ScoreCard = () => {
   const tr = getTranslateByScope('result');
@@ -23,6 +24,7 @@ export const ScoreCard = () => {
     const loadScore = async () => {
       try {
         const score = await getScore();
+
         setScore(score);
         setHasError(false);
       } catch (e) {
@@ -48,6 +50,7 @@ export const ScoreCard = () => {
       }
     },
   };
+
   const hasScoreAndPercentage =
     presenter.hasPoints() && presenter.getPercentage();
   const points = tr('evaluation.resultBox.points', {
@@ -67,17 +70,18 @@ export const ScoreCard = () => {
     },
   };
 
+  const animationVariants = {
+    initial: { opacity: 0 },
+    in: { opacity: 1 },
+  };
+
   return (
     <>
       <div className={styles.scoreCardWrapper}>
         {hasScoreAndPercentage && (
           <>
             <span className={styles.scoreCardTitle}>{title}</span>
-            <ProgressBar
-              isPoint
-              progress={points.substring(0, points.length - 2)}
-              color="gradient"
-            />
+            <ProgressBar isPoint progress={points} color="gradient" />
             <p className={styles.betterThan}>{betterThan}</p>
             <div className={styles.booklet}>
               <Image
@@ -95,6 +99,7 @@ export const ScoreCard = () => {
             </div>
           </>
         )}
+
         {!score && (
           <Lottie
             options={defaultOptions}

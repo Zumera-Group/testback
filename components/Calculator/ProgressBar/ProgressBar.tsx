@@ -1,5 +1,6 @@
 import { SCREEN_SIZE_MD } from 'lib/constants';
 import { useMediaQuery } from 'lib/hooks/useMediaQuery';
+import router from 'next/router';
 import styles from './ProgressBar.module.scss';
 
 interface Props {
@@ -16,6 +17,8 @@ export const ProgressBar: React.FC<Props> = ({
   color,
 }) => {
   const isMobile = useMediaQuery(`(max-width: ${SCREEN_SIZE_MD})`);
+
+  const pt = router.locale === 'en' ? 'pts' : 'pkt';
 
   const DesktopIcon = () => {
     return (
@@ -59,7 +62,7 @@ export const ProgressBar: React.FC<Props> = ({
               </text>
               <br />
               <text className={styles.pointsTitle} x="75" y="45">
-                pts
+                {pt}
               </text>
             </>
           )}
