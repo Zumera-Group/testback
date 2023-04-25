@@ -58,8 +58,8 @@ export const GlobeAnimation = ({ onDark }) => {
           />
         ))}
       </>
-    )
-  }
+    );
+  };
 
   const LocationPoints = () => {
     return (
@@ -211,7 +211,6 @@ export const GlobeAnimation = ({ onDark }) => {
       >
         <LocationPoints />
       </motion.g>
-
     </motion.svg>
   );
 };

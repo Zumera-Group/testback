@@ -8,7 +8,7 @@ export const staggerChildrenAnimationProps = {
     opacity: 1,
     transition: {
       staggerChildren: durations.sm / 2,
-    }
+    },
   },
 };
 
@@ -31,7 +31,7 @@ export const verticalLineAnimationProps = {
 
 export const horizontalLineAnimationProps = {
   initial: {
-    clipPath: 'polygon(0 0, 0 0, 0 100%, 0% 100%)', 
+    clipPath: 'polygon(0 0, 0 0, 0 100%, 0% 100%)',
   },
   animate: {
     clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)',
@@ -52,8 +52,8 @@ export const regionAnimationProps = {
       delay: durations.xl,
       duration: durations.xl * 1.5,
       eases: eases.out,
-    }
-  }
+    },
+  },
 };
 
 export const staggerLocationsAnimationProps = {
@@ -68,7 +68,7 @@ export const staggerLocationsAnimationProps = {
       duration: durations.md,
       // duration: durations.xl,
       // staggerChildren: durations.sm * 2,
-    }
+    },
   },
 };
 
@@ -87,8 +87,8 @@ export const locationPointAnimationProps = {
       // repeat: Infinity,
       // repeatType: "mirror",
       // repeatDelay: durations.sm * 4,
-    }
-  }
+    },
+  },
 };
 
 export const staggerLocationLinesAnimationProps = {
@@ -101,23 +101,43 @@ export const staggerLocationLinesAnimationProps = {
       delay: durations.xl * 2,
       ease: eases.in,
       duration: durations.xl,
-      staggerChildren: durations.xl * 2,
-    }
+      // staggerChildren: durations.xl * 2,
+      staggerChildren: durations.xl * 1.75,
+    },
   },
 };
+
+// export const locationLineAnimationProps = {
+//   initial: {
+//     pathLength: 0,
+//   },
+//   animate: {
+//     pathLength: 1,
+//     transition: {
+//       duration: durations.xl * 2,
+//       eases: eases.inOut,
+//       repeat: Infinity,
+//       repeatType: 'mirror',
+//       repeatDelay: durations.xl * 2,
+//     },
+//   },
+// };
 
 export const locationLineAnimationProps = {
   initial: {
     pathLength: 0,
+    pathOffset: 0,
   },
+
   animate: {
-    pathLength: 1,
+    pathLength: [0, 1, 1, 0, 0],
+    pathOffset: [0, 0, 1, 1, 0],
     transition: {
       duration: durations.xl * 2,
       eases: eases.inOut,
       repeat: Infinity,
-      repeatType: "mirror",
-      repeatDelay: durations.xl * 2,
-    }
+      repeatType: 'reverse',
+      repeatDelay: durations.md,
+    },
   },
-}
+};
