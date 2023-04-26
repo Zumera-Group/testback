@@ -50,6 +50,10 @@ function MyApp({ Component, pageProps, router }) {
   // const lang = router.locale;
   // const slug = router.state.asPath.
 
+  const stringData = JSON.parse(
+    JSON.stringify(pageProps).replace(/\u2028/g, ''),
+  );
+
   return (
     <>
       <Head>
@@ -65,7 +69,7 @@ function MyApp({ Component, pageProps, router }) {
         autoBootProps={{ hideDefaultLauncher: true }}
       >
         <main className={myFont.className}>
-          <Component {...pageProps} key={router.pathname} />
+          <Component {...stringData} key={router.pathname} />
         </main>
       </IntercomProvider>
 
