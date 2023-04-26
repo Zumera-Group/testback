@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { useState, useEffect, useRef } from 'react';
+import { motion, useAnimation } from 'framer-motion';
 
 import { useInView } from 'react-intersection-observer';
 
@@ -22,15 +22,13 @@ import styles from './GlobeAnimation.module.scss';
 
 export const GlobeAnimation = ({ onDark }) => {
   const { ref, inView } = useInView();
-  const [animateOnce, setAnimateOnce] = useState(false);
-  const [isPlaying, setIsPlaying] = useState(false);
+  const controls = useAnimation();
 
   useEffect(() => {
-    if (inView && !animateOnce) {
-      setIsPlaying(true);
-      setAnimateOnce(true);
+    if (inView) {
+      controls.start('animate');
     }
-  }, [inView, animateOnce]);
+  }, [inView, controls]);
 
   const LinearGradients = () => {
     return (
@@ -83,7 +81,7 @@ export const GlobeAnimation = ({ onDark }) => {
       className={[styles.globe, onDark ? styles.globe__onDark : ''].join(' ')}
       ref={ref}
       initial="initial"
-      animate={isPlaying ? 'animate' : 'initial'}
+      animate={controls}
       viewport={{ once: true, amount: 0.8 }}
     >
       <g style={{ opacity: '.6' }}>
