@@ -101,27 +101,11 @@ export const staggerLocationLinesAnimationProps = {
       delay: durations.xl * 2,
       ease: eases.in,
       duration: durations.xl,
-      // staggerChildren: durations.xl * 2,
-      staggerChildren: durations.xl * 1.75,
+      staggerChildren: durations.md * 7,
+      staggerDirection: -1,
     },
   },
 };
-
-// export const locationLineAnimationProps = {
-//   initial: {
-//     pathLength: 0,
-//   },
-//   animate: {
-//     pathLength: 1,
-//     transition: {
-//       duration: durations.xl * 2,
-//       eases: eases.inOut,
-//       repeat: Infinity,
-//       repeatType: 'mirror',
-//       repeatDelay: durations.xl * 2,
-//     },
-//   },
-// };
 
 export const locationLineAnimationProps = {
   initial: {
@@ -132,8 +116,22 @@ export const locationLineAnimationProps = {
   animate: {
     pathLength: [0, 1, 1, 0, 0],
     pathOffset: [0, 0, 1, 1, 0],
+    stroke: [
+      '#F0005C',
+      '#300032',
+      '#F0005C',
+      '#300032',
+      '#F0005C',
+      '#300032',
+      '#F0005C',
+      '#300032',
+      '#F0005C',
+      '#300032',
+      '#F0005C',
+    ],
+
     transition: {
-      duration: durations.xl * 2,
+      duration: durations.xl * 5.5,
       eases: eases.inOut,
       repeat: Infinity,
       repeatType: 'reverse',
