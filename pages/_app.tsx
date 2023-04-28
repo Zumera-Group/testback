@@ -63,7 +63,6 @@ function MyApp({ Component, pageProps, router }) {
         />
       </Head>
       <IntercomProvider
-        initializeDelay={10000}
         appId={INTERCOM_APP_ID}
         autoBoot
         autoBootProps={{ hideDefaultLauncher: true }}
