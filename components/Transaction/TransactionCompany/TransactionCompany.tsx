@@ -2,7 +2,6 @@ import { Container, Grid, GridColumn, Section } from 'components/Layout';
 import styles from './TransactionCompany.module.scss';
 import { Transaction } from 'lib/shared-domain/transactions/domain';
 import Image from 'next/image';
-import { SectionHeading } from 'components/SectionHeading';
 import { sanityImageUrlFor } from 'lib/sanity';
 
 export const TransactionCompany: React.FC<{
@@ -15,7 +14,7 @@ export const TransactionCompany: React.FC<{
   ) {
     return null;
   }
-
+  console.log(transaction);
   return (
     <Section size={'md'} bg={'light'} color={'primary'}>
       <Container classes={styles.headingContainer}>
@@ -37,10 +36,12 @@ export const TransactionCompany: React.FC<{
           <Company
             companyDescription={transaction?.companyDescription1}
             companyImage={transaction.companyLogo1?.asset?.url}
+            companyName={transaction.companyName1}
           />
           <Company
             companyDescription={transaction?.companyDescription2}
             companyImage={transaction.companyLogo2?.asset?.url}
+            companyName={transaction.companyName2}
           />
         </Grid>
       </Container>
@@ -48,23 +49,27 @@ export const TransactionCompany: React.FC<{
   );
 };
 
-const Company = ({ companyImage, companyDescription }) => (
+const Company = ({ companyImage, companyDescription, companyName }) => (
   <GridColumn sm={12} md={6} lg={6} className={styles.companyCol}>
     <div className={styles.companyLogo}>
-      <Image
-        unoptimized
-        loading="lazy"
-        width={'200'}
-        height={'64'}
-        alt=""
-        src={sanityImageUrlFor(companyImage)?.url()}
-        sizes="100vw"
-        style={{
-          height: '70px',
-          objectFit: 'contain',
-          objectPosition: 'left',
-        }}
-      />
+      {companyImage ? (
+        <Image
+          unoptimized
+          loading="lazy"
+          width={'200'}
+          height={'64'}
+          alt=""
+          src={sanityImageUrlFor(companyImage)?.url()}
+          sizes="100vw"
+          style={{
+            height: '70px',
+            objectFit: 'contain',
+            objectPosition: 'left',
+          }}
+        />
+      ) : (
+        <h2>{companyName}</h2>
+      )}
     </div>
     <p color={'primary'}>{companyDescription}</p>
   </GridColumn>
