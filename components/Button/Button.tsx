@@ -39,6 +39,7 @@ export const Button: React.FC<Props> = ({
   ...rest
 }) => {
   const isLink = externalUrl || link?.slug?.current;
+
   const internalLink =
     link?.slug?.current && !internalAnchor
       ? link?.slug?.current

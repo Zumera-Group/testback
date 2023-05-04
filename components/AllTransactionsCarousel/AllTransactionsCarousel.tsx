@@ -21,6 +21,7 @@ import { fetchTransactions } from 'lib/shared-domain/transactions/application/us
 
 import styles from './AllTransactionsCarousel.module.scss';
 import { Button } from 'components/Button';
+import { links } from 'lib/links';
 
 export const AllTransactionsCarousel = ({ ...rest }) => {
   const [transactions, setTransactions] = useState([]);
@@ -45,6 +46,14 @@ export const AllTransactionsCarousel = ({ ...rest }) => {
       });
     }
   }, [isVisible, router]);
+
+  const transactionLink = {
+    link: {
+      slug: {
+        current: links().transactions('' as any),
+      },
+    },
+  };
 
   const transactionsFiltered = filterTransactions(rest, transactions);
   const Carousel = ({ transactions }) => {
@@ -103,7 +112,13 @@ export const AllTransactionsCarousel = ({ ...rest }) => {
               className={styles.navigationColumn}
             >
               {button?.title ? (
-                <Button {...button} classes={styles.button}>
+                <Button
+                  {...{
+                    ...button,
+                    ...transactionLink,
+                  }}
+                  classes={styles.button}
+                >
                   {button.title}
                 </Button>
               ) : null}
