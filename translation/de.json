@@ -97,7 +97,7 @@
         },
         "checkbox": {
           "first": "Hiermit stimme ich, ",
-          "second": "gemäß unserer Datenschutzerklärung",
+          "second": "gemäß Datenschutzerklärung",
           "third": ", der Verarbeitung meiner Daten zu.",
           "link": "/de/datenschutzerklarung/"
         },
