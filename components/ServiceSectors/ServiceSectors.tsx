@@ -2,7 +2,7 @@ import { Section, Container, Grid, GridColumn } from 'components/Layout';
 import { SectionHeading } from 'components/SectionHeading';
 import { Button } from 'components/Button';
 import { Sector } from 'components/Sectors';
-
+import { links } from 'lib/links';
 import styles from './ServiceSectors.module.scss';
 
 interface Props {
@@ -24,7 +24,6 @@ export const ServiceSectors: React.FC<Props> = ({ ...rest }) => {
     sectors,
     linkText,
     sectorsOverviewPage,
-    customHref,
     displayMaxItems,
   } = rest;
   const displaySectors = displayMaxItems
@@ -67,12 +66,12 @@ export const ServiceSectors: React.FC<Props> = ({ ...rest }) => {
               ))}
           </Grid>
         )}
-        {customHref || sectorsOverviewPage?.slug?.current ? (
+        {sectorsOverviewPage?.slug?.current ? (
           <div className={styles.btnWrapper}>
             <Button
               variant={'secondary'}
               onDark={false}
-              link={{ slug: { current: customHref } } || sectorsOverviewPage}
+              link={{ slug: { current: links().sectors({} as any) } }}
             >
               {linkText}
             </Button>
