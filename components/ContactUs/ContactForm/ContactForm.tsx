@@ -6,7 +6,6 @@ import { Button } from 'components/Button';
 import { FormGroup, Input, Textarea, Checkbox, Message } from 'components/Form';
 import { SanityBlockContent } from 'components/SanityBlockContent';
 
-import { useSharedContentContext } from 'lib/shared-domain/page/infrastructure/sharedContentContext';
 import { useLinkWithCurrentLocale } from 'lib/shared-domain/useLinkWithCurrentLocale';
 import { useContactFormSubmit } from 'lib/shared-domain/salesforce/application/useContactFormSubmit';
 
@@ -14,7 +13,6 @@ import styles from './ContactForm.module.scss';
 
 export const ContactForm = ({ contactForm }) => {
   const [checkboxIsChecked, setCheckboxIsChecked] = useState(false);
-  const sharedContent = useSharedContentContext();
   const linkWithCurrentLocale = useLinkWithCurrentLocale();
   const form = useContactFormSubmit();
 
@@ -28,6 +26,10 @@ export const ContactForm = ({ contactForm }) => {
     messagePlaceholder,
     successMessage,
     errorMessage,
+    checkboxPrivacyText1,
+    checkboxPrivacyText2,
+    checkboxPrivacyText3,
+    checkboxPrivacyPage,
   } = contactForm;
 
   const {
@@ -101,16 +103,14 @@ export const ContactForm = ({ contactForm }) => {
           isChecked={checkboxIsChecked}
           required={true}
         >
-          {sharedContent?.checkboxPrivacyText1}{' '}
+          {checkboxPrivacyText1}{' '}
           <Link
             passHref
-            href={linkWithCurrentLocale(
-              sharedContent?.checkboxPrivacyPage?.slug?.current,
-            )}
+            href={linkWithCurrentLocale(checkboxPrivacyPage?.slug?.current)}
           >
-            {sharedContent?.checkboxPrivacyText2}
+            {checkboxPrivacyText2}
           </Link>
-          {' ' + sharedContent?.checkboxPrivacyText3}
+          {' ' + checkboxPrivacyText3}
         </Checkbox>
       </FormGroup>
       <FormGroup>
