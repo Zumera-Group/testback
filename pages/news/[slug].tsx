@@ -64,6 +64,7 @@ export async function getStaticProps({ locale, params, preview = false }) {
     }
 
     const siteSettings = await fetchSiteSettings(locale);
+
     const content = await fetchNewsArticleDetailContent(locale);
     const sharedContent =
       await new SharedContentFacade().getSharedContentFacade(locale);
