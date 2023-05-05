@@ -1,76 +1,78 @@
 import { Locale } from 'lib/locale';
 import { SanityService } from 'lib/services/sanity.service';
 import { BlogArticle } from '../domain';
+
 import {
   filterDataToSingleItem,
   getOtherLangSlugQuery,
 } from '../../page/infrastructure/page.facade';
 import { SERVER_FETCHING_ERROR } from '../../page/constants';
 
-const queryNewsArticle = (
+const queryBlogArticle = (
   lang,
   slug,
   otherLangSlugQuery,
-) => `*[_type == "newsArticle" && slug.current == "${slug}" && _lang == "${lang}"] {
+) => `*[_type == "blogArticle" && slug.current == "${slug}" && _lang == "${lang}"] {
   ...,
   _id,
   _lang,
  seoDescription,
- seoTitle
+ seoTitle,
   "queryOtherLangSlug": ${otherLangSlugQuery},
 }`;
 
-const queryNewsArticles = (
+const queryBlogArticles = (
   lang,
-) => `*[_type == "newsArticle" && _lang == "${lang}"] {
+) => `*[_type == "blogArticle" && _lang == "${lang}"] {
   ...,
   _id,
   _lang,
    seoDescription,
-    seoTitle
+    seoTitle,
+    articleTitle,
+    name,
+}
 `;
 
-const queryNewsDetailContent = (
-  lang,
-) => `*[_type == "newsArticleDetailContent" && _lang == "${lang}"] {
-  ...,
-}`;
+// const queryNewsDetailContent = (
+//   lang,
+// ) => `*[_type == "newsArticleDetailContent" && _lang == "${lang}"] {
+//   ...,
+//     _id,
+//   _lang,
+//    seoDescription,
+//     seoTitle,
+//     articleTitle,
+//     name,
+// }`;
 
-// export class NewsArticleFacade {
-//   constructor(private readonly sanityService = new SanityService()) {}
+export class BlogArticleFacade {
+  constructor(private readonly sanityService = new SanityService()) {}
 
-//   async getNewsArticle(
-//     lang: Locale,
-//     slug: string,
-//     preview?: boolean,
-//   ): Promise<{ newsArticle: BlogArticle; query: string }> {
-//     const query = queryNewsArticle(
-//       this.sanityService.getSanityLocale(lang),
-//       slug,
-//       getOtherLangSlugQuery(lang, 'newsArticle'),
-//     );
-//     const data = await this.sanityService.fetch(query, preview);
-//     if (!data) {
-//       throw new Error(SERVER_FETCHING_ERROR);
-//     }
-//     const newsArticle = filterDataToSingleItem(data, preview);
+  async getBlogArticle(
+    lang: Locale,
+    slug: string,
+    preview?: boolean,
+  ): Promise<{ blogArticle: BlogArticle; query: string }> {
+    const query = queryBlogArticle(
+      this.sanityService.getSanityLocale(lang),
+      slug,
+      getOtherLangSlugQuery(lang, 'blogArticle'),
+    );
+    const data = await this.sanityService.fetch(query, preview);
+    if (!data) {
+      throw new Error(SERVER_FETCHING_ERROR);
+    }
+    const blogArticle = filterDataToSingleItem(data, preview);
 
-//     return { newsArticle, query };
-//   }
+    return { blogArticle, query };
+  }
 
-//   async getNewsArticles(lang: Locale): Promise<BlogArticle[]> {
-//     const newsArticles = await this.sanityService.fetch(
-//       queryNewsArticles(this.sanityService.getSanityLocale(lang)),
-//     );
+  async getBlogArticles(lang: Locale): Promise<BlogArticle[]> {
+    const blogArticles = await this.sanityService.fetch(
+      queryBlogArticles(this.sanityService.getSanityLocale(lang)),
+    );
 
-//     return newsArticles;
-//   }
-
-//   async getDetailContent(locale: Locale) {
-//     const detailContent = await this.sanityService.fetch(
-//       queryNewsDetailContent(this.sanityService.getSanityLocale(locale)),
-//     );
-
-//     return detailContent?.[0] || {};
-//   }
-// }
+    return blogArticles;
+  }
+}

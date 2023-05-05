@@ -577,6 +577,6 @@ export const contentModulesQuery = (
 			  url
 			},
 		},
-   },
+   }, 
 ${extraQuery || ''}
   }`;
