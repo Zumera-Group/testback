@@ -18,6 +18,16 @@ const queryBlogArticle = (
   _lang,
  seoDescription,
  seoTitle,
+  heroImage {
+    asset->{
+      url
+    },
+  },
+  blogModules[] {
+       _key,
+    _type,
+    ...,
+    },
   "queryOtherLangSlug": ${otherLangSlugQuery},
 }`;
 
@@ -27,24 +37,20 @@ const queryBlogArticles = (
   ...,
   _id,
   _lang,
-   seoDescription,
-    seoTitle,
-    articleTitle,
-    name,
+ seoDescription,
+ seoTitle,
+  heroImage {
+    asset->{
+      url
+    },
+  },
+    blogModules[] {
+       _key,
+    _type,
+    ...,
+    }
 }
 `;
-
-// const queryNewsDetailContent = (
-//   lang,
-// ) => `*[_type == "newsArticleDetailContent" && _lang == "${lang}"] {
-//   ...,
-//     _id,
-//   _lang,
-//    seoDescription,
-//     seoTitle,
-//     articleTitle,
-//     name,
-// }`;
 
 export class BlogArticleFacade {
   constructor(private readonly sanityService = new SanityService()) {}

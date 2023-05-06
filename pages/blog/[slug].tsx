@@ -2,13 +2,11 @@ import React, { useEffect, useState } from 'react';
 
 import { fetchSiteSettings } from 'lib/shared-domain/page/application/useGetSiteSettings';
 import { SiteSettings } from 'lib/shared-domain/page/domain';
-// import { NewsArticle } from 'lib/shared-domain/newsArticle/domain';
 import { BlogArticle } from 'lib/shared-domain/blogArticle/domain';
 import { fetchBlogArticles } from 'lib/shared-domain/blogArticle/application/useGetBlogArticles';
 // import { NewsArticleDetailLayout } from 'lib/shared-domain/newsArticle/presentation/NewsArticleDetailLayout';
 import { fetchBlogArticle } from 'lib/shared-domain/blogArticle/application/useGetBlogArticle';
 import { ErrorTrackingBoundary } from 'lib/ErrorTrackingBoundary';
-// import { fetchNewsArticleDetailContent } from 'lib/shared-domain/newsArticle/application/useGetNewsArticleDetailContent';
 import { NewsEventDetailLayout } from '../../lib/shared-domain/newsArticle/presentation/NewsEventDetailLayout';
 import { SharedContentContext } from 'lib/shared-domain/page/infrastructure/sharedContentContext';
 import { SharedContentFacade } from 'lib/shared-domain/page/infrastructure/sharedContent.facade';
@@ -18,6 +16,7 @@ import { usePreviewSubscription } from '../../lib/sanity';
 
 import { REVALIDATE_ON_FAILURE_TIME_IN_SECONDS } from '../../lib/shared-domain/page/constants';
 import { SecretKeyLockScreen } from 'components/SecretKeyLockScreen';
+import { BlogArticleLayout } from 'lib/shared-domain/blogArticle/presentation/BlogArticleLayout';
 
 export async function getStaticPaths() {
   const en = await fetchBlogArticles('en');
@@ -43,21 +42,13 @@ export async function getStaticPaths() {
     locale: 'de',
   }));
 
-  console.log(enPaths);
-
-  //   return {
-  //     paths: [...enPaths, ...dePaths],
-  //     fallback: true,
-  //   };
-
   return {
-    paths: [{ params: { slug: 'test-article' }, locale: 'en' }],
+    paths: [...enPaths, ...dePaths],
     fallback: true,
   };
 }
 
 export async function getStaticProps({ locale, params, preview = false }) {
-  console.log('testing here', params);
   try {
     const { blogArticle, query } = await fetchBlogArticle(
       locale,
@@ -151,12 +142,10 @@ export default function Index({
   return (
     <ErrorTrackingBoundary>
       <SharedContentContext value={sharedContent}>
-        {/* <NewsArticleDetailLayout
-            siteSettings={siteSettings}
-            newsArticle={previewNewsArticle || selectedBlogArticle}
-            content={content}
-          /> */}
-        <p>This is a blog</p>
+        <BlogArticleLayout
+          siteSettings={siteSettings}
+          blogArticle={selectedBlogArticle}
+        />
       </SharedContentContext>
     </ErrorTrackingBoundary>
   );

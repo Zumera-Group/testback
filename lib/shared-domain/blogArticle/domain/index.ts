@@ -1,3 +1,5 @@
+import { ContentModuleType } from './blogModule';
+
 export interface BlogArticle {
   queryOtherLangSlug: {
     slug: { current: string };
@@ -9,4 +11,9 @@ export interface BlogArticle {
   slug: { current: string };
   seoDescription: string;
   seoTitle: string;
+  heroImage: any;
+  blogModules: {
+    _key: string;
+    _type: ContentModuleType;
+  }[];
 }
