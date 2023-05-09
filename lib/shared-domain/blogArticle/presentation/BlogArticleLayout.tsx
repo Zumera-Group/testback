@@ -24,13 +24,11 @@ export const BlogArticleLayout: React.FC<{
 
   const otherLangSlug =
     blogArticle?.queryOtherLangSlug?.slice(-1)[0]?.slug &&
-    links(locale === 'en' ? 'de' : 'en').newsArticles(
+    links(locale === 'en' ? 'de' : 'en').blogArticles(
       blogArticle?.queryOtherLangSlug?.slice(-1)[0] as any,
     );
   const blogModules =
     blogArticle?.blogModules?.map((c) => ContentModule.create(c)) || [];
-
-  console.log(blogArticle.blogModules);
 
   return (
     <main id="main">

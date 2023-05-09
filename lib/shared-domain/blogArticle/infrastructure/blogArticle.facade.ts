@@ -27,6 +27,17 @@ const queryBlogArticle = (
        _key,
     _type,
     ...,
+   text[] {
+      ...,
+      markDefs[] {
+        ...,
+        _type == "internalLink" => {
+          "slug": @.reference->slug,
+          "type": @.reference->_type,
+          "lang": @.reference->_lang
+        }
+      }
+      }
     },
   "queryOtherLangSlug": ${otherLangSlugQuery},
 }`;
@@ -44,11 +55,22 @@ const queryBlogArticles = (
       url
     },
   },
-    blogModules[] {
+  blogModules[] {
        _key,
     _type,
     ...,
-    }
+   text[] {
+      ...,
+      markDefs[] {
+        ...,
+        _type == "internalLink" => {
+           "slug": @.reference->slug,
+          "type": @.reference->_type,
+          "lang": @.reference->_lang
+        }
+      }
+      }
+    },
 }
 `;
 
