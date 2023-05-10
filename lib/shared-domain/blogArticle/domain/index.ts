@@ -7,6 +7,7 @@ export interface BlogArticle {
   _id: string;
   _lang: string;
   name: string;
+  date: any;
   articleTitle: string;
   slug: { current: string };
   seoDescription: string;

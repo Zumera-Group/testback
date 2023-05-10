@@ -16,7 +16,7 @@ import { usePreviewSubscription } from '../../lib/sanity';
 
 import { REVALIDATE_ON_FAILURE_TIME_IN_SECONDS } from '../../lib/shared-domain/page/constants';
 import { SecretKeyLockScreen } from 'components/SecretKeyLockScreen';
-import { BlogArticleLayout } from 'lib/shared-domain/blogArticle/presentation/BlogArticleLayout';
+import { BlogArticleLayout } from 'components/BlogArticleLayout';
 
 export async function getStaticPaths() {
   const en = await fetchBlogArticles('en');

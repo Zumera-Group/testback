@@ -19,8 +19,7 @@ export const TextBlock: React.FC<any> = ({ specificContentModule }) => {
 
               const pageType = type === 'blogArticle' ? 'blog' : '';
               const localeType = locale === 'en' ? 'en' : 'de';
-              console.log(slug.current);
-              const href = `/${localeType}/${pageType}/${slug.current}`;
+              const href = `/${localeType}/${pageType}/${slug?.current}`;
               const target = (value?.href || '').startsWith('http')
                 ? '_blank'
                 : undefined;
