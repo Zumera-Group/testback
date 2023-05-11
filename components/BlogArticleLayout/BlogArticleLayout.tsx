@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BlogArticle } from 'lib/shared-domain/blogArticle/domain';
 import { SiteSettings } from 'lib/shared-domain/page/domain';
 import { PageFooter } from 'lib/shared-domain/page/presentation/PageFooter';
@@ -14,6 +14,12 @@ import { useFormatDate } from 'lib/shared-domain/useFormatDate';
 import { Container, Grid, GridColumn, Section } from 'components/Layout';
 import styles from './BlogArticleLayout.module.scss';
 import { Button } from 'components/Button';
+import Image from 'next/image';
+import { sanityImageUrlFor } from 'lib/sanity';
+import { Twitter } from 'components/Icons/Twitter';
+import { Facebook } from 'components/Icons/Facebook';
+import { Linkedin } from 'components/Icons/Linkedin';
+import { Clipboard } from 'components/Icons/Clipboard';
 
 export const BlogArticleLayout: React.FC<{
   blogArticle: BlogArticle;
@@ -39,10 +45,50 @@ export const BlogArticleLayout: React.FC<{
     ? format(new Date(blogArticle?.date))
     : null;
 
-  console.log(dateFormatted);
+  console.log(blogArticle);
+  const [copied, setCopied] = useState(false);
+  const localeType = locale === 'en' ? 'en' : 'de';
+  const protoDomain = 'https://www.zumera.com';
+  const iframe = 'width=500,height=400';
+
+  const handleTwitterClick = () => {
+    const shareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(
+      blogArticle?.articleTitle,
+    )}&url=${encodeURIComponent(
+      `${protoDomain}/${localeType}/blog/${blogArticle?.slug?.current}`,
+    )}`;
+    window.open(shareUrl, '_blank', iframe);
+  };
+
+  const handleFacebookClick = () => {
+    const shareUrl = `https://www.facebook.com/sharer.php?u=${encodeURIComponent(
+      `${protoDomain}/${localeType}/blog/${blogArticle?.slug?.current}`,
+    )}`;
+    window.open(shareUrl, '_blank', iframe);
+  };
+
+  const handleLinkedinClick = () => {
+    const shareUrl = `https://www.linkedin.com/shareArticle?url=${encodeURIComponent(
+      `${protoDomain}/${localeType}/blog/${blogArticle?.slug?.current}`,
+    )}&title=${encodeURIComponent(blogArticle?.articleTitle)}`;
+    window.open(shareUrl, '_blank', iframe);
+  };
+
+  const handleClipboardClick = () => {
+    navigator.clipboard
+      .writeText(
+        `${protoDomain}/${localeType}/blog/${blogArticle?.slug?.current}`,
+      )
+      .then(() => {
+        setCopied(true);
+        setTimeout(() => {
+          setCopied(false);
+        }, 2000);
+      });
+  };
 
   return (
-    <main id="main" className={styles.blogArticleTemplate}>
+    <main id="main" className={styles.blogArticle}>
       <SEO
         seoTitle={blogArticle.seoTitle}
         seoDescription={blogArticle.seoDescription}
@@ -55,57 +101,175 @@ export const BlogArticleLayout: React.FC<{
         otherLangSlug={otherLangSlug}
       />
       <PageTransition slug={blogArticle._id}>
-        <Section size={'md'} bg={'light'} color={'primary'}>
-          <Container classes={styles.titleWrapperOuter}>
-            <div className={styles.titleWrapperInner}>
-              <Grid
-                justifyContent={'space-between'}
-                alignItems={'start'}
-                fullWidth={true}
-              >
-                <GridColumn sm={12} md={6} lg={6}>
-                  <span>{dateFormatted}</span>
-                </GridColumn>
-              </Grid>
-              <Grid
-                justifyContent={'space-between'}
-                alignItems={'end'}
-                fullWidth={true}
-              >
-                <GridColumn sm={12} md={6} lg={7}>
-                  <h1 className={styles.articleTitle}>
-                    {blogArticle.articleTitle}
-                  </h1>
-                </GridColumn>
-                <GridColumn sm={12} md={6} lg={3}>
-                  <Button
-                    variant={'secondary'}
-                    link={'#'}
-                    onDark={false}
-                    classes={styles.downloadBtn}
-                  >
-                    {'Download this article'}
-                  </Button>
-                </GridColumn>
-              </Grid>
-            </div>
+        <Section
+          size={'md'}
+          bg={'light'}
+          color={'primary'}
+          as="article"
+          classes={styles.articleContent}
+        >
+          <Container classes={styles.introWrapper}>
+            <Grid
+              justifyContent={'space-between'}
+              alignItems={'center'}
+              fullWidth={true}
+            >
+              <GridColumn sm={12} md={6} lg={9}>
+                <span>{dateFormatted}</span>
+                <h1 className={styles.articleTitle}>
+                  {blogArticle.articleTitle}
+                </h1>
+                <Grid
+                  justifyContent={'space-between'}
+                  alignItems={'center'}
+                  fullWidth={true}
+                >
+                  <GridColumn sm={12} md={12} lg={9}>
+                    <p className={styles.summary}>{blogArticle.summary}</p>
+                  </GridColumn>
+                </Grid>
+                <p className={styles.author}>
+                  Written by <a href="#">Martin test</a>
+                </p>
+                <Grid
+                  justifyContent={'space-between'}
+                  alignItems={'center'}
+                  fullWidth={true}
+                >
+                  <GridColumn sm={12} md={6} lg={7}>
+                    <div className={styles.socialIcons}>
+                      <button
+                        className={[styles.twitterShare, styles.shareIcon].join(
+                          ' ',
+                        )}
+                        onClick={handleTwitterClick}
+                      >
+                        <Twitter />
+                      </button>
+                      <button
+                        className={[
+                          styles.facebookShare,
+                          styles.shareIcon,
+                        ].join(' ')}
+                        onClick={handleFacebookClick}
+                      >
+                        <Facebook />
+                      </button>
+                      <button
+                        className={[
+                          styles.linkedinShare,
+                          styles.shareIcon,
+                        ].join(' ')}
+                        onClick={handleLinkedinClick}
+                      >
+                        <Linkedin />
+                      </button>
+                      <button
+                        className={[
+                          styles.clipboardShare,
+                          styles.shareIcon,
+                        ].join(' ')}
+                        onClick={handleClipboardClick}
+                      >
+                        <Clipboard />
+                        {copied && <div className={styles.popup}>Copied!</div>}
+                      </button>
+                    </div>
+                  </GridColumn>
+                  <GridColumn sm={12} md={6} lg={5}>
+                    <Button
+                      variant={'secondary'}
+                      link={'#'}
+                      onDark={false}
+                      classes={styles.downloadBtn}
+                    >
+                      Download this article
+                    </Button>
+                  </GridColumn>
+                </Grid>
+              </GridColumn>
+              <GridColumn sm={12} md={6} lg={3}>
+                <p>Anchor links</p>
+              </GridColumn>
+            </Grid>
           </Container>
         </Section>
 
-        {blogModules &&
-          blogModules.map((c) => {
-            return (
-              <React.Fragment key={c._key}>
-                {getContentForContentModule(
-                  c,
-                  {
-                    ...siteSettings,
-                  },
-                  blogModules,
-                )}
-              </React.Fragment>
-            );
-          })}
+        {/* <Section
+          size={'md'}
+          bg={'light'}
+          color={'primary'}
+          as="article"
+          classes={styles.articleContent}
+        >
+          <Container>
+            <Grid
+              justifyContent={'space-between'}
+              alignItems={'start'}
+              fullWidth={true}
+            >
+              <GridColumn sm={12} md={6} lg={6}>
+                <span>{dateFormatted}</span>
+              </GridColumn>
+            </Grid>
+            <Grid
+              justifyContent={'space-between'}
+              alignItems={'end'}
+              fullWidth={true}
+            >
+              <GridColumn sm={12} md={6} lg={7}>
+                <h1 className={styles.articleTitle}>
+                  {blogArticle.articleTitle}
+                </h1>
+              </GridColumn>
+              <GridColumn sm={12} md={6} lg={3}>
+                <Button
+                  variant={'secondary'}
+                  link={'#'}
+                  onDark={false}
+                  classes={styles.downloadBtn}
+                >
+                  {'Download this article'}
+                </Button>
+              </GridColumn>
+            </Grid>
+          </Container>
+          <Container classes={styles.heroWrapper}>
+            <img
+              src={blogArticle?.heroImage?.asset?.url}
+              alt={blogArticle?.heroImage?.asset?.alt}
+              className={styles.heroImage}
+            />
+          </Container>
+          <Container classes={styles.introWrapper}>
+            <Grid fullWidth={true}>
+              <GridColumn sm={12} md={7} lg={7} className={styles.offsetMargin}>
+                <p className={styles.summary}>{blogArticle.summary}</p>
+              </GridColumn>
+            </Grid>
+            <Grid fullWidth={true}>
+              <GridColumn sm={12} md={7} lg={7} className={styles.offsetMargin}>
+                <p className={styles.author}>
+                  Written by <a href="#">Martin test</a>
+                </p>
+              </GridColumn>
+            </Grid>
+          </Container>
+          {blogModules &&
+            blogModules.map((c) => {
+              return (
+                <React.Fragment key={c._key}>
+                  {getContentForContentModule(
+                    c,
+                    {
+                      ...siteSettings,
+                    },
+                    blogModules,
+                  )}
+                </React.Fragment>
+              );
+            })}
+        </Section> */}
       </PageTransition>
       <PageFooter siteSettings={siteSettings} />
     </main>

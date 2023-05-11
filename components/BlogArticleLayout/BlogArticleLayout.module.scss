@@ -1,13 +1,15 @@
-.blogArticleTemplate {
-  .titleWrapperInner {
-    max-width: 1100px;
-    width: 100%;
+// .blogArticle {
+.articleContent {
+  a {
+    border-bottom: solid 2px $accent;
+    padding-bottom: $gutter * 0.1;
+    &:hover {
+      color: $primary;
+      border-bottom: solid 2px $accent;
+    }
   }
-
-  .titleWrapperOuter {
-    display: flex;
-    justify-content: flex-end;
-    max-width: 1258px;
+  .offsetMargin {
+    margin-left: 7.7rem;
   }
 
   .downloadBtn {
@@ -22,8 +24,54 @@
     margin-bottom: $gutter;
     margin-top: $gutter;
     font-size: $h2-font-size;
+    text-transform: capitalize;
     @include breakpoint-up(md) {
-      margin-bottom: 0;
+      margin-bottom: $gutter * 2;
+    }
+  }
+
+  .heroImage {
+    width: 100%;
+    max-height: 538px;
+    object-fit: cover;
+    margin-top: $gutter * 5;
+    margin-bottom: $gutter * 5;
+  }
+
+  .summary {
+    font-size: $font-size-base * 1.25;
+    @include breakpoint-up(md) {
+      font-size: $h4-font-size;
+    }
+  }
+
+  .author {
+    font-size: $font-size-base;
+    margin-bottom: $gutter * 1.25;
+    @include breakpoint-up(md) {
+      font-size: $font-size-base * 1.25;
+    }
+  }
+
+  .clipboardShare {
+    position: relative;
+    .popup {
+      position: absolute;
+      top: 14px;
+      right: -60px;
+    }
+  }
+
+  .shareIcon {
+    background: none;
+    border: none;
+    cursor: pointer;
+
+    transition: transform $timing-lg $ease-out, opacity $timing-md $ease-out;
+    &:hover {
+      opacity: 0.7;
+      transition: transform $timing-lg $ease-out, opacity $timing-md $ease-out;
     }
   }
 }
+// }
