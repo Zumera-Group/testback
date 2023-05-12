@@ -14,6 +14,7 @@ export interface BlogArticle {
   seoTitle: string;
   heroImage: any;
   summary: string;
+  introduction: any;
   blogModules: {
     _key: string;
     _type: ContentModuleType;

@@ -15,7 +15,8 @@ import { Container, Grid, GridColumn, Section } from 'components/Layout';
 import styles from './BlogArticleLayout.module.scss';
 import { Button } from 'components/Button';
 import Image from 'next/image';
-import { sanityImageUrlFor } from 'lib/sanity';
+// import { PortableText, sanityImageUrlFor } from 'lib/sanity';
+import { PortableText } from '@portabletext/react';
 import { Twitter } from 'components/Icons/Twitter';
 import { Facebook } from 'components/Icons/Facebook';
 import { Linkedin } from 'components/Icons/Linkedin';
@@ -45,7 +46,7 @@ export const BlogArticleLayout: React.FC<{
     ? format(new Date(blogArticle?.date))
     : null;
 
-  console.log(blogArticle);
+  // console.log(blogArticle);
   const [copied, setCopied] = useState(false);
   const localeType = locale === 'en' ? 'en' : 'de';
   const protoDomain = 'https://www.zumera.com';
@@ -172,7 +173,11 @@ export const BlogArticleLayout: React.FC<{
                         onClick={handleClipboardClick}
                       >
                         <Clipboard />
-                        {copied && <div className={styles.popup}>Copied!</div>}
+                        {copied && (
+                          <div className={styles.popup}>
+                            {localeType === 'en' ? 'Copied!' : 'Kopiert!'}
+                          </div>
+                        )}
                       </button>
                     </div>
                   </GridColumn>
@@ -193,6 +198,69 @@ export const BlogArticleLayout: React.FC<{
               </GridColumn>
             </Grid>
           </Container>
+          <Container classes={styles.heroWrapper}>
+            <img
+              src={blogArticle?.heroImage?.asset?.url}
+              alt={blogArticle?.heroImage?.asset?.alt}
+              className={styles.heroImage}
+            />
+          </Container>
+          <Container classes={[styles.introContentWrapper].join(' ')}>
+            <div className={styles.innerOffset}>
+              <Grid fullWidth={true} justifyContent={'space-between'}>
+                <GridColumn sm={12} md={6} lg={8}>
+                  <PortableText
+                    value={blogArticle.introduction}
+                    components={{
+                      marks: {
+                        internalLink: ({ value, children }) => {
+                          const { slug = {}, type } = value;
+                          const pageType = type === 'blogArticle' ? 'blog' : '';
+                          const href = `/${localeType}/${pageType}/${slug?.current}`;
+                          const target = (value?.href || '').startsWith('http')
+                            ? '_blank'
+                            : undefined;
+                          return (
+                            <a
+                              href={href}
+                              target={target}
+                              rel={target === '_blank' && 'noindex nofollow'}
+                            >
+                              {children}
+                            </a>
+                          );
+                        },
+                      },
+                    }}
+                  />
+                </GridColumn>
+                <GridColumn sm={12} md={6} lg={3}>
+                  RELATED ARTICLES
+                  <ol>
+                    <li>What is a family office and how does it work?</li>
+                    <li>What is a family office and how does it work?</li>
+                    <li>What is a family office and how does it work?</li>
+                    <li>What is a family office and how does it work?</li>
+                    <li>What is a family office and how does it work?</li>
+                  </ol>
+                </GridColumn>
+              </Grid>
+            </div>
+          </Container>
+          {blogModules &&
+            blogModules.map((c) => {
+              return (
+                <React.Fragment key={c._key}>
+                  {getContentForContentModule(
+                    c,
+                    {
+                      ...siteSettings,
+                    },
+                    blogModules,
+                  )}
+                </React.Fragment>
+              );
+            })}
         </Section>
 
         {/* <Section

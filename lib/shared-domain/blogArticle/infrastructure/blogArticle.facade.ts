@@ -23,21 +23,37 @@ const queryBlogArticle = (
       url
     },
   },
+    introduction[] {
+    ...,
+    markDefs[] {
+      ...,
+      _type == "internalLink" => {
+        "slug": @.reference->slug,
+        "type": @.reference->_type,
+        "lang": @.reference->_lang
+      }
+    }
+  },
   blogModules[] {
        _key,
     _type,
     ...,
    text[] {
       ...,
-      markDefs[] {
-        ...,
-        _type == "internalLink" => {
-          "slug": @.reference->slug,
-          "type": @.reference->_type,
-          "lang": @.reference->_lang
+        markDefs[] {
+          ...,
+          _type == "internalLink" => {
+            "slug": @.reference->slug,
+            "type": @.reference->_type,
+            "lang": @.reference->_lang
+          }
         }
-      }
-      }
+      },
+      image {
+        asset->{
+          url
+        },
+      },
     },
   "queryOtherLangSlug": ${otherLangSlugQuery},
 }`;
@@ -55,6 +71,17 @@ const queryBlogArticles = (
       url
     },
   },
+  introduction[] {
+    ...,
+    markDefs[] {
+      ...,
+      _type == "internalLink" => {
+        "slug": @.reference->slug,
+        "type": @.reference->_type,
+        "lang": @.reference->_lang
+      }
+    }
+  },
   blogModules[] {
        _key,
     _type,
@@ -69,8 +96,13 @@ const queryBlogArticles = (
           "lang": @.reference->_lang
         }
       }
-      }
     },
+    image {
+      asset->{
+        url
+      },
+    },
+  },
 }
 `;
 

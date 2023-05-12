@@ -39,30 +39,3 @@ export const TextBlock: React.FC<any> = ({ specificContentModule }) => {
     </div>
   );
 };
-
-// const components: PortableTextComponents = {
-//   marks: {
-//     internalLink: ({ value, children }) => {
-//       const { slug = {}, lang, type } = value;
-
-//       const pageType = type === 'blogArticle' ? 'blog' : '';
-//       const locale = lang === 'en_GB' ? 'en' : 'de';
-
-//       console.log(`/${locale}/${pageType}/${slug.current}`);
-
-//       const href = `/${locale}/${pageType}/${slug.current}`;
-//       const target = (value?.href || '').startsWith('http')
-//         ? '_blank'
-//         : undefined;
-//       return (
-//         <a
-//           href={href}
-//           target={target}
-//           rel={target === '_blank' && 'noindex nofollow'}
-//         >
-//           {children}
-//         </a>
-//       );
-//     },
-//   },
-// };

@@ -1,0 +1,40 @@
+.imageBlockWrapper {
+  .figure {
+    max-width: 955px;
+    padding-bottom: $blog-mb-mobile;
+    margin-bottom: $blog-mb-mobile;
+    border-style: solid;
+    border-width: 0 0 1px;
+    border-image: linear-gradient(
+        90deg,
+        rgba(48, 0, 50, 0),
+        $primary 50%,
+        rgba(48, 0, 50, 0)
+      )
+      1;
+
+    @include breakpoint-up(md) {
+      padding-bottom: $blog-mb-desktop;
+      margin-bottom: $blog-mb-desktop;
+    }
+  }
+  .caption {
+    margin: $gutter 0;
+
+    @include breakpoint-up(md) {
+      max-width: 65%;
+    }
+  }
+}
+
+.splitscreen {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.pane {
+  flex: 1;
+  overflow-y: scroll;
+  height: 100%;
+}

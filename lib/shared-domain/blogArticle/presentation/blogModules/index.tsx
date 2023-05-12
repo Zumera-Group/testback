@@ -1,8 +1,5 @@
-import {
-  TransactionQuoteModule,
-  TextBlockModule,
-} from '../../domain/blogModule';
-import { TransactionQuote } from 'components/TransactionQuote';
+import { ImageBlock } from 'components/BlogModules/ImageBlock';
+import { ImageBlockModule, TextBlockModule } from '../../domain/blogModule';
 import { ContentModule } from '../../domain/blogModule';
 import { TextBlock } from 'components/BlogModules/TextBlock';
 
@@ -12,16 +9,14 @@ export const getContentForContentModule = (
   sharedContent?: any,
   allModulesData?: any,
 ): JSX.Element => {
-  if (contentModule.specificContentModule instanceof TransactionQuoteModule) {
-    return (
-      <TransactionQuote
-        specificContentModule={contentModule.specificContentModule}
-      />
-    );
-  }
   if (contentModule.specificContentModule instanceof TextBlockModule) {
     return (
       <TextBlock specificContentModule={contentModule.specificContentModule} />
+    );
+  }
+  if (contentModule.specificContentModule instanceof ImageBlockModule) {
+    return (
+      <ImageBlock specificContentModule={contentModule.specificContentModule} />
     );
   }
 };

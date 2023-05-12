@@ -1,17 +1,11 @@
-import { Transaction } from 'lib/shared-domain/transactions/domain';
-// import { Fact, TitleAndDescriptionItem } from '.';
-// import { Sector, Service, Description, IndustryReport } from './index';
-// import { Office } from 'lib/shared-domain/offices/domain/index';
-// import { Employee } from 'lib/shared-domain/employees/domain';
-
 export abstract class BaseModule {}
 
-export type ContentModuleType = 'transactionQuote' | 'textBlock';
+export type ContentModuleType = 'textBlock' | 'imageBlock';
 
 abstract class ContentModuleTypeFactory {
   static createInstance(type: ContentModuleType, fields: Record<string, any>) {
-    if (type === 'transactionQuote') return new TransactionQuoteModule(fields);
     if (type === 'textBlock') return new TextBlockModule(fields);
+    if (type === 'imageBlock') return new ImageBlockModule(fields);
   }
 }
 
@@ -35,26 +29,6 @@ export class ContentModule {
   }
 }
 
-export class TransactionQuoteModule extends BaseModule {
-  title: string;
-  subtitle: string;
-  quoteText: string;
-  name: string;
-  position: string;
-  photo: any;
-  transaction: Transaction;
-  constructor(fields: Record<string, any>) {
-    super();
-    this.title = fields.title;
-    this.subtitle = fields.subtitle;
-    this.quoteText = fields.quoteText;
-    this.position = fields.position;
-    this.name = fields.name;
-    this.photo = fields.photo;
-    this.transaction = fields.transaction;
-  }
-}
-
 export class TextBlockModule extends BaseModule {
   subheading: string;
   text: any[];
@@ -63,5 +37,16 @@ export class TextBlockModule extends BaseModule {
     super();
     this.subheading = fields.subheading;
     this.text = fields.text;
+  }
+}
+
+export class ImageBlockModule extends BaseModule {
+  image: any;
+  caption: any[];
+
+  constructor(fields: Record<string, any>) {
+    super();
+    this.image = fields.image;
+    this.caption = fields.caption;
   }
 }
