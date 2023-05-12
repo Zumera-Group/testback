@@ -153,6 +153,15 @@ export const querySiteSettings = (
           url,
         }
       }
+    },
+    contactForm {
+      ...,
+      checkboxPrivacyPage->{
+        slug {
+          ...,
+          current
+        }
+      }
     }
   },
   announcementTopBanner {
