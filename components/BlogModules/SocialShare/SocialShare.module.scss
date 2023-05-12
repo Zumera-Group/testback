@@ -1,0 +1,27 @@
+.socialIcons {
+  margin-bottom: $gutter * 1.5;
+  @include breakpoint-up(md) {
+    margin-bottom: 0;
+  }
+
+  .clipboardShare {
+    position: relative;
+    .popup {
+      position: absolute;
+      top: 14px;
+      right: -60px;
+    }
+  }
+
+  .shareIcon {
+    background: none;
+    border: none;
+    cursor: pointer;
+
+    transition: transform $timing-lg $ease-out, opacity $timing-md $ease-out;
+    &:hover {
+      opacity: 0.7;
+      transition: transform $timing-lg $ease-out, opacity $timing-md $ease-out;
+    }
+  }
+}

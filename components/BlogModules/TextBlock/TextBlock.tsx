@@ -1,41 +1,14 @@
-import { useRouter } from 'next/router';
 import styles from './TextBlock.module.scss';
-import { PortableText, PortableTextComponents } from '@portabletext/react';
+import { RichText } from '../RichText';
 
 export const TextBlock: React.FC<any> = ({ specificContentModule }) => {
-  const { locale } = useRouter();
   const { subheading, text } = specificContentModule;
-  // console.log(text);
 
   return (
     <div className={styles.textBlock}>
       {subheading && <h4>{subheading}</h4>}
-      <PortableText
-        value={text}
-        components={{
-          marks: {
-            internalLink: ({ value, children }) => {
-              const { slug = {}, lang, type } = value;
-
-              const pageType = type === 'blogArticle' ? 'blog' : '';
-              const localeType = locale === 'en' ? 'en' : 'de';
-              const href = `/${localeType}/${pageType}/${slug?.current}`;
-              const target = (value?.href || '').startsWith('http')
-                ? '_blank'
-                : undefined;
-              return (
-                <a
-                  href={href}
-                  target={target}
-                  rel={target === '_blank' && 'noindex nofollow'}
-                >
-                  {children}
-                </a>
-              );
-            },
-          },
-        }}
-      />
+      <RichText content={text} />
     </div>
   );
 };
+export default TextBlock;

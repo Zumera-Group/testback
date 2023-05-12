@@ -26,15 +26,3 @@
     }
   }
 }
-
-.splitscreen {
-  display: flex;
-  height: 100vh;
-  overflow: hidden;
-}
-
-.pane {
-  flex: 1;
-  overflow-y: scroll;
-  height: 100%;
-}

@@ -1,7 +1,12 @@
 import { ImageBlock } from 'components/BlogModules/ImageBlock';
-import { ImageBlockModule, TextBlockModule } from '../../domain/blogModule';
+import {
+  ImageBlockModule,
+  TextBlockModule,
+  TextImageParallaxBlockModule,
+} from '../../domain/blogModule';
 import { ContentModule } from '../../domain/blogModule';
 import { TextBlock } from 'components/BlogModules/TextBlock';
+import { TextImageParallaxBlock } from 'components/BlogModules/TextImageParallaxBlock/TextImageParallaxBlock';
 
 export const getContentForContentModule = (
   contentModule: ContentModule,
@@ -17,6 +22,15 @@ export const getContentForContentModule = (
   if (contentModule.specificContentModule instanceof ImageBlockModule) {
     return (
       <ImageBlock specificContentModule={contentModule.specificContentModule} />
+    );
+  }
+  if (
+    contentModule.specificContentModule instanceof TextImageParallaxBlockModule
+  ) {
+    return (
+      <TextImageParallaxBlock
+        specificContentModule={contentModule.specificContentModule}
+      />
     );
   }
 };

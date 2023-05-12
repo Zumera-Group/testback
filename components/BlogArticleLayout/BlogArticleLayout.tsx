@@ -15,12 +15,10 @@ import { Container, Grid, GridColumn, Section } from 'components/Layout';
 import styles from './BlogArticleLayout.module.scss';
 import { Button } from 'components/Button';
 import Image from 'next/image';
-// import { PortableText, sanityImageUrlFor } from 'lib/sanity';
-import { PortableText } from '@portabletext/react';
-import { Twitter } from 'components/Icons/Twitter';
-import { Facebook } from 'components/Icons/Facebook';
-import { Linkedin } from 'components/Icons/Linkedin';
-import { Clipboard } from 'components/Icons/Clipboard';
+import { sanityImageUrlFor } from 'lib/sanity';
+
+import { RichText } from 'components/BlogModules/RichText';
+import { SocialShare } from 'components/BlogModules/SocialShare';
 
 export const BlogArticleLayout: React.FC<{
   blogArticle: BlogArticle;
@@ -45,48 +43,6 @@ export const BlogArticleLayout: React.FC<{
   const dateFormatted = blogArticle?.date
     ? format(new Date(blogArticle?.date))
     : null;
-
-  // console.log(blogArticle);
-  const [copied, setCopied] = useState(false);
-  const localeType = locale === 'en' ? 'en' : 'de';
-  const protoDomain = 'https://www.zumera.com';
-  const iframe = 'width=500,height=400';
-
-  const handleTwitterClick = () => {
-    const shareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(
-      blogArticle?.articleTitle,
-    )}&url=${encodeURIComponent(
-      `${protoDomain}/${localeType}/blog/${blogArticle?.slug?.current}`,
-    )}`;
-    window.open(shareUrl, '_blank', iframe);
-  };
-
-  const handleFacebookClick = () => {
-    const shareUrl = `https://www.facebook.com/sharer.php?u=${encodeURIComponent(
-      `${protoDomain}/${localeType}/blog/${blogArticle?.slug?.current}`,
-    )}`;
-    window.open(shareUrl, '_blank', iframe);
-  };
-
-  const handleLinkedinClick = () => {
-    const shareUrl = `https://www.linkedin.com/shareArticle?url=${encodeURIComponent(
-      `${protoDomain}/${localeType}/blog/${blogArticle?.slug?.current}`,
-    )}&title=${encodeURIComponent(blogArticle?.articleTitle)}`;
-    window.open(shareUrl, '_blank', iframe);
-  };
-
-  const handleClipboardClick = () => {
-    navigator.clipboard
-      .writeText(
-        `${protoDomain}/${localeType}/blog/${blogArticle?.slug?.current}`,
-      )
-      .then(() => {
-        setCopied(true);
-        setTimeout(() => {
-          setCopied(false);
-        }, 2000);
-      });
-  };
 
   return (
     <main id="main" className={styles.blogArticle}>
@@ -138,48 +94,11 @@ export const BlogArticleLayout: React.FC<{
                   fullWidth={true}
                 >
                   <GridColumn sm={12} md={6} lg={7}>
-                    <div className={styles.socialIcons}>
-                      <button
-                        className={[styles.twitterShare, styles.shareIcon].join(
-                          ' ',
-                        )}
-                        onClick={handleTwitterClick}
-                      >
-                        <Twitter />
-                      </button>
-                      <button
-                        className={[
-                          styles.facebookShare,
-                          styles.shareIcon,
-                        ].join(' ')}
-                        onClick={handleFacebookClick}
-                      >
-                        <Facebook />
-                      </button>
-                      <button
-                        className={[
-                          styles.linkedinShare,
-                          styles.shareIcon,
-                        ].join(' ')}
-                        onClick={handleLinkedinClick}
-                      >
-                        <Linkedin />
-                      </button>
-                      <button
-                        className={[
-                          styles.clipboardShare,
-                          styles.shareIcon,
-                        ].join(' ')}
-                        onClick={handleClipboardClick}
-                      >
-                        <Clipboard />
-                        {copied && (
-                          <div className={styles.popup}>
-                            {localeType === 'en' ? 'Copied!' : 'Kopiert!'}
-                          </div>
-                        )}
-                      </button>
-                    </div>
+                    <SocialShare
+                      content={blogArticle}
+                      partialSlug="blog"
+                      domain="https://www.zumera.com"
+                    />
                   </GridColumn>
                   <GridColumn sm={12} md={6} lg={5}>
                     <Button
@@ -199,9 +118,12 @@ export const BlogArticleLayout: React.FC<{
             </Grid>
           </Container>
           <Container classes={styles.heroWrapper}>
-            <img
-              src={blogArticle?.heroImage?.asset?.url}
+            <Image
+              unoptimized
+              src={sanityImageUrlFor(blogArticle?.heroImage?.asset?.url).url()}
               alt={blogArticle?.heroImage?.asset?.alt}
+              width={1280}
+              height={549}
               className={styles.heroImage}
             />
           </Container>
@@ -209,30 +131,7 @@ export const BlogArticleLayout: React.FC<{
             <div className={styles.innerOffset}>
               <Grid fullWidth={true} justifyContent={'space-between'}>
                 <GridColumn sm={12} md={6} lg={8}>
-                  <PortableText
-                    value={blogArticle.introduction}
-                    components={{
-                      marks: {
-                        internalLink: ({ value, children }) => {
-                          const { slug = {}, type } = value;
-                          const pageType = type === 'blogArticle' ? 'blog' : '';
-                          const href = `/${localeType}/${pageType}/${slug?.current}`;
-                          const target = (value?.href || '').startsWith('http')
-                            ? '_blank'
-                            : undefined;
-                          return (
-                            <a
-                              href={href}
-                              target={target}
-                              rel={target === '_blank' && 'noindex nofollow'}
-                            >
-                              {children}
-                            </a>
-                          );
-                        },
-                      },
-                    }}
-                  />
+                  <RichText content={blogArticle.introduction} />
                 </GridColumn>
                 <GridColumn sm={12} md={6} lg={3}>
                   RELATED ARTICLES
@@ -262,84 +161,9 @@ export const BlogArticleLayout: React.FC<{
               );
             })}
         </Section>
-
-        {/* <Section
-          size={'md'}
-          bg={'light'}
-          color={'primary'}
-          as="article"
-          classes={styles.articleContent}
-        >
-          <Container>
-            <Grid
-              justifyContent={'space-between'}
-              alignItems={'start'}
-              fullWidth={true}
-            >
-              <GridColumn sm={12} md={6} lg={6}>
-                <span>{dateFormatted}</span>
-              </GridColumn>
-            </Grid>
-            <Grid
-              justifyContent={'space-between'}
-              alignItems={'end'}
-              fullWidth={true}
-            >
-              <GridColumn sm={12} md={6} lg={7}>
-                <h1 className={styles.articleTitle}>
-                  {blogArticle.articleTitle}
-                </h1>
-              </GridColumn>
-              <GridColumn sm={12} md={6} lg={3}>
-                <Button
-                  variant={'secondary'}
-                  link={'#'}
-                  onDark={false}
-                  classes={styles.downloadBtn}
-                >
-                  {'Download this article'}
-                </Button>
-              </GridColumn>
-            </Grid>
-          </Container>
-          <Container classes={styles.heroWrapper}>
-            <img
-              src={blogArticle?.heroImage?.asset?.url}
-              alt={blogArticle?.heroImage?.asset?.alt}
-              className={styles.heroImage}
-            />
-          </Container>
-          <Container classes={styles.introWrapper}>
-            <Grid fullWidth={true}>
-              <GridColumn sm={12} md={7} lg={7} className={styles.offsetMargin}>
-                <p className={styles.summary}>{blogArticle.summary}</p>
-              </GridColumn>
-            </Grid>
-            <Grid fullWidth={true}>
-              <GridColumn sm={12} md={7} lg={7} className={styles.offsetMargin}>
-                <p className={styles.author}>
-                  Written by <a href="#">Martin test</a>
-                </p>
-              </GridColumn>
-            </Grid>
-          </Container>
-          {blogModules &&
-            blogModules.map((c) => {
-              return (
-                <React.Fragment key={c._key}>
-                  {getContentForContentModule(
-                    c,
-                    {
-                      ...siteSettings,
-                    },
-                    blogModules,
-                  )}
-                </React.Fragment>
-              );
-            })}
-        </Section> */}
       </PageTransition>
       <PageFooter siteSettings={siteSettings} />
     </main>
   );
 };
+export default BlogArticleLayout;

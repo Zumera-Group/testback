@@ -1,11 +1,16 @@
 export abstract class BaseModule {}
 
-export type ContentModuleType = 'textBlock' | 'imageBlock';
+export type ContentModuleType =
+  | 'textBlock'
+  | 'imageBlock'
+  | 'textImageParallaxBlock';
 
 abstract class ContentModuleTypeFactory {
   static createInstance(type: ContentModuleType, fields: Record<string, any>) {
     if (type === 'textBlock') return new TextBlockModule(fields);
     if (type === 'imageBlock') return new ImageBlockModule(fields);
+    if (type === 'textImageParallaxBlock')
+      return new TextImageParallaxBlockModule(fields);
   }
 }
 
@@ -42,11 +47,22 @@ export class TextBlockModule extends BaseModule {
 
 export class ImageBlockModule extends BaseModule {
   image: any;
-  caption: any[];
+  caption: string;
 
   constructor(fields: Record<string, any>) {
     super();
     this.image = fields.image;
     this.caption = fields.caption;
+  }
+}
+
+export class TextImageParallaxBlockModule extends BaseModule {
+  imageSection: {};
+  textSection: any[];
+
+  constructor(fields: Record<string, any>) {
+    super();
+    this.imageSection = fields.imageSection;
+    this.textSection = fields.textSection;
   }
 }

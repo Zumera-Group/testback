@@ -54,7 +54,15 @@ const queryBlogArticle = (
           url
         },
       },
+    imageSection {
+      ...,
+      image {
+        asset->{
+          url
+        },
+      },
     },
+  },
   "queryOtherLangSlug": ${otherLangSlugQuery},
 }`;
 
@@ -100,6 +108,14 @@ const queryBlogArticles = (
     image {
       asset->{
         url
+      },
+    },
+    imageSection {
+      ...,
+      image {
+        asset->{
+          url
+        },
       },
     },
   },

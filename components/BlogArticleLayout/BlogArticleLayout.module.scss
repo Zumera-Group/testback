@@ -28,15 +28,16 @@
   }
 
   .heroImage {
-    width: 100%;
-    max-height: 538px;
-    object-fit: cover;
     margin-top: $gutter * 1.5;
     margin-bottom: $gutter * 3.75;
+    height: 100%;
+    object-fit: cover;
+    max-width: 100%;
 
     @include breakpoint-up(md) {
       margin-top: $gutter * 5;
       margin-bottom: $gutter * 5.5;
+      height: 549px;
     }
   }
 
@@ -55,34 +56,6 @@
       font-size: $font-size-base * 1.25;
       margin-top: $gutter;
       margin-bottom: $gutter * 2.5;
-    }
-  }
-
-  .socialIcons {
-    margin-bottom: $gutter * 1.5;
-    @include breakpoint-up(md) {
-      margin-bottom: 0;
-    }
-  }
-
-  .clipboardShare {
-    position: relative;
-    .popup {
-      position: absolute;
-      top: 14px;
-      right: -60px;
-    }
-  }
-
-  .shareIcon {
-    background: none;
-    border: none;
-    cursor: pointer;
-
-    transition: transform $timing-lg $ease-out, opacity $timing-md $ease-out;
-    &:hover {
-      opacity: 0.7;
-      transition: transform $timing-lg $ease-out, opacity $timing-md $ease-out;
     }
   }
 
