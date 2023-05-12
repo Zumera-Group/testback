@@ -101,8 +101,9 @@ export const staggerLocationLinesAnimationProps = {
       delay: durations.xl * 2,
       ease: eases.in,
       duration: durations.xl,
-      staggerChildren: durations.md * 7,
-      staggerDirection: -1,
+      // staggerChildren: durations.md * 7,
+      staggerChildren: durations.md * 4,
+      // staggerDirection: -1,
     },
   },
 };
@@ -131,7 +132,8 @@ export const locationLineAnimationProps = {
     ],
 
     transition: {
-      duration: durations.xl * 5.5,
+      // duration: durations.xl * 5.5,
+      duration: durations.xl * 3,
       eases: eases.inOut,
       repeat: Infinity,
       repeatType: 'reverse',
