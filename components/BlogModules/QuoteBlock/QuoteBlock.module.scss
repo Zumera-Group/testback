@@ -1,0 +1,69 @@
+.quoteBlockWrapper {
+  margin-bottom: $blog-mb-mobile;
+  .quoteWrapper {
+    padding-bottom: $blog-mb-mobile * 0.75;
+    padding-top: $blog-mb-mobile * 0.75;
+    border-style: solid;
+    border-width: 1px 0 1px;
+    border-image: linear-gradient(
+        90deg,
+        rgba(48, 0, 50, 0),
+        $primary 50%,
+        rgba(48, 0, 50, 0)
+      )
+      1;
+    flex: 0 0 calc(var(--column) * 12);
+    max-width: calc(var(--column) * 12);
+
+    @include breakpoint-up(lg) {
+      flex: 0 0 calc(var(--column) * 9);
+      max-width: calc(var(--column) * 9);
+      padding-top: $blog-mb-desktop;
+      padding-bottom: $blog-mb-desktop;
+    }
+  }
+  .quote {
+    font-size: $h2-font-size;
+    font-weight: $font-weight-bold;
+    line-height: $line-height-heading;
+    text-transform: capitalize;
+    background-image: radial-gradient(
+      73.5% 103.89% at 0% 100%,
+      $accent 0%,
+      $tertiary 26.56%,
+      $primary-alt 73.44%,
+      $primary 100%
+    );
+    -webkit-background-clip: text;
+    color: transparent;
+  }
+
+  svg {
+    margin-left: auto;
+    margin-right: 0;
+    display: block;
+    top: -30px;
+    position: absolute;
+    width: 50px;
+    right: 0px;
+    @include breakpoint-up(md) {
+      top: -3rem;
+      width: auto;
+    }
+  }
+
+  .citeWrapper {
+    position: relative;
+    .iconWrapper {
+      position: absolute;
+      right: 0;
+    }
+
+    .name {
+      margin-top: $gutter * 0.5;
+      @include breakpoint-up(md) {
+        margin-top: $gutter * 1.5;
+      }
+    }
+  }
+}

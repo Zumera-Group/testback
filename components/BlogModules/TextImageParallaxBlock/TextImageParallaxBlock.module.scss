@@ -1,4 +1,7 @@
 .imageTextParallaxWrapper {
+  @include breakpoint-up(md) {
+    margin-bottom: $blog-mb-desktop * 0.5;
+  }
   .headline {
     font-size: $font-size-base * 1.5;
     line-height: 1.25;

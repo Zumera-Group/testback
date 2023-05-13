@@ -3,7 +3,8 @@ export abstract class BaseModule {}
 export type ContentModuleType =
   | 'textBlock'
   | 'imageBlock'
-  | 'textImageParallaxBlock';
+  | 'textImageParallaxBlock'
+  | 'quoteBlock';
 
 abstract class ContentModuleTypeFactory {
   static createInstance(type: ContentModuleType, fields: Record<string, any>) {
@@ -11,6 +12,7 @@ abstract class ContentModuleTypeFactory {
     if (type === 'imageBlock') return new ImageBlockModule(fields);
     if (type === 'textImageParallaxBlock')
       return new TextImageParallaxBlockModule(fields);
+    if (type === 'quoteBlock') return new QuoteBlockModule(fields);
   }
 }
 
@@ -64,5 +66,18 @@ export class TextImageParallaxBlockModule extends BaseModule {
     super();
     this.imageSection = fields.imageSection;
     this.textSection = fields.textSection;
+  }
+}
+
+export class QuoteBlockModule extends BaseModule {
+  quote: string;
+  name: string;
+  position: string;
+
+  constructor(fields: Record<string, any>) {
+    super();
+    this.quote = fields.quote;
+    this.name = fields.name;
+    this.position = fields.position;
   }
 }

@@ -11,6 +11,8 @@ export const TextImageParallaxBlock: React.FC<any> = ({
   const { imageSection, textSection } = specificContentModule;
   const { headline, summary, image, caption } = imageSection;
 
+  console.log(textSection);
+
   return (
     <Container classes={styles.imageTextParallaxWrapper}>
       <Grid
@@ -39,8 +41,8 @@ export const TextImageParallaxBlock: React.FC<any> = ({
           </figure>
         </GridColumn>
         <GridColumn sm={12} md={6} lg={4} className={styles.rightPane}>
-          {textSection?.map((section) => (
-            <div className={styles.textBlock} key={section._key}>
+          {textSection?.map((section, index) => (
+            <div className={styles.textBlock} key={index}>
               <h4 className={styles.subheading}>{section?.subheading}</h4>
               <div className={styles.content}>
                 <RichText content={section.text} />
