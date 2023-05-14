@@ -1,0 +1,30 @@
+.textStatsWrapper {
+  .content > div {
+    flex-direction: column-reverse;
+    @include breakpoint-up(md) {
+      flex-direction: row;
+    }
+  }
+  .description {
+    text-align: center;
+    padding: $gutter $gutter $gutter * 2;
+    display: block;
+    border-style: solid;
+    border-width: 0 0 1px;
+    border-image: linear-gradient(
+        90deg,
+        rgba(48, 0, 50, 0),
+        $primary 50%,
+        rgba(48, 0, 50, 0)
+      )
+      1;
+  }
+
+  .statsWrapper {
+    @include breakpoint-down(md) {
+      max-width: 400px;
+      margin: auto auto $blog-mb-mobile;
+    }
+  }
+}
+@include innerOffset;

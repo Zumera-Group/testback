@@ -4,11 +4,13 @@ import {
   QuoteBlockModule,
   TextBlockModule,
   TextImageParallaxBlockModule,
+  TextStatsBlockModule,
 } from '../../domain/blogModule';
 import { ContentModule } from '../../domain/blogModule';
 import { TextBlock } from 'components/BlogModules/TextBlock';
 import { TextImageParallaxBlock } from 'components/BlogModules/TextImageParallaxBlock/TextImageParallaxBlock';
 import { QuoteBlock } from 'components/BlogModules/QuoteBlock';
+import { TextStatsBlock } from 'components/BlogModules/TextStatsBlock';
 
 export const getContentForContentModule = (
   contentModule: ContentModule,
@@ -38,6 +40,13 @@ export const getContentForContentModule = (
   if (contentModule.specificContentModule instanceof QuoteBlockModule) {
     return (
       <QuoteBlock specificContentModule={contentModule.specificContentModule} />
+    );
+  }
+  if (contentModule.specificContentModule instanceof TextStatsBlockModule) {
+    return (
+      <TextStatsBlock
+        specificContentModule={contentModule.specificContentModule}
+      />
     );
   }
 };

@@ -20,6 +20,7 @@
       max-width: calc(var(--column) * 9);
       padding-top: $blog-mb-desktop;
       padding-bottom: $blog-mb-desktop;
+      margin-bottom: $blog-mb-desktop * 0.55;
     }
   }
   .quote {
