@@ -7,7 +7,7 @@ import { StatsCircle } from '../StatsCircle';
 export const TextStatsBlock = ({ specificContentModule }) => {
   const { subheading, text, statistics } = specificContentModule;
   return (
-    <Container classes={[styles.textStatsWrapper].join(' ')}>
+    <Container classes={styles.textStatsWrapper}>
       <div className={styles.innerOffset}>
         <Grid
           fullWidth={true}

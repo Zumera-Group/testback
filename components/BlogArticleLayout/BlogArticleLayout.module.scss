@@ -83,6 +83,16 @@
       color: transparent;
     }
   }
+
+  ul,
+  ol {
+    font-size: $font-size-normal;
+    padding-left: $gutter;
+  }
+
+  ul {
+    @include bullet-list();
+  }
 }
 
 @include innerOffset;

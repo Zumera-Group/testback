@@ -1,4 +1,9 @@
 .textStatsWrapper {
+  margin-bottom: $blog-mb-mobile * 0.75;
+  @include breakpoint-up(md) {
+    margin-bottom: $blog-mb-desktop;
+  }
+
   .content > div {
     flex-direction: column-reverse;
     @include breakpoint-up(md) {
@@ -9,15 +14,8 @@
     text-align: center;
     padding: $gutter $gutter $gutter * 2;
     display: block;
-    border-style: solid;
-    border-width: 0 0 1px;
-    border-image: linear-gradient(
-        90deg,
-        rgba(48, 0, 50, 0),
-        $primary 50%,
-        rgba(48, 0, 50, 0)
-      )
-      1;
+
+    @include divider('bottom', $primary);
   }
 
   .statsWrapper {
