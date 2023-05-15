@@ -13,13 +13,14 @@ export const BigMenu = ({
   siteSettings,
   services,
   sectors,
+  blogs,
   logo,
   closeBigMenu,
   otherLangSlug,
 }) => {
-  const [showMode, setShowMode] = useState<'normal' | 'sectors' | 'services'>(
-    'normal',
-  );
+  const [showMode, setShowMode] = useState<
+    'normal' | 'sectors' | 'services' | 'blogs'
+  >('normal');
 
   const getNavigationHeading = () => {
     if (showMode === 'sectors') {
@@ -29,6 +30,12 @@ export const BigMenu = ({
       return sectorsMenu.name;
     }
     if (showMode === 'services') {
+      const servicesMenu = siteSettings?.hamburgerMenu?.find(
+        (menu) => menu.type.toLowerCase() === showMode,
+      );
+      return servicesMenu.name;
+    }
+    if (showMode === 'blogs') {
       const servicesMenu = siteSettings?.hamburgerMenu?.find(
         (menu) => menu.type.toLowerCase() === showMode,
       );
@@ -60,6 +67,7 @@ export const BigMenu = ({
         setShowMode={setShowMode}
         sectors={sectors}
         services={services}
+        blogs={blogs}
       />
       <Close mobile={false} callBack={closeBigMenu} />
     </motion.nav>

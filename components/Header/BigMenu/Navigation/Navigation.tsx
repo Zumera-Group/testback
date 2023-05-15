@@ -18,6 +18,7 @@ export const Navigation = ({
   setShowMode,
   sectors,
   services,
+  blogs,
 }) => {
   const [currentNavigation, setCurrentNavigation] = useState([]);
 
@@ -32,13 +33,16 @@ export const Navigation = ({
     const navigationItems = {
       sectors: sectors,
       services: services,
+      // blogs: blogs,
     };
+
     if (navigationItems.hasOwnProperty(showMode))
       setCurrentNavigation(navigationItems[showMode]);
   }, [showMode, sectors, services]);
 
   const CurrentItems = () => {
     const link = links();
+    console.log(link[showMode]);
     return showNavigation ? (
       <ul className={styles.items}>
         {currentNavigation?.map((item, index: number) => (

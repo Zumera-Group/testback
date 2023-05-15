@@ -85,6 +85,9 @@ export const Header = ({
   const sectors = siteSettings?.hamburgerMenu.find(
     (h) => h.type === 'sectors',
   )?.sectorMenuItems;
+  const blogs = siteSettings?.hamburgerMenu.find(
+    (h) => h.type === 'blogs',
+  )?.blogMenuItems;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -225,6 +228,7 @@ export const Header = ({
               siteSettings={siteSettings}
               services={services}
               sectors={sectors}
+              blogs={blogs}
               logo={<Logo slug={homeSlug} title={siteName} isAnimated={true} />}
               closeBigMenu={() => setBigMenuOpen(false)}
               otherLangSlug={otherLangSlug}

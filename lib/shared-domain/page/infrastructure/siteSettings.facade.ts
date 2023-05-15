@@ -77,6 +77,9 @@ export const querySiteSettings = (
     sectorMenuItems[]-> {
       ...,
     },
+    blogMenuItems[]-> {
+      ...,
+    },
   },
   headerMenu[] {
     ...,
@@ -97,6 +100,9 @@ export const querySiteSettings = (
       ...,
     },
     sectorMenuItems[]-> {
+      ...,
+    },
+    blogMenuItems[]-> {
       ...,
     },
   },
