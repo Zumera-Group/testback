@@ -19,6 +19,7 @@ const queryBlogArticle = (
  seoDescription,
  seoTitle,
   heroImage {
+    ...,
     asset->{
       url
     },
@@ -39,12 +40,20 @@ const queryBlogArticle = (
     lastName,
     email,
     slug,
-    _id
+    _id,
   },
   relatedArticles[]-> {
+    ...,
     articleTitle,
     slug,
-    _id
+    _id,
+    date,
+    heroImage {
+      ...,
+      asset->{
+        url
+      },
+    },
   },
   blogModules[] {
        _key,
@@ -62,6 +71,7 @@ const queryBlogArticle = (
         }
     },
     image {
+      ...,
       asset->{
         url
       },
@@ -69,6 +79,7 @@ const queryBlogArticle = (
     imageSection {
       ...,
       image {
+        ...,
         asset->{
           url
         },
@@ -89,6 +100,7 @@ const queryBlogArticle = (
       },
     },
     thumbnail {
+      ...,
       asset->{
         url
       },
@@ -106,6 +118,7 @@ const queryBlogArticles = (
  seoDescription,
  seoTitle,
   heroImage {
+    ...,
     asset->{
       url
     },
@@ -129,9 +142,17 @@ const queryBlogArticles = (
     _id
   },
   relatedArticles[]-> {
+    ...,
     articleTitle,
     slug,
-    _id
+    _id,
+    date,
+     heroImage {
+    ...,
+    asset->{
+        url
+      },
+    },
   },
   blogModules[] {
        _key,
@@ -149,6 +170,7 @@ const queryBlogArticles = (
       }
     },
     image {
+      ...,
       asset->{
         url
       },
@@ -156,6 +178,7 @@ const queryBlogArticles = (
     imageSection {
       ...,
       image {
+        ...,
         asset->{
           url
         },
@@ -176,6 +199,7 @@ const queryBlogArticles = (
       },
     },
   thumbnail {
+    ...,
       asset->{
         url
       },

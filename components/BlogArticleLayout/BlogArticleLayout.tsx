@@ -20,6 +20,7 @@ import { sanityImageUrlFor } from 'lib/sanity';
 import { RichText } from 'components/BlogModules/RichText';
 import { SocialShare } from 'components/BlogModules/SocialShare';
 import { AuthorBlock } from 'components/BlogModules/AuthorBlock';
+import RelatedArticles from 'components/BlogModules/RelatedArticles/RelatedArticles';
 
 export const BlogArticleLayout: React.FC<{
   blogArticle: BlogArticle;
@@ -199,6 +200,7 @@ export const BlogArticleLayout: React.FC<{
               );
             })}
           <AuthorBlock blogArticle={blogArticle} />
+          <RelatedArticles relatedArticles={blogArticle.relatedArticles} />
         </Section>
       </PageTransition>
       <PageFooter siteSettings={siteSettings} />
