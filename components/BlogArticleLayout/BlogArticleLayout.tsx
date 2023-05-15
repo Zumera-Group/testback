@@ -150,15 +150,35 @@ export const BlogArticleLayout: React.FC<{
                 <GridColumn sm={12} md={6} lg={8}>
                   <RichText content={blogArticle.introduction} />
                 </GridColumn>
-                <GridColumn sm={12} md={6} lg={3}>
-                  RELATED ARTICLES
-                  <ol>
-                    <li>What is a family office and how does it work?</li>
-                    <li>What is a family office and how does it work?</li>
-                    <li>What is a family office and how does it work?</li>
-                    <li>What is a family office and how does it work?</li>
-                    <li>What is a family office and how does it work?</li>
-                  </ol>
+                <GridColumn
+                  sm={12}
+                  md={6}
+                  lg={3}
+                  className={styles.relatedListWrapper}
+                >
+                  <aside className={styles.relatedListInner}>
+                    <span className={styles.relatedTitle}>
+                      RELATED ARTICLES
+                    </span>
+                    <ol>
+                      {blogArticle?.relatedArticles?.map((article) => (
+                        <>
+                          <li>
+                            <a
+                              key={article._id}
+                              href={
+                                locale === 'en'
+                                  ? `/en/blog/${article?.slug?.current}`
+                                  : `/de/blog/${article?.slug?.current}`
+                              }
+                            >
+                              {article?.articleTitle}
+                            </a>
+                          </li>
+                        </>
+                      ))}
+                    </ol>
+                  </aside>
                 </GridColumn>
               </Grid>
             </div>

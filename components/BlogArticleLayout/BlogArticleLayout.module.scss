@@ -62,17 +62,6 @@
     }
   }
 
-  .authorWrapper {
-    padding-bottom: $blog-mb-mobile;
-    margin-bottom: $blog-mb-mobile;
-    @include divider('bottom', $primary);
-
-    @include breakpoint-up(md) {
-      padding-bottom: $blog-mb-desktop;
-      margin-bottom: $blog-mb-desktop * 1.3;
-    }
-  }
-
   .introContentWrapper {
     margin-bottom: $blog-mb-mobile;
 
@@ -107,5 +96,33 @@
   ul {
     @include bullet-list();
   }
+
+  .relatedListWrapper {
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    display: none;
+
+    @include breakpoint-up(md) {
+      display: flex;
+    }
+
+    .relatedTitle {
+      margin-bottom: $gutter;
+      font-size: $font-size-base;
+      display: block;
+    }
+
+    a {
+      border: unset;
+    }
+
+    li {
+      font-size: $font-size-base;
+      font-weight: $font-weight-bold;
+      margin-bottom: $gutter * 0.75;
+    }
+  }
+
   @include innerOffset;
 }

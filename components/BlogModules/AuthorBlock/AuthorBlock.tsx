@@ -31,13 +31,13 @@ export const AuthorBlock: React.FC<any> = ({ blogArticle }) => {
                     className={styles.authorLink}
                   >
                     {author?.firstName} {author?.lastName}
-                  </a>
+                  </a>{' '}
                   {author?.email && (
-                    <a href={`mailto:${author?.email}`}>({author.email})</a>
+                    <a href={`mailto:${author?.email}`}> ({author.email})</a>
                   )}
                   {index < blogArticle.authors.length - 1 && ', '}
                 </>
-              ))}
+              ))}{' '}
               who can be contacted directly for qualified interests.
             </p>
           </GridColumn>

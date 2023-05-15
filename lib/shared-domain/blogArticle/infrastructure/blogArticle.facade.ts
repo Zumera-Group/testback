@@ -41,6 +41,11 @@ const queryBlogArticle = (
     slug,
     _id
   },
+  relatedArticles[]-> {
+    articleTitle,
+    slug,
+    _id
+  },
   blogModules[] {
        _key,
     _type,
@@ -120,6 +125,11 @@ const queryBlogArticles = (
     firstName,
     lastName,
     email,
+    slug,
+    _id
+  },
+  relatedArticles[]-> {
+    articleTitle,
     slug,
     _id
   },
