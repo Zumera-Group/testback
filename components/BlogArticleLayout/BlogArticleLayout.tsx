@@ -34,7 +34,7 @@ export const BlogArticleLayout: React.FC<{
   const { locale } = useRouter();
   const format = useFormatDate();
 
-  console.log(blogArticle);
+  // console.log(blogArticle);
 
   const otherLangSlug =
     blogArticle?.queryOtherLangSlug?.slice(-1)[0]?.slug &&

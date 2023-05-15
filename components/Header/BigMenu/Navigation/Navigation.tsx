@@ -18,11 +18,13 @@ export const Navigation = ({
   setShowMode,
   sectors,
   services,
-  blogs,
+  blogArticles,
 }) => {
   const [currentNavigation, setCurrentNavigation] = useState([]);
 
   const navigationHeading = heading();
+
+  console.log(navigationHeading);
 
   const showNavigation = showMode !== 'normal' && currentNavigation?.length > 0;
 
@@ -33,16 +35,16 @@ export const Navigation = ({
     const navigationItems = {
       sectors: sectors,
       services: services,
-      // blogs: blogs,
+      blogArticles: blogArticles,
     };
 
     if (navigationItems.hasOwnProperty(showMode))
       setCurrentNavigation(navigationItems[showMode]);
-  }, [showMode, sectors, services]);
+  }, [showMode, sectors, services, blogArticles]);
 
   const CurrentItems = () => {
     const link = links();
-    console.log(link[showMode]);
+
     return showNavigation ? (
       <ul className={styles.items}>
         {currentNavigation?.map((item, index: number) => (
@@ -55,6 +57,8 @@ export const Navigation = ({
       </ul>
     ) : null;
   };
+
+  console.log(navigationHeading);
 
   return showNavigation ? (
     <motion.div
@@ -77,11 +81,8 @@ export const Navigation = ({
           variants={childAnimationProps}
           className={styles.navigation_heading}
         >
-          <Link
-            passHref
-            href={linkWithCurrentLocale(navigationHeading.toLowerCase())}
-          >
-            {navigationHeading}
+          <Link passHref href={linkWithCurrentLocale(navigationHeading.slug)}>
+            {navigationHeading.heading}
           </Link>
         </motion.h2>
       )}

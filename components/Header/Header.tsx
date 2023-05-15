@@ -85,8 +85,8 @@ export const Header = ({
   const sectors = siteSettings?.hamburgerMenu.find(
     (h) => h.type === 'sectors',
   )?.sectorMenuItems;
-  const blogs = siteSettings?.hamburgerMenu.find(
-    (h) => h.type === 'blogs',
+  const blogArticles = siteSettings?.hamburgerMenu.find(
+    (h) => h.type === 'blogArticles',
   )?.blogMenuItems;
 
   useEffect(() => {
@@ -228,7 +228,7 @@ export const Header = ({
               siteSettings={siteSettings}
               services={services}
               sectors={sectors}
-              blogs={blogs}
+              blogArticles={blogArticles}
               logo={<Logo slug={homeSlug} title={siteName} isAnimated={true} />}
               closeBigMenu={() => setBigMenuOpen(false)}
               otherLangSlug={otherLangSlug}

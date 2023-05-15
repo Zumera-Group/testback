@@ -13,33 +13,63 @@ export const BigMenu = ({
   siteSettings,
   services,
   sectors,
-  blogs,
+  blogArticles,
   logo,
   closeBigMenu,
   otherLangSlug,
 }) => {
   const [showMode, setShowMode] = useState<
-    'normal' | 'sectors' | 'services' | 'blogs'
+    'normal' | 'sectors' | 'services' | 'blogArticles'
   >('normal');
+
+  // const getNavigationHeading = () => {
+  //   if (showMode === 'sectors') {
+  //     const sectorsMenu = siteSettings?.hamburgerMenu?.find(
+  //       (menu) => menu.type.toLowerCase() === showMode,
+  //     );
+  //     return sectorsMenu.name;
+  //   }
+  //   if (showMode === 'services') {
+  //     const servicesMenu = siteSettings?.hamburgerMenu?.find(
+  //       (menu) => menu.type.toLowerCase() === showMode,
+  //     );
+  //     return servicesMenu.name;
+  //   }
+  //   if (showMode === 'blogArticles') {
+  //     const blogArticlesMenu = siteSettings?.hamburgerMenu?.find(
+  //       (menu) => menu.type === showMode,
+  //     );
+
+  //     return blogArticlesMenu.name;
+  //   }
+  //   return '';
+  // };
 
   const getNavigationHeading = () => {
     if (showMode === 'sectors') {
       const sectorsMenu = siteSettings?.hamburgerMenu?.find(
         (menu) => menu.type.toLowerCase() === showMode,
       );
-      return sectorsMenu.name;
+      return { heading: sectorsMenu.name, slug: sectorsMenu.page.slug.current };
     }
     if (showMode === 'services') {
       const servicesMenu = siteSettings?.hamburgerMenu?.find(
         (menu) => menu.type.toLowerCase() === showMode,
       );
-      return servicesMenu.name;
+      return {
+        heading: servicesMenu.name,
+        slug: servicesMenu.page.slug.current,
+      };
     }
-    if (showMode === 'blogs') {
-      const servicesMenu = siteSettings?.hamburgerMenu?.find(
-        (menu) => menu.type.toLowerCase() === showMode,
+    if (showMode === 'blogArticles') {
+      const blogArticlesMenu = siteSettings?.hamburgerMenu?.find(
+        (menu) => menu.type === showMode,
       );
-      return servicesMenu.name;
+
+      return {
+        heading: blogArticlesMenu.name,
+        slug: blogArticlesMenu.page.slug.current,
+      };
     }
     return '';
   };
@@ -67,7 +97,7 @@ export const BigMenu = ({
         setShowMode={setShowMode}
         sectors={sectors}
         services={services}
-        blogs={blogs}
+        blogArticles={blogArticles}
       />
       <Close mobile={false} callBack={closeBigMenu} />
     </motion.nav>
