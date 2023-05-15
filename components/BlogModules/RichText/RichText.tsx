@@ -36,6 +36,10 @@ export const RichText: React.FC<any> = ({ content }) => {
               <a href={href}>{children}</a>
             );
           },
+          contactFormAnchor: ({ value, children }) => {
+            const { anchor } = value;
+            return <a href={anchor}>{children}</a>;
+          },
         },
       }}
     />

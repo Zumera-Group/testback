@@ -21,6 +21,7 @@ import { RichText } from 'components/BlogModules/RichText';
 import { SocialShare } from 'components/BlogModules/SocialShare';
 import { AuthorBlock } from 'components/BlogModules/AuthorBlock';
 import RelatedArticles from 'components/BlogModules/RelatedArticles/RelatedArticles';
+import ContactUsSection from 'lib/shared-domain/page/presentation/contentModules/ContactUsSection';
 
 export const BlogArticleLayout: React.FC<{
   blogArticle: BlogArticle;
@@ -203,6 +204,13 @@ export const BlogArticleLayout: React.FC<{
           <RelatedArticles relatedArticles={blogArticle.relatedArticles} />
         </Section>
       </PageTransition>
+      <div id="contactForm">
+        <ContactUsSection
+          specificContentModule={null}
+          content={siteSettings.contactSectionContent}
+        />
+      </div>
+
       <PageFooter siteSettings={siteSettings} />
     </main>
   );
