@@ -42,14 +42,14 @@ export const AuthorBlock: React.FC<any> = ({ blogArticle }) => {
             </p>
           </GridColumn>
           <GridColumn sm={12} md={6} lg={3}>
-            <Button
+            {/* <Button
               variant={'secondary'}
               link={'#'}
               onDark={false}
               classes={styles.downloadBtn}
             >
               Download this article
-            </Button>
+            </Button> */}
           </GridColumn>
         </Grid>
       </div>
