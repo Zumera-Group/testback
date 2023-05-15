@@ -19,6 +19,7 @@ import { sanityImageUrlFor } from 'lib/sanity';
 
 import { RichText } from 'components/BlogModules/RichText';
 import { SocialShare } from 'components/BlogModules/SocialShare';
+import { AuthorBlock } from 'components/BlogModules/AuthorBlock';
 
 export const BlogArticleLayout: React.FC<{
   blogArticle: BlogArticle;
@@ -31,6 +32,8 @@ export const BlogArticleLayout: React.FC<{
   //   );
   const { locale } = useRouter();
   const format = useFormatDate();
+
+  console.log(blogArticle);
 
   const otherLangSlug =
     blogArticle?.queryOtherLangSlug?.slice(-1)[0]?.slug &&
@@ -86,7 +89,21 @@ export const BlogArticleLayout: React.FC<{
                   </GridColumn>
                 </Grid>
                 <p className={styles.author}>
-                  Written by <a href="#">Martin test</a>
+                  Written by{' '}
+                  {blogArticle?.authors?.map((author, index) => (
+                    <a
+                      key={author._id}
+                      href={
+                        locale === 'en'
+                          ? `/en/employees/${author?.slug?.current}`
+                          : `/de/mitarbeiter/${author?.slug?.current}`
+                      }
+                      className={styles.authorLink}
+                    >
+                      {author?.firstName} {author?.lastName}
+                      {index < blogArticle.authors.length - 1 && ', '}
+                    </a>
+                  ))}
                 </p>
                 <Grid
                   justifyContent={'space-between'}
@@ -161,6 +178,7 @@ export const BlogArticleLayout: React.FC<{
                 </React.Fragment>
               );
             })}
+          <AuthorBlock blogArticle={blogArticle} />
         </Section>
       </PageTransition>
       <PageFooter siteSettings={siteSettings} />

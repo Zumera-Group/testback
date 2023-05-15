@@ -34,6 +34,13 @@ const queryBlogArticle = (
       }
     }
   },
+  authors[]-> {
+    firstName,
+    lastName,
+    email,
+    slug,
+    _id
+  },
   blogModules[] {
        _key,
     _type,
@@ -108,6 +115,13 @@ const queryBlogArticles = (
         "lang": @.reference->_lang
       }
     }
+  },
+  authors[]-> {
+    firstName,
+    lastName,
+    email,
+    slug,
+    _id
   },
   blogModules[] {
        _key,
