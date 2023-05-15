@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { BlogArticle } from 'lib/shared-domain/blogArticle/domain';
 import { SiteSettings } from 'lib/shared-domain/page/domain';
 import { PageFooter } from 'lib/shared-domain/page/presentation/PageFooter';
@@ -146,6 +146,7 @@ export const BlogArticleLayout: React.FC<{
               </Grid>
             </div>
           </Container>
+
           {blogModules &&
             blogModules.map((c) => {
               return (

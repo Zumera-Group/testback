@@ -1,0 +1,79 @@
+.videoBlockWrapper {
+  .innerWrapper {
+    max-width: 955px;
+    padding-bottom: $blog-mb-mobile;
+    margin-bottom: $blog-mb-mobile;
+
+    & > div {
+      height: 300px !important;
+      @include breakpoint-up(md) {
+        max-width: 955px;
+        max-height: 538px;
+        height: 538px !important;
+      }
+    }
+    @include divider('bottom', $primary);
+
+    @include breakpoint-up(md) {
+      padding-bottom: $blog-mb-desktop;
+      margin-bottom: $blog-mb-desktop * 1.3;
+    }
+  }
+
+  .overlay {
+    width: 100%;
+    height: 100%;
+    position: relative;
+  }
+
+  .overlayInner {
+    width: 100%;
+    height: 100%;
+    background: rgba(97, 0, 103, 0.4);
+    backdrop-filter: blur(6px);
+    position: relative;
+    & > * {
+      color: $white;
+    }
+    .title {
+      position: absolute;
+      margin-left: $gutter;
+      margin-right: $gutter;
+      top: $gutter * 2;
+
+      @include breakpoint-up(md) {
+        top: $gutter * 3;
+        left: $gutter * 3;
+      }
+    }
+
+    .playButton {
+      background: unset;
+      border: unset;
+      margin: 0 $gutter;
+    }
+
+    .durationWrapper {
+      position: absolute;
+      right: $gutter;
+      bottom: $gutter * 1;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      @include breakpoint-up(md) {
+        right: $gutter * 3;
+        bottom: $gutter * 3;
+      }
+    }
+  }
+  .caption {
+    margin: $gutter 0;
+
+    @include breakpoint-up(md) {
+      max-width: 65%;
+    }
+  }
+}
+
+// @include innerOffset;

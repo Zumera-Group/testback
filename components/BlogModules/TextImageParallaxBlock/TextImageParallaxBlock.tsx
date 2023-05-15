@@ -11,8 +11,6 @@ export const TextImageParallaxBlock: React.FC<any> = ({
   const { imageSection, textSection } = specificContentModule;
   const { headline, summary, image, caption } = imageSection;
 
-  console.log(textSection);
-
   return (
     <Container classes={styles.imageTextParallaxWrapper}>
       <Grid

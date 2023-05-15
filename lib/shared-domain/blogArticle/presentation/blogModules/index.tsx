@@ -1,16 +1,20 @@
 import { ImageBlock } from 'components/BlogModules/ImageBlock';
 import {
+  FullWidthImageBlockModule,
   ImageBlockModule,
   QuoteBlockModule,
   TextBlockModule,
   TextImageParallaxBlockModule,
   TextStatsBlockModule,
+  VideoBlockModule,
 } from '../../domain/blogModule';
 import { ContentModule } from '../../domain/blogModule';
 import { TextBlock } from 'components/BlogModules/TextBlock';
 import { TextImageParallaxBlock } from 'components/BlogModules/TextImageParallaxBlock/TextImageParallaxBlock';
 import { QuoteBlock } from 'components/BlogModules/QuoteBlock';
 import { TextStatsBlock } from 'components/BlogModules/TextStatsBlock';
+import { FullWidthImageBlock } from 'components/BlogModules/FullWidthImageBlock';
+import VideoBlock from 'components/BlogModules/VideoBlock/VideoBlock';
 
 export const getContentForContentModule = (
   contentModule: ContentModule,
@@ -47,6 +51,20 @@ export const getContentForContentModule = (
       <TextStatsBlock
         specificContentModule={contentModule.specificContentModule}
       />
+    );
+  }
+  if (
+    contentModule.specificContentModule instanceof FullWidthImageBlockModule
+  ) {
+    return (
+      <FullWidthImageBlock
+        specificContentModule={contentModule.specificContentModule}
+      />
+    );
+  }
+  if (contentModule.specificContentModule instanceof VideoBlockModule) {
+    return (
+      <VideoBlock specificContentModule={contentModule.specificContentModule} />
     );
   }
 };

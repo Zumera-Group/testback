@@ -5,7 +5,9 @@ export type ContentModuleType =
   | 'imageBlock'
   | 'textImageParallaxBlock'
   | 'quoteBlock'
-  | 'textStatsBlock';
+  | 'textStatsBlock'
+  | 'fullWidthImageBlock'
+  | 'videoBlock';
 
 abstract class ContentModuleTypeFactory {
   static createInstance(type: ContentModuleType, fields: Record<string, any>) {
@@ -15,6 +17,9 @@ abstract class ContentModuleTypeFactory {
       return new TextImageParallaxBlockModule(fields);
     if (type === 'quoteBlock') return new QuoteBlockModule(fields);
     if (type === 'textStatsBlock') return new TextStatsBlockModule(fields);
+    if (type === 'fullWidthImageBlock')
+      return new FullWidthImageBlockModule(fields);
+    if (type === 'videoBlock') return new VideoBlockModule(fields);
   }
 }
 
@@ -94,5 +99,33 @@ export class TextStatsBlockModule extends BaseModule {
     this.subheading = fields.subheading;
     this.text = fields.text;
     this.statistics = fields.statistics;
+  }
+}
+
+export class FullWidthImageBlockModule extends BaseModule {
+  image: any;
+  caption: string;
+
+  constructor(fields: Record<string, any>) {
+    super();
+    this.image = fields.image;
+    this.caption = fields.caption;
+  }
+}
+
+export class VideoBlockModule extends BaseModule {
+  videoTitle: string;
+  thumbnail: string;
+  videoUrl: string;
+  duration: string;
+  caption?: string;
+
+  constructor(fields: Record<string, any>) {
+    super();
+    this.videoTitle = fields.videoTitle;
+    this.thumbnail = fields.thumbnail;
+    this.videoUrl = fields.videoUrl;
+    this.duration = fields.duration;
+    this.caption = fields.caption;
   }
 }

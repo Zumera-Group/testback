@@ -75,7 +75,12 @@ const queryBlogArticle = (
           }
         }
       },
-    }
+    },
+    thumbnail {
+      asset->{
+        url
+      },
+    } 
   },
   "queryOtherLangSlug": ${otherLangSlugQuery},
 }`;
@@ -145,7 +150,12 @@ const queryBlogArticles = (
           }
         }
       },
-    }
+    },
+  thumbnail {
+      asset->{
+        url
+      },
+    } 
   },
 }
 `;
