@@ -67,7 +67,7 @@ export const BlogArticleLayout: React.FC<{
       <PageTransition slug={blogArticle._id}>
         <Section
           size={'md'}
-          bg={'light'}
+          bg={'white'}
           color={'primary'}
           as="article"
           classes={styles.articleContent}
