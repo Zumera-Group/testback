@@ -3,13 +3,13 @@ import styles from './Section.module.scss';
 interface Props {
   as?: '' | 'section' | 'article' | 'div' | 'header' | 'footer';
   size?: 'sm' | 'md' | 'lg' | 'xl';
-  bg?: 'gradient' | 'primary' | 'secondary' | 'tertiary' | 'light',
+  bg?: 'gradient' | 'primary' | 'secondary' | 'tertiary' | 'light' | 'white';
   color?: 'primary' | 'secondary' | 'white';
-  divider?: boolean,
+  divider?: boolean;
   classes?: string;
   id?: string;
   children: any;
-};
+}
 
 export const Section: React.FC<Props> = ({
   as,
@@ -37,7 +37,7 @@ export const Section: React.FC<Props> = ({
     <Component className={sectionStyles.join(' ')} id={id} {...rest}>
       {children}
     </Component>
-  )
+  );
 };
 
 export default Section;

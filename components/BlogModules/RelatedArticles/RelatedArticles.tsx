@@ -14,19 +14,20 @@ import { useFormatDate } from 'lib/shared-domain/useFormatDate';
 
 const RelatedArticles: React.FC<{
   relatedArticles: any;
-}> = ({ relatedArticles }) => {
+  blogArticleDetail: any;
+}> = ({ relatedArticles, blogArticleDetail }) => {
   const swiperPrevRef = useRef();
   const swiperNextRef = useRef();
   const format = useFormatDate();
-
+  const {
+    relatedArticleSection: { raDesc, raTitle },
+  } = blogArticleDetail;
   return (
     <Container classes={styles.relatedArticlesWrapper}>
       <Grid>
         <GridColumn xs={12} sm={6} md={6} lg={6}>
-          <h2>Related Articles</h2>
-          <p className={styles.summary}>
-            Lorem ipsum dolor sit amet consectuter elit
-          </p>
+          <h2>{raTitle}</h2>
+          <p className={styles.summary}>{raDesc}</p>
         </GridColumn>
         <GridColumn
           xs={12}

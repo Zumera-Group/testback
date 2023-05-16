@@ -4,7 +4,7 @@ import { fetchSiteSettings } from 'lib/shared-domain/page/application/useGetSite
 import { SiteSettings } from 'lib/shared-domain/page/domain';
 import { BlogArticle } from 'lib/shared-domain/blogArticle/domain';
 import { fetchBlogArticles } from 'lib/shared-domain/blogArticle/application/useGetBlogArticles';
-// import { NewsArticleDetailLayout } from 'lib/shared-domain/newsArticle/presentation/NewsArticleDetailLayout';
+import { fetchBlogDetailContent } from 'lib/shared-domain/blogArticle/application/useGetBlogDetailContent';
 import { fetchBlogArticle } from 'lib/shared-domain/blogArticle/application/useGetBlogArticle';
 import { ErrorTrackingBoundary } from 'lib/ErrorTrackingBoundary';
 import { NewsEventDetailLayout } from '../../lib/shared-domain/newsArticle/presentation/NewsEventDetailLayout';
@@ -70,6 +70,8 @@ export async function getStaticProps({ locale, params, preview = false }) {
     const sharedContent =
       await new SharedContentFacade().getSharedContentFacade(locale);
 
+    const blogDetailContent = await fetchBlogDetailContent(locale);
+
     return {
       props: {
         // preview,
@@ -78,6 +80,7 @@ export async function getStaticProps({ locale, params, preview = false }) {
         selectedBlogArticle: blogArticle || null,
         siteSettings,
         // content,
+        blogDetailContent,
         sharedContent,
       },
       revalidate: REVALIDATE_ON_FAILURE_TIME_IN_SECONDS,
@@ -96,6 +99,7 @@ interface Props {
   siteSettings: SiteSettings;
   //   content: any;
   sharedContent: any;
+  blogDetailContent: any;
 }
 
 export default function Index({
@@ -106,6 +110,7 @@ export default function Index({
   siteSettings,
   //   content,
   sharedContent,
+  blogDetailContent,
 }: Props): JSX.Element {
   const { data: previewData } = usePreviewSubscription(query, {
     params: { slug: queryParams } ?? {},
@@ -145,6 +150,7 @@ export default function Index({
         <BlogArticleLayout
           siteSettings={siteSettings}
           blogArticle={selectedBlogArticle}
+          blogArticleDetail={blogDetailContent}
         />
       </SharedContentContext>
     </ErrorTrackingBoundary>

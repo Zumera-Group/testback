@@ -220,6 +220,12 @@ const queryBlogArticles = (
 }
 `;
 
+const queryBlogDetailContent = (
+  lang,
+) => `*[_type == "blogDetailContent" && _lang == "${lang}"] {
+  ...,
+}`;
+
 export class BlogArticleFacade {
   constructor(private readonly sanityService = new SanityService()) {}
 
@@ -248,5 +254,13 @@ export class BlogArticleFacade {
     );
 
     return blogArticles;
+  }
+
+  async getBlogDetailContent(locale: Locale) {
+    const detailContent = await this.sanityService.fetch(
+      queryBlogDetailContent(this.sanityService.getSanityLocale(locale)),
+    );
+
+    return detailContent?.[0] || {};
   }
 }

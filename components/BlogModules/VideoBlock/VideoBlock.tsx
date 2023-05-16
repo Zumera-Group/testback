@@ -18,7 +18,10 @@ const PlayButton = () => (
   </svg>
 );
 
-export const VideoBlock: React.FC<any> = ({ specificContentModule }) => {
+export const VideoBlock: React.FC<any> = ({
+  specificContentModule,
+  blogArticleDetail,
+}) => {
   const { videoUrl, thumbnail, caption, videoTitle, duration, anchor } =
     specificContentModule;
 
@@ -33,7 +36,9 @@ export const VideoBlock: React.FC<any> = ({ specificContentModule }) => {
           playIcon={
             <div className={styles.overlay}>
               <div className={styles.overlayInner}>
-                <h3 className={styles.title}>Watch: {videoTitle}</h3>
+                <h3 className={styles.title}>
+                  {blogArticleDetail.videoTitleLabel} {videoTitle}
+                </h3>
                 <div className={styles.durationWrapper}>
                   <span>{duration}</span>
                   <button className={styles.playButton}>

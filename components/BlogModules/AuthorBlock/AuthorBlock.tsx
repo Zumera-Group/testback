@@ -4,7 +4,10 @@ import styles from './AuthorBlock.module.scss';
 import { useRouter } from 'next/router';
 import { Button } from 'components/Button';
 
-export const AuthorBlock: React.FC<any> = ({ blogArticle }) => {
+export const AuthorBlock: React.FC<any> = ({
+  blogArticle,
+  blogArticleDetail,
+}) => {
   const { locale } = useRouter();
   return (
     <Container classes={[styles.authorWrapper].join(' ')}>
@@ -15,9 +18,9 @@ export const AuthorBlock: React.FC<any> = ({ blogArticle }) => {
           alignItems={'center'}
         >
           <GridColumn sm={12} md={6} lg={8} className={styles.authorList}>
-            <h4>The Author(s)</h4>
+            <h4>{blogArticleDetail.authorSection.authorTitle}</h4>
             <p className={styles.author}>
-              Written by{' '}
+              {blogArticleDetail.writtenByLabel}{' '}
               {blogArticle?.authors?.map((author, index) => (
                 <>
                   {' '}
@@ -38,7 +41,7 @@ export const AuthorBlock: React.FC<any> = ({ blogArticle }) => {
                   {index < blogArticle.authors.length - 1 && ', '}
                 </>
               ))}{' '}
-              who can be contacted directly for qualified interests.
+              {blogArticleDetail.authorSection.authorSummary}
             </p>
           </GridColumn>
           <GridColumn sm={12} md={6} lg={3}>

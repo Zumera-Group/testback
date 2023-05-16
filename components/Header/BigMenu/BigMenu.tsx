@@ -22,29 +22,6 @@ export const BigMenu = ({
     'normal' | 'sectors' | 'services' | 'blogArticles'
   >('normal');
 
-  // const getNavigationHeading = () => {
-  //   if (showMode === 'sectors') {
-  //     const sectorsMenu = siteSettings?.hamburgerMenu?.find(
-  //       (menu) => menu.type.toLowerCase() === showMode,
-  //     );
-  //     return sectorsMenu.name;
-  //   }
-  //   if (showMode === 'services') {
-  //     const servicesMenu = siteSettings?.hamburgerMenu?.find(
-  //       (menu) => menu.type.toLowerCase() === showMode,
-  //     );
-  //     return servicesMenu.name;
-  //   }
-  //   if (showMode === 'blogArticles') {
-  //     const blogArticlesMenu = siteSettings?.hamburgerMenu?.find(
-  //       (menu) => menu.type === showMode,
-  //     );
-
-  //     return blogArticlesMenu.name;
-  //   }
-  //   return '';
-  // };
-
   const getNavigationHeading = () => {
     if (showMode === 'sectors') {
       const sectorsMenu = siteSettings?.hamburgerMenu?.find(

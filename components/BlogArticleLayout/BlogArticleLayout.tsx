@@ -26,16 +26,19 @@ import ContactUsSection from 'lib/shared-domain/page/presentation/contentModules
 export const BlogArticleLayout: React.FC<{
   blogArticle: BlogArticle;
   siteSettings: SiteSettings;
-}> = ({ blogArticle, siteSettings }) => {
+  blogArticleDetail: any;
+}> = ({ blogArticle, siteSettings, blogArticleDetail }) => {
   //   const blogArticles = useFetchBlogArticles();
 
   //   const filteredNewsArticles = newsArticles.filter(
   //     (n) => n._id !== blogArticle._id,
   //   );
+
+  console.log(blogArticleDetail);
   const { locale } = useRouter();
   const format = useFormatDate();
 
-  console.log(blogArticle);
+  // console.log(blogArticle);
 
   const otherLangSlug =
     blogArticle?.queryOtherLangSlug?.slice(-1)[0]?.slug &&
@@ -91,7 +94,7 @@ export const BlogArticleLayout: React.FC<{
                   </GridColumn>
                 </Grid>
                 <p className={styles.author}>
-                  Written by{' '}
+                  {blogArticleDetail.writtenByLabel}{' '}
                   {blogArticle?.authors?.map((author, index) => (
                     <a
                       key={author._id}
@@ -138,7 +141,9 @@ export const BlogArticleLayout: React.FC<{
                 className={styles.tocListWrapper}
               >
                 <aside className={styles.tocInner}>
-                  <span className={styles.tocTitle}>JUMP TO SECTION</span>
+                  <span className={styles.tocTitle}>
+                    {blogArticleDetail.tocTitle}
+                  </span>
                   <ol>
                     {blogArticle?.toc?.map((section) => (
                       <>
@@ -211,18 +216,18 @@ export const BlogArticleLayout: React.FC<{
             blogModules.map((c) => {
               return (
                 <React.Fragment key={c._key}>
-                  {getContentForContentModule(
-                    c,
-                    {
-                      ...siteSettings,
-                    },
-                    blogModules,
-                  )}
+                  {getContentForContentModule(c, blogArticleDetail)}
                 </React.Fragment>
               );
             })}
-          <AuthorBlock blogArticle={blogArticle} />
-          <RelatedArticles relatedArticles={blogArticle.relatedArticles} />
+          <AuthorBlock
+            blogArticle={blogArticle}
+            blogArticleDetail={blogArticleDetail}
+          />
+          <RelatedArticles
+            relatedArticles={blogArticle.relatedArticles}
+            blogArticleDetail={blogArticleDetail}
+          />
         </Section>
       </PageTransition>
       <div id="contactForm">

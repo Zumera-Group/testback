@@ -18,10 +18,9 @@ import VideoBlock from 'components/BlogModules/VideoBlock/VideoBlock';
 
 export const getContentForContentModule = (
   contentModule: ContentModule,
-  siteSettings: any,
-  sharedContent?: any,
-  allModulesData?: any,
+  blogArticleDetail?: any,
 ): JSX.Element => {
+  console.log(blogArticleDetail);
   if (contentModule.specificContentModule instanceof TextBlockModule) {
     return (
       <TextBlock specificContentModule={contentModule.specificContentModule} />
@@ -64,7 +63,10 @@ export const getContentForContentModule = (
   }
   if (contentModule.specificContentModule instanceof VideoBlockModule) {
     return (
-      <VideoBlock specificContentModule={contentModule.specificContentModule} />
+      <VideoBlock
+        specificContentModule={contentModule.specificContentModule}
+        blogArticleDetail={blogArticleDetail}
+      />
     );
   }
 };

@@ -58,8 +58,6 @@ export const Navigation = ({
     ) : null;
   };
 
-  console.log(navigationHeading);
-
   return showNavigation ? (
     <motion.div
       variants={parentAnimationProps}
