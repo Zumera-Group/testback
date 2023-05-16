@@ -10,8 +10,6 @@ export const AuthorBlock: React.FC<any> = ({
   blogArticleDetail,
 }) => {
   const { locale } = useRouter();
-
-  const richTextRef = useRef(null);
   const spanRef = useRef(null);
 
   useEffect(() => {
