@@ -21,21 +21,21 @@ export const SocialShare: React.FC<{
     const shareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(
       content?.articleTitle,
     )}&url=${encodeURIComponent(
-      `${protoDomain}/${localeType}/${partialSlug}/${content?.slug?.current}`,
+      `${protoDomain}${localeType}/${partialSlug}/${content?.slug?.current}`,
     )}`;
     window.open(shareUrl, '_blank', iframe);
   };
 
   const handleFacebookClick = () => {
     const shareUrl = `https://www.facebook.com/sharer.php?u=${encodeURIComponent(
-      `${protoDomain}/${localeType}/${partialSlug}/${content?.slug?.current}`,
+      `${protoDomain}${localeType}/${partialSlug}/${content?.slug?.current}`,
     )}`;
     window.open(shareUrl, '_blank', iframe);
   };
 
   const handleLinkedinClick = () => {
     const shareUrl = `https://www.linkedin.com/shareArticle?url=${encodeURIComponent(
-      `${protoDomain}/${localeType}/${partialSlug}/${content?.slug?.current}`,
+      `${protoDomain}${localeType}/${partialSlug}/${content?.slug?.current}`,
     )}&title=${encodeURIComponent(content?.articleTitle)}`;
     window.open(shareUrl, '_blank', iframe);
   };

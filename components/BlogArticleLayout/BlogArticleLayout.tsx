@@ -118,7 +118,7 @@ export const BlogArticleLayout: React.FC<{
                     <SocialShare
                       content={blogArticle}
                       partialSlug="blog"
-                      domain="https://www.zumera.com"
+                      domain={process.env.NEXT_PUBLIC_BASE_URL}
                     />
                   </GridColumn>
                   <GridColumn sm={12} md={6} lg={5}>
