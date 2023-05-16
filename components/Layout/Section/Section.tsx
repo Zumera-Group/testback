@@ -33,8 +33,6 @@ export const Section: React.FC<Props> = ({
     classes ?? '',
   ];
 
-  console.log(sectionStyles);
-
   return (
     <Component className={sectionStyles.join(' ')} id={id} {...rest}>
       {children}

@@ -63,6 +63,7 @@ export const BlogArticleLayout: React.FC<{
         contentModules={[]}
         siteSettings={siteSettings}
         otherLangSlug={otherLangSlug}
+        whiteBg
       />
       <PageTransition slug={blogArticle._id}>
         <Section
@@ -139,22 +140,24 @@ export const BlogArticleLayout: React.FC<{
                 lg={3}
                 className={styles.tocListWrapper}
               >
-                <aside className={styles.tocInner}>
-                  <span className={styles.tocTitle}>
-                    {blogArticleDetail.tocTitle}
-                  </span>
-                  <ol>
-                    {blogArticle?.toc?.map((section) => (
-                      <>
-                        <li>
-                          <a key={section._id} href={`#${section.anchor}`}>
-                            {section?.title}
-                          </a>
-                        </li>
-                      </>
-                    ))}
-                  </ol>
-                </aside>
+                {blogArticle.toc && (
+                  <aside className={styles.tocInner}>
+                    <span className={styles.tocTitle}>
+                      {blogArticleDetail.tocTitle}
+                    </span>
+                    <ol>
+                      {blogArticle?.toc?.map((section) => (
+                        <>
+                          <li>
+                            <a key={section._id} href={`#${section.anchor}`}>
+                              {section?.title}
+                            </a>
+                          </li>
+                        </>
+                      ))}
+                    </ol>
+                  </aside>
+                )}
               </GridColumn>
             </Grid>
           </Container>
@@ -183,29 +186,31 @@ export const BlogArticleLayout: React.FC<{
                   lg={3}
                   className={styles.relatedListWrapper}
                 >
-                  <aside className={styles.relatedListInner}>
-                    <span className={styles.relatedTitle}>
-                      RELATED ARTICLES
-                    </span>
-                    <ol>
-                      {blogArticle?.relatedArticles?.map((article) => (
-                        <>
-                          <li>
-                            <a
-                              key={article._id}
-                              href={
-                                locale === 'en'
-                                  ? `/en/blog/${article?.slug?.current}`
-                                  : `/de/blog/${article?.slug?.current}`
-                              }
-                            >
-                              {article?.articleTitle}
-                            </a>
-                          </li>
-                        </>
-                      ))}
-                    </ol>
-                  </aside>
+                  {blogArticle.relatedArticles && (
+                    <aside className={styles.relatedListInner}>
+                      <span className={styles.relatedTitle}>
+                        {blogArticleDetail.relatedArticleSection.raTitle}
+                      </span>
+                      <ol>
+                        {blogArticle?.relatedArticles?.map((article) => (
+                          <>
+                            <li>
+                              <a
+                                key={article._id}
+                                href={
+                                  locale === 'en'
+                                    ? `/en/blog/${article?.slug?.current}`
+                                    : `/de/blog/${article?.slug?.current}`
+                                }
+                              >
+                                {article?.articleTitle}
+                              </a>
+                            </li>
+                          </>
+                        ))}
+                      </ol>
+                    </aside>
+                  )}
                 </GridColumn>
               </Grid>
             </div>
@@ -223,10 +228,12 @@ export const BlogArticleLayout: React.FC<{
             blogArticle={blogArticle}
             blogArticleDetail={blogArticleDetail}
           />
-          <RelatedArticles
-            relatedArticles={blogArticle.relatedArticles}
-            blogArticleDetail={blogArticleDetail}
-          />
+          {blogArticle.relatedArticles && (
+            <RelatedArticles
+              relatedArticles={blogArticle.relatedArticles}
+              blogArticleDetail={blogArticleDetail}
+            />
+          )}
         </Section>
       </PageTransition>
       <div id="contactForm">

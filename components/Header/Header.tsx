@@ -39,6 +39,7 @@ export const Header = ({
   staticExtended,
   indicator,
   hideMenu,
+  whiteBg,
 }) => {
   const [bigMenuOpen, setBigMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -165,6 +166,7 @@ export const Header = ({
         id="header"
         className={[
           styles.header,
+          whiteBg ? styles.header__white : '',
           isLightPage() ? styles.header__light : '',
           isScrolled ? styles.header__scrolled : '',
           bigMenuOpen ? styles.header__open : '',

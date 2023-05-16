@@ -7,6 +7,7 @@ interface Props {
   siteSettings: SiteSettings;
   contentModules: ContentModule[];
   darkBg?: boolean;
+  whiteBg?: boolean;
   otherLangSlug?: string;
   hideHeader?: boolean;
   isLightHeader?: boolean;
@@ -28,6 +29,7 @@ export const PageHeader: React.FC<Props> = ({
   staticExtended,
   indicator,
   hideMenu,
+  whiteBg,
 }) => {
   return (
     <Header
@@ -41,6 +43,7 @@ export const PageHeader: React.FC<Props> = ({
       staticExtended={staticExtended}
       indicator={indicator}
       hideMenu={hideMenu}
+      whiteBg={whiteBg}
     />
   );
 };

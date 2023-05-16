@@ -24,8 +24,6 @@ export const Navigation = ({
 
   const navigationHeading = heading();
 
-  console.log(navigationHeading);
-
   const showNavigation = showMode !== 'normal' && currentNavigation?.length > 0;
 
   const linkWithCurrentLocale = useLinkWithCurrentLocale();
