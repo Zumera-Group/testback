@@ -1,4 +1,5 @@
 .authorWrapper {
+  max-width: 1400px;
   padding-bottom: $blog-mb-mobile;
   margin-bottom: $blog-mb-mobile;
   @include divider('bottom', $primary);
@@ -7,5 +8,47 @@
     padding-bottom: $blog-mb-desktop;
     margin-bottom: $blog-mb-desktop * 1.3;
   }
+
+  .authorList {
+    margin-bottom: $gutter;
+  }
+
+  .calculatorCta {
+    a {
+      border-bottom: unset;
+    }
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 100%;
+    padding: $gutter;
+    @include divider(top, $primary);
+    @include breakpoint-up(md) {
+      padding: $gutter * 1.5;
+    }
+    flex: 1;
+    background-color: $secondary;
+    color: $white;
+    svg {
+      margin-top: auto;
+      margin-left: auto;
+      display: block;
+      fill: $accent;
+    }
+
+    &:hover {
+      .heading {
+        color: $white;
+      }
+      .summary {
+        color: $white;
+      }
+    }
+  }
+
+  .innerOffset {
+    @media screen and (min-width: 1024px) {
+      margin-left: $gutter * 12;
+    }
+  }
 }
-@include innerOffset;

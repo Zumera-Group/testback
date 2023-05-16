@@ -28,16 +28,8 @@ export const BlogArticleLayout: React.FC<{
   siteSettings: SiteSettings;
   blogArticleDetail: any;
 }> = ({ blogArticle, siteSettings, blogArticleDetail }) => {
-  //   const blogArticles = useFetchBlogArticles();
-
-  //   const filteredNewsArticles = newsArticles.filter(
-  //     (n) => n._id !== blogArticle._id,
-  //   );
-
   const { locale } = useRouter();
   const format = useFormatDate();
-
-  // console.log(blogArticle);
 
   const otherLangSlug =
     blogArticle?.queryOtherLangSlug?.slice(-1)[0]?.slug &&

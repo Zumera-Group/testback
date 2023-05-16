@@ -224,6 +224,12 @@ const queryBlogDetailContent = (
   lang,
 ) => `*[_type == "blogDetailContent" && _lang == "${lang}"] {
   ...,
+    calculatorCta{
+    ...,
+    calculatorPage[]->{
+      questionnaireSlug
+    }
+  }
 }`;
 
 export class BlogArticleFacade {
