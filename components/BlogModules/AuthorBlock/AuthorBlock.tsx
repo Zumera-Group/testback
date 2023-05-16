@@ -1,14 +1,23 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Container, Grid, GridColumn } from 'components/Layout';
 import styles from './AuthorBlock.module.scss';
 import { useRouter } from 'next/router';
 import { Button } from 'components/Button';
+import { RichText } from '../RichText';
 
 export const AuthorBlock: React.FC<any> = ({
   blogArticle,
   blogArticleDetail,
 }) => {
   const { locale } = useRouter();
+
+  const richTextRef = useRef(null);
+  const spanRef = useRef(null);
+
+  useEffect(() => {
+    spanRef.current.innerHTML = spanRef.current.firstElementChild.innerHTML;
+  }, [spanRef]);
+
   return (
     <Container classes={[styles.authorWrapper].join(' ')}>
       <div className={styles.innerOffset}>
@@ -41,7 +50,11 @@ export const AuthorBlock: React.FC<any> = ({
                   {index < blogArticle.authors.length - 1 && ', '}
                 </>
               ))}{' '}
-              {blogArticleDetail.authorSection.authorSummary}
+              <span ref={spanRef}>
+                <RichText
+                  content={blogArticleDetail.authorSection.authorSummary}
+                />
+              </span>
             </p>
           </GridColumn>
           <GridColumn sm={12} md={6} lg={3}>

@@ -20,7 +20,6 @@ export const getContentForContentModule = (
   contentModule: ContentModule,
   blogArticleDetail?: any,
 ): JSX.Element => {
-  console.log(blogArticleDetail);
   if (contentModule.specificContentModule instanceof TextBlockModule) {
     return (
       <TextBlock specificContentModule={contentModule.specificContentModule} />

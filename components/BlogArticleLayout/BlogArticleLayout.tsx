@@ -34,7 +34,6 @@ export const BlogArticleLayout: React.FC<{
   //     (n) => n._id !== blogArticle._id,
   //   );
 
-  console.log(blogArticleDetail);
   const { locale } = useRouter();
   const format = useFormatDate();
 
