@@ -4,10 +4,10 @@ import { sanityImageUrlFor } from 'lib/sanity';
 import Image from 'next/image';
 
 export const ImageBlock: React.FC<any> = ({ specificContentModule }) => {
-  const { image, caption } = specificContentModule;
+  const { image, caption, anchor } = specificContentModule;
 
   return (
-    <Container classes={styles.imageBlockWrapper}>
+    <Container classes={styles.imageBlockWrapper} id={anchor}>
       <figure className={styles.figure}>
         <Image
           unoptimized

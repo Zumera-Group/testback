@@ -3,10 +3,10 @@ import { RichText } from '../RichText';
 import { Container, Grid, GridColumn } from 'components/Layout';
 
 export const TextBlock: React.FC<any> = ({ specificContentModule }) => {
-  const { subheading, text } = specificContentModule;
+  const { subheading, text, anchor } = specificContentModule;
 
   return (
-    <Container classes={styles.textBlock}>
+    <Container classes={styles.textBlock} id={anchor}>
       <div className={styles.innerOffset}>
         <Grid
           fullWidth={true}

@@ -5,9 +5,9 @@ import styles from './TextStatsBlock.module.scss';
 import { StatsCircle } from '../StatsCircle';
 
 export const TextStatsBlock = ({ specificContentModule }) => {
-  const { subheading, text, statistics } = specificContentModule;
+  const { subheading, text, statistics, anchor } = specificContentModule;
   return (
-    <Container classes={styles.textStatsWrapper}>
+    <Container classes={styles.textStatsWrapper} id={anchor}>
       <div className={styles.innerOffset}>
         <Grid
           fullWidth={true}

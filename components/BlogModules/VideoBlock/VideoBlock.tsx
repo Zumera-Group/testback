@@ -19,11 +19,11 @@ const PlayButton = () => (
 );
 
 export const VideoBlock: React.FC<any> = ({ specificContentModule }) => {
-  const { videoUrl, thumbnail, caption, videoTitle, duration } =
+  const { videoUrl, thumbnail, caption, videoTitle, duration, anchor } =
     specificContentModule;
 
   return (
-    <Container classes={styles.videoBlockWrapper}>
+    <Container classes={styles.videoBlockWrapper} id={anchor}>
       <div className={styles.innerWrapper}>
         <ReactPlayer
           url={videoUrl}

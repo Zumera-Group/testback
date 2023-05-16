@@ -3,10 +3,10 @@ import styles from './QuoteBlock.module.scss';
 import { Quotation } from 'components/Icons/Quotation';
 
 export const QuoteBlock: React.FC<any> = ({ specificContentModule }) => {
-  const { quote, name, position } = specificContentModule;
+  const { quote, name, position, anchor } = specificContentModule;
 
   return (
-    <Container classes={styles.quoteBlockWrapper}>
+    <Container classes={styles.quoteBlockWrapper} id={anchor}>
       <Grid
         justifyContent={'space-between'}
         alignItems={'center'}

@@ -46,33 +46,39 @@ export class ContentModule {
 export class TextBlockModule extends BaseModule {
   subheading: string;
   text: any[];
+  anchor?: string;
 
   constructor(fields: Record<string, any>) {
     super();
     this.subheading = fields.subheading;
     this.text = fields.text;
+    this.anchor = fields.anchor;
   }
 }
 
 export class ImageBlockModule extends BaseModule {
   image: any;
   caption: string;
+  anchor?: string;
 
   constructor(fields: Record<string, any>) {
     super();
     this.image = fields.image;
     this.caption = fields.caption;
+    this.anchor = fields.anchor;
   }
 }
 
 export class TextImageParallaxBlockModule extends BaseModule {
   imageSection: {};
   textSection: any[];
+  anchor?: string;
 
   constructor(fields: Record<string, any>) {
     super();
     this.imageSection = fields.imageSection;
     this.textSection = fields.textSection;
+    this.anchor = fields.anchor;
   }
 }
 
@@ -80,12 +86,14 @@ export class QuoteBlockModule extends BaseModule {
   quote: string;
   name: string;
   position: string;
+  anchor?: string;
 
   constructor(fields: Record<string, any>) {
     super();
     this.quote = fields.quote;
     this.name = fields.name;
     this.position = fields.position;
+    this.anchor = fields.anchor;
   }
 }
 
@@ -93,23 +101,27 @@ export class TextStatsBlockModule extends BaseModule {
   subheading: string;
   text: any[];
   statistics: any;
+  anchor?: string;
 
   constructor(fields: Record<string, any>) {
     super();
     this.subheading = fields.subheading;
     this.text = fields.text;
     this.statistics = fields.statistics;
+    this.anchor = fields.anchor;
   }
 }
 
 export class FullWidthImageBlockModule extends BaseModule {
   image: any;
   caption: string;
+  anchor?: string;
 
   constructor(fields: Record<string, any>) {
     super();
     this.image = fields.image;
     this.caption = fields.caption;
+    this.anchor = fields.anchor;
   }
 }
 
@@ -119,6 +131,7 @@ export class VideoBlockModule extends BaseModule {
   videoUrl: string;
   duration: string;
   caption?: string;
+  anchor?: string;
 
   constructor(fields: Record<string, any>) {
     super();
@@ -127,5 +140,6 @@ export class VideoBlockModule extends BaseModule {
     this.videoUrl = fields.videoUrl;
     this.duration = fields.duration;
     this.caption = fields.caption;
+    this.anchor = fields.anchor;
   }
 }

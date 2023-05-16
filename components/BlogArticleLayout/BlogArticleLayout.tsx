@@ -35,7 +35,7 @@ export const BlogArticleLayout: React.FC<{
   const { locale } = useRouter();
   const format = useFormatDate();
 
-  // console.log(blogArticle);
+  console.log(blogArticle);
 
   const otherLangSlug =
     blogArticle?.queryOtherLangSlug?.slice(-1)[0]?.slug &&
@@ -131,8 +131,26 @@ export const BlogArticleLayout: React.FC<{
                   </GridColumn>
                 </Grid>
               </GridColumn>
-              <GridColumn sm={12} md={6} lg={3}>
-                <p>Anchor links</p>
+              <GridColumn
+                sm={12}
+                md={6}
+                lg={3}
+                className={styles.tocListWrapper}
+              >
+                <aside className={styles.tocInner}>
+                  <span className={styles.tocTitle}>JUMP TO SECTION</span>
+                  <ol>
+                    {blogArticle?.toc?.map((section) => (
+                      <>
+                        <li>
+                          <a key={section._id} href={`#${section.anchor}`}>
+                            {section?.title}
+                          </a>
+                        </li>
+                      </>
+                    ))}
+                  </ol>
+                </aside>
               </GridColumn>
             </Grid>
           </Container>
@@ -146,7 +164,10 @@ export const BlogArticleLayout: React.FC<{
               className={styles.heroImage}
             />
           </Container>
-          <Container classes={[styles.introContentWrapper].join(' ')}>
+          <Container
+            classes={[styles.introContentWrapper].join(' ')}
+            id={blogArticle.introAnchor}
+          >
             <div className={styles.innerOffset}>
               <Grid fullWidth={true} justifyContent={'space-between'}>
                 <GridColumn sm={12} md={6} lg={8}>

@@ -16,6 +16,8 @@ export interface BlogArticle {
   heroImage: any;
   summary: string;
   introduction: any;
+  introAnchor: string;
+  toc: any[];
   relatedArticles: any[];
   blogModules: {
     _key: string;

@@ -8,11 +8,11 @@ import RichText from '../RichText/RichText';
 export const TextImageParallaxBlock: React.FC<any> = ({
   specificContentModule,
 }) => {
-  const { imageSection, textSection } = specificContentModule;
+  const { imageSection, textSection, anchor } = specificContentModule;
   const { headline, summary, image, caption } = imageSection;
 
   return (
-    <Container classes={styles.imageTextParallaxWrapper}>
+    <Container classes={styles.imageTextParallaxWrapper} id={anchor}>
       <Grid
         justifyContent={'space-between'}
         alignItems={'start'}
