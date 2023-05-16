@@ -10,6 +10,7 @@ export interface BlogArticle {
   date: any;
   articleTitle: string;
   slug: { current: string };
+  categories: any[];
   authors: any[];
   seoDescription: string;
   seoTitle: string;

@@ -18,6 +18,9 @@ const queryBlogArticle = (
   _lang,
  seoDescription,
  seoTitle,
+ categories[]->{
+   ...,
+ },
   heroImage {
     ...,
     asset->{
@@ -48,6 +51,9 @@ const queryBlogArticle = (
     slug,
     _id,
     date,
+    categories[]->{
+      ...,
+    },
     heroImage {
       ...,
       asset->{
@@ -117,6 +123,9 @@ const queryBlogArticles = (
   _lang,
  seoDescription,
  seoTitle,
+  categories[]->{
+   ...,
+ },
   heroImage {
     ...,
     asset->{
@@ -147,6 +156,9 @@ const queryBlogArticles = (
     slug,
     _id,
     date,
+    categories[]->{
+      ...,
+    },
      heroImage {
     ...,
     asset->{

@@ -7,7 +7,7 @@ export const FullWidthImageBlock: React.FC<any> = ({
   specificContentModule,
 }) => {
   const { image, caption, anchor } = specificContentModule;
-  console.log(specificContentModule);
+
   return (
     <Container classes={styles.fullImageBlockWrapper} id={anchor}>
       <figure className={styles.figure}>

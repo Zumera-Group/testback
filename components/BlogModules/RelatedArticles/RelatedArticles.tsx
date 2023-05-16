@@ -74,6 +74,13 @@ const RelatedArticles: React.FC<{
               </span>
               <h5>{article?.articleTitle}</h5>
               <p className={styles.summary}>{article?.summary}</p>
+              <div className={styles.categoryTags}>
+                {article.categories?.map((category) => (
+                  <div key={category._id} className={styles.categoryTag}>
+                    {category.title}
+                  </div>
+                ))}
+              </div>
             </article>
           </SwiperSlide>
         ))}

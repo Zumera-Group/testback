@@ -54,7 +54,7 @@
     &:before {
       top: -$gutter;
       left: 0;
-      height: calc(50% + #{$gutter});
+      height: calc(20% + #{$gutter});
       width: $border-width;
       @include divider(left, $primary, true);
     }
@@ -70,5 +70,18 @@
   .date {
     margin: $gutter 0;
     display: block;
+  }
+
+  .categoryTags {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: $gutter;
+    flex-wrap: wrap;
+    .categoryTag {
+      background-color: $lighter;
+      padding: $gutter * 0.25 $gutter;
+      border-radius: 4px;
+    }
   }
 }
