@@ -45,10 +45,7 @@ export const AuthorBlock: React.FC<any> = ({
                     className={styles.authorLink}
                   >
                     {author?.firstName} {author?.lastName}
-                  </a>{' '}
-                  {author?.email && (
-                    <a href={`mailto:${author?.email}`}> ({author.email})</a>
-                  )}
+                  </a>
                   {index < blogArticle.authors.length - 1 && ', '}
                 </>
               ))}{' '}
