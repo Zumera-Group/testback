@@ -30,12 +30,6 @@ export const BlogArticleLayout: React.FC<{
 }> = ({ blogArticle, siteSettings, blogArticleDetail, querySlug }) => {
   const { locale } = useRouter();
 
-  const otherLangSlug =
-    blogArticle?.queryOtherLangSlug?.slice(-1)[0]?.slug &&
-    links(locale === 'en' ? 'de' : 'en').blogArticles(
-      blogArticle?.queryOtherLangSlug?.slice(-1)[0] as any,
-    );
-
   const blogModules =
     blogArticle?.blogModules?.map((c) => ContentModule.create(c)) || [];
 
@@ -217,6 +211,7 @@ export const BlogArticleLayout: React.FC<{
           <AuthorBlock
             blogArticle={blogArticle}
             blogArticleDetail={blogArticleDetail}
+            key={blogArticle._id}
           />
           {blogArticle.relatedArticles && (
             <RelatedArticles

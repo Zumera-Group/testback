@@ -22,7 +22,7 @@ export const AuthorBlock: React.FC<any> = ({
   } = blogArticleDetail;
 
   return (
-    <Container classes={[styles.authorWrapper].join(' ')}>
+    <Container classes={[styles.authorWrapper].join(' ')} key={blogArticle._id}>
       <div className={styles.innerOffset}>
         <Grid
           fullWidth={true}

@@ -87,8 +87,10 @@ export const Header = ({
     (h) => h.type === 'sectors',
   )?.sectorMenuItems;
   const blogArticles = siteSettings?.hamburgerMenu.find(
-    (h) => h.type === 'blogArticles',
+    (h) => h.type === 'blogValToolArticle',
   )?.blogMenuItems;
+
+  // console.log(blogArticles);
 
   useEffect(() => {
     const handleScroll = () => {

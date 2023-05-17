@@ -147,7 +147,7 @@ export default function Index({
 
   const otherLangSlug =
     selectedBlogArticle?.queryOtherLangSlug?.slice(-1)[0]?.slug &&
-    links(locale === 'en' ? 'de' : 'en').blogValToolArticles(
+    links(locale === 'en' ? 'de' : 'en').blogValToolArticle(
       selectedBlogArticle?.queryOtherLangSlug?.slice(-1)[0] as any,
     );
 

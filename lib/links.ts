@@ -37,8 +37,8 @@ export const links = (l?: string) => {
         `/en/landing/${l?.landingSlug?.current || ''}`,
       blogArticles: (b: BlogArticle): string =>
         `/en/blog/${b?.slug?.current || ''}`,
-      blogValToolArticles: (b: BlogArticle): string =>
-        `/en/valuation-tool/${b?.slug?.current || ''}`,
+      blogValToolArticle: (bv: BlogArticle): string =>
+        `/en/valuation-tool/${bv?.slug?.current || ''}`,
     };
   }
 
@@ -58,7 +58,7 @@ export const links = (l?: string) => {
       `/de/landing/${l?.landingSlug?.current || ''}`,
     blogArticles: (b: BlogArticle): string =>
       `/de/blog/${b?.slug?.current || ''}`,
-    blogValToolArticles: (b: BlogArticle): string =>
-      `/de/unternehmenswert-rechner/${b?.slug?.current || ''}`,
+    blogValToolArticle: (bv: BlogArticle): string =>
+      `/de/unternehmenswert-rechner/${bv?.slug?.current || ''}`,
   };
 };
