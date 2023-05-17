@@ -37,6 +37,8 @@ export const links = (l?: string) => {
         `/en/landing/${l?.landingSlug?.current || ''}`,
       blogArticles: (b: BlogArticle): string =>
         `/en/blog/${b?.slug?.current || ''}`,
+      blogValToolArticles: (b: BlogArticle): string =>
+        `/en/valuation-tool/${b?.slug?.current || ''}`,
     };
   }
 
@@ -56,5 +58,7 @@ export const links = (l?: string) => {
       `/de/landing/${l?.landingSlug?.current || ''}`,
     blogArticles: (b: BlogArticle): string =>
       `/de/blog/${b?.slug?.current || ''}`,
+    blogValToolArticles: (b: BlogArticle): string =>
+      `/de/unternehmenswert-rechner/${b?.slug?.current || ''}`,
   };
 };

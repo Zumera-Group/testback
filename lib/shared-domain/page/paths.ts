@@ -8,6 +8,7 @@ export const enPaths = [
   'cdi-global',
   'career',
   'imprint',
+  'valuation-tool',
 ];
 
 export const dePaths = [
@@ -20,4 +21,5 @@ export const dePaths = [
   'cdi-global',
   'karriere',
   'impressum',
+  'unternehmenswert-rechner',
 ];
