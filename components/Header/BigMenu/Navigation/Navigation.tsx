@@ -35,7 +35,6 @@ export const Navigation = ({
       services: services,
       blogValToolArticle: blogArticles,
     };
-    console.log(navigationItems[showMode]);
     if (navigationItems.hasOwnProperty(showMode))
       setCurrentNavigation(navigationItems[showMode]);
   }, [showMode, sectors, services, blogArticles]);
