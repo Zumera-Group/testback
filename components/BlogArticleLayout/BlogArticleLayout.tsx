@@ -7,10 +7,8 @@ import { ContentModule } from 'lib/shared-domain/blogArticle/domain/blogModule';
 import { getContentForContentModule } from 'lib/shared-domain/blogArticle/presentation/blogModules';
 import { PageTransition } from 'components/PageTransition';
 import { SEO } from 'components/SEO';
-import { useFetchBlogArticles } from 'lib/shared-domain/blogArticle/application/useGetBlogArticles';
 import { links } from 'lib/links';
 import { useRouter } from 'next/router';
-import { useFormatDate } from 'lib/shared-domain/useFormatDate';
 import { Container, Grid, GridColumn, Section } from 'components/Layout';
 import styles from './BlogArticleLayout.module.scss';
 import { Button } from 'components/Button';
@@ -22,6 +20,7 @@ import { SocialShare } from 'components/BlogModules/SocialShare';
 import { AuthorBlock } from 'components/BlogModules/AuthorBlock';
 import RelatedArticles from 'components/BlogModules/RelatedArticles/RelatedArticles';
 import ContactUsSection from 'lib/shared-domain/page/presentation/contentModules/ContactUsSection';
+import useFormatDateLong from 'lib/shared-domain/useFormatDateLong';
 
 export const BlogArticleLayout: React.FC<{
   blogArticle: BlogArticle;
@@ -29,7 +28,6 @@ export const BlogArticleLayout: React.FC<{
   blogArticleDetail: any;
 }> = ({ blogArticle, siteSettings, blogArticleDetail }) => {
   const { locale } = useRouter();
-  const format = useFormatDate();
 
   const otherLangSlug =
     blogArticle?.queryOtherLangSlug?.slice(-1)[0]?.slug &&
@@ -39,9 +37,7 @@ export const BlogArticleLayout: React.FC<{
   const blogModules =
     blogArticle?.blogModules?.map((c) => ContentModule.create(c)) || [];
 
-  const dateFormatted = blogArticle?.date
-    ? format(new Date(blogArticle?.date))
-    : null;
+  const dateFormatted = useFormatDateLong(blogArticle?.date);
 
   return (
     <main id="main" className={styles.blogArticle}>
