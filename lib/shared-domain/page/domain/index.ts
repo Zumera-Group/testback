@@ -113,7 +113,7 @@ export interface SiteSettings {
   }[];
   hamburgerMenu: {
     name: string;
-    type: 'normal' | 'sectors' | 'services' | 'blogArticles';
+    type: 'normal' | 'sectors' | 'services' | 'blogValToolArticle';
     page: {
       slug: {
         current: string;
