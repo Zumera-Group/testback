@@ -12,7 +12,7 @@ export const WhitePaperDownload: React.FC<any> = ({
   const { title, subtitle, description, whitePaperFormFields, image, file } =
     specificContentModule;
 
-  console.log(specificContentModule);
+  // console.log(specificContentModule);
   return (
     <Section size={'md'} bg={'light'} color={'primary'}>
       <Container>
