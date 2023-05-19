@@ -11,6 +11,7 @@ import styles from './AboutUs.module.scss';
 
 export const AboutUs = ({ ...rest }) => {
   const { title, subtitle, description, link, bulletPoints } = rest;
+
   const isMobile = useMediaQuery(`(max-width: ${SCREEN_SIZE_MD})`);
 
   const CTA = () => {

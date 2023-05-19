@@ -71,11 +71,11 @@
       }
     },
     "evaluation": {
-      "title": "Zumera Free Expert Evaluation",
+      "title": "Get your free expert evaluation",
       "description": "In order to give a sound estimation of the company value an adviser will double check the entries and will reach out with the result via email or via phone if there are open question.",
       "resultBox": {
         "title": "Your preliminary result",
-        "points": "{{points}} pt",
+        "points": "{{points}}",
         "betterThen": "Better than {{percentage}}% of our applicants"
       },
       "form": {
@@ -96,10 +96,10 @@
           "error": "Phone number is required"
         },
         "checkbox": {
-          "first": "Hiermit stimme ich, ",
-          "second": "gemäß unserer Datenschutzerklärung",
-          "third": ", der Verarbeitung meiner Daten zu.",
-          "link": "/de/datenschutzerklarung/"
+          "first": "I agree with the processing of the given ",
+          "second": "data",
+          "third": " for the creation of the evaluation as well as the contacting by Zumera.",
+          "link": "/en/privacy-policy/"
         },
         "checkboxError": "This is required",
         "button": "Send",

@@ -1,0 +1,59 @@
+.imageTextParallaxWrapper {
+  @include breakpoint-up(md) {
+    margin-bottom: $blog-mb-desktop * 0.5;
+  }
+  .headline {
+    font-size: $font-size-base * 1.5;
+    line-height: 1.25;
+    @include breakpoint-up(md) {
+      font-size: $h4-font-size;
+    }
+  }
+  .figure {
+    img {
+      margin-top: $gutter * 0.75;
+      margin-bottom: $gutter * 1.5;
+    }
+  }
+
+  .summary {
+    font-size: $font-size-base * 1.13;
+    @include breakpoint-up(md) {
+      font-size: $font-size-base * 1.17;
+    }
+  }
+
+  .leftPane {
+    @include breakpoint-up(md) {
+      width: 50%;
+      height: 100vh;
+      position: sticky;
+      top: 0;
+      z-index: 1;
+    }
+  }
+
+  .rightPane {
+    .subheading {
+      font-size: $font-size-base * 1.25;
+    }
+
+    .content {
+      & > * {
+        font-size: $font-size-base;
+      }
+    }
+
+    .textBlock {
+      margin-bottom: $gutter * 3;
+    }
+
+    @include breakpoint-up(md) {
+      padding-left: 0;
+    }
+  }
+
+  .addPadTop {
+    padding-top: 40rem;
+  }
+}

@@ -1,0 +1,17 @@
+.bulletTitle {
+  font-weight: normal;
+  @include divider(bottom, $primary);
+  padding-bottom: $gutter * 1.5;
+}
+.items {
+  @include bullet-list();
+  font-size: $font-size-normal;
+  margin: 0;
+  li {
+    @include divider(bottom, $primary);
+    margin-bottom: $gutter * 1.5;
+    p {
+      margin-bottom: $gutter * 1.5;
+    }
+  }
+}

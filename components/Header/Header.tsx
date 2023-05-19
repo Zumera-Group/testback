@@ -39,6 +39,7 @@ export const Header = ({
   staticExtended,
   indicator,
   hideMenu,
+  whiteBg,
 }) => {
   const [bigMenuOpen, setBigMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -48,7 +49,7 @@ export const Header = ({
   const router = useRouter();
   const linkWithCurrentLocale = useLinkWithCurrentLocale();
   const homeSlug = linkWithCurrentLocale(siteSettings?.homePage?.slug?.current);
-
+  const [isLanding, setIsLanding] = useState(false);
   const isQuestionnaire = () =>
     router.locale === 'en' ? '/questionnaires/' : '/fragenkatalog/';
   const hideTopBanner = router.asPath.includes(isQuestionnaire());
@@ -85,6 +86,11 @@ export const Header = ({
   const sectors = siteSettings?.hamburgerMenu.find(
     (h) => h.type === 'sectors',
   )?.sectorMenuItems;
+  const blogArticles = siteSettings?.hamburgerMenu.find(
+    (h) => h.type === 'blogValToolArticle',
+  )?.blogMenuItems;
+
+  // console.log(blogArticles);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -128,16 +134,26 @@ export const Header = ({
     };
   }, []);
 
-  const [isLanding, setIsLanding] = useState(false);
-
+  //set session storage for campaign landing page joruney to calculator
   useEffect(() => {
+    const isLandingRoute = router.route.includes('landing');
+    const isQuestionnaireRoute =
+      router.route.includes('questionnaires') ||
+      router.route.includes('fragenkatalog');
     const session = sessionStorage.getItem('isLanding');
-    if (session === 'true') {
+
+    if (
+      (session === 'true' &&
+        router.query.slug !== 'valuation-tool' &&
+        isLandingRoute) ||
+      (session === 'true' && isQuestionnaireRoute)
+    ) {
       setIsLanding(true);
     } else {
       setIsLanding(false);
+      sessionStorage.removeItem('isLanding');
     }
-  }, []);
+  }, [router.query.slug, router.route]);
 
   return (
     <>
@@ -152,6 +168,7 @@ export const Header = ({
         id="header"
         className={[
           styles.header,
+          whiteBg ? styles.header__white : '',
           isLightPage() ? styles.header__light : '',
           isScrolled ? styles.header__scrolled : '',
           bigMenuOpen ? styles.header__open : '',
@@ -215,6 +232,7 @@ export const Header = ({
               siteSettings={siteSettings}
               services={services}
               sectors={sectors}
+              blogArticles={blogArticles}
               logo={<Logo slug={homeSlug} title={siteName} isAnimated={true} />}
               closeBigMenu={() => setBigMenuOpen(false)}
               otherLangSlug={otherLangSlug}

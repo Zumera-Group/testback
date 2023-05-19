@@ -31,7 +31,7 @@
 .title {
   margin-top: 0;
   margin-bottom: 0;
-
+  overflow-wrap: anywhere;
   & + * {
     margin-top: $headings-margin-bottom;
   }

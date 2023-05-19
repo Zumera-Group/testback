@@ -23,6 +23,7 @@ export const TransactionsSelected: React.FC<{
   transaction: Transaction;
   content: any;
 }> = ({ transaction, content }) => {
+  const router = useRouter();
   const transactions = useFetchTransactions();
   const swiperPrevRef = useRef();
   const swiperNextRef = useRef();
@@ -32,6 +33,9 @@ export const TransactionsSelected: React.FC<{
     (t) => t._id !== transaction._id,
   );
   if (!filteredTransactions || filteredTransactions.length === 0) return null;
+
+  const transactionSlug =
+    router.locale === 'en' ? '/transactions' : '/transaktionen';
 
   return (
     <Section size={'md'} bg={'light'} color={'primary'}>
@@ -82,7 +86,7 @@ export const TransactionsSelected: React.FC<{
               {content?.linkText ? (
                 <Button
                   variant={'secondary'}
-                  link={{ slug: { current: `/transactions` } }}
+                  link={{ slug: { current: transactionSlug } }}
                   classes={styles.button}
                 >
                   {content?.linkText}

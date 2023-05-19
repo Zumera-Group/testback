@@ -46,6 +46,7 @@ const retrieve = (): Record<string, any> => {
       if (value) {
         total[key] = MarketingQueryStorage.get(key);
       }
+
       return total;
     }, {});
 
@@ -77,8 +78,8 @@ const getCookies = () => {
   const ga = getCookieByName('_ga');
 
   return {
-    GaSessionID__c: ga,
-    GAUserId__c: gid,
+    gasessionid__c: ga,
+    gauserid__c: gid,
   };
 };
 

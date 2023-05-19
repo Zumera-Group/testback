@@ -6,12 +6,23 @@ import Image from 'next/image';
 import { TextWithImageGridModule } from 'lib/shared-domain/page/domain/contentModule';
 import { Icon } from 'components/Icon';
 import { sanityImageUrlFor } from 'lib/sanity';
+import { SanityBlockContent } from 'components/SanityBlockContent';
 
 export const TextWithImageGrid: React.FC<{
   specificContentModule: TextWithImageGridModule;
 }> = ({ specificContentModule }) => {
-  const { title, subtitle, description, button, background, image, bullets } =
-    specificContentModule;
+  const {
+    title,
+    subtitle,
+    description,
+    button,
+    background,
+    image,
+    bullets,
+    servicesCards,
+    alignServicesCenter,
+    noServiceCardsBoldTitle,
+  } = specificContentModule;
 
   const sectionStyles = [
     styles.gridContainer,
@@ -81,6 +92,43 @@ export const TextWithImageGrid: React.FC<{
           </Grid>
         ) : null}
       </Container>
+      {servicesCards?.length ? (
+        <Container>
+          <div
+            className={[
+              styles.servicesCards,
+              alignServicesCenter ? styles.centered : '',
+              noServiceCardsBoldTitle ? styles.noBoldTitle : '',
+            ].join(' ')}
+          >
+            {servicesCards.map((card) => (
+              <div key={card._key} className={styles.servicesCard}>
+                <div className={styles.icon}>
+                  <Image
+                    loading="lazy"
+                    src={sanityImageUrlFor(
+                      card.cardIcon?.iconImage?.asset?.url,
+                    ).url()}
+                    alt={'icon'}
+                    height="48"
+                    width="48"
+                    style={{
+                      maxWidth: '100%',
+                      height: 'auto',
+                    }}
+                  />
+                </div>
+                <div>
+                  <SanityBlockContent text={card.title} />
+                </div>
+                <div>
+                  <SanityBlockContent text={card.description} />
+                </div>
+              </div>
+            ))}
+          </div>
+        </Container>
+      ) : null}
     </Section>
   );
 };

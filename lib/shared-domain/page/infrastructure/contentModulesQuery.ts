@@ -86,6 +86,18 @@ export const contentModulesQuery = (
          url,
        }
     },
+    rightButtons[] {
+      ...,
+      link->{
+        slug
+      }
+    },
+    leftButtons[] {
+      ...,
+      link->{
+        slug
+      },
+    },
 	file{
       asset->{
         url
@@ -443,6 +455,11 @@ export const contentModulesQuery = (
         url
       }
     },
+     bottomBackground {
+      asset->{
+        url
+      }
+    },
     heroMobileBgImage {
       asset->{
         url
@@ -455,6 +472,16 @@ export const contentModulesQuery = (
           url
         }
       }
+    },
+    servicesCards[] {
+      ...,
+      cardIcon {
+		iconImage {
+			asset->{
+			  url,
+			}
+		}
+      },
     },
     values[] {
       ...,
@@ -540,5 +567,13 @@ export const contentModulesQuery = (
 				},
 		},
     }, 
+    partnerItem[] {
+		...,
+		image {
+			asset->{
+			  url
+			},
+		},
+   }, 
 ${extraQuery || ''}
   }`;

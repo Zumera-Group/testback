@@ -42,6 +42,10 @@
     }
   }
 
+  &__white {
+    background-color: $white !important;
+  }
+
   &__light,
   &__scrolled,
   &__open {

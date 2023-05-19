@@ -13,26 +13,40 @@ export const BigMenu = ({
   siteSettings,
   services,
   sectors,
+  blogArticles,
   logo,
   closeBigMenu,
   otherLangSlug,
 }) => {
-  const [showMode, setShowMode] = useState<'normal' | 'sectors' | 'services'>(
-    'normal',
-  );
+  const [showMode, setShowMode] = useState<
+    'normal' | 'sectors' | 'services' | 'blogValToolArticle'
+  >('normal');
 
   const getNavigationHeading = () => {
     if (showMode === 'sectors') {
       const sectorsMenu = siteSettings?.hamburgerMenu?.find(
         (menu) => menu.type.toLowerCase() === showMode,
       );
-      return sectorsMenu.name;
+      return { heading: sectorsMenu.name, slug: sectorsMenu.page.slug.current };
     }
     if (showMode === 'services') {
       const servicesMenu = siteSettings?.hamburgerMenu?.find(
         (menu) => menu.type.toLowerCase() === showMode,
       );
-      return servicesMenu.name;
+      return {
+        heading: servicesMenu.name,
+        slug: servicesMenu.page.slug.current,
+      };
+    }
+    if (showMode === 'blogValToolArticle') {
+      const blogArticlesMenu = siteSettings?.hamburgerMenu?.find(
+        (menu) => menu.type === showMode,
+      );
+
+      return {
+        heading: blogArticlesMenu.name,
+        slug: blogArticlesMenu.page.slug.current,
+      };
     }
     return '';
   };
@@ -60,6 +74,7 @@ export const BigMenu = ({
         setShowMode={setShowMode}
         sectors={sectors}
         services={services}
+        blogArticles={blogArticles}
       />
       <Close mobile={false} callBack={closeBigMenu} />
     </motion.nav>

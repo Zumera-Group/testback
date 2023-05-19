@@ -2,31 +2,24 @@ import { IService } from 'components/TimelineSection/TimelineSection';
 import styles from './TimelineSection.module.scss';
 import { Icon } from 'components/Icon';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
-
+import { links } from 'lib/links';
+import { Service } from 'lib/shared-domain/page/domain';
 interface IProps {
   service: IService;
   index: number;
 }
 export const ServiceItem: React.FC<IProps> = ({ service, index }) => {
-  const route = useRouter();
   return (
     <div className={styles.serviceItem}>
       <Link
         passHref
-        href={`${route.asPath}${service.slug?.current}`}
-        className={styles.serviceLink}>
-
-        <h2 className={styles.serviceIndex}>
-          {index}
-        </h2>
+        href={links().services(service as Service)}
+        className={styles.serviceLink}
+      >
+        <h2 className={styles.serviceIndex}>{index}</h2>
         <div className={styles.serviceItemContent}>
-          <h4 className={styles.serviceName}>
-            {service.name}
-          </h4>
-          <p>
-            {service.shortDescription}
-          </p>
+          <h4 className={styles.serviceName}>{service.name}</h4>
+          <p>{service.shortDescription}</p>
           <Icon
             iconName={'arrow-circle'}
             viewBox={'0 0 32 32'}
@@ -34,7 +27,6 @@ export const ServiceItem: React.FC<IProps> = ({ service, index }) => {
             height={24}
           />
         </div>
-
       </Link>
     </div>
   );

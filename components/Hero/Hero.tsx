@@ -2,6 +2,7 @@ import { Home, Primary } from 'components/Hero';
 import { Transactions } from 'components/Hero/Transactions';
 import { AnchorHero } from 'components/Hero/AnchorHero/AnchorHero';
 import { Career } from 'components/Hero/Career';
+import { Landing } from 'components/Hero/Landing';
 
 interface Props {
   type?: string;
@@ -16,6 +17,8 @@ export const Hero: React.FC<Props> = ({ allPageContent, ...rest }) => {
     career: <Career {...rest} />,
     transaction: <Transactions {...rest} />,
     anchor: <AnchorHero allPageContent={allPageContent} {...rest} />,
+    landing_dark: <Landing {...rest} type={'dark'} />,
+    landing_light: <Landing {...rest} type={'light'} />,
   };
   const { type } = rest;
   const selectedHero = types.hasOwnProperty(type);

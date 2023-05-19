@@ -77,6 +77,9 @@ export const querySiteSettings = (
     sectorMenuItems[]-> {
       ...,
     },
+    blogMenuItems[]-> {
+      ...,
+    },
   },
   headerMenu[] {
     ...,
@@ -97,6 +100,9 @@ export const querySiteSettings = (
       ...,
     },
     sectorMenuItems[]-> {
+      ...,
+    },
+    blogMenuItems[]-> {
       ...,
     },
   },
@@ -151,6 +157,15 @@ export const querySiteSettings = (
       image{
         asset->{
           url,
+        }
+      }
+    },
+    contactForm {
+      ...,
+      checkboxPrivacyPage->{
+        slug {
+          ...,
+          current
         }
       }
     }

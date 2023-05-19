@@ -36,6 +36,8 @@ export interface Page {
   queryOtherLangSlug: {
     slug: { current: string };
   }[];
+
+  darkBg: boolean;
 }
 
 export interface IAnnouncementTopBanner {
@@ -111,7 +113,7 @@ export interface SiteSettings {
   }[];
   hamburgerMenu: {
     name: string;
-    type: 'normal' | 'sectors' | 'services';
+    type: 'normal' | 'sectors' | 'services' | 'blogValToolArticle';
     page: {
       slug: {
         current: string;

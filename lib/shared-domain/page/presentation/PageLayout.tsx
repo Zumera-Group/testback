@@ -43,9 +43,11 @@ const PageLayout: React.FC<{
           otherLangSlug={otherLangSlug}
           hideHeader={page.isHeaderRoutesHidden}
           hideMenu={page.hideNavMenu}
+          darkBg={page.darkBg}
         />
         <Suspense fallback={() => <div>loading</div>}>
           <main id="main">
+            {console.log(contentModules, 'contentModules')}
             {contentModules &&
               contentModules.map((c) => {
                 return (

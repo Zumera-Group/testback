@@ -17,7 +17,6 @@ export const useAnswers = (
     getAnswer: () => {
       if (getAnswer(question?.salesforceId))
         return getAnswer(question?.salesforceId);
-
       return getAnswer(question?._id);
     },
   };

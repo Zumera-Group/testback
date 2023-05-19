@@ -27,6 +27,12 @@ import {
   StepsDownBulletsSectionModule,
   StickyFooterModule,
   TransactionQuoteModule,
+  OpenJobsListModule,
+  PartnerLogosAndTextsModule,
+  DividerLineModule,
+  PartnerPersonQuoteModule,
+  PartnerReviewModule,
+  PartnerVisionModule,
   WhitePaperDownloadModule,
 } from '../../domain/contentModule';
 
@@ -74,16 +80,61 @@ import { TransactionQuote } from 'components/TransactionQuote';
 import { WhitePaperDownload } from 'components/WhitePaperDownload';
 
 import dynamic from 'next/dynamic';
+import { OpenJobsList } from 'components/OpenJobsList';
+import { PartnerLogoAndTextSection } from 'components/PartnerLogoAndTextSection';
+import { DividerLine } from 'components/DividerLine';
+import { PartnerPersonQuote } from 'components/PartnerPersonQuote';
+import { PartnerReviewSection } from 'components/PartnerReviewSection';
+import { PartnerVisionSection } from 'components/PartnerVisionSection';
 const NewsGridSection = dynamic(() => import('./NewsGridSection'), {
   ssr: false,
 });
-
 export const getContentForContentModule = (
   contentModule: ContentModule,
   siteSettings: any,
   sharedContent?: any,
   allModulesData?: any,
 ): JSX.Element => {
+  if (contentModule.specificContentModule instanceof PartnerVisionModule) {
+    return (
+      <PartnerVisionSection
+        specificContentModule={contentModule.specificContentModule}
+      />
+    );
+  }
+  if (contentModule.specificContentModule instanceof PartnerReviewModule) {
+    return (
+      <PartnerReviewSection
+        specificContentModule={contentModule.specificContentModule}
+      />
+    );
+  }
+  if (contentModule.specificContentModule instanceof PartnerPersonQuoteModule) {
+    return (
+      <PartnerPersonQuote
+        specificContentModule={contentModule.specificContentModule}
+      />
+    );
+  }
+  if (contentModule.specificContentModule instanceof DividerLineModule) {
+    return <DividerLine />;
+  }
+  if (
+    contentModule.specificContentModule instanceof PartnerLogosAndTextsModule
+  ) {
+    return (
+      <PartnerLogoAndTextSection
+        specificContentModule={contentModule.specificContentModule}
+      />
+    );
+  }
+  if (contentModule.specificContentModule instanceof OpenJobsListModule) {
+    return (
+      <OpenJobsList
+        specificContentModule={contentModule.specificContentModule}
+      />
+    );
+  }
   if (contentModule.specificContentModule instanceof WhitePaperDownloadModule) {
     return (
       <WhitePaperDownload
@@ -360,5 +411,8 @@ export const getContentForContentModule = (
         specificContentModule={contentModule.specificContentModule}
       />
     );
+  }
+  if (contentModule.specificContentModule === 'blogIndexSection') {
+    return <div>Blog</div>;
   }
 };

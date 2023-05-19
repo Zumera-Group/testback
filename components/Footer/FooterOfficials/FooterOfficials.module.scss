@@ -14,7 +14,7 @@
 
   justify-content: space-between;
   align-items: center;
-  margin: calc(var(--spacing-y) * 2) 0 0 0;
+  //margin: calc(var(--spacing-y) * 2) 0 0 0;
   padding: var(--spacing-y) 0 0 0;
   @include divider(top, $white);
   & > * {

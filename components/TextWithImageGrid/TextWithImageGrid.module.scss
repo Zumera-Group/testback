@@ -4,7 +4,7 @@
   }
 }
 .gridContainer {
-  padding: $gutter * 2;
+  //padding: $gutter * 2;
   @include breakpoint-up(lg) {
     padding: $gutter * 3;
   }
@@ -13,6 +13,8 @@
     &.bg-#{$name} {
       @if ($name == 'gradient') {
         @include zumera-gradient(100%, 0%);
+      } @else if($name == 'light') {
+        color: $primary;
       } @else {
         background-color: $bg;
       }
@@ -75,5 +77,50 @@
         @include divider('bottom', $white);
       }
     }
+  }
+}
+
+.servicesCards {
+  margin-top: $gutter * 2;
+  display: flex;
+  padding-bottom: $gutter * 4;
+  color: $primary;
+  @include breakpoint-up(md) {
+    margin-top: $gutter * 3;
+  }
+  @include breakpoint-down(md) {
+    flex-direction: column;
+  }
+  &.noBoldTitle {
+    h4 {
+      font-weight: normal;
+    }
+  }
+  &.centered {
+    .servicesCard {
+      text-align: center;
+    }
+  }
+}
+
+.servicesCard {
+  @include divider('right', $primary);
+  flex: 1;
+  padding: 0 $gutter * 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  h4 {
+    margin-top: 12px;
+  }
+  &:last-child {
+    @include divider('right', transparent);
+    @include breakpoint-down(md) {
+      @include divider('bottom', $primary);
+    }
+  }
+  @include breakpoint-down(md) {
+    @include divider('bottom', $primary);
+    padding: $gutter * 1.2 0;
   }
 }

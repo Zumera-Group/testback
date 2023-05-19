@@ -1,0 +1,28 @@
+.textStatsWrapper {
+  margin-bottom: $blog-mb-mobile * 0.75;
+  @include breakpoint-up(md) {
+    margin-bottom: $blog-mb-desktop;
+  }
+
+  .content > div {
+    flex-direction: column-reverse;
+    @include breakpoint-up(md) {
+      flex-direction: row;
+    }
+  }
+  .description {
+    text-align: center;
+    padding: $gutter $gutter $gutter * 2;
+    display: block;
+
+    @include divider('bottom', $primary);
+  }
+
+  .statsWrapper {
+    @include breakpoint-down(md) {
+      max-width: 400px;
+      margin: auto auto $blog-mb-mobile;
+    }
+  }
+}
+@include innerOffset;

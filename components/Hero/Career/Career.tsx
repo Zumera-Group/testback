@@ -7,7 +7,9 @@ import baseStyles from '../Hero.module.scss';
 import styles from './Career.module.scss';
 
 export const Career: HeroComponent = ({ ...rest }) => {
-  const { title, title2, description, button } = rest;
+  const { title, title2, description, button, appointment, bottomBackground } =
+    rest;
+
   const closeCalendly = () => {
     const calendly = document.querySelector('.calendly-overlay');
     if (calendly) {
@@ -19,10 +21,18 @@ export const Career: HeroComponent = ({ ...rest }) => {
   return (
     <Section
       as={'div'}
-      classes={[baseStyles.hero, styles.hero].join(' ')}
+      classes={[
+        baseStyles.hero,
+        styles.hero,
+        bottomBackground?.asset?.url ? baseStyles.heroBottomBackground : '',
+      ].join(' ')}
       size={'xl'}
       bg={'primary'}
       color={'white'}
+      // @ts-ignore
+      style={{
+        backgroundImage: `url(${bottomBackground?.asset?.url || ''})`,
+      }}
     >
       <Container classes={styles.container}>
         <Grid
@@ -48,19 +58,22 @@ export const Career: HeroComponent = ({ ...rest }) => {
                   {button.title}
                 </Button>
               )}
-              <Button
-                variant={'secondary'}
-                callBack={() => {
-                  window.Calendly.showPopupWidget(
-                    'https://calendly.com/thorebehrens/15min?embed_domain=opportunities.saxenhammer-co.com&amp;embed_type=PopupText',
-                  );
-                  const calendly = document.querySelector('.calendly-overlay');
-                  calendly.addEventListener('click', closeCalendly);
-                }}
-                onDark={true}
-              >
-                Book an appointment
-              </Button>
+              {appointment?.title && (
+                <Button
+                  variant={'secondary'}
+                  callBack={() => {
+                    window.Calendly.showPopupWidget(
+                      `${appointment?.calendlyURL}?embed_domain=zumera.com/&amp;embed_type=PopupText`,
+                    );
+                    const calendly =
+                      document.querySelector('.calendly-overlay');
+                    calendly.addEventListener('click', closeCalendly);
+                  }}
+                  onDark={true}
+                >
+                  {appointment?.title}
+                </Button>
+              )}
             </div>
           </GridColumn>
         </Grid>

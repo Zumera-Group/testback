@@ -194,7 +194,6 @@ export class OpenJobsListModule extends BaseModule {
     this.subtitle = fields.subtitle;
     this.title = fields.title;
     this.description = fields.description;
-    this.unit = fields.unit;
   }
 }
 
@@ -509,7 +508,7 @@ export class HeroSectionModule extends BaseModule {
   heroImage: {
     asset: { url: string };
   };
-  heroMobileBgImage: {
+  bottomBackground: {
     asset: { url: string };
   };
   buttonText: string;
@@ -519,6 +518,10 @@ export class HeroSectionModule extends BaseModule {
     link: { slug: { current: string } };
     type: 'normal' | 'underline';
   };
+  appointment?: {
+    title: string;
+    calendlyURL: string;
+  };
 
   constructor(fields: Record<string, any>) {
     super();
@@ -527,7 +530,9 @@ export class HeroSectionModule extends BaseModule {
     this.description = fields.description;
     this.type = fields.type;
     this.button = fields.button;
+    this.appointment = fields.appointment;
     this.heroImage = fields.heroImage;
+    this.bottomBackground = fields.bottomBackground;
   }
 }
 
@@ -911,6 +916,9 @@ export type ContentModuleType =
   | 'landingRoadmap'
   | 'brandOverviewSection'
   | 'referralSection'
+  | 'dividerLine'
+  | 'partnerReviewSection'
+  | 'blogIndexSection'
   // service detail sections
   | serviceDetailSectionNames.processSection
   | serviceDetailSectionNames.helpContactPerson
@@ -920,6 +928,8 @@ export type ContentModuleType =
 
 abstract class ContentModuleTypeFactory {
   static createInstance(type: ContentModuleType, fields: Record<string, any>) {
+    if (type === 'partnerReviewSection') return new PartnerReviewModule(fields);
+    if (type === 'dividerLine') return new DividerLineModule();
     if (type === 'whitePaperDownload')
       return new WhitePaperDownloadModule(fields);
     if (type === 'stickyFooter') return new StickyFooterModule(fields);
@@ -1190,25 +1200,19 @@ export class PartnerAboutModule extends BaseModule {
 }
 
 export class PartnerVisionModule extends BaseModule {
-  image: {
-    asset: {
-      url: string;
-    };
-  };
   title: string;
   subtitle: string;
-  boldText: string;
-  normalText: string;
+  description: string;
+  bulletTitle: string;
   bulletPoints: { title: string; description: any[] }[];
 
   constructor(fields: Record<string, any>) {
     super();
     this.bulletPoints = fields.bulletPoints;
-    this.image = fields.image;
     this.title = fields.title;
     this.subtitle = fields.subtitle;
-    this.boldText = fields.boldText;
-    this.normalText = fields.normalText;
+    this.description = fields.description;
+    this.bulletTitle = fields.bulletTitle;
   }
 }
 
@@ -1272,8 +1276,7 @@ export class ReferralSectionModule extends BaseModule {
 export class PartnerLogosAndTextsModule extends BaseModule {
   title: string;
   subtitle: string;
-  firstText: string;
-  secondText: string;
+  description: string;
   logo1: any;
   logo2: any;
   logo3: any;
@@ -1282,8 +1285,7 @@ export class PartnerLogosAndTextsModule extends BaseModule {
     super();
     this.title = fields.title;
     this.subtitle = fields.subtitle;
-    this.firstText = fields.firstText;
-    this.secondText = fields.secondText;
+    this.description = fields.description;
     this.logo1 = fields.logo1;
     this.logo2 = fields.logo2;
     this.logo3 = fields.logo3;
@@ -1291,7 +1293,7 @@ export class PartnerLogosAndTextsModule extends BaseModule {
 }
 
 export class PartnerPersonQuoteModule extends BaseModule {
-  subtitle: string;
+  quoteOwnerPosition: string;
   title: any;
   partnerImageLabel: string;
   quoteText: string;
@@ -1299,17 +1301,15 @@ export class PartnerPersonQuoteModule extends BaseModule {
   image: {
     asset: { url: string };
   };
-  bullets: string[];
 
   constructor(fields: Record<string, any>) {
     super();
     this.title = fields.title;
-    this.subtitle = fields.subtitle;
+    this.quoteOwnerPosition = fields.quoteOwnerPosition;
     this.quoteOwner = fields.quoteOwner;
     this.partnerImageLabel = fields.partnerImageLabel;
     this.quoteText = fields.quoteText;
     this.image = fields.image;
-    this.bullets = fields.bullets;
   }
 }
 
@@ -1325,6 +1325,18 @@ export class PartnerAboutWithImageModule extends BaseModule {
     this.title = fields.title;
     this.description = fields.description;
     this.image = fields.image;
+  }
+}
+
+export class PartnerReviewModule extends BaseModule {
+  title: string;
+  subtitle: string;
+  partnerItem: any[];
+  constructor(fields: Record<string, any>) {
+    super();
+    this.title = fields.title;
+    this.subtitle = fields.subtitle;
+    this.partnerItem = fields.partnerItem;
   }
 }
 
@@ -1471,6 +1483,10 @@ export class TextWithImageGridModule extends BaseModule {
   image: any;
 
   bullets: any[];
+  servicesCards: any[];
+  alignServicesCenter: boolean;
+  noServiceCardsBoldTitle: boolean;
+
   constructor(fields: Record<string, any>) {
     super();
     this.title = fields.title;
@@ -1480,6 +1496,9 @@ export class TextWithImageGridModule extends BaseModule {
     this.button = fields.button;
     this.image = fields.image;
     this.bullets = fields.bullets;
+    this.servicesCards = fields.servicesCards;
+    this.alignServicesCenter = fields.alignServicesCenter;
+    this.noServiceCardsBoldTitle = fields.noServiceCardsBoldTitle;
   }
 }
 
@@ -1517,6 +1536,9 @@ export class TitleTextSectionModule extends BaseModule {
   description: any[];
   leftButtons: any[];
   rightButtons: any[];
+  servicesCards: any[];
+  alignServicesCenter: boolean;
+  noServiceCardsBoldTitle: boolean;
   constructor(fields: Record<string, any>) {
     super();
     this.title = fields.title;
@@ -1525,6 +1547,9 @@ export class TitleTextSectionModule extends BaseModule {
     this.leftButtons = fields.leftButtons;
     this.leftButtons = fields.leftButtons;
     this.rightButtons = fields.rightButtons;
+    this.servicesCards = fields.servicesCards;
+    this.alignServicesCenter = fields.alignServicesCenter;
+    this.noServiceCardsBoldTitle = fields.noServiceCardsBoldTitle;
   }
 }
 
@@ -1630,6 +1655,12 @@ export class TransactionQuoteModule extends BaseModule {
     this.name = fields.name;
     this.photo = fields.photo;
     this.transaction = fields.transaction;
+  }
+}
+
+export class DividerLineModule extends BaseModule {
+  constructor() {
+    super();
   }
 }
 

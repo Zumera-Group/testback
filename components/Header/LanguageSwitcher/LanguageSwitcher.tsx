@@ -29,6 +29,7 @@ export const LanguageSwitcher: React.FC<Props> = ({
   const pages = {
     en: [
       ...enPaths,
+
       'questionnaires',
       'landing',
       'employees',
@@ -80,7 +81,8 @@ export const LanguageSwitcher: React.FC<Props> = ({
       passHref
       locale={getLocale()}
       href={getSlug()}
-      className={[styles.link, classes ?? ''].join(' ')}>
+      className={[styles.link, classes ?? ''].join(' ')}
+    >
       {localeLabel()}
     </Link>
   );

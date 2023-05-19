@@ -42,6 +42,7 @@ export const TextInput: React.FC<{
             value={getAnswer()}
             onChange={(e) => setAnswer(e.target.value)}
             placeholder={placeholder}
+            hideLabel
           />
         </div>
       </QuestionAnimation>
