@@ -67,7 +67,7 @@ function MyApp({ Component, pageProps, router }) {
         autoBoot
         autoBootProps={{ hideDefaultLauncher: true }}
       >
-        <main className={myFont.className}>
+        <main className={myFont.className} {...myFont}>
           <Component {...stringData} key={router.pathname} />
         </main>
       </IntercomProvider>
