@@ -47,6 +47,7 @@ const PageLayout: React.FC<{
         />
         <Suspense fallback={() => <div>loading</div>}>
           <main id="main">
+            {console.log(contentModules, 'contentModules')}
             {contentModules &&
               contentModules.map((c) => {
                 return (

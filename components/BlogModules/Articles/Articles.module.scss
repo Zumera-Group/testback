@@ -1,0 +1,178 @@
+.root {
+  position: relative;
+}
+
+.secitionTitle {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.25;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  display: block;
+  color: $primary;
+  margin-bottom: 20px
+}
+
+.infoContainer {
+  h2 {
+    margin-bottom: 12px;
+  }
+
+  p {
+    margin-bottom: 40px;
+  }
+}
+
+.container {
+  @include divider(bottom, $primary);
+  padding-bottom: $gutter * 2.5;
+  margin-bottom: $gutter * 2.5;
+
+  >div {
+    --gutter: 12px;
+  }
+}
+
+.veritcalGrid {
+  >div {
+    >div {
+      &:last-of-type {
+        >div {
+          @include breakpoint-down(md) {
+            border: 0;
+          }
+        }
+      }
+    }
+  }
+}
+
+.cta {
+  height: 100%;
+  background-color: $primary;
+  padding: $gutter * 1.5;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+
+  h4 {
+    color: $white;
+    margin-bottom: $gutter / 2;
+  }
+
+  p {
+    color: $white;
+  }
+
+  svg {
+    margin-top: auto;
+    margin-left: auto;
+    display: block;
+    fill: $accent;
+  }
+}
+
+.otherPageItem {
+  margin-bottom: 24px;
+}
+
+.pagination {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 auto;
+  padding: 0;
+  list-style: none;
+  gap: 0 8px;
+  max-width: 100%;
+  align-items: center;
+  justify-content: center;
+
+  li {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    a {
+      display: block;
+      margin: auto;
+      cursor: pointer;
+
+      &:hover {
+        color: $primary;
+      }
+    }
+
+    &.active {
+      border: 1px solid $accent;
+    }
+  }
+  .hide{
+    opacity: 0;
+  }
+}
+
+.loading {
+  position: absolute;
+  width: 100%;
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: 2;
+  background: white;
+}
+
+@keyframes placeHolderShimmer {
+  0% {
+    background-position: -468px 0
+  }
+
+  100% {
+    background-position: 468px 0
+  }
+}
+
+.animation {
+  margin-bottom: 24px;
+
+  .animatedImage {
+    animation-duration: 1.25s;
+    animation-fill-mode: forwards;
+    animation-iteration-count: infinite;
+    animation-name: placeHolderShimmer;
+    animation-timing-function: linear;
+    background: #F6F6F6;
+    background: linear-gradient(to right, #F6F6F6 8%, #F0F0F0 18%, #F6F6F6 33%);
+    background-size: 800px 104px;
+    height: 296px;
+    position: relative;
+    margin-bottom: 18px;
+  }
+
+  .animationTitle2,
+  .animationTitle {
+    @extend .animatedImage;
+    height: 24px;
+    margin-bottom: 8px;
+  }
+
+  .animationTitle2 {
+    width: 60%;
+    margin-bottom: 24px;
+  }
+
+  .animationDesc3,
+  .animationDesc2,
+  .animationDesc {
+    @extend .animatedImage;
+    height: 12px;
+    margin-bottom: 8px;
+  }
+
+  .animationDesc2 {
+    width: 60%;
+  }
+}

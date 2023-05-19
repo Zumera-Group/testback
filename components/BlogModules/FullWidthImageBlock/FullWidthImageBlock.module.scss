@@ -1,0 +1,23 @@
+.fullImageBlockWrapper {
+  max-width: map-get($breakpoints, xxl);
+  .figure {
+    margin-bottom: $blog-mb-mobile * 0.5;
+
+    @include breakpoint-up(md) {
+      margin-bottom: $blog-mb-desktop * 0.5;
+    }
+  }
+  .caption {
+    margin: $gutter * 1.5 0;
+
+    @include breakpoint-up(md) {
+      max-width: 90%;
+    }
+  }
+
+  .captionWrapper {
+    max-width: 1280px;
+    margin-left: auto;
+    margin-right: 0;
+  }
+}

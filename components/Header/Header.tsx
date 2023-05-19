@@ -39,6 +39,7 @@ export const Header = ({
   staticExtended,
   indicator,
   hideMenu,
+  whiteBg,
 }) => {
   const [bigMenuOpen, setBigMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -85,6 +86,9 @@ export const Header = ({
   const sectors = siteSettings?.hamburgerMenu.find(
     (h) => h.type === 'sectors',
   )?.sectorMenuItems;
+  const blogArticles = siteSettings?.hamburgerMenu.find(
+    (h) => h.type === 'blogArticles',
+  )?.blogMenuItems;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -162,6 +166,7 @@ export const Header = ({
         id="header"
         className={[
           styles.header,
+          whiteBg ? styles.header__white : '',
           isLightPage() ? styles.header__light : '',
           isScrolled ? styles.header__scrolled : '',
           bigMenuOpen ? styles.header__open : '',
@@ -225,6 +230,7 @@ export const Header = ({
               siteSettings={siteSettings}
               services={services}
               sectors={sectors}
+              blogArticles={blogArticles}
               logo={<Logo slug={homeSlug} title={siteName} isAnimated={true} />}
               closeBigMenu={() => setBigMenuOpen(false)}
               otherLangSlug={otherLangSlug}

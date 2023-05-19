@@ -1,0 +1,134 @@
+.articleContent {
+  a {
+    border-bottom: solid 2px $accent;
+    padding-bottom: $gutter * 0.1;
+    &:hover {
+      color: $primary;
+      border-bottom: solid 2px $accent;
+    }
+  }
+
+  .downloadBtn {
+    @include breakpoint-up(md) {
+      margin-left: auto;
+      margin-right: 0;
+      display: block;
+    }
+  }
+
+  .articleTitle {
+    margin-bottom: $gutter;
+    margin-top: $gutter;
+    font-size: $h2-font-size;
+    text-transform: capitalize;
+    @include breakpoint-up(md) {
+      margin-bottom: $gutter * 2;
+    }
+  }
+
+  .heroImage {
+    margin-top: $gutter * 1.5;
+    margin-bottom: $gutter * 3.75;
+    height: 100%;
+    object-fit: cover;
+    max-width: 100%;
+
+    @include breakpoint-up(md) {
+      margin-top: $gutter * 5;
+      margin-bottom: $gutter * 5.5;
+      height: 549px;
+    }
+  }
+
+  .summary {
+    font-size: $font-size-base * 1.25;
+    @include breakpoint-up(md) {
+      font-size: $h4-font-size;
+    }
+  }
+
+  .author {
+    font-size: $font-size-base;
+    margin-top: $gutter * 0.5;
+    margin-bottom: $gutter * 1.75;
+    @include breakpoint-up(md) {
+      font-size: $font-size-base * 1.25;
+      margin-top: $gutter;
+      margin-bottom: $gutter * 2.5;
+    }
+
+    .authorLink {
+      margin-right: $gutter * 0.25;
+    }
+  }
+
+  .introContentWrapper {
+    margin-bottom: $blog-mb-mobile;
+
+    @include breakpoint-up(md) {
+      margin-bottom: $blog-mb-desktop;
+    }
+
+    p:first-child::first-letter {
+      padding-right: 8px;
+
+      -webkit-initial-letter: 3;
+      initial-letter: 3;
+
+      background-image: radial-gradient(
+        73.5% 103.89% at 0% 100%,
+        $accent 0%,
+        $tertiary 26.56%,
+        $primary-alt 73.44%,
+        $primary 100%
+      );
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+  }
+
+  ul,
+  ol {
+    font-size: $font-size-normal;
+    padding-left: $gutter;
+  }
+
+  ul {
+    @include bullet-list();
+  }
+
+  .relatedListWrapper,
+  .tocListWrapper {
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    display: none;
+
+    @include breakpoint-up(md) {
+      display: flex;
+    }
+
+    .relatedTitle,
+    .tocTitle {
+      margin-bottom: $gutter;
+      font-size: $font-size-base;
+      display: block;
+      text-transform: uppercase;
+    }
+
+    a {
+      border: unset;
+      &:hover {
+        border-bottom: solid 2px $primary;
+      }
+    }
+
+    li {
+      font-size: $font-size-base;
+      font-weight: $font-weight-bold;
+      margin-bottom: $gutter * 0.75;
+    }
+  }
+
+  @include innerOffset;
+}

@@ -813,6 +813,26 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
+"@portabletext/react@3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@portabletext/react/-/react-3.0.0.tgz#9066e00500ef5f30a92d9eb26bcd2209be1c8aad"
+  integrity sha512-bvh9Ls3ZOa7rPOtJ2fTrTFAC6nXAwHlyt1ukFqFSgTehtsgl91WB2kaBa3XdXCBiobzED3OPcLZ3Y3fsb9ZFiQ==
+  dependencies:
+    "@portabletext/toolkit" "^2.0.1"
+    "@portabletext/types" "^2.0.2"
+
+"@portabletext/toolkit@^2.0.1":
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/@portabletext/toolkit/-/toolkit-2.0.1.tgz#ce1f6a27b19e6bb2e36ffcb39c5e05b09d55e9dc"
+  integrity sha512-vr2SeDFUFV+VmRIyYsHBMimZLiiN0S7qIridt/YLJs3Wm1dI4jsfUam82AQwheSMjvWdBiBZ+Wsjq5HZBG4htw==
+  dependencies:
+    "@portabletext/types" "^2.0.0"
+
+"@portabletext/types@^2.0.0", "@portabletext/types@^2.0.2":
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/@portabletext/types/-/types-2.0.2.tgz#f283a2a0db68abff0c7b8f04f6fafc266d01e0c4"
+  integrity sha512-3xTbSa80G1nODyACY0ilrmPo1PmU1xuoPvfcpzpqSEL0kX01fSW+21PKgS9BcG+GqdG9HK/VxciKWa+nFA7mqg==
+
 "@react-pdf/fns@2.0.0":
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/@react-pdf/fns/-/fns-2.0.0.tgz#fb7fc9373fdb74428b6af6949b3c67fb4b4e23e4"
@@ -2358,6 +2378,11 @@ deep-is@^0.1.3, deep-is@~0.1.3:
   version "0.1.4"
   resolved "https://registry.yarnpkg.com/deep-is/-/deep-is-0.1.4.tgz#a6f2dce612fadd2ef1f519b73551f17e85199831"
   integrity sha512-oIPzksmTg4/MriiaYGO+okXDT7ztn/w3Eptv/+gSIdMdKsJo0u4CfYNFJPy+4SKMuCqGw2wxnA+URMg3t8a/bQ==
+
+deepmerge@^4.0.0:
+  version "4.3.1"
+  resolved "https://registry.yarnpkg.com/deepmerge/-/deepmerge-4.3.1.tgz#44b5f2147cd3b00d4b56137685966f26fd25dd4a"
+  integrity sha512-3sUqbMEc77XqpdNO7FRyRog+eW3ph+GYCbj+rK+uYyRMuwsVy0rMiVtPn+QJlKFvWP/1PYpapqYn0Me2knFn+A==
 
 deepmerge@^4.2.2:
   version "4.2.2"
@@ -4562,6 +4587,11 @@ lit@^2.4.1:
     lit-element "^3.2.0"
     lit-html "^2.6.0"
 
+load-script@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/load-script/-/load-script-1.0.0.tgz#0491939e0bee5643ee494a7e3da3d2bac70c6ca4"
+  integrity sha512-kPEjMFtZvwL9TaZo0uZ2ml+Ye9HUMmPwbYRJ324qF9tqMejwykJ5ggTyvzmrbBeapCAbk98BSbTeovHEEP1uCA==
+
 locate-path@^5.0.0:
   version "5.0.0"
   resolved "https://registry.yarnpkg.com/locate-path/-/locate-path-5.0.0.tgz#1afba396afd676a6d42504d0a67a3a7eb9f62aa0"
@@ -4648,6 +4678,11 @@ media-typer@0.3.0:
   version "0.3.0"
   resolved "https://registry.yarnpkg.com/media-typer/-/media-typer-0.3.0.tgz#8710d7af0aa626f8fffa1ce00168545263255748"
   integrity sha512-dq+qelQ9akHpcOl/gUVRTxVIOkAJ1wR3QAvb4RsVjS8oVoFjDGTc679wJYmUmknUF5HwMLOgb5O+a3KxfWapPQ==
+
+memoize-one@^5.1.1:
+  version "5.2.1"
+  resolved "https://registry.yarnpkg.com/memoize-one/-/memoize-one-5.2.1.tgz#8337aa3c4335581839ec01c3d594090cebe8f00e"
+  integrity sha512-zYiwtZUcYyXKo/np96AGZAckk+FWWsUdJ3cHGGmld7+AhvcWmQyGCYUh1hc4Q/pkOhb65dQR/pqCyK0cOaHz4Q==
 
 mendoza@^2.1.1:
   version "2.1.1"
@@ -5220,7 +5255,7 @@ prompts@^2.0.1:
     kleur "^3.0.3"
     sisteransi "^1.0.5"
 
-prop-types@^15.6.2, prop-types@^15.8.1:
+prop-types@^15, prop-types@^15.6.2, prop-types@^15.7.2, prop-types@^15.8.1:
   version "15.8.1"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.8.1.tgz#67d87bf1a694f48435cf332c24af10214a3140b5"
   integrity sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg==
@@ -5327,6 +5362,11 @@ react-dom@^18.2.0:
     loose-envify "^1.1.0"
     scheduler "^0.23.0"
 
+react-fast-compare@^3.0.1:
+  version "3.2.1"
+  resolved "https://registry.yarnpkg.com/react-fast-compare/-/react-fast-compare-3.2.1.tgz#53933d9e14f364281d6cba24bfed7a4afb808b5f"
+  integrity sha512-xTYf9zFim2pEif/Fw16dBiXpe0hoy5PxcD8+OwBnTtNLfIm3g6WxhKNurY+6OmdH1u6Ta/W/Vl6vjbYP1MFnDg==
+
 react-gtm-module@^2.0.11:
   version "2.0.11"
   resolved "https://registry.yarnpkg.com/react-gtm-module/-/react-gtm-module-2.0.11.tgz#14484dac8257acd93614e347c32da9c5ac524206"
@@ -5359,6 +5399,24 @@ react-lottie@^1.2.3:
   dependencies:
     babel-runtime "^6.26.0"
     lottie-web "^5.1.3"
+
+react-paginate@^8.2.0:
+  version "8.2.0"
+  resolved "https://registry.yarnpkg.com/react-paginate/-/react-paginate-8.2.0.tgz#947c3dcb444a6c16c1bcf8361871aa135baa3dcd"
+  integrity sha512-sJCz1PW+9PNIjUSn919nlcRVuleN2YPoFBOvL+6TPgrH/3lwphqiSOgdrLafLdyLDxsgK+oSgviqacF4hxsDIw==
+  dependencies:
+    prop-types "^15"
+
+react-player@2.12.0:
+  version "2.12.0"
+  resolved "https://registry.yarnpkg.com/react-player/-/react-player-2.12.0.tgz#2fc05dbfec234c829292fbca563b544064bd14f0"
+  integrity sha512-rymLRz/2GJJD+Wc01S7S+i9pGMFYnNmQibR2gVE3KmHJCBNN8BhPAlOPTGZtn1uKpJ6p4RPLlzPQ1OLreXd8gw==
+  dependencies:
+    deepmerge "^4.0.0"
+    load-script "^1.0.0"
+    memoize-one "^5.1.1"
+    prop-types "^15.7.2"
+    react-fast-compare "^3.0.1"
 
 react-reconciler@^0.23.0:
   version "0.23.0"

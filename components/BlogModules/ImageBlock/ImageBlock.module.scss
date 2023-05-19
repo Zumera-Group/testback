@@ -1,0 +1,20 @@
+.imageBlockWrapper {
+  .figure {
+    max-width: 955px;
+    padding-bottom: $blog-mb-mobile;
+    margin-bottom: $blog-mb-mobile;
+    @include divider('bottom', $primary);
+
+    @include breakpoint-up(md) {
+      padding-bottom: $blog-mb-desktop;
+      margin-bottom: $blog-mb-desktop * 1.3;
+    }
+  }
+  .caption {
+    margin: $gutter 0;
+
+    @include breakpoint-up(md) {
+      max-width: 65%;
+    }
+  }
+}

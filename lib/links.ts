@@ -5,6 +5,7 @@ import { Transaction } from './shared-domain/transactions/domain';
 import { Employee } from './shared-domain/employees/domain/index';
 import { Questionnaire } from './shared-domain/questionnaire/domain/index';
 import { VTLanding } from './shared-domain/valuation-tool/domain';
+import { BlogArticle } from './shared-domain/blogArticle/domain';
 
 const getLocale = () => {
   try {
@@ -34,6 +35,8 @@ export const links = (l?: string) => {
         `/en/questionnaires/${q?.questionnaireSlug?.current || ''}`,
       landings: (l: VTLanding): string =>
         `/en/landing/${l?.landingSlug?.current || ''}`,
+      blogArticles: (b: BlogArticle): string =>
+        `/en/blog/${b?.slug?.current || ''}`,
     };
   }
 
@@ -51,5 +54,7 @@ export const links = (l?: string) => {
       `/de/fragenkatalog/${q?.questionnaireSlug?.current || ''}`,
     landings: (l: VTLanding): string =>
       `/de/landing/${l?.landingSlug?.current || ''}`,
+    blogArticles: (b: BlogArticle): string =>
+      `/de/blog/${b?.slug?.current || ''}`,
   };
 };
