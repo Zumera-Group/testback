@@ -1,0 +1,163 @@
+.article {
+  @include breakpoint-down(md) {
+    margin-bottom: $gutter * 1.5;
+  }
+
+  .content {
+    >span {
+      display: block;
+    }
+
+    a {
+      display: block;
+      transition: opacity 800ms cubic-bezier(0.165, 0.84, 0.44, 1);
+
+      &:hover {
+        color: $primary;
+        opacity: 0.75;
+      }
+    }
+
+    p {
+      margin: 0;
+    }
+  }
+
+  &.featured {
+    @include breakpoint-down(md) {
+      margin-bottom: $gutter * 2.5;
+    }
+
+    .thumbnail {
+      margin-bottom: $gutter * 1.5;
+    }
+
+    .content {
+      h3 {
+        margin-top: $gutter;
+        margin-bottom: $gutter;
+      }
+    }
+  }
+
+  &.latest {
+    @include breakpoint-down(md) {
+      margin: 0;
+    }
+
+    .content {
+      padding: $gutter 0;
+      @include divider(top, $primary);
+
+      h5 {
+        margin: $gutter * 0.75 0 0;
+
+        @include breakpoint-down(md) {
+          margin: $gutter * 0.5 0 0;
+        }
+      }
+    }
+  }
+
+  &.standard {
+    .thumbnail {
+      margin-bottom: $gutter * 1.5;
+    }
+
+    .content {
+      h5 {
+        margin: $gutter * 0.75 0 $gutter / 2;
+      }
+      h4 {
+        @include breakpoint-down(md) {
+          margin: $gutter * 0.75 0 $gutter / 2;
+        }
+      }
+    }
+  }
+
+  &.half-vertical,
+  &.vertical,
+  &.small-vertical {
+    display: flex;
+    align-self: stretch;
+    gap: 0 $gutter;
+  }
+
+  &.small-vertical {
+    @include breakpoint-down(md) {
+      @include divider(bottom, $primary);
+      padding: 0 0 $gutter;
+      margin-bottom: $gutter;
+    }
+
+    &.divider {
+      @include divider(bottom, $primary);
+      padding: 0 0 $gutter;
+      margin-bottom: $gutter;
+    }
+
+    .thumbnail {
+      img {
+        min-width: 109px;
+        min-height: 109px;
+      }
+    }
+
+    .content {
+      h5, strong {
+        margin: $gutter * 0.5 0 0;
+        display: block
+      }
+    }
+  }
+
+  &.vertical {
+    @include breakpoint-down(md) {
+      @include divider(bottom, $primary);
+      padding: 0 0 $gutter;
+      margin-bottom: $gutter;
+    }
+
+    .thumbnail {
+      img {
+        min-width: 268px;
+        min-height: 268px;
+
+        @include breakpoint-down(md) {
+          min-width: 109px;
+          max-width: 109px !important;
+          min-height: 109px;
+        }
+      }
+    }
+
+    .content {
+      h4 {
+        margin: $gutter * 0.75 0;
+      }
+    }
+  }
+
+  &.half-vertical {
+    margin-bottom: $gutter * 1.5;
+
+    .thumbnail {
+      img {
+        min-width: 183px;
+        min-height: 183px;
+
+        @include breakpoint-down(md) {
+          min-width: 109px;
+          min-height: 109px;
+        }
+      }
+    }
+
+    .content {
+      h5 {
+        margin: $gutter 0 $gutter * 0.75;
+      }
+    }
+  }
+}

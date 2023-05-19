@@ -402,4 +402,7 @@ export const getContentForContentModule = (
       />
     );
   }
+  if (contentModule.specificContentModule === 'blogIndexSection') {
+    return <div>Blog</div>
+  }
 };

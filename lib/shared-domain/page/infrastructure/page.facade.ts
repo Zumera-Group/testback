@@ -13,6 +13,7 @@ const queryPage = (
   otherLangSlugQuery,
   querySiteSettings,
   querySharedContent,
+  extraQuery = '',
 ) => `*[_type == "page" && _lang == "${lang}" && slug.current == "${slug}"]
  {
   ...,
@@ -26,7 +27,7 @@ const queryPage = (
       url
     }
   },
-  ${contentModulesQuery()},
+  ${contentModulesQuery(extraQuery)},
   "queryOtherLangSlug": ${otherLangSlugQuery},
   "querySiteSettings": ${querySiteSettings},
   "querySharedContent": ${querySharedContent},
@@ -65,6 +66,7 @@ export class PageFacade {
     lang: Locale,
     slug: string,
     preview?: boolean,
+    extraQuery = null,
   ): Promise<{
     page: Page;
     query: string;
@@ -77,6 +79,7 @@ export class PageFacade {
       getOtherLangSlugQuery(lang, 'page'),
       querySiteSettings(this.sanityService.getSanityLocale(lang)),
       querySharedContent(this.sanityService.getSanityLocale(lang)),
+      extraQuery,
     );
 
     const data = await this.sanityService.fetch(query, preview);
