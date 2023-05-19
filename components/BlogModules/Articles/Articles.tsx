@@ -62,7 +62,7 @@ const Articles: React.FC<Props> = ({
               fullWidth={true}
             >
               {[...Array.from({ length: 18 })].map((_, index) => (
-                <GridColumn sm={12} md={4} lg={4}>
+                <GridColumn sm={12} md={4} lg={4} key={index}>
                   <div className={styles.animation}>
                     <div className={styles.animatedImage} />
                     <div className={styles.animationTitle} />

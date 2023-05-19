@@ -133,6 +133,10 @@ export default function Index({
     }
   }, []);
 
+  useEffect(() => {
+    setTimeout(() => setLoading(false), 600);
+  }, [])
+
   if (router.isFallback) {
     return null;
   }
@@ -158,10 +162,6 @@ export default function Index({
     });
     setTimeout(() => setLoading(false), 500);
   };
-
-  useEffect(() => {
-    setTimeout(() => setLoading(false), 600);
-  }, [])
 
   return (
     <ErrorTrackingBoundary>
