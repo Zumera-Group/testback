@@ -5,8 +5,9 @@ export const fetchPage = async (
   locale: Locale,
   slug: string,
   preview?: boolean,
+  extraQuery = ''
 ) => {
   const facade = new PageFacade();
 
-  return await facade.getPage(locale, slug, preview);
+  return await facade.getPage(locale, slug, preview, extraQuery);
 };

@@ -917,6 +917,7 @@ export type ContentModuleType =
   | 'referralSection'
   | 'dividerLine'
   | 'partnerReviewSection'
+  | 'blogIndexSection'
   // service detail sections
   | serviceDetailSectionNames.processSection
   | serviceDetailSectionNames.helpContactPerson
