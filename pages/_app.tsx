@@ -14,6 +14,8 @@ import { IconSprite } from 'components/Icon';
 const INTERCOM_APP_ID = 'lwrptr1h';
 
 const myFont = localFont({
+  // variable:
+  display: 'swap',
   src: [
     {
       path: '../public/fonts/Yellix-Light.woff2',
