@@ -35,6 +35,8 @@ export const BlogArticleLayout: React.FC<{
 
   const dateFormatted = useFormatDateLong(blogArticle?.date);
 
+  console.log(blogArticle?.whitePaperDownload);
+
   return (
     <main id="main" className={styles.blogArticle}>
       <SEO
@@ -107,7 +109,13 @@ export const BlogArticleLayout: React.FC<{
                     />
                   </GridColumn>
                   <GridColumn sm={12} md={6} lg={5}>
-                    <WhitePaperModal />
+                    {blogArticle?.whitePaperDownload?.pdfURL && (
+                      <WhitePaperModal
+                        blogArticle={blogArticle}
+                        siteSettings={siteSettings}
+                        blogArticleDetail={blogArticleDetail}
+                      />
+                    )}
                   </GridColumn>
                 </Grid>
               </GridColumn>
@@ -163,6 +171,7 @@ export const BlogArticleLayout: React.FC<{
                   lg={3}
                   className={styles.relatedListWrapper}
                 >
+                  {/* UPDATE TYPE HERE TO GET THE VALUE CALC ARTICLES */}
                   {blogArticle.relatedArticles && (
                     <aside className={styles.relatedListInner}>
                       <span className={styles.relatedTitle}>

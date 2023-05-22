@@ -7,6 +7,8 @@ import { useRouter } from 'next/router';
 import { SanityBlockContent } from 'components/SanityBlockContent';
 import axios from 'axios';
 import { Icon } from 'components/Icon';
+import Link from 'next/link';
+import { useLinkWithCurrentLocale } from 'lib/shared-domain/useLinkWithCurrentLocale';
 
 const PhoneInput = dynamic(() => import('react-phone-number-input'));
 
@@ -23,6 +25,13 @@ export const WhitePaperForm = ({
   const router = useRouter();
   const [checkboxIsChecked, setCheckboxIsChecked] = useState(false);
   const [isFormSubmitted, setIsFormSubmitted] = useState(false);
+  const linkWithCurrentLocale = useLinkWithCurrentLocale();
+  const {
+    checkboxPrivacyText1,
+    checkboxPrivacyText2,
+    checkboxPrivacyText3,
+    checkboxPrivacyPage,
+  } = termsAndConditionsLabel;
 
   const [value, setValue] = useState();
   const PhoneInputComponent = PhoneInput as any;
@@ -107,7 +116,15 @@ export const WhitePaperForm = ({
           isChecked={checkboxIsChecked}
           required={true}
         >
-          <SanityBlockContent text={termsAndConditionsLabel} />
+          {/* <SanityBlockContent text={termsAndConditionsLabel} /> */}
+          {checkboxPrivacyText1}{' '}
+          <Link
+            passHref
+            href={linkWithCurrentLocale(checkboxPrivacyPage?.slug?.current)}
+          >
+            {checkboxPrivacyText2}
+          </Link>
+          {' ' + checkboxPrivacyText3}
         </Checkbox>
       </FormGroup>
       <FormGroup>

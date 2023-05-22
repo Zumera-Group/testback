@@ -10,11 +10,21 @@ import ReactModal from 'react-modal';
 import { Button } from 'components/Button';
 import { useState } from 'react';
 import { Icon } from 'components/Icon';
+import { BlogArticle } from 'lib/shared-domain/blogArticle/domain';
+import { SiteSettings } from 'lib/shared-domain/page/domain';
 
 ReactModal.setAppElement('body');
 
-const WhitePaperModal: React.FC<{}> = ({}) => {
+const WhitePaperModal: React.FC<{
+  blogArticle: BlogArticle;
+  siteSettings: SiteSettings;
+  blogArticleDetail: any;
+}> = ({ blogArticle, blogArticleDetail, siteSettings }) => {
   const [isOpen, setIsOpen] = useState(false);
+
+  //   console.log(blogArticle);
+
+  console.log(siteSettings.contactSectionContent);
 
   const openModal = () => {
     setIsOpen(true);
@@ -56,8 +66,6 @@ const WhitePaperModal: React.FC<{}> = ({}) => {
 
         <Grid justifyContent={'center'} alignItems={'center'} fullWidth={true}>
           <GridColumn sm={12} md={12} lg={12}>
-            {/* <Container>
-              <div className={styles.content}> */}
             <Grid
               justifyContent={'space-between'}
               alignItems={'stretch'}
@@ -65,19 +73,20 @@ const WhitePaperModal: React.FC<{}> = ({}) => {
             >
               <GridColumn sm={12} md={5} lg={5}>
                 <SectionHeading
-                  title={'Download this blog post'}
-                  description={
-                    'This is a placeholder lorem ipsum dolor sit amet'
-                  }
+                  title={blogArticleDetail.whitePaperDownload.title}
+                  description={blogArticleDetail.whitePaperDownload.description}
                   headingType={'h3'}
                   align={'left'}
                 />
                 <div className={styles.image}>
                   <Image
                     unoptimized={true}
-                    //   src={sanityImageUrlFor(image.asset.url).url()}
-                    src="https://cdn.sanity.io/images/8r7hp46l/development/06d6f1e9299056c902b8ca7ae8d2c5a65f6aa7bb-569x302.png"
-                    alt={''}
+                    src={sanityImageUrlFor(
+                      blogArticle?.whitePaperDownload?.pdfThumbnail.asset.url,
+                    ).url()}
+                    alt={
+                      blogArticle?.whitePaperDownload?.pdfThumbnail.asset.alt
+                    }
                     width={545}
                     height={280}
                     className={styles.thumbnail}
@@ -86,21 +95,40 @@ const WhitePaperModal: React.FC<{}> = ({}) => {
               </GridColumn>
               <GridColumn sm={12} md={5} lg={6} className={styles.formWrapper}>
                 <WhitePaperForm
-                  buttonText={'Download'}
-                  namePlaceholder={'name'}
-                  emailPlaceholder={'email'}
-                  termsAndConditionsLabel={'terms'}
-                  successMessage={'success'}
-                  downloadAgain={'download'}
-                  file={
-                    'https://cdn.sanity.io/files/8r7hp46l/development/5592b141c8ecedad006ecf087347b073a1758581.png'
+                  buttonText={
+                    blogArticleDetail.whitePaperDownload.whitePaperForm
+                      .submitLabel
                   }
-                  phoneNumber={'number'}
+                  namePlaceholder={
+                    blogArticleDetail.whitePaperDownload.whitePaperForm
+                      .nameLabel
+                  }
+                  emailPlaceholder={
+                    blogArticleDetail.whitePaperDownload.whitePaperForm
+                      .emailLabel
+                  }
+                  termsAndConditionsLabel={
+                    siteSettings.contactSectionContent.contactForm
+                  }
+                  successMessage={
+                    blogArticleDetail.whitePaperDownload.whitePaperForm
+                      .successMessage
+                  }
+                  //   errorMessage={
+                  //     blogArticleDetail.whitePaperDownload.whitePaperForm
+                  //       .successMessage
+                  //   }
+                  downloadAgain={
+                    blogArticleDetail.whitePaperDownload.downloadAgain
+                  }
+                  file={blogArticle?.whitePaperDownload?.pdfURL}
+                  phoneNumber={
+                    blogArticleDetail.whitePaperDownload.whitePaperForm
+                      .numberLabel
+                  }
                 />
               </GridColumn>
             </Grid>
-            {/* </div>
-            </Container> */}
           </GridColumn>
         </Grid>
       </Modal>
