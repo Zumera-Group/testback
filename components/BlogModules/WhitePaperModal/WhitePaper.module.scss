@@ -1,0 +1,41 @@
+.overlay {
+  backdrop-filter: blur(6px);
+  position: fixed;
+  inset: 0px;
+  z-index: 999999;
+}
+
+.modal {
+  position: absolute;
+  inset: 40px;
+  background: $secondary;
+  overflow: auto;
+  outline: none;
+  padding: $gutter * 4;
+  color: $white;
+  max-width: 1280px;
+  margin: var(--header-height) auto 0 auto;
+}
+
+.closeBtn {
+  background: none;
+  border: unset;
+  cursor: pointer;
+  color: $white;
+  position: absolute;
+  right: 1.5rem;
+  top: 1.5rem;
+}
+
+.thumbnail {
+  height: 100%;
+  object-fit: cover;
+  max-width: 100%;
+  margin-top: $gutter * 1.5;
+}
+
+.formWrapper {
+  label {
+    text-transform: uppercase;
+  }
+}

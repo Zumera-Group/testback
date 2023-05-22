@@ -11,7 +11,6 @@ import { links } from 'lib/links';
 import { useRouter } from 'next/router';
 import { Container, Grid, GridColumn, Section } from 'components/Layout';
 import styles from './BlogArticleLayout.module.scss';
-import { Button } from 'components/Button';
 import Image from 'next/image';
 import { sanityImageUrlFor } from 'lib/sanity';
 
@@ -21,6 +20,7 @@ import { AuthorBlock } from 'components/BlogModules/AuthorBlock';
 import RelatedArticles from 'components/BlogModules/RelatedArticles/RelatedArticles';
 import ContactUsSection from 'lib/shared-domain/page/presentation/contentModules/ContactUsSection';
 import useFormatDateLong from 'lib/shared-domain/useFormatDateLong';
+import WhitePaperModal from 'components/BlogModules/WhitePaperModal/WhitePaperModal';
 
 export const BlogArticleLayout: React.FC<{
   blogArticle: BlogArticle;
@@ -107,14 +107,7 @@ export const BlogArticleLayout: React.FC<{
                     />
                   </GridColumn>
                   <GridColumn sm={12} md={6} lg={5}>
-                    {/* <Button
-                      variant={'secondary'}
-                      link={'#'}
-                      onDark={false}
-                      classes={styles.downloadBtn}
-                    >
-                      Download this article
-                    </Button> */}
+                    <WhitePaperModal />
                   </GridColumn>
                 </Grid>
               </GridColumn>

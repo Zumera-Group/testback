@@ -17,6 +17,7 @@ export const WhitePaperForm = ({
   termsAndConditionsLabel,
   successMessage,
   downloadAgain,
+  phoneNumber,
   file,
 }) => {
   const router = useRouter();
@@ -28,7 +29,8 @@ export const WhitePaperForm = ({
 
   const downloadFile = () => {
     axios({
-      url: file.asset.url,
+      // url: file.asset.url,
+      url: 'https://cdn.sanity.io/files/8r7hp46l/development/5592b141c8ecedad006ecf087347b073a1758581.png',
       method: 'GET',
       responseType: 'blob',
     }).then((response) => {
@@ -88,7 +90,7 @@ export const WhitePaperForm = ({
         />
       </FormGroup>
       <FormGroup classes={styles.phoneNum}>
-        <Label text={'Phone number'} required={true} />
+        <Label text={phoneNumber} required={true} />
         <PhoneInputComponent
           defaultCountry={router.locale === 'en' ? 'GB' : 'DE'}
           international
