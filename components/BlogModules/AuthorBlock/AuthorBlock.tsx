@@ -5,10 +5,12 @@ import { useRouter } from 'next/router';
 import { Button } from 'components/Button';
 import { RichText } from '../RichText';
 import { Icon } from 'components/Icon';
+import WhitePaperModal from '../WhitePaperModal/WhitePaperModal';
 
 export const AuthorBlock: React.FC<any> = ({
   blogArticle,
   blogArticleDetail,
+  siteSettings,
 }) => {
   const { locale } = useRouter();
   const spanRef = useRef(null);
@@ -24,47 +26,55 @@ export const AuthorBlock: React.FC<any> = ({
   return (
     <Container classes={[styles.authorWrapper].join(' ')} key={blogArticle._id}>
       <div className={styles.innerOffset}>
-        <Grid
-          fullWidth={true}
-          justifyContent={'space-between'}
-          alignItems={'center'}
-        >
-          <GridColumn sm={12} md={6} lg={6} className={styles.authorList}>
-            <h4>{blogArticleDetail.authorSection.authorTitle}</h4>
-            <p className={styles.author}>
-              {blogArticleDetail.writtenByLabel}{' '}
-              {blogArticle?.authors?.map((author, index) => (
-                <>
-                  <a
-                    key={author._id}
-                    href={
-                      locale === 'en'
-                        ? `/en/employees/${author?.slug?.current}`
-                        : `/de/mitarbeiter/${author?.slug?.current}`
-                    }
-                    className={styles.authorLink}
-                  >
-                    {author?.firstName} {author?.lastName}
-                  </a>
-                  {index < blogArticle.authors.length - 1 && ', '}
-                </>
-              ))}{' '}
-              <span ref={spanRef}>
-                <RichText
-                  content={blogArticleDetail.authorSection.authorSummary}
+        <Grid fullWidth={true} justifyContent={'space-between'}>
+          <GridColumn sm={12} md={6} lg={6} className={styles.leftColumn}>
+            <div className={styles.authorList}>
+              <h4>{blogArticleDetail.authorSection.authorTitle}</h4>
+              <p className={styles.author}>
+                {blogArticleDetail.writtenByLabel}{' '}
+                {blogArticle?.authors?.map((author, index) => (
+                  <>
+                    <a
+                      key={author._id}
+                      href={
+                        locale === 'en'
+                          ? `/en/employees/${author?.slug?.current}`
+                          : `/de/mitarbeiter/${author?.slug?.current}`
+                      }
+                      className={styles.authorLink}
+                    >
+                      {author?.firstName} {author?.lastName}
+                    </a>
+                    {index < blogArticle.authors.length - 1 && ', '}
+                  </>
+                ))}{' '}
+                <span ref={spanRef}>
+                  <RichText
+                    content={blogArticleDetail.authorSection.authorSummary}
+                  />
+                </span>
+              </p>
+            </div>
+
+            <Grid fullWidth={true}>
+              <GridColumn sm={12} md={12} lg={6}>
+                <WhitePaperModal
+                  blogArticle={blogArticle}
+                  siteSettings={siteSettings}
+                  blogArticleDetail={blogArticleDetail}
                 />
-              </span>
-            </p>
+              </GridColumn>
+              <GridColumn sm={12} md={12} lg={6}>
+                <WhitePaperModal
+                  blogArticle={blogArticle}
+                  siteSettings={siteSettings}
+                  blogArticleDetail={blogArticleDetail}
+                />
+              </GridColumn>
+            </Grid>
           </GridColumn>
-          <GridColumn sm={12} md={6} lg={5}>
-            {/* <Button
-              variant={'secondary'}
-              link={'#'}
-              onDark={false}
-              classes={styles.downloadBtn}
-            >
-              Download this article
-            </Button> */}
+
+          <GridColumn sm={12} md={6} lg={5} className={styles.rightColumn}>
             <div className={styles.calculatorCta}>
               <a
                 href={

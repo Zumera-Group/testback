@@ -5,15 +5,36 @@ import { SectionHeading } from 'components/SectionHeading';
 import Image from 'next/image';
 import { sanityImageUrlFor } from 'lib/sanity';
 import Modal from 'react-modal';
-import ReactModal from 'react-modal';
 
 import { Button } from 'components/Button';
 import { useState } from 'react';
 import { Icon } from 'components/Icon';
 import { BlogArticle } from 'lib/shared-domain/blogArticle/domain';
 import { SiteSettings } from 'lib/shared-domain/page/domain';
+import localFont from '@next/font/local';
+('./..');
 
-ReactModal.setAppElement('body');
+Modal.setAppElement('#modalWrapper');
+
+const myFont = localFont({
+  src: [
+    {
+      path: '../../../public/fonts/Yellix-Light.woff2',
+      weight: '300',
+      style: 'normal',
+    },
+    {
+      path: '../../../public/fonts/Yellix-Medium.woff2',
+      weight: '400',
+      style: 'normal',
+    },
+    {
+      path: '../../../public/fonts/Yellix-Bold.woff2',
+      weight: '700',
+      style: 'normal',
+    },
+  ],
+});
 
 const WhitePaperModal: React.FC<{
   blogArticle: BlogArticle;
@@ -22,9 +43,14 @@ const WhitePaperModal: React.FC<{
 }> = ({ blogArticle, blogArticleDetail, siteSettings }) => {
   const [isOpen, setIsOpen] = useState(false);
 
-  //   console.log(blogArticle);
+  const {
+    whitePaperDownload,
+    whitePaperDownload: { whitePaperForm },
+  } = blogArticleDetail;
 
-  console.log(siteSettings.contactSectionContent);
+  const {
+    whitePaperDownload: { pdfThumbnail },
+  } = blogArticle;
 
   const openModal = () => {
     setIsOpen(true);
@@ -46,19 +72,19 @@ const WhitePaperModal: React.FC<{
   );
 
   return (
-    <div className={styles.modalWrapper}>
+    <div className={[styles.modalWrapper].join(' ')} id="modalWrapper">
       <Button
-        variant={'secondary'}
+        variant={'download'}
         link={'#'}
         onDark={false}
         classes={styles.downloadBtn}
         callBack={openModal}
       >
-        Download this article
+        {whitePaperDownload.downloadCTA}
       </Button>
       <Modal
         isOpen={isOpen}
-        className={styles.modal}
+        className={[styles.modal, myFont.className].join(' ')}
         overlayClassName={styles.overlay}
         onRequestClose={closeModal}
       >
@@ -73,20 +99,16 @@ const WhitePaperModal: React.FC<{
             >
               <GridColumn sm={12} md={5} lg={5}>
                 <SectionHeading
-                  title={blogArticleDetail.whitePaperDownload.title}
-                  description={blogArticleDetail.whitePaperDownload.description}
+                  title={whitePaperDownload.title}
+                  description={whitePaperDownload.description}
                   headingType={'h3'}
                   align={'left'}
                 />
                 <div className={styles.image}>
                   <Image
                     unoptimized={true}
-                    src={sanityImageUrlFor(
-                      blogArticle?.whitePaperDownload?.pdfThumbnail.asset.url,
-                    ).url()}
-                    alt={
-                      blogArticle?.whitePaperDownload?.pdfThumbnail.asset.alt
-                    }
+                    src={sanityImageUrlFor(pdfThumbnail.asset.url).url()}
+                    alt={pdfThumbnail.asset.alt}
                     width={545}
                     height={280}
                     className={styles.thumbnail}
@@ -95,37 +117,20 @@ const WhitePaperModal: React.FC<{
               </GridColumn>
               <GridColumn sm={12} md={5} lg={6} className={styles.formWrapper}>
                 <WhitePaperForm
-                  buttonText={
-                    blogArticleDetail.whitePaperDownload.whitePaperForm
-                      .submitLabel
-                  }
-                  namePlaceholder={
-                    blogArticleDetail.whitePaperDownload.whitePaperForm
-                      .nameLabel
-                  }
-                  emailPlaceholder={
-                    blogArticleDetail.whitePaperDownload.whitePaperForm
-                      .emailLabel
-                  }
+                  buttonText={whitePaperForm.submitLabel}
+                  namePlaceholder={whitePaperForm.nameLabel}
+                  emailPlaceholder={whitePaperForm.emailLabel}
                   termsAndConditionsLabel={
                     siteSettings.contactSectionContent.contactForm
                   }
-                  successMessage={
-                    blogArticleDetail.whitePaperDownload.whitePaperForm
-                      .successMessage
-                  }
+                  successMessage={whitePaperForm.successMessage}
                   //   errorMessage={
-                  //     blogArticleDetail.whitePaperDownload.whitePaperForm
+                  //     whitePaperForm
                   //       .successMessage
                   //   }
-                  downloadAgain={
-                    blogArticleDetail.whitePaperDownload.downloadAgain
-                  }
+                  downloadAgain={whitePaperDownload.downloadAgain}
                   file={blogArticle?.whitePaperDownload?.pdfURL}
-                  phoneNumber={
-                    blogArticleDetail.whitePaperDownload.whitePaperForm
-                      .numberLabel
-                  }
+                  phoneNumber={whitePaperForm.numberLabel}
                 />
               </GridColumn>
             </Grid>

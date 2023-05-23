@@ -15,6 +15,12 @@
   color: $white;
   max-width: 1280px;
   margin: var(--header-height) auto 0 auto;
+
+  @include breakpoint-up(md) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 }
 
 .closeBtn {
@@ -27,15 +33,16 @@
   top: 1.5rem;
 }
 
+.downloadBtn {
+  box-shadow: $btn-box-shadow;
+  svg {
+    fill: none;
+  }
+}
+
 .thumbnail {
   height: 100%;
   object-fit: cover;
   max-width: 100%;
   margin-top: $gutter * 1.5;
-}
-
-.formWrapper {
-  //   label {
-  //     text-transform: uppercase;
-  //   }
 }

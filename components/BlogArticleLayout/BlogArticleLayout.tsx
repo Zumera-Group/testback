@@ -35,8 +35,6 @@ export const BlogArticleLayout: React.FC<{
 
   const dateFormatted = useFormatDateLong(blogArticle?.date);
 
-  console.log(blogArticle?.whitePaperDownload);
-
   return (
     <main id="main" className={styles.blogArticle}>
       <SEO
@@ -214,6 +212,7 @@ export const BlogArticleLayout: React.FC<{
             blogArticle={blogArticle}
             blogArticleDetail={blogArticleDetail}
             key={blogArticle._id}
+            siteSettings={siteSettings}
           />
           {blogArticle.relatedArticles && (
             <RelatedArticles
