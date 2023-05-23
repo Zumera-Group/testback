@@ -24,6 +24,7 @@ const RelatedArticles: React.FC<{
   const {
     relatedArticleSection: { raDesc, raTitle },
   } = blogArticleDetail;
+
   return (
     <Container classes={styles.relatedArticlesWrapper}>
       <Grid>
@@ -59,39 +60,79 @@ const RelatedArticles: React.FC<{
             className={styles.slide}
           >
             <article className={styles.articleCard}>
-              <a
-                href={
-                  locale === 'en'
-                    ? `/en/blog/${article?.slug?.current}`
-                    : `/de/blog/${article?.slug?.current}`
-                }
-              >
-                <div className={styles.thumbnail}>
-                  <Image
-                    unoptimized
-                    src={sanityImageUrlFor(article.heroImage?.asset?.url).url()}
-                    alt={article.heroImage?.alt}
-                    width={410}
-                    height={231}
-                    style={{
-                      maxWidth: '100%',
-                      objectFit: 'cover',
-                    }}
-                  />
-                </div>
-                <span className={styles.date}>
-                  {format(new Date(article?.date))}
-                </span>
-                <h5>{article?.articleTitle}</h5>
-                <p className={styles.summary}>{article?.summary}</p>
-                <div className={styles.categoryTags}>
-                  {article.categories?.map((category) => (
-                    <div key={category._id} className={styles.categoryTag}>
-                      {category.title}
-                    </div>
-                  ))}
-                </div>
-              </a>
+              {article._type === 'blogArticle' ? (
+                <a
+                  href={
+                    locale === 'en'
+                      ? `/en/blog/${article?.slug?.current}`
+                      : `/de/blog/${article?.slug?.current}`
+                  }
+                >
+                  <div className={styles.thumbnail}>
+                    <Image
+                      unoptimized
+                      src={sanityImageUrlFor(
+                        article.heroImage?.asset?.url,
+                      ).url()}
+                      alt={article.heroImage?.alt}
+                      width={410}
+                      height={231}
+                      style={{
+                        maxWidth: '100%',
+                        objectFit: 'cover',
+                      }}
+                    />
+                  </div>
+                  <span className={styles.date}>
+                    {format(new Date(article?.date))}
+                  </span>
+                  <h5>{article?.articleTitle}</h5>
+                  <p className={styles.summary}>{article?.summary}</p>
+                  <div className={styles.categoryTags}>
+                    {article.categories?.map((category) => (
+                      <div key={category._id} className={styles.categoryTag}>
+                        {category.title}
+                      </div>
+                    ))}
+                  </div>
+                </a>
+              ) : (
+                <a
+                  href={
+                    locale === 'en'
+                      ? `/en/valuation-tool/${article?.slug?.current}`
+                      : `/de/unternehmenswert-rechner/${article?.slug?.current}`
+                  }
+                >
+                  <div className={styles.thumbnail}>
+                    <Image
+                      unoptimized
+                      src={sanityImageUrlFor(
+                        article.heroImage?.asset?.url,
+                      ).url()}
+                      alt={article.heroImage?.alt}
+                      width={410}
+                      height={231}
+                      style={{
+                        maxWidth: '100%',
+                        objectFit: 'cover',
+                      }}
+                    />
+                  </div>
+                  <span className={styles.date}>
+                    {format(new Date(article?.date))}
+                  </span>
+                  <h5>{article?.articleTitle}</h5>
+                  <p className={styles.summary}>{article?.summary}</p>
+                  <div className={styles.categoryTags}>
+                    {article.categories?.map((category) => (
+                      <div key={category._id} className={styles.categoryTag}>
+                        {category.title}
+                      </div>
+                    ))}
+                  </div>
+                </a>
+              )}
             </article>
           </SwiperSlide>
         ))}

@@ -178,18 +178,35 @@ export const BlogArticleLayout: React.FC<{
                       <ol>
                         {blogArticle?.relatedArticles?.map((article) => (
                           <>
-                            <li>
-                              <a
-                                key={article._id}
-                                href={
-                                  locale === 'en'
-                                    ? `/en/blog/${article?.slug?.current}`
-                                    : `/de/blog/${article?.slug?.current}`
-                                }
-                              >
-                                {article?.articleTitle}
-                              </a>
-                            </li>
+                            {console.log(article)}
+
+                            {article._type === 'blogArticle' ? (
+                              <li>
+                                <a
+                                  key={article._id}
+                                  href={
+                                    locale === 'en'
+                                      ? `/en/blog/${article?.slug?.current}`
+                                      : `/de/blog/${article?.slug?.current}`
+                                  }
+                                >
+                                  {article?.articleTitle}
+                                </a>
+                              </li>
+                            ) : (
+                              <li>
+                                <a
+                                  key={article._id}
+                                  href={
+                                    locale === 'en'
+                                      ? `/en/valuation-tool/${article?.slug?.current}`
+                                      : `/de/unternehmenswert-rechner/${article?.slug?.current}`
+                                  }
+                                >
+                                  {article?.articleTitle}
+                                </a>
+                              </li>
+                            )}
                           </>
                         ))}
                       </ol>
