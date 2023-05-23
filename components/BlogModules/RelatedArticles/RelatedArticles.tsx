@@ -32,7 +32,7 @@ const RelatedArticles: React.FC<{
           <h2>{raTitle}</h2>
           <p className={styles.summary}>{raDesc}</p>
         </GridColumn>
-        <GridColumn
+        {/* <GridColumn
           xs={12}
           sm={6}
           md={6}
@@ -45,7 +45,7 @@ const RelatedArticles: React.FC<{
               next={swiperNextRef}
             />
           </div>
-        </GridColumn>
+        </GridColumn> */}
       </Grid>
 
       <SwiperRelatedArticles
@@ -137,6 +137,22 @@ const RelatedArticles: React.FC<{
           </SwiperSlide>
         ))}
       </SwiperRelatedArticles>
+      <Grid justifyContent="flex-end" fullWidth={true}>
+        <GridColumn
+          xs={12}
+          sm={6}
+          md={6}
+          lg={6}
+          className={styles.navigationColumn}
+        >
+          <div className={styles.swiperButtons}>
+            <SwiperNavigationButtons
+              prev={swiperPrevRef}
+              next={swiperNextRef}
+            />
+          </div>
+        </GridColumn>
+      </Grid>
     </Container>
   );
 };
