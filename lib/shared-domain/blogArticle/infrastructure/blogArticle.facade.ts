@@ -43,6 +43,7 @@ const queryBlogArticle = (
     lastName,
     email,
     slug,
+    calendlyURL,
     _id,
   },
   relatedArticles[]-> {
@@ -148,6 +149,7 @@ const queryBlogArticles = (
     lastName,
     email,
     slug,
+    calendlyURL,
     _id
   },
   relatedArticles[]-> {

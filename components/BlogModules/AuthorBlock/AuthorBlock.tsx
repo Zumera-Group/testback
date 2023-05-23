@@ -19,52 +19,81 @@ export const AuthorBlock: React.FC<any> = ({
 
   const {
     calculatorCta: { calculatorPage, description, title },
+    calendlyCTA,
   } = blogArticleDetail;
+
+  const closeCalendly = () => {
+    const calendly = document.querySelector('.calendly-overlay');
+    if (calendly) {
+      calendly.removeEventListener('click', closeCalendly);
+    }
+    window.Calendly.closePopupWidget();
+  };
 
   return (
     <Container classes={[styles.authorWrapper].join(' ')} key={blogArticle._id}>
       <div className={styles.innerOffset}>
-        <Grid
-          fullWidth={true}
-          justifyContent={'space-between'}
-          alignItems={'center'}
-        >
-          <GridColumn sm={12} md={6} lg={6} className={styles.authorList}>
-            <h4>{blogArticleDetail.authorSection.authorTitle}</h4>
-            <p className={styles.author}>
-              {blogArticleDetail.writtenByLabel}{' '}
-              {blogArticle?.authors?.map((author, index) => (
-                <>
-                  <a
-                    key={author._id}
-                    href={
-                      locale === 'en'
-                        ? `/en/employees/${author?.slug?.current}`
-                        : `/de/mitarbeiter/${author?.slug?.current}`
-                    }
-                    className={styles.authorLink}
-                  >
-                    {author?.firstName} {author?.lastName}
-                  </a>
-                  {index < blogArticle.authors.length - 1 && ', '}
-                </>
-              ))}{' '}
-              <span ref={spanRef}>
-                <RichText
-                  content={blogArticleDetail.authorSection.authorSummary}
+        <Grid fullWidth={true} justifyContent={'space-between'}>
+          <GridColumn sm={12} md={6} lg={6} className={styles.leftColumn}>
+            <div className={styles.authorList}>
+              <h4>{blogArticleDetail.authorSection.authorTitle}</h4>
+              <p className={styles.author}>
+                {blogArticleDetail.writtenByLabel}{' '}
+                {blogArticle?.authors?.map((author, index) => (
+                  <>
+                    <a
+                      key={author._id}
+                      href={
+                        locale === 'en'
+                          ? `/en/employees/${author?.slug?.current}`
+                          : `/de/mitarbeiter/${author?.slug?.current}`
+                      }
+                      className={styles.authorLink}
+                    >
+                      {author?.firstName} {author?.lastName}
+                    </a>
+                    {index < blogArticle.authors.length - 1 && ', '}
+                  </>
+                ))}{' '}
+                <span ref={spanRef}>
+                  <RichText
+                    content={blogArticleDetail.authorSection.authorSummary}
+                  />
+                </span>
+              </p>
+            </div>
+
+            <Grid fullWidth={true}>
+              {/* <GridColumn sm={12} md={12} lg={6}>
+                <WhitePaperModal
+                  blogArticle={blogArticle}
+                  siteSettings={siteSettings}
+                  blogArticleDetail={blogArticleDetail}
                 />
-              </span>
-            </p>
+              </GridColumn> */}
+
+              {blogArticle.authors[0]?.calendlyURL && (
+                <GridColumn sm={12} md={12} lg={6}>
+                  <Button
+                    variant={'secondary'}
+                    callBack={() => {
+                      window.Calendly.showPopupWidget(
+                        `${blogArticle.authors[0]?.calendlyURL}?embed_domain=zumera.com/&amp;embed_type=PopupText`,
+                      );
+                      const calendly =
+                        document.querySelector('.calendly-overlay');
+                      calendly.addEventListener('click', closeCalendly);
+                    }}
+                    classes={styles.calendlyCTA}
+                  >
+                    {calendlyCTA}
+                  </Button>
+                </GridColumn>
+              )}
+            </Grid>
           </GridColumn>
-          <GridColumn sm={12} md={6} lg={5}>
-            {/* <Button
-              variant={'secondary'}
-              link={'#'}
-              onDark={false}
-              classes={styles.downloadBtn}
-            >
-              Download this article
-            </Button> */}
+
+          <GridColumn sm={12} md={6} lg={5} className={styles.rightColumn}>
             <div className={styles.calculatorCta}>
               <a
                 href={
