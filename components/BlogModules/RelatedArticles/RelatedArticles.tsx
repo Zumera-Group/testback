@@ -137,7 +137,7 @@ const RelatedArticles: React.FC<{
           </SwiperSlide>
         ))}
       </SwiperRelatedArticles>
-      <Grid justifyContent="flex-end" fullWidth={true}>
+      <Grid justifyContent="flex-end">
         <GridColumn
           xs={12}
           sm={6}
