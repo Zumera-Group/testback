@@ -44,6 +44,10 @@
         color: $white;
       }
     }
+
+    @include breakpoint-down(md) {
+      margin-top: $gutter * 2;
+    }
   }
 
   .leftColumn {
