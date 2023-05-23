@@ -23,7 +23,7 @@ import ContactUsSection from 'lib/shared-domain/page/presentation/contentModules
 const PER_PAGE = 19;
 
 export const queryBlogArticles = (lang, pageIndex, perPage) => `{
-  "items": *[_type == "blogArticle" && _lang == "${lang}"] | order(_id) [(${pageIndex} * ${perPage})...(${pageIndex} + 1) * ${perPage}] {
+  "items": *[_type == "blogArticle" && _lang == "${lang}"] | order(date desc) [(${pageIndex} * ${perPage})...(${pageIndex} + 1) * ${perPage}] {
     articleTitle,
     date,
     name,
@@ -135,7 +135,7 @@ export default function Index({
 
   useEffect(() => {
     setTimeout(() => setLoading(false), 600);
-  }, [])
+  }, []);
 
   if (router.isFallback) {
     return null;

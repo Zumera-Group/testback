@@ -26,6 +26,7 @@ const FirstPage: React.FC<Props> = ({
   halfGridArticles,
 }) => {
   const { locale } = useRouter();
+
   return (
     <div className={styles.root}>
       <Container classes={styles.container}>

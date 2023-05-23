@@ -91,7 +91,13 @@ const Articles: React.FC<Props> = ({
           <Container classes={styles.container}>
             <Grid justifyContent={'space-between'} fullWidth={true}>
               {blog.items.map((article, i) => (
-                <GridColumn sm={12} md={6} lg={4} key={article.id} className={styles.otherPageItem}>
+                <GridColumn
+                  sm={12}
+                  md={6}
+                  lg={4}
+                  key={article.id}
+                  className={styles.otherPageItem}
+                >
                   <ArticleBox titleEl={'h5'} item={article} type="standard" />
                 </GridColumn>
               ))}
