@@ -15,6 +15,7 @@ interface Props {
   verticalGridArticles: any[];
   tripleGridArticles: any[];
   halfGridArticles: any[];
+  blogDetailContent: any;
 }
 
 const FirstPage: React.FC<Props> = ({
@@ -24,15 +25,20 @@ const FirstPage: React.FC<Props> = ({
   verticalGridArticles,
   tripleGridArticles,
   halfGridArticles,
+  blogDetailContent,
 }) => {
   const { locale } = useRouter();
-
+  const {
+    calculatorCta: { calculatorPage, description, title },
+  } = blogDetailContent;
   return (
     <div className={styles.root}>
       <Container classes={styles.container}>
         <Grid justifyContent={'space-between'} fullWidth={true}>
           <GridColumn sm={12} md={8} lg={8}>
-            <span className={styles.secitionTitle}>FEATURED ARTICLE</span>
+            <span className={styles.secitionTitle}>
+              {blogDetailContent?.blogIndexContent?.featuredArticle}
+            </span>
             <ArticleBox
               titleEl="h3"
               item={featuredBlog || {}}
@@ -40,7 +46,9 @@ const FirstPage: React.FC<Props> = ({
             />
           </GridColumn>
           <GridColumn sm={12} md={4} lg={4}>
-            <span className={styles.secitionTitle}>LATEST ARTICLE</span>
+            <span className={styles.secitionTitle}>
+              {blogDetailContent?.blogIndexContent?.latestArticles}
+            </span>
             {latestArticles?.map((article) => (
               <ArticleBox
                 titleEl="h5"
@@ -65,15 +73,13 @@ const FirstPage: React.FC<Props> = ({
                 className={styles.cta}
                 href={
                   locale === 'en'
-                    ? `/en/questionnaires/company-valuation/`
-                    : `/de/questionnaires/company-valuation/`
+                    ? `/en/questionnaires/${calculatorPage[0]?.questionnaireSlug?.current}`
+                    : `/de/fragenkatalog/${calculatorPage[0]?.questionnaireSlug?.current}`
                 }
               >
                 <div>
-                  <h4>
-                    Want to find out how much your company could be worth?
-                  </h4>
-                  <p>Check out our valuation calculator</p>
+                  <h4>{title}</h4>
+                  <p>{description}</p>
                 </div>
 
                 <Icon

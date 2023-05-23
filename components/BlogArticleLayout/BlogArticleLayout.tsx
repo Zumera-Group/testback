@@ -178,8 +178,6 @@ export const BlogArticleLayout: React.FC<{
                       <ol>
                         {blogArticle?.relatedArticles?.map((article) => (
                           <>
-                            {console.log(article)}
-
                             {article._type === 'blogArticle' ? (
                               <li>
                                 <a

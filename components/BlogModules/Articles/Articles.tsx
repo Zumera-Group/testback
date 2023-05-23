@@ -5,6 +5,7 @@ import ArticleBox from '../ArticleBox';
 import styles from './Articles.module.scss';
 import Pagination from './Pagination';
 import FirstPage from './FirstPage';
+import { useRouter } from 'next/router';
 
 interface Props {
   featuredBlog: any;
@@ -13,6 +14,7 @@ interface Props {
   verticalGridArticles: any[];
   tripleGridArticles: any[];
   halfGridArticles: any[];
+  blogDetailContent: any;
   handlePagination: (value: string) => void;
   blog: any;
   pageIndex: number;
@@ -32,11 +34,16 @@ const Articles: React.FC<Props> = ({
   blog,
   loading,
   perPage,
+  blogDetailContent,
 }) => {
   const startArticle = pageIndex * perPage + 1;
   const endArticle = Math.min((pageIndex + 1) * perPage, blog.total);
+  const { locale } = useRouter();
 
-  const result = `Showing ${startArticle}-${endArticle} of ${blog.total} articles`;
+  const result =
+    locale === 'en'
+      ? `Showing ${startArticle}-${endArticle} of ${blog.total} articles`
+      : `Zeigt ${startArticle}-${endArticle} von ${blog.total} artikeln`;
 
   return (
     <div className={styles.root}>
@@ -47,7 +54,7 @@ const Articles: React.FC<Props> = ({
           fullWidth={true}
         >
           <GridColumn sm={12} md={8} lg={8}>
-            <h2>All articles</h2>
+            <h2>{blogDetailContent?.blogIndexContent?.heading}</h2>
             <p>{result}</p>
           </GridColumn>
           <GridColumn sm={12} md={4} lg={4}></GridColumn>
@@ -86,10 +93,11 @@ const Articles: React.FC<Props> = ({
             verticalGridArticles={verticalGridArticles}
             tripleGridArticles={tripleGridArticles}
             halfGridArticles={halfGridArticles}
+            blogDetailContent={blogDetailContent}
           />
         ) : (
           <Container classes={styles.container}>
-            <Grid justifyContent={'space-between'} fullWidth={true}>
+            <Grid fullWidth={true}>
               {blog.items.map((article, i) => (
                 <GridColumn
                   sm={12}
