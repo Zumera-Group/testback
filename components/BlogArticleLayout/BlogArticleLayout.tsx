@@ -223,11 +223,11 @@ export const BlogArticleLayout: React.FC<{
                 </React.Fragment>
               );
             })}
-          {/* <AuthorBlock
+          <AuthorBlock
             blogArticle={blogArticle}
             blogArticleDetail={blogArticleDetail}
             key={blogArticle._id}
-          /> */}
+          />
           {blogArticle.relatedArticles && (
             <RelatedArticles
               relatedArticles={blogArticle.relatedArticles}
