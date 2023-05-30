@@ -12,6 +12,10 @@
   height: 100%;
   margin-top: $gutter * 2;
   aspect-ratio: 1/1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   @include breakpoint-up(md) {
     margin-top: 0;
   }

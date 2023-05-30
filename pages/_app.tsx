@@ -14,6 +14,8 @@ import { IconSprite } from 'components/Icon';
 const INTERCOM_APP_ID = 'lwrptr1h';
 
 const myFont = localFont({
+  // variable:
+  display: 'swap',
   src: [
     {
       path: '../public/fonts/Yellix-Light.woff2',
@@ -67,7 +69,7 @@ function MyApp({ Component, pageProps, router }) {
         autoBoot
         autoBootProps={{ hideDefaultLauncher: true }}
       >
-        <main className={myFont.className}>
+        <main className={myFont.className} {...myFont}>
           <Component {...stringData} key={router.pathname} />
         </main>
       </IntercomProvider>
