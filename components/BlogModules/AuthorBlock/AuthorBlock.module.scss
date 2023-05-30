@@ -17,6 +17,10 @@
     a {
       border-bottom: unset;
       text-decoration: none;
+      &:hover {
+        border-bottom: unset;
+        text-decoration: none;
+      }
     }
     display: flex;
     flex-direction: column;
