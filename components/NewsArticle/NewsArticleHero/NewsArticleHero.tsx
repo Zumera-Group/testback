@@ -49,6 +49,7 @@ const NewsArticleHero: React.FC<Props> = ({ newsArticle }) => {
                   style={{
                     maxWidth: '100%',
                     height: 'auto',
+                    width: '100%',
                   }}
                 />
               </div>
