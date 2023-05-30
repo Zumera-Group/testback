@@ -14,7 +14,7 @@ export const TransactionCompany: React.FC<{
   ) {
     return null;
   }
-  console.log(transaction);
+  // console.log(transaction);
   return (
     <Section size={'md'} bg={'light'} color={'primary'}>
       <Container classes={styles.headingContainer}>
