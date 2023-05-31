@@ -32,7 +32,7 @@ const NewsArticleDescription: React.FC<Props> = ({ newsArticle, content }) => {
           className={styles.contentWrapper}
         >
           <GridColumn sm={12} md={6} lg={6}>
-            {newsArticle?.picture?.asset?.url && (
+            {secondPicture?.asset?.url && (
               <div className={styles.imageWrapper}>
                 <Image
                   unoptimized
