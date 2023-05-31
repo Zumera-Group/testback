@@ -140,13 +140,7 @@ export const QuestionComponent: React.FC<{
     qLogs('onNextQuestion');
     qLogs('ID ' + currentQuestion?.salesforceId);
 
-    // console.log(allQuestions.questions);
-    // console.log(getEvStartPos());
-
     const evStartPos = getEvStartPos();
-
-    console.log(evStartPos);
-    console.log(currentPos);
 
     if (currentPos >= evStartPos) {
       syncCurrentAnswersToSalesforce(
