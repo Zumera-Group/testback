@@ -13,6 +13,7 @@ interface Props {
 
 const NewsArticleHero: React.FC<Props> = ({ newsArticle }) => {
   const format = useFormatDate();
+
   const dateFormatted = newsArticle.date
     ? format(new Date(newsArticle.date))
     : null;
