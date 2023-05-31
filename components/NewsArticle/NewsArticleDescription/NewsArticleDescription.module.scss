@@ -5,9 +5,27 @@
 
 .container {
   @include divider('bottom', $primary);
-  padding-bottom: 5rem; 
+  padding-bottom: 5rem;
 }
 
 .section {
   padding-bottom: 0 !important;
+}
+
+.contentWrapper {
+  & > div {
+    @include breakpoint-down(md) {
+      flex-direction: column-reverse;
+    }
+  }
+
+  .imageWrapper {
+    margin-top: $gutter * 4;
+
+    img {
+      @include breakpoint-down(md) {
+        width: 100% !important;
+      }
+    }
+  }
 }
