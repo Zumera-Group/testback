@@ -15,7 +15,7 @@ const NewsArticleDescription: React.FC<Props> = ({ newsArticle, content }) => {
   const { newArticleSection, secondPicture } = newsArticle;
   const description =
     newArticleSection?.articleTextRichEditor || newArticleSection?.articleText;
-  console.log(secondPicture);
+
   return (
     <Section
       as={'div'}
