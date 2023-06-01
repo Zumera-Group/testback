@@ -9,7 +9,6 @@ export const enPaths = [
   'career',
   'imprint',
   'valuation-tool',
-  'blog',
 ];
 
 export const dePaths = [
@@ -23,5 +22,4 @@ export const dePaths = [
   'karriere',
   'impressum',
   'unternehmenswert-rechner',
-  'blog',
 ];
