@@ -3,17 +3,17 @@ import cx from 'classnames';
 import { useRouter } from 'next/router';
 
 import { sanityImageUrlFor } from 'lib/sanity';
-import { useFormatDate } from 'lib/shared-domain/useFormatDate';
 
 import styles from './ArticleBox.module.scss';
 import Link from 'next/link';
+import useFormatDateLong from 'lib/shared-domain/useFormatDateLong';
 
 interface Props {
   titleEl: any;
   type: string;
   hasDivider?: boolean;
   item: {
-    date?: string;
+    date?: any;
     summary?: string;
     articleTitle?: string;
     slug: {
@@ -51,16 +51,16 @@ const getWidthAndHeight = (type: string) => {
     width: 845,
     height: 475,
   };
-}
+};
 
 const ArticleBox: React.FC<Props> = ({
   titleEl = 'h5',
   item,
   type = 'featured',
-  hasDivider = false
+  hasDivider = false,
 }) => {
   const TitleElement = titleEl;
-  const format = useFormatDate();
+  const dateFormatted = useFormatDateLong(item?.date);
   const { locale } = useRouter();
   const href =
     locale === 'en'
@@ -69,7 +69,9 @@ const ArticleBox: React.FC<Props> = ({
 
   const isLatest = type === 'latest';
   const isSmallVertical = type === 'small-vertical';
-  const classNames = cx(styles.article, styles[type], {[styles.divider]: hasDivider });
+  const classNames = cx(styles.article, styles[type], {
+    [styles.divider]: hasDivider,
+  });
   const noImage = isLatest;
   const noSummary = isLatest || isSmallVertical;
 
@@ -94,11 +96,9 @@ const ArticleBox: React.FC<Props> = ({
         </div>
       )}
       <div className={styles.content}>
-        <span>{format(new Date(item?.date))}</span>
+        <span>{dateFormatted}</span>
         <Link href={href}>
-          <TitleElement>
-            {item?.articleTitle}
-          </TitleElement>
+          <TitleElement>{item?.articleTitle}</TitleElement>
         </Link>
         {!noSummary && <p className={styles.summary}>{item?.summary}</p>}
       </div>

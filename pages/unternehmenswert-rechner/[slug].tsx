@@ -3,9 +3,9 @@ import React, { useEffect, useState } from 'react';
 import { fetchSiteSettings } from 'lib/shared-domain/page/application/useGetSiteSettings';
 import { SiteSettings } from 'lib/shared-domain/page/domain';
 import { BlogArticle } from 'lib/shared-domain/blogArticle/domain';
-import { fetchBlogArticles } from 'lib/shared-domain/blogArticle/application/useGetBlogArticles';
+import { fetchBlogArticles } from 'lib/shared-domain/blogValToolArticle/application/useGetBlogArticles';
 import { fetchBlogDetailContent } from 'lib/shared-domain/blogArticle/application/useGetBlogDetailContent';
-import { fetchBlogArticle } from 'lib/shared-domain/blogArticle/application/useGetBlogArticle';
+import { fetchBlogArticle } from 'lib/shared-domain/blogValToolArticle/application/useGetBlogArticle';
 import { ErrorTrackingBoundary } from 'lib/ErrorTrackingBoundary';
 import { SharedContentContext } from 'lib/shared-domain/page/infrastructure/sharedContentContext';
 import { SharedContentFacade } from 'lib/shared-domain/page/infrastructure/sharedContent.facade';
@@ -147,7 +147,7 @@ export default function Index({
 
   const otherLangSlug =
     selectedBlogArticle?.queryOtherLangSlug?.slice(-1)[0]?.slug &&
-    links(locale === 'en' ? 'de' : 'en').blogArticles(
+    links(locale === 'en' ? 'de' : 'en').blogValToolArticle(
       selectedBlogArticle?.queryOtherLangSlug?.slice(-1)[0] as any,
     );
 

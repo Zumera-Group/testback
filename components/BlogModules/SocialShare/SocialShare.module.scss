@@ -23,5 +23,10 @@
       opacity: 0.7;
       transition: transform $timing-lg $ease-out, opacity $timing-md $ease-out;
     }
+
+    svg {
+      box-shadow: $btn-box-shadow;
+      border-radius: 90px;
+    }
   }
 }

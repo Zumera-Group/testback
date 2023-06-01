@@ -7,10 +7,8 @@ import { ContentModule } from 'lib/shared-domain/blogArticle/domain/blogModule';
 import { getContentForContentModule } from 'lib/shared-domain/blogArticle/presentation/blogModules';
 import { PageTransition } from 'components/PageTransition';
 import { SEO } from 'components/SEO';
-import { useFetchBlogArticles } from 'lib/shared-domain/blogArticle/application/useGetBlogArticles';
 import { links } from 'lib/links';
 import { useRouter } from 'next/router';
-import { useFormatDate } from 'lib/shared-domain/useFormatDate';
 import { Container, Grid, GridColumn, Section } from 'components/Layout';
 import styles from './BlogArticleLayout.module.scss';
 import { Button } from 'components/Button';
@@ -22,26 +20,20 @@ import { SocialShare } from 'components/BlogModules/SocialShare';
 import { AuthorBlock } from 'components/BlogModules/AuthorBlock';
 import RelatedArticles from 'components/BlogModules/RelatedArticles/RelatedArticles';
 import ContactUsSection from 'lib/shared-domain/page/presentation/contentModules/ContactUsSection';
+import useFormatDateLong from 'lib/shared-domain/useFormatDateLong';
 
 export const BlogArticleLayout: React.FC<{
   blogArticle: BlogArticle;
   siteSettings: SiteSettings;
   blogArticleDetail: any;
-}> = ({ blogArticle, siteSettings, blogArticleDetail }) => {
+  querySlug: any;
+}> = ({ blogArticle, siteSettings, blogArticleDetail, querySlug }) => {
   const { locale } = useRouter();
-  const format = useFormatDate();
 
-  const otherLangSlug =
-    blogArticle?.queryOtherLangSlug?.slice(-1)[0]?.slug &&
-    links(locale === 'en' ? 'de' : 'en').blogArticles(
-      blogArticle?.queryOtherLangSlug?.slice(-1)[0] as any,
-    );
   const blogModules =
     blogArticle?.blogModules?.map((c) => ContentModule.create(c)) || [];
 
-  const dateFormatted = blogArticle?.date
-    ? format(new Date(blogArticle?.date))
-    : null;
+  const dateFormatted = useFormatDateLong(blogArticle?.date);
 
   return (
     <main id="main" className={styles.blogArticle}>
@@ -54,7 +46,7 @@ export const BlogArticleLayout: React.FC<{
       <PageHeader
         contentModules={[]}
         siteSettings={siteSettings}
-        otherLangSlug={otherLangSlug}
+        otherLangSlug={querySlug}
         whiteBg
       />
       <PageTransition slug={blogArticle._id}>
@@ -140,7 +132,7 @@ export const BlogArticleLayout: React.FC<{
                     <ol>
                       {blogArticle?.toc?.map((section) => (
                         <>
-                          <li>
+                          <li key={section._id}>
                             <a key={section._id} href={`#${section.anchor}`}>
                               {section?.title}
                             </a>
@@ -186,18 +178,33 @@ export const BlogArticleLayout: React.FC<{
                       <ol>
                         {blogArticle?.relatedArticles?.map((article) => (
                           <>
-                            <li>
-                              <a
-                                key={article._id}
-                                href={
-                                  locale === 'en'
-                                    ? `/en/blog/${article?.slug?.current}`
-                                    : `/de/blog/${article?.slug?.current}`
-                                }
-                              >
-                                {article?.articleTitle}
-                              </a>
-                            </li>
+                            {article._type === 'blogArticle' ? (
+                              <li key={article._id}>
+                                <a
+                                  key={article._id}
+                                  href={
+                                    locale === 'en'
+                                      ? `/en/blog/${article?.slug?.current}`
+                                      : `/de/blog/${article?.slug?.current}`
+                                  }
+                                >
+                                  {article?.articleTitle}
+                                </a>
+                              </li>
+                            ) : (
+                              <li>
+                                <a
+                                  key={article._id}
+                                  href={
+                                    locale === 'en'
+                                      ? `/en/valuation-tool/${article?.slug?.current}`
+                                      : `/de/unternehmenswert-rechner/${article?.slug?.current}`
+                                  }
+                                >
+                                  {article?.articleTitle}
+                                </a>
+                              </li>
+                            )}
                           </>
                         ))}
                       </ol>
@@ -219,6 +226,7 @@ export const BlogArticleLayout: React.FC<{
           <AuthorBlock
             blogArticle={blogArticle}
             blogArticleDetail={blogArticleDetail}
+            key={blogArticle._id}
           />
           {blogArticle.relatedArticles && (
             <RelatedArticles

@@ -1,6 +1,6 @@
 import { Locale } from 'lib/locale';
 import { SanityService } from 'lib/services/sanity.service';
-import { BlogArticle } from '../domain';
+import { BlogArticle } from './../../blogArticle/domain';
 
 import {
   filterDataToSingleItem,
@@ -12,7 +12,7 @@ const queryBlogArticle = (
   lang,
   slug,
   otherLangSlugQuery,
-) => `*[_type == "blogArticle" && slug.current == "${slug}" && _lang == "${lang}"] {
+) => `*[_type == "blogValToolArticle" && slug.current == "${slug}" && _lang == "${lang}"] {
   ...,
   _id,
   _lang,
@@ -118,7 +118,7 @@ const queryBlogArticle = (
 
 const queryBlogArticles = (
   lang,
-) => `*[_type == "blogArticle" && _lang == "${lang}"] {
+) => `*[_type == "blogValToolArticle" && _lang == "${lang}"] {
   ...,
   _id,
   _lang,
@@ -245,7 +245,7 @@ export class BlogArticleFacade {
     const query = queryBlogArticle(
       this.sanityService.getSanityLocale(lang),
       slug,
-      getOtherLangSlugQuery(lang, 'blogArticle'),
+      getOtherLangSlugQuery(lang, 'blogValToolArticle'),
     );
     const data = await this.sanityService.fetch(query, preview);
     if (!data) {

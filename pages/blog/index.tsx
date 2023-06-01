@@ -19,11 +19,12 @@ import { fetchPage } from 'lib/shared-domain/page/application/useGetPage';
 import { ContentModuleType } from 'lib/shared-domain/page/domain/contentModule';
 import Articles from 'components/BlogModules/Articles';
 import ContactUsSection from 'lib/shared-domain/page/presentation/contentModules/ContactUsSection';
+import { fetchBlogDetailContent } from 'lib/shared-domain/blogArticle/application/useGetBlogDetailContent';
 
 const PER_PAGE = 19;
 
 export const queryBlogArticles = (lang, pageIndex, perPage) => `{
-  "items": *[_type == "blogArticle" && _lang == "${lang}"] | order(_id) [(${pageIndex} * ${perPage})...(${pageIndex} + 1) * ${perPage}] {
+  "items": *[_type == "blogArticle" && _lang == "${lang}"] | order(date desc) [(${pageIndex} * ${perPage})...(${pageIndex} + 1) * ${perPage}] {
     articleTitle,
     date,
     name,
@@ -55,6 +56,8 @@ export async function getStaticProps({ locale, params, preview = false }) {
     articleTitle,
   },
   `;
+  const blogDetailContent = await fetchBlogDetailContent(locale);
+
   const data = await fetchPage(locale, 'blog', preview, extraQuery);
   const blogs = await sanrityService.fetch(
     queryBlogArticles(sanrityService.getSanityLocale(locale), 0, PER_PAGE),
@@ -76,6 +79,7 @@ export async function getStaticProps({ locale, params, preview = false }) {
       page,
       featuredBlog,
       contentModules,
+      blogDetailContent,
     },
     revalidate: REVALIDATE_ON_FAILURE_TIME_IN_SECONDS,
   };
@@ -101,6 +105,7 @@ export default function Index({
   sharedContent,
   featuredBlog,
   blogs,
+  blogDetailContent,
 }: Props): JSX.Element {
   const { data: previewData } = usePreviewSubscription(query, {
     params: { slug: queryParams } ?? {},
@@ -135,7 +140,7 @@ export default function Index({
 
   useEffect(() => {
     setTimeout(() => setLoading(false), 600);
-  }, [])
+  }, []);
 
   if (router.isFallback) {
     return null;
@@ -191,6 +196,7 @@ export default function Index({
                   await fetchBlogPost(value);
                 }}
                 blog={blogData}
+                blogDetailContent={blogDetailContent}
               />
             </Section>
           </PageTransition>

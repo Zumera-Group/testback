@@ -19,7 +19,7 @@ export const BigMenu = ({
   otherLangSlug,
 }) => {
   const [showMode, setShowMode] = useState<
-    'normal' | 'sectors' | 'services' | 'blogArticles'
+    'normal' | 'sectors' | 'services' | 'blogValToolArticle'
   >('normal');
 
   const getNavigationHeading = () => {
@@ -38,7 +38,7 @@ export const BigMenu = ({
         slug: servicesMenu.page.slug.current,
       };
     }
-    if (showMode === 'blogArticles') {
+    if (showMode === 'blogValToolArticle') {
       const blogArticlesMenu = siteSettings?.hamburgerMenu?.find(
         (menu) => menu.type === showMode,
       );
