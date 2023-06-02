@@ -63,6 +63,10 @@ function MyApp({ Component, pageProps, router }) {
           name="viewport"
           content="width=device-width, initial-scale=1, shrink-to-fit=no"
         />
+        <meta
+          name="facebook-domain-verification"
+          content="rky918eo3cxtgnpah82z57jjtgpmr4"
+        />
       </Head>
       <IntercomProvider
         appId={INTERCOM_APP_ID}
