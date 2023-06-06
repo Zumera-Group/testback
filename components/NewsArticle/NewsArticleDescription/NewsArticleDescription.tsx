@@ -3,6 +3,8 @@ import { Container, Grid, GridColumn, Section } from 'components/Layout';
 
 import styles from './NewsArticleDescription.module.scss';
 import { Button } from 'components/Button';
+import Image from 'next/image';
+import { sanityImageUrlFor } from 'lib/sanity';
 
 interface Props {
   newsArticle: any;
@@ -10,7 +12,7 @@ interface Props {
 }
 
 const NewsArticleDescription: React.FC<Props> = ({ newsArticle, content }) => {
-  const { newArticleSection } = newsArticle;
+  const { newArticleSection, secondPicture } = newsArticle;
   const description =
     newArticleSection?.articleTextRichEditor || newArticleSection?.articleText;
 
@@ -26,9 +28,29 @@ const NewsArticleDescription: React.FC<Props> = ({ newsArticle, content }) => {
         <Grid
           fullWidth={true}
           justifyContent={'space-between'}
-          alignItems={'center'}
+          alignItems={'end'}
+          className={styles.contentWrapper}
         >
-          <GridColumn sm={12} md={6} lg={6} />
+          <GridColumn sm={12} md={6} lg={6}>
+            {secondPicture?.asset?.url && (
+              <div className={styles.imageWrapper}>
+                <Image
+                  unoptimized
+                  src={sanityImageUrlFor(secondPicture.asset?.url).url()}
+                  width={200}
+                  height={1200}
+                  alt={secondPicture.asset?.alt}
+                  style={{
+                    maxWidth: '100%',
+                    height: 'auto',
+                    width: '75%',
+                    display: 'block',
+                    margin: 'auto',
+                  }}
+                />
+              </div>
+            )}
+          </GridColumn>
           <GridColumn sm={12} md={6} lg={6}>
             <div className={styles.description}>
               {Array.isArray(description) ? (

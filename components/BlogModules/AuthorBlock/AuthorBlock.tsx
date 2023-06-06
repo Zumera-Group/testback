@@ -21,7 +21,16 @@ export const AuthorBlock: React.FC<any> = ({
 
   const {
     calculatorCta: { calculatorPage, description, title },
+    calendlyCTA,
   } = blogArticleDetail;
+
+  const closeCalendly = () => {
+    const calendly = document.querySelector('.calendly-overlay');
+    if (calendly) {
+      calendly.removeEventListener('click', closeCalendly);
+    }
+    window.Calendly.closePopupWidget();
+  };
 
   return (
     <Container classes={[styles.authorWrapper].join(' ')} key={blogArticle._id}>
@@ -57,20 +66,32 @@ export const AuthorBlock: React.FC<any> = ({
             </div>
 
             <Grid fullWidth={true}>
-              <GridColumn sm={12} md={12} lg={6}>
+              {/* <GridColumn sm={12} md={12} lg={6}>
                 <WhitePaperModal
                   blogArticle={blogArticle}
                   siteSettings={siteSettings}
                   blogArticleDetail={blogArticleDetail}
                 />
-              </GridColumn>
-              <GridColumn sm={12} md={12} lg={6}>
-                <WhitePaperModal
-                  blogArticle={blogArticle}
-                  siteSettings={siteSettings}
-                  blogArticleDetail={blogArticleDetail}
-                />
-              </GridColumn>
+              </GridColumn> */}
+
+              {blogArticle.authors[0]?.calendlyURL && (
+                <GridColumn sm={12} md={12} lg={6}>
+                  <Button
+                    variant={'secondary'}
+                    callBack={() => {
+                      window.Calendly.showPopupWidget(
+                        `${blogArticle.authors[0]?.calendlyURL}?embed_domain=zumera.com/&amp;embed_type=PopupText`,
+                      );
+                      const calendly =
+                        document.querySelector('.calendly-overlay');
+                      calendly.addEventListener('click', closeCalendly);
+                    }}
+                    classes={styles.calendlyCTA}
+                  >
+                    {calendlyCTA}
+                  </Button>
+                </GridColumn>
+              )}
             </Grid>
           </GridColumn>
 

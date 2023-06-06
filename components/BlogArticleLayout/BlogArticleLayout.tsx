@@ -131,7 +131,7 @@ export const BlogArticleLayout: React.FC<{
                     <ol>
                       {blogArticle?.toc?.map((section) => (
                         <>
-                          <li>
+                          <li key={section._id}>
                             <a key={section._id} href={`#${section.anchor}`}>
                               {section?.title}
                             </a>
@@ -178,18 +178,33 @@ export const BlogArticleLayout: React.FC<{
                       <ol>
                         {blogArticle?.relatedArticles?.map((article) => (
                           <>
-                            <li>
-                              <a
-                                key={article._id}
-                                href={
-                                  locale === 'en'
-                                    ? `/en/blog/${article?.slug?.current}`
-                                    : `/de/blog/${article?.slug?.current}`
-                                }
-                              >
-                                {article?.articleTitle}
-                              </a>
-                            </li>
+                            {article._type === 'blogArticle' ? (
+                              <li key={article._id}>
+                                <a
+                                  key={article._id}
+                                  href={
+                                    locale === 'en'
+                                      ? `/en/blog/${article?.slug?.current}`
+                                      : `/de/blog/${article?.slug?.current}`
+                                  }
+                                >
+                                  {article?.articleTitle}
+                                </a>
+                              </li>
+                            ) : (
+                              <li>
+                                <a
+                                  key={article._id}
+                                  href={
+                                    locale === 'en'
+                                      ? `/en/valuation-tool/${article?.slug?.current}`
+                                      : `/de/unternehmenswert-rechner/${article?.slug?.current}`
+                                  }
+                                >
+                                  {article?.articleTitle}
+                                </a>
+                              </li>
+                            )}
                           </>
                         ))}
                       </ol>

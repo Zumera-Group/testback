@@ -13,6 +13,7 @@ interface Props {
 
 const NewsArticleHero: React.FC<Props> = ({ newsArticle }) => {
   const format = useFormatDate();
+
   const dateFormatted = newsArticle.date
     ? format(new Date(newsArticle.date))
     : null;
@@ -49,6 +50,7 @@ const NewsArticleHero: React.FC<Props> = ({ newsArticle }) => {
                   style={{
                     maxWidth: '100%',
                     height: 'auto',
+                    width: '100%',
                   }}
                 />
               </div>

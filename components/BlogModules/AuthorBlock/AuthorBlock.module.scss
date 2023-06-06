@@ -16,6 +16,11 @@
   .calculatorCta {
     a {
       border-bottom: unset;
+      text-decoration: none;
+      &:hover {
+        border-bottom: unset;
+        text-decoration: none;
+      }
     }
     display: flex;
     flex-direction: column;
@@ -44,6 +49,20 @@
         color: $white;
       }
     }
+
+    @include breakpoint-down(md) {
+      margin-top: $gutter * 2;
+    }
+  }
+
+  .leftColumn {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+  }
+
+  .calendlyCTA {
+    box-shadow: $btn-box-shadow;
   }
 
   .leftColumn {
