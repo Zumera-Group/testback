@@ -124,13 +124,12 @@ const WhitePaperModal: React.FC<{
                     siteSettings.contactSectionContent.contactForm
                   }
                   successMessage={whitePaperForm.successMessage}
-                  //   errorMessage={
-                  //     whitePaperForm
-                  //       .successMessage
-                  //   }
+                  errorMessage={whitePaperForm.errorMessage}
                   downloadAgain={whitePaperDownload.downloadAgain}
                   file={blogArticle?.whitePaperDownload?.pdfURL}
                   phoneNumber={whitePaperForm.numberLabel}
+                  variant={'blog'}
+                  sectorName={''}
                 />
               </GridColumn>
             </Grid>

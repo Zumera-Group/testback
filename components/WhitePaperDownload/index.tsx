@@ -6,13 +6,22 @@ import { WhitePaperForm } from 'components/WhitePaperDownload/WhitePaperForm';
 import Image from 'next/image';
 import { sanityImageUrlFor } from 'lib/sanity';
 import axios from 'axios';
-export const WhitePaperDownload: React.FC<any> = ({
-  specificContentModule,
-}) => {
-  const { title, subtitle, description, whitePaperFormFields, image, file } =
-    specificContentModule;
+import { Sector, SiteSettings } from 'lib/shared-domain/page/domain';
+export const WhitePaperDownload: React.FC<{
+  sector: Sector;
+  siteSettings: SiteSettings;
+  content: any;
+  variant: 'sector' | 'blog';
+}> = ({ sector, siteSettings, content, variant }) => {
+  const {
+    whitePaperDownload,
+    whitePaperDownload: { whitePaperForm },
+  } = content;
 
-  // console.log(specificContentModule);
+  const {
+    whitePaperDownload: { pdfThumbnail },
+  } = sector;
+
   return (
     <Section size={'md'} bg={'light'} color={'primary'}>
       <Container>
@@ -24,16 +33,15 @@ export const WhitePaperDownload: React.FC<any> = ({
           >
             <GridColumn sm={12} md={6} lg={6}>
               <SectionHeading
-                title={title}
-                subtitle={subtitle}
-                description={description}
+                title={whitePaperDownload.title}
+                description={whitePaperDownload.description}
                 headingType={'h3'}
                 align={'left'}
               />
               <div className={styles.image}>
                 <Image
                   unoptimized={true}
-                  src={sanityImageUrlFor(image.asset.url).url()}
+                  src={sanityImageUrlFor(pdfThumbnail?.asset?.url)?.url()}
                   alt={''}
                   fill={true}
                   style={{
@@ -45,7 +53,21 @@ export const WhitePaperDownload: React.FC<any> = ({
               </div>
             </GridColumn>
             <GridColumn sm={12} md={6} lg={6}>
-              <WhitePaperForm {...whitePaperFormFields} file={file} />
+              <WhitePaperForm
+                buttonText={whitePaperForm.submitLabel}
+                namePlaceholder={whitePaperForm.nameLabel}
+                emailPlaceholder={whitePaperForm.emailLabel}
+                termsAndConditionsLabel={
+                  siteSettings.contactSectionContent.contactForm
+                }
+                successMessage={whitePaperForm.successMessage}
+                errorMessage={whitePaperForm.errorMessage}
+                downloadAgain={whitePaperDownload.downloadAgain}
+                file={sector?.whitePaperDownload?.pdfURL}
+                phoneNumber={whitePaperForm.numberLabel}
+                variant={variant}
+                sectorName={sector?.name}
+              />
             </GridColumn>
           </Grid>
         </div>

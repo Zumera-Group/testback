@@ -135,13 +135,13 @@ export const getContentForContentModule = (
       />
     );
   }
-  if (contentModule.specificContentModule instanceof WhitePaperDownloadModule) {
-    return (
-      <WhitePaperDownload
-        specificContentModule={contentModule.specificContentModule}
-      />
-    );
-  }
+  // if (contentModule.specificContentModule instanceof WhitePaperDownloadModule) {
+  //   return (
+  //     <WhitePaperDownload
+  //       specificContentModule={contentModule.specificContentModule}
+  //     />
+  //   );
+  // }
   if (contentModule.specificContentModule instanceof TransactionQuoteModule) {
     return (
       <TransactionQuote

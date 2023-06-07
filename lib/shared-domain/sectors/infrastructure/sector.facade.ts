@@ -94,6 +94,15 @@ const querySectors = (lang) => `*[_type == "sector" && _lang == "${lang}"] {
       }
     }
   },
+  whitePaperDownload {
+      ...,
+      pdfThumbnail {
+        ...,
+        asset->{
+          url
+        },
+      }
+    },
 }`;
 
 const querySectorDetailContent = (
@@ -225,6 +234,15 @@ const querySectorDetail = (
           url
         }
       }
+    }
+  },
+   whitePaperDownload {
+    ...,
+    pdfThumbnail {
+       ...,
+      asset->{
+        url
+      },
     }
   },
   "queryOtherLangSlug": ${otherLangSlugQuery},
