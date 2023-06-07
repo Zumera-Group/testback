@@ -22,6 +22,7 @@ export const WhitePaperForm = ({
   phoneNumber,
   file,
   variant,
+  sectorName,
 }) => {
   const router = useRouter();
   const [checkboxIsChecked, setCheckboxIsChecked] = useState(false);
@@ -88,6 +89,7 @@ export const WhitePaperForm = ({
       email: inputs['whitePaperEmail'].value,
       phone: phoneValue,
       variant: variant,
+      sectorName: sectorName,
     };
 
     try {
