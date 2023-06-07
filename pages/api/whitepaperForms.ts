@@ -27,8 +27,8 @@ export default async function handler(
           lastName: lastName,
           company: company,
           country: country,
-          // email: email,
-          // phone: phone,
+          email: email,
+          phone: phone,
         }
       : {
           firstName: firstName,
@@ -36,8 +36,8 @@ export default async function handler(
           company: company,
           country: country,
           email: email,
-          // phone: phone,
-          // sector: 'sectorName',
+          phone: phone,
+          sector: sectorName,
         };
 
   const endPoint =
@@ -45,21 +45,25 @@ export default async function handler(
       ? 'http://go.zumera.com/l/931863/2023-06-02/36wd1'
       : 'http://go.zumera.com/l/931863/2023-05-16/34ydb';
 
-  console.log(request);
-
   try {
-    const response = await fetch('http://go.zumera.com/', {
+    const response = await fetch(endPoint, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
       },
       body: new URLSearchParams(request).toString(),
     });
-    if (response.ok) {
-      res.status(200).json({ message: 'Form submitted successfully' });
-      console.log(response);
+
+    const responseData = await response.text();
+    if (
+      responseData.includes('required') ||
+      responseData.includes('no content')
+    ) {
+      res
+        .status(500)
+        .json({ message: 'Form submission failed', response: responseData });
     } else {
-      res.status(500).json({ message: 'Form submission failed' });
+      res.status(200).json({ message: 'Success' });
     }
   } catch (error) {
     res.status(500).json({ message: 'An error occurred' });

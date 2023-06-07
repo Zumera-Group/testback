@@ -45,8 +45,7 @@ export const SectorDetailLayout: React.FC<{
     links(locale === 'en' ? 'de' : 'en').sectors(
       sector?.queryOtherLangSlug?.slice(-1)[0] as any,
     );
-  console.log(content);
-  console.log(sector);
+
   return (
     <>
       <SEO

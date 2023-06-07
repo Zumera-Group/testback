@@ -1,10 +1,9 @@
-import { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Button } from 'components/Button';
 import { FormGroup, Input, Checkbox, Label } from 'components/Form';
 import styles from './WhitePaperForm.module.scss';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
-import axios from 'axios';
 import { Icon } from 'components/Icon';
 import Link from 'next/link';
 import { useLinkWithCurrentLocale } from 'lib/shared-domain/useLinkWithCurrentLocale';
@@ -36,16 +35,19 @@ export const WhitePaperForm = ({
   } = termsAndConditionsLabel;
 
   const [phoneValue, setPhoneValue] = useState();
-  const [countryValue, setCountryValue] = useState(null);
+  const [countryValue, setCountryValue] = useState(
+    router.locale === 'en' ? 'United Kingdom' : 'Germany',
+  );
+  const [isSuccess, setIsSuccess] = useState(null);
+
   const PhoneInputComponent = PhoneInput as any;
 
-  useEffect(() => {
+  const handleCountryChange = () => {
     const country = document?.getElementsByClassName('PhoneInputCountrySelect');
     const countrySelect = country[0] as HTMLSelectElement | undefined;
-    const countryValue = countrySelect?.selectedOptions[0]?.textContent;
-
-    setCountryValue(countryValue);
-  }, []);
+    const countryContent = countrySelect?.selectedOptions[0]?.textContent;
+    setCountryValue(countryContent);
+  };
 
   const downloadFile = async () => {
     const fileName = file?.substring(file?.lastIndexOf('/') + 1);
@@ -74,7 +76,7 @@ export const WhitePaperForm = ({
     }
   };
 
-  const blogHandleSubmit = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     // @ts-ignore
     const inputs = document.getElementById('white-paper-form').elements;
@@ -103,12 +105,13 @@ export const WhitePaperForm = ({
 
       if (response.ok) {
         console.log('success');
-        // downloadFile();
-        // setIsFormSubmitted(true);
-      } else {
-        console.error('failed ');
         downloadFile();
         setIsFormSubmitted(true);
+        setIsSuccess(true);
+      } else {
+        console.error('failed');
+        setIsFormSubmitted(true);
+        setIsSuccess(false);
       }
     } catch (error) {
       console.error('An error occurred', error);
@@ -117,11 +120,11 @@ export const WhitePaperForm = ({
 
   return (
     <>
-      {!isFormSubmitted ? (
+      {!isFormSubmitted && (
         <form
           className={styles.form}
           id={'white-paper-form'}
-          onSubmit={(e) => blogHandleSubmit(e)}
+          onSubmit={(e) => handleSubmit(e)}
         >
           <FormGroup>
             <Input
@@ -150,6 +153,7 @@ export const WhitePaperForm = ({
               value={phoneValue}
               countryCallingCodeEditable={false}
               onChange={setPhoneValue}
+              onCountryChange={handleCountryChange}
             />
           </FormGroup>
           <FormGroup>
@@ -182,7 +186,9 @@ export const WhitePaperForm = ({
             </Button>
           </FormGroup>
         </form>
-      ) : (
+      )}
+
+      {isFormSubmitted && isSuccess && (
         <div className={styles.successMessage}>
           <Icon
             iconName={'tick'}
@@ -192,6 +198,24 @@ export const WhitePaperForm = ({
             height={32}
           />
           <p>{successMessage}</p>
+          <Button
+            variant={'primary'}
+            onDark={true}
+            type={'button'}
+            title={'Send'}
+            classes={styles.submitBtn}
+            callBack={() => {
+              setIsFormSubmitted(false);
+            }}
+          >
+            {downloadAgain}
+          </Button>
+        </div>
+      )}
+
+      {isFormSubmitted && !isSuccess && (
+        <div className={styles.successMessage}>
+          <p>{errorMessage}</p>
           <Button
             variant={'primary'}
             onDark={true}
