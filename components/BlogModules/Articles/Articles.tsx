@@ -40,10 +40,6 @@ const Articles: React.FC<Props> = ({
   const endArticle = Math.min((pageIndex + 1) * perPage, blog.total);
   const { locale } = useRouter();
 
-  console.log(latestArticles);
-  console.log(midGridArticles);
-  console.log(blog.total);
-
   const result =
     locale === 'en'
       ? `Showing ${startArticle}-${endArticle + 1} of ${

@@ -30,6 +30,7 @@ export const queryBlogArticles = (lang, pageIndex, perPage) => `{
     name,
     slug,
     _id,
+    _type,
     summary,
     heroImage {
       asset->{

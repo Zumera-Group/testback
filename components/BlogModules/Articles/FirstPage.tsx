@@ -31,6 +31,7 @@ const FirstPage: React.FC<Props> = ({
   const {
     calculatorCta: { calculatorPage, description, title },
   } = blogDetailContent;
+
   return (
     <div className={styles.root}>
       <Container classes={styles.container}>

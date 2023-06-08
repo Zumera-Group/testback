@@ -13,6 +13,7 @@ interface Props {
   type: string;
   hasDivider?: boolean;
   item: {
+    _type?: any;
     date?: any;
     summary?: string;
     articleTitle?: string;
@@ -62,10 +63,6 @@ const ArticleBox: React.FC<Props> = ({
   const TitleElement = titleEl;
   const dateFormatted = useFormatDateLong(item?.date);
   const { locale } = useRouter();
-  const href =
-    locale === 'en'
-      ? `/en/blog/${item?.slug?.current}`
-      : `/de/blog/${item?.slug?.current}`;
 
   const isLatest = type === 'latest';
   const isSmallVertical = type === 'small-vertical';
@@ -74,6 +71,19 @@ const ArticleBox: React.FC<Props> = ({
   });
   const noImage = isLatest;
   const noSummary = isLatest || isSmallVertical;
+
+  console.log(item);
+
+  const href =
+    item._type === 'blogArticle' && locale === 'en'
+      ? `/en/blog/${item?.slug?.current}`
+      : item._type === 'blogArticle' && locale === 'de'
+      ? `/de/blog/${item?.slug?.current}`
+      : item._type === 'blogValToolArticle' && locale === 'en'
+      ? `/en/valuation-tool/${item?.slug?.current}`
+      : item._type === 'blogValToolArticle' && locale === 'de'
+      ? `/de/unternehmenswert-rechner/${item?.slug?.current}`
+      : `/en/blog/${item?.slug?.current}`;
 
   return (
     <div className={classNames}>
