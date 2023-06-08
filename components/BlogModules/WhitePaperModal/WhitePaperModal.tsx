@@ -72,8 +72,6 @@ const WhitePaperModal: React.FC<{
     </button>
   );
 
-  console.log(whitePaperDownload);
-
   return (
     <div className={[styles.modalWrapper].join(' ')} id="modalWrapper">
       <Button
