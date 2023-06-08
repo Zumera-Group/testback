@@ -42,9 +42,9 @@ export const WhitePaperDownload: React.FC<{
                 <Image
                   unoptimized={true}
                   src={sanityImageUrlFor(
-                    whitePaperDownload?.pdfThumbnail?.asset?.url,
+                    sector?.whitePaperDownload?.pdfThumbnail?.asset?.url,
                   )?.url()}
-                  alt={''}
+                  alt={sector?.whitePaperDownload?.pdfThumbnail?.asset?.alt}
                   fill={true}
                   style={{
                     width: '100%',

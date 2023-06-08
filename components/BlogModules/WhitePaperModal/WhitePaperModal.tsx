@@ -72,6 +72,8 @@ const WhitePaperModal: React.FC<{
     </button>
   );
 
+  console.log(whitePaperDownload);
+
   return (
     <div className={[styles.modalWrapper].join(' ')} id="modalWrapper">
       <Button
@@ -110,9 +112,11 @@ const WhitePaperModal: React.FC<{
                   <Image
                     unoptimized={true}
                     src={sanityImageUrlFor(
-                      whitePaperDownload?.pdfThumbnail?.asset?.url,
+                      blogArticle?.whitePaperDownload?.pdfThumbnail?.asset?.url,
                     )?.url()}
-                    alt={whitePaperDownload?.pdfThumbnail?.asset?.alt}
+                    alt={
+                      blogArticle?.whitePaperDownload?.pdfThumbnail?.asset?.alt
+                    }
                     width={545}
                     height={280}
                     className={styles.thumbnail}
