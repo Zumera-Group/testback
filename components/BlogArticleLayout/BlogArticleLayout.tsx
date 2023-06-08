@@ -130,13 +130,13 @@ export const BlogArticleLayout: React.FC<{
                     </span>
                     <ol>
                       {blogArticle?.toc?.map((section) => (
-                        <>
+                        <React.Fragment key={section._id}>
                           <li key={section._id}>
                             <a key={section._id} href={`#${section.anchor}`}>
                               {section?.title}
                             </a>
                           </li>
-                        </>
+                        </React.Fragment>
                       ))}
                     </ol>
                   </aside>
@@ -177,7 +177,7 @@ export const BlogArticleLayout: React.FC<{
                       </span>
                       <ol>
                         {blogArticle?.relatedArticles?.map((article) => (
-                          <>
+                          <React.Fragment key={article._id}>
                             {article._type === 'blogArticle' ? (
                               <li key={article._id}>
                                 <a
@@ -205,7 +205,7 @@ export const BlogArticleLayout: React.FC<{
                                 </a>
                               </li>
                             )}
-                          </>
+                          </React.Fragment>
                         ))}
                       </ol>
                     </aside>

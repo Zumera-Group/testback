@@ -17,6 +17,7 @@ import localFont from '@next/font/local';
 Modal.setAppElement('#modalWrapper');
 
 const myFont = localFont({
+  display: 'swap',
   src: [
     {
       path: '../../../public/fonts/Yellix-Light.woff2',
@@ -97,7 +98,7 @@ const WhitePaperModal: React.FC<{
               alignItems={'stretch'}
               fullWidth={true}
             >
-              <GridColumn sm={12} md={5} lg={5}>
+              <GridColumn sm={12} md={6} lg={6}>
                 <SectionHeading
                   title={whitePaperDownload.title}
                   description={whitePaperDownload.description}
@@ -115,7 +116,7 @@ const WhitePaperModal: React.FC<{
                   />
                 </div>
               </GridColumn>
-              <GridColumn sm={12} md={5} lg={6} className={styles.formWrapper}>
+              <GridColumn sm={12} md={6} lg={6} className={styles.formWrapper}>
                 <WhitePaperForm
                   buttonText={whitePaperForm.submitLabel}
                   namePlaceholder={whitePaperForm.nameLabel}

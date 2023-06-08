@@ -67,13 +67,11 @@ export const AuthorBlock: React.FC<any> = ({
 
             <Grid fullWidth={true}>
               <GridColumn sm={12} md={12} lg={6}>
-                {/* <div id="modalWrapper"> */}
                 <WhitePaperModal
                   blogArticle={blogArticle}
                   siteSettings={siteSettings}
                   blogArticleDetail={blogArticleDetail}
                 />
-                {/* </div> */}
               </GridColumn>
 
               {blogArticle.authors[0]?.calendlyURL && (
