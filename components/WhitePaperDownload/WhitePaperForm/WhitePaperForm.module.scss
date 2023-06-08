@@ -44,7 +44,15 @@
         @include input();
         margin-left: $gutter * 1.2;
         flex: 0 0 auto;
-        max-width: 75%;
+        max-width: 55%;
+
+        @include breakpoint-up(md) {
+          max-width: 65%;
+        }
+
+        @include breakpoint-up(lg) {
+          max-width: 75%;
+        }
       }
     }
     .PhoneInputCountry {
@@ -53,13 +61,25 @@
       position: relative;
       .PhoneInputCountrySelect {
         color: transparent;
+
+        &:focus {
+          color: transparent;
+        }
       }
       .PhoneInputCountryIcon {
-        width: 50px;
+        width: 20px;
         position: absolute;
         margin-left: 1rem;
         border-radius: 30%;
         overflow: hidden;
+
+        @media screen and (min-width: 1024px) {
+          width: 25px;
+        }
+
+        @media screen and (min-width: 1240px) {
+          width: 50px;
+        }
       }
     }
   }
