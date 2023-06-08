@@ -18,9 +18,9 @@ export const WhitePaperDownload: React.FC<{
     whitePaperDownload: { whitePaperForm },
   } = content;
 
-  const {
-    whitePaperDownload: { pdfThumbnail },
-  } = sector;
+  // const {
+  //   whitePaperDownload: { pdfThumbnail },
+  // } = sector;
 
   return (
     <Section size={'md'} bg={'light'} color={'primary'}>
@@ -33,15 +33,17 @@ export const WhitePaperDownload: React.FC<{
           >
             <GridColumn sm={12} md={6} lg={6}>
               <SectionHeading
-                title={whitePaperDownload.title}
-                description={whitePaperDownload.description}
+                title={whitePaperDownload?.title}
+                description={whitePaperDownload?.description}
                 headingType={'h3'}
                 align={'left'}
               />
               <div className={styles.image}>
                 <Image
                   unoptimized={true}
-                  src={sanityImageUrlFor(pdfThumbnail?.asset?.url)?.url()}
+                  src={sanityImageUrlFor(
+                    whitePaperDownload?.pdfThumbnail?.asset?.url,
+                  )?.url()}
                   alt={''}
                   fill={true}
                   style={{
@@ -54,17 +56,17 @@ export const WhitePaperDownload: React.FC<{
             </GridColumn>
             <GridColumn sm={12} md={6} lg={6}>
               <WhitePaperForm
-                buttonText={whitePaperForm.submitLabel}
-                namePlaceholder={whitePaperForm.nameLabel}
-                emailPlaceholder={whitePaperForm.emailLabel}
+                buttonText={whitePaperForm?.submitLabel}
+                namePlaceholder={whitePaperForm?.nameLabel}
+                emailPlaceholder={whitePaperForm?.emailLabel}
                 termsAndConditionsLabel={
-                  siteSettings.contactSectionContent.contactForm
+                  siteSettings?.contactSectionContent?.contactForm
                 }
-                successMessage={whitePaperForm.successMessage}
-                errorMessage={whitePaperForm.errorMessage}
-                downloadAgain={whitePaperDownload.downloadAgain}
+                successMessage={whitePaperForm?.successMessage}
+                errorMessage={whitePaperForm?.errorMessage}
+                downloadAgain={whitePaperDownload?.downloadAgain}
                 file={sector?.whitePaperDownload?.pdfURL}
-                phoneNumber={whitePaperForm.numberLabel}
+                phoneNumber={whitePaperForm?.numberLabel}
                 variant={variant}
                 sectorName={sector?.name}
               />

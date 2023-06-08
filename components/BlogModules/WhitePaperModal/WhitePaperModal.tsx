@@ -49,9 +49,9 @@ const WhitePaperModal: React.FC<{
     whitePaperDownload: { whitePaperForm },
   } = blogArticleDetail;
 
-  const {
-    whitePaperDownload: { pdfThumbnail },
-  } = blogArticle;
+  // const {
+  //   whitePaperDownload: { pdfThumbnail },
+  // } = blogArticle;
 
   const openModal = () => {
     setIsOpen(true);
@@ -81,7 +81,7 @@ const WhitePaperModal: React.FC<{
         classes={styles.downloadBtn}
         callBack={openModal}
       >
-        {whitePaperDownload.downloadCTA}
+        {whitePaperDownload?.downloadCTA}
       </Button>
       <Modal
         isOpen={isOpen}
@@ -100,16 +100,19 @@ const WhitePaperModal: React.FC<{
             >
               <GridColumn sm={12} md={6} lg={6}>
                 <SectionHeading
-                  title={whitePaperDownload.title}
-                  description={whitePaperDownload.description}
+                  title={whitePaperDownload?.title}
+                  description={whitePaperDownload?.description}
                   headingType={'h3'}
                   align={'left'}
                 />
+
                 <div className={styles.image}>
                   <Image
                     unoptimized={true}
-                    src={sanityImageUrlFor(pdfThumbnail?.asset?.url).url()}
-                    alt={pdfThumbnail?.asset?.alt}
+                    src={sanityImageUrlFor(
+                      whitePaperDownload?.pdfThumbnail?.asset?.url,
+                    )?.url()}
+                    alt={whitePaperDownload?.pdfThumbnail?.asset?.alt}
                     width={545}
                     height={280}
                     className={styles.thumbnail}
@@ -118,17 +121,17 @@ const WhitePaperModal: React.FC<{
               </GridColumn>
               <GridColumn sm={12} md={6} lg={6} className={styles.formWrapper}>
                 <WhitePaperForm
-                  buttonText={whitePaperForm.submitLabel}
-                  namePlaceholder={whitePaperForm.nameLabel}
-                  emailPlaceholder={whitePaperForm.emailLabel}
+                  buttonText={whitePaperForm?.submitLabel}
+                  namePlaceholder={whitePaperForm?.nameLabel}
+                  emailPlaceholder={whitePaperForm?.emailLabel}
                   termsAndConditionsLabel={
-                    siteSettings.contactSectionContent.contactForm
+                    siteSettings?.contactSectionContent?.contactForm
                   }
-                  successMessage={whitePaperForm.successMessage}
-                  errorMessage={whitePaperForm.errorMessage}
-                  downloadAgain={whitePaperDownload.downloadAgain}
+                  successMessage={whitePaperForm?.successMessage}
+                  errorMessage={whitePaperForm?.errorMessage}
+                  downloadAgain={whitePaperDownload?.downloadAgain}
                   file={blogArticle?.whitePaperDownload?.pdfURL}
-                  phoneNumber={whitePaperForm.numberLabel}
+                  phoneNumber={whitePaperForm?.numberLabel}
                   variant={'blog'}
                   sectorName={''}
                 />
