@@ -72,8 +72,6 @@ const ArticleBox: React.FC<Props> = ({
   const noImage = isLatest;
   const noSummary = isLatest || isSmallVertical;
 
-  console.log(item);
-
   const href =
     item._type === 'blogArticle' && locale === 'en'
       ? `/en/blog/${item?.slug?.current}`
