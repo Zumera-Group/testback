@@ -40,10 +40,18 @@ const Articles: React.FC<Props> = ({
   const endArticle = Math.min((pageIndex + 1) * perPage, blog.total);
   const { locale } = useRouter();
 
+  console.log(latestArticles);
+  console.log(midGridArticles);
+  console.log(blog.total);
+
   const result =
     locale === 'en'
-      ? `Showing ${startArticle}-${endArticle} of ${blog.total} articles`
-      : `Zeigt ${startArticle}-${endArticle} von ${blog.total} artikeln`;
+      ? `Showing ${startArticle}-${endArticle + 1} of ${
+          blog.total + 1
+        } articles`
+      : `Zeigt ${startArticle}-${endArticle + 1} von ${
+          blog.total + 1
+        } artikeln`;
 
   return (
     <div className={styles.root}>

@@ -24,7 +24,7 @@ import { fetchBlogDetailContent } from 'lib/shared-domain/blogArticle/applicatio
 const PER_PAGE = 19;
 
 export const queryBlogArticles = (lang, pageIndex, perPage) => `{
-  "items": *[_type == "blogArticle" && _lang == "${lang}"] | order(date desc) [(${pageIndex} * ${perPage})...(${pageIndex} + 1) * ${perPage}] {
+  "items": *[_type == "blogValToolArticle" && _lang == "${lang}" || _type == "blogArticle" && _lang == "${lang}"] | order(date desc) [(${pageIndex} * ${perPage})...(${pageIndex} + 1) * ${perPage}] {
     articleTitle,
     date,
     name,
@@ -37,7 +37,8 @@ export const queryBlogArticles = (lang, pageIndex, perPage) => `{
       },
     },
   },
-  "total": count(*[_type == "blogArticle" && _lang == "${lang}"]),
+  "blogTotal": count(*[_type == "blogArticle" && _lang == "${lang}"]),
+  "valToolBlogTotal": count(*[_type == "blogValToolArticle" && _lang == "${lang}"]),
 }`;
 export async function getStaticProps({ locale, params, preview = false }) {
   const sanrityService = new SanityService();
@@ -117,8 +118,9 @@ export default function Index({
 
   const [blogData, setBlogData] = useState({
     items: [],
-    pageCount: Math.ceil(blogs.total / PER_PAGE),
-    total: blogs.total,
+    pageCount: Math.ceil((blogs.valToolBlogTotal + blogs.blogTotal) / PER_PAGE),
+    // total: blogs.total,
+    total: blogs.valToolBlogTotal + blogs.blogTotal,
   });
 
   const latestBlogs = blogs?.items.slice(0, 5) || [];
