@@ -108,8 +108,8 @@ const WhitePaperModal: React.FC<{
                 <div className={styles.image}>
                   <Image
                     unoptimized={true}
-                    src={sanityImageUrlFor(pdfThumbnail.asset.url).url()}
-                    alt={pdfThumbnail.asset.alt}
+                    src={sanityImageUrlFor(pdfThumbnail?.asset?.url).url()}
+                    alt={pdfThumbnail?.asset?.alt}
                     width={545}
                     height={280}
                     className={styles.thumbnail}
