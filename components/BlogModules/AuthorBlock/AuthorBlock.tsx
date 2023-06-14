@@ -32,6 +32,8 @@ export const AuthorBlock: React.FC<any> = ({
     window.Calendly.closePopupWidget();
   };
 
+  console.log(blogArticle);
+
   return (
     <Container classes={[styles.authorWrapper].join(' ')} key={blogArticle._id}>
       <div className={styles.innerOffset}>
@@ -66,13 +68,15 @@ export const AuthorBlock: React.FC<any> = ({
             </div>
 
             <Grid fullWidth={true}>
-              <GridColumn sm={12} md={12} lg={6}>
-                <WhitePaperModal
-                  blogArticle={blogArticle}
-                  siteSettings={siteSettings}
-                  blogArticleDetail={blogArticleDetail}
-                />
-              </GridColumn>
+              {blogArticle?.whitePaperDownload && (
+                <GridColumn sm={12} md={12} lg={6}>
+                  <WhitePaperModal
+                    blogArticle={blogArticle}
+                    siteSettings={siteSettings}
+                    blogArticleDetail={blogArticleDetail}
+                  />
+                </GridColumn>
+              )}
 
               {blogArticle.authors[0]?.calendlyURL && (
                 <GridColumn sm={12} md={12} lg={6}>
