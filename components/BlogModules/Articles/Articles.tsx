@@ -42,8 +42,12 @@ const Articles: React.FC<Props> = ({
 
   const result =
     locale === 'en'
-      ? `Showing ${startArticle}-${endArticle} of ${blog.total} articles`
-      : `Zeigt ${startArticle}-${endArticle} von ${blog.total} artikeln`;
+      ? `Showing ${startArticle}-${endArticle + 1} of ${
+          blog.total + 1
+        } articles`
+      : `Zeigt ${startArticle}-${endArticle + 1} von ${
+          blog.total + 1
+        } artikeln`;
 
   return (
     <div className={styles.root}>
