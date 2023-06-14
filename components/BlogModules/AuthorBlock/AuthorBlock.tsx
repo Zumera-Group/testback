@@ -5,10 +5,12 @@ import { useRouter } from 'next/router';
 import { Button } from 'components/Button';
 import { RichText } from '../RichText';
 import { Icon } from 'components/Icon';
+import WhitePaperModal from '../WhitePaperModal/WhitePaperModal';
 
 export const AuthorBlock: React.FC<any> = ({
   blogArticle,
   blogArticleDetail,
+  siteSettings,
 }) => {
   const { locale } = useRouter();
   const spanRef = useRef(null);
@@ -64,13 +66,13 @@ export const AuthorBlock: React.FC<any> = ({
             </div>
 
             <Grid fullWidth={true}>
-              {/* <GridColumn sm={12} md={12} lg={6}>
+              <GridColumn sm={12} md={12} lg={6}>
                 <WhitePaperModal
                   blogArticle={blogArticle}
                   siteSettings={siteSettings}
                   blogArticleDetail={blogArticleDetail}
                 />
-              </GridColumn> */}
+              </GridColumn>
 
               {blogArticle.authors[0]?.calendlyURL && (
                 <GridColumn sm={12} md={12} lg={6}>

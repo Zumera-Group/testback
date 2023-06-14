@@ -18,6 +18,7 @@ export interface BlogArticle {
   summary: string;
   introduction: any;
   introAnchor: string;
+  whitePaperDownload: any;
   toc: any[];
   relatedArticles: any[];
   blogModules: {

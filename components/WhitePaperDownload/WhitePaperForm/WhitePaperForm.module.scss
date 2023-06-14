@@ -1,0 +1,97 @@
+.form {
+  //--padding: #{$gutter * 1.5};
+  margin-top: $gutter * 3;
+  @include breakpoint-up(md) {
+    margin-top: 0;
+  }
+  @include breakpoint-up(lg) {
+    //--padding: #{$gutter * 3};
+  }
+  display: block;
+}
+
+.formHeader {
+  margin: 0 0 $form-group-margin-bottom * 1.25 0;
+  p {
+    font-size: $font-size-small;
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.title {
+  font-size: $h5-font-size;
+  font-weight: $font-weight-bold;
+  margin: 0 0 $headings-margin-bottom * 0.5;
+}
+
+.submitBtn {
+  text-align: center;
+  justify-content: center;
+}
+
+.phoneNum {
+  :global {
+    .PhoneInput {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      select {
+        @include select();
+      }
+      input {
+        @include input();
+        margin-left: $gutter * 1.2;
+        flex: 0 0 auto;
+        max-width: 55%;
+
+        @include breakpoint-up(md) {
+          max-width: 65%;
+        }
+
+        @include breakpoint-up(lg) {
+          max-width: 75%;
+        }
+      }
+    }
+    .PhoneInputCountry {
+      display: flex;
+      align-items: center;
+      position: relative;
+      .PhoneInputCountrySelect {
+        color: transparent;
+
+        &:focus {
+          color: transparent;
+        }
+      }
+      .PhoneInputCountryIcon {
+        width: 20px;
+        position: absolute;
+        margin-left: 1rem;
+        border-radius: 30%;
+        overflow: hidden;
+
+        @media screen and (min-width: 1024px) {
+          width: 25px;
+        }
+
+        @media screen and (min-width: 1240px) {
+          width: 50px;
+        }
+      }
+    }
+  }
+}
+
+.successMessage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  p {
+    margin: $gutter * 1;
+    text-align: center;
+  }
+}

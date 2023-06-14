@@ -62,6 +62,15 @@ const queryBlogArticle = (
       },
     },
   },
+  whitePaperDownload {
+    ...,
+    pdfThumbnail {
+       ...,
+      asset->{
+        url
+      },
+    }
+  },
   blogModules[] {
        _key,
     _type,
@@ -167,6 +176,15 @@ const queryBlogArticles = (
         url
       },
     },
+  },
+  whitePaperDownload {
+    ...,
+    pdfThumbnail {
+       ...,
+      asset->{
+        url
+      },
+    }
   },
   blogModules[] {
        _key,

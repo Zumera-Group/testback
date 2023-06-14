@@ -65,6 +65,13 @@
     box-shadow: $btn-box-shadow;
   }
 
+  .leftColumn {
+    display: flex;
+
+    justify-content: space-between;
+    flex-direction: column;
+  }
+
   .innerOffset {
     @media screen and (min-width: 1024px) {
       margin-left: $gutter * 12;

@@ -11,7 +11,6 @@ import { links } from 'lib/links';
 import { useRouter } from 'next/router';
 import { Container, Grid, GridColumn, Section } from 'components/Layout';
 import styles from './BlogArticleLayout.module.scss';
-import { Button } from 'components/Button';
 import Image from 'next/image';
 import { sanityImageUrlFor } from 'lib/sanity';
 
@@ -21,6 +20,7 @@ import { AuthorBlock } from 'components/BlogModules/AuthorBlock';
 import RelatedArticles from 'components/BlogModules/RelatedArticles/RelatedArticles';
 import ContactUsSection from 'lib/shared-domain/page/presentation/contentModules/ContactUsSection';
 import useFormatDateLong from 'lib/shared-domain/useFormatDateLong';
+import WhitePaperModal from 'components/BlogModules/WhitePaperModal/WhitePaperModal';
 
 export const BlogArticleLayout: React.FC<{
   blogArticle: BlogArticle;
@@ -107,14 +107,13 @@ export const BlogArticleLayout: React.FC<{
                     />
                   </GridColumn>
                   <GridColumn sm={12} md={6} lg={5}>
-                    {/* <Button
-                      variant={'secondary'}
-                      link={'#'}
-                      onDark={false}
-                      classes={styles.downloadBtn}
-                    >
-                      Download this article
-                    </Button> */}
+                    {blogArticle?.whitePaperDownload?.pdfURL && (
+                      <WhitePaperModal
+                        blogArticle={blogArticle}
+                        siteSettings={siteSettings}
+                        blogArticleDetail={blogArticleDetail}
+                      />
+                    )}
                   </GridColumn>
                 </Grid>
               </GridColumn>
@@ -131,13 +130,13 @@ export const BlogArticleLayout: React.FC<{
                     </span>
                     <ol>
                       {blogArticle?.toc?.map((section) => (
-                        <>
+                        <React.Fragment key={section._id}>
                           <li key={section._id}>
                             <a key={section._id} href={`#${section.anchor}`}>
                               {section?.title}
                             </a>
                           </li>
-                        </>
+                        </React.Fragment>
                       ))}
                     </ol>
                   </aside>
@@ -170,6 +169,7 @@ export const BlogArticleLayout: React.FC<{
                   lg={3}
                   className={styles.relatedListWrapper}
                 >
+                  {/* UPDATE TYPE HERE TO GET THE VALUE CALC ARTICLES */}
                   {blogArticle.relatedArticles && (
                     <aside className={styles.relatedListInner}>
                       <span className={styles.relatedTitle}>
@@ -177,7 +177,7 @@ export const BlogArticleLayout: React.FC<{
                       </span>
                       <ol>
                         {blogArticle?.relatedArticles?.map((article) => (
-                          <>
+                          <React.Fragment key={article._id}>
                             {article._type === 'blogArticle' ? (
                               <li key={article._id}>
                                 <a
@@ -205,7 +205,7 @@ export const BlogArticleLayout: React.FC<{
                                 </a>
                               </li>
                             )}
-                          </>
+                          </React.Fragment>
                         ))}
                       </ol>
                     </aside>
@@ -227,6 +227,7 @@ export const BlogArticleLayout: React.FC<{
             blogArticle={blogArticle}
             blogArticleDetail={blogArticleDetail}
             key={blogArticle._id}
+            siteSettings={siteSettings}
           />
           {blogArticle.relatedArticles && (
             <RelatedArticles

@@ -57,6 +57,16 @@ export default async function preview(req, res) {
     res.writeHead(307, {
       Location: `/${req?.query?.lang}/${pageSlug}/${req?.query?.slug}` ?? `/`,
     });
+  } else if (req?.query?.type === 'blogArticle') {
+    res.writeHead(307, {
+      Location: `/${req?.query?.lang}/blog/${req?.query?.slug}` ?? `/`,
+    });
+  } else if (req?.query?.type === 'blogValToolArticle') {
+    const pageSlug =
+      req?.query?.lang === 'de' ? 'unternehmenswert-rechner' : 'valuation-tool';
+    res.writeHead(307, {
+      Location: `/${req?.query?.lang}/${pageSlug}/${req?.query?.slug}` ?? `/`,
+    });
   } else if (req?.query?.type !== 'page') {
     // check if any element of lang.en includes type
     const pageIndex = langs.en.findIndex(

@@ -9,6 +9,7 @@ interface Props {
   classes?: string;
   id?: string;
   children: any;
+  ref?: any;
 }
 
 export const Section: React.FC<Props> = ({
@@ -20,6 +21,7 @@ export const Section: React.FC<Props> = ({
   classes,
   id,
   children,
+  ref,
   ...rest
 }) => {
   const Component = as || 'section';
@@ -34,7 +36,7 @@ export const Section: React.FC<Props> = ({
   ];
 
   return (
-    <Component className={sectionStyles.join(' ')} id={id} {...rest}>
+    <Component className={sectionStyles.join(' ')} id={id} {...rest} ref={ref}>
       {children}
     </Component>
   );

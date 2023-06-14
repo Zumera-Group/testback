@@ -33,6 +33,7 @@ import {
   PartnerPersonQuoteModule,
   PartnerReviewModule,
   PartnerVisionModule,
+  WhitePaperDownloadModule,
 } from '../../domain/contentModule';
 
 import {
@@ -76,6 +77,8 @@ import { VTServicesSection } from 'components/VTServicesSection/VTServicesSectio
 import { StepsDownBulletsSection } from 'components/StepsDownBulletsSection';
 import { StickyFooter } from 'components/StickyFooter';
 import { TransactionQuote } from 'components/TransactionQuote';
+import { WhitePaperDownload } from 'components/WhitePaperDownload';
+
 import dynamic from 'next/dynamic';
 import { OpenJobsList } from 'components/OpenJobsList';
 import { PartnerLogoAndTextSection } from 'components/PartnerLogoAndTextSection';
@@ -132,6 +135,13 @@ export const getContentForContentModule = (
       />
     );
   }
+  // if (contentModule.specificContentModule instanceof WhitePaperDownloadModule) {
+  //   return (
+  //     <WhitePaperDownload
+  //       specificContentModule={contentModule.specificContentModule}
+  //     />
+  //   );
+  // }
   if (contentModule.specificContentModule instanceof TransactionQuoteModule) {
     return (
       <TransactionQuote
@@ -403,6 +413,6 @@ export const getContentForContentModule = (
     );
   }
   if (contentModule.specificContentModule === 'blogIndexSection') {
-    return <div>Blog</div>
+    return <div>Blog</div>;
   }
 };

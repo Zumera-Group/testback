@@ -314,6 +314,10 @@ export interface Sector {
     industrySheetName: string;
   }[];
   industryReportSection: IndustryReportSectionModule;
+  whitePaperDownload: {
+    pdfURL: string;
+    pdfThumbnail: any;
+  };
 }
 
 export interface Description {

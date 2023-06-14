@@ -98,14 +98,11 @@ export const contentModulesQuery = (
         slug
       },
     },
-    // textBlocks[] {
-    //   ...,
-    //   image{
-    //     asset->{
-    //       url,
-    //     }
-    //   },
-    // },
+	file{
+      asset->{
+        url
+      }
+    },
     topImage {
       asset->{
         url

@@ -18,6 +18,7 @@ import { links } from 'lib/links';
 import { useRouter } from 'next/router';
 import ContactUsSection from 'lib/shared-domain/page/presentation/contentModules/ContactUsSection';
 import { useFetchTransactions } from 'components/NewsArticle/NewsArticleMoreNews';
+import { WhitePaperDownload } from 'components/WhitePaperDownload';
 
 export const SectorDetailLayout: React.FC<{
   sector: Sector;
@@ -70,6 +71,14 @@ export const SectorDetailLayout: React.FC<{
           />
           <SectorTeam sector={sector} />
           <SectorMoreDetails sector={sector} content={content} />
+          {sector?.whitePaperDownload?.pdfURL && (
+            <WhitePaperDownload
+              sector={sector}
+              siteSettings={siteSettings}
+              content={content}
+              variant="sector"
+            />
+          )}
           <SectorNews
             newsArticles={filteredNewsArticles}
             employees={employees}

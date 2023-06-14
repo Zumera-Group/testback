@@ -6,7 +6,7 @@ import axios from 'axios';
 
 interface Props {
   title?: string;
-  variant: 'primary' | 'secondary' | 'tertiary' | 'link';
+  variant: 'primary' | 'secondary' | 'tertiary' | 'link' | 'download';
   onDark?: boolean;
   icon?: string;
   hideIcon?: boolean;
@@ -56,6 +56,8 @@ export const Button: React.FC<Props> = ({
       return <Icon iconName={icon || 'arrow'} width={10} height={10} />;
     } else if (variant === 'tertiary') {
       return <Icon iconName={icon || 'arrow-circle'} width={32} height={32} />;
+    } else if (variant === 'download') {
+      return <Icon iconName={icon || 'download'} width={14} height={16} />;
     }
     return null;
   };
