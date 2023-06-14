@@ -57,16 +57,6 @@ export default async function preview(req, res) {
     res.writeHead(307, {
       Location: `/${req?.query?.lang}/${pageSlug}/${req?.query?.slug}` ?? `/`,
     });
-  } else if (req?.query?.type !== 'page') {
-    // check if any element of lang.en includes type
-    const pageIndex = langs.en.findIndex(
-      (el) => el.includes(req?.query?.type) || req?.query?.type.includes(el),
-    );
-    // if exists get the page slug from the current lang array
-    const pageSlug = langs[req?.query?.lang][pageIndex];
-    res.writeHead(307, {
-      Location: `/${req?.query?.lang}/${pageSlug}/${req?.query?.slug}` ?? `/`,
-    });
   } else if (req?.query?.type === 'blogArticle') {
     res.writeHead(307, {
       Location: `/${req?.query?.lang}/blog/${req?.query?.slug}` ?? `/`,
@@ -74,6 +64,16 @@ export default async function preview(req, res) {
   } else if (req?.query?.type === 'blogValToolArticle') {
     const pageSlug =
       req?.query?.lang === 'de' ? 'unternehmenswert-rechner' : 'valuation-tool';
+    res.writeHead(307, {
+      Location: `/${req?.query?.lang}/${pageSlug}/${req?.query?.slug}` ?? `/`,
+    });
+  } else if (req?.query?.type !== 'page') {
+    // check if any element of lang.en includes type
+    const pageIndex = langs.en.findIndex(
+      (el) => el.includes(req?.query?.type) || req?.query?.type.includes(el),
+    );
+    // if exists get the page slug from the current lang array
+    const pageSlug = langs[req?.query?.lang][pageIndex];
     res.writeHead(307, {
       Location: `/${req?.query?.lang}/${pageSlug}/${req?.query?.slug}` ?? `/`,
     });
