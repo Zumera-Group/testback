@@ -74,13 +74,13 @@ export class SalesforceFacade {
         },
       };
 
-      qLogs(
-        'SalesforceFacade.createOrUpdateLeadEntry ' + JSON.stringify(fields),
-      );
+      // qLogs(
+      //   'SalesforceFacade.createOrUpdateLeadEntry ' + JSON.stringify(fields),
+      // );
 
-      qLogs(marketingParams); //console.log
-      qLogs(fields);
-      qLogs(assessmentPurpose);
+      // qLogs(marketingParams);
+      // qLogs(fields);
+      // qLogs(assessmentPurpose);
 
       await this.httpService.post(
         endpoints.createOrUpdateLeadEntry,
