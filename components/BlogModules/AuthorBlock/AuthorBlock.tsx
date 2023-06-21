@@ -32,8 +32,6 @@ export const AuthorBlock: React.FC<any> = ({
     window.Calendly.closePopupWidget();
   };
 
-  console.log(blogArticle);
-
   return (
     <Container classes={[styles.authorWrapper].join(' ')} key={blogArticle._id}>
       <div className={styles.innerOffset}>

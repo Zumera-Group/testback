@@ -7,14 +7,12 @@ import { sanityImageUrlFor } from 'lib/sanity';
 import Modal from 'react-modal';
 
 import { Button } from 'components/Button';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Icon } from 'components/Icon';
 import { BlogArticle } from 'lib/shared-domain/blogArticle/domain';
 import { SiteSettings } from 'lib/shared-domain/page/domain';
 import localFont from '@next/font/local';
 ('./..');
-
-Modal.setAppElement('#modalWrapper');
 
 const myFont = localFont({
   display: 'swap',
@@ -44,14 +42,14 @@ const WhitePaperModal: React.FC<{
 }> = ({ blogArticle, blogArticleDetail, siteSettings }) => {
   const [isOpen, setIsOpen] = useState(false);
 
+  useEffect(() => {
+    Modal.setAppElement('#modalWrapper');
+  }, []);
+
   const {
     whitePaperDownload,
     whitePaperDownload: { whitePaperForm },
   } = blogArticleDetail;
-
-  // const {
-  //   whitePaperDownload: { pdfThumbnail },
-  // } = blogArticle;
 
   const openModal = () => {
     setIsOpen(true);
