@@ -22,11 +22,13 @@ export const Radio: React.FC<Props> = ({
   isChecked,
 }) => {
   return (
-    <div className={[
-      styles.radioWrapper,
-      disabled ? styles.radioWrapper__disabled : '',
-      classes ? classes : ''
-    ].join(' ')}>
+    <div
+      className={[
+        styles.radioWrapper,
+        disabled ? styles.radioWrapper__disabled : '',
+        classes ? classes : '',
+      ].join(' ')}
+    >
       <input
         type="radio"
         className={styles.radio}
@@ -37,10 +39,7 @@ export const Radio: React.FC<Props> = ({
         onChange={onChange}
         checked={isChecked}
       />
-      <label
-        htmlFor={id}
-        className={styles.radioLabel}
-      >
+      <label htmlFor={id} className={styles.radioLabel}>
         {children}
       </label>
     </div>

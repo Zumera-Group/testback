@@ -22,11 +22,13 @@ export const Checkbox: React.FC<Props> = ({
   isChecked,
 }) => {
   return (
-    <div className={[
-      styles.checkboxWrapper,
-      disabled ? styles.checkboxWrapper__disabled : '',
-      classes ? classes : ''
-    ].join(' ')}>
+    <div
+      className={[
+        styles.checkboxWrapper,
+        disabled ? styles.checkboxWrapper__disabled : '',
+        classes ? classes : '',
+      ].join(' ')}
+    >
       <input
         type="checkbox"
         className={styles.checkbox}
@@ -38,10 +40,7 @@ export const Checkbox: React.FC<Props> = ({
         onChange={onChange}
         checked={isChecked}
       />
-      <label
-        htmlFor={id}
-        className={styles.checkboxLabel}
-      >
+      <label htmlFor={id} className={styles.checkboxLabel}>
         {children}
       </label>
     </div>
