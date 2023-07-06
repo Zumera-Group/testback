@@ -71,14 +71,14 @@ export const SectorDetailLayout: React.FC<{
           />
           <SectorTeam sector={sector} />
           <SectorMoreDetails sector={sector} content={content} />
-          {/* {sector?.whitePaperDownload?.pdfURL && (
+          {sector?.whitePaperDownload?.pdfURL && (
             <WhitePaperDownload
               sector={sector}
               siteSettings={siteSettings}
               content={content}
               variant="sector"
             />
-          )} */}
+          )}
           <SectorNews
             newsArticles={filteredNewsArticles}
             employees={employees}

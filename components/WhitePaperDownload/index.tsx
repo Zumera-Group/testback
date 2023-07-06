@@ -18,10 +18,6 @@ export const WhitePaperDownload: React.FC<{
     whitePaperDownload: { whitePaperForm },
   } = content;
 
-  // const {
-  //   whitePaperDownload: { pdfThumbnail },
-  // } = sector;
-
   return (
     <Section size={'md'} bg={'light'} color={'primary'}>
       <Container>
