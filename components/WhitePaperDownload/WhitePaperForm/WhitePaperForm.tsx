@@ -167,6 +167,7 @@ export const WhitePaperForm = ({
               <Link
                 passHref
                 href={linkWithCurrentLocale(checkboxPrivacyPage?.slug?.current)}
+                target="_blank"
               >
                 {checkboxPrivacyText2}
               </Link>
