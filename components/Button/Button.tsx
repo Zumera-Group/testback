@@ -85,7 +85,7 @@ export const Button: React.FC<Props> = ({
       className={[styles.button, btnVariant, classes ?? ''].join(' ')}
       target={externalUrl ? '_blank' : undefined}
       rel={externalUrl ? 'noopener noreferrer' : undefined}
-      scroll={false}
+      scroll={internalAnchor ? false : true}
       {...rest}
     >
       <span>{children}</span>
