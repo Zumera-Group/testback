@@ -39,11 +39,8 @@ export const WhitePaperForm = ({
     router.locale === 'en' ? 'United Kingdom' : 'Germany',
   );
   const [isSuccess, setIsSuccess] = useState(null);
-
-  const PhoneInputComponent = PhoneInput as any;
-
   const DOMAIN = process.env.NEXT_PUBLIC_EXTERNAL_PDF_HOST;
-  const PDF_PATH = file.substring(DOMAIN.length);
+  const PhoneInputComponent = PhoneInput as any;
 
   const handleCountryChange = () => {
     const country = document?.getElementsByClassName('PhoneInputCountrySelect');
@@ -65,7 +62,12 @@ export const WhitePaperForm = ({
   };
 
   const downloadFile = async () => {
-    window.open(`/whitepaper/${PDF_PATH}`, '_blank');
+    const pdfPath = file.substring(DOMAIN.length);
+    const externalUrl = file.includes(DOMAIN) ? `/whitepaper/${pdfPath}` : file;
+    const timer = setTimeout(() => {
+      window.open(externalUrl, '_blank');
+    }, 2000);
+    return () => clearTimeout(timer);
   };
 
   const handleSubmit = async (e) => {
