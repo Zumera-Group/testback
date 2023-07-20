@@ -1118,4 +1118,13 @@ module.exports = {
       },
     ];
   },
+  async rewrites() {
+    return [
+      {
+        source: '/pdf',
+        destination:
+          'https://go.zumera.com/l/931863/2023-05-26/363cx/931863/1685976469T2T1GIV3/230210b_Zumera_Sektorfokus_MarketingMedia_Digital_Q1_23.pdf',
+      },
+    ];
+  },
 };

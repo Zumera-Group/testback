@@ -49,31 +49,49 @@ export const WhitePaperForm = ({
     setCountryValue(countryContent);
   };
 
+  console.log(file);
+
+  // Mock fetch function that returns a dummy response with 'ok' set to true
+  const mockFetch = async (url, options) => {
+    // Simulate a delay to mimic an asynchronous API call
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+
+    return {
+      ok: true,
+      json: () => Promise.resolve({}), // Dummy JSON response
+      blob: () => Promise.resolve(new Blob()), // Dummy blob response
+    };
+  };
+
+  // const downloadFile = async () => {
+  //   const fileName = file?.substring(file?.lastIndexOf('/') + 1);
+  //   try {
+  //     const response = await fetch('/api/pdfHandler/', {
+  //       method: 'POST',
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //       },
+  //       body: JSON.stringify({ file: file }),
+  //     });
+  //     if (!response.ok) {
+  //       throw new Error('Error while downloading the file');
+  //     } else {
+  //       const downloadURL = URL.createObjectURL(await response.blob());
+  //       const a = document.createElement('a');
+  //       a.style.display = 'none';
+  //       a.href = downloadURL;
+  //       a.setAttribute('download', `${fileName}`);
+  //       document.body.appendChild(a);
+  //       a.click();
+  //       URL.revokeObjectURL(downloadURL);
+  //     }
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // };
+
   const downloadFile = async () => {
-    const fileName = file?.substring(file?.lastIndexOf('/') + 1);
-    try {
-      const response = await fetch('/api/pdfHandler/', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ file: file }),
-      });
-      if (!response.ok) {
-        throw new Error('Error while downloading the file');
-      } else {
-        const downloadURL = URL.createObjectURL(await response.blob());
-        const a = document.createElement('a');
-        a.style.display = 'none';
-        a.href = downloadURL;
-        a.setAttribute('download', `${fileName}`);
-        document.body.appendChild(a);
-        a.click();
-        URL.revokeObjectURL(downloadURL);
-      }
-    } catch (error) {
-      console.error(error);
-    }
+    window.open(file, '_blank');
   };
 
   const handleSubmit = async (e) => {
@@ -95,7 +113,14 @@ export const WhitePaperForm = ({
     };
 
     try {
-      const response = await fetch('/api/whitepaperForms/', {
+      // const response = await fetch('/api/whitepaperForms/', {
+      //   method: 'POST',
+      //   headers: {
+      //     'Content-Type': 'application/json',
+      //   },
+      //   body: JSON.stringify(formData),
+      // });
+      const response = await mockFetch('/api/whitepaperForms/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
