@@ -49,18 +49,6 @@ export const WhitePaperForm = ({
     setCountryValue(countryContent);
   };
 
-  // Mock fetch function that returns a dummy response with 'ok' set to true
-  const mockFetch = async (url, options) => {
-    // Simulate a delay to mimic an asynchronous API call
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-
-    return {
-      ok: true,
-      json: () => Promise.resolve({}), // Dummy JSON response
-      blob: () => Promise.resolve(new Blob()), // Dummy blob response
-    };
-  };
-
   const downloadFile = async () => {
     const pdfPath = file.substring(DOMAIN.length);
     const externalUrl = file.includes(DOMAIN) ? `/whitepaper/${pdfPath}` : file;
@@ -89,14 +77,7 @@ export const WhitePaperForm = ({
     };
 
     try {
-      // const response = await fetch('/api/whitepaperForms/', {
-      //   method: 'POST',
-      //   headers: {
-      //     'Content-Type': 'application/json',
-      //   },
-      //   body: JSON.stringify(formData),
-      // });
-      const response = await mockFetch('/api/whitepaperForms/', {
+      const response = await fetch('/api/whitepaperForms/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
