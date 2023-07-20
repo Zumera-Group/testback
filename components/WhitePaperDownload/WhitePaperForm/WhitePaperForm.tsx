@@ -39,7 +39,7 @@ export const WhitePaperForm = ({
     router.locale === 'en' ? 'United Kingdom' : 'Germany',
   );
   const [isSuccess, setIsSuccess] = useState(null);
-
+  const DOMAIN = process.env.NEXT_PUBLIC_EXTERNAL_PDF_HOST;
   const PhoneInputComponent = PhoneInput as any;
 
   const handleCountryChange = () => {
@@ -50,30 +50,12 @@ export const WhitePaperForm = ({
   };
 
   const downloadFile = async () => {
-    const fileName = file?.substring(file?.lastIndexOf('/') + 1);
-    try {
-      const response = await fetch('/api/pdfHandler/', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ file: file }),
-      });
-      if (!response.ok) {
-        throw new Error('Error while downloading the file');
-      } else {
-        const downloadURL = URL.createObjectURL(await response.blob());
-        const a = document.createElement('a');
-        a.style.display = 'none';
-        a.href = downloadURL;
-        a.setAttribute('download', `${fileName}`);
-        document.body.appendChild(a);
-        a.click();
-        URL.revokeObjectURL(downloadURL);
-      }
-    } catch (error) {
-      console.error(error);
-    }
+    const pdfPath = file.substring(DOMAIN.length);
+    const externalUrl = file.includes(DOMAIN) ? `/whitepaper/${pdfPath}` : file;
+    const timer = setTimeout(() => {
+      window.open(externalUrl, '_blank');
+    }, 2000);
+    return () => clearTimeout(timer);
   };
 
   const handleSubmit = async (e) => {

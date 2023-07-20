@@ -1118,4 +1118,12 @@ module.exports = {
       },
     ];
   },
+  async rewrites() {
+    return [
+      {
+        source: '/whitepaper/:path*',
+        destination: 'https://go.zumera.com/:path*',
+      },
+    ];
+  },
 };
