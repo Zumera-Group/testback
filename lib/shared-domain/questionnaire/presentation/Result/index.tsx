@@ -93,12 +93,18 @@ const EvaluationScreen: React.FC<{
   const [checkboxIsChecked, setCheckboxIsChecked] = React.useState(false);
   const [pressed, setPressed] = React.useState(false);
   const { locale } = useRouter();
+  const router = useRouter();
   const SEND_IS_ALLOWED =
     checkboxIsChecked &&
     getAnswer(NAME_STORE_INDICATOR)?.trim() &&
     getAnswer(EMAIL_STORE_INDICATOR)?.trim() &&
     getAnswer(PHONE_NUMBER_STORE_INDICATOR)?.trim() &&
     EmailValidator.validate(getAnswer(EMAIL_STORE_INDICATOR)?.trim());
+
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
+  const localeType = locale === 'en' ? 'en' : 'de';
+  const path = router.asPath;
+  const fullUrl = `${baseUrl}${localeType}${path}`;
 
   const onSend = async (e) => {
     e.preventDefault();
@@ -113,7 +119,11 @@ const EvaluationScreen: React.FC<{
     } else {
       onSuccess();
     }
+
+    //CAPTURE SUBMIT DESTINATION
   };
+
+  console.log(fullUrl);
 
   const getEmailError = () => {
     if (!pressed) return null;
