@@ -34,6 +34,7 @@ export class SalesforceFacade {
     industrySheetName: string,
     sectorSheetName: string,
     assessmentPurpose: string,
+    leadSourceURL: string,
   ): Promise<void> {
     try {
       const marketingParams = MarketingParamsService.retrieve();
@@ -62,6 +63,7 @@ export class SalesforceFacade {
           unique_id: uniqueId,
           current_progress: currentProgress,
           data: {
+            Lead_Source_URL__c: leadSourceURL,
             Assessment_Purpose__c: assessmentPurpose,
             ...fields,
             ...formattedMarketingParams,
@@ -80,7 +82,8 @@ export class SalesforceFacade {
 
       // qLogs(marketingParams);
       // qLogs(fields);
-      // qLogs(assessmentPurpose);
+      qLogs(assessmentPurpose);
+      qLogs(`lead sf ${leadSourceURL}`);
 
       await this.httpService.post(
         endpoints.createOrUpdateLeadEntry,

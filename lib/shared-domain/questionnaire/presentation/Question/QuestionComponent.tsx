@@ -14,6 +14,7 @@ import { useQuestionnaireRouter, t } from './index';
 import { AnimateSharedLayout } from 'framer-motion';
 import { Sector } from '../../../page/domain/index';
 import { useGetSalesforceScore } from '../../application/useGetQuestionnaireScore';
+import { useRouter } from 'next/router';
 
 export const QuestionComponent: React.FC<{
   sectorSpecificQuestions: Question[];
@@ -30,7 +31,9 @@ export const QuestionComponent: React.FC<{
     isOnResultScreen,
     sectorId,
     industryId,
+    leadSourceURL,
     setQuestionnaire,
+    setLeadSourceURL,
   } = useValuationStore();
   const { syncCurrentAnswersToSalesforce } = useSalesforceAnswerSync();
 
@@ -57,6 +60,13 @@ export const QuestionComponent: React.FC<{
   const currentProgress = Math.round(
     (currentPos / numberOfQuestionsInTotal) * 100,
   );
+
+  const { locale } = useRouter();
+  const router = useRouter();
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
+  const localeType = locale === 'en' ? 'en' : 'de';
+  const path = router.asPath;
+  const fullUrl = `${baseUrl}${localeType}${path}`;
 
   //GETS POSITION OF SELECTED FIELD WHICH IS THE START OF THE EV THRESHOLD
   const salesforceProperty = 'salesforceId';
@@ -136,6 +146,8 @@ export const QuestionComponent: React.FC<{
 
   const onNextQuestion = () => {
     refEl.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+    setLeadSourceURL(fullUrl);
 
     qLogs('onNextQuestion');
     qLogs('ID ' + currentQuestion?.salesforceId);

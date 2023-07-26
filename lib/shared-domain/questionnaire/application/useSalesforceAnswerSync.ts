@@ -16,6 +16,7 @@ export const useSalesforceAnswerSync = () => {
     setIndustrySheetName,
     setSectorSheetName,
     assessmentPurpose,
+    leadSourceURL,
     setAssessmentPurpose,
   } = useValuationStore();
   const { sendQuestionnaireToAnalytics } = useSendQuestionnaireToAnalytics();
@@ -37,6 +38,7 @@ export const useSalesforceAnswerSync = () => {
         industrySheetName,
         sectorSheetName,
         assessmentPurpose,
+        leadSourceURL,
       );
     },
     syncCurrentAnswersFromSalesforce: async (uniqueId: string) => {
