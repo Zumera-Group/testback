@@ -82,8 +82,8 @@ export class SalesforceFacade {
 
       // qLogs(marketingParams);
       // qLogs(fields);
-      qLogs(assessmentPurpose);
-      qLogs(`lead sf ${leadSourceURL}`);
+      // qLogs(assessmentPurpose);
+      // qLogs(`lead sf ${leadSourceURL}`);
 
       await this.httpService.post(
         endpoints.createOrUpdateLeadEntry,
