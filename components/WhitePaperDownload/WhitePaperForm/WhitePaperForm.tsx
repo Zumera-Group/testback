@@ -7,6 +7,7 @@ import { useRouter } from 'next/router';
 import { Icon } from 'components/Icon';
 import Link from 'next/link';
 import { useLinkWithCurrentLocale } from 'lib/shared-domain/useLinkWithCurrentLocale';
+import { useGetURL } from 'lib/hooks/useGetURL';
 
 const PhoneInput = dynamic(() => import('react-phone-number-input'));
 
@@ -58,6 +59,9 @@ export const WhitePaperForm = ({
     return () => clearTimeout(timer);
   };
 
+  const fullURL = useGetURL();
+  console.log(fullURL);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     // @ts-ignore
@@ -74,6 +78,7 @@ export const WhitePaperForm = ({
       phone: phoneValue,
       variant: variant,
       sectorName: sectorName,
+      leadSourceURL: fullURL,
     };
 
     try {
