@@ -2,6 +2,7 @@ import React from 'react';
 import * as EmailValidator from 'email-validator';
 
 import { SalesforceFacade } from '../infrastructure/salesforce.facade';
+import { useRouter } from 'next/router';
 
 export const useContactFormSubmit = () => {
   const [nameTouched, setNameTouched] = React.useState(false);
@@ -11,6 +12,7 @@ export const useContactFormSubmit = () => {
   const [name, setName] = React.useState('');
   const [phone, setPhone] = React.useState('');
   const [message, setMessage] = React.useState('');
+  const [leadSourceURL, setLeadSourceURL] = React.useState('');
 
   const [isSuccess, setIsSuccess] = React.useState(false);
   const [isError, setIsError] = React.useState(false);
@@ -21,11 +23,21 @@ export const useContactFormSubmit = () => {
   const isEmailValid = email.trim() && EmailValidator.validate(email.trim());
   const isPhoneValid = phone.trim();
 
+  const { locale } = useRouter();
+  const router = useRouter();
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
+  const localeType = locale === 'en' ? 'en' : 'de';
+  const path = router.asPath;
+  const fullUrl = `${baseUrl}${localeType}${path}`;
+
+  console.log(fullUrl);
+
   const resetForm = () => {
     setEmail('');
     setName('');
     setPhone('');
     setMessage('');
+    setLeadSourceURL('');
     setNameTouched(false);
     setEmailTouched(false);
     setPhoneTouched(false);
@@ -63,6 +75,7 @@ export const useContactFormSubmit = () => {
       value: message,
       onChange: (e) => setMessage(e.target.value),
     },
+    leadSourceURL: {},
     submit: async () => {
       setEmailTouched(true);
       setNameTouched(true);
@@ -76,6 +89,7 @@ export const useContactFormSubmit = () => {
           firstName: firstName || '',
           lastName: lastName || firstName,
           message: message,
+          leadSourceURL: fullUrl,
         });
         resetForm();
         setIsError(false);

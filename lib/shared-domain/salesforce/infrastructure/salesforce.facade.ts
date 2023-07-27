@@ -158,6 +158,7 @@ export class SalesforceFacade {
     firstName: string;
     lastName: string;
     message: string;
+    leadSourceURL: string;
   }): Promise<void> {
     try {
       const marketingParams = MarketingParamsService.retrieve();
@@ -193,6 +194,7 @@ export class SalesforceFacade {
             last_name: contact.lastName,
             company: contact.firstName + ' ' + contact.lastName,
             message: contact.message,
+            Lead_Source_URL__c: contact.leadSourceURL,
           },
         },
         requestsConfig,

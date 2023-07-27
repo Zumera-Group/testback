@@ -9,12 +9,21 @@ import { SanityBlockContent } from 'components/SanityBlockContent';
 import { useLinkWithCurrentLocale } from 'lib/shared-domain/useLinkWithCurrentLocale';
 import { useContactFormSubmit } from 'lib/shared-domain/salesforce/application/useContactFormSubmit';
 
+import { useRouter } from 'next/router';
+
 import styles from './ContactForm.module.scss';
 
 export const ContactForm = ({ contactForm }) => {
   const [checkboxIsChecked, setCheckboxIsChecked] = useState(false);
   const linkWithCurrentLocale = useLinkWithCurrentLocale();
   const form = useContactFormSubmit();
+
+  const { locale } = useRouter();
+  const router = useRouter();
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
+  const localeType = locale === 'en' ? 'en' : 'de';
+  const path = router.asPath;
+  const fullUrl = `${baseUrl}${localeType}${path}`;
 
   const {
     title,
