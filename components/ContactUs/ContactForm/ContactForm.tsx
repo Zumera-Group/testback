@@ -12,6 +12,7 @@ import { useContactFormSubmit } from 'lib/shared-domain/salesforce/application/u
 import { useRouter } from 'next/router';
 
 import styles from './ContactForm.module.scss';
+import { useGetURL } from 'lib/hooks/useGetURL';
 
 export const ContactForm = ({ contactForm }) => {
   const [checkboxIsChecked, setCheckboxIsChecked] = useState(false);
@@ -24,6 +25,10 @@ export const ContactForm = ({ contactForm }) => {
   const localeType = locale === 'en' ? 'en' : 'de';
   const path = router.asPath;
   const fullUrl = `${baseUrl}${localeType}${path}`;
+
+  const test = useGetURL();
+
+  console.log(test);
 
   const {
     title,
