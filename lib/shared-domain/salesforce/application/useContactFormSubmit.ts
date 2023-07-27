@@ -3,6 +3,7 @@ import * as EmailValidator from 'email-validator';
 
 import { SalesforceFacade } from '../infrastructure/salesforce.facade';
 import { useRouter } from 'next/router';
+import { useGetURL } from 'lib/hooks/useGetURL';
 
 export const useContactFormSubmit = () => {
   const [nameTouched, setNameTouched] = React.useState(false);
@@ -23,14 +24,7 @@ export const useContactFormSubmit = () => {
   const isEmailValid = email.trim() && EmailValidator.validate(email.trim());
   const isPhoneValid = phone.trim();
 
-  const { locale } = useRouter();
-  const router = useRouter();
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
-  const localeType = locale === 'en' ? 'en' : 'de';
-  const path = router.asPath;
-  const fullUrl = `${baseUrl}${localeType}${path}`;
-
-  console.log(fullUrl);
+  const fullUrl = useGetURL();
 
   const resetForm = () => {
     setEmail('');

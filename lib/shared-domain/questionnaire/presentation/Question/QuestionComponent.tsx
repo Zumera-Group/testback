@@ -15,6 +15,7 @@ import { AnimateSharedLayout } from 'framer-motion';
 import { Sector } from '../../../page/domain/index';
 import { useGetSalesforceScore } from '../../application/useGetQuestionnaireScore';
 import { useRouter } from 'next/router';
+import { useGetURL } from 'lib/hooks/useGetURL';
 
 export const QuestionComponent: React.FC<{
   sectorSpecificQuestions: Question[];
@@ -61,12 +62,7 @@ export const QuestionComponent: React.FC<{
     (currentPos / numberOfQuestionsInTotal) * 100,
   );
 
-  const { locale } = useRouter();
-  const router = useRouter();
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
-  const localeType = locale === 'en' ? 'en' : 'de';
-  const path = router.asPath;
-  const fullUrl = `${baseUrl}${localeType}${path}`;
+  const fullUrl = useGetURL();
 
   //GETS POSITION OF SELECTED FIELD WHICH IS THE START OF THE EV THRESHOLD
   const salesforceProperty = 'salesforceId';
