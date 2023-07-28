@@ -11,6 +11,7 @@ const config = {
 const MarketingQueryStorage = {
   saveIfWithValue: (key: string, value: any) => {
     if (!value) return null;
+
     window.localStorage.setItem(
       config.localStoreKey + key,
       JSON.stringify(value),
@@ -27,15 +28,58 @@ const MarketingQueryStorage = {
   },
 };
 
+const getExpiryRecord = (value) => {
+  const expiryPeriod = 90 * 24 * 60 * 60 * 1000; // 90 day expiry in milliseconds
+
+  const expiryDate = new Date().getTime() + expiryPeriod;
+  return {
+    value: value,
+    expiryDate: expiryDate,
+  };
+};
+
 const useSaveOnMount = () => {
   useEffect(() => {
     if (!window) return; // to avoid running on server side.
 
     const valuesForKeys = queryString.parse(window.location.search);
 
-    config.desiredKeysToMap.forEach((key) => {
-      MarketingQueryStorage.saveIfWithValue(key, valuesForKeys?.[key]);
-    });
+    const gclsrcParam = 'gclsrc' in valuesForKeys;
+    const keysArray = Object.keys(valuesForKeys);
+    const gclidParam = valuesForKeys['gclid'];
+    const isGclsrcValid = !gclsrcParam || gclsrcParam.indexOf('aw') !== -1;
+    var gclidRecord = null;
+
+    console.log('gclsrc' in valuesForKeys);
+
+    for (const key in valuesForKeys) {
+      if (key === 'gclid') {
+        const gclidValue = valuesForKeys[key];
+        console.log('The value of gclid is:', gclidValue);
+      } else {
+        config.desiredKeysToMap
+          .filter((key) => key !== 'gclid')
+          .forEach((key) => {
+            MarketingQueryStorage.saveIfWithValue(key, valuesForKeys?.[key]);
+          });
+      }
+    }
+
+    // if (gclidParam && isGclsrcValid) {
+    //   gclidRecord = getExpiryRecord(gclidParam);
+    //   MarketingQueryStorage.saveIfWithValue(
+    //     'gclid',
+    //     valuesForKeys?.[JSON.stringify(gclidRecord)],
+    //   );
+    // } else {
+    //   config.desiredKeysToMap.forEach((key) => {
+    //     MarketingQueryStorage.saveIfWithValue(key, valuesForKeys?.[key]);
+    //   });
+    // }
+
+    // config.desiredKeysToMap.forEach((key) => {
+    //   MarketingQueryStorage.saveIfWithValue(key, valuesForKeys?.[key]);
+    // });
   }, []);
 };
 
