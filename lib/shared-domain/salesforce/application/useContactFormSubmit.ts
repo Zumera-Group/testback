@@ -13,7 +13,6 @@ export const useContactFormSubmit = () => {
   const [name, setName] = React.useState('');
   const [phone, setPhone] = React.useState('');
   const [message, setMessage] = React.useState('');
-  const [leadSourceURL, setLeadSourceURL] = React.useState('');
 
   const [isSuccess, setIsSuccess] = React.useState(false);
   const [isError, setIsError] = React.useState(false);
@@ -31,7 +30,6 @@ export const useContactFormSubmit = () => {
     setName('');
     setPhone('');
     setMessage('');
-    setLeadSourceURL('');
     setNameTouched(false);
     setEmailTouched(false);
     setPhoneTouched(false);
