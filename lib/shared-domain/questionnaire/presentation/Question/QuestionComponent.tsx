@@ -58,28 +58,6 @@ export const QuestionComponent: React.FC<{
     (currentPos / numberOfQuestionsInTotal) * 100,
   );
 
-  //GETS POSITION OF SELECTED FIELD WHICH IS THE START OF THE EV THRESHOLD
-  const salesforceProperty = 'salesforceId';
-  const evStartField = 'Company_EBIT_2022__c';
-
-  const allQuestions = questionnaire?.questionsByCategory?.reduce(
-    (accumulatedCategory, currentCategory) => {
-      return {
-        categoryName: currentCategory.categoryName,
-        questions: accumulatedCategory.questions.concat(
-          currentCategory.questions,
-        ),
-      };
-    },
-  );
-
-  const getEvStartPos = () => {
-    const elementPos = allQuestions.questions.findIndex(
-      (obj) => obj[salesforceProperty] === evStartField,
-    );
-    return elementPos + 1;
-  };
-
   const buildSectorSpecificQuestions = () => {
     if (!questionnaire.sectorSpecific.hasSectorSpecificQuestions) return;
     const filteredSectorSpecificQuestions = sectorSpecificQuestions.filter(
@@ -140,15 +118,11 @@ export const QuestionComponent: React.FC<{
     qLogs('onNextQuestion');
     qLogs('ID ' + currentQuestion?.salesforceId);
 
-    const evStartPos = getEvStartPos();
-
-    if (currentPos >= evStartPos) {
-      syncCurrentAnswersToSalesforce(
-        uniqueId,
-        currentQuestion?.salesforceId,
-        currentProgress,
-      );
-    }
+    syncCurrentAnswersToSalesforce(
+      uniqueId,
+      currentQuestion?.salesforceId,
+      currentProgress,
+    );
 
     if (industryId && currentQuestion?.questionId === INDUSTRY_QUESTION_ID) {
       buildSectorSpecificQuestions();
