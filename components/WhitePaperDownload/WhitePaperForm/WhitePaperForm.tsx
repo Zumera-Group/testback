@@ -7,6 +7,7 @@ import { useRouter } from 'next/router';
 import { Icon } from 'components/Icon';
 import Link from 'next/link';
 import { useLinkWithCurrentLocale } from 'lib/shared-domain/useLinkWithCurrentLocale';
+import { MarketingParamsService } from 'lib/shared-domain/salesforce/application/marketingParamsService';
 
 const PhoneInput = dynamic(() => import('react-phone-number-input'));
 
@@ -42,6 +43,10 @@ export const WhitePaperForm = ({
   const DOMAIN = process.env.NEXT_PUBLIC_EXTERNAL_PDF_HOST;
   const PhoneInputComponent = PhoneInput as any;
 
+  const marketingParams = MarketingParamsService.retrieve();
+  const hasGclid = marketingParams.hasOwnProperty('gclid');
+  const gclidValue = hasGclid ? marketingParams['gclid'] : '';
+
   const handleCountryChange = () => {
     const country = document?.getElementsByClassName('PhoneInputCountrySelect');
     const countrySelect = country[0] as HTMLSelectElement | undefined;
@@ -74,6 +79,7 @@ export const WhitePaperForm = ({
       phone: phoneValue,
       variant: variant,
       sectorName: sectorName,
+      gclid: gclidValue,
     };
 
     try {

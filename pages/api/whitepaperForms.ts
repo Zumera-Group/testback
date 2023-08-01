@@ -18,6 +18,7 @@ export default async function handler(
     company,
     sectorName,
     variant,
+    gclid,
   } = req.body;
 
   const request =

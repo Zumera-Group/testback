@@ -60,8 +60,6 @@ export class SalesforceFacade {
         {},
       );
 
-      console.log(formattedMarketingParams);
-
       const params = {
         lead_entry: {
           unique_id: uniqueId,
