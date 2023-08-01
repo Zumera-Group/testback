@@ -44,18 +44,19 @@ const useSaveOnMount = () => {
 
     const valuesForKeys = queryString.parse(window.location.search);
 
+    //GOOGLE CLICK ID SETUP
     const gclsrcParam = 'gclsrc' in valuesForKeys;
-    const keysArray = Object.keys(valuesForKeys);
     const gclidParam = valuesForKeys['gclid'];
-    const isGclsrcValid = !gclsrcParam || gclsrcParam.indexOf('aw') !== -1;
-    var gclidRecord = null;
-
-    console.log('gclsrc' in valuesForKeys);
+    const isGclsrcValid =
+      !gclsrcParam || valuesForKeys['gclsrc']?.indexOf('aw') !== -1;
+    let gclidRecord = null;
 
     for (const key in valuesForKeys) {
       if (key === 'gclid') {
-        const gclidValue = valuesForKeys[key];
-        console.log('The value of gclid is:', gclidValue);
+        if (gclidParam && isGclsrcValid) {
+          gclidRecord = getExpiryRecord(gclidParam);
+          MarketingQueryStorage.saveIfWithValue('gclid', gclidRecord);
+        }
       } else {
         config.desiredKeysToMap
           .filter((key) => key !== 'gclid')
@@ -65,18 +66,6 @@ const useSaveOnMount = () => {
       }
     }
 
-    // if (gclidParam && isGclsrcValid) {
-    //   gclidRecord = getExpiryRecord(gclidParam);
-    //   MarketingQueryStorage.saveIfWithValue(
-    //     'gclid',
-    //     valuesForKeys?.[JSON.stringify(gclidRecord)],
-    //   );
-    // } else {
-    //   config.desiredKeysToMap.forEach((key) => {
-    //     MarketingQueryStorage.saveIfWithValue(key, valuesForKeys?.[key]);
-    //   });
-    // }
-
     // config.desiredKeysToMap.forEach((key) => {
     //   MarketingQueryStorage.saveIfWithValue(key, valuesForKeys?.[key]);
     // });
@@ -84,11 +73,23 @@ const useSaveOnMount = () => {
 };
 
 const retrieve = (): Record<string, any> => {
+  const gclidRecord = null;
+  const gclid =
+    gclidRecord ||
+    JSON.parse(localStorage.getItem(config.localStoreKey + 'gclid'));
+  const isGclidValid = gclid && new Date().getTime() < gclid.expiryDate;
   try {
     const data = config.desiredKeysToMap.reduce((total: any, key: any) => {
       const value = MarketingQueryStorage.get(key);
-      if (value) {
-        total[key] = MarketingQueryStorage.get(key);
+      if (key === 'gclid') {
+        //GOOGLE CLICK ID SETUP
+        if (value && isGclidValid) {
+          total[key] = MarketingQueryStorage.get(key).value;
+        }
+      } else {
+        if (value) {
+          total[key] = MarketingQueryStorage.get(key);
+        }
       }
 
       return total;
