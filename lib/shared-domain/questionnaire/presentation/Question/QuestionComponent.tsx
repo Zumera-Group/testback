@@ -122,6 +122,8 @@ export const QuestionComponent: React.FC<{
       uniqueId,
       currentQuestion?.salesforceId,
       currentProgress,
+      `Question: ${currentPos}`,
+      currentQuestion?.salesforceId,
     );
 
     if (industryId && currentQuestion?.questionId === INDUSTRY_QUESTION_ID) {
