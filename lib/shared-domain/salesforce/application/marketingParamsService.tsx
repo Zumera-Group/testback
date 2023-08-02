@@ -76,7 +76,7 @@ const retrieve = (): Record<string, any> => {
   const gclidRecord = null;
   const gclid =
     gclidRecord ||
-    JSON.parse(localStorage.getItem(config.localStoreKey + 'gclid'));
+    JSON.parse(localStorage?.getItem(config.localStoreKey + 'gclid'));
   const isGclidValid = gclid && new Date().getTime() < gclid.expiryDate;
   try {
     const data = config.desiredKeysToMap.reduce((total: any, key: any) => {
