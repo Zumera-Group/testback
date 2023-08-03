@@ -30,6 +30,7 @@ export default async function handler(
           country: country,
           email: email,
           phone: phone,
+          gclid: gclid,
         }
       : {
           firstName: firstName,
@@ -39,6 +40,7 @@ export default async function handler(
           email: email,
           phone: phone,
           sector: sectorName,
+          gclid: gclid,
         };
 
   const endPoint =
