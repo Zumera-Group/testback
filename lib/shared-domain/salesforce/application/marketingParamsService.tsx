@@ -45,30 +45,21 @@ const useSaveOnMount = () => {
     const valuesForKeys = queryString.parse(window.location.search);
 
     //GOOGLE CLICK ID SETUP
-    const gclsrcParam = 'gclsrc' in valuesForKeys;
+    const gclsrcParam = valuesForKeys['gclsrc'];
     const gclidParam = valuesForKeys['gclid'];
-    const isGclsrcValid =
-      !gclsrcParam || valuesForKeys['gclsrc']?.indexOf('aw') !== -1;
+    const isGclsrcValid = !gclsrcParam || gclsrcParam?.indexOf('aw') !== -1;
     let gclidRecord = null;
 
-    for (const key in valuesForKeys) {
-      if (key === 'gclid') {
-        if (gclidParam && isGclsrcValid) {
-          gclidRecord = getExpiryRecord(gclidParam);
-          MarketingQueryStorage.saveIfWithValue('gclid', gclidRecord);
-        }
-      } else {
-        config.desiredKeysToMap
-          .filter((key) => key !== 'gclid')
-          .forEach((key) => {
-            MarketingQueryStorage.saveIfWithValue(key, valuesForKeys?.[key]);
-          });
-      }
+    if (gclidParam && isGclsrcValid) {
+      gclidRecord = getExpiryRecord(gclidParam);
+      MarketingQueryStorage.saveIfWithValue('gclid', gclidRecord);
     }
 
-    // config.desiredKeysToMap.forEach((key) => {
-    //   MarketingQueryStorage.saveIfWithValue(key, valuesForKeys?.[key]);
-    // });
+    config.desiredKeysToMap
+      .filter((key) => key !== 'gclid')
+      .forEach((key) => {
+        MarketingQueryStorage.saveIfWithValue(key, valuesForKeys?.[key]);
+      });
   }, []);
 };
 
