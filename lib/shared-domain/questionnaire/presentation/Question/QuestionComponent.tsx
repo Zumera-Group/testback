@@ -14,6 +14,8 @@ import { useQuestionnaireRouter, t } from './index';
 import { AnimateSharedLayout } from 'framer-motion';
 import { Sector } from '../../../page/domain/index';
 import { useGetSalesforceScore } from '../../application/useGetQuestionnaireScore';
+import { useRouter } from 'next/router';
+import { useGetURL } from 'lib/hooks/useGetURL';
 
 export const QuestionComponent: React.FC<{
   sectorSpecificQuestions: Question[];
@@ -30,7 +32,9 @@ export const QuestionComponent: React.FC<{
     isOnResultScreen,
     sectorId,
     industryId,
+    leadSourceURL,
     setQuestionnaire,
+    setLeadSourceURL,
   } = useValuationStore();
   const { syncCurrentAnswersToSalesforce } = useSalesforceAnswerSync();
 
@@ -57,6 +61,30 @@ export const QuestionComponent: React.FC<{
   const currentProgress = Math.round(
     (currentPos / numberOfQuestionsInTotal) * 100,
   );
+
+  const fullUrl = useGetURL();
+
+  //GETS POSITION OF SELECTED FIELD WHICH IS THE START OF THE EV THRESHOLD
+  const salesforceProperty = 'salesforceId';
+  const evStartField = 'Company_EBIT_2022__c';
+
+  const allQuestions = questionnaire?.questionsByCategory?.reduce(
+    (accumulatedCategory, currentCategory) => {
+      return {
+        categoryName: currentCategory.categoryName,
+        questions: accumulatedCategory.questions.concat(
+          currentCategory.questions,
+        ),
+      };
+    },
+  );
+
+  const getEvStartPos = () => {
+    const elementPos = allQuestions.questions.findIndex(
+      (obj) => obj[salesforceProperty] === evStartField,
+    );
+    return elementPos + 1;
+  };
 
   const buildSectorSpecificQuestions = () => {
     if (!questionnaire.sectorSpecific.hasSectorSpecificQuestions) return;
@@ -114,6 +142,8 @@ export const QuestionComponent: React.FC<{
 
   const onNextQuestion = () => {
     refEl.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+    setLeadSourceURL(fullUrl);
 
     qLogs('onNextQuestion');
     qLogs('ID ' + currentQuestion?.salesforceId);

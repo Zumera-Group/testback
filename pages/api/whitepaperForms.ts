@@ -18,25 +18,26 @@ export default async function handler(
     company,
     sectorName,
     variant,
+    leadSourceURL,
   } = req.body;
+
+  const coreFields = {
+    firstName: firstName,
+    lastName: lastName,
+    company: company,
+    country: country,
+    email: email,
+    phone: phone,
+    leadSourceURL: leadSourceURL,
+  };
 
   const request =
     variant === 'blog'
       ? {
-          firstName: firstName,
-          lastName: lastName,
-          company: company,
-          country: country,
-          email: email,
-          phone: phone,
+          ...coreFields,
         }
       : {
-          firstName: firstName,
-          lastName: lastName,
-          company: company,
-          country: country,
-          email: email,
-          phone: phone,
+          ...coreFields,
           sector: sectorName,
         };
 
