@@ -11,6 +11,7 @@ const config = {
 const MarketingQueryStorage = {
   saveIfWithValue: (key: string, value: any) => {
     if (!value) return null;
+
     window.localStorage.setItem(
       config.localStoreKey + key,
       JSON.stringify(value),
@@ -27,24 +28,59 @@ const MarketingQueryStorage = {
   },
 };
 
+const getExpiryRecord = (value) => {
+  const expiryPeriod = 90 * 24 * 60 * 60 * 1000; // 90 day expiry in milliseconds
+
+  const expiryDate = new Date().getTime() + expiryPeriod;
+  return {
+    value: value,
+    expiryDate: expiryDate,
+  };
+};
+
 const useSaveOnMount = () => {
   useEffect(() => {
     if (!window) return; // to avoid running on server side.
 
     const valuesForKeys = queryString.parse(window.location.search);
 
-    config.desiredKeysToMap.forEach((key) => {
-      MarketingQueryStorage.saveIfWithValue(key, valuesForKeys?.[key]);
-    });
+    //GOOGLE CLICK ID SETUP
+    const gclsrcParam = valuesForKeys['gclsrc'];
+    const gclidParam = valuesForKeys['gclid'];
+    const isGclsrcValid = !gclsrcParam || gclsrcParam?.indexOf('aw') !== -1;
+    let gclidRecord = null;
+
+    if (gclidParam && isGclsrcValid) {
+      gclidRecord = getExpiryRecord(gclidParam);
+      MarketingQueryStorage.saveIfWithValue('gclid', gclidRecord);
+    }
+
+    config.desiredKeysToMap
+      .filter((key) => key !== 'gclid')
+      .forEach((key) => {
+        MarketingQueryStorage.saveIfWithValue(key, valuesForKeys?.[key]);
+      });
   }, []);
 };
 
 const retrieve = (): Record<string, any> => {
+  const gclidRecord = null;
+  const gclid =
+    gclidRecord ||
+    JSON.parse(localStorage?.getItem(config.localStoreKey + 'gclid'));
+  const isGclidValid = gclid && new Date().getTime() < gclid.expiryDate;
   try {
     const data = config.desiredKeysToMap.reduce((total: any, key: any) => {
       const value = MarketingQueryStorage.get(key);
-      if (value) {
-        total[key] = MarketingQueryStorage.get(key);
+      if (key === 'gclid') {
+        //GOOGLE CLICK ID SETUP
+        if (value && isGclidValid) {
+          total[key] = MarketingQueryStorage.get(key).value;
+        }
+      } else {
+        if (value) {
+          total[key] = MarketingQueryStorage.get(key);
+        }
       }
 
       return total;

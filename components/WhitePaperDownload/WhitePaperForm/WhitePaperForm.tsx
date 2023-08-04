@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button } from 'components/Button';
 import { FormGroup, Input, Checkbox, Label } from 'components/Form';
 import styles from './WhitePaperForm.module.scss';
@@ -7,6 +7,7 @@ import { useRouter } from 'next/router';
 import { Icon } from 'components/Icon';
 import Link from 'next/link';
 import { useLinkWithCurrentLocale } from 'lib/shared-domain/useLinkWithCurrentLocale';
+import { MarketingParamsService } from 'lib/shared-domain/salesforce/application/marketingParamsService';
 import { useGetURL } from 'lib/hooks/useGetURL';
 
 const PhoneInput = dynamic(() => import('react-phone-number-input'));
@@ -40,8 +41,16 @@ export const WhitePaperForm = ({
     router.locale === 'en' ? 'United Kingdom' : 'Germany',
   );
   const [isSuccess, setIsSuccess] = useState(null);
+  const [gclid, setGCLID] = useState(null);
   const DOMAIN = process.env.NEXT_PUBLIC_EXTERNAL_PDF_HOST;
   const PhoneInputComponent = PhoneInput as any;
+
+  useEffect(() => {
+    const marketingParams = MarketingParamsService.retrieve();
+    const hasGclid = marketingParams.hasOwnProperty('gclid');
+    const gclidValue = hasGclid ? marketingParams['gclid'] : '';
+    setGCLID(gclidValue);
+  }, []);
 
   const handleCountryChange = () => {
     const country = document?.getElementsByClassName('PhoneInputCountrySelect');
@@ -78,6 +87,7 @@ export const WhitePaperForm = ({
       phone: phoneValue,
       variant: variant,
       sectorName: sectorName,
+      gclid: gclid,
       leadSourceURL: fullURL,
     };
 

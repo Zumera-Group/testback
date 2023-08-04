@@ -18,6 +18,7 @@ export default async function handler(
     company,
     sectorName,
     variant,
+    gclid,
     leadSourceURL,
   } = req.body;
 
@@ -29,11 +30,18 @@ export default async function handler(
     email: email,
     phone: phone,
     leadSourceURL: leadSourceURL,
+    gclid: gclid,
   };
 
   const request =
     variant === 'blog'
       ? {
+          firstName: firstName,
+          lastName: lastName,
+          company: company,
+          country: country,
+          email: email,
+          phone: phone,
           ...coreFields,
         }
       : {

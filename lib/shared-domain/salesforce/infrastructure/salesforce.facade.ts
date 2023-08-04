@@ -50,11 +50,14 @@ export class SalesforceFacade {
         [unformattedParams[4]]: 'UTM_Source_Platform__c',
         [unformattedParams[5]]: 'UTMTerm__c',
         [unformattedParams[6]]: 'UTM_Content__c',
+        [unformattedParams[7]]: 'gclid__c',
       };
+
       const formattedMarketingParams = Object.keys(marketingParams).reduce(
         (acc, key) => {
           const newKey = keyMap[key] || key;
           acc[newKey] = marketingParams[key];
+
           return acc;
         },
         {},
@@ -167,32 +170,12 @@ export class SalesforceFacade {
     leadSourceURL: string;
   }): Promise<void> {
     try {
-      const marketingParams = MarketingParamsService.retrieve();
       const cookies = MarketingParamsService.getCookies();
-
-      const keyMap = {
-        [unformattedParams[0]]: 'UTMSource__c',
-        [unformattedParams[1]]: 'UTMMedium__c',
-        [unformattedParams[2]]: 'UTMCampaign__c',
-        [unformattedParams[3]]: 'UTM_ID__c',
-        [unformattedParams[4]]: 'UTM_Source_Platform__c',
-        [unformattedParams[5]]: 'UTMTerm__c',
-        [unformattedParams[6]]: 'UTM_Content__c',
-      };
-      const formattedMarketingParams = Object.keys(marketingParams).reduce(
-        (acc, key) => {
-          const newKey = keyMap[key] || key;
-          acc[newKey] = marketingParams[key];
-          return acc;
-        },
-        {},
-      );
 
       await this.httpService.post(
         endpoints.submitContactForm,
         {
           contact: {
-            ...formattedMarketingParams,
             ...cookies,
             email: contact.email,
             phone: contact.phone,
