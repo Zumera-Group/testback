@@ -148,15 +148,13 @@ export const QuestionComponent: React.FC<{
     qLogs('onNextQuestion');
     qLogs('ID ' + currentQuestion?.salesforceId);
 
-    const evStartPos = getEvStartPos();
-
-    if (currentPos >= evStartPos) {
-      syncCurrentAnswersToSalesforce(
-        uniqueId,
-        currentQuestion?.salesforceId,
-        currentProgress,
-      );
-    }
+    syncCurrentAnswersToSalesforce(
+      uniqueId,
+      currentQuestion?.salesforceId,
+      currentProgress,
+      `Question: ${currentPos}`,
+      currentQuestion?.salesforceId,
+    );
 
     if (industryId && currentQuestion?.questionId === INDUSTRY_QUESTION_ID) {
       buildSectorSpecificQuestions();

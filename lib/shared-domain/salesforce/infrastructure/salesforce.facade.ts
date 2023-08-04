@@ -35,6 +35,8 @@ export class SalesforceFacade {
     sectorSheetName: string,
     assessmentPurpose: string,
     leadSourceURL: string,
+    currentQuestionNumber: string,
+    currentField: string,
   ): Promise<void> {
     try {
       const marketingParams = MarketingParamsService.retrieve();
@@ -61,7 +63,7 @@ export class SalesforceFacade {
       const params = {
         lead_entry: {
           unique_id: uniqueId,
-          current_progress: currentProgress,
+          // current_progress: currentProgress,
           data: {
             Lead_Source_URL__c: leadSourceURL,
             Assessment_Purpose__c: assessmentPurpose,
@@ -72,6 +74,10 @@ export class SalesforceFacade {
             sector_id: sectorId,
             industry_sheet_name: industrySheetName,
             sector_sheet_name: sectorSheetName,
+          },
+          dropped_at: {
+            field: currentField,
+            progress: currentQuestionNumber,
           },
         },
       };

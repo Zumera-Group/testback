@@ -105,7 +105,13 @@ const EvaluationScreen: React.FC<{
     setPressed(true);
 
     if (!SEND_IS_ALLOWED) return;
-    await syncCurrentAnswersToSalesforce(uniqueId, 'lastQuestion', 100);
+    await syncCurrentAnswersToSalesforce(
+      uniqueId,
+      'lastQuestion',
+      100,
+      'resultScreen',
+      'lastQuestion',
+    );
     await syncLeadToSalesforce(uniqueId);
 
     if (!score || !score.avg || score?.avg < 5000000) {

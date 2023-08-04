@@ -26,6 +26,8 @@ export const useSalesforceAnswerSync = () => {
       uniqueId: string,
       currentSalesforceId: string,
       currentProgress: number,
+      currentQuestionNumber: string,
+      currentField: string,
     ) => {
       sendQuestionnaireToAnalytics(currentSalesforceId);
 
@@ -39,6 +41,8 @@ export const useSalesforceAnswerSync = () => {
         sectorSheetName,
         assessmentPurpose,
         leadSourceURL,
+        currentQuestionNumber,
+        currentField,
       );
     },
     syncCurrentAnswersFromSalesforce: async (uniqueId: string) => {
