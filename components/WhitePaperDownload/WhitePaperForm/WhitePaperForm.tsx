@@ -8,6 +8,7 @@ import { Icon } from 'components/Icon';
 import Link from 'next/link';
 import { useLinkWithCurrentLocale } from 'lib/shared-domain/useLinkWithCurrentLocale';
 import { MarketingParamsService } from 'lib/shared-domain/salesforce/application/marketingParamsService';
+import { useGetURL } from 'lib/hooks/useGetURL';
 
 const PhoneInput = dynamic(() => import('react-phone-number-input'));
 
@@ -67,6 +68,9 @@ export const WhitePaperForm = ({
     return () => clearTimeout(timer);
   };
 
+  const fullURL = useGetURL();
+  console.log(fullURL);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     // @ts-ignore
@@ -84,6 +88,7 @@ export const WhitePaperForm = ({
       variant: variant,
       sectorName: sectorName,
       gclid: gclid,
+      leadSourceURL: fullURL,
     };
 
     try {

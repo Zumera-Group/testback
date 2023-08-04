@@ -34,6 +34,9 @@ export class SalesforceFacade {
     industrySheetName: string,
     sectorSheetName: string,
     assessmentPurpose: string,
+    leadSourceURL: string,
+    currentQuestionNumber: string,
+    currentField: string,
   ): Promise<void> {
     try {
       const marketingParams = MarketingParamsService.retrieve();
@@ -63,8 +66,9 @@ export class SalesforceFacade {
       const params = {
         lead_entry: {
           unique_id: uniqueId,
-          current_progress: currentProgress,
+          // current_progress: currentProgress,
           data: {
+            Lead_Source_URL__c: leadSourceURL,
             Assessment_Purpose__c: assessmentPurpose,
             ...fields,
             ...formattedMarketingParams,
@@ -73,6 +77,10 @@ export class SalesforceFacade {
             sector_id: sectorId,
             industry_sheet_name: industrySheetName,
             sector_sheet_name: sectorSheetName,
+          },
+          dropped_at: {
+            field: currentField,
+            progress: currentQuestionNumber,
           },
         },
       };
@@ -84,6 +92,7 @@ export class SalesforceFacade {
       // qLogs(marketingParams);
       // qLogs(fields);
       // qLogs(assessmentPurpose);
+      // qLogs(`lead sf ${leadSourceURL}`);
 
       await this.httpService.post(
         endpoints.createOrUpdateLeadEntry,
@@ -158,6 +167,7 @@ export class SalesforceFacade {
     firstName: string;
     lastName: string;
     message: string;
+    leadSourceURL: string;
   }): Promise<void> {
     try {
       const cookies = MarketingParamsService.getCookies();
@@ -173,6 +183,7 @@ export class SalesforceFacade {
             last_name: contact.lastName,
             company: contact.firstName + ' ' + contact.lastName,
             message: contact.message,
+            Lead_Source_URL__c: contact.leadSourceURL,
           },
         },
         requestsConfig,

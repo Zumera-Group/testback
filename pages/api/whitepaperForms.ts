@@ -19,7 +19,19 @@ export default async function handler(
     sectorName,
     variant,
     gclid,
+    leadSourceURL,
   } = req.body;
+
+  const coreFields = {
+    firstName: firstName,
+    lastName: lastName,
+    company: company,
+    country: country,
+    email: email,
+    phone: phone,
+    leadSourceURL: leadSourceURL,
+    gclid: gclid,
+  };
 
   const request =
     variant === 'blog'
@@ -30,17 +42,11 @@ export default async function handler(
           country: country,
           email: email,
           phone: phone,
-          gclid: gclid,
+          ...coreFields,
         }
       : {
-          firstName: firstName,
-          lastName: lastName,
-          company: company,
-          country: country,
-          email: email,
-          phone: phone,
+          ...coreFields,
           sector: sectorName,
-          gclid: gclid,
         };
 
   const endPoint =

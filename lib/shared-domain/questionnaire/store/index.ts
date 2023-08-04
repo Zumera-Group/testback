@@ -26,9 +26,11 @@ interface ValuationState {
   sectorId: string | null;
   industryId: string | null;
   assessmentPurpose: string | null;
+  leadSourceURL: string | null;
   setSectorId: (sectorId: string) => void;
   setIndustryId: (industryId: string) => void;
   setAssessmentPurpose: (assessmentPurpose: string) => void;
+  setLeadSourceURL: (leadSourceURL: string) => void;
   sectorSheetName: string | null;
   industrySheetName: string | null;
   setSectorSheetName: (sectorSheetName: string) => void;
@@ -73,6 +75,10 @@ export const useValuationStore = create<ValuationState>(
       setAssessmentPurpose: (assessmentPurpose: string) => {
         set({ assessmentPurpose });
       },
+      leadSourceURL: null,
+      setLeadSourceURL: (leadSourceURL: string) => {
+        set({ leadSourceURL });
+      },
       industrySheetName: null,
       setIndustrySheetName: (industrySheetName: string) => {
         set({ industrySheetName });
@@ -88,7 +94,6 @@ export const useValuationStore = create<ValuationState>(
         const questionnaire = get().questionnaire;
         if (!questionnaire) return false;
         const mainStep = get().mainStep;
-
         return (
           mainStep === questionnaire.questionsByCategory.length - 1 &&
           questionnaire.questionsByCategory[mainStep].categoryName ===
