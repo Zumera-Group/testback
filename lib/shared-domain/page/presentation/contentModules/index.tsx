@@ -86,15 +86,68 @@ import { DividerLine } from 'components/DividerLine';
 import { PartnerPersonQuote } from 'components/PartnerPersonQuote';
 import { PartnerReviewSection } from 'components/PartnerReviewSection';
 import { PartnerVisionSection } from 'components/PartnerVisionSection';
+import InfoSection from 'components/Sector/SectorInfo/InfoSection';
+import GrowthRatesSection from 'components/Sector/SectorInfo/GrowthRatesSection';
+import { SectorTeam } from 'components/Sector';
+
 const NewsGridSection = dynamic(() => import('./NewsGridSection'), {
   ssr: false,
 });
 export const getContentForContentModule = (
-  contentModule: ContentModule,
+  contentModule: ContentModule | any,
   siteSettings: any,
   sharedContent?: any,
   allModulesData?: any,
 ): JSX.Element => {
+  if (contentModule.specificContentModule?._type === 'teamWithQuoteSection') {
+    return (
+      <SectorTeam
+        sector={{
+          teamSection: {
+            title: contentModule.specificContentModule.title,
+            description: contentModule.specificContentModule.description,
+            author: contentModule.specificContentModule.author,
+            quote: contentModule.specificContentModule.quoteText,
+            linkText: contentModule.specificContentModule.linkText
+          },
+          contributors: [
+            {
+              newsGridPicture: {
+                picture:
+                  contentModule.specificContentModule.author.detailPagePicture,
+              },
+              jobTitle: contentModule.specificContentModule.author.jobTitle,
+              firstName: contentModule.specificContentModule.author.firstName,
+              lastName: contentModule.specificContentModule.author.lastName,
+            },
+          ],
+        }}
+      />
+    );
+  }
+  if (contentModule.specificContentModule?._type === 'growthRateSection') {
+    return (
+      <GrowthRatesSection
+        growthRatesTable={contentModule.specificContentModule.growthRatesTable}
+        transactionsTable={
+          contentModule.specificContentModule.transactionsTable
+        }
+        trendsTable={contentModule.specificContentModule.trendsTable}
+      />
+    );
+  }
+  if (contentModule.specificContentModule?._type === 'infoSection') {
+    return (
+      <InfoSection
+        title={contentModule.specificContentModule.title}
+        subtitle={contentModule.specificContentModule.subtitle}
+        description={contentModule.specificContentModule.subtitle}
+        accordionQuestionAndAnswers={
+          contentModule.specificContentModule.accordionQuestionAndAnswers || []
+        }
+      />
+    );
+  }
   if (contentModule.specificContentModule instanceof PartnerVisionModule) {
     return (
       <PartnerVisionSection

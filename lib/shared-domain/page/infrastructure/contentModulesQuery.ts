@@ -48,6 +48,23 @@ export const contentModulesQuery = (
     _key,
     _type,
     ...,
+    author->{
+      firstName,
+      lastName,
+      jobTitle,
+      mobile,
+      phone,
+      email,
+      detailPagePicture {
+        ...
+        picture {
+          asset->{
+            url,
+            type
+          },
+        }
+      },
+    },
     image {
       asset->{
         url
@@ -574,6 +591,6 @@ export const contentModulesQuery = (
 			  url
 			},
 		},
-   }, 
+   },
 ${extraQuery || ''}
   }`;

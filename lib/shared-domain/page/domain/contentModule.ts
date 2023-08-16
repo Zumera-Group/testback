@@ -919,6 +919,9 @@ export type ContentModuleType =
   | 'dividerLine'
   | 'partnerReviewSection'
   | 'blogIndexSection'
+  | 'infoSection'
+  | 'growthRateSection'
+  | 'teamWithQuoteSection'
   // service detail sections
   | serviceDetailSectionNames.processSection
   | serviceDetailSectionNames.helpContactPerson
@@ -953,6 +956,9 @@ abstract class ContentModuleTypeFactory {
     if (type === 'anchoredTextSection')
       return new AnchoredTextSectionModule(fields);
     if (type === 'heroSection') return new HeroSectionModule(fields);
+    if (type === 'infoSection') return fields;
+    if (type === 'growthRateSection') return fields;
+    if (type === 'teamWithQuoteSection') return fields;
     if (type === 'dividerImage') return new DividerImageModule(fields);
     if (type === 'servicesLargeGridSection')
       return new ServicesLargeGridSectionModule(fields);
@@ -1084,6 +1090,7 @@ abstract class ContentModuleTypeFactory {
 
 export class ContentModule {
   _key: string;
+  _type?: string;
   specificContentModule: BaseModule;
 
   constructor(_key: string, specificContentModule: BaseModule) {

@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import React, { useRef } from 'react';
 
 import {
   Section,
@@ -82,7 +82,7 @@ export const SectorTeam = ({ sector }) => {
           xxlSlides={2.3}
         >
           {contributors?.map((p, index) => (
-            <>
+            <React.Fragment key={index}>
               <SwiperSlide className={styles.slide}>
                 <Employee article={p} cardLabel={sector.teamSection.linkText} />
               </SwiperSlide>
@@ -94,7 +94,7 @@ export const SectorTeam = ({ sector }) => {
                   <Quote />
                 </SwiperSlide>
               ) : null}
-            </>
+            </React.Fragment>
           ))}
         </SwiperPeople>
       )}
