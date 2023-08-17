@@ -92,7 +92,7 @@ import GrowthRatesSection from 'components/Sector/SectorInfo/GrowthRatesSection'
 import { SectorHero, SectorTeam, SectorTransactions } from 'components/Sector';
 import FutureTrendsSection from 'components/Sector/SectorInfo/FutureTrendsSection';
 import SectorMoreDetails from 'components/SectorMoreDetails/SectorMoreDetails';
-import { useSharedContentContext } from 'lib/shared-domain/page/infrastructure/sharedContentContext';
+import { WhitePaperDownloadSection } from 'components/WhitePaperDownload/WhitePaperDownloadSection';
 
 const NewsGridSection = dynamic(() => import('./NewsGridSection'), {
   ssr: false,
@@ -247,38 +247,9 @@ export const getContentForContentModule = (
     );
   }
   if (contentModule.specificContentModule instanceof WhitePaperDownloadModule) {
-    const sharedContent = useSharedContentContext();
     return (
-      <WhitePaperDownload
-        variant="sector"
-        siteSettings={{
-          contactSectionContent: {
-            contactForm: {
-              checkboxPrivacyText1: sharedContent.checkboxPrivacyText1,
-              checkboxPrivacyText2: sharedContent.checkboxPrivacyText2,
-              checkboxPrivacyText3: sharedContent.checkboxPrivacyText3,
-              checkboxPrivacyPage: sharedContent.checkboxPrivacyPage,
-            },
-          },
-        }}
-        sector={{
-          name: 'Sector',
-          whitePaperDownload: {
-            pdfURL: contentModule.specificContentModule.file,
-            pdfThumbnail: contentModule.specificContentModule.image,
-          },
-        }}
-        content={{
-          whitePaperDownload: {
-            title: contentModule.specificContentModule.title,
-            description: contentModule.specificContentModule.description,
-            whitePaperForm: {
-              ...contentModule.specificContentModule.whitePaperFormFields,
-              numberLabel: contentModule.specificContentModule.whitePaperFormFields.phoneNumberLabel,
-              submitLabel: sharedContent.downloadButtonContent.buttonCaption,
-            },
-          },
-        }}
+      <WhitePaperDownloadSection
+        specificContentModule={contentModule.specificContentModule}
       />
     );
   }
