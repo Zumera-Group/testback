@@ -22,7 +22,8 @@ export const WhitePaperDownloadSection: React.FC<{
       sector={{
         name: 'Sector',
         whitePaperDownload: {
-          pdfURL: specificContentModule.file,
+          ...specificContentModule.whitePaperFormFields,
+          pdfURL: specificContentModule.pdfUrl,
           pdfThumbnail: specificContentModule.image,
         },
       }}
@@ -30,6 +31,7 @@ export const WhitePaperDownloadSection: React.FC<{
         whitePaperDownload: {
           title: specificContentModule.title,
           description: specificContentModule.description,
+          ...specificContentModule.whitePaperFormFields,
           whitePaperForm: {
             ...specificContentModule.whitePaperFormFields,
             numberLabel:

@@ -1683,6 +1683,7 @@ export class WhitePaperDownloadModule extends BaseModule {
   description: string;
   image: any;
   file: any;
+  pdfUrl: any;
   whitePaperFormFields: any[];
   constructor(fields: Record<string, any>) {
     super();
@@ -1692,5 +1693,6 @@ export class WhitePaperDownloadModule extends BaseModule {
     this.image = fields.image;
     this.file = fields.file;
     this.whitePaperFormFields = fields.whitePaperFormFields;
+    this.pdfUrl = fields.pdfUrl;
   }
 }

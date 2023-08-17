@@ -60,8 +60,7 @@ export const WhitePaperForm = ({
   };
 
   const downloadFile = async () => {
-    const pdfPath = file.substring(DOMAIN.length);
-    const externalUrl = file.includes(DOMAIN) ? `/whitepaper/${pdfPath}` : file;
+    const externalUrl = file;
     const timer = setTimeout(() => {
       window.open(externalUrl, '_blank');
     }, 2000);
@@ -69,7 +68,6 @@ export const WhitePaperForm = ({
   };
 
   const fullURL = useGetURL();
-  console.log(fullURL);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -101,12 +99,10 @@ export const WhitePaperForm = ({
       });
 
       if (response.ok) {
-        console.log('success');
         downloadFile();
         setIsFormSubmitted(true);
         setIsSuccess(true);
       } else {
-        console.error('failed');
         setIsFormSubmitted(true);
         setIsSuccess(false);
       }
