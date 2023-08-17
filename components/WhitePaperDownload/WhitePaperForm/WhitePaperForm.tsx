@@ -42,7 +42,7 @@ export const WhitePaperForm = ({
   );
   const [isSuccess, setIsSuccess] = useState(null);
   const [gclid, setGCLID] = useState(null);
-  const DOMAIN = process.env.NEXT_PUBLIC_EXTERNAL_PDF_HOST;
+  const DOMAIN = process.env.NEXT_PUBLIC_EXTERNAL_PDF_HOST || '';
   const PhoneInputComponent = PhoneInput as any;
 
   useEffect(() => {
@@ -60,7 +60,8 @@ export const WhitePaperForm = ({
   };
 
   const downloadFile = async () => {
-    const externalUrl = file;
+    const pdfPath = file.substring(DOMAIN.length);
+    const externalUrl = file.includes(DOMAIN) ? `/whitepaper/${pdfPath}` : file;
     const timer = setTimeout(() => {
       window.open(externalUrl, '_blank');
     }, 2000);
