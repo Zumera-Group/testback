@@ -8,8 +8,8 @@ import { sanityImageUrlFor } from 'lib/sanity';
 import axios from 'axios';
 import { Sector, SiteSettings } from 'lib/shared-domain/page/domain';
 export const WhitePaperDownload: React.FC<{
-  sector: Sector;
-  siteSettings: SiteSettings;
+  sector: Sector | any;
+  siteSettings: SiteSettings | any;
   content: any;
   variant: 'sector' | 'blog';
 }> = ({ sector, siteSettings, content, variant }) => {

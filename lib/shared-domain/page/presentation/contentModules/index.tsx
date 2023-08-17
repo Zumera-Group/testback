@@ -34,6 +34,7 @@ import {
   PartnerReviewModule,
   PartnerVisionModule,
   WhitePaperDownloadModule,
+  TransactionsCarouselSectionModule,
 } from '../../domain/contentModule';
 
 import {
@@ -88,7 +89,10 @@ import { PartnerReviewSection } from 'components/PartnerReviewSection';
 import { PartnerVisionSection } from 'components/PartnerVisionSection';
 import InfoSection from 'components/Sector/SectorInfo/InfoSection';
 import GrowthRatesSection from 'components/Sector/SectorInfo/GrowthRatesSection';
-import { SectorTeam } from 'components/Sector';
+import { SectorHero, SectorTeam, SectorTransactions } from 'components/Sector';
+import FutureTrendsSection from 'components/Sector/SectorInfo/FutureTrendsSection';
+import SectorMoreDetails from 'components/SectorMoreDetails/SectorMoreDetails';
+import { useSharedContentContext } from 'lib/shared-domain/page/infrastructure/sharedContentContext';
 
 const NewsGridSection = dynamic(() => import('./NewsGridSection'), {
   ssr: false,
@@ -99,6 +103,60 @@ export const getContentForContentModule = (
   sharedContent?: any,
   allModulesData?: any,
 ): JSX.Element => {
+  if (contentModule.specificContentModule?._type === 'moreDetailsSection') {
+    return (
+      <SectorMoreDetails
+        moreDetailsDescription={
+          contentModule.specificContentModule.moreDetailsDescription
+        }
+        sectorMoreDetailsPicture={
+          contentModule.specificContentModule.sectorMoreDetailsPicture
+        }
+        title={contentModule.specificContentModule.title}
+      />
+    );
+  }
+  if (contentModule.specificContentModule?._type === 'futureTrendsSection') {
+    return (
+      <FutureTrendsSection
+        futureTrends={{
+          title: contentModule.specificContentModule.title,
+          trendDescription:
+            contentModule.specificContentModule.trendDescription,
+          trendsImage: contentModule.specificContentModule.trendsImage,
+        }}
+      />
+    );
+  }
+  if (contentModule.specificContentModule?._type === 'sectorHeroSection') {
+    const {
+      contributors,
+      name,
+      date,
+      type,
+      detailPageHeroImage,
+      contributorsTitle,
+      typeTitle,
+      dateTitle,
+    } = contentModule.specificContentModule;
+
+    return (
+      <SectorHero
+        content={{
+          contributors: contributorsTitle,
+          type: typeTitle,
+          lateUpdate: dateTitle,
+        }}
+        sector={{
+          contributors,
+          name,
+          date,
+          type,
+          detailPageHeroImage,
+        }}
+      />
+    );
+  }
   if (contentModule.specificContentModule?._type === 'teamWithQuoteSection') {
     return (
       <SectorTeam
@@ -108,7 +166,7 @@ export const getContentForContentModule = (
             description: contentModule.specificContentModule.description,
             author: contentModule.specificContentModule.author,
             quote: contentModule.specificContentModule.quoteText,
-            linkText: contentModule.specificContentModule.linkText
+            linkText: contentModule.specificContentModule.linkText,
           },
           contributors: [
             {
@@ -188,13 +246,42 @@ export const getContentForContentModule = (
       />
     );
   }
-  // if (contentModule.specificContentModule instanceof WhitePaperDownloadModule) {
-  //   return (
-  //     <WhitePaperDownload
-  //       specificContentModule={contentModule.specificContentModule}
-  //     />
-  //   );
-  // }
+  if (contentModule.specificContentModule instanceof WhitePaperDownloadModule) {
+    const sharedContent = useSharedContentContext();
+    return (
+      <WhitePaperDownload
+        variant="sector"
+        siteSettings={{
+          contactSectionContent: {
+            contactForm: {
+              checkboxPrivacyText1: sharedContent.checkboxPrivacyText1,
+              checkboxPrivacyText2: sharedContent.checkboxPrivacyText2,
+              checkboxPrivacyText3: sharedContent.checkboxPrivacyText3,
+              checkboxPrivacyPage: sharedContent.checkboxPrivacyPage,
+            },
+          },
+        }}
+        sector={{
+          name: 'Sector',
+          whitePaperDownload: {
+            pdfURL: contentModule.specificContentModule.file,
+            pdfThumbnail: contentModule.specificContentModule.image,
+          },
+        }}
+        content={{
+          whitePaperDownload: {
+            title: contentModule.specificContentModule.title,
+            description: contentModule.specificContentModule.description,
+            whitePaperForm: {
+              ...contentModule.specificContentModule.whitePaperFormFields,
+              numberLabel: contentModule.specificContentModule.whitePaperFormFields.phoneNumberLabel,
+              submitLabel: sharedContent.downloadButtonContent.buttonCaption,
+            },
+          },
+        }}
+      />
+    );
+  }
   if (contentModule.specificContentModule instanceof TransactionQuoteModule) {
     return (
       <TransactionQuote
