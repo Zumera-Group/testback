@@ -23,7 +23,7 @@ export const TransactionHero = ({ transaction, content }) => {
           <GridColumn sm={12} md={6} lg={6} className={styles.headingColumn}>
             <SectionHeading
               title={transaction.headline}
-              subtitle={content.heroSubtitle}
+              subtitle={content?.heroSubtitle}
               headingType={'h3'}
               align={'left'}
             />

@@ -32,6 +32,8 @@ function useSetQuestionnaireLocaleToUseFori18n(locale: string) {
     if (!EnvironmentService.isProduction()) return;
     if (locale === 'de') {
       I18n.locale = 'de';
+    } else if (locale === 'fr') {
+      I18n.locale = 'fr';
     } else {
       I18n.locale = 'en';
     }

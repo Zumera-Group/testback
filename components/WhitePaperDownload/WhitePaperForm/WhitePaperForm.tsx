@@ -9,6 +9,7 @@ import Link from 'next/link';
 import { useLinkWithCurrentLocale } from 'lib/shared-domain/useLinkWithCurrentLocale';
 import { MarketingParamsService } from 'lib/shared-domain/salesforce/application/marketingParamsService';
 import { useGetURL } from 'lib/hooks/useGetURL';
+import { getDefaultCountry } from 'lib/links';
 
 const PhoneInput = dynamic(() => import('react-phone-number-input'));
 
@@ -38,7 +39,7 @@ export const WhitePaperForm = ({
 
   const [phoneValue, setPhoneValue] = useState();
   const [countryValue, setCountryValue] = useState(
-    router.locale === 'en' ? 'United Kingdom' : 'Germany',
+    router.locale === 'en' ? 'United Kingdom' : router.locale === 'fr' ? 'France' : 'Germany',
   );
   const [isSuccess, setIsSuccess] = useState(null);
   const [gclid, setGCLID] = useState(null);
@@ -144,7 +145,7 @@ export const WhitePaperForm = ({
           <FormGroup classes={styles.phoneNum}>
             <Label text={phoneNumber} required={true} />
             <PhoneInputComponent
-              defaultCountry={router.locale === 'en' ? 'GB' : 'DE'}
+              defaultCountry={getDefaultCountry(router.locale)}
               international
               placeholder="Enter phone number"
               value={phoneValue}

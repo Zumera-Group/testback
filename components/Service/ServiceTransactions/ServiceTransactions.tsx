@@ -16,13 +16,13 @@ import { Button } from 'components/Button';
 
 import styles from './ServiceTransactions.module.scss';
 import { useRouter } from 'next/router';
+import { allLinks } from 'lib/links';
 
 export const ServiceTransactions = ({ transactions, service, content }) => {
   const swiperPrevRef = useRef();
   const swiperNextRef = useRef();
   const router = useRouter();
-  const transactionSlug =
-    router.locale === 'en' ? '/transactions' : '/transaktionen';
+  const transactionSlug = `/${allLinks.transactions[router.locale]}`;
 
   if (!transactions || transactions.length === 0) return null;
 

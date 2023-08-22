@@ -5,6 +5,7 @@ export const enPaths = [
   'transactions',
   'about-us',
   'news',
+  'blog',
   'cdi-global',
   'career',
   'imprint',
@@ -18,8 +19,23 @@ export const dePaths = [
   'transaktionen',
   'ueber-uns',
   'news',
+  'blog',
   'cdi-global',
   'karriere',
   'impressum',
   'unternehmenswert-rechner',
+];
+
+export const frPaths = [
+  'home',
+  'secteurs',
+  'prestations-de-service',
+  'transactionnel',
+  'about-us',
+  'news',
+  'blog',
+  'cdi-global',
+  'carriere',
+  'imprimer',
+  'outil-de-valorisation',
 ];

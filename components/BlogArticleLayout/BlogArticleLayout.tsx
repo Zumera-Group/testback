@@ -7,7 +7,7 @@ import { ContentModule } from 'lib/shared-domain/blogArticle/domain/blogModule';
 import { getContentForContentModule } from 'lib/shared-domain/blogArticle/presentation/blogModules';
 import { PageTransition } from 'components/PageTransition';
 import { SEO } from 'components/SEO';
-import { links } from 'lib/links';
+import { getBuiltLink, links } from 'lib/links';
 import { useRouter } from 'next/router';
 import { Container, Grid, GridColumn, Section } from 'components/Layout';
 import styles from './BlogArticleLayout.module.scss';
@@ -27,7 +27,7 @@ export const BlogArticleLayout: React.FC<{
   siteSettings: SiteSettings;
   blogArticleDetail: any;
   querySlug: any;
-}> = ({ blogArticle, siteSettings, blogArticleDetail, querySlug }) => {
+}> = ({ blogArticle, siteSettings, blogArticleDetail }) => {
   const { locale } = useRouter();
 
   const blogModules =
@@ -46,7 +46,6 @@ export const BlogArticleLayout: React.FC<{
       <PageHeader
         contentModules={[]}
         siteSettings={siteSettings}
-        otherLangSlug={querySlug}
         whiteBg
       />
       <PageTransition slug={blogArticle._id}>
@@ -82,11 +81,11 @@ export const BlogArticleLayout: React.FC<{
                   {blogArticle?.authors?.map((author, index) => (
                     <a
                       key={author._id}
-                      href={
-                        locale === 'en'
-                          ? `/en/employees/${author?.slug?.current}`
-                          : `/de/mitarbeiter/${author?.slug?.current}`
-                      }
+                      href={getBuiltLink({
+                        locale,
+                        path: 'employees',
+                        uri: author?.slug?.current,
+                      })}
                       className={styles.authorLink}
                     >
                       {author?.firstName} {author?.lastName}
@@ -182,11 +181,11 @@ export const BlogArticleLayout: React.FC<{
                               <li key={article._id}>
                                 <a
                                   key={article._id}
-                                  href={
-                                    locale === 'en'
-                                      ? `/en/blog/${article?.slug?.current}`
-                                      : `/de/blog/${article?.slug?.current}`
-                                  }
+                                  href={getBuiltLink({
+                                    locale,
+                                    path: 'blog',
+                                    uri: article?.slug?.current,
+                                  })}
                                 >
                                   {article?.articleTitle}
                                 </a>
@@ -195,11 +194,11 @@ export const BlogArticleLayout: React.FC<{
                               <li>
                                 <a
                                   key={article._id}
-                                  href={
-                                    locale === 'en'
-                                      ? `/en/valuation-tool/${article?.slug?.current}`
-                                      : `/de/unternehmenswert-rechner/${article?.slug?.current}`
-                                  }
+                                  href={getBuiltLink({
+                                    locale,
+                                    path: 'valuation-tool',
+                                    uri: article?.slug?.current,
+                                  })}
                                 >
                                   {article?.articleTitle}
                                 </a>

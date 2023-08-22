@@ -5,6 +5,7 @@ import { TransactionCard } from './TransactionCard';
 
 import styles from './TransactionShowcase.module.scss';
 import { useRouter } from 'next/router';
+import { allLinks } from 'lib/links';
 
 interface Props {
   title?: string;
@@ -38,10 +39,7 @@ export const TransactionShowcase: React.FC<Props> = ({ ...rest }) => {
                   variant={'secondary'}
                   link={{
                     slug: {
-                      current:
-                        router.locale === 'en'
-                          ? '/transactions'
-                          : '/transaktionen',
+                      current: `/${allLinks.transactions[router.locale]}`,
                     },
                   }}
                 >
