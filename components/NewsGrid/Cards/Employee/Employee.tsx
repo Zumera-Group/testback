@@ -29,7 +29,7 @@ export const Employee: React.FC<{
 
   return (
     <article className={styles.employee}>
-      <LinkType {...(hideLink && { href, passHref: true, prefetch: false })} className={styles.link}>
+      <LinkType {...(!hideLink && { href, passHref: true, prefetch: false })} className={styles.link}>
         <div className={styles.imageWrapper}>
           <div
             className={[

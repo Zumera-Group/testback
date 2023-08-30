@@ -14,7 +14,7 @@ export const VTHero: React.FC<{
   specificContentModule: VTHeroModule;
 }> = ({ specificContentModule }) => {
   const [selectedPurpose, setSelectedPurpose] = useState('');
-  const { title, title2, description, buttons, purposesTitle, purposes, removeHeaderHeight } =
+  const { title, title2, description, buttons, purposesTitle, purposes, removeHeaderHeight = false } =
     specificContentModule;
 
   const router = useRouter();
