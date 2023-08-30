@@ -14,7 +14,7 @@ export const VTHero: React.FC<{
   specificContentModule: VTHeroModule;
 }> = ({ specificContentModule }) => {
   const [selectedPurpose, setSelectedPurpose] = useState('');
-  const { title, title2, description, buttons, purposesTitle, purposes } =
+  const { title, title2, description, buttons, purposesTitle, purposes, removeHeaderHeight } =
     specificContentModule;
 
   const router = useRouter();
@@ -35,7 +35,7 @@ export const VTHero: React.FC<{
       bg={'primary'}
       color={'white'}
     >
-      <Container classes={styles.container}>
+      <Container classes={[styles.container, removeHeaderHeight ? styles.removeHeaderHeight : ''].join(' ')}>
         <Grid
           fullWidth={true}
           justifyContent={'space-between'}

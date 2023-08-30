@@ -12,7 +12,8 @@ import styles from './Employee.module.scss';
 export const Employee: React.FC<{
   article: any;
   cardLabel?: string;
-}> = ({ article, cardLabel }) => {
+  hideLink?: boolean;
+}> = ({ article, cardLabel, hideLink = false }) => {
   if (!article) return null;
   const name = getEmployeeFullName(article);
   const jobTitle = article.jobTitle;
@@ -24,9 +25,11 @@ export const Employee: React.FC<{
 
   const href = links().employees(article);
 
+  const LinkType = hideLink ? 'div' : Link;
+
   return (
     <article className={styles.employee}>
-      <Link passHref href={href} className={styles.link} prefetch={false}>
+      <LinkType {...(hideLink && { href, passHref: true, prefetch: false })} className={styles.link}>
         <div className={styles.imageWrapper}>
           <div
             className={[
@@ -52,17 +55,19 @@ export const Employee: React.FC<{
         <div className={styles.body}>
           {jobTitle && <h4 className={styles.jobTitle}>{jobTitle}</h4>}
           {name && <h3 className={styles.name}>{name}</h3>}
-          <div className={styles.moreAbout}>
-            {cardLabel}
-            <Icon
-              iconName={'arrow-circle'}
-              viewBox={'0 0 32 32'}
-              width={24}
-              height={24}
-            />
-          </div>
+          {!hideLink && (
+            <div className={styles.moreAbout}>
+              {cardLabel}
+              <Icon
+                iconName={'arrow-circle'}
+                viewBox={'0 0 32 32'}
+                width={24}
+                height={24}
+              />
+            </div>
+          )}
         </div>
-      </Link>
+      </LinkType>
     </article>
   );
 };

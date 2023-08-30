@@ -1581,6 +1581,7 @@ export class VTHeroModule extends BaseModule {
   buttons?: any[];
   purposesTitle: string;
   purposes: any[];
+  removeHeaderHeight?: boolean;
 
   constructor(fields: Record<string, any>) {
     super();
@@ -1590,6 +1591,7 @@ export class VTHeroModule extends BaseModule {
     this.buttons = fields.buttons;
     this.purposesTitle = fields.purposesTitle;
     this.purposes = fields.purposes;
+    this.removeHeaderHeight = fields.removeHeaderHeight;
   }
 }
 

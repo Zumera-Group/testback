@@ -160,6 +160,7 @@ export const getContentForContentModule = (
   if (contentModule.specificContentModule?._type === 'teamWithQuoteSection') {
     return (
       <SectorTeam
+        hideLink
         sector={{
           teamSection: {
             title: contentModule.specificContentModule.title,

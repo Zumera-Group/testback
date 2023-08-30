@@ -42,6 +42,9 @@
 
 .container {
   margin-top: var(--header-height);
+  &.removeHeaderHeight {
+    margin-top: 0;
+  }
 }
 
 .title {
