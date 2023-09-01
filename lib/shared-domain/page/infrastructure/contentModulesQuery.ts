@@ -48,6 +48,57 @@ export const contentModulesQuery = (
     _key,
     _type,
     ...,
+    sectorMoreDetailsPicture {
+      asset->{
+        url,
+      }
+    },
+    detailPageHeroImage {
+      asset->{
+        url,
+      }
+    },
+    trendsImage {
+      asset->{
+        url,
+      }
+    },
+    contributors[]-> {
+      ...,
+      firstName,
+      lastName,
+      picture {
+        asset->{
+          url
+        },
+      },
+      cardPicture {
+        ...
+        picture {
+          asset->{
+            url,
+            type
+          },
+        }
+      },
+    },
+    author->{
+      firstName,
+      lastName,
+      jobTitle,
+      mobile,
+      phone,
+      email,
+      detailPagePicture {
+        ...
+        picture {
+          asset->{
+            url,
+            type
+          },
+        }
+      },
+    },
     image {
       asset->{
         url
@@ -574,6 +625,6 @@ export const contentModulesQuery = (
 			  url
 			},
 		},
-   }, 
+   },
 ${extraQuery || ''}
   }`;

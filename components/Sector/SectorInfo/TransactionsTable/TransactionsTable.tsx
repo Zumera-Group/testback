@@ -7,7 +7,7 @@ export const TransactionsTable = ({ titles, transactions, transactionsTable }) =
     mostPopularTitle,
     mAndANumber,
     significantTransactionsTitle
-  } = titles;
+  } = titles || {};
 
   const {
     mostPopularTransaction,

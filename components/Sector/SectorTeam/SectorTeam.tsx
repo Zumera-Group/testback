@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import React, { useRef } from 'react';
 
 import {
   Section,
@@ -16,7 +16,7 @@ import { Employee } from 'components/NewsGrid';
 
 import styles from './SectorTeam.module.scss';
 
-export const SectorTeam = ({ sector }) => {
+export const SectorTeam = ({ sector, hideLink = false }) => {
   const swiperPrevRef = useRef();
   const swiperNextRef = useRef();
 
@@ -82,9 +82,9 @@ export const SectorTeam = ({ sector }) => {
           xxlSlides={2.3}
         >
           {contributors?.map((p, index) => (
-            <>
+            <React.Fragment key={index}>
               <SwiperSlide className={styles.slide}>
-                <Employee article={p} cardLabel={sector.teamSection.linkText} />
+                <Employee article={p} cardLabel={sector.teamSection.linkText} hideLink={hideLink} />
               </SwiperSlide>
               {index === 0 && teamSection ? (
                 <SwiperSlide
@@ -94,7 +94,7 @@ export const SectorTeam = ({ sector }) => {
                   <Quote />
                 </SwiperSlide>
               ) : null}
-            </>
+            </React.Fragment>
           ))}
         </SwiperPeople>
       )}
