@@ -57,6 +57,12 @@
     .container:after {
       @include divider(bottom, $primary);
     }
+
+    .actionsWrapper {
+      button {
+        color: $primary;
+      }
+    }
   }
 
   &.hideBorder {
