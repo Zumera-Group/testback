@@ -919,6 +919,12 @@ export type ContentModuleType =
   | 'dividerLine'
   | 'partnerReviewSection'
   | 'blogIndexSection'
+  | 'infoSection'
+  | 'growthRateSection'
+  | 'teamWithQuoteSection'
+  | 'sectorHeroSection'
+  | 'futureTrendsSection'
+  | 'moreDetailsSection'
   // service detail sections
   | serviceDetailSectionNames.processSection
   | serviceDetailSectionNames.helpContactPerson
@@ -953,6 +959,12 @@ abstract class ContentModuleTypeFactory {
     if (type === 'anchoredTextSection')
       return new AnchoredTextSectionModule(fields);
     if (type === 'heroSection') return new HeroSectionModule(fields);
+    if (type === 'infoSection') return fields;
+    if (type === 'growthRateSection') return fields;
+    if (type === 'teamWithQuoteSection') return fields;
+    if (type === 'sectorHeroSection') return fields;
+    if (type === 'futureTrendsSection') return fields;
+    if (type === 'moreDetailsSection') return fields;
     if (type === 'dividerImage') return new DividerImageModule(fields);
     if (type === 'servicesLargeGridSection')
       return new ServicesLargeGridSectionModule(fields);
@@ -1084,6 +1096,7 @@ abstract class ContentModuleTypeFactory {
 
 export class ContentModule {
   _key: string;
+  _type?: string;
   specificContentModule: BaseModule;
 
   constructor(_key: string, specificContentModule: BaseModule) {
@@ -1568,6 +1581,7 @@ export class VTHeroModule extends BaseModule {
   buttons?: any[];
   purposesTitle: string;
   purposes: any[];
+  removeHeaderHeight?: boolean;
 
   constructor(fields: Record<string, any>) {
     super();
@@ -1577,6 +1591,7 @@ export class VTHeroModule extends BaseModule {
     this.buttons = fields.buttons;
     this.purposesTitle = fields.purposesTitle;
     this.purposes = fields.purposes;
+    this.removeHeaderHeight = fields.removeHeaderHeight;
   }
 }
 
@@ -1670,6 +1685,7 @@ export class WhitePaperDownloadModule extends BaseModule {
   description: string;
   image: any;
   file: any;
+  pdfUrl: any;
   whitePaperFormFields: any[];
   constructor(fields: Record<string, any>) {
     super();
@@ -1679,5 +1695,6 @@ export class WhitePaperDownloadModule extends BaseModule {
     this.image = fields.image;
     this.file = fields.file;
     this.whitePaperFormFields = fields.whitePaperFormFields;
+    this.pdfUrl = fields.pdfUrl;
   }
 }

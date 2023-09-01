@@ -43,7 +43,7 @@ export const WhitePaperForm = ({
   );
   const [isSuccess, setIsSuccess] = useState(null);
   const [gclid, setGCLID] = useState(null);
-  const DOMAIN = process.env.NEXT_PUBLIC_EXTERNAL_PDF_HOST;
+  const DOMAIN = process.env.NEXT_PUBLIC_EXTERNAL_PDF_HOST || '';
   const PhoneInputComponent = PhoneInput as any;
 
   useEffect(() => {
@@ -70,7 +70,6 @@ export const WhitePaperForm = ({
   };
 
   const fullURL = useGetURL();
-  console.log(fullURL);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -102,12 +101,10 @@ export const WhitePaperForm = ({
       });
 
       if (response.ok) {
-        console.log('success');
         downloadFile();
         setIsFormSubmitted(true);
         setIsSuccess(true);
       } else {
-        console.error('failed');
         setIsFormSubmitted(true);
         setIsSuccess(false);
       }
