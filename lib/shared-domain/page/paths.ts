@@ -31,7 +31,7 @@ export const frPaths = [
   'secteurs',
   'prestations-de-service',
   'transactionnel',
-  'about-us',
+  'propos-de-nous',
   'news',
   'blog',
   'cdi-global',

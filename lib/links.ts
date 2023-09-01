@@ -159,7 +159,7 @@ export const allLinks = {
   career: {
     en: 'career',
     de: 'karriere',
-    fr: 'career',
+    fr: 'carriere',
   },
   imprint: {
     en: 'imprint',

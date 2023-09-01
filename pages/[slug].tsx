@@ -28,7 +28,7 @@ export async function getStaticPaths() {
   }));
 
   return {
-    paths: [...enPaths, ...dePaths, ...frPaths],
+    paths: [],
     fallback: true,
   };
 }
