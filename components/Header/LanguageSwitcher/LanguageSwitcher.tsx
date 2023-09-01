@@ -85,6 +85,12 @@ export const LanguageSwitcher: React.FC<Props> = ({
     return () => document.removeEventListener('click', onClick);
   }, [show]);
 
+  useEffect(() => {
+    if(show) {
+      setShow(false);
+    }
+  }, [router.asPath])
+
   return (
     <div
       className={[
