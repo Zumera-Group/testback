@@ -73,7 +73,7 @@ const ArticleBox: React.FC<Props> = ({
   const noImage = isLatest;
   const noSummary = isLatest || isSmallVertical;
 
-  const href = getArticleBoxLink(locale, item?.slug?.current, item._type);
+  const href = getArticleBoxLink(locale, item?.slug?.current, item._type) || '/en/home';
 
   return (
     <div className={classNames}>

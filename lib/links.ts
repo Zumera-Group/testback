@@ -50,7 +50,7 @@ export const links = (l?: string) => {
         `/fr/news/${n?.slug?.current || ''}`,
       transactions: (t: Transaction): string =>
         `/fr/transactionnel/${t?.slug?.current || ''}`,
-      sectors: (s: Sector): string => `/en/secteurs/${s?.slug?.current || ''}`,
+      sectors: (s: Sector): string => `/fr/secteurs/${s?.slug?.current || ''}`,
       employees: (e: Employee): string =>
         `/fr/employes/${e?.slug?.current || ''}`,
       questionnaires: (q: Questionnaire): string =>
@@ -148,8 +148,8 @@ export const allLinks = {
   },
   'about-us': {
     en: 'about-us',
-    de: 'about-us',
-    fr: 'about-us',
+    de: 'ueber-uns',
+    fr: 'propos-de-nous',
   },
   'cdi-global': {
     en: 'cdi-global',

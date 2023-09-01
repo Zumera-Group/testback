@@ -62,8 +62,6 @@ export const LanguageSwitcher: React.FC<Props> = ({
       (el) => el === pathElements[0],
     );
 
-    console.log(pathElements, 'pathElements')
-
     if (!pages[lang][pageIndex]) {
       return '/home';
     }
