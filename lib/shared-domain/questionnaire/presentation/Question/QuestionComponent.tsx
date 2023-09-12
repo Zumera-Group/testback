@@ -210,10 +210,7 @@ export const QuestionComponent: React.FC<{
         />
       );
     }
-    if (
-      (currentQuestion?.questionId === INDUSTRY_QUESTION_ID && sectorId) ||
-      (sectorId && !industryId)
-    ) {
+    if (currentQuestion?.questionId === INDUSTRY_QUESTION_ID && sectorId) {
       return (
         <questions.BoxSelector
           onNextQuestion={onNextQuestion}
