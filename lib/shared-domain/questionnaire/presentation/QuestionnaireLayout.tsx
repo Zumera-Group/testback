@@ -169,8 +169,6 @@ const QuestionnaireLayout: React.FC<{
   const currentCategoryIndex = mainStep + 1;
   const progress = (currenQuestionPosition / numberOfQuestionsInTotal) * 100;
 
-  console.log(questionnaire);
-
   //LOGIC FOR SIDEBAR SHOWING OR NOT
   const currentCatSidebar = questionnaire?.questionsByCategory?.[mainStep];
   const categoryQuestions = currentCatSidebar?.questions;
@@ -286,7 +284,7 @@ const QuestionnaireLayout: React.FC<{
                         sectors={sectors}
                         currentPos={currenQuestionPosition}
                         refEl={pageRef}
-                        questionnaireId={questionnaire?._id}
+                        isNoah={questionnaire?.isNoah}
                       />
                     </div>
                   </GridColumn>

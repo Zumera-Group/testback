@@ -47,6 +47,8 @@ const queryQuestion = (
   salesforceId,
   showMoreButton,
   hasMultipleAnswers,
+  growthNoahCategory,
+  sustainabilityNoahCategory,
   isRequired,
   answerSelector{
     answerType,

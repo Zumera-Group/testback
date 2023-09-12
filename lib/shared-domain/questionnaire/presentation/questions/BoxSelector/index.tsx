@@ -36,6 +36,7 @@ interface Props {
     industrySheetName: string;
   }[];
   sectorSpecificQuestions?: Question[];
+  isNoah?: any;
 }
 
 export const BoxSelector = ({
@@ -45,6 +46,7 @@ export const BoxSelector = ({
   sectors,
   industries,
   currentPos,
+  isNoah,
 }: Props): JSX.Element => {
   const { sectorId, industryId } = useValuationStore();
   const { getAnswer } = useAnswers(question);
@@ -68,30 +70,50 @@ export const BoxSelector = ({
     setSelectionsLoaded(true);
 
     if (!sectors && !industries) setAllBoxes(boxAnswers);
-
-    if (sectors) {
-      setAllBoxes(
-        sectors?.map((s) => ({
-          _key: s.id,
-          boxContent: s.id,
-          label: s.name,
-          sheetName: s.sectorSheetName,
-          boxIcon: {
-            name: s.name,
-            iconImage: s.graph.iconImage,
-          },
-        })),
-      );
+    if (!isNoah) {
+      if (sectors) {
+        setAllBoxes(
+          sectors?.map((s) => ({
+            _key: s.id,
+            boxContent: s.id,
+            label: s.name,
+            sheetName: s.sectorSheetName,
+            boxIcon: {
+              name: s.name,
+              iconImage: s.graph.iconImage,
+            },
+          })),
+        );
+      }
+      if (industries) {
+        setAllBoxes(
+          industries?.map((i, index) => ({
+            _key: i.id,
+            boxContent: `${i.id}_${index}`,
+            label: i.name,
+            sheetName: i.industrySheetName,
+          })),
+        );
+      }
     }
-    if (industries) {
-      setAllBoxes(
-        industries?.map((i, index) => ({
-          _key: i.id,
-          boxContent: `${i.id}_${index}`,
-          label: i.name,
-          sheetName: i.industrySheetName,
-        })),
-      );
+
+    if (isNoah) {
+      if (sectors) {
+        setAllBoxes(
+          sectors
+            ?.filter((s) => s?.isNoah)
+            .map((s) => ({
+              _key: s.id,
+              boxContent: s.id,
+              label: s.name,
+              sheetName: s.sectorSheetName,
+              boxIcon: {
+                name: s.name,
+                iconImage: s.graph.iconImage,
+              },
+            })),
+        );
+      }
     }
   }, [boxAnswers, selectionsLoaded, sectors, industries]);
 

@@ -59,6 +59,8 @@ export interface Question {
   hasMultipleAnswers?: boolean;
   navigationTitle: string;
   questionId: string;
+  sustainabilityNoahCategory: string;
+  growthNoahCategor: string;
   salesforceId: string;
   questionText: string;
   description: string;
