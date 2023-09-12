@@ -106,6 +106,7 @@ export interface Questionnaire {
       url: string;
     };
   };
+  isNoah: boolean;
   questionsByCategory: Category[];
   sectorSpecific: SectorSpecific;
   checkmarkTexts: string[];

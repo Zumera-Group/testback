@@ -15,6 +15,7 @@ const queryQuestionnaire = (
     current
   },
   questionnaireName,
+  isNoah,
   sectorSpecific,
   checkmarkTexts,
   "categories": navigationCategories[],

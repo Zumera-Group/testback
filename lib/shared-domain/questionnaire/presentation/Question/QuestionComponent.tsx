@@ -22,6 +22,7 @@ export const QuestionComponent: React.FC<{
   sectors: Sector[];
   currentPos: number;
   refEl: any;
+  questionnaireId: any;
 }> = ({ sectorSpecificQuestions, sectors, currentPos, refEl }) => {
   const {
     questionnaire,
