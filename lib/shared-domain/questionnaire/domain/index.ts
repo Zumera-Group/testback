@@ -23,6 +23,7 @@ export interface BoxAnswer {
   boxIcon?: BoxIcon;
   _key: string;
   sheetName?: string;
+  category?: string;
 }
 
 export interface Answer {
@@ -60,7 +61,7 @@ export interface Question {
   navigationTitle: string;
   questionId: string;
   sustainabilityNoahCategory: string;
-  growthNoahCategor: string;
+  growthNoahCategory: string;
   salesforceId: string;
   questionText: string;
   description: string;

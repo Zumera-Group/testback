@@ -6,6 +6,10 @@
   gap: $container-padding-x;
 }
 
+.extraMargin {
+  margin-bottom: $gutter * 4;
+}
+
 .showMoreWrapper {
   margin: $gutter * 2 0 0 0;
 }
