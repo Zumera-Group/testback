@@ -108,8 +108,8 @@ export const BoxSelector = ({
               label: s.name,
               sheetName: s.sectorSheetName,
               boxIcon: {
-                name: s.name,
-                iconImage: s.graph.iconImage,
+                name: s?.name,
+                iconImage: s?.graph.iconImage,
               },
               category: s.noahCategory,
             })),
@@ -142,6 +142,7 @@ export const BoxSelector = ({
     }
   }, [allBoxes?.length, isMobile, moreBoxesToShow]);
 
+  console.log(allBoxes);
   // Reset to original state when question changes
   useEffect(() => {
     setSelectionsLoaded(false);
