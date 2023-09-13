@@ -23,6 +23,7 @@ import 'swiper/css/scrollbar';
 import styles from './BoxSelector.module.scss';
 
 const t = getTranslateByScope('answerTypes.boxSelector');
+const noahTranslation = getTranslateByScope('question');
 
 interface Props {
   question: Question;
@@ -197,7 +198,7 @@ export const BoxSelector = ({
       <QuestionAnimation>
         {isNoah ? (
           <QuestionText title={''}>
-            <RequiredQuestionInfo isRequired={question?.isRequired} />
+            <p>{noahTranslation('noahSector')}</p>
           </QuestionText>
         ) : (
           <QuestionText title={question?.questionText}>
