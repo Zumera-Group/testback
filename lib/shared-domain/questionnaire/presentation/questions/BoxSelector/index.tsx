@@ -142,8 +142,6 @@ export const BoxSelector = ({
     }
   }, [allBoxes?.length, isMobile, moreBoxesToShow]);
 
-  console.log(allBoxes);
-
   // Reset to original state when question changes
   useEffect(() => {
     setSelectionsLoaded(false);
