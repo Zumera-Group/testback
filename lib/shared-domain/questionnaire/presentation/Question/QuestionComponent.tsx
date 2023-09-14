@@ -22,7 +22,8 @@ export const QuestionComponent: React.FC<{
   sectors: Sector[];
   currentPos: number;
   refEl: any;
-}> = ({ sectorSpecificQuestions, sectors, currentPos, refEl }) => {
+  isNoah: any;
+}> = ({ sectorSpecificQuestions, sectors, currentPos, refEl, isNoah }) => {
   const {
     questionnaire,
     mainStep,
@@ -140,6 +141,7 @@ export const QuestionComponent: React.FC<{
     }
   };
 
+  // console.log(currentQuestion);
   const onNextQuestion = () => {
     refEl.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
@@ -205,15 +207,17 @@ export const QuestionComponent: React.FC<{
           onNextQuestion={onNextQuestion}
           onPrevQuestion={onPreviousQuestion}
           question={currentQuestion}
-          sectors={sectors?.filter((s) => s?.industries?.length > 0)}
+          sectors={
+            !isNoah
+              ? sectors?.filter((s) => s?.industries?.length > 0)
+              : sectors
+          }
           currentPos={currentPos}
+          isNoah={isNoah}
         />
       );
     }
-    if (
-      (currentQuestion?.questionId === INDUSTRY_QUESTION_ID && sectorId) ||
-      (sectorId && !industryId)
-    ) {
+    if (currentQuestion?.questionId === INDUSTRY_QUESTION_ID && sectorId) {
       return (
         <questions.BoxSelector
           onNextQuestion={onNextQuestion}

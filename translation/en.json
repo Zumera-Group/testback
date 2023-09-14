@@ -57,7 +57,8 @@
     "skipBtn": "Skip",
     "required": "An answer is required in order to continue",
     "backBtn": "Back",
-    "question": "Question"
+    "question": "Question",
+    "noahSector": "Please choose a sector"
   },
   "result": {
     "loading": {

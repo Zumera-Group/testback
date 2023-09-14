@@ -284,6 +284,7 @@ const QuestionnaireLayout: React.FC<{
                         sectors={sectors}
                         currentPos={currenQuestionPosition}
                         refEl={pageRef}
+                        isNoah={questionnaire?.isNoah}
                       />
                     </div>
                   </GridColumn>

@@ -216,6 +216,8 @@ export interface Report {
 }
 
 export interface Sector {
+  noahCategory: any;
+  isNoah: boolean;
   queryOtherLangSlug: {
     slug: { current: string };
   }[];

@@ -57,7 +57,8 @@
     "skipBtn": "Überspringen",
     "required": "Eine Antwort wird benötigt",
     "backBtn": "Zurück",
-    "question": "Frage"
+    "question": "Frage",
+    "noahSector": "Bitte wählen Sie einen Sektor"
   },
   "result": {
     "loading": {

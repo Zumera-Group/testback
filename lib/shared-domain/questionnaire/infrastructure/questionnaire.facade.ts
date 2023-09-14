@@ -15,6 +15,7 @@ const queryQuestionnaire = (
     current
   },
   questionnaireName,
+  isNoah,
   sectorSpecific,
   checkmarkTexts,
   "categories": navigationCategories[],
@@ -46,6 +47,8 @@ const queryQuestion = (
   salesforceId,
   showMoreButton,
   hasMultipleAnswers,
+  growthNoahCategory,
+  sustainabilityNoahCategory,
   isRequired,
   answerSelector{
     answerType,

@@ -23,6 +23,7 @@ export interface BoxAnswer {
   boxIcon?: BoxIcon;
   _key: string;
   sheetName?: string;
+  category?: string;
 }
 
 export interface Answer {
@@ -59,6 +60,8 @@ export interface Question {
   hasMultipleAnswers?: boolean;
   navigationTitle: string;
   questionId: string;
+  sustainabilityNoahCategory: string;
+  growthNoahCategory: string;
   salesforceId: string;
   questionText: string;
   description: string;
@@ -106,6 +109,7 @@ export interface Questionnaire {
       url: string;
     };
   };
+  isNoah: boolean;
   questionsByCategory: Category[];
   sectorSpecific: SectorSpecific;
   checkmarkTexts: string[];
