@@ -23,7 +23,8 @@ export const QuestionComponent: React.FC<{
   currentPos: number;
   refEl: any;
   isNoah: any;
-}> = ({ sectorSpecificQuestions, sectors, currentPos, refEl, isNoah }) => {
+  selectedQuestionnaire: any;
+}> = ({ sectorSpecificQuestions, sectors, currentPos, refEl, isNoah, selectedQuestionnaire }) => {
   const {
     questionnaire,
     mainStep,
@@ -141,7 +142,6 @@ export const QuestionComponent: React.FC<{
     }
   };
 
-  // console.log(currentQuestion);
   const onNextQuestion = () => {
     refEl.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
 

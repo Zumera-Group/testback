@@ -5,6 +5,9 @@ import { Career } from 'components/Hero/Career';
 import { Landing } from 'components/Hero/Landing';
 
 interface Props {
+  title?: string;
+  title2?: string;
+  description?: any;
   type?: string;
   allPageContent?: any[];
 }

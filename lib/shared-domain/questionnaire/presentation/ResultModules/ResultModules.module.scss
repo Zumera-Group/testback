@@ -1,0 +1,28 @@
+.checkmarkItem {
+  text-align: center;
+
+  @media screen and (max-width: 768px) {
+    margin-bottom: 32px;
+  }
+
+  img {
+    max-width: 100%;
+    display: block;
+    margin: 0 auto 32px;
+    width: 64px;
+    height: 64px;
+  }
+
+  h4 {
+    font-weight: 400;
+  }
+}
+
+.authorsTitle {
+  margin-bottom: 64px;
+  font-weight: 400;
+  text-align: center;
+  @media screen and (max-width: 768px) {
+    margin-bottom: 32px;
+  }
+}

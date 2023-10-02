@@ -99,6 +99,7 @@ export interface SectorSpecific {
 }
 
 export interface Questionnaire {
+  result?: string;
   questionnaireName: string;
   questionnaireSlug: {
     current: string;

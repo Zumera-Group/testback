@@ -94,6 +94,7 @@ interface Props {
   locale: string;
   sectors: Sector[];
   sharedContent: any;
+  result: any;
 }
 
 export default function Index({
