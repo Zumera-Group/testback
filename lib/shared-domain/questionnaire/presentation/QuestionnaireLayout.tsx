@@ -294,7 +294,7 @@ const QuestionnaireLayout: React.FC<{
                 </Grid>
               </Container>
             </Section>
-            {!!result && <ResultModules result={result} />}
+            {!!result && isOnResultScreen && <ResultModules result={result} />}
           </main>
         </div>
       </PageTransition>

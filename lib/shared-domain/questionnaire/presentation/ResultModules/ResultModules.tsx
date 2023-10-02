@@ -6,18 +6,14 @@ import { Employee } from 'components/NewsGrid';
 import { GrowthRatesTable } from 'components/Sector';
 import { SCREEN_SIZE_MD } from 'lib/constants';
 import { useMediaQuery } from 'lib/hooks/useMediaQuery';
-import { useValuationStore } from 'lib/shared-domain/questionnaire/store';
 
 import styles from './ResultModules.module.scss';
 
 const ResultModules = ({ result }) => {
   const isMobile = useMediaQuery(`(max-width: ${SCREEN_SIZE_MD})`);
   const router = useRouter();
-  const {
-    isOnResultScreen,
-  } = useValuationStore();
 
-  if (router.locale !== 'de' && isOnResultScreen) {
+  if (router.locale !== 'de') {
     return null;
   }
 
