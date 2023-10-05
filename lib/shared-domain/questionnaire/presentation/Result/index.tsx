@@ -15,6 +15,7 @@ import { useSalesforceAnswerSync } from '../../application/useSalesforceAnswerSy
 import { useSalesforceLeadSync } from '../../application/useSaleforceLeadSync';
 import { qLogs } from '../../application/log';
 import { useRouter } from 'next/router';
+import Script from 'next/script';
 
 const t = getTranslateByScope('result');
 
@@ -243,6 +244,13 @@ const EvaluationScreen: React.FC<{
             >
               {t('evaluation.form.button')}
             </Button>
+            <div
+              className="trustedsite-trustmark"
+              data-type="211"
+              data-width="180"
+              data-height="75"
+            ></div>
+            <Script src="https://cdn.ywxi.net/js/1.js" async />
           </form>
         </>
       ) : (

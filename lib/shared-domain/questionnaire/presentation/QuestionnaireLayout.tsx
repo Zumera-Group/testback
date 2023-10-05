@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import I18n from 'i18n-js';
+import cx from 'classnames';
 import styles from './QuestionnaireLayout.module.scss';
 import { PageTransition } from 'components/PageTransition';
 import { SEO } from 'components/SEO';
@@ -183,6 +184,8 @@ const QuestionnaireLayout: React.FC<{
   const pageRef = useRef(null);
   const [isLanding, setIsLanding] = useState(false);
 
+  const renderResultModules = !!result && isOnResultScreen;
+
   useEffect(() => {
     const session = sessionStorage.getItem('isLanding');
     if (session === 'true') {
@@ -232,7 +235,7 @@ const QuestionnaireLayout: React.FC<{
               bg={'primary'}
               color={'white'}
               size={(isMobile || !!result) ? 'sm' : 'md'}
-              classes={styles.section}
+              classes={cx(styles.section, {[styles.hasResultScreen]: renderResultModules} )}
             >
               {questionnaire && !isOnResultScreen && isMobile && (
                 <div className={styles.progressBarLineMobile}>
@@ -294,7 +297,7 @@ const QuestionnaireLayout: React.FC<{
                 </Grid>
               </Container>
             </Section>
-            {!!result && isOnResultScreen && <ResultModules result={result} />}
+            {renderResultModules && <ResultModules result={result} />}
           </main>
         </div>
       </PageTransition>

@@ -63,6 +63,10 @@ $main-layout-height: calc(
   padding-bottom: calc(
     var(--section-size) + #{$main-layout-chat-button-offset}
   ) !important;
+
+  &.hasResultScreen {
+    padding-bottom: 2rem !important;
+  }
 }
 
 .grid {
