@@ -18,17 +18,23 @@ const ResultModules = ({ result }) => {
   }
 
   return (
-    <div>
-      <Section bg={'primary'} color={'white'} size="sm">
+    <div className={styles.root}>
+      {/* <Section bg={'primary'} color={'white'} size="sm">
         <Grid>
           {result?.greenCheckmarkTexts?.map((mark) => (
-            <GridColumn sm={12} md={6} lg={3} className={styles.checkmarkItem} key={mark}>
+            <GridColumn
+              sm={12}
+              md={6}
+              lg={3}
+              className={styles.checkmarkItem}
+              key={mark}
+            >
               <img src="/calculator/checkmark.svg" />
               <h4>{mark}</h4>
             </GridColumn>
           ))}
         </Grid>
-      </Section>
+      </Section> */}
       <Section
         bg={'secondary'}
         color={'white'}
@@ -69,21 +75,23 @@ const ResultModules = ({ result }) => {
                 }}
               />
             </GridColumn>
-            <GridColumn sm={12} md={12} lg={12}>
-              <GrowthRatesTable
-                title={''}
-                growthRatesTable={result?.growthRatesTable || []}
-              />
-            </GridColumn>
           </Grid>
         </Container>
       </Section>
-      <Hero
-        type="transaction"
-        title={result?.heroSection?.heroTitle}
-        title2={result?.heroSection?.heroSecondTitle}
-        description={result?.heroSection?.heroDescription}
+
+      <GrowthRatesTable
+        title={''}
+        growthRatesTable={result?.growthRatesTable || []}
       />
+
+      <div className={styles.hero}>
+        <Hero
+          type="transaction"
+          title={result?.heroSection?.heroTitle}
+          title2={result?.heroSection?.heroSecondTitle}
+          description={result?.heroSection?.heroDescription}
+        />
+      </div>
     </div>
   );
 };

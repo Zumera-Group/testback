@@ -1,7 +1,5 @@
 $main-layout-chat-button-offset: 48px;
-$main-layout-height: calc(
-  100vh - var(--header-height) - calc(var(--section-size) * 2) - #{$main-layout-chat-button-offset}
-);
+$main-layout-height: calc(100vh - var(--header-height) - calc(var(--section-size) * 2) - #{$main-layout-chat-button-offset});
 
 .page {
   width: 100%;
@@ -10,9 +8,11 @@ $main-layout-height: calc(
   background-color: $primary;
 
   --grid-gap: 0;
+
   @include breakpoint-up(md) {
     --grid-gap: #{$gutter * 3};
   }
+
   @include breakpoint-up(lg) {
     --grid-gap: #{$gutter * 4};
   }
@@ -21,6 +21,7 @@ $main-layout-height: calc(
     position: relative !important;
     background-color: transparent !important;
     color: $white !important;
+
     svg {
       fill: $white !important;
     }
@@ -60,12 +61,10 @@ $main-layout-height: calc(
 }
 
 .section {
-  padding-bottom: calc(
-    var(--section-size) + #{$main-layout-chat-button-offset}
-  ) !important;
+  padding-bottom: calc(var(--section-size) + #{$main-layout-chat-button-offset}) !important;
 
   &.hasResultScreen {
-    padding-bottom: 2rem !important;
+    // padding-bottom: 2rem !important;
   }
 }
 
@@ -88,7 +87,7 @@ $main-layout-height: calc(
 }
 
 .sidebarWrapper {
-  & > * {
+  &>* {
     width: 100%;
   }
 }
@@ -97,4 +96,38 @@ $main-layout-height: calc(
   display: block;
   width: 100%;
   margin: -$gutter auto $gutter * 2.5 auto;
+}
+
+.checkmarks {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+
+  @media screen and (max-width: 991px) {
+    flex-direction: row;
+    justify-content: center;
+    padding-top: 48px;
+    padding-bottom: 48px;
+  }
+
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+  }
+
+  .checkmarkItem {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+
+    img {
+      margin-bottom: 24px;
+    }
+
+    h5 {
+      font-weight: 400;
+      margin: 0;
+    }
+  }
 }

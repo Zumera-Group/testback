@@ -234,8 +234,10 @@ const QuestionnaireLayout: React.FC<{
             <Section
               bg={'primary'}
               color={'white'}
-              size={(isMobile || !!result) ? 'sm' : 'md'}
-              classes={cx(styles.section, {[styles.hasResultScreen]: renderResultModules} )}
+              size={isMobile || !!result ? 'sm' : 'md'}
+              classes={cx(styles.section, {
+                [styles.hasResultScreen]: renderResultModules,
+              })}
             >
               {questionnaire && !isOnResultScreen && isMobile && (
                 <div className={styles.progressBarLineMobile}>
@@ -280,7 +282,7 @@ const QuestionnaireLayout: React.FC<{
                   <GridColumn
                     sm={12}
                     md={8}
-                    lg={9}
+                    lg={7}
                     className={styles.questionCol}
                   >
                     <div className={styles.questionWrapper}>
@@ -293,6 +295,19 @@ const QuestionnaireLayout: React.FC<{
                         selectedQuestionnaire={selectedQuestionnaire}
                       />
                     </div>
+                  </GridColumn>
+                  <GridColumn
+                    sm={12}
+                    md={12}
+                    lg={2}
+                    className={styles.checkmarks}
+                  >
+                    {result?.greenCheckmarkTexts?.map((mark) => (
+                      <div className={styles.checkmarkItem} key={mark}>
+                        <img src="/calculator/checkmark-v2.svg" />
+                        <h5>{mark}</h5>
+                      </div>
+                    ))}
                   </GridColumn>
                 </Grid>
               </Container>
