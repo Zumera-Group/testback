@@ -232,17 +232,24 @@ const EvaluationScreen: React.FC<{
                 <Message isError> {t('evaluation.form.checkboxError')}</Message>
               </FormGroup>
             )}
-
-            <Button
-              type="submit"
-              variant="primary"
-              disabled={!checkboxIsChecked}
-              onDark
-              hideIcon
-              classes={styles.submitButton}
-            >
-              {t('evaluation.form.button')}
-            </Button>
+            <div className={styles.formFooter}>
+              <Button
+                type="submit"
+                variant="primary"
+                disabled={!checkboxIsChecked}
+                onDark
+                hideIcon
+                classes={styles.submitButton}
+              >
+                {t('evaluation.form.button')}
+              </Button>
+              <div
+                className="trustedsite-trustmark"
+                data-type="211"
+                data-width="180"
+                data-height="75"
+              ></div>
+            </div>
           </form>
         </>
       ) : (

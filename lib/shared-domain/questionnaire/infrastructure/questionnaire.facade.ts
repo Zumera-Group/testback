@@ -16,6 +16,50 @@ const queryQuestionnaire = (
   },
   questionnaireName,
   isNoah,
+  result {
+    greenCheckmarkTexts,
+    authors {
+      authorsTitle,
+      author1 -> {
+        jobTitle,
+        firstName,
+        lastName,
+        email,
+        slug,
+        calendlyURL,
+        _id,
+        detailPagePicture {
+          ...
+          picture {
+            asset->{
+              url,
+              type
+            },
+          }
+        },
+      },
+      author2 -> {
+        jobTitle,
+        firstName,
+        lastName,
+        email,
+        slug,
+        calendlyURL,
+        _id,
+        detailPagePicture {
+          ...
+          picture {
+            asset->{
+              url,
+              type
+            },
+          }
+        },
+      }
+    },
+    growthRatesTable,
+    heroSection,
+  },
   sectorSpecific,
   checkmarkTexts,
   "categories": navigationCategories[],
