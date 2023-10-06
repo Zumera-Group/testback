@@ -184,7 +184,7 @@ const QuestionnaireLayout: React.FC<{
   const pageRef = useRef(null);
   const [isLanding, setIsLanding] = useState(false);
 
-  const renderResultModules = !!result && isOnResultScreen;
+  const renderResultModules = !!result && isOnResultScreen && router.locale === 'de';
 
   useEffect(() => {
     const session = sessionStorage.getItem('isLanding');
@@ -282,7 +282,7 @@ const QuestionnaireLayout: React.FC<{
                   <GridColumn
                     sm={12}
                     md={8}
-                    lg={7}
+                    lg={renderResultModules ? 7 : 9}
                     className={styles.questionCol}
                   >
                     <div className={styles.questionWrapper}>
@@ -296,19 +296,21 @@ const QuestionnaireLayout: React.FC<{
                       />
                     </div>
                   </GridColumn>
-                  <GridColumn
-                    sm={12}
-                    md={12}
-                    lg={2}
-                    className={styles.checkmarks}
-                  >
-                    {result?.greenCheckmarkTexts?.map((mark) => (
-                      <div className={styles.checkmarkItem} key={mark}>
-                        <img src="/calculator/checkmark-v2.svg" />
-                        <h5>{mark}</h5>
-                      </div>
-                    ))}
-                  </GridColumn>
+                  {renderResultModules && (
+                    <GridColumn
+                      sm={12}
+                      md={12}
+                      lg={2}
+                      className={styles.checkmarks}
+                    >
+                      {result?.greenCheckmarkTexts?.map((mark) => (
+                        <div className={styles.checkmarkItem} key={mark}>
+                          <img src="/calculator/checkmark-v2.svg" />
+                          <h5>{mark}</h5>
+                        </div>
+                      ))}
+                    </GridColumn>
+                  )}
                 </Grid>
               </Container>
             </Section>
