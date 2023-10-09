@@ -55,7 +55,7 @@ const ResultModules = ({ result }) => {
                   ...result.authors?.author1,
                   newsGridPicture: {
                     picture: {
-                      asset: result.authors?.author1?.detailPagePicture?.asset,
+                      asset: result.authors?.author1?.cardPicture?.asset,
                     },
                   },
                 }}
@@ -69,7 +69,7 @@ const ResultModules = ({ result }) => {
                   ...result.authors?.author2,
                   newsGridPicture: {
                     picture: {
-                      asset: result.authors?.author2?.detailPagePicture?.asset,
+                      asset: result.authors?.author2?.cardPicture?.asset,
                     },
                   },
                 }}

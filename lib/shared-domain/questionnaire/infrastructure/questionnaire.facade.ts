@@ -28,7 +28,8 @@ const queryQuestionnaire = (
         slug,
         calendlyURL,
         _id,
-        detailPagePicture {
+        title,
+        cardPicture {
           ...
           picture {
             asset->{
@@ -46,7 +47,8 @@ const queryQuestionnaire = (
         slug,
         calendlyURL,
         _id,
-        detailPagePicture {
+        title,
+        cardPicture {
           ...
           picture {
             asset->{
