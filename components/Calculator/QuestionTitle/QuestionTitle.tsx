@@ -1,6 +1,10 @@
 import { useValuationStore } from 'lib/shared-domain/questionnaire/store';
 import styles from './QuestionTitle.module.scss';
 import { Tooltip } from 'components/Icons/Tooltip';
+import { getTranslateByScope } from 'translation/i18n';
+
+
+const t = getTranslateByScope('result');
 
 interface Props {
   title?: string;
@@ -21,7 +25,7 @@ const QuestionTitle: React.FC<Props> = ({ title, description }) => {
       {isDesc && (
         <div className={styles.tooltipWrapper}>
           <span className={styles.infoPrompt}>
-            Why do you need this information?
+            {t('evaluation.description2')}
           </span>
           <Tooltip color="#ffffff" className={styles.tooltipIcon} />
           <div className={styles.tooltipText}>{description}</div>

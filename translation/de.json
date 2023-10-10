@@ -72,8 +72,9 @@
       }
     },
     "evaluation": {
-      "title": "Wofür benötigen wir diese Informationen?",
+      "title": "Holen Sie sich ihre kostenlose Expertenbewertung.",
       "description": "Um eine fundierte Einschätzung der Unternehmenswertes zu erhalten, wird ein Berater die Eingaben prüfen und Sie kontaktieren.",
+      "description2": "Wofür benötigen wir diese Informationen?",
       "resultBox": {
         "title": "Ihr vorläufiges Ergebnis",
         "points": "{{points}}",
