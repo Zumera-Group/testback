@@ -6,7 +6,35 @@ $beam-colors: (
   'accent': $accent,
 );
 
-.logoBarSection {
-  display: block;
-  border: 2px solid red;
+.logoContainer {
+  margin-top: $gutter * 2.5;
+  .logo {
+    img {
+      max-height: 75px;
+      margin-right: $gutter * 4;
+      width: auto;
+    }
+  }
+}
+
+@include breakpoint-down(lg) {
+  .logoContainer {
+    .logo {
+      img {
+        margin-right: $gutter * 3;
+      }
+    }
+  }
+}
+
+@include breakpoint-down(md) {
+  .logoContainer {
+    margin-top: $gutter * 1.5;
+    .logo {
+      img {
+        max-height: 50px;
+        margin-right: $gutter * 2;
+      }
+    }
+  }
 }

@@ -407,10 +407,16 @@ export class FactsAndFiguresSectionModule extends BaseModule {
 }
 export class LogoBarSectionModule extends BaseModule {
   title: string;
+  logos: [
+    asset: {
+      url: string;
+    },
+  ];
 
   constructor(fields: Record<string, any>) {
     super();
     this.title = fields.title;
+    this.logos = fields.logos;
   }
 }
 

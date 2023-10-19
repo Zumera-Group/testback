@@ -450,4 +450,5 @@ export interface IndustryReport {
 
 export interface LogoBarSection {
   title: string;
+  logos: any;
 }
