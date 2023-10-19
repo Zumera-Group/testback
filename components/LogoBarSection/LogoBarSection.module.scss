@@ -1,0 +1,12 @@
+$beam-colors: (
+  'white': $white,
+  'primary': $primary,
+  'secondary': $secondary,
+  'tertiary': $tertiary,
+  'accent': $accent,
+);
+
+.logoBarSection {
+  display: block;
+  border: 2px solid red;
+}

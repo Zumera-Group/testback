@@ -447,3 +447,7 @@ export interface IndustryReport {
   subtitle: string;
   title: string;
 }
+
+export interface LogoBarSection {
+  title: string;
+}

@@ -925,6 +925,7 @@ export type ContentModuleType =
   | 'sectorHeroSection'
   | 'futureTrendsSection'
   | 'moreDetailsSection'
+  | 'logoBarSection'
   // service detail sections
   | serviceDetailSectionNames.processSection
   | serviceDetailSectionNames.helpContactPerson
@@ -935,6 +936,7 @@ export type ContentModuleType =
 abstract class ContentModuleTypeFactory {
   static createInstance(type: ContentModuleType, fields: Record<string, any>) {
     if (type === 'partnerReviewSection') return new PartnerReviewModule(fields);
+    if (type === 'logoBarSection') return new LogoBarSectionModule(fields);
     if (type === 'dividerLine') return new DividerLineModule();
     if (type === 'whitePaperDownload')
       return new WhitePaperDownloadModule(fields);
@@ -1696,5 +1698,13 @@ export class WhitePaperDownloadModule extends BaseModule {
     this.file = fields.file;
     this.whitePaperFormFields = fields.whitePaperFormFields;
     this.pdfUrl = fields.pdfUrl;
+  }
+}
+
+export class LogoBarSectionModule extends BaseModule {
+  title: string;
+  constructor(fields: Record<string, any>) {
+    super();
+    this.title = fields.title;
   }
 }
