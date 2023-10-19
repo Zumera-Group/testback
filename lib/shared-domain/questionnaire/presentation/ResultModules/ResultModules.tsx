@@ -6,6 +6,7 @@ import { Employee } from 'components/NewsGrid';
 import { GrowthRatesTable } from 'components/Sector';
 import { SCREEN_SIZE_MD } from 'lib/constants';
 import { useMediaQuery } from 'lib/hooks/useMediaQuery';
+import { LogoBarSection } from 'components/LogoBarSection';
 
 import styles from './ResultModules.module.scss';
 
@@ -92,6 +93,8 @@ const ResultModules = ({ result }) => {
           description={result?.heroSection?.heroDescription}
         />
       </div>
+
+      <LogoBarSection />
     </div>
   );
 };

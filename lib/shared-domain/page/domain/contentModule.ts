@@ -405,6 +405,14 @@ export class FactsAndFiguresSectionModule extends BaseModule {
     this.facts = fields.facts;
   }
 }
+export class LogoBarSectionModule extends BaseModule {
+  title: string;
+
+  constructor(fields: Record<string, any>) {
+    super();
+    this.title = fields.title;
+  }
+}
 
 export class TitleAndDescriptionItemsGridModule extends BaseModule {
   subtitle: string;
@@ -936,8 +944,8 @@ export type ContentModuleType =
 abstract class ContentModuleTypeFactory {
   static createInstance(type: ContentModuleType, fields: Record<string, any>) {
     if (type === 'partnerReviewSection') return new PartnerReviewModule(fields);
-    if (type === 'logoBarSection') return new LogoBarSectionModule(fields);
     if (type === 'dividerLine') return new DividerLineModule();
+    if (type === 'logoBarSection') return new LogoBarSectionModule(fields);
     if (type === 'whitePaperDownload')
       return new WhitePaperDownloadModule(fields);
     if (type === 'stickyFooter') return new StickyFooterModule(fields);
@@ -1698,13 +1706,5 @@ export class WhitePaperDownloadModule extends BaseModule {
     this.file = fields.file;
     this.whitePaperFormFields = fields.whitePaperFormFields;
     this.pdfUrl = fields.pdfUrl;
-  }
-}
-
-export class LogoBarSectionModule extends BaseModule {
-  title: string;
-  constructor(fields: Record<string, any>) {
-    super();
-    this.title = fields.title;
   }
 }

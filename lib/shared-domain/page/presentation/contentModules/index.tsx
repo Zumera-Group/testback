@@ -34,8 +34,8 @@ import {
   PartnerReviewModule,
   PartnerVisionModule,
   WhitePaperDownloadModule,
-  TransactionsCarouselSectionModule,
   LogoBarSectionModule,
+  TransactionsCarouselSectionModule,
 } from '../../domain/contentModule';
 
 import {
@@ -209,6 +209,10 @@ export const getContentForContentModule = (
       />
     );
   }
+  if (contentModule.specificContentModule instanceof LogoBarSectionModule) {
+    return <LogoBarSection />;
+  }
+
   if (contentModule.specificContentModule instanceof PartnerVisionModule) {
     return (
       <PartnerVisionSection
@@ -528,12 +532,5 @@ export const getContentForContentModule = (
   }
   if (contentModule.specificContentModule === 'blogIndexSection') {
     return <div>Blog</div>;
-  }
-  if (contentModule.logoBarSectionModule instanceof LogoBarSectionModule) {
-    return (
-      <LogoBarSection
-        specificContentModule={contentModule.specificContentModule}
-      />
-    );
   }
 };

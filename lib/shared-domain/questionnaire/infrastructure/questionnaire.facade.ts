@@ -61,6 +61,7 @@ const queryQuestionnaire = (
     },
     growthRatesTable,
     heroSection,
+    logoBarSection,
   },
   sectorSpecific,
   checkmarkTexts,
