@@ -210,7 +210,11 @@ export const getContentForContentModule = (
     );
   }
   if (contentModule.specificContentModule instanceof LogoBarSectionModule) {
-    return <LogoBarSection />;
+    return (
+      <LogoBarSection
+        specificContentModule={contentModule.specificContentModule}
+      />
+    );
   }
 
   if (contentModule.specificContentModule instanceof PartnerVisionModule) {

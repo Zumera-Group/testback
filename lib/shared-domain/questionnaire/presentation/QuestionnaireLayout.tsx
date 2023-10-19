@@ -57,9 +57,6 @@ const QuestionnaireLayout: React.FC<{
   const router = useRouter();
   const result = selectedQuestionnaire?.result;
 
-  console.log(result);
-  console.log('frog');
-
   useSetQuestionnaireLocaleToUseFori18n(locale);
   const [currenQuestionPosition, setCurrentQuestionPosition] = useState(0);
   const isMobile = useMediaQuery(`(max-width: ${SCREEN_SIZE_MD})`);

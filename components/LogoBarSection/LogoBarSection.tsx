@@ -1,11 +1,13 @@
 import styles from './LogoBarSection.module.scss';
+import { LogoBarSectionModule } from 'lib/shared-domain/page/domain/contentModule';
 
-interface Props {}
-
-export const LogoBarSection: React.FC<Props> = ({}) => {
+export const LogoBarSection: React.FC<{
+  specificContentModule: LogoBarSectionModule;
+}> = ({ specificContentModule }) => {
+  const { title } = specificContentModule;
   return (
     <section>
-      <h1>LogoBar</h1>
+      <h1>{title}</h1>
     </section>
   );
 };
