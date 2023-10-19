@@ -55,8 +55,17 @@ const useSaveOnMount = () => {
       MarketingQueryStorage.saveIfWithValue('gclid', gclidRecord);
     }
 
+    const fbclidParam = valuesForKeys['fbclid'];
+    let fbclidRecord = null;
+
+    if (fbclidParam) {
+      fbclidRecord = getExpiryRecord(fbclidParam);
+      MarketingQueryStorage.saveIfWithValue('fbclid', fbclidRecord);
+    }
+
+    // we already stored the fbclid & gclid so we should run marketingQueryStorage for all other values except those.
     config.desiredKeysToMap
-      .filter((key) => key !== 'gclid')
+      .filter((key) => key !== 'gclid' && key !== 'fbclid')
       .forEach((key) => {
         MarketingQueryStorage.saveIfWithValue(key, valuesForKeys?.[key]);
       });
@@ -69,6 +78,14 @@ const retrieve = (): Record<string, any> => {
     gclidRecord ||
     JSON.parse(localStorage?.getItem(config.localStoreKey + 'gclid'));
   const isGclidValid = gclid && new Date().getTime() < gclid.expiryDate;
+
+  const fbclidRecord = null;
+  const fbclid =
+      fbclidRecord ||
+      JSON.parse(localStorage?.getItem(config.localStoreKey + 'fbclid'));
+  const isFbclidValid = fbclid && new Date().getTime() < fbclid.expiryDate;
+
+
   try {
     const data = config.desiredKeysToMap.reduce((total: any, key: any) => {
       const value = MarketingQueryStorage.get(key);
@@ -77,6 +94,11 @@ const retrieve = (): Record<string, any> => {
         if (value && isGclidValid) {
           total[key] = MarketingQueryStorage.get(key).value;
         }
+      } else if(key === 'fbclid'){
+          //FB CLICK ID SETUP
+          if (value && isFbclidValid) {
+            total[key] = MarketingQueryStorage.get(key).value;
+          }
       } else {
         if (value) {
           total[key] = MarketingQueryStorage.get(key);
