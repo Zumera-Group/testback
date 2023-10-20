@@ -18,6 +18,8 @@ const ResultModules = ({ result }) => {
     return null;
   }
 
+  console.log(result);
+
   return (
     <div className={styles.root}>
       {/* <Section bg={'primary'} color={'white'} size="sm">
@@ -36,6 +38,9 @@ const ResultModules = ({ result }) => {
           ))}
         </Grid>
       </Section> */}
+      {result.logoBarSection && (
+        <LogoBarSection specificContentModule={result.logoBarSection} />
+      )}
       <Section
         bg={'secondary'}
         color={'white'}
@@ -93,8 +98,6 @@ const ResultModules = ({ result }) => {
           description={result?.heroSection?.heroDescription}
         />
       </div>
-
-      <LogoBarSection />
     </div>
   );
 };
