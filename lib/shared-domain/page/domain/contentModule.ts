@@ -410,6 +410,7 @@ export class LogoBarSectionModule extends BaseModule {
   logos: {
     asset: {
       url: string;
+      alt: string;
     };
   }[];
 

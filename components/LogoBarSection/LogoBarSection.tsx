@@ -5,6 +5,8 @@ import { SectionHeading } from 'components/SectionHeading';
 import { Section } from 'components/Layout';
 import { useMediaQuery } from 'lib/hooks/useMediaQuery';
 import { SCREEN_SIZE_MD } from 'lib/constants';
+import Image from 'next/image';
+import { sanityImageUrlFor } from 'lib/sanity';
 
 export const LogoBarSection: React.FC<{
   specificContentModule: LogoBarSectionModule;
@@ -19,13 +21,23 @@ export const LogoBarSection: React.FC<{
       color={'primary'}
       id={title.replaceAll(' ', '-')}
     >
-      <SectionHeading title={title} headingType={'h3'} align={'center'} />
+      <SectionHeading title={title} headingType={'h4'} align={'center'} />
       <div className={styles.logoContainer}>
         <Marquee speed={speed} gradient={false}>
           {logos.map((item, index) => {
             return (
               <div className={styles.logo} key={index}>
-                <img src={item.asset.url} />
+                <Image
+                  unoptimized
+                  src={sanityImageUrlFor(item?.asset?.url).url()}
+                  alt={item?.asset?.alt}
+                  width={410}
+                  height={231}
+                  style={{
+                    maxWidth: '100%',
+                    objectFit: 'cover',
+                  }}
+                />
               </div>
             );
           })}

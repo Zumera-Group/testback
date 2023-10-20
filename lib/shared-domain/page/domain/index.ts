@@ -453,6 +453,7 @@ export interface LogoBarSection {
   logos: {
     asset: {
       url: string;
+      alt: string;
     };
   }[];
 }
