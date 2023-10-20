@@ -31,8 +31,8 @@ export const LogoBarSection: React.FC<{
                   unoptimized
                   src={sanityImageUrlFor(item?.asset?.url).url()}
                   alt={item?.asset?.alt}
-                  width={410}
-                  height={231}
+                  width={item.asset.metadata.dimensions.width}
+                  height={item.asset.metadata.dimensions.height}
                   style={{
                     maxWidth: '100%',
                     objectFit: 'cover',

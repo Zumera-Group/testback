@@ -66,7 +66,12 @@ const queryQuestionnaire = (
       logos[]{
         asset->{
           url,
-          type
+          metadata{
+            dimensions{
+              height,
+              width
+            }
+          }
         },
       }
     }

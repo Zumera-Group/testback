@@ -454,6 +454,12 @@ export interface LogoBarSection {
     asset: {
       url: string;
       alt: string;
+      metadata: {
+        dimensions: {
+          height: number;
+          width: number;
+        };
+      };
     };
   }[];
 }

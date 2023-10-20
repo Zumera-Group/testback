@@ -411,6 +411,12 @@ export class LogoBarSectionModule extends BaseModule {
     asset: {
       url: string;
       alt: string;
+      metadata: {
+        dimensions: {
+          height: number;
+          width: number;
+        };
+      };
     };
   }[];
 
