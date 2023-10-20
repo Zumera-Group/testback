@@ -61,7 +61,15 @@ const queryQuestionnaire = (
     },
     growthRatesTable,
     heroSection,
-    logoBarSection,
+    logoBarSection{
+      title,
+      logos[]{
+        asset->{
+          url,
+          type
+        },
+      }
+    }
   },
   sectorSpecific,
   checkmarkTexts,
