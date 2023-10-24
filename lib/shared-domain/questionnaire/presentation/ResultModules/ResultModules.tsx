@@ -18,8 +18,6 @@ const ResultModules = ({ result }) => {
     return null;
   }
 
-  console.log(result);
-
   return (
     <div className={styles.root}>
       {/* <Section bg={'primary'} color={'white'} size="sm">
