@@ -1,6 +1,6 @@
 $main-layout-chat-button-offset: 48px;
 $main-layout-height: calc(
-  100vh - var(--header-height) - calc(var(--section-size) * 2) - #{$main-layout-chat-button-offset}
+  85vh - var(--header-height) - calc(var(--section-size) * 2) - #{$main-layout-chat-button-offset}
 );
 
 .page {
@@ -70,6 +70,10 @@ $main-layout-height: calc(
   &.hasResultScreen {
     // padding-bottom: 2rem !important;
   }
+}
+
+.grid {
+  min-height: $main-layout-height;
 }
 
 .questionCol {
