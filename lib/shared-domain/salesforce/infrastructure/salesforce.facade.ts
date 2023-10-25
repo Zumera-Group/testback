@@ -51,6 +51,7 @@ export class SalesforceFacade {
         [unformattedParams[5]]: 'UTMTerm__c',
         [unformattedParams[6]]: 'UTM_Content__c',
         [unformattedParams[7]]: 'gclid__c',
+        [unformattedParams[8]]: 'fbclid__c', // TODO we need a salesforce field with this name
       };
 
       const formattedMarketingParams = Object.keys(marketingParams).reduce(
