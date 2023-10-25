@@ -20,10 +20,11 @@ export const LogoBarSection: React.FC<{
       size={'sm'}
       color={'primary'}
       id={title.replaceAll(' ', '-')}
+      classes={styles.logoBarSection}
     >
       <SectionHeading title={title} headingType={'h4'} align={'center'} />
       <div className={styles.logoContainer}>
-        <Marquee speed={speed} gradient={false}>
+        <Marquee speed={speed} gradient={false} autoFill>
           {logos.map((item, index) => {
             return (
               <div className={styles.logo} key={index}>

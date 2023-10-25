@@ -6,34 +6,41 @@ $beam-colors: (
   'accent': $accent,
 );
 
-.logoContainer {
-  margin-top: $gutter * 2.5;
-  .logo {
-    img {
-      max-height: 55px;
-      margin-right: $gutter * 6;
-      width: auto;
+.logoBarSection {
+  padding: $gutter * 2 0 !important;
+  .logoContainer {
+    margin-top: $gutter * 2;
+    .logo {
+      img {
+        max-height: 30px;
+        margin-right: $gutter * 8;
+        width: auto;
+      }
     }
   }
 }
 
 @include breakpoint-down(lg) {
-  .logoContainer {
-    .logo {
-      img {
-        margin-right: $gutter * 4.5;
+  .logoBarSection {
+    .logoContainer {
+      .logo {
+        img {
+          margin-right: $gutter * 4.5;
+        }
       }
     }
   }
 }
 
 @include breakpoint-down(md) {
-  .logoContainer {
-    margin-top: $gutter * 1.5;
-    .logo {
-      img {
-        max-height: 40px;
-        margin-right: $gutter * 3;
+  .logoBarSection {
+    .logoContainer {
+      margin-top: $gutter * 1.5;
+      .logo {
+        img {
+          max-height: 25px;
+          margin-right: $gutter * 3;
+        }
       }
     }
   }
