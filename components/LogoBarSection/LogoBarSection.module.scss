@@ -8,6 +8,9 @@ $beam-colors: (
 
 .logoBarSection {
   padding: $gutter * 2 0 !important;
+  h3 {
+    font-size: $h5-font-size;
+  }
   .logoContainer {
     margin-top: $gutter * 2;
     .logo {

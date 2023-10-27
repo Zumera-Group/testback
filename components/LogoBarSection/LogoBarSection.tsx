@@ -22,7 +22,7 @@ export const LogoBarSection: React.FC<{
       id={title.replaceAll(' ', '-')}
       classes={styles.logoBarSection}
     >
-      <SectionHeading title={title} headingType={'h4'} align={'center'} />
+      <SectionHeading title={title} headingType={'h3'} align={'center'} />
       <div className={styles.logoContainer}>
         <Marquee speed={speed} gradient={false} autoFill>
           {logos.map((item, index) => {
