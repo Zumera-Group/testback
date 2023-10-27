@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Head from 'next/head';
 import Script from 'next/script';
 import { MarketingParamsService } from 'lib/shared-domain/salesforce/application/marketingParamsService';
@@ -36,6 +36,9 @@ const myFont = localFont({
 });
 
 function MyApp({ Component, pageProps, router }) {
+
+  const [interComInit, setInterComeInit] = useState(true);
+
   useEffect(() => {
     const element = document.querySelector('html');
     element.classList.add('mobileLoaded');
@@ -50,7 +53,23 @@ function MyApp({ Component, pageProps, router }) {
   }, []);
 
   // const lang = router.locale;
-  // const slug = router.state.asPath.
+  const slug = router.asPath;
+
+  const slugsToDisableIntercom = [
+      '/unternehmenswert-rechner/',
+      '/valuation-tool/',
+      '/unternehmensbewertungundverkauf/'
+  ];
+
+  useEffect(() => {
+    if(slugsToDisableIntercom.includes(slug)){
+      setInterComeInit(false);
+      document.getElementById('intercomChatButton').style.display = 'none';
+    } else {
+      setInterComeInit(true);
+      document.getElementById('intercomChatButton').style.display = 'block';
+    }
+  }, [slug]);
 
   const stringData = JSON.parse(
     JSON.stringify(pageProps).replace(/\u2028/g, ''),
@@ -71,6 +90,7 @@ function MyApp({ Component, pageProps, router }) {
       <IntercomProvider
         appId={INTERCOM_APP_ID}
         autoBoot
+        shouldInitialize={interComInit}
         autoBootProps={{ hideDefaultLauncher: true }}
       >
         <main className={myFont.className} {...myFont}>
