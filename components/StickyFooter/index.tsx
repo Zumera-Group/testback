@@ -54,6 +54,7 @@ export const StickyFooter: React.FC<{
 
   return (
     <div
+        id={'sticky-footer'}
       className={[
         styles.stickyFooter,
         isScrolled ? styles.stickyFooter__show : '',

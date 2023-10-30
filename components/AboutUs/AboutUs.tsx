@@ -26,7 +26,7 @@ export const AboutUs = ({ ...rest }) => {
   };
 
   return (
-    <Section size={'md'} bg={'light'} color={'primary'}>
+    <Section size={'md'} bg={'light'} color={'primary'} id={'about'}>
       <Container>
         <Grid
           justifyContent={'space-between'}

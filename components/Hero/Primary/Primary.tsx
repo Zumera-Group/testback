@@ -19,6 +19,7 @@ export const Primary: HeroComponent = ({ ...rest }) => {
       ].join(' ')}
       size={'xl'}
       bg={'primary'}
+      id={'primary-hero'}
       color={'white'}
       // @ts-ignore
       style={{
