@@ -56,6 +56,7 @@ export const VTServicesSection: React.FC<{
       bg={isFullWidth ? background : 'light'}
       color={'white'}
       classes={styles.section}
+      id={'vtservices'}
     >
       <Container classes={sectionStyles}>
         <Grid

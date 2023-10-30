@@ -27,7 +27,7 @@ export const ImagesGridSection: React.FC<{
   }, [images]);
 
   return (
-    <Section size={'md'} bg={'light'} color={'primary'}>
+    <Section size={'md'} bg={'light'} color={'primary'} id={'images-grid'}>
       <Container classes={styles.container}>
         {displayImage.map((chunkImg, topIndex) => {
           const isOddLine = topIndex % 2 === 0;

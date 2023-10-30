@@ -34,6 +34,7 @@ export const VTHero: React.FC<{
       size={'xl'}
       bg={'primary'}
       color={'white'}
+      id={'vthero'}
     >
       <Container classes={styles.container}>
         <Grid

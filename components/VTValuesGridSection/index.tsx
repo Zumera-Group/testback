@@ -32,7 +32,7 @@ export const VTValuesGridSection: React.FC<{
   };
 
   return (
-    <Section size={'md'} bg={'light'} color={'primary'}>
+    <Section size={'md'} bg={'light'} color={'primary'} id={'vtvalues'}>
       <Container classes={styles.container}>
         <Grid
           justifyContent={'space-between'}
