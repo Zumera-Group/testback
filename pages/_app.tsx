@@ -64,10 +64,17 @@ function MyApp({ Component, pageProps, router }) {
   useEffect(() => {
     if(slugsToDisableIntercom.includes(slug)){
       setInterComeInit(false);
-      document.getElementById('intercomChatButton').style.display = 'none';
+      const intercom = document.getElementById('intercomChatButton');
+      if(intercom){
+        intercom.style.display = 'none';
+      }
+
     } else {
       setInterComeInit(true);
-      document.getElementById('intercomChatButton').style.display = 'block';
+      const intercom = document.getElementById('intercomChatButton');
+      if(intercom){
+        intercom.style.display = 'none';
+      }
     }
   }, [slug]);
 
