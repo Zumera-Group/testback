@@ -51,7 +51,7 @@ export class SalesforceFacade {
         [unformattedParams[5]]: 'UTMTerm__c',
         [unformattedParams[6]]: 'UTM_Content__c',
         [unformattedParams[7]]: 'gclid__c',
-        [unformattedParams[8]]: 'fbclid__c', // TODO we need a salesforce field with this name
+        [unformattedParams[8]]: 'fbclid__c',
       };
 
       const formattedMarketingParams = Object.keys(marketingParams).reduce(
@@ -59,10 +59,13 @@ export class SalesforceFacade {
           const newKey = keyMap[key] || key;
           acc[newKey] = marketingParams[key];
 
+          console.log("acc", acc);
+
           return acc;
         },
         {},
       );
+
 
       const params = {
         lead_entry: {

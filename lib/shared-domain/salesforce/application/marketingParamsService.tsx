@@ -108,6 +108,8 @@ const retrieve = (): Record<string, any> => {
       return total;
     }, {});
 
+    console.log("data", data);
+
     return data;
   } catch (e) {
     console.log('ERROR: Retrieving Marketing params' + e);
