@@ -40,7 +40,7 @@ export const ScoreCard = () => {
       return true;
     },
     getFormattedPoints: () => {
-      return score?.points;
+      return score?.points ? score?.points : 0;
     },
     getPercentage: () => {
       try {
@@ -51,8 +51,8 @@ export const ScoreCard = () => {
     },
   };
 
-  const hasScoreAndPercentage =
-    presenter.hasPoints() && presenter.getPercentage();
+  // const hasScoreAndPercentage =
+  //   presenter.hasPoints() && presenter.getPercentage();
   const points = tr('evaluation.resultBox.points', {
     points: presenter.getFormattedPoints(),
   });
@@ -78,27 +78,23 @@ export const ScoreCard = () => {
   return (
     <>
       <div className={styles.scoreCardWrapper}>
-        {hasScoreAndPercentage && (
-          <>
-            <span className={styles.scoreCardTitle}>{title}</span>
-            <ProgressBar isPoint progress={points} color="gradient" />
-            <p className={styles.betterThan}>{betterThan}</p>
-            <div className={styles.booklet}>
-              <Image
-                unoptimized
-                loading="lazy"
-                // objectFit="cover"
-                alt={'booklet'}
-                src={'/calculator/booklet.png'}
-                width={237}
-                height={200}
-                style={{
-                  objectFit: 'cover',
-                }}
-              />
-            </div>
-          </>
-        )}
+        <span className={styles.scoreCardTitle}>{title}</span>
+        <ProgressBar isPoint progress={points} color="gradient" />
+        <p className={styles.betterThan}>{betterThan}</p>
+        <div className={styles.booklet}>
+          <Image
+            unoptimized
+            loading="lazy"
+            // objectFit="cover"
+            alt={'booklet'}
+            src={'/calculator/booklet.png'}
+            width={237}
+            height={200}
+            style={{
+              objectFit: 'cover',
+            }}
+          />
+        </div>
 
         {!score && (
           <Lottie
