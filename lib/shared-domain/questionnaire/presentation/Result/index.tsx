@@ -303,7 +303,7 @@ export const Result: React.FC = () => {
     return () => clearInterval(interval);
   }, [loadingPercentage]);
 
-  if (score && !hasError && loadingPercentage >= 100)
+  if (score && !hasError && loadingPercentage >= 40) {
     return (
       <>
         {!showAppointmentBooking ? (
@@ -312,10 +312,12 @@ export const Result: React.FC = () => {
             onSuccess={() => setShowAppointmentBooking(true)}
           />
         ) : (
-          <AppointmentBookingScreen userCalendlyLink={score.calendly} />
+          <h1>egg</h1>
+          // <AppointmentBookingScreen userCalendlyLink={score.calendly} />
         )}
       </>
     );
+  }
 
   return (
     //loading screen
