@@ -312,8 +312,7 @@ export const Result: React.FC = () => {
             onSuccess={() => setShowAppointmentBooking(true)}
           />
         ) : (
-          <h1>egg</h1>
-          // <AppointmentBookingScreen userCalendlyLink={score.calendly} />
+          <AppointmentBookingScreen userCalendlyLink={score.calendly} />
         )}
       </>
     );
