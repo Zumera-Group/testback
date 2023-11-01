@@ -53,8 +53,6 @@ export const ScoreCard = () => {
     },
   };
 
-  // const hasScoreAndPercentage =
-  //   presenter.hasPoints() && presenter.getPercentage();
   const points = tr('evaluation.resultBox.points', {
     points: presenter.getFormattedPoints(),
   });
