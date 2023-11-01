@@ -184,7 +184,8 @@ const QuestionnaireLayout: React.FC<{
   const pageRef = useRef(null);
   const [isLanding, setIsLanding] = useState(false);
 
-  const renderResultModules = !!result && isOnResultScreen && router.locale === 'de';
+  const renderResultModules =
+    !!result && isOnResultScreen && router.locale === 'de';
 
   useEffect(() => {
     const session = sessionStorage.getItem('isLanding');

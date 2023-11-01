@@ -264,7 +264,6 @@ const EvaluationScreen: React.FC<{
 export const Result: React.FC = () => {
   const [showAppointmentBooking, setShowAppointmentBooking] =
     React.useState(false);
-  const [loadingPercentage, setLoadingPercentage] = React.useState(0);
   const [score, setScore] = React.useState<{
     points: string;
     percentage: string;
@@ -294,37 +293,20 @@ export const Result: React.FC = () => {
     loadScore();
   }, []);
 
-  React.useEffect(() => {
-    const interval = setInterval(() => {
-      if (loadingPercentage < 100) {
-        setLoadingPercentage(loadingPercentage + 1);
-      }
-    }, 50);
-    return () => clearInterval(interval);
-  }, [loadingPercentage]);
-
-  if (score && !hasError && loadingPercentage >= 100)
-    return (
-      <>
-        {!showAppointmentBooking ? (
-          <EvaluationScreen
-            score={score}
-            onSuccess={() => setShowAppointmentBooking(true)}
-          />
-        ) : (
-          <AppointmentBookingScreen userCalendlyLink={score.calendly} />
-        )}
-      </>
-    );
+  if (hasError) {
+    return <QuestionText title={t('loading.error')} />;
+  }
 
   return (
-    //loading screen
-    <AnimateIn>
-      {!hasError ? (
-        <QuestionText title={t('loading.title')} />
+    <>
+      {!showAppointmentBooking ? (
+        <EvaluationScreen
+          score={score}
+          onSuccess={() => setShowAppointmentBooking(true)}
+        />
       ) : (
-        <QuestionText title={t('loading.error')} />
+        <AppointmentBookingScreen userCalendlyLink={score.calendly} />
       )}
-    </AnimateIn>
+    </>
   );
 };
