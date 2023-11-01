@@ -25,8 +25,10 @@ export const ScoreCard = () => {
       try {
         const score = await getScore();
 
-        setScore(score);
-        setHasError(false);
+        setTimeout(() => {
+          setScore(score);
+          setHasError(false);
+        }, 3000);
       } catch (e) {
         setHasError(true);
       }
@@ -79,7 +81,18 @@ export const ScoreCard = () => {
     <>
       <div className={styles.scoreCardWrapper}>
         <span className={styles.scoreCardTitle}>{title}</span>
-        <ProgressBar isPoint progress={points} color="gradient" />
+        {score ? (
+          <ProgressBar isPoint progress={points} color="gradient" />
+        ) : (
+          <Lottie
+            options={defaultOptions}
+            width="100%"
+            height={'auto'}
+            style={{ maxWidth: 194, marginLeft: 'auto' }}
+            isStopped={false}
+            isPaused={false}
+          />
+        )}
         <p className={styles.betterThan}>{betterThan}</p>
         <div className={styles.booklet}>
           <Image
@@ -95,17 +108,6 @@ export const ScoreCard = () => {
             }}
           />
         </div>
-
-        {!score && (
-          <Lottie
-            options={defaultOptions}
-            width="100%"
-            height={'auto'}
-            style={{ maxWidth: 194, marginLeft: 'auto' }}
-            isStopped={false}
-            isPaused={false}
-          />
-        )}
       </div>
     </>
   );
