@@ -14,6 +14,7 @@ export const LogoBarSection: React.FC<{
   const { title, logos } = specificContentModule;
   const isMobile = useMediaQuery(`(max-width: ${SCREEN_SIZE_MD})`);
   const speed = isMobile ? 50 : 70;
+  const logoStartPos = isMobile ? 1 : 2;
   return (
     <Section
       as={'section'}
@@ -24,10 +25,16 @@ export const LogoBarSection: React.FC<{
     >
       <div className={styles.logoContainer}>
         <Marquee speed={speed} gradient={false} autoFill>
-          <SectionHeading title={title} headingType={'h3'} align={'center'} />
           {logos.map((item, index) => {
             return (
               <div className={styles.logo} key={index}>
+                {index === logoStartPos && (
+                  <SectionHeading
+                    title={title}
+                    headingType={'h3'}
+                    align={'center'}
+                  />
+                )}
                 <Image
                   unoptimized
                   src={sanityImageUrlFor(item?.asset?.url).url()}
