@@ -49,7 +49,7 @@
     "react-player": "2.12.0",
     "react-use-intercom": "^1.4.0",
     "sass": "^1.56.2",
-    "sharp": "^0.29.1",
+    "sharp": "^0.32.6",
     "swiper": "^8.4.5",
     "ts-node": "^10.3.0",
     "typescript": "^4.3.5",

@@ -11,26 +11,27 @@ $beam-colors: (
   h3 {
     font-size: $h5-font-size;
   }
+
   .logoContainer {
-    margin-top: $gutter * 2;
     .logo {
       img {
         max-height: 30px;
-        margin-right: $gutter * 8;
         width: auto;
       }
     }
+  }
+
+  h3,
+  .logo img {
+    margin-right: $gutter * 8;
   }
 }
 
 @include breakpoint-down(lg) {
   .logoBarSection {
-    .logoContainer {
-      .logo {
-        img {
-          margin-right: $gutter * 4.5;
-        }
-      }
+    h3,
+    .logo img {
+      margin-right: $gutter * 4.5;
     }
   }
 }
@@ -38,13 +39,15 @@ $beam-colors: (
 @include breakpoint-down(md) {
   .logoBarSection {
     .logoContainer {
-      margin-top: $gutter * 1.5;
       .logo {
         img {
           max-height: 25px;
-          margin-right: $gutter * 3;
         }
       }
+    }
+    h3,
+    .logo img {
+      margin-right: $gutter * 3;
     }
   }
 }
