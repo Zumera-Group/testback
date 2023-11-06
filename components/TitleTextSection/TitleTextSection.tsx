@@ -22,7 +22,7 @@ export const TitleTextSection: React.FC<{
   } = specificContentModule;
 
   return (
-    <Section size={'md'} bg={'light'} color={'primary'}>
+    <Section size={'md'} bg={'light'} color={'primary'} id={'title-text'}>
       <Container>
         <Grid
           justifyContent={'space-between'}
