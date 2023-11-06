@@ -405,6 +405,27 @@ export class FactsAndFiguresSectionModule extends BaseModule {
     this.facts = fields.facts;
   }
 }
+export class LogoBarSectionModule extends BaseModule {
+  title: string;
+  logos: {
+    asset: {
+      url: string;
+      alt: string;
+      metadata: {
+        dimensions: {
+          height: number;
+          width: number;
+        };
+      };
+    };
+  }[];
+
+  constructor(fields: Record<string, any>) {
+    super();
+    this.title = fields.title;
+    this.logos = fields.logos;
+  }
+}
 
 export class TitleAndDescriptionItemsGridModule extends BaseModule {
   subtitle: string;
@@ -925,6 +946,7 @@ export type ContentModuleType =
   | 'sectorHeroSection'
   | 'futureTrendsSection'
   | 'moreDetailsSection'
+  | 'logoBarSection'
   // service detail sections
   | serviceDetailSectionNames.processSection
   | serviceDetailSectionNames.helpContactPerson
@@ -936,6 +958,7 @@ abstract class ContentModuleTypeFactory {
   static createInstance(type: ContentModuleType, fields: Record<string, any>) {
     if (type === 'partnerReviewSection') return new PartnerReviewModule(fields);
     if (type === 'dividerLine') return new DividerLineModule();
+    if (type === 'logoBarSection') return new LogoBarSectionModule(fields);
     if (type === 'whitePaperDownload')
       return new WhitePaperDownloadModule(fields);
     if (type === 'stickyFooter') return new StickyFooterModule(fields);

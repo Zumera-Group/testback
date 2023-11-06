@@ -1,5 +1,7 @@
 $main-layout-chat-button-offset: 48px;
-$main-layout-height: calc(100vh - var(--header-height) - calc(var(--section-size) * 2) - #{$main-layout-chat-button-offset});
+$main-layout-height: calc(
+  85vh - var(--header-height) - calc(var(--section-size) * 2) - #{$main-layout-chat-button-offset}
+);
 
 .page {
   width: 100%;
@@ -61,7 +63,9 @@ $main-layout-height: calc(100vh - var(--header-height) - calc(var(--section-size
 }
 
 .section {
-  padding-bottom: calc(var(--section-size) + #{$main-layout-chat-button-offset}) !important;
+  padding-bottom: calc(
+    var(--section-size) + #{$main-layout-chat-button-offset}
+  ) !important;
 
   &.hasResultScreen {
     // padding-bottom: 2rem !important;
@@ -87,7 +91,7 @@ $main-layout-height: calc(100vh - var(--header-height) - calc(var(--section-size
 }
 
 .sidebarWrapper {
-  &>* {
+  & > * {
     width: 100%;
   }
 }

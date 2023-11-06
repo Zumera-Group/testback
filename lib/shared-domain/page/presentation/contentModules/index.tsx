@@ -34,6 +34,7 @@ import {
   PartnerReviewModule,
   PartnerVisionModule,
   WhitePaperDownloadModule,
+  LogoBarSectionModule,
   TransactionsCarouselSectionModule,
 } from '../../domain/contentModule';
 
@@ -93,6 +94,7 @@ import { SectorHero, SectorTeam, SectorTransactions } from 'components/Sector';
 import FutureTrendsSection from 'components/Sector/SectorInfo/FutureTrendsSection';
 import SectorMoreDetails from 'components/SectorMoreDetails/SectorMoreDetails';
 import { WhitePaperDownloadSection } from 'components/WhitePaperDownload/WhitePaperDownloadSection';
+import { LogoBarSection } from 'components/LogoBarSection';
 
 const NewsGridSection = dynamic(() => import('./NewsGridSection'), {
   ssr: false,
@@ -207,6 +209,14 @@ export const getContentForContentModule = (
       />
     );
   }
+  if (contentModule.specificContentModule instanceof LogoBarSectionModule) {
+    return (
+      <LogoBarSection
+        specificContentModule={contentModule.specificContentModule}
+      />
+    );
+  }
+
   if (contentModule.specificContentModule instanceof PartnerVisionModule) {
     return (
       <PartnerVisionSection

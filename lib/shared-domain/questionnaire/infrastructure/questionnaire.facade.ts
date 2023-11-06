@@ -61,6 +61,20 @@ const queryQuestionnaire = (
     },
     growthRatesTable,
     heroSection,
+    logoBarSection{
+      title,
+      logos[]{
+        asset->{
+          url,
+          metadata{
+            dimensions{
+              height,
+              width
+            }
+          }
+        },
+      }
+    }
   },
   sectorSpecific,
   checkmarkTexts,
