@@ -72,9 +72,9 @@
       }
     },
     "evaluation": {
-      "title": "Holen Sie sich ihre kostenlose Expertenbewertung.",
+      "title": "Fertig! An wen sollen wir die gesamte Bewertung schicken?",
       "description": "Um eine fundierte Einschätzung der Unternehmenswertes zu erhalten, wird ein Berater die Eingaben prüfen und Sie kontaktieren.",
-      "description2": "Wofür benötigen wir diese Informationen?",
+      "description2": "Wir möchten sicherstellen, dass die geprüfte Bewertung sicher und vertraulich nur an Sie geschickt wird.",
       "resultBox": {
         "title": "Ihr vorläufiges Ergebnis",
         "points": "{{points}}",
