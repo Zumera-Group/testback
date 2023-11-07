@@ -95,9 +95,10 @@ function MyApp({ Component, pageProps, router }) {
         />
       </Head>
       <IntercomProvider
+        initializeDelay={2000}
         appId={INTERCOM_APP_ID}
         autoBoot
-        shouldInitialize={interComInit}
+        shouldInitialize={true}
         autoBootProps={{ hideDefaultLauncher: true }}
       >
         <main className={myFont.className} {...myFont}>
