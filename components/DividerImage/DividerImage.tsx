@@ -57,9 +57,10 @@ export const DividerImage: React.FC<Props> = ({ ...rest }) => {
       >
         <Image
           loading="lazy"
+          quality={80}
           unoptimized
           alt={''}
-          src={sanityImageUrlFor(dividerImage).url()}
+          src={sanityImageUrlFor(dividerImage).auto('format').fit('crop').height(396).width(1053).url()}
           fill
           style={{
             maxWidth: '100%',

@@ -60,7 +60,7 @@ export const TextWithImageGrid: React.FC<{
             <Image
               unoptimized
               loading="lazy"
-              src={sanityImageUrlFor(image?.asset?.url).url()}
+              src={sanityImageUrlFor(image?.asset?.url).quality(80).width(492).height(437).url()}
               fill
               alt={image?.name}
               style={{
