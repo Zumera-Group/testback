@@ -14,6 +14,7 @@ export const GrowthRatesTable = ({ title, growthRatesTable }) => {
       [item['title'], item['subtitle']] = [item['subtitle'], item['title']];
       return item;
     });
+
     setFormatted(growthRatesFormatted)
   }, [growthRates]);
 

@@ -29,7 +29,14 @@ export const SectorSpecificEntry: React.FC<{
   const firstButtonText = t('firstButtonText', { industry });
   const { setIsOnResultScreen } = useValuationStore();
   const secondButtonText = t('secondButtonText');
-  const onFinishQuestionnaire = () => setIsOnResultScreen(true);
+  const onFinishQuestionnaire = () => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'instant' as any,
+    });
+    setIsOnResultScreen(true);
+  };
   const isMobile = useMediaQuery(`(max-width: ${SCREEN_SIZE_MD})`);
 
   return (

@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import I18n from 'i18n-js';
+import cx from 'classnames';
 import styles from './QuestionnaireLayout.module.scss';
 import { PageTransition } from 'components/PageTransition';
 import { SEO } from 'components/SEO';
@@ -22,6 +23,7 @@ import ProgressBarLine from 'components/Calculator/ProgressBarLine/ProgressBarLi
 
 import { Section, Container, Grid, GridColumn } from 'components/Layout';
 import { INDUSTRY_QUESTION_ID, SECTOR_QUESTION_ID } from './questions';
+import ResultModules from './ResultModules';
 
 const t = getTranslateByScope('timeEstimation');
 const tSidebar = getTranslateByScope('sidebar');
@@ -55,6 +57,7 @@ const QuestionnaireLayout: React.FC<{
 }) => {
   const { syncCurrentAnswersFromSalesforce } = useSalesforceAnswerSync();
   const router = useRouter();
+  const result = selectedQuestionnaire?.result;
 
   useSetQuestionnaireLocaleToUseFori18n(locale);
   const [currenQuestionPosition, setCurrentQuestionPosition] = useState(0);
@@ -183,6 +186,9 @@ const QuestionnaireLayout: React.FC<{
   const pageRef = useRef(null);
   const [isLanding, setIsLanding] = useState(false);
 
+  const renderResultModules =
+    !!result && isOnResultScreen && router.locale === 'de';
+
   useEffect(() => {
     const session = sessionStorage.getItem('isLanding');
     if (session === 'true') {
@@ -231,8 +237,10 @@ const QuestionnaireLayout: React.FC<{
             <Section
               bg={'primary'}
               color={'white'}
-              size={isMobile ? 'sm' : 'md'}
-              classes={styles.section}
+              size={isMobile || !!result ? 'sm' : 'md'}
+              classes={cx(styles.section, {
+                [styles.hasResultScreen]: renderResultModules,
+              })}
             >
               {questionnaire && !isOnResultScreen && isMobile && (
                 <div className={styles.progressBarLineMobile}>
@@ -277,7 +285,7 @@ const QuestionnaireLayout: React.FC<{
                   <GridColumn
                     sm={12}
                     md={8}
-                    lg={9}
+                    lg={renderResultModules ? 7 : 9}
                     className={styles.questionCol}
                   >
                     <div className={styles.questionWrapper}>
@@ -286,12 +294,30 @@ const QuestionnaireLayout: React.FC<{
                         sectors={sectors}
                         currentPos={currenQuestionPosition}
                         refEl={pageRef}
+                        isNoah={questionnaire?.isNoah}
+                        selectedQuestionnaire={selectedQuestionnaire}
                       />
                     </div>
                   </GridColumn>
+                  {renderResultModules && (
+                    <GridColumn
+                      sm={12}
+                      md={12}
+                      lg={2}
+                      className={styles.checkmarks}
+                    >
+                      {result?.greenCheckmarkTexts?.map((mark) => (
+                        <div className={styles.checkmarkItem} key={mark}>
+                          <img src="/calculator/checkmark-v2.svg" />
+                          <h5>{mark}</h5>
+                        </div>
+                      ))}
+                    </GridColumn>
+                  )}
                 </Grid>
               </Container>
             </Section>
+            {renderResultModules && <ResultModules result={result} />}
           </main>
         </div>
       </PageTransition>

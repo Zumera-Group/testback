@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Head from 'next/head';
 import Script from 'next/script';
 import { MarketingParamsService } from 'lib/shared-domain/salesforce/application/marketingParamsService';
@@ -36,6 +36,9 @@ const myFont = localFont({
 });
 
 function MyApp({ Component, pageProps, router }) {
+
+  const [interComInit, setInterComeInit] = useState(true);
+
   useEffect(() => {
     const element = document.querySelector('html');
     element.classList.add('mobileLoaded');
@@ -50,7 +53,30 @@ function MyApp({ Component, pageProps, router }) {
   }, []);
 
   // const lang = router.locale;
-  // const slug = router.state.asPath.
+  const slug = router.asPath;
+
+  const slugsToDisableIntercom = [
+      '/unternehmenswert-rechner/',
+      '/valuation-tool/',
+      '/unternehmensbewertungundverkauf/'
+  ];
+
+  useEffect(() => {
+    if(slugsToDisableIntercom.includes(slug)){
+      setInterComeInit(false);
+      const intercom = document.getElementById('intercomChatButton');
+      if(intercom){
+        intercom.style.display = 'none';
+      }
+
+    } else {
+      setInterComeInit(true);
+      const intercom = document.getElementById('intercomChatButton');
+      if(intercom){
+        intercom.style.display = 'none';
+      }
+    }
+  }, [slug]);
 
   const stringData = JSON.parse(
     JSON.stringify(pageProps).replace(/\u2028/g, ''),
@@ -71,6 +97,7 @@ function MyApp({ Component, pageProps, router }) {
       <IntercomProvider
         appId={INTERCOM_APP_ID}
         autoBoot
+        shouldInitialize={interComInit}
         autoBootProps={{ hideDefaultLauncher: true }}
       >
         <main className={myFont.className} {...myFont}>
@@ -83,6 +110,7 @@ function MyApp({ Component, pageProps, router }) {
         src="https://assets.calendly.com/assets/external/widget.js"
         // strategy="worker"
       />
+      <Script src="https://cdn.ywxi.net/js/1.js" async />
       {/*<link rel="canonical" href={`https://www.zumera.com/${lang}/${slug}`} />*/}
       <IconSprite />
     </>

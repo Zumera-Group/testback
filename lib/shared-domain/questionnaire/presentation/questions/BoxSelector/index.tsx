@@ -23,6 +23,7 @@ import 'swiper/css/scrollbar';
 import styles from './BoxSelector.module.scss';
 
 const t = getTranslateByScope('answerTypes.boxSelector');
+const noahTranslation = getTranslateByScope('question');
 
 interface Props {
   question: Question;
@@ -36,6 +37,7 @@ interface Props {
     industrySheetName: string;
   }[];
   sectorSpecificQuestions?: Question[];
+  isNoah?: any;
 }
 
 export const BoxSelector = ({
@@ -45,6 +47,7 @@ export const BoxSelector = ({
   sectors,
   industries,
   currentPos,
+  isNoah,
 }: Props): JSX.Element => {
   const { sectorId, industryId } = useValuationStore();
   const { getAnswer } = useAnswers(question);
@@ -68,30 +71,51 @@ export const BoxSelector = ({
     setSelectionsLoaded(true);
 
     if (!sectors && !industries) setAllBoxes(boxAnswers);
-
-    if (sectors) {
-      setAllBoxes(
-        sectors?.map((s) => ({
-          _key: s.id,
-          boxContent: s.id,
-          label: s.name,
-          sheetName: s.sectorSheetName,
-          boxIcon: {
-            name: s.name,
-            iconImage: s.graph.iconImage,
-          },
-        })),
-      );
+    if (!isNoah) {
+      if (sectors) {
+        setAllBoxes(
+          sectors?.map((s) => ({
+            _key: s.id,
+            boxContent: s.id,
+            label: s.name,
+            sheetName: s.sectorSheetName,
+            boxIcon: {
+              name: s.name,
+              iconImage: s.graph.iconImage,
+            },
+          })),
+        );
+      }
+      if (industries) {
+        setAllBoxes(
+          industries?.map((i, index) => ({
+            _key: i.id,
+            boxContent: `${i.id}_${index}`,
+            label: i.name,
+            sheetName: i.industrySheetName,
+          })),
+        );
+      }
     }
-    if (industries) {
-      setAllBoxes(
-        industries?.map((i, index) => ({
-          _key: i.id,
-          boxContent: `${i.id}_${index}`,
-          label: i.name,
-          sheetName: i.industrySheetName,
-        })),
-      );
+
+    if (isNoah) {
+      if (sectors) {
+        setAllBoxes(
+          sectors
+            ?.filter((s) => s?.isNoah)
+            .map((s) => ({
+              _key: s.id,
+              boxContent: s.id,
+              label: s.name,
+              sheetName: s.sectorSheetName,
+              boxIcon: {
+                name: s?.name,
+                iconImage: s?.graph.iconImage,
+              },
+              category: s.noahCategory,
+            })),
+        );
+      }
     }
   }, [boxAnswers, selectionsLoaded, sectors, industries]);
 
@@ -105,7 +129,9 @@ export const BoxSelector = ({
   // Show/hide the 'Show more' button if the items length exceeds initial length
   useEffect(() => {
     if (moreBoxesToShow) return;
-    setMoreBoxesToShow(allBoxes?.length > boxesToShow);
+    if (!isNoah) {
+      setMoreBoxesToShow(allBoxes?.length > boxesToShow);
+    }
   }, [allBoxes, boxesToShow, moreBoxesToShow]);
 
   // Show all boxes in the carousel mobile view
@@ -169,48 +195,141 @@ export const BoxSelector = ({
       )}
 
       <QuestionAnimation>
-        <QuestionText title={question?.questionText}>
-          <RequiredQuestionInfo isRequired={question?.isRequired} />
-        </QuestionText>
-
-        {!isMobile || (isMobile && allBoxes.length === 2) ? (
-          <div className={styles.boxRow}>
-            {allBoxes?.slice(0, boxesToShow).map((box, index) => (
-              <BoxSelectorItem
-                key={`${box._key}_${index}`}
-                question={question}
-                box={box}
-                refEl={buttonRef}
-              />
-            ))}
-          </div>
+        {isNoah ? (
+          <QuestionText title={''}>
+            <p>{noahTranslation('noahSector')}</p>
+          </QuestionText>
         ) : (
-          <Swiper {...swiperOptions}>
-            {allBoxes?.slice(0, boxesToShow).map((box, index) => (
-              <SwiperSlide key={index} className={styles.swiperSlide}>
-                <BoxSelectorItem
-                  key={`${box._key}_${index}`}
-                  question={question}
-                  box={box}
-                  refEl={buttonRef}
-                />
-              </SwiperSlide>
-            ))}
-          </Swiper>
+          <QuestionText title={question?.questionText}>
+            <RequiredQuestionInfo isRequired={question?.isRequired} />
+          </QuestionText>
         )}
-        <div className={styles.showMoreWrapper}>
-          {moreBoxesToShow && !isMobile && (
-            <Button
-              callBack={onShowMore}
-              variant="secondary"
-              onDark={true}
-              hideIcon
-              classes={styles.showMoreBtn}
-            >
-              {buttonText.trim()}
-            </Button>
-          )}
-        </div>
+        {isNoah ? (
+          <>
+            {!isMobile || (isMobile && allBoxes.length === 2) ? (
+              <>
+                <h3>{question?.growthNoahCategory}</h3>
+                <div className={[styles.boxRow, styles.extraMargin].join(' ')}>
+                  {allBoxes
+                    ?.filter((s) => s?.category === 'noah-growth')
+                    .slice(0, boxesToShow)
+                    .map((box, index) => (
+                      <BoxSelectorItem
+                        key={`${box._key}_${index}`}
+                        question={question}
+                        box={box}
+                        refEl={buttonRef}
+                      />
+                    ))}
+                </div>
+                <h3>{question?.sustainabilityNoahCategory}</h3>
+                <div className={styles.boxRow}>
+                  {allBoxes
+                    ?.filter((s) => s?.category === 'noah-sustainability')
+                    .slice(0, boxesToShow)
+                    .map((box, index) => (
+                      <BoxSelectorItem
+                        key={`${box._key}_${index}`}
+                        question={question}
+                        box={box}
+                        refEl={buttonRef}
+                      />
+                    ))}
+                </div>
+              </>
+            ) : (
+              <>
+                <h3>{question?.growthNoahCategory}</h3>
+                <Swiper {...swiperOptions} className={styles.extraMargin}>
+                  {allBoxes
+                    ?.filter((s) => s?.category === 'noah-growth')
+                    .slice(0, boxesToShow)
+                    .map((box, index) => (
+                      <SwiperSlide key={index} className={styles.swiperSlide}>
+                        <BoxSelectorItem
+                          key={`${box._key}_${index}`}
+                          question={question}
+                          box={box}
+                          refEl={buttonRef}
+                        />
+                      </SwiperSlide>
+                    ))}
+                </Swiper>
+
+                <h3>{question?.sustainabilityNoahCategory}</h3>
+                <Swiper {...swiperOptions}>
+                  {allBoxes
+                    ?.filter((s) => s?.category === 'noah-sustainability')
+                    .slice(0, boxesToShow)
+                    .map((box, index) => (
+                      <SwiperSlide key={index} className={styles.swiperSlide}>
+                        <BoxSelectorItem
+                          key={`${box._key}_${index}`}
+                          question={question}
+                          box={box}
+                          refEl={buttonRef}
+                        />
+                      </SwiperSlide>
+                    ))}
+                </Swiper>
+              </>
+            )}
+            <div className={styles.showMoreWrapper}>
+              {moreBoxesToShow && !isMobile && (
+                <Button
+                  callBack={onShowMore}
+                  variant="secondary"
+                  onDark={true}
+                  hideIcon
+                  classes={styles.showMoreBtn}
+                >
+                  {buttonText.trim()}
+                </Button>
+              )}
+            </div>
+          </>
+        ) : (
+          <>
+            {!isMobile || (isMobile && allBoxes.length === 2) ? (
+              <div className={styles.boxRow}>
+                {allBoxes?.slice(0, boxesToShow).map((box, index) => (
+                  <BoxSelectorItem
+                    key={`${box._key}_${index}`}
+                    question={question}
+                    box={box}
+                    refEl={buttonRef}
+                  />
+                ))}
+              </div>
+            ) : (
+              <Swiper {...swiperOptions}>
+                {allBoxes?.slice(0, boxesToShow).map((box, index) => (
+                  <SwiperSlide key={index} className={styles.swiperSlide}>
+                    <BoxSelectorItem
+                      key={`${box._key}_${index}`}
+                      question={question}
+                      box={box}
+                      refEl={buttonRef}
+                    />
+                  </SwiperSlide>
+                ))}
+              </Swiper>
+            )}
+            <div className={styles.showMoreWrapper}>
+              {moreBoxesToShow && !isMobile && (
+                <Button
+                  callBack={onShowMore}
+                  variant="secondary"
+                  onDark={true}
+                  hideIcon
+                  classes={styles.showMoreBtn}
+                >
+                  {buttonText.trim()}
+                </Button>
+              )}
+            </div>
+          </>
+        )}
       </QuestionAnimation>
       <QuestionButtonsWrapper>
         <div className={styles.buttonOuter} ref={buttonRef}>

@@ -25,6 +25,7 @@ export const Landing: HeroComponent = ({ ...rest }) => {
         bottomBackground?.asset?.url ? baseStyles.heroBottomBackground : '',
       ].join(' ')}
       size={'xl'}
+      id={'hero'}
       bg={type === 'light' ? 'light' : 'primary'}
       color={type === 'light' ? 'primary' : 'white'}
       // @ts-ignore
