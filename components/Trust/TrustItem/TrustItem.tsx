@@ -10,8 +10,8 @@ export const TrustItem = ({ title, extractNumberFromString, subtitle, index }) =
   const numberToAnimateRef = useRef(null);
   const { ref, inView } = useInView();
   const [animateOnce, setAnimateOnce] = useState(false);
-
-  const numberInTitle = extractNumberFromString(title)[0].toString();
+  const extractedNumber = extractNumberFromString(title);
+  const numberInTitle = extractedNumber ? extractedNumber[0].toString() : extractedNumber;
   const titleSplit = [];
   if (numberInTitle) {
     const startPositionOfNumber = title.indexOf(numberInTitle);
@@ -29,7 +29,10 @@ export const TrustItem = ({ title, extractNumberFromString, subtitle, index }) =
   const countAnimation = () => {
     let element = numberToAnimateRef?.current;
     const startNumber = 0;
-    const endNumber = parseInt(element.textContent);
+    if(!element?.textContent) {
+      return null;
+    }
+    const endNumber = parseInt(element?.textContent);
     element.textContent = startNumber;
     const animateNumberCount = animate(startNumber, endNumber, {
       duration: 2,

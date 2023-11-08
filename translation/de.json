@@ -57,7 +57,8 @@
     "skipBtn": "Überspringen",
     "required": "Eine Antwort wird benötigt",
     "backBtn": "Zurück",
-    "question": "Frage"
+    "question": "Frage",
+    "noahSector": "Bitte wählen Sie einen Sektor"
   },
   "result": {
     "loading": {
@@ -71,8 +72,9 @@
       }
     },
     "evaluation": {
-      "title": "Holen Sie sich ihre kostenlose Expertenbewertung.",
+      "title": "Fertig! An wen sollen wir die gesamte Bewertung schicken?",
       "description": "Um eine fundierte Einschätzung der Unternehmenswertes zu erhalten, wird ein Berater die Eingaben prüfen und Sie kontaktieren.",
+      "description2": "Wir möchten sicherstellen, dass die geprüfte Bewertung sicher und vertraulich nur an Sie geschickt wird.",
       "resultBox": {
         "title": "Ihr vorläufiges Ergebnis",
         "points": "{{points}}",

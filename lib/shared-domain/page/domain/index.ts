@@ -216,6 +216,8 @@ export interface Report {
 }
 
 export interface Sector {
+  noahCategory: any;
+  isNoah: boolean;
   queryOtherLangSlug: {
     slug: { current: string };
   }[];
@@ -444,4 +446,20 @@ export interface IndustryReport {
   };
   subtitle: string;
   title: string;
+}
+
+export interface LogoBarSection {
+  title: string;
+  logos: {
+    asset: {
+      url: string;
+      alt: string;
+      metadata: {
+        dimensions: {
+          height: number;
+          width: number;
+        };
+      };
+    };
+  }[];
 }

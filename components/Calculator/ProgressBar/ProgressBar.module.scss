@@ -1,6 +1,7 @@
 .progressWrapper {
   transform: rotate(-90deg);
   width: 100%;
+  margin: $gutter * 1 0;
 }
 .progressCircle {
   fill: none;

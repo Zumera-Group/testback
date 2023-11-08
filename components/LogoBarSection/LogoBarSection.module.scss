@@ -1,0 +1,55 @@
+$beam-colors: (
+  'white': $white,
+  'primary': $primary,
+  'secondary': $secondary,
+  'tertiary': $tertiary,
+  'accent': $accent,
+);
+
+.logoBarSection {
+  padding: $gutter * 2 0 !important;
+  h3 {
+    font-size: $h5-font-size;
+  }
+
+  .logoContainer {
+    .logo {
+      display: flex;
+      align-items: center;
+      img {
+        max-height: 30px;
+        width: auto;
+      }
+    }
+  }
+
+  h3,
+  .logo img {
+    margin-right: $gutter * 8;
+  }
+}
+
+@include breakpoint-down(lg) {
+  .logoBarSection {
+    h3,
+    .logo img {
+      margin-right: $gutter * 4.5;
+    }
+  }
+}
+
+@include breakpoint-down(md) {
+  .logoBarSection {
+    .logoContainer {
+      .logo {
+        img {
+          max-height: 25px;
+        }
+      }
+    }
+    h3,
+    .logo img {
+      margin-right: $gutter * 3;
+    }
+  }
+}

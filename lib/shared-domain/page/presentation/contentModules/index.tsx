@@ -34,6 +34,8 @@ import {
   PartnerReviewModule,
   PartnerVisionModule,
   WhitePaperDownloadModule,
+  LogoBarSectionModule,
+  TransactionsCarouselSectionModule,
 } from '../../domain/contentModule';
 
 import {
@@ -86,15 +88,135 @@ import { DividerLine } from 'components/DividerLine';
 import { PartnerPersonQuote } from 'components/PartnerPersonQuote';
 import { PartnerReviewSection } from 'components/PartnerReviewSection';
 import { PartnerVisionSection } from 'components/PartnerVisionSection';
+import InfoSection from 'components/Sector/SectorInfo/InfoSection';
+import GrowthRatesSection from 'components/Sector/SectorInfo/GrowthRatesSection';
+import { SectorHero, SectorTeam, SectorTransactions } from 'components/Sector';
+import FutureTrendsSection from 'components/Sector/SectorInfo/FutureTrendsSection';
+import SectorMoreDetails from 'components/SectorMoreDetails/SectorMoreDetails';
+import { WhitePaperDownloadSection } from 'components/WhitePaperDownload/WhitePaperDownloadSection';
+import { LogoBarSection } from 'components/LogoBarSection';
+
 const NewsGridSection = dynamic(() => import('./NewsGridSection'), {
   ssr: false,
 });
 export const getContentForContentModule = (
-  contentModule: ContentModule,
+  contentModule: ContentModule | any,
   siteSettings: any,
   sharedContent?: any,
   allModulesData?: any,
 ): JSX.Element => {
+  if (contentModule.specificContentModule?._type === 'moreDetailsSection') {
+    return (
+      <SectorMoreDetails
+        moreDetailsDescription={
+          contentModule.specificContentModule.moreDetailsDescription
+        }
+        sectorMoreDetailsPicture={
+          contentModule.specificContentModule.sectorMoreDetailsPicture
+        }
+        title={contentModule.specificContentModule.title}
+      />
+    );
+  }
+  if (contentModule.specificContentModule?._type === 'futureTrendsSection') {
+    return (
+      <FutureTrendsSection
+        futureTrends={{
+          title: contentModule.specificContentModule.title,
+          trendDescription:
+            contentModule.specificContentModule.trendDescription,
+          trendsImage: contentModule.specificContentModule.trendsImage,
+        }}
+      />
+    );
+  }
+  if (contentModule.specificContentModule?._type === 'sectorHeroSection') {
+    const {
+      contributors,
+      name,
+      date,
+      type,
+      detailPageHeroImage,
+      contributorsTitle,
+      typeTitle,
+      dateTitle,
+    } = contentModule.specificContentModule;
+
+    return (
+      <SectorHero
+        content={{
+          contributors: contributorsTitle,
+          type: typeTitle,
+          lateUpdate: dateTitle,
+        }}
+        sector={{
+          contributors,
+          name,
+          date,
+          type,
+          detailPageHeroImage,
+        }}
+      />
+    );
+  }
+  if (contentModule.specificContentModule?._type === 'teamWithQuoteSection') {
+    return (
+      <SectorTeam
+        hideLink
+        sector={{
+          teamSection: {
+            title: contentModule.specificContentModule.title,
+            description: contentModule.specificContentModule.description,
+            author: contentModule.specificContentModule.author,
+            quote: contentModule.specificContentModule.quoteText,
+            linkText: contentModule.specificContentModule.linkText,
+          },
+          contributors: [
+            {
+              newsGridPicture: {
+                picture:
+                  contentModule.specificContentModule.author.detailPagePicture,
+              },
+              jobTitle: contentModule.specificContentModule.author.jobTitle,
+              firstName: contentModule.specificContentModule.author.firstName,
+              lastName: contentModule.specificContentModule.author.lastName,
+            },
+          ],
+        }}
+      />
+    );
+  }
+  if (contentModule.specificContentModule?._type === 'growthRateSection') {
+    return (
+      <GrowthRatesSection
+        growthRatesTable={contentModule.specificContentModule.growthRatesTable}
+        transactionsTable={
+          contentModule.specificContentModule.transactionsTable
+        }
+        trendsTable={contentModule.specificContentModule.trendsTable}
+      />
+    );
+  }
+  if (contentModule.specificContentModule?._type === 'infoSection') {
+    return (
+      <InfoSection
+        title={contentModule.specificContentModule.title}
+        subtitle={contentModule.specificContentModule.subtitle}
+        description={contentModule.specificContentModule.subtitle}
+        accordionQuestionAndAnswers={
+          contentModule.specificContentModule.accordionQuestionAndAnswers || []
+        }
+      />
+    );
+  }
+  if (contentModule.specificContentModule instanceof LogoBarSectionModule) {
+    return (
+      <LogoBarSection
+        specificContentModule={contentModule.specificContentModule}
+      />
+    );
+  }
+
   if (contentModule.specificContentModule instanceof PartnerVisionModule) {
     return (
       <PartnerVisionSection
@@ -135,13 +257,13 @@ export const getContentForContentModule = (
       />
     );
   }
-  // if (contentModule.specificContentModule instanceof WhitePaperDownloadModule) {
-  //   return (
-  //     <WhitePaperDownload
-  //       specificContentModule={contentModule.specificContentModule}
-  //     />
-  //   );
-  // }
+  if (contentModule.specificContentModule instanceof WhitePaperDownloadModule) {
+    return (
+      <WhitePaperDownloadSection
+        specificContentModule={contentModule.specificContentModule}
+      />
+    );
+  }
   if (contentModule.specificContentModule instanceof TransactionQuoteModule) {
     return (
       <TransactionQuote

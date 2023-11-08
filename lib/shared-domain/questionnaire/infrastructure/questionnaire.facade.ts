@@ -15,6 +15,67 @@ const queryQuestionnaire = (
     current
   },
   questionnaireName,
+  isNoah,
+  result {
+    greenCheckmarkTexts,
+    authors {
+      authorsTitle,
+      author1 -> {
+        jobTitle,
+        firstName,
+        lastName,
+        email,
+        slug,
+        calendlyURL,
+        _id,
+        title,
+        cardPicture {
+          ...
+          picture {
+            asset->{
+              url,
+              type
+            },
+          }
+        },
+      },
+      author2 -> {
+        jobTitle,
+        firstName,
+        lastName,
+        email,
+        slug,
+        calendlyURL,
+        _id,
+        title,
+        cardPicture {
+          ...
+          picture {
+            asset->{
+              url,
+              type
+            },
+          }
+        },
+      }
+    },
+    growthRatesTable,
+    heroSection,
+    logoBarSection{
+      title,
+      logos[]{
+        asset->{
+          url,
+          metadata{
+            dimensions{
+              height,
+              width
+            }
+          }
+        },
+      }
+    }
+  },
   sectorSpecific,
   checkmarkTexts,
   "categories": navigationCategories[],
@@ -46,6 +107,8 @@ const queryQuestion = (
   salesforceId,
   showMoreButton,
   hasMultipleAnswers,
+  growthNoahCategory,
+  sustainabilityNoahCategory,
   isRequired,
   answerSelector{
     answerType,
