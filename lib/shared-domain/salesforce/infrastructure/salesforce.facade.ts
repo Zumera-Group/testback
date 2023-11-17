@@ -14,6 +14,7 @@ const endpoints = {
   getSectionsAndIndustries: 'overview',
   submitContactForm: 'contact',
   createOrUpdateLeadEntry: 'lead_entries',
+  createOrUpdateHistory: 'lead_history',
   getLeadEntry: (id: string) => 'lead_entries/' + id,
   getLeadEntryScore: (id: string) => 'lead_entries/' + id + '/score',
 };
@@ -24,6 +25,77 @@ const requestsConfig = {
 
 export class SalesforceFacade {
   constructor(private httpService = new AxiosService()) {}
+
+  async createLeadHistory(
+      uniqueId: string,
+  ): Promise<void> {
+    try {
+      const marketingParams = MarketingParamsService.retrieve();
+      const cookies = MarketingParamsService.getCookies();
+
+      const keyMap = {
+        [unformattedParams[0]]: 'UTMSource__c',
+        [unformattedParams[1]]: 'UTMMedium__c',
+        [unformattedParams[2]]: 'UTMCampaign__c',
+        [unformattedParams[3]]: 'UTM_ID__c',
+        [unformattedParams[4]]: 'UTM_Source_Platform__c',
+        [unformattedParams[5]]: 'UTMTerm__c',
+        [unformattedParams[6]]: 'UTM_Content__c',
+        [unformattedParams[7]]: 'gclid__c',
+        [unformattedParams[8]]: 'fbclid__c',
+      };
+
+      const formattedMarketingParams = Object.keys(marketingParams).reduce(
+          (acc, key) => {
+            const newKey = keyMap[key] || key;
+            acc[newKey] = marketingParams[key];
+
+            console.log("acc", acc);
+
+            return acc;
+          },
+          {},
+      );
+
+      /*
+        uniqueId contains a new string every time the user drops the session
+        if uniqueId and cookies uid are the same that means we are in the same session.
+        If they are different that means we are in a new session.
+        In a new session, we need to create a new lead entry history but with the old unique id.
+       */
+      if(uniqueId === cookies.uid) {
+
+      }
+
+
+      const params = {
+        lead_entry: {
+          unique_id: uniqueId,
+          // current_progress: currentProgress,
+        },
+      };
+
+      // qLogs(
+      //   'SalesforceFacade.createOrUpdateLeadEntry ' + JSON.stringify(fields),
+      // );
+
+      // qLogs(marketingParams);
+      // qLogs(fields);
+      // qLogs(assessmentPurpose);
+      // qLogs(`lead sf ${leadSourceURL}`);
+
+      await this.httpService.post(
+          endpoints.createOrUpdateHistory,
+          params,
+          requestsConfig,
+      );
+    } catch (e) {
+      qErrorLogs('ERRORsetAnswer => updating to' + JSON.stringify(e));
+      trackApplicationError('createOrUpdateLeadEntry', e);
+
+      throw new Error(e);
+    }
+  }
 
   async createOrUpdateLeadEntry(
     uniqueId: string,
