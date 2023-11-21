@@ -18,7 +18,7 @@ export const ProgressBar: React.FC<Props> = ({
 }) => {
   const isMobile = useMediaQuery(`(max-width: ${SCREEN_SIZE_MD})`);
 
-  const pt = router.locale === 'en' ? 'pts' : 'pkt';
+  const pt = router.locale === 'en' ? 'pts' : router.locale === 'fr' ? 'points' : 'pkt';
 
   const DesktopIcon = () => {
     return (

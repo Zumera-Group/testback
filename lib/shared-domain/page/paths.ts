@@ -23,3 +23,16 @@ export const dePaths = [
   'impressum',
   'unternehmenswert-rechner',
 ];
+
+export const frPaths = [
+  'home',
+  'secteurs',
+  'prestations-de-service',
+  'transactionnel',
+  'propos-de-nous',
+  'news',
+  'cdi-global',
+  'carriere',
+  'imprimer',
+  'outil-de-valorisation',
+];

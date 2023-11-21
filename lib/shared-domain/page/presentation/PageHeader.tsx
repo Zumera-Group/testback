@@ -36,7 +36,6 @@ export const PageHeader: React.FC<Props> = ({
       siteSettings={siteSettings}
       contentModules={contentModules}
       darkBg={darkBg}
-      otherLangSlug={otherLangSlug}
       hideHeader={hideHeader}
       isLightHeader={isLightHeader}
       hideBurger={hideBurger}
