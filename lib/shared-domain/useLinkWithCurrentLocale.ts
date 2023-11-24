@@ -15,7 +15,6 @@ export const useLinkWithCurrentLocale = () => {
     if (
       path?.startsWith('/de/') ||
       path?.startsWith('/en/') ||
-      path?.startsWith('/fr/') ||
       path?.startsWith('http')
     )
       return path;

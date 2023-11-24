@@ -25,7 +25,6 @@ import { LogoExtended } from 'components/Icons/LogoExtended';
 
 import styles from './Header.module.scss';
 import { getTranslateByScope } from 'translation/i18n';
-import { allLinks } from 'lib/links';
 
 const t = getTranslateByScope('question');
 
@@ -33,6 +32,7 @@ export const Header = ({
   siteSettings,
   contentModules,
   darkBg,
+  otherLangSlug,
   hideHeader,
   isLightHeader,
   hideBurger,
@@ -50,8 +50,9 @@ export const Header = ({
   const linkWithCurrentLocale = useLinkWithCurrentLocale();
   const homeSlug = linkWithCurrentLocale(siteSettings?.homePage?.slug?.current);
   const [isLanding, setIsLanding] = useState(false);
-
-  const hideTopBanner = router.asPath.includes(`/${allLinks.questionnaires[router.locale]}/`);
+  const isQuestionnaire = () =>
+    router.locale === 'en' ? '/questionnaires/' : '/fragenkatalog/';
+  const hideTopBanner = router.asPath.includes(isQuestionnaire());
 
   const isLightPage = () => {
     if (isLightHeader) return true;
@@ -136,8 +137,9 @@ export const Header = ({
   //set session storage for campaign landing page joruney to calculator
   useEffect(() => {
     const isLandingRoute = router.route.includes('landing');
-    const isQuestionnaireRoute = router.route.includes(allLinks.questionnaires[router.locale]);
-
+    const isQuestionnaireRoute =
+      router.route.includes('questionnaires') ||
+      router.route.includes('fragenkatalog');
     const session = sessionStorage.getItem('isLanding');
 
     if (
@@ -202,8 +204,8 @@ export const Header = ({
           {!hideBurger && (
             <div className={styles.actionsWrapper}>
               <LanguageSwitcher
+                otherLangSlug={otherLangSlug}
                 classes={styles.languageSelector}
-                isLight={isLightPage()}
               />
 
               {!hideMenu ? (
@@ -233,6 +235,7 @@ export const Header = ({
               blogArticles={blogArticles}
               logo={<Logo slug={homeSlug} title={siteName} isAnimated={true} />}
               closeBigMenu={() => setBigMenuOpen(false)}
+              otherLangSlug={otherLangSlug}
             />
           )}
         </AnimatePresence>

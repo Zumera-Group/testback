@@ -1,12 +1,10 @@
 /* eslint-disable no-undef */
-import { enPaths, dePaths, frPaths } from '../../lib/shared-domain/page/paths';
+import { enPaths, dePaths } from '../../lib/shared-domain/page/paths';
 import { slugifyOffice } from '../../lib/shared-domain/offices/application/slugifyOffice';
-import { allLinks } from 'lib/links';
 
 const langs = {
   en: enPaths,
   de: dePaths,
-  fr: frPaths,
 };
 
 export default async function preview(req, res) {
@@ -34,8 +32,8 @@ export default async function preview(req, res) {
   res.setPreviewData({ preview: true });
 
   if (req?.query?.type === 'valueCalculator') {
-    // const pageSlug = req?.query?.lang === 'de' ? 'fragenkatalog' : 'questionnaires';
-    const pageSlug = allLinks.questionnaires[req?.query?.lang];
+    const pageSlug =
+      req?.query?.lang === 'de' ? 'fragenkatalog' : 'questionnaires';
     res.writeHead(307, {
       Location: `/${req?.query?.lang}/${pageSlug}/${req?.query?.slug}` ?? `/`,
     });
@@ -55,8 +53,7 @@ export default async function preview(req, res) {
       Location: `/${req?.query?.lang}/landing/${req?.query?.slug}` ?? `/`,
     });
   } else if (req?.query?.type === 'employee') {
-    const pageSlug = allLinks.employees[req?.query?.lang];
-
+    const pageSlug = req?.query?.lang === 'de' ? 'mitarbeiter' : 'employees';
     res.writeHead(307, {
       Location: `/${req?.query?.lang}/${pageSlug}/${req?.query?.slug}` ?? `/`,
     });
@@ -65,7 +62,8 @@ export default async function preview(req, res) {
       Location: `/${req?.query?.lang}/blog/${req?.query?.slug}` ?? `/`,
     });
   } else if (req?.query?.type === 'blogValToolArticle') {
-      const pageSlug = allLinks['valuation-tool'][req?.query?.lang];
+    const pageSlug =
+      req?.query?.lang === 'de' ? 'unternehmenswert-rechner' : 'valuation-tool';
     res.writeHead(307, {
       Location: `/${req?.query?.lang}/${pageSlug}/${req?.query?.slug}` ?? `/`,
     });

@@ -6,7 +6,6 @@ import { Button } from 'components/Button';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { sanityImageUrlFor } from 'lib/sanity';
-import { allLinks } from 'lib/links';
 interface IProps {
   sector: Sector;
   linkText: string;
@@ -39,9 +38,9 @@ export const TransactionSector: React.FC<IProps> = ({
               variant={'secondary'}
               link={{
                 slug: {
-                  current: `/${allLinks.sectors[router.locale]}/${
-                    sector?.slug?.current
-                  }`,
+                  current: `/${
+                    router.locale === 'en' ? '/sectors' : '/sektoren'
+                  }/${sector?.slug?.current}`,
                 },
               }}
               onDark={true}
