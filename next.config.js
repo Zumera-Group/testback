@@ -9,7 +9,7 @@ const sassOptions = {
 module.exports = {
   // Remove this object
   i18n: {
-    locales: ['en', 'de', 'fr', 'catchAll'],
+    locales: ['en', 'de', 'catchAll'],
     defaultLocale: 'catchAll',
   },
   images: {
@@ -45,11 +45,6 @@ module.exports = {
       {
         source: '/en/',
         destination: '/en/home',
-        permanent: true,
-      },
-      {
-        source: '/fr/',
-        destination: '/fr/home',
         permanent: true,
       },
       {

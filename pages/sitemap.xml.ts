@@ -28,27 +28,21 @@ export const getServerSideProps = async ({ res }) => {
 
   const enTransactions = await fetchTransactions('en');
   const deTransactions = await fetchTransactions('de');
-  const frTransactions = await fetchTransactions('fr');
 
   const enServices = await fetchServices('en');
   const deServices = await fetchServices('de');
-  const frServices = await fetchServices('fr');
 
   const enSectors = await fetchSectors('en');
   const deSectors = await fetchSectors('de');
-  const frSectors = await fetchSectors('fr');
 
   const enNews = await fetchNewsArticles('en');
   const deNews = await fetchNewsArticles('de');
-  const frNews = await fetchNewsArticles('fr');
 
   const enEmployees = await fetchEmployees('en');
   const deEmployees = await fetchEmployees('de');
-  const frEmployees = await fetchEmployees('fr');
 
   const enOffices = await fetchOffices('en');
   const deOffices = await fetchOffices('de');
-  const frOffices = await fetchOffices('fr');
 
   const questionnaires = await fetchQuestionnaires();
 
@@ -62,33 +56,33 @@ export const getServerSideProps = async ({ res }) => {
     ),
   );
 
-  const staticTransactions = [...enTransactions, ...deTransactions, ...frTransactions]?.map((t) =>
+  const staticTransactions = [...enTransactions, ...deTransactions]?.map((t) =>
     getUrl(
       links(SanityService.getLocaleFromSanityLocale(t._lang)).transactions(t),
     ),
   );
 
-  const staticServices = [...enServices, ...deServices, ...frServices]?.map((s) =>
+  const staticServices = [...enServices, ...deServices]?.map((s) =>
     getUrl(links(SanityService.getLocaleFromSanityLocale(s._lang)).services(s)),
   );
 
-  const staticSectors = [...enSectors, ...deSectors, ...frSectors]?.map((s) =>
+  const staticSectors = [...enSectors, ...deSectors]?.map((s) =>
     getUrl(links(SanityService.getLocaleFromSanityLocale(s._lang)).sectors(s)),
   );
 
-  const staticNews = [...enNews, ...deNews, ...frNews]?.map((n) =>
+  const staticNews = [...enNews, ...deNews]?.map((n) =>
     getUrl(
       links(SanityService.getLocaleFromSanityLocale(n._lang)).newsArticles(n),
     ),
   );
 
-  const staticEmployees = [...enEmployees, ...deEmployees, ...frEmployees]?.map((e) =>
+  const staticEmployees = [...enEmployees, ...deEmployees]?.map((e) =>
     getUrl(
       links(SanityService.getLocaleFromSanityLocale(e._lang)).employees(e),
     ),
   );
 
-  const staticOffices = [...enOffices, ...deOffices, ...frOffices]?.map((o) =>
+  const staticOffices = [...enOffices, ...deOffices]?.map((o) =>
     getUrl(
       '/' +
         SanityService.getLocaleFromSanityLocale(o._lang) +

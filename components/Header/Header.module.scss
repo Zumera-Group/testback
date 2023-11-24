@@ -57,12 +57,6 @@
     .container:after {
       @include divider(bottom, $primary);
     }
-
-    .actionsWrapper {
-      button {
-        color: $primary;
-      }
-    }
   }
 
   &.hideBorder {
@@ -99,6 +93,10 @@
   opacity: 1;
   margin-right: $gutter * 0.5;
   transition: color $timing-sm $ease-out, opacity $timing-md $ease-out;
+  @include hover-state() {
+    color: inherit;
+    opacity: 0.75;
+  }
   @include breakpoint-down(md) {
     display: none;
   }

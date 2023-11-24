@@ -18,7 +18,6 @@ import { useRouter } from 'next/router';
 import { fetchTransactions } from 'lib/shared-domain/transactions/application/useGetTransactions';
 import { Transaction } from 'lib/shared-domain/transactions/domain';
 import { Button } from 'components/Button';
-import { allLinks } from 'lib/links';
 
 export const TransactionsSelected: React.FC<{
   transaction: Transaction;
@@ -35,7 +34,8 @@ export const TransactionsSelected: React.FC<{
   );
   if (!filteredTransactions || filteredTransactions.length === 0) return null;
 
-  const transactionSlug = `/${allLinks.transactions[router.locale]}`
+  const transactionSlug =
+    router.locale === 'en' ? '/transactions' : '/transaktionen';
 
   return (
     <Section size={'md'} bg={'light'} color={'primary'}>

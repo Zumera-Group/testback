@@ -6,7 +6,6 @@ import styles from './Articles.module.scss';
 import Pagination from './Pagination';
 import FirstPage from './FirstPage';
 import { useRouter } from 'next/router';
-import { getArticlePaginationInfo } from 'lib/links';
 
 interface Props {
   featuredBlog: any;
@@ -41,12 +40,14 @@ const Articles: React.FC<Props> = ({
   const endArticle = Math.min((pageIndex + 1) * perPage, blog.total);
   const { locale } = useRouter();
 
-  const result = getArticlePaginationInfo({
-    total: blog.total,
-    startArticle,
-    endArticle,
-    locale,
-  });
+  const result =
+    locale === 'en'
+      ? `Showing ${startArticle}-${endArticle + 1} of ${
+          blog.total + 1
+        } articles`
+      : `Zeigt ${startArticle}-${endArticle + 1} von ${
+          blog.total + 1
+        } artikeln`;
 
   return (
     <div className={styles.root}>

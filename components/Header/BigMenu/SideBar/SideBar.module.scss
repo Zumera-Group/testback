@@ -49,6 +49,14 @@
   margin: var(--sidebar-padding-y) 0 0 0;
 }
 
+.item {
+  margin: 0;
+  &__divider {
+    margin-top: var(--sidebar-link-padding-y);
+    @include divider(top, $white);
+  }
+}
+
 .link {
   @include reset-button();
   @include menu-item-text();
@@ -78,18 +86,5 @@
   }
   &__languageSelector {
     margin-top: var(--sidebar-link-padding-y);
-  }
-}
-
-.item {
-  margin: 0;
-  &__divider {
-    margin-top: var(--sidebar-link-padding-y);
-    @include divider(top, $white);
-  }
-  > div {
-    @include hover-state() {
-      background-color: transparent !important;
-    }
   }
 }
