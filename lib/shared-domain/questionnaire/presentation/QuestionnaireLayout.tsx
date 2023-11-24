@@ -132,7 +132,7 @@ const QuestionnaireLayout: React.FC<{
 
       if(getBrowserCookie('_uid')){
         setUniqueId(getBrowserCookie('_uid'));
-        syncHistory(uniqueId);
+        syncHistory(getBrowserCookie('_uid'));
       } else {
         setUniqueId(newUuid);
         setBrowserCookie('_uid', newUuid, 365);

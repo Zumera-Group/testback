@@ -14,7 +14,7 @@ const endpoints = {
   getSectionsAndIndustries: 'overview',
   submitContactForm: 'contact',
   createOrUpdateLeadEntry: 'lead_entries',
-  createOrUpdateHistory: 'lead_history',
+  createOrUpdateHistory: (id: string) => '/lead_entries/'+ id + '/lead_history',
   getLeadEntry: (id: string) => 'lead_entries/' + id,
   getLeadEntryScore: (id: string) => 'lead_entries/' + id + '/score',
 };
@@ -57,20 +57,13 @@ export class SalesforceFacade {
           {},
       );
 
-      /*
-        uniqueId contains a new string every time the user drops the session
-        if uniqueId and cookies uid are the same that means we are in the same session.
-        If they are different that means we are in a new session.
-        In a new session, we need to create a new lead entry history but with the old unique id.
-       */
-      if(uniqueId === cookies.uid) {
-
-      }
-
-
       const params = {
         lead_entry: {
           unique_id: uniqueId,
+          data: {
+            ...formattedMarketingParams,
+            ...cookies,
+          }
           // current_progress: currentProgress,
         },
       };
@@ -85,13 +78,13 @@ export class SalesforceFacade {
       // qLogs(`lead sf ${leadSourceURL}`);
 
       await this.httpService.post(
-          endpoints.createOrUpdateHistory,
+          endpoints.createOrUpdateHistory(uniqueId),
           params,
           requestsConfig,
       );
     } catch (e) {
       qErrorLogs('ERRORsetAnswer => updating to' + JSON.stringify(e));
-      trackApplicationError('createOrUpdateLeadEntry', e);
+      trackApplicationError('createLeadHistory', e);
 
       throw new Error(e);
     }
@@ -130,8 +123,6 @@ export class SalesforceFacade {
         (acc, key) => {
           const newKey = keyMap[key] || key;
           acc[newKey] = marketingParams[key];
-
-          console.log("acc", acc);
 
           return acc;
         },
