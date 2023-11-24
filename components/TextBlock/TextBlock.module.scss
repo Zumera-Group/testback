@@ -1,0 +1,8 @@
+.textBlock {
+  margin-bottom: $blog-mb-mobile * 0.75;
+  @include breakpoint-up(md) {
+    margin-bottom: $blog-mb-desktop;
+  }
+}
+
+@include innerOffset;
