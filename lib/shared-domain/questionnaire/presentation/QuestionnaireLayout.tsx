@@ -57,6 +57,8 @@ const QuestionnaireLayout: React.FC<{
   const router = useRouter();
   const result = selectedQuestionnaire?.result;
 
+  // console.log(selectedQuestionnaire);
+
   useSetQuestionnaireLocaleToUseFori18n(locale);
   const [currenQuestionPosition, setCurrentQuestionPosition] = useState(0);
   const isMobile = useMediaQuery(`(max-width: ${SCREEN_SIZE_MD})`);
@@ -276,7 +278,9 @@ const QuestionnaireLayout: React.FC<{
                         {questionnaire && !isOnResultScreen && !isMobile && (
                           <Sidebar />
                         )}
-                        {isOnResultScreen && <ScoreCard />}
+                        {isOnResultScreen && (
+                          <ScoreCard questionnaire={selectedQuestionnaire} />
+                        )}
                       </aside>
                     </GridColumn>
                   )}

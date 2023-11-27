@@ -8,7 +8,8 @@ import * as animationData from './loading-wheel.json';
 import Lottie from 'react-lottie';
 import { motion } from 'framer-motion';
 
-export const ScoreCard = () => {
+export const ScoreCard = ({ questionnaire }) => {
+  console.log(questionnaire.resultScreenCopy);
   const tr = getTranslateByScope('result');
 
   const [score, setScore] = React.useState<{
@@ -56,10 +57,14 @@ export const ScoreCard = () => {
   const points = tr('evaluation.resultBox.points', {
     points: presenter.getFormattedPoints(),
   });
-  const title = tr('evaluation.resultBox.title');
-  const betterThan = tr('evaluation.resultBox.betterThen', {
-    percentage: presenter.getPercentage(),
-  });
+  const title = questionnaire.resultScreenCopy.sideBar.heading;
+  const betterThan1 =
+    questionnaire.resultScreenCopy.sideBar.betterThanFirstPart;
+  const betterThan2 =
+    questionnaire.resultScreenCopy.sideBar.betterThanSecondPart;
+  const percentage = presenter.getPercentage();
+
+  const betterThan = `${betterThan1} ${percentage}% ${betterThan2}`;
 
   const defaultOptions = {
     loop: true,
