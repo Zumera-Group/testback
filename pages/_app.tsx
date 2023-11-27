@@ -111,7 +111,7 @@ function MyApp({ Component, pageProps, router }) {
         src="https://assets.calendly.com/assets/external/widget.js"
         // strategy="worker"
       />
-      <Script src="https://cdn.ywxi.net/js/1.js" async />
+      <Script strategy="lazyOnload" src="https://cdn.ywxi.net/js/1.js" async />
       {/*<link rel="canonical" href={`https://www.zumera.com/${lang}/${slug}`} />*/}
       <IconSprite />
     </>
