@@ -9,7 +9,6 @@ import Lottie from 'react-lottie';
 import { motion } from 'framer-motion';
 
 export const ScoreCard = ({ questionnaire }) => {
-  console.log(questionnaire.resultScreenCopy);
   const tr = getTranslateByScope('result');
 
   const [score, setScore] = React.useState<{
@@ -63,8 +62,9 @@ export const ScoreCard = ({ questionnaire }) => {
   const betterThan2 =
     questionnaire.resultScreenCopy.sideBar.betterThanSecondPart;
   const percentage = presenter.getPercentage();
-
   const betterThan = `${betterThan1} ${percentage}% ${betterThan2}`;
+  const bookletImage =
+    questionnaire.resultScreenCopy.sideBar.bookletImage.asset.url;
 
   const defaultOptions = {
     loop: true,
@@ -103,7 +103,7 @@ export const ScoreCard = ({ questionnaire }) => {
             loading="lazy"
             // objectFit="cover"
             alt={'booklet'}
-            src={'/calculator/booklet.png'}
+            src={bookletImage}
             width={237}
             height={200}
             style={{
