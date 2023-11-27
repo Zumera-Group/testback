@@ -1,5 +1,5 @@
 import styles from './TextBlock.module.scss';
-import { RichText } from '../RichText';
+import { RichText } from '../../components/BlogModules/RichText';
 import { Container, Grid, GridColumn } from 'components/Layout';
 
 export const TextBlock: React.FC<any> = ({ specificContentModule }) => {
@@ -14,9 +14,8 @@ export const TextBlock: React.FC<any> = ({ specificContentModule }) => {
           className={styles.content}
         >
           <GridColumn sm={12} md={12} lg={8}>
-            <h1>this is a header</h1>
-            {/* {subheading && <h4>{subheading}</h4>} */}
-            {/* <RichText content={text} /> */}
+            {subheading && <h4>{subheading}</h4>}
+            <RichText content={text} />
           </GridColumn>
         </Grid>
       </div>
