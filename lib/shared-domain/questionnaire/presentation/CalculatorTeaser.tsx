@@ -4,7 +4,6 @@ import router, { useRouter } from 'next/router';
 import styles from './CalculatorTeaser.module.scss';
 import { HalfBeam } from 'components/HalfBeam';
 import { Button } from 'components/Button';
-import { allLinks } from 'lib/links';
 
 export const ResultTeaser: React.FC<{
   calculatorSteps: {
@@ -22,13 +21,6 @@ export const ResultTeaser: React.FC<{
     step4: 'Zumera Evaluation',
   };
 
-  const frSteps = {
-    step1: 'Informations générales',
-    step2: 'Spécificités de l\'entreprise',
-    step3: 'Spécificités du secteur',
-    step4: 'Évaluation Zumera',
-  };
-
   const deSteps = {
     step1: 'Allgemeine Informationen',
     step2: 'Spezifische Angaben zum Unternehmen',
@@ -36,14 +28,7 @@ export const ResultTeaser: React.FC<{
     step4: 'Zumera Bewertung',
   };
 
-  const _steps = {
-    de: deSteps,
-    fr: frSteps,
-    en: enSteps,
-  }
-
-  const steps = _steps[router.locale];
-
+  const steps = router.locale === 'en' ? enSteps : deSteps;
   return (
     <div className={styles.calculatorTeaserWrapper}>
       <HalfBeam />
@@ -93,8 +78,7 @@ export const CalculatorTeaser: React.FC<{
   calculatorSteps,
 }) => {
   const router = useRouter();
-  const page = allLinks.questionnaires[router.locale];
-
+  const page = router.locale === 'en' ? 'questionnaires' : 'fragenkatalog';
   if (!questionnaireSlug) return null;
 
   return (

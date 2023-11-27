@@ -12,7 +12,6 @@ import { sanityImageUrlFor } from 'lib/sanity';
 import { SwiperRelatedArticles } from 'components/Layout/SwiperRelatedArticles';
 import { useFormatDate } from 'lib/shared-domain/useFormatDate';
 import { useRouter } from 'next/router';
-import { getBuiltLink } from 'lib/links';
 
 const RelatedArticles: React.FC<{
   relatedArticles: any;
@@ -63,11 +62,11 @@ const RelatedArticles: React.FC<{
             <article className={styles.articleCard}>
               {article._type === 'blogArticle' ? (
                 <a
-                  href={getBuiltLink({
-                    locale,
-                    path: 'blog',
-                    uri: article?.slug?.current,
-                  })}
+                  href={
+                    locale === 'en'
+                      ? `/en/blog/${article?.slug?.current}`
+                      : `/de/blog/${article?.slug?.current}`
+                  }
                 >
                   <div className={styles.thumbnail}>
                     <Image
@@ -99,11 +98,11 @@ const RelatedArticles: React.FC<{
                 </a>
               ) : (
                 <a
-                  href={getBuiltLink({
-                    locale,
-                    path: 'valuation-tool',
-                    uri: article?.slug?.current,
-                  })}
+                  href={
+                    locale === 'en'
+                      ? `/en/valuation-tool/${article?.slug?.current}`
+                      : `/de/unternehmenswert-rechner/${article?.slug?.current}`
+                  }
                 >
                   <div className={styles.thumbnail}>
                     <Image
