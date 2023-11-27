@@ -14,8 +14,9 @@ export const TextBlock: React.FC<any> = ({ specificContentModule }) => {
           className={styles.content}
         >
           <GridColumn sm={12} md={12} lg={8}>
-            {subheading && <h4>{subheading}</h4>}
-            <RichText content={text} />
+            <h1>this is a header</h1>
+            {/* {subheading && <h4>{subheading}</h4>} */}
+            {/* <RichText content={text} /> */}
           </GridColumn>
         </Grid>
       </div>
