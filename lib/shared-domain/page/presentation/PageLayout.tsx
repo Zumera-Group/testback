@@ -46,7 +46,7 @@ const PageLayout: React.FC<{
           darkBg={page.darkBg}
         />
         <Suspense fallback={() => <div>loading</div>}>
-          <main id="main">
+          <main id="main" className={page.whiteBg && 'white-bg'}>
             {contentModules &&
               contentModules.map((c) => {
                 return (

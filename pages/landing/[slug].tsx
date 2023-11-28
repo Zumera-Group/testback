@@ -83,6 +83,8 @@ export default function Index({
   const previewPage = filterDataToSingleItem(previewData, preview);
   const router = useRouter();
 
+  sharedContent.whiteBg = previewPage?.whiteBg || selectedLanding?.whiteBg;
+
   useEffect(() => {
     if (selectedLanding?.hidePage) {
       router.push(`/${router.locale}/home`);
