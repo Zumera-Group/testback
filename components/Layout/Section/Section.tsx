@@ -29,7 +29,7 @@ export const Section: React.FC<Props> = ({
   const { whiteBg } = useSharedContentContext();
   const sectionBG = () => {
     if (whiteBg && bg === 'light') {
-      return styles['bg-white'] || styles['bg-light'];
+      return styles['bg-white'];
     } else {
       return styles[`bg-${bg}`] || styles['bg-light'];
     }
