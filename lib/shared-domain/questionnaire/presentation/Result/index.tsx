@@ -69,10 +69,7 @@ const AppointmentBookingScreen: React.FC<{ userCalendlyLink?: string }> = ({
   return (
     <AnimateIn>
       <QuestionText title={t('appointment.title')} />
-      <InlineWidget
-        url={process.env.NEXT_PUBLIC_CALENDLY_LINK}
-        prefill={prefill}
-      />
+      <InlineWidget url={userCalendlyLink} prefill={prefill} />
     </AnimateIn>
   );
 };
@@ -94,6 +91,7 @@ const EvaluationScreen: React.FC<{
   const [checkboxIsChecked, setCheckboxIsChecked] = React.useState(false);
   const [pressed, setPressed] = React.useState(false);
   const { locale } = useRouter();
+
   const SEND_IS_ALLOWED =
     checkboxIsChecked &&
     getAnswer(NAME_STORE_INDICATOR)?.trim() &&
@@ -277,6 +275,7 @@ export const Result: React.FC<{ questionnaire: any }> = (questionnaire) => {
   }>(null);
   const [hasError, setHasError] = React.useState(false);
   const { getScore } = useGetSalesforceScore();
+  const calendlyFallback = process.env.NEXT_PUBLIC_CALCULATOR_CALENDLY_FALLBACK;
 
   React.useEffect(() => {
     const loadScore = async () => {
@@ -311,7 +310,9 @@ export const Result: React.FC<{ questionnaire: any }> = (questionnaire) => {
           resultScreenCopy={resultScreenCopy}
         />
       ) : (
-        <AppointmentBookingScreen userCalendlyLink={score.calendly} />
+        <AppointmentBookingScreen
+          userCalendlyLink={score.calendly ? score.calendly : calendlyFallback}
+        />
       )}
     </>
   );
