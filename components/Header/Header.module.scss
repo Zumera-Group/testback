@@ -44,6 +44,11 @@
 
   &__white {
     background-color: $white !important;
+    color: $primary;
+    svg,
+    path {
+      fill: $primary;
+    }
   }
 
   &__light,

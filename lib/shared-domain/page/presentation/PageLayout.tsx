@@ -44,6 +44,7 @@ const PageLayout: React.FC<{
           hideHeader={page.isHeaderRoutesHidden}
           hideMenu={page.hideNavMenu}
           darkBg={page.darkBg}
+          whiteBg={page.whiteBg}
         />
         <Suspense fallback={() => <div>loading</div>}>
           <main id="main" className={page.whiteBg && 'white-bg'}>

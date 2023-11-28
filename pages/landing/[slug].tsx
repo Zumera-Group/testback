@@ -29,8 +29,9 @@ export async function getStaticProps({ locale, params, preview = false }) {
   try {
     const { landing, query } = await fetchLanding(locale, params.slug, preview);
     const siteSettings = await fetchSiteSettings(locale);
-    const sharedContent =
-      await new SharedContentFacade().getSharedContentFacade(locale);
+    let sharedContent = await new SharedContentFacade().getSharedContentFacade(
+      locale,
+    );
 
     if (!landing) {
       return {
@@ -83,7 +84,9 @@ export default function Index({
   const previewPage = filterDataToSingleItem(previewData, preview);
   const router = useRouter();
 
-  sharedContent.whiteBg = previewPage?.whiteBg || selectedLanding?.whiteBg;
+  if (sharedContent) {
+    sharedContent.whiteBg = previewPage?.whiteBg || selectedLanding?.whiteBg;
+  }
 
   useEffect(() => {
     if (selectedLanding?.hidePage) {

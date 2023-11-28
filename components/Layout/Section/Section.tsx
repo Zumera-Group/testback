@@ -26,7 +26,14 @@ export const Section: React.FC<Props> = ({
   ...rest
 }) => {
   const Component = as || 'section';
-  const { whiteBg } = useSharedContentContext();
+
+  let whiteBg = false;
+  try {
+    const result = useSharedContentContext();
+    whiteBg = result.whiteBg;
+  } catch (error) {
+    console.error('An error occurred:', error.message);
+  }
   const sectionBG = () => {
     if (whiteBg && bg === 'light') {
       return styles['bg-white'];
