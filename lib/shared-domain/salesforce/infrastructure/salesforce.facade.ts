@@ -14,6 +14,7 @@ const endpoints = {
   getSectionsAndIndustries: 'overview',
   submitContactForm: 'contact',
   createOrUpdateLeadEntry: 'lead_entries',
+  createOrUpdateHistory: (id: string) => '/lead_entries/'+ id + '/lead_history',
   getLeadEntry: (id: string) => 'lead_entries/' + id,
   getLeadEntryScore: (id: string) => 'lead_entries/' + id + '/score',
 };
@@ -24,6 +25,70 @@ const requestsConfig = {
 
 export class SalesforceFacade {
   constructor(private httpService = new AxiosService()) {}
+
+  async createLeadHistory(
+      uniqueId: string,
+  ): Promise<void> {
+    try {
+      const marketingParams = MarketingParamsService.retrieve();
+      const cookies = MarketingParamsService.getCookies();
+
+      const keyMap = {
+        [unformattedParams[0]]: 'UTMSource__c',
+        [unformattedParams[1]]: 'UTMMedium__c',
+        [unformattedParams[2]]: 'UTMCampaign__c',
+        [unformattedParams[3]]: 'UTM_ID__c',
+        [unformattedParams[4]]: 'UTM_Source_Platform__c',
+        [unformattedParams[5]]: 'UTMTerm__c',
+        [unformattedParams[6]]: 'UTM_Content__c',
+        [unformattedParams[7]]: 'gclid__c',
+        [unformattedParams[8]]: 'fbclid__c',
+      };
+
+      const formattedMarketingParams = Object.keys(marketingParams).reduce(
+          (acc, key) => {
+            const newKey = keyMap[key] || key;
+            acc[newKey] = marketingParams[key];
+
+            console.log("acc", acc);
+
+            return acc;
+          },
+          {},
+      );
+
+      const params = {
+        lead_entry: {
+          unique_id: uniqueId,
+          data: {
+            ...formattedMarketingParams,
+            ...cookies,
+          }
+          // current_progress: currentProgress,
+        },
+      };
+
+      // qLogs(
+      //   'SalesforceFacade.createOrUpdateLeadEntry ' + JSON.stringify(fields),
+      // );
+
+      // qLogs(marketingParams);
+      // qLogs(fields);
+      // qLogs(assessmentPurpose);
+      // qLogs(`lead sf ${leadSourceURL}`);
+
+      await this.httpService.post(
+          endpoints.createOrUpdateHistory(uniqueId),
+          params,
+          requestsConfig,
+      );
+    } catch (e) {
+      qErrorLogs('ERRORsetAnswer => updating to' + JSON.stringify(e));
+      trackApplicationError('createLeadHistory', e);
+
+      throw new Error(e);
+    }
+  }
 
   async createOrUpdateLeadEntry(
     uniqueId: string,
@@ -58,8 +123,6 @@ export class SalesforceFacade {
         (acc, key) => {
           const newKey = keyMap[key] || key;
           acc[newKey] = marketingParams[key];
-
-          console.log("acc", acc);
 
           return acc;
         },
