@@ -19,6 +19,7 @@ import PageHeader from 'lib/shared-domain/page/presentation/PageHeader';
 import { SCREEN_SIZE_MD } from 'lib/constants';
 import { useMediaQuery } from 'lib/hooks/useMediaQuery';
 import { ScoreCard } from './ScoreCard';
+import {ProgressBarLine} from '../../../../components/Calculator/ProgressBarLine/ProgressBarLine';
 
 import { Section, Container, Grid, GridColumn } from 'components/Layout';
 import { INDUSTRY_QUESTION_ID, SECTOR_QUESTION_ID } from './questions';
