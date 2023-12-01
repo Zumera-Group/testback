@@ -114,22 +114,8 @@ const QuestionnaireLayout: React.FC<{
     } else {
       const newUuid = uuid();
       qLogs('Id not found in headers. Generating uuid: ' + newUuid);
-      setUniqueId(newUuid);
-    }
-  }, [uniqueId]);
 
-  useEffect(() => {
-    qLogs('Check if unique id exist for questionnaire');
-    if (uniqueId) {
-      qLogs(
-        'ID exists. Saving it and syncing from salesforce. UniqueId' + uniqueId,
-      );
-      setUniqueId(uniqueId as string);
-      syncCurrentAnswersFromSalesforce(uniqueId as string);
-    } else {
-      const newUuid = uuid();
-      qLogs('Id not found in headers. Generating uuid: ' + newUuid);
-
+      console.log('Id not found in headers. Generating uuid: ' + newUuid)
       if(getBrowserCookie('_uid')){
         setUniqueId(getBrowserCookie('_uid'));
         syncHistory(getBrowserCookie('_uid'));
