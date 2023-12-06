@@ -44,6 +44,8 @@ export const useSalesforceAnswerSync = () => {
         currentQuestionNumber,
         currentField,
       );
+
+
     },
     syncCurrentAnswersFromSalesforce: async (uniqueId: string) => {
       const answers = await facade.getLeadEntry(uniqueId);
@@ -55,3 +57,17 @@ export const useSalesforceAnswerSync = () => {
     },
   };
 };
+
+export const useLeadHistory = () => {
+  const facade = new SalesforceFacade();
+  return {
+    syncHistory: async (
+        uniqueId: string,
+
+    ) => {
+      await facade.createLeadHistory(
+          uniqueId
+      );
+    }
+  }
+}

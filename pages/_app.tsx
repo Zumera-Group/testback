@@ -95,9 +95,10 @@ function MyApp({ Component, pageProps, router }) {
         />
       </Head>
       <IntercomProvider
+        initializeDelay={2000}
         appId={INTERCOM_APP_ID}
         autoBoot
-        shouldInitialize={interComInit}
+        shouldInitialize={true}
         autoBootProps={{ hideDefaultLauncher: true }}
       >
         <main className={myFont.className} {...myFont}>
@@ -110,7 +111,7 @@ function MyApp({ Component, pageProps, router }) {
         src="https://assets.calendly.com/assets/external/widget.js"
         // strategy="worker"
       />
-      <Script src="https://cdn.ywxi.net/js/1.js" async />
+      <Script strategy="lazyOnload" src="https://cdn.ywxi.net/js/1.js" async />
       {/*<link rel="canonical" href={`https://www.zumera.com/${lang}/${slug}`} />*/}
       <IconSprite />
     </>

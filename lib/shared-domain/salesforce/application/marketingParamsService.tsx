@@ -136,10 +136,12 @@ function getCookieByName(name) {
 const getCookies = () => {
   const gid = getCookieByName('_gid');
   const ga = getCookieByName('_ga');
+  const uid = getCookieByName('_uid');
 
   return {
     gasessionid__c: ga,
     gauserid__c: gid,
+    uid: uid,
   };
 };
 
