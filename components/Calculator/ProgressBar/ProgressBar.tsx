@@ -24,8 +24,8 @@ export const ProgressBar: React.FC<Props> = ({
     return (
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        width="192"
-        height="192"
+        width={isMobile ? '119' : '192'}
+        height={isMobile ? '119' : '192'}
         className={styles.progressWrapper}
         viewBox="0 0 192 192"
       >
