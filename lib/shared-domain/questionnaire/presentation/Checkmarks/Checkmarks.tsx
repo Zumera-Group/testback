@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './ScoreCard.module.scss';
+import styles from 'lib/shared-domain/questionnaire/presentation/Checkmarks/Checkmarks.module.scss';
 import { GridColumn } from '../../../../../components/Layout';
 import { Questionnaire } from '../../domain';
 
