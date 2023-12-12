@@ -13,17 +13,18 @@ import Sidebar from './Sidebar';
 import { EnvironmentService } from 'environment.service';
 import { uuid } from 'uuidv4';
 import { qLogs } from '../application/log';
-import {useLeadHistory, useSalesforceAnswerSync} from '../application/useSalesforceAnswerSync';
+import { useLeadHistory, useSalesforceAnswerSync } from '../application/useSalesforceAnswerSync';
 import { useRouter } from 'next/router';
 import PageHeader from 'lib/shared-domain/page/presentation/PageHeader';
 import { SCREEN_SIZE_MD } from 'lib/constants';
 import { useMediaQuery } from 'lib/hooks/useMediaQuery';
 import { ScoreCard } from './ScoreCard';
-import {ProgressBarLine} from '../../../../components/Calculator/ProgressBarLine/ProgressBarLine';
+import { ProgressBarLine } from '../../../../components/Calculator/ProgressBarLine/ProgressBarLine';
 
-import { Section, Container, Grid, GridColumn } from 'components/Layout';
+import { Container, Grid, GridColumn, Section } from 'components/Layout';
 import { INDUSTRY_QUESTION_ID, SECTOR_QUESTION_ID } from './questions';
 import ResultModules from './ResultModules';
+import { Checkmarks } from './Checkmarks';
 
 const t = getTranslateByScope('timeEstimation');
 const tSidebar = getTranslateByScope('sidebar');
@@ -41,31 +42,31 @@ function useSetQuestionnaireLocaleToUseFori18n(locale: string) {
 }
 
 // create a function for setting the cookie
-function setBrowserCookie(name, value, days){
-  if(process.browser) {
+function setBrowserCookie(name, value, days) {
+  if (process.browser) {
     // create this function for setting a cookie
-    var expires = "";
+    var expires = '';
     if (days) {
       var date = new Date();
       date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-      expires = "; expires=" + date.toUTCString();
+      expires = '; expires=' + date.toUTCString();
     }
-    document.cookie = name + "=" + (value || "") + expires + "; path=/";
+    document.cookie = name + '=' + (value || '') + expires + '; path=/';
   }
 }
 
 function getBrowserCookie(name) {
   // create this function for getting a cookie
-    if(process.browser) {
-        var nameEQ = name + "=";
-        var ca = document.cookie.split(';');
-        for(var i=0;i < ca.length;i++) {
-            var c = ca[i];
-            while (c.charAt(0) === ' ') c = c.substring(1,c.length);
-            if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length,c.length);
-        }
-        return null;
+  if (process.browser) {
+    var nameEQ = name + '=';
+    var ca = document.cookie.split(';');
+    for (var i = 0; i < ca.length; i++) {
+      var c = ca[i];
+      while (c.charAt(0) === ' ') c = c.substring(1, c.length);
+      if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
     }
+    return null;
+  }
 }
 
 const QuestionnaireLayout: React.FC<{
@@ -116,8 +117,8 @@ const QuestionnaireLayout: React.FC<{
       const newUuid = uuid();
       qLogs('Id not found in headers. Generating uuid: ' + newUuid);
 
-      console.log('Id not found in headers. Generating uuid: ' + newUuid)
-      if(getBrowserCookie('_uid')){
+      qLogs('Id not found in headers. Generating uuid: ' + newUuid);
+      if (getBrowserCookie('_uid')) {
         setUniqueId(getBrowserCookie('_uid'));
         syncHistory(getBrowserCookie('_uid'));
       } else {
@@ -125,8 +126,7 @@ const QuestionnaireLayout: React.FC<{
         setBrowserCookie('_uid', newUuid, 365);
       }
 
-      console.log("getCookie", uniqueId)
-      // setBrowserCookie('_uid', newUuid, 365);
+      qLogs('getCookie' + uniqueId);
     }
   }, [uniqueId]);
 
@@ -147,7 +147,7 @@ const QuestionnaireLayout: React.FC<{
 
     qLogs(
       'Save state for current questionnaire: ' +
-        JSON.stringify(newQuestionnaire),
+      JSON.stringify(newQuestionnaire),
     );
 
     setQuestionnaire(newQuestionnaire);
@@ -305,6 +305,11 @@ const QuestionnaireLayout: React.FC<{
                       </aside>
                     </GridColumn>
                   )}
+
+                  {renderResultModules && isMobile && (
+                    <Checkmarks result={result} />
+                  )}
+
                   <GridColumn
                     sm={12}
                     md={8}
@@ -322,20 +327,8 @@ const QuestionnaireLayout: React.FC<{
                       />
                     </div>
                   </GridColumn>
-                  {renderResultModules && (
-                    <GridColumn
-                      sm={12}
-                      md={12}
-                      lg={2}
-                      className={styles.checkmarks}
-                    >
-                      {result?.greenCheckmarkTexts?.map((mark) => (
-                        <div className={styles.checkmarkItem} key={mark}>
-                          <img src="/calculator/checkmark-v2.svg" />
-                          <h5>{mark}</h5>
-                        </div>
-                      ))}
-                    </GridColumn>
+                  {renderResultModules && !isMobile && (
+                    <Checkmarks result={result} />
                   )}
                 </Grid>
               </Container>

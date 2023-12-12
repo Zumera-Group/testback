@@ -1,15 +1,17 @@
 import { ProgressBar } from 'components/Calculator/ProgressBar';
-import React, { memo } from 'react';
+import React from 'react';
 import { getTranslateByScope } from 'translation/i18n';
 import { useGetSalesforceScore } from '../../application/useGetQuestionnaireScore';
 import Image from 'next/image';
 import styles from './ScoreCard.module.scss';
 import * as animationData from './loading-wheel.json';
 import Lottie from 'react-lottie';
-import { motion } from 'framer-motion';
+import { useMediaQuery } from "../../../../hooks/useMediaQuery";
+import { SCREEN_SIZE_MD } from "../../../../constants";
 
 export const ScoreCard = () => {
   const tr = getTranslateByScope('result');
+  const isMobile = useMediaQuery(`(max-width: ${SCREEN_SIZE_MD})`);
 
   const [score, setScore] = React.useState<{
     points: string;
@@ -24,11 +26,7 @@ export const ScoreCard = () => {
     const loadScore = async () => {
       try {
         const score = await getScore();
-
-        setTimeout(() => {
-          setScore(score);
-          setHasError(false);
-        }, 3000);
+        setScore(score);
       } catch (e) {
         setHasError(true);
       }
@@ -37,10 +35,6 @@ export const ScoreCard = () => {
   }, []);
 
   const presenter = {
-    hasPoints: () => {
-      if (score?.points === '#N/A' || !score?.points) return false;
-      return true;
-    },
     getFormattedPoints: () => {
       return score?.points ? score?.points : 0;
     },
@@ -70,36 +64,30 @@ export const ScoreCard = () => {
     },
   };
 
-  const animationVariants = {
-    initial: { opacity: 0 },
-    in: { opacity: 1 },
-  };
-
   return (
     <>
       <div className={styles.scoreCardWrapper}>
         <span className={styles.scoreCardTitle}>{title}</span>
         {score ? (
-          <ProgressBar isPoint progress={points} color="gradient" />
+          <ProgressBar isPoint progress={points} color="gradient"/>
         ) : (
           <Lottie
             options={defaultOptions}
             width="100%"
             height={'auto'}
-            style={{ maxWidth: 194, marginLeft: 'auto' }}
+            style={{ width: isMobile ? 119 : 192, marginLeft: 'auto', marginTop: 16 }}
             isStopped={false}
             isPaused={false}
           />
         )}
-        <p className={styles.betterThan}>{betterThan}</p>
+        <h4 className={styles.betterThan}>{betterThan}</h4>
         <div className={styles.booklet}>
           <Image
             unoptimized
             loading="lazy"
-            // objectFit="cover"
             alt={'booklet'}
             src={'/calculator/booklet.png'}
-            width={237}
+            width={isMobile ? 300 : 237}
             height={200}
             style={{
               objectFit: 'cover',
