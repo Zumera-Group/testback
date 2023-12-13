@@ -13,13 +13,16 @@ import Sidebar from './Sidebar';
 import { EnvironmentService } from 'environment.service';
 import { uuid } from 'uuidv4';
 import { qLogs } from '../application/log';
-import {useLeadHistory, useSalesforceAnswerSync} from '../application/useSalesforceAnswerSync';
+import {
+  useLeadHistory,
+  useSalesforceAnswerSync,
+} from '../application/useSalesforceAnswerSync';
 import { useRouter } from 'next/router';
 import PageHeader from 'lib/shared-domain/page/presentation/PageHeader';
 import { SCREEN_SIZE_MD } from 'lib/constants';
 import { useMediaQuery } from 'lib/hooks/useMediaQuery';
 import { ScoreCard } from './ScoreCard';
-import {ProgressBarLine} from '../../../../components/Calculator/ProgressBarLine/ProgressBarLine';
+import { ProgressBarLine } from '../../../../components/Calculator/ProgressBarLine/ProgressBarLine';
 
 import { Section, Container, Grid, GridColumn } from 'components/Layout';
 import { INDUSTRY_QUESTION_ID, SECTOR_QUESTION_ID } from './questions';
@@ -41,31 +44,31 @@ function useSetQuestionnaireLocaleToUseFori18n(locale: string) {
 }
 
 // create a function for setting the cookie
-function setBrowserCookie(name, value, days){
-  if(process.browser) {
+function setBrowserCookie(name, value, days) {
+  if (process.browser) {
     // create this function for setting a cookie
-    var expires = "";
+    var expires = '';
     if (days) {
       var date = new Date();
-      date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-      expires = "; expires=" + date.toUTCString();
+      date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
+      expires = '; expires=' + date.toUTCString();
     }
-    document.cookie = name + "=" + (value || "") + expires + "; path=/";
+    document.cookie = name + '=' + (value || '') + expires + '; path=/';
   }
 }
 
 function getBrowserCookie(name) {
   // create this function for getting a cookie
-    if(process.browser) {
-        var nameEQ = name + "=";
-        var ca = document.cookie.split(';');
-        for(var i=0;i < ca.length;i++) {
-            var c = ca[i];
-            while (c.charAt(0) === ' ') c = c.substring(1,c.length);
-            if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length,c.length);
-        }
-        return null;
+  if (process.browser) {
+    var nameEQ = name + '=';
+    var ca = document.cookie.split(';');
+    for (var i = 0; i < ca.length; i++) {
+      var c = ca[i];
+      while (c.charAt(0) === ' ') c = c.substring(1, c.length);
+      if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
     }
+    return null;
+  }
 }
 
 const QuestionnaireLayout: React.FC<{
@@ -116,8 +119,8 @@ const QuestionnaireLayout: React.FC<{
       const newUuid = uuid();
       qLogs('Id not found in headers. Generating uuid: ' + newUuid);
 
-      console.log('Id not found in headers. Generating uuid: ' + newUuid)
-      if(getBrowserCookie('_uid')){
+      console.log('Id not found in headers. Generating uuid: ' + newUuid);
+      if (getBrowserCookie('_uid')) {
         setUniqueId(getBrowserCookie('_uid'));
         syncHistory(getBrowserCookie('_uid'));
       } else {
@@ -125,7 +128,7 @@ const QuestionnaireLayout: React.FC<{
         setBrowserCookie('_uid', newUuid, 365);
       }
 
-      console.log("getCookie", uniqueId)
+      console.log('getCookie', uniqueId);
       // setBrowserCookie('_uid', newUuid, 365);
     }
   }, [uniqueId]);
@@ -231,6 +234,7 @@ const QuestionnaireLayout: React.FC<{
         seoDescription={questionnaire?.seoDescription}
         seoImage={questionnaire?.seoImage}
         siteSettings={siteSettings}
+        preventIndexing={questionnaire?.preventIndexing}
       />
 
       <PageTransition slug={questionnaire?.questionnaireSlug?.current}>
