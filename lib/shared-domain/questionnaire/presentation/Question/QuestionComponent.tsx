@@ -24,7 +24,14 @@ export const QuestionComponent: React.FC<{
   refEl: any;
   isNoah: any;
   selectedQuestionnaire: any;
-}> = ({ sectorSpecificQuestions, sectors, currentPos, refEl, isNoah, selectedQuestionnaire }) => {
+}> = ({
+  sectorSpecificQuestions,
+  sectors,
+  currentPos,
+  refEl,
+  isNoah,
+  selectedQuestionnaire,
+}) => {
   const {
     questionnaire,
     mainStep,
