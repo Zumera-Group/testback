@@ -136,7 +136,7 @@ type Authors = {
 type TextElement = {
   title?: string;
   subtitle: string;
-  _type: "textElement";
+  _type: 'textElement';
   _key: string;
 };
 
@@ -144,14 +144,14 @@ type GrowthRate = TextElement[];
 
 type Block = {
   children: Span[];
-  _type: "block";
+  _type: 'block';
   style: string;
   _key: string;
   markDefs: any[];
 };
 
 type Span = {
-  _type: "span";
+  _type: 'span';
   marks: any[];
   text: string;
   _key: string;
@@ -219,4 +219,5 @@ export interface Questionnaire {
   checkmarkTexts: string[];
   _id: string;
   _lang: string;
+  variantOfTheResultPage: 'compact' | 'default';
 }

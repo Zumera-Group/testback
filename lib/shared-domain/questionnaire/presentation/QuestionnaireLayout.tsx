@@ -221,6 +221,8 @@ const QuestionnaireLayout: React.FC<{
     }
   }, []);
 
+  const isQuestionnaireCompactOnMobile = questionnaire?.variantOfTheResultPage === 'compact' && isMobile;
+
   return (
     <>
       <SEO
@@ -301,13 +303,14 @@ const QuestionnaireLayout: React.FC<{
                         {questionnaire && !isOnResultScreen && !isMobile && (
                           <Sidebar />
                         )}
-                        {isOnResultScreen && <ScoreCard />}
+                        {isOnResultScreen &&
+                          <ScoreCard isQuestionnaireCompactOnMobile={isQuestionnaireCompactOnMobile} />}
                       </aside>
                     </GridColumn>
                   )}
 
-                  {renderResultModules && isMobile && (
-                    <Checkmarks result={result} />
+                  {renderResultModules && isQuestionnaireCompactOnMobile && (
+                    <Checkmarks isQuestionnaireCompactOnMobile={isQuestionnaireCompactOnMobile} result={result} />
                   )}
 
                   <GridColumn
@@ -327,7 +330,7 @@ const QuestionnaireLayout: React.FC<{
                       />
                     </div>
                   </GridColumn>
-                  {renderResultModules && !isMobile && (
+                  {renderResultModules && !isQuestionnaireCompactOnMobile && (
                     <Checkmarks result={result} />
                   )}
                 </Grid>
