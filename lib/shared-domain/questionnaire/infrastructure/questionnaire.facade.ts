@@ -96,7 +96,8 @@ const queryQuestionnaire = (
       url
     }
   },
-  seoDescription
+  seoDescription,
+  preventIndexing
 }`;
 
 const queryQuestionnaires = () => `*[_type == "valueCalculator"] {

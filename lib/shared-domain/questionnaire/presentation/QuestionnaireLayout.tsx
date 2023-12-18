@@ -235,6 +235,7 @@ const QuestionnaireLayout: React.FC<{
         seoDescription={questionnaire?.seoDescription}
         seoImage={questionnaire?.seoImage}
         siteSettings={siteSettings}
+        preventIndexing={questionnaire?.preventIndexing}
       />
 
       <PageTransition slug={questionnaire?.questionnaireSlug?.current}>
