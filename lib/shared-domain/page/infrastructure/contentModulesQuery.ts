@@ -626,5 +626,13 @@ export const contentModulesQuery = (
 			},
 		},
    },
+	imagesWithHeaderAndTextColumns[] {
+		...,
+		image {
+			asset->{
+				url,
+			}
+		}    
+	},
 ${extraQuery || ''}
   }`;
