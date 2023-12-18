@@ -82,7 +82,8 @@ const PHONE_NUMBER_STORE_INDICATOR = 'phone';
 const EvaluationScreen: React.FC<{
   onSuccess: () => void;
   score: { points: string; percentage: string; avg: number };
-}> = ({ onSuccess, score }) => {
+  resultScreenCopy: any;
+}> = ({ onSuccess, score, resultScreenCopy }) => {
   const { syncCurrentAnswersToSalesforce } = useSalesforceAnswerSync();
   const { syncLeadToSalesforce } = useSalesforceLeadSync();
   const [isSubmit, setSubmit] = useState(false);
@@ -97,6 +98,10 @@ const EvaluationScreen: React.FC<{
     getAnswer(EMAIL_STORE_INDICATOR)?.trim() &&
     getAnswer(PHONE_NUMBER_STORE_INDICATOR)?.trim() &&
     EmailValidator.validate(getAnswer(EMAIL_STORE_INDICATOR)?.trim());
+
+  const formFields = resultScreenCopy.formFields;
+  const questionTitle = resultScreenCopy.questionTitle;
+  console.log(questionTitle);
 
   const onSend = async (e) => {
     e.preventDefault();
@@ -122,9 +127,9 @@ const EvaluationScreen: React.FC<{
   const getEmailError = () => {
     if (!pressed) return null;
     if (!getAnswer(EMAIL_STORE_INDICATOR)?.trim())
-      return t('evaluation.form.email.requiredError');
+      return formFields.emailRequiredError;
     if (!EmailValidator.validate(getAnswer(EMAIL_STORE_INDICATOR)?.trim()))
-      return t('evaluation.form.email.invalidError');
+      return formFields.emailInvalidError;
 
     return null;
   };
@@ -134,8 +139,9 @@ const EvaluationScreen: React.FC<{
       {!isSubmit ? (
         <>
           <QuestionText
-            title={t('evaluation.title')}
-            description={t('evaluation.description')}
+            title={questionTitle.title}
+            description={questionTitle.tooltipDescription}
+            toolTipPromptText={questionTitle.tooltipPrompt}
           />
 
           <form className={styles.resultForm} onSubmit={(e) => onSend(e)}>
@@ -144,11 +150,11 @@ const EvaluationScreen: React.FC<{
                 id={'resultsFormName'}
                 type={'text'}
                 required={true}
-                label={t('evaluation.form.name.label')}
+                label={formFields.nameLabel}
                 description={
                   pressed &&
                   !getAnswer(NAME_STORE_INDICATOR)?.trim() &&
-                  t('evaluation.form.name.error')
+                  formFields.nameRequiredError
                 }
                 value={getAnswer(NAME_STORE_INDICATOR)}
                 onChange={(e) => {
@@ -165,7 +171,7 @@ const EvaluationScreen: React.FC<{
                 id={'resultsFormEmail'}
                 type={'email'}
                 required={true}
-                label={t('evaluation.form.email.label')}
+                label={formFields.emailLabel}
                 description={getEmailError()}
                 value={getAnswer(EMAIL_STORE_INDICATOR)}
                 onChange={(e) =>
@@ -182,11 +188,11 @@ const EvaluationScreen: React.FC<{
                 id={'resultsFormPhone'}
                 type={'tel'}
                 required={true}
-                label={t('evaluation.form.phoneNumber.label')}
+                label={formFields.phoneNumberLabel}
                 description={
                   pressed &&
                   !getAnswer(PHONE_NUMBER_STORE_INDICATOR)?.trim() &&
-                  t('evaluation.form.phoneNumber.error')
+                  formFields.phoneNumberRequiredError
                 }
                 value={getAnswer(PHONE_NUMBER_STORE_INDICATOR)}
                 onChange={(e) =>
@@ -209,7 +215,7 @@ const EvaluationScreen: React.FC<{
                   locale === 'en' ? styles.enTerms : '',
                 ].join(' ')}
               >
-                <span>{t('evaluation.form.checkbox.first')}</span>
+                <span>{formFields.checkBoxfirst} </span>
                 <a
                   style={{
                     display: 'inline-block',
@@ -218,11 +224,11 @@ const EvaluationScreen: React.FC<{
                   }}
                   target="_blank"
                   rel="noreferrer"
-                  href={t('evaluation.form.checkbox.link')}
+                  href={formFields.checkBoxLink}
                 >
-                  {t('evaluation.form.checkbox.second')}
+                  {formFields.checkBoxSecond}
                 </a>
-                <span>{t('evaluation.form.checkbox.third')}</span>
+                <span> {formFields.checkBoxThird}</span>
               </div>
             </Checkbox>
             {pressed && !checkboxIsChecked && (
@@ -239,7 +245,7 @@ const EvaluationScreen: React.FC<{
                 hideIcon
                 classes={styles.submitButton}
               >
-                {t('evaluation.form.button')}
+                {formFields.buttonText}
               </Button>
               <div
                 className="trustedsite-trustmark"
@@ -251,15 +257,14 @@ const EvaluationScreen: React.FC<{
           </form>
         </>
       ) : (
-        <h3 className={styles.successMessage}>
-          {t('evaluation.form.successMessage')}
-        </h3>
+        <h3 className={styles.successMessage}>{formFields.successMessage}</h3>
       )}
     </AnimateIn>
   );
 };
 
-export const Result: React.FC = () => {
+export const Result: React.FC<{ questionnaire: any }> = (questionnaire) => {
+  const resultScreenCopy = questionnaire.questionnaire.resultScreenCopy;
   const [showAppointmentBooking, setShowAppointmentBooking] =
     React.useState(false);
   const [score, setScore] = React.useState<{
@@ -302,6 +307,7 @@ export const Result: React.FC = () => {
         <EvaluationScreen
           score={score}
           onSuccess={() => setShowAppointmentBooking(true)}
+          resultScreenCopy={resultScreenCopy}
         />
       ) : (
         <AppointmentBookingScreen

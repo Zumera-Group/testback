@@ -16,6 +16,18 @@ const queryQuestionnaire = (
   },
   questionnaireName,
   isNoah,
+  resultScreenCopy {
+    ...,
+    sideBar {
+      ...,
+      bookletImage {
+        asset->{
+          url,
+          type
+        }
+      }
+    }
+  },
   result {
     greenCheckmarkTexts,
     authors {
