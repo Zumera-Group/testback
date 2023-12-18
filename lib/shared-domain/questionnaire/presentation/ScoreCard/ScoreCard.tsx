@@ -6,12 +6,9 @@ import Image from 'next/image';
 import styles from './ScoreCard.module.scss';
 import * as animationData from './loading-wheel.json';
 import Lottie from 'react-lottie';
-import { useMediaQuery } from "../../../../hooks/useMediaQuery";
-import { SCREEN_SIZE_MD } from "../../../../constants";
 
-export const ScoreCard = () => {
+export const ScoreCard = ({ isQuestionnaireCompactOnMobile }: { isQuestionnaireCompactOnMobile: boolean }) => {
   const tr = getTranslateByScope('result');
-  const isMobile = useMediaQuery(`(max-width: ${SCREEN_SIZE_MD})`);
 
   const [score, setScore] = React.useState<{
     points: string;
@@ -69,13 +66,13 @@ export const ScoreCard = () => {
       <div className={styles.scoreCardWrapper}>
         <span className={styles.scoreCardTitle}>{title}</span>
         {score ? (
-          <ProgressBar isPoint progress={points} color="gradient"/>
+          <ProgressBar isPoint progress={points} color="gradient" />
         ) : (
           <Lottie
             options={defaultOptions}
             width="100%"
             height={'auto'}
-            style={{ width: isMobile ? 119 : 192, marginLeft: 'auto', marginTop: 16 }}
+            style={{ width: isQuestionnaireCompactOnMobile ? 119 : 192, marginLeft: 'auto', marginTop: 16 }}
             isStopped={false}
             isPaused={false}
           />
@@ -87,7 +84,7 @@ export const ScoreCard = () => {
             loading="lazy"
             alt={'booklet'}
             src={'/calculator/booklet.png'}
-            width={isMobile ? 300 : 237}
+            width={isQuestionnaireCompactOnMobile ? 300 : 237}
             height={200}
             style={{
               objectFit: 'cover',
