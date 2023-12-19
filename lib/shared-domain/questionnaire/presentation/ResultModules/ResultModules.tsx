@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 
-import { Grid, Section, GridColumn, Container } from 'components/Layout';
+import { Container, Grid, GridColumn, Section } from 'components/Layout';
 import Hero from 'components/Hero';
 import { Employee } from 'components/NewsGrid';
 import { GrowthRatesTable } from 'components/Sector';
@@ -10,7 +10,7 @@ import { LogoBarSection } from 'components/LogoBarSection';
 
 import styles from './ResultModules.module.scss';
 
-const ResultModules = ({ result }) => {
+const ResultModules = ({ result, isResultsCompactOnMobile }) => {
   const isMobile = useMediaQuery(`(max-width: ${SCREEN_SIZE_MD})`);
   const router = useRouter();
 
@@ -52,7 +52,7 @@ const ResultModules = ({ result }) => {
                 {result.authors?.authorsTitle}
               </h3>
             </GridColumn>
-            <GridColumn sm={12} md={6} lg={6}>
+            <GridColumn xs={isResultsCompactOnMobile ? 6 : 12} sm={isResultsCompactOnMobile ? 6 : 12} md={6} lg={6}>
               <Employee
                 hideLink
                 article={{
@@ -65,7 +65,7 @@ const ResultModules = ({ result }) => {
                 }}
               />
             </GridColumn>
-            <GridColumn sm={12} md={6} lg={6}>
+            <GridColumn xs={isResultsCompactOnMobile ? 6 : 12} sm={isResultsCompactOnMobile ? 6 : 12} md={6} lg={6}>
               <Employee
                 hideLink
                 article={{
@@ -84,6 +84,7 @@ const ResultModules = ({ result }) => {
       </Section>
 
       <GrowthRatesTable
+        isResultsCompactOnMobile={isResultsCompactOnMobile}
         title={''}
         growthRatesTable={result?.growthRatesTable || []}
       />

@@ -3,8 +3,8 @@ import styles from 'lib/shared-domain/questionnaire/presentation/Checkmarks/Chec
 import { GridColumn } from '../../../../../components/Layout';
 import { Questionnaire } from '../../domain';
 
-export const Checkmarks = ({ isQuestionnaireCompactOnMobile = false, result }: {
-  isQuestionnaireCompactOnMobile?: boolean,
+export const Checkmarks = ({ isResultsCompactOnMobile = false, result }: {
+  isResultsCompactOnMobile?: boolean,
   result: Questionnaire['result']
 }) => {
   return (
@@ -12,7 +12,7 @@ export const Checkmarks = ({ isQuestionnaireCompactOnMobile = false, result }: {
       sm={12}
       md={12}
       lg={2}
-      className={isQuestionnaireCompactOnMobile ? styles.checkmarksCompact : styles.checkmarksDefault}
+      className={isResultsCompactOnMobile ? styles.checkmarksCompact : styles.checkmarksDefault}
     >
       {result?.greenCheckmarkTexts?.map((mark) => (
         <div
