@@ -41,9 +41,11 @@ body {
 
 main {
   min-height: 100vh;
+  &.white-bg {
+    background-color: $white;
+  }
 }
-
-::selection {
+s ::selection {
   background: $accent;
   color: $white;
 }

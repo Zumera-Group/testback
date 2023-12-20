@@ -1,4 +1,5 @@
 import styles from './Section.module.scss';
+import { useSharedContentContext } from 'lib/shared-domain/page/infrastructure/sharedContentContext';
 
 interface Props {
   as?: '' | 'section' | 'article' | 'div' | 'header' | 'footer';
@@ -26,10 +27,25 @@ export const Section: React.FC<Props> = ({
 }) => {
   const Component = as || 'section';
 
+  let whiteBg = false;
+  try {
+    const result = useSharedContentContext();
+    whiteBg = result.whiteBg;
+  } catch (error) {
+    console.error('An error occurred:', error.message);
+  }
+  const sectionBG = () => {
+    if (whiteBg && bg === 'light') {
+      return styles['bg-white'];
+    } else {
+      return styles[`bg-${bg}`] || styles['bg-light'];
+    }
+  };
+
   const sectionStyles = [
     styles.section,
     styles[`size-${size}`] || styles['size-md'],
-    styles[`bg-${bg}`] || styles['bg-light'],
+    sectionBG(),
     styles[`color-${color}` || styles['color-primary']],
     divider && styles[`divider`],
     classes ?? '',
