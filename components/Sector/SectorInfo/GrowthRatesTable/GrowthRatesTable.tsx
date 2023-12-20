@@ -1,10 +1,10 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 import Trust from 'components/Trust';
 
 import styles from './GrowthRatesTable.module.scss';
 
-export const GrowthRatesTable = ({ title, growthRatesTable }) => {
+export const GrowthRatesTable = ({ title, growthRatesTable, isResultsCompactOnMobile }) => {
   const [formatted, setFormatted] = useState([]);
   const { growthRates } = growthRatesTable;
 
@@ -15,7 +15,7 @@ export const GrowthRatesTable = ({ title, growthRatesTable }) => {
       return item;
     });
 
-    setFormatted(growthRatesFormatted)
+    setFormatted(growthRatesFormatted);
   }, [growthRates]);
 
   if (!growthRates) return null;
@@ -23,7 +23,7 @@ export const GrowthRatesTable = ({ title, growthRatesTable }) => {
   return (
     <>
       {title && <h3 className={styles.title}>{title}</h3>}
-      {formatted.length > 0 && <Trust textElements={formatted} />}
+      {formatted.length > 0 && <Trust isResultsCompactOnMobile={isResultsCompactOnMobile} textElements={formatted} />}
     </>
   );
 };

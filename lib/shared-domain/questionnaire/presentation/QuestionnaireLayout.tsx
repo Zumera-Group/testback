@@ -221,7 +221,7 @@ const QuestionnaireLayout: React.FC<{
     }
   }, []);
 
-  const isQuestionnaireCompactOnMobile = questionnaire?.variantOfTheResultPage === 'compact' && isMobile;
+  const isResultsCompactOnMobile = questionnaire?.variantOfTheResultPage === 'compact' && isMobile;
 
   return (
     <>
@@ -304,13 +304,13 @@ const QuestionnaireLayout: React.FC<{
                           <Sidebar />
                         )}
                         {isOnResultScreen &&
-                          <ScoreCard isQuestionnaireCompactOnMobile={isQuestionnaireCompactOnMobile} />}
+                          <ScoreCard isResultsCompactOnMobile={isResultsCompactOnMobile} />}
                       </aside>
                     </GridColumn>
                   )}
 
-                  {renderResultModules && isQuestionnaireCompactOnMobile && (
-                    <Checkmarks isQuestionnaireCompactOnMobile={isQuestionnaireCompactOnMobile} result={result} />
+                  {renderResultModules && isResultsCompactOnMobile && (
+                    <Checkmarks isResultsCompactOnMobile={isResultsCompactOnMobile} result={result} />
                   )}
 
                   <GridColumn
@@ -330,13 +330,14 @@ const QuestionnaireLayout: React.FC<{
                       />
                     </div>
                   </GridColumn>
-                  {renderResultModules && !isQuestionnaireCompactOnMobile && (
+                  {renderResultModules && !isResultsCompactOnMobile && (
                     <Checkmarks result={result} />
                   )}
                 </Grid>
               </Container>
             </Section>
-            {renderResultModules && <ResultModules result={result} />}
+            {renderResultModules &&
+              <ResultModules isResultsCompactOnMobile={isResultsCompactOnMobile} result={result} />}
           </main>
         </div>
       </PageTransition>

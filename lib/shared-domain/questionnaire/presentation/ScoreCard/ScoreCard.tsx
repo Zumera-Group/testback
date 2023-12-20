@@ -7,7 +7,7 @@ import styles from './ScoreCard.module.scss';
 import * as animationData from './loading-wheel.json';
 import Lottie from 'react-lottie';
 
-export const ScoreCard = ({ isQuestionnaireCompactOnMobile }: { isQuestionnaireCompactOnMobile: boolean }) => {
+export const ScoreCard = ({ isResultsCompactOnMobile }: { isResultsCompactOnMobile: boolean }) => {
   const tr = getTranslateByScope('result');
 
   const [score, setScore] = React.useState<{
@@ -72,7 +72,7 @@ export const ScoreCard = ({ isQuestionnaireCompactOnMobile }: { isQuestionnaireC
             options={defaultOptions}
             width="100%"
             height={'auto'}
-            style={{ width: isQuestionnaireCompactOnMobile ? 119 : 192, marginLeft: 'auto', marginTop: 16 }}
+            style={{ width: isResultsCompactOnMobile ? 119 : 192, marginLeft: 'auto', marginTop: 16 }}
             isStopped={false}
             isPaused={false}
           />
@@ -84,7 +84,7 @@ export const ScoreCard = ({ isQuestionnaireCompactOnMobile }: { isQuestionnaireC
             loading="lazy"
             alt={'booklet'}
             src={'/calculator/booklet.png'}
-            width={isQuestionnaireCompactOnMobile ? 300 : 237}
+            width={isResultsCompactOnMobile ? 300 : 237}
             height={200}
             style={{
               objectFit: 'cover',
