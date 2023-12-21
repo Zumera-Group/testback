@@ -15,6 +15,7 @@ export interface Landings {
   };
   hidePage: boolean;
   seoDescription: string;
+  whiteBg?: string;
   description: Description[];
   contentModules: {
     _key: string;

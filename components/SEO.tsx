@@ -7,7 +7,14 @@ export const SEO: React.FC<{
   seoDescription: string;
   seoImage?: { asset: { url: string } };
   siteSettings: SiteSettings;
-}> = ({ seoTitle, seoImage, seoDescription, siteSettings }) => {
+  preventIndexing?: boolean;
+}> = ({
+  seoTitle,
+  seoImage,
+  seoDescription,
+  siteSettings,
+  preventIndexing,
+}) => {
   const title = seoTitle + ' | ' + siteSettings?.siteName;
   const image = seoImage?.asset?.url;
   return (
@@ -17,7 +24,7 @@ export const SEO: React.FC<{
       <meta name="title" content={title} />
       <meta itemProp="name" content={title} />
       <meta property="og:title" content={title} />
-
+      {preventIndexing && <meta name="robots" content="noindex, nofollow" />}
       <meta name="description" content={seoDescription} />
       <meta itemProp="description" content={seoDescription} />
       <meta itemProp="og:description" content={seoDescription} />

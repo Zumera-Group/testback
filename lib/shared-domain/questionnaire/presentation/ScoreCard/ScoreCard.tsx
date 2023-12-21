@@ -7,7 +7,8 @@ import styles from './ScoreCard.module.scss';
 import * as animationData from './loading-wheel.json';
 import Lottie from 'react-lottie';
 
-export const ScoreCard = ({ isResultsCompactOnMobile }: { isResultsCompactOnMobile: boolean }) => {
+export const ScoreCard = ({ questionnaire, { isResultsCompactOnMobile }: { isResultsCompactOnMobile: boolean } }) => {
+
   const tr = getTranslateByScope('result');
 
   const [score, setScore] = React.useState<{
@@ -47,10 +48,15 @@ export const ScoreCard = ({ isResultsCompactOnMobile }: { isResultsCompactOnMobi
   const points = tr('evaluation.resultBox.points', {
     points: presenter.getFormattedPoints(),
   });
-  const title = tr('evaluation.resultBox.title');
-  const betterThan = tr('evaluation.resultBox.betterThen', {
-    percentage: presenter.getPercentage(),
-  });
+  const title = questionnaire.resultScreenCopy.sideBar.heading;
+  const betterThan1 =
+    questionnaire.resultScreenCopy.sideBar.betterThanFirstPart;
+  const betterThan2 =
+    questionnaire.resultScreenCopy.sideBar.betterThanSecondPart;
+  const percentage = presenter.getPercentage();
+  const betterThan = `${betterThan1} ${percentage}% ${betterThan2}`;
+  const bookletImage =
+    questionnaire.resultScreenCopy.sideBar.bookletImage.asset.url;
 
   const defaultOptions = {
     loop: true,
@@ -83,7 +89,7 @@ export const ScoreCard = ({ isResultsCompactOnMobile }: { isResultsCompactOnMobi
             unoptimized
             loading="lazy"
             alt={'booklet'}
-            src={'/calculator/booklet.png'}
+            src={bookletImage}
             width={isResultsCompactOnMobile ? 300 : 237}
             height={200}
             style={{

@@ -862,6 +862,19 @@ export class TextSliderSectionModule extends BaseModule {
   }
 }
 
+export class ContentTextBlockModule extends BaseModule {
+  subheading: string;
+  text: any[];
+  anchor?: string;
+
+  constructor(fields: Record<string, any>) {
+    super();
+    this.subheading = fields.subheading;
+    this.text = fields.text;
+    this.anchor = fields.anchor;
+  }
+}
+
 export enum serviceDetailSectionNames {
   helpContactPerson = 'helpContactPerson',
   processSection = 'processSection',
@@ -871,6 +884,7 @@ export enum serviceDetailSectionNames {
 }
 
 export type ContentModuleType =
+  | 'contentTextBlock'
   | 'whitePaperDownload'
   | 'transactionQuote'
   | 'stickyFooter'
@@ -958,6 +972,7 @@ export type ContentModuleType =
 
 abstract class ContentModuleTypeFactory {
   static createInstance(type: ContentModuleType, fields: Record<string, any>) {
+    if (type === 'contentTextBlock') return new ContentTextBlockModule(fields);
     if (type === 'partnerReviewSection') return new PartnerReviewModule(fields);
     if (type === 'dividerLine') return new DividerLineModule();
     if (type === 'logoBarSection') return new LogoBarSectionModule(fields);

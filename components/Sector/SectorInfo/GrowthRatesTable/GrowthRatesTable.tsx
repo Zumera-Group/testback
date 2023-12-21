@@ -10,7 +10,7 @@ export const GrowthRatesTable = ({ title, growthRatesTable, isResultsCompactOnMo
 
   // Swap the title + subtitle for correct statistic animation
   useEffect(() => {
-    const growthRatesFormatted = growthRates.map((item) => {
+    const growthRatesFormatted = growthRates?.map((item) => {
       [item['title'], item['subtitle']] = [item['subtitle'], item['title']];
       return item;
     });
