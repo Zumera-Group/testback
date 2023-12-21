@@ -13,7 +13,10 @@ import Sidebar from './Sidebar';
 import { EnvironmentService } from 'environment.service';
 import { uuid } from 'uuidv4';
 import { qLogs } from '../application/log';
-import { useLeadHistory, useSalesforceAnswerSync } from '../application/useSalesforceAnswerSync';
+import {
+  useLeadHistory,
+  useSalesforceAnswerSync,
+} from '../application/useSalesforceAnswerSync';
 import { useRouter } from 'next/router';
 import PageHeader from 'lib/shared-domain/page/presentation/PageHeader';
 import { SCREEN_SIZE_MD } from 'lib/constants';
@@ -48,7 +51,7 @@ function setBrowserCookie(name, value, days) {
     var expires = '';
     if (days) {
       var date = new Date();
-      date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+      date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
       expires = '; expires=' + date.toUTCString();
     }
     document.cookie = name + '=' + (value || '') + expires + '; path=/';
@@ -87,6 +90,8 @@ const QuestionnaireLayout: React.FC<{
   const router = useRouter();
   const result = selectedQuestionnaire?.result;
 
+  // console.log(selectedQuestionnaire);
+
   useSetQuestionnaireLocaleToUseFori18n(locale);
   const [currenQuestionPosition, setCurrentQuestionPosition] = useState(0);
   const isMobile = useMediaQuery(`(max-width: ${SCREEN_SIZE_MD})`);
@@ -117,7 +122,8 @@ const QuestionnaireLayout: React.FC<{
       const newUuid = uuid();
       qLogs('Id not found in headers. Generating uuid: ' + newUuid);
 
-      qLogs('Id not found in headers. Generating uuid: ' + newUuid);
+      console.log('Id not found in headers. Generating uuid: ' + newUuid);
+
       if (getBrowserCookie('_uid')) {
         setUniqueId(getBrowserCookie('_uid'));
         syncHistory(getBrowserCookie('_uid'));
@@ -126,7 +132,11 @@ const QuestionnaireLayout: React.FC<{
         setBrowserCookie('_uid', newUuid, 365);
       }
 
+      console.log('getCookie', uniqueId);
+      // setBrowserCookie('_uid', newUuid, 365);
+
       qLogs('getCookie' + uniqueId);
+
     }
   }, [uniqueId]);
 
@@ -209,8 +219,7 @@ const QuestionnaireLayout: React.FC<{
   const pageRef = useRef(null);
   const [isLanding, setIsLanding] = useState(false);
 
-  const renderResultModules =
-    !!result && isOnResultScreen && router.locale === 'de';
+  const renderResultModules = !!result && isOnResultScreen;
 
   useEffect(() => {
     const session = sessionStorage.getItem('isLanding');
@@ -233,6 +242,7 @@ const QuestionnaireLayout: React.FC<{
         seoDescription={questionnaire?.seoDescription}
         seoImage={questionnaire?.seoImage}
         siteSettings={siteSettings}
+        preventIndexing={questionnaire?.preventIndexing}
       />
 
       <PageTransition slug={questionnaire?.questionnaireSlug?.current}>
@@ -303,8 +313,11 @@ const QuestionnaireLayout: React.FC<{
                         {questionnaire && !isOnResultScreen && !isMobile && (
                           <Sidebar />
                         )}
-                        {isOnResultScreen &&
-                          <ScoreCard isResultsCompactOnMobile={isResultsCompactOnMobile} />}
+
+                        {isOnResultScreen && (
+                          <ScoreCard questionnaire={selectedQuestionnaire} isResultsCompactOnMobile={isResultsCompactOnMobile}/>
+                        )}
+
                       </aside>
                     </GridColumn>
                   )}

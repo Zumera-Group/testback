@@ -16,6 +16,18 @@ const queryQuestionnaire = (
   questionnaireName,
   variantOfTheResultPage,
   isNoah,
+  resultScreenCopy {
+    ...,
+    sideBar {
+      ...,
+      bookletImage {
+        asset->{
+          url,
+          type
+        }
+      }
+    }
+  },
   result {
     greenCheckmarkTexts,
     authors {
@@ -84,7 +96,8 @@ const queryQuestionnaire = (
       url
     }
   },
-  seoDescription
+  seoDescription,
+  preventIndexing
 }`;
 
 const queryQuestionnaires = () => `*[_type == "valueCalculator"] {

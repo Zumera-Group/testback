@@ -213,6 +213,7 @@ export interface Questionnaire {
       url: string;
     };
   };
+  preventIndexing?: boolean;
   isNoah: boolean;
   questionsByCategory: Category[];
   sectorSpecific: SectorSpecific;

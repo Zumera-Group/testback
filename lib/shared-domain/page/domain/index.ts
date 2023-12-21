@@ -38,6 +38,7 @@ export interface Page {
   }[];
 
   darkBg: boolean;
+  whiteBg: boolean;
 }
 
 export interface IAnnouncementTopBanner {

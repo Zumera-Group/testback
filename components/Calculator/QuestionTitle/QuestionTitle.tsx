@@ -9,9 +9,14 @@ const t = getTranslateByScope('result');
 interface Props {
   title?: string;
   description?: string;
+  toolTipPromptText?: string;
 }
 
-const QuestionTitle: React.FC<Props> = ({ title, description }) => {
+const QuestionTitle: React.FC<Props> = ({
+  title,
+  description,
+  toolTipPromptText,
+}) => {
   const { questionnaire, mainStep } = useValuationStore();
   const currentCategory =
     questionnaire?.questionsByCategory?.[mainStep]?.categoryName ?? '';
@@ -36,7 +41,9 @@ const QuestionTitle: React.FC<Props> = ({ title, description }) => {
       {isDesc && (
         <div className={styles.tooltipWrapper}>
           <span className={styles.infoPrompt} ref={infoPromptRef}>
-            {t('evaluation.description2')}
+            {toolTipPromptText
+              ? toolTipPromptText
+              : t('evaluation.description2')}
           </span>
           <Tooltip color="#ffffff" className={styles.tooltipIcon} />
           <div
