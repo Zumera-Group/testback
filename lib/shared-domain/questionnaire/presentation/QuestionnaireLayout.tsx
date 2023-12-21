@@ -24,9 +24,10 @@ import { useMediaQuery } from 'lib/hooks/useMediaQuery';
 import { ScoreCard } from './ScoreCard';
 import { ProgressBarLine } from '../../../../components/Calculator/ProgressBarLine/ProgressBarLine';
 
-import { Section, Container, Grid, GridColumn } from 'components/Layout';
+import { Container, Grid, GridColumn, Section } from 'components/Layout';
 import { INDUSTRY_QUESTION_ID, SECTOR_QUESTION_ID } from './questions';
 import ResultModules from './ResultModules';
+import { Checkmarks } from './Checkmarks';
 
 const t = getTranslateByScope('timeEstimation');
 const tSidebar = getTranslateByScope('sidebar');
@@ -122,6 +123,7 @@ const QuestionnaireLayout: React.FC<{
       qLogs('Id not found in headers. Generating uuid: ' + newUuid);
 
       console.log('Id not found in headers. Generating uuid: ' + newUuid);
+
       if (getBrowserCookie('_uid')) {
         setUniqueId(getBrowserCookie('_uid'));
         syncHistory(getBrowserCookie('_uid'));
@@ -132,6 +134,9 @@ const QuestionnaireLayout: React.FC<{
 
       console.log('getCookie', uniqueId);
       // setBrowserCookie('_uid', newUuid, 365);
+
+      qLogs('getCookie' + uniqueId);
+
     }
   }, [uniqueId]);
 
@@ -152,7 +157,7 @@ const QuestionnaireLayout: React.FC<{
 
     qLogs(
       'Save state for current questionnaire: ' +
-        JSON.stringify(newQuestionnaire),
+      JSON.stringify(newQuestionnaire),
     );
 
     setQuestionnaire(newQuestionnaire);
@@ -224,6 +229,8 @@ const QuestionnaireLayout: React.FC<{
       setIsLanding(false);
     }
   }, []);
+
+  const isResultsCompactOnMobile = questionnaire?.variantOfTheResultPage === 'compact' && isMobile;
 
   return (
     <>
@@ -306,12 +313,19 @@ const QuestionnaireLayout: React.FC<{
                         {questionnaire && !isOnResultScreen && !isMobile && (
                           <Sidebar />
                         )}
+
                         {isOnResultScreen && (
-                          <ScoreCard questionnaire={selectedQuestionnaire} />
+                          <ScoreCard questionnaire={selectedQuestionnaire} isResultsCompactOnMobile={isResultsCompactOnMobile}/>
                         )}
+
                       </aside>
                     </GridColumn>
                   )}
+
+                  {renderResultModules && isResultsCompactOnMobile && (
+                    <Checkmarks isResultsCompactOnMobile={isResultsCompactOnMobile} result={result} />
+                  )}
+
                   <GridColumn
                     sm={12}
                     md={8}
@@ -329,25 +343,14 @@ const QuestionnaireLayout: React.FC<{
                       />
                     </div>
                   </GridColumn>
-                  {renderResultModules && (
-                    <GridColumn
-                      sm={12}
-                      md={12}
-                      lg={2}
-                      className={styles.checkmarks}
-                    >
-                      {result?.greenCheckmarkTexts?.map((mark) => (
-                        <div className={styles.checkmarkItem} key={mark}>
-                          <img src="/calculator/checkmark-v2.svg" />
-                          <h5>{mark}</h5>
-                        </div>
-                      ))}
-                    </GridColumn>
+                  {renderResultModules && !isResultsCompactOnMobile && (
+                    <Checkmarks result={result} />
                   )}
                 </Grid>
               </Container>
             </Section>
-            {renderResultModules && <ResultModules result={result} />}
+            {renderResultModules &&
+              <ResultModules isResultsCompactOnMobile={isResultsCompactOnMobile} result={result} />}
           </main>
         </div>
       </PageTransition>

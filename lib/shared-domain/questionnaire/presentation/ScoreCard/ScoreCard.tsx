@@ -1,14 +1,14 @@
 import { ProgressBar } from 'components/Calculator/ProgressBar';
-import React, { memo } from 'react';
+import React from 'react';
 import { getTranslateByScope } from 'translation/i18n';
 import { useGetSalesforceScore } from '../../application/useGetQuestionnaireScore';
 import Image from 'next/image';
 import styles from './ScoreCard.module.scss';
 import * as animationData from './loading-wheel.json';
 import Lottie from 'react-lottie';
-import { motion } from 'framer-motion';
 
-export const ScoreCard = ({ questionnaire }) => {
+export const ScoreCard = ({ questionnaire, { isResultsCompactOnMobile }: { isResultsCompactOnMobile: boolean } }) => {
+
   const tr = getTranslateByScope('result');
 
   const [score, setScore] = React.useState<{
@@ -24,11 +24,7 @@ export const ScoreCard = ({ questionnaire }) => {
     const loadScore = async () => {
       try {
         const score = await getScore();
-
-        setTimeout(() => {
-          setScore(score);
-          setHasError(false);
-        }, 3000);
+        setScore(score);
       } catch (e) {
         setHasError(true);
       }
@@ -37,10 +33,6 @@ export const ScoreCard = ({ questionnaire }) => {
   }, []);
 
   const presenter = {
-    hasPoints: () => {
-      if (score?.points === '#N/A' || !score?.points) return false;
-      return true;
-    },
     getFormattedPoints: () => {
       return score?.points ? score?.points : 0;
     },
@@ -75,11 +67,6 @@ export const ScoreCard = ({ questionnaire }) => {
     },
   };
 
-  const animationVariants = {
-    initial: { opacity: 0 },
-    in: { opacity: 1 },
-  };
-
   return (
     <>
       <div className={styles.scoreCardWrapper}>
@@ -91,20 +78,19 @@ export const ScoreCard = ({ questionnaire }) => {
             options={defaultOptions}
             width="100%"
             height={'auto'}
-            style={{ maxWidth: 194, marginLeft: 'auto' }}
+            style={{ width: isResultsCompactOnMobile ? 119 : 192, marginLeft: 'auto', marginTop: 16 }}
             isStopped={false}
             isPaused={false}
           />
         )}
-        <p className={styles.betterThan}>{betterThan}</p>
+        <h4 className={styles.betterThan}>{betterThan}</h4>
         <div className={styles.booklet}>
           <Image
             unoptimized
             loading="lazy"
-            // objectFit="cover"
             alt={'booklet'}
             src={bookletImage}
-            width={237}
+            width={isResultsCompactOnMobile ? 300 : 237}
             height={200}
             style={{
               objectFit: 'cover',

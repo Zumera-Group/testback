@@ -1,7 +1,6 @@
 import { Locale } from 'lib/locale';
 import { SanityService } from 'lib/services/sanity.service';
 import { Category, Question, Questionnaire } from '../domain';
-import { SanityIcon } from '../domain/index';
 import { filterDataToSingleItem } from '../../page/infrastructure/page.facade';
 import { SERVER_FETCHING_ERROR } from '../../page/constants';
 
@@ -15,6 +14,7 @@ const queryQuestionnaire = (
     current
   },
   questionnaireName,
+  variantOfTheResultPage,
   isNoah,
   resultScreenCopy {
     ...,
@@ -225,7 +225,8 @@ const querySectorSpecificQuestions = (
 }`;
 
 export class QuestionnaireFacade {
-  constructor(private readonly sanityService = new SanityService()) {}
+  constructor(private readonly sanityService = new SanityService()) {
+  }
 
   async getQuestionnaire(
     lang: Locale,

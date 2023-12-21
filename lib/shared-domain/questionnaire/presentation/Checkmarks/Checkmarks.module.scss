@@ -1,0 +1,81 @@
+.checkmarksDefault {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+
+  @media screen and (max-width: 991px) {
+    flex-direction: row;
+    justify-content: center;
+    padding-top: 48px;
+    padding-bottom: 48px;
+  }
+
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+  }
+
+  .checkmarkItem {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+
+    img {
+      margin-bottom: 24px;
+    }
+
+    .checkmarkText {
+      font-size: $h5-font-size;
+      font-weight: 400;
+      margin: 0;
+    }
+  }
+}
+
+.checkmarksCompact {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+
+  @media screen and (max-width: 991px) {
+    flex-direction: row;
+    justify-content: center;
+    padding-top: 48px;
+    padding-bottom: 48px;
+  }
+
+  @media screen and (max-width: 768px) {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: start;
+    gap: 18px;
+  }
+
+  .checkmarkItem {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+
+    img {
+      margin-bottom: 24px;
+
+      @media screen and (max-width: 768px) {
+        margin-bottom: 16px;
+        width: 26px;
+        height: 26px;
+      }
+    }
+
+    .checkmarkText {
+      font-size: $h5-font-size;
+      font-weight: 400;
+      margin: 0;
+      @media screen and (max-width: 768px) {
+        font-size: $font-size-extra-tiny;
+      }
+    }
+  }
+}

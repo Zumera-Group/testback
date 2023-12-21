@@ -1,10 +1,10 @@
-import { Section, Container, Grid, GridColumn } from 'components/Layout';
+import { Container, Grid, GridColumn, Section } from 'components/Layout';
 import { TrustItem } from './TrustItem';
 
-export const Trust = ({ ...rest }) => {
+export const Trust = ({ isResultsCompactOnMobile, ...rest }) => {
 
   const { textElements } = rest;
-  
+
   if (!textElements?.length) return null;
 
   const trustColumns = 12 / textElements?.length;
@@ -32,7 +32,8 @@ export const Trust = ({ ...rest }) => {
           {textElements.map(({ title, subtitle }, index: number) => (
             <GridColumn
               key={`trustItem-${index}`}
-              sm={12}
+              xs={isResultsCompactOnMobile ? trustColumns : 12}
+              sm={isResultsCompactOnMobile ? trustColumns : 12}
               md={trustColumns}
               lg={trustColumns}
             >

@@ -3,6 +3,7 @@ import { Fact, TitleAndDescriptionItem } from '.';
 import { Sector, Service, Description, IndustryReport } from './index';
 import { Office } from 'lib/shared-domain/offices/domain/index';
 import { Employee } from 'lib/shared-domain/employees/domain';
+import {IImagesWithHeaderAndTextModuleColumn} from '../../../../@types/modules';
 
 export abstract class BaseModule {}
 
@@ -961,6 +962,7 @@ export type ContentModuleType =
   | 'futureTrendsSection'
   | 'moreDetailsSection'
   | 'logoBarSection'
+  | 'imagesWithHeaderAndText'
   // service detail sections
   | serviceDetailSectionNames.processSection
   | serviceDetailSectionNames.helpContactPerson
@@ -1128,6 +1130,10 @@ abstract class ContentModuleTypeFactory {
 
     if (type === 'landingRoadmap') {
       return new LandingRoadmapModule(fields);
+    }
+
+    if (type === 'imagesWithHeaderAndText') {
+      return new ImagesWithHeaderAndTextModule(fields);
     }
   }
 }
@@ -1734,5 +1740,13 @@ export class WhitePaperDownloadModule extends BaseModule {
     this.file = fields.file;
     this.whitePaperFormFields = fields.whitePaperFormFields;
     this.pdfUrl = fields.pdfUrl;
+  }
+}
+
+export class ImagesWithHeaderAndTextModule extends BaseModule {
+  columns: IImagesWithHeaderAndTextModuleColumn[];
+  constructor(fields: Record<string, any>) {
+    super();
+    this.columns = fields.imagesWithHeaderAndTextColumns;
   }
 }

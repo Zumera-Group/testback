@@ -35,8 +35,9 @@ import {
   PartnerVisionModule,
   WhitePaperDownloadModule,
   LogoBarSectionModule,
-  TransactionsCarouselSectionModule,
   ContentTextBlockModule,
+  TransactionsCarouselSectionModule, 
+  ImagesWithHeaderAndTextModule,
 } from '../../domain/contentModule';
 
 import {
@@ -81,6 +82,7 @@ import { StepsDownBulletsSection } from 'components/StepsDownBulletsSection';
 import { StickyFooter } from 'components/StickyFooter';
 import { TransactionQuote } from 'components/TransactionQuote';
 import { WhitePaperDownload } from 'components/WhitePaperDownload';
+import { ImagesWithHeaderAndText } from 'components/ImagesWithHeaderAndText';
 
 import dynamic from 'next/dynamic';
 import { OpenJobsList } from 'components/OpenJobsList';
@@ -544,5 +546,11 @@ export const getContentForContentModule = (
   }
   if (contentModule.specificContentModule === 'blogIndexSection') {
     return <div>Blog</div>;
+  }
+
+  if (contentModule.specificContentModule instanceof ImagesWithHeaderAndTextModule) {
+    return (
+      <ImagesWithHeaderAndText specificContentModule={contentModule.specificContentModule} />
+    );
   }
 };

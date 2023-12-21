@@ -98,8 +98,111 @@ export interface SectorSpecific {
   sectorSpecificBeginOrEnd: 'after' | 'before';
 }
 
+type Slug = {
+  current: string;
+  _type?: string; // Optional property
+};
+
+type AssetMetadata = {
+  dimensions: AssetMetadataDimensions;
+};
+
+type Asset = {
+  url: string;
+  type: null;
+  metadata: AssetMetadata
+};
+
+type Author = {
+  firstName: string;
+  lastName: string;
+  email: string | null; // Allows both string and null
+  slug: Slug;
+  jobTitle: string;
+  calendlyURL: string | null; // Allows both string and null
+  _id: string;
+  title: string;
+  cardPicture: {
+    asset: Asset;
+  };
+};
+
+type Authors = {
+  authorsTitle: string;
+  author1: Author;
+  author2: Author;
+};
+
+type TextElement = {
+  title?: string;
+  subtitle: string;
+  _type: 'textElement';
+  _key: string;
+};
+
+type GrowthRate = TextElement[];
+
+type Block = {
+  children: Span[];
+  _type: 'block';
+  style: string;
+  _key: string;
+  markDefs: any[];
+};
+
+type Span = {
+  _type: 'span';
+  marks: any[];
+  text: string;
+  _key: string;
+};
+
+type HeroDescription = Block[];
+
+type AssetMetadataDimensions = {
+  height: number;
+  width: number;
+};
+
+
+type Logo = {
+  asset: Asset;
+};
+
+type LogoBarSection = {
+  title: string;
+  logos: Logo[];
+};
+
+type PageContent = {
+  greenCheckmarkTexts: string[];
+  authors: Authors;
+  growthRatesTable: {
+    growthRates: GrowthRate;
+  };
+  heroSection: {
+    heroDescription: HeroDescription;
+    heroSecondTitle: string;
+    heroTitle: string;
+  };
+  logoBarSection: LogoBarSection;
+};
+
+
 export interface Questionnaire {
-  result?: any;
+  result?: {
+    greenCheckmarkTexts?: string[];
+    authors?: Authors,
+    growthRatesTable?: {
+      growthRates: GrowthRate;
+    },
+    heroSection?: {
+      heroDescription: HeroDescription;
+      heroSecondTitle: string;
+      heroTitle: string;
+    },
+    logoBarSection?: LogoBarSection
+  };
   questionnaireName: string;
   questionnaireSlug: {
     current: string;
@@ -117,4 +220,5 @@ export interface Questionnaire {
   checkmarkTexts: string[];
   _id: string;
   _lang: string;
+  variantOfTheResultPage: 'compact' | 'default';
 }
