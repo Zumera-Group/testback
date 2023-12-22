@@ -53,6 +53,7 @@ export const SectorInfo = ({ sector, sectorTransactions, content }) => {
 
         <div className={styles.calloutBox}>
           <GrowthRatesTable
+            isResultsCompactOnMobile={false}
             title={t('growthRatesTable')}
             growthRatesTable={growthRatesTable}
           />

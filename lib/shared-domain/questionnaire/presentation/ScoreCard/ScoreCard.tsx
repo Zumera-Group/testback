@@ -7,7 +7,7 @@ import styles from './ScoreCard.module.scss';
 import * as animationData from './loading-wheel.json';
 import Lottie from 'react-lottie';
 
-export const ScoreCard = ({ questionnaire, { isResultsCompactOnMobile }: { isResultsCompactOnMobile: boolean } }) => {
+export const ScoreCard = ({ questionnaire } : any, { isResultsCompactOnMobile }: { isResultsCompactOnMobile: boolean } ) => {
 
   const tr = getTranslateByScope('result');
 
