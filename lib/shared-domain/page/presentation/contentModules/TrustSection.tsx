@@ -8,7 +8,7 @@ export const TrustSection: React.FC<{
   specificContentModule: TrustSectionModule;
 }> = ({ specificContentModule }) => {
   return (
-    <Trust {...specificContentModule} />
+    <Trust isResultsCompactOnMobile={false} {...specificContentModule} />
   );
 };
 
