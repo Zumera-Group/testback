@@ -22,7 +22,6 @@ export const GrowthRatesSection = ({
       <Container>
         <div className={styles.calloutBox}>
           <GrowthRatesTable
-            isResultsCompactOnMobile={false}
             title={growthRatesTable.title}
             growthRatesTable={growthRatesTable}
           />

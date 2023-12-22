@@ -1,4 +1,4 @@
-import { Section, Container, Grid, GridColumn } from 'components/Layout';
+import { Container, Grid, GridColumn, Section } from 'components/Layout';
 import { SectionHeading } from 'components/SectionHeading';
 
 import { Description } from './Description';
@@ -53,7 +53,6 @@ export const SectorInfo = ({ sector, sectorTransactions, content }) => {
 
         <div className={styles.calloutBox}>
           <GrowthRatesTable
-            isResultsCompactOnMobile={false}
             title={t('growthRatesTable')}
             growthRatesTable={growthRatesTable}
           />
