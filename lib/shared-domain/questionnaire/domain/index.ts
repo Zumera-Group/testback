@@ -190,6 +190,7 @@ type PageContent = {
 
 
 export interface Questionnaire {
+  resultScreenCopy: any;
   result?: {
     greenCheckmarkTexts?: string[];
     authors?: Authors,
