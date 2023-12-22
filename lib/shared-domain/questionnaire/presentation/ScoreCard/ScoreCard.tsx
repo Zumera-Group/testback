@@ -12,7 +12,6 @@ export const ScoreCard = ({ questionnaire, isResultsCompactOnMobile }: {
   questionnaire: Questionnaire,
   isResultsCompactOnMobile: boolean
 }) => {
-
   const tr = getTranslateByScope('result');
 
   const [score, setScore] = React.useState<{
