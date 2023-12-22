@@ -4,7 +4,11 @@ import Trust from 'components/Trust';
 
 import styles from './GrowthRatesTable.module.scss';
 
-export const GrowthRatesTable = ({ title, growthRatesTable, isResultsCompactOnMobile }) => {
+export const GrowthRatesTable = ({ title, growthRatesTable, isResultsCompactOnMobile = false }: {
+  title: string,
+  growthRatesTable: any
+  isResultsCompactOnMobile?: boolean,
+}) => {
   const [formatted, setFormatted] = useState([]);
   const { growthRates } = growthRatesTable;
 

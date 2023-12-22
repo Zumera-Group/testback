@@ -6,8 +6,12 @@ import Image from 'next/image';
 import styles from './ScoreCard.module.scss';
 import * as animationData from './loading-wheel.json';
 import Lottie from 'react-lottie';
+import { Questionnaire } from 'lib/shared-domain/questionnaire/domain';
 
-export const ScoreCard = ({ questionnaire, { isResultsCompactOnMobile }: { isResultsCompactOnMobile: boolean } }) => {
+export const ScoreCard = ({ questionnaire, isResultsCompactOnMobile }: {
+  questionnaire: Questionnaire,
+  isResultsCompactOnMobile: boolean
+}) => {
 
   const tr = getTranslateByScope('result');
 

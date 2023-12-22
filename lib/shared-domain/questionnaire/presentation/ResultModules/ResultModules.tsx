@@ -1,5 +1,3 @@
-import { useRouter } from 'next/router';
-
 import { Container, Grid, GridColumn, Section } from 'components/Layout';
 import Hero from 'components/Hero';
 import { Employee } from 'components/NewsGrid';
@@ -16,21 +14,21 @@ const ResultModules = ({ result, isResultsCompactOnMobile }) => {
   return (
     <div className={styles.root}>
       {/* <Section bg={'primary'} color={'white'} size="sm">
-        <Grid>
-          {result?.greenCheckmarkTexts?.map((mark) => (
-            <GridColumn
-              sm={12}
-              md={6}
-              lg={3}
-              className={styles.checkmarkItem}
-              key={mark}
-            >
-              <img src="/calculator/checkmark.svg" />
-              <h4>{mark}</h4>
-            </GridColumn>
-          ))}
-        </Grid>
-      </Section> */}
+       <Grid>
+       {result?.greenCheckmarkTexts?.map((mark) => (
+       <GridColumn
+       sm={12}
+       md={6}
+       lg={3}
+       className={styles.checkmarkItem}
+       key={mark}
+       >
+       <img src="/calculator/checkmark.svg" />
+       <h4>{mark}</h4>
+       </GridColumn>
+       ))}
+       </Grid>
+       </Section> */}
       {result.logoBarSection && (
         <LogoBarSection specificContentModule={result.logoBarSection} />
       )}
@@ -86,7 +84,7 @@ const ResultModules = ({ result, isResultsCompactOnMobile }) => {
       {result.growthRatesTable && (
         <GrowthRatesTable
           title={''}
-           isResultsCompactOnMobile={isResultsCompactOnMobile}
+          isResultsCompactOnMobile={isResultsCompactOnMobile}
           growthRatesTable={result?.growthRatesTable || []}
         />
       )}
