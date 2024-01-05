@@ -36,6 +36,7 @@ export async function getStaticProps({
     const siteSettings = await fetchSiteSettings(locale);
     const sharedContent =
       await new SharedContentFacade().getSharedContentFacade(locale);
+
     if (localeFromRoute !== locale) {
       return {
         redirect: {
