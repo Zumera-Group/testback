@@ -3,7 +3,7 @@ import { Fact, TitleAndDescriptionItem } from '.';
 import { Sector, Service, Description, IndustryReport } from './index';
 import { Office } from 'lib/shared-domain/offices/domain/index';
 import { Employee } from 'lib/shared-domain/employees/domain';
-import {IImagesWithHeaderAndTextModuleColumn} from '../../../../@types/modules';
+import { IImagesWithHeaderAndTextModuleColumn } from '../../../../@types/modules';
 
 export abstract class BaseModule {}
 
@@ -599,6 +599,7 @@ export class ServicesLargeGridSectionModule extends BaseModule {
 
 export class TrustSectionModule extends BaseModule {
   textElements: { title: string; subtitle: string }[];
+  isResultsCompactOnMobile: boolean;
 
   constructor(fields: Record<string, any>) {
     super();
