@@ -1,10 +1,11 @@
 import { Locale } from 'lib/locale';
 import { getClient } from '../sanity.server';
 
-export type SanityLocale = 'de' | 'en_GB';
+export type SanityLocale = 'de' | 'fr' | 'en_GB';
 
 const langMap: Record<Locale, SanityLocale> = {
   de: 'de',
+  fr: 'fr',
   en: 'en_GB',
 };
 
@@ -24,6 +25,7 @@ export class SanityService {
   };
 
   static getLocaleFromSanityLocale = (locale: string) => {
+    if (locale === 'fr') return 'fr';
     if (locale === 'de') return 'de';
     return 'en';
   };

@@ -286,7 +286,6 @@ export class BlogArticleFacade {
     const detailContent = await this.sanityService.fetch(
       queryBlogDetailContent(this.sanityService.getSanityLocale(locale)),
     );
-
     return detailContent?.[0] || {};
   }
 }

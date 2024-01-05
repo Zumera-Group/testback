@@ -150,6 +150,7 @@ presentation; //  components and pages for employees
 translation; // translations
 zu;
 de;
+fr;
 en.env.local.env.local; // env that will be used local // env that will be used local
 ```
 

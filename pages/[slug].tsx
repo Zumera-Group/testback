@@ -6,7 +6,7 @@ import { SharedContentContext } from 'lib/shared-domain/page/infrastructure/shar
 import { useRouter } from 'next/router';
 import { usePreviewSubscription } from '../lib/sanity';
 import { filterDataToSingleItem } from '../lib/shared-domain/page/infrastructure/page.facade';
-import { enPaths as en, dePaths as de } from '../lib/shared-domain/page/paths';
+import { enPaths as en, dePaths as de, frPaths as fr } from '../lib/shared-domain/page/paths';
 import { REVALIDATE_ON_SUCCESS_IN_SECONDS } from '../lib/shared-domain/page/constants';
 import { useEffect, useState } from 'react';
 import { SecretKeyLockScreen } from 'components/SecretKeyLockScreen';
@@ -22,8 +22,13 @@ export async function getStaticPaths() {
     locale: 'de',
   }));
 
+  const frPaths = fr.map((slug) => ({
+    params: { slug },
+    locale: 'fr',
+  }));
+
   return {
-    paths: [...enPaths, ...dePaths],
+    paths: [...enPaths, ...dePaths, ...frPaths],
     fallback: true,
   };
 }
@@ -105,6 +110,7 @@ export default function Index({
 
   useEffect(() => {
     if (router.isFallback) {
+      console.log(router, 'router.isFallback')
       router.push(`/${router.locale}/404`);
     }
   }, [router]);
@@ -130,7 +136,7 @@ export default function Index({
   }
 
   return (
-    <SharedContentContext value={sharedContent}>
+    <SharedContentContext value={sharedContent || {}}>
       <ErrorTrackingBoundary>
         <PageLayout
           page={previewPage || page}
