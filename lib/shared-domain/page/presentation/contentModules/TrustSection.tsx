@@ -7,9 +7,7 @@ import Trust from 'components/Trust';
 export const TrustSection: React.FC<{
   specificContentModule: TrustSectionModule;
 }> = ({ specificContentModule }) => {
-  return (
-    <Trust {...specificContentModule} />
-  );
+  return <Trust {...specificContentModule} />;
 };
 
 export default TrustSection;

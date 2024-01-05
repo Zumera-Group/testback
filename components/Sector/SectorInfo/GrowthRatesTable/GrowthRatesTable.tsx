@@ -4,7 +4,17 @@ import Trust from 'components/Trust';
 
 import styles from './GrowthRatesTable.module.scss';
 
-export const GrowthRatesTable = ({ title, growthRatesTable, isResultsCompactOnMobile }) => {
+interface GrowthRatesTableProps {
+  title: string;
+  growthRatesTable: any;
+  isResultsCompactOnMobile?: boolean;
+}
+
+export const GrowthRatesTable = ({
+  title,
+  growthRatesTable,
+  isResultsCompactOnMobile,
+}: GrowthRatesTableProps) => {
   const [formatted, setFormatted] = useState([]);
   const { growthRates } = growthRatesTable;
 
@@ -23,7 +33,12 @@ export const GrowthRatesTable = ({ title, growthRatesTable, isResultsCompactOnMo
   return (
     <>
       {title && <h3 className={styles.title}>{title}</h3>}
-      {formatted.length > 0 && <Trust isResultsCompactOnMobile={isResultsCompactOnMobile} textElements={formatted} />}
+      {formatted.length > 0 && (
+        <Trust
+          isResultsCompactOnMobile={isResultsCompactOnMobile}
+          textElements={formatted}
+        />
+      )}
     </>
   );
 };
