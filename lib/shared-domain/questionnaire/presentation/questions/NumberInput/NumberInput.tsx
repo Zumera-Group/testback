@@ -136,7 +136,10 @@ export const NumberInput: React.FC<{
                   : getUnformattedAnswer() || ''
               }
               onChange={(e) => {
-                formatToSalesforce(Number(e.target.value.replace(/[.,]/g, '')));
+                formatToSalesforce(
+                  Number(e.target.value.replace(/[.,\s]/g, '')),
+                );
+
                 setInputLength(e.target.value.length);
               }}
             />
