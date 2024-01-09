@@ -4,6 +4,7 @@ import { EnvironmentService } from '../environment.service';
 import zu from './zu.json';
 import de from './de.json';
 import en from './en.json';
+import fr from './fr.json';
 
 const DEVELOPMENT_LANGUAGE = 'zu';
 
@@ -12,6 +13,7 @@ I18n.translations = {
   zu,
   de,
   en,
+  fr,
 };
 
 I18n.missingTranslation = function (scope, options) {
@@ -26,6 +28,7 @@ if (!EnvironmentService.isProduction()) {
 if (EnvironmentService.isProduction()) {
   I18n.locales.de = ['de', 'zu'];
   I18n.locales.en = ['en', 'zu'];
+  I18n.locales.fr = ['fr', 'zu'];
   I18n.locale = 'de';
 }
 

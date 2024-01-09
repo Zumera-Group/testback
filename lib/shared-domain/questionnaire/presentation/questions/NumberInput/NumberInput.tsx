@@ -43,7 +43,16 @@ export const NumberInput: React.FC<{
       ? true
       : false;
 
-  const localeFormat = router.locale === 'en' ? 'en-GB' : 'de-DE';
+  // const localeFormat = router.locale === 'en' ? 'en-GB' : 'de-DE';
+  let localeFormat;
+
+  if (router.locale === 'en') {
+    localeFormat = 'en-GB';
+  } else if (router.locale === 'fr') {
+    localeFormat = 'fr-FR';
+  } else {
+    localeFormat = 'de-DE';
+  }
 
   const formatToSalesforce = (v: number) => {
     const today = new Date();
@@ -127,7 +136,10 @@ export const NumberInput: React.FC<{
                   : getUnformattedAnswer() || ''
               }
               onChange={(e) => {
-                formatToSalesforce(Number(e.target.value.replace(/[.,]/g, '')));
+                formatToSalesforce(
+                  Number(e.target.value.replace(/[.,\s]/g, '')),
+                );
+
                 setInputLength(e.target.value.length);
               }}
             />

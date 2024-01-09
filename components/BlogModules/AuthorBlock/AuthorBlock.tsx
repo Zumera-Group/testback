@@ -6,6 +6,7 @@ import { Button } from 'components/Button';
 import { RichText } from '../RichText';
 import { Icon } from 'components/Icon';
 import WhitePaperModal from '../WhitePaperModal/WhitePaperModal';
+import { getBuiltLink } from 'lib/links';
 
 export const AuthorBlock: React.FC<any> = ({
   blogArticle,
@@ -45,11 +46,11 @@ export const AuthorBlock: React.FC<any> = ({
                   <>
                     <a
                       key={author._id}
-                      href={
-                        locale === 'en'
-                          ? `/en/employees/${author?.slug?.current}`
-                          : `/de/mitarbeiter/${author?.slug?.current}`
-                      }
+                      href={getBuiltLink({
+                        locale,
+                        path: 'employees',
+                        uri: author?.slug?.current,
+                      })}
                       className={styles.authorLink}
                     >
                       {author?.firstName} {author?.lastName}
@@ -100,11 +101,11 @@ export const AuthorBlock: React.FC<any> = ({
           <GridColumn sm={12} md={6} lg={5} className={styles.rightColumn}>
             <div className={styles.calculatorCta}>
               <a
-                href={
-                  locale === 'en'
-                    ? `/en/questionnaires/${calculatorPage[0]?.questionnaireSlug?.current}`
-                    : `/de/fragenkatalog/${calculatorPage[0]?.questionnaireSlug?.current}`
-                }
+                href={getBuiltLink({
+                  locale,
+                  path: 'questionnaires',
+                  uri: calculatorPage[0]?.questionnaireSlug?.current,
+                })}
               >
                 <h4 className={styles.heading}>{title}</h4>
                 <p className={styles.summary}>{description}</p>

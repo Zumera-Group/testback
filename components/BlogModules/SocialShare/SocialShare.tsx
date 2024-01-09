@@ -13,7 +13,6 @@ export const SocialShare: React.FC<{
 }> = ({ content, partialSlug, domain }) => {
   const { locale } = useRouter();
   const [copied, setCopied] = useState(false);
-  const localeType = locale === 'en' ? 'en' : 'de';
   const protoDomain = domain;
   const iframe = 'width=500,height=400';
 
@@ -21,21 +20,21 @@ export const SocialShare: React.FC<{
     const shareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(
       content?.articleTitle,
     )}&url=${encodeURIComponent(
-      `${protoDomain}/${localeType}/${partialSlug}/${content?.slug?.current}`,
+      `${protoDomain}/${locale}/${partialSlug}/${content?.slug?.current}`,
     )}`;
     window.open(shareUrl, '_blank', iframe);
   };
 
   const handleFacebookClick = () => {
     const shareUrl = `https://www.facebook.com/sharer.php?u=${encodeURIComponent(
-      `${protoDomain}/${localeType}/${partialSlug}/${content?.slug?.current}`,
+      `${protoDomain}/${locale}/${partialSlug}/${content?.slug?.current}`,
     )}`;
     window.open(shareUrl, '_blank', iframe);
   };
 
   const handleLinkedinClick = () => {
     const shareUrl = `https://www.linkedin.com/shareArticle?url=${encodeURIComponent(
-      `${protoDomain}/${localeType}/${partialSlug}/${content?.slug?.current}`,
+      `${protoDomain}/${locale}/${partialSlug}/${content?.slug?.current}`,
     )}&title=${encodeURIComponent(content?.articleTitle)}`;
     window.open(shareUrl, '_blank', iframe);
   };
@@ -43,7 +42,7 @@ export const SocialShare: React.FC<{
   const handleClipboardClick = () => {
     navigator.clipboard
       .writeText(
-        `${protoDomain}/${localeType}/${partialSlug}/${content?.slug?.current}`,
+        `${protoDomain}/${locale}/${partialSlug}/${content?.slug?.current}`,
       )
       .then(() => {
         setCopied(true);
@@ -79,7 +78,7 @@ export const SocialShare: React.FC<{
         <Clipboard />
         {copied && (
           <div className={styles.popup}>
-            {localeType === 'en' ? 'Copied!' : 'Kopiert!'}
+            {locale === 'en' ? 'Copied!' : locale === 'fr' ? 'Copié!' : 'Kopiert!'}
           </div>
         )}
       </button>

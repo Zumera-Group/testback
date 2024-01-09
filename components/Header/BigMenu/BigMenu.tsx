@@ -16,7 +16,6 @@ export const BigMenu = ({
   blogArticles,
   logo,
   closeBigMenu,
-  otherLangSlug,
 }) => {
   const [showMode, setShowMode] = useState<
     'normal' | 'sectors' | 'services' | 'blogValToolArticle'
@@ -66,7 +65,6 @@ export const BigMenu = ({
         showMode={showMode}
         setShowMode={setShowMode}
         close={closeBigMenu}
-        otherLangSlug={otherLangSlug}
       />
       <Navigation
         heading={getNavigationHeading}

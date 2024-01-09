@@ -7,6 +7,7 @@ import { sanityImageUrlFor } from 'lib/sanity';
 import styles from './ArticleBox.module.scss';
 import Link from 'next/link';
 import useFormatDateLong from 'lib/shared-domain/useFormatDateLong';
+import { getArticleBoxLink } from 'lib/links';
 
 interface Props {
   titleEl: any;
@@ -72,16 +73,7 @@ const ArticleBox: React.FC<Props> = ({
   const noImage = isLatest;
   const noSummary = isLatest || isSmallVertical;
 
-  const href =
-    item._type === 'blogArticle' && locale === 'en'
-      ? `/en/blog/${item?.slug?.current}`
-      : item._type === 'blogArticle' && locale === 'de'
-      ? `/de/blog/${item?.slug?.current}`
-      : item._type === 'blogValToolArticle' && locale === 'en'
-      ? `/en/valuation-tool/${item?.slug?.current}`
-      : item._type === 'blogValToolArticle' && locale === 'de'
-      ? `/de/unternehmenswert-rechner/${item?.slug?.current}`
-      : `/en/blog/${item?.slug?.current}`;
+  const href = getArticleBoxLink(locale, item?.slug?.current, item._type) || '/en/home';
 
   return (
     <div className={classNames}>

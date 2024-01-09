@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 import { format } from 'date-fns';
-import { enGB, de } from 'date-fns/locale';
+import { enGB, de, fr } from 'date-fns/locale';
 
 export const useFormatDateLong = (value: Date) => {
   const router = useRouter();
@@ -10,9 +10,19 @@ export const useFormatDateLong = (value: Date) => {
   if (routerLocale === 'de') {
     locale = de;
   }
+  if (routerLocale === 'fr') {
+    locale = fr;
+  }
 
   try {
-    const localeFormat = locale === de ? 'de-DE' : 'en-GB';
+    let localeFormat;
+    if (locale === de) {
+      localeFormat = 'de-DE'
+    } else if (locale === fr) {
+      localeFormat = 'fr-FR'
+    } else {
+      localeFormat = 'en-GB';
+    }
     const val = new Date(value);
 
     const date = new Date(

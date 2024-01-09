@@ -1,11 +1,13 @@
+import { allLinks } from "lib/links";
+
 export const getLinksByPageType = (locale, pageType, slug) => {
   const linkTypePart = {
-    sector: locale === 'en' ? 'sectors' : 'sektoren',
-    valueCalculator: locale === 'en' ? 'questionnaires' : 'fragenkatalog',
-    employee: locale === 'en' ? 'employees' : 'mitarbeiter',
-    transaction: locale === 'en' ? 'transactions' : 'transaktionen',
+    sector: allLinks.sectors[locale],
+    valueCalculator: allLinks.questionnaires[locale],
+    employee: allLinks.employees[locale],
+    transaction: allLinks.transactions[locale],
     newsArticle: 'news',
-    service: locale === 'en' ? 'services' : 'leistungsspektrum',
+    service: allLinks.services[locale],
     landings: 'landing',
     page: '',
   }[pageType];
