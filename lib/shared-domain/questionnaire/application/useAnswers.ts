@@ -3,8 +3,12 @@ import { useValuationStore } from '../store';
 
 export const useAnswers = (
   question: Question,
-): { setAnswer(value: any): void; getAnswer(): any } => {
-  const { getAnswer, setAnswer } = useValuationStore();
+): {
+  setAnswer(value: any): void;
+  getAnswer(): any;
+  removeAnswer(value: any): void;
+} => {
+  const { getAnswer, setAnswer, removeAnswer } = useValuationStore();
 
   return {
     setAnswer: (value: any) => {
@@ -18,6 +22,11 @@ export const useAnswers = (
       if (getAnswer(question?.salesforceId))
         return getAnswer(question?.salesforceId);
       return getAnswer(question?._id);
+    },
+    removeAnswer: (value: any) => {
+      if (question?.salesforceId) {
+        removeAnswer({ id: question.salesforceId, value });
+      }
     },
   };
 };
