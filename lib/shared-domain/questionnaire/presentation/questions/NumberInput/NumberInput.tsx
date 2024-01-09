@@ -28,7 +28,7 @@ export const NumberInput: React.FC<{
   const { valueType, placeholder, salesforceFormat, label } =
     question?.answerSelector?.numberInput || DEFAULT_VALUES;
   const { getNumberFormat, sign } = useNumberFormat(valueType);
-  const { getAnswer, setAnswer } = useAnswers(question);
+  const { getAnswer, setAnswer, removeAnswer } = useAnswers(question);
   const isMobile = useMediaQuery(`(max-width: ${SCREEN_SIZE_MD})`);
   const [inputLength, setInputLength] = useState(0);
   const isYear = valueType === 'year';
@@ -53,6 +53,17 @@ export const NumberInput: React.FC<{
   } else {
     localeFormat = 'de-DE';
   }
+
+  const evCalcFields = [
+    'Annual_Revenue_2021__c',
+    'Annual_Revenue_2022__c',
+    'Annual_Revenue_2023__c',
+    'Annual_Revenue_2024__c',
+    'Company_EBIT_2021__c',
+    'Company_EBIT_2022__c',
+    'Company_EBIT_2023__c',
+    'Company_EBIT_2024__c',
+  ];
 
   const formatToSalesforce = (v: number) => {
     const today = new Date();
@@ -141,6 +152,9 @@ export const NumberInput: React.FC<{
                 );
 
                 setInputLength(e.target.value.length);
+                if (e.target.value === '') {
+                  removeAnswer(e.target.value);
+                }
               }}
             />
 
