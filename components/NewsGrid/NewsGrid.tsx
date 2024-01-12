@@ -124,9 +124,9 @@ export const NewsGrid: React.FC<Props> = ({
     }))
     .filter((item) => {
       return (
-        item?.slug.current !==
+        item?.slug?.current !==
           firstHighlightedArticleSection?.highlightedPage?.slug?.current &&
-        item?.slug.current !==
+        item?.slug?.current !==
           secondHighlightedArticleSection?.highlightedPage?.slug?.current
       );
     })
