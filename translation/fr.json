@@ -49,14 +49,14 @@
       "inputLabel": "Sinon, tapez"
     },
     "boxSelector": {
-      "buttonText": "+ Montre plus"
+      "buttonText": "Montrer +"
     }
   },
   "question": {
-    "nextBtn": "Suivante",
+    "nextBtn": "Suivant",
     "skipBtn": "Sauter",
     "required": "Une réponse est nécessaire pour continuer",
-    "backBtn": "Dos",
+    "backBtn": "Retour",
     "question": "Question"
   },
   "result": {
