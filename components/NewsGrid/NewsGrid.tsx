@@ -122,6 +122,14 @@ export const NewsGrid: React.FC<Props> = ({
       ...item,
       sortDate: new Date(item.date).getTime(),
     }))
+    .filter((item) => {
+      return (
+        item?.slug.current !==
+          firstHighlightedArticleSection?.highlightedPage?.slug?.current &&
+        item?.slug.current !==
+          secondHighlightedArticleSection?.highlightedPage?.slug?.current
+      );
+    })
     .sort((a, b) => {
       return b.sortDate - a.sortDate;
     });
