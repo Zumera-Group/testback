@@ -166,9 +166,13 @@ export const allLinks = {
     de: 'impressum',
     fr: 'imprimer',
   },
-}
+};
 
-export const getArticleBoxLink = (locale: string, path: string, type: string) => {
+export const getArticleBoxLink = (
+  locale: string,
+  path: string,
+  type: string,
+) => {
   if (!type) {
     return `/${locale}/blog/${path}`;
   }
@@ -182,11 +186,11 @@ export const getArticleBoxLink = (locale: string, path: string, type: string) =>
       en: `/en/valuation-tool/${path}`,
       de: `/de/unternehmenswert-rechner/${path}`,
       fr: `/de/outil-de-valorisation/${path}`,
-    }
+    },
   };
 
   return urls[type][locale];
-}
+};
 
 export const getDefaultCountry = (locale: string) => {
   const countriesMap = {
@@ -196,16 +200,24 @@ export const getDefaultCountry = (locale: string) => {
   };
 
   return countriesMap[locale] || 'GB';
-}
+};
 
-export const getBuiltLink = ({ locale, path, uri }: { locale: string, path: string; uri: string; }) => {
+export const getBuiltLink = ({
+  locale,
+  path,
+  uri,
+}: {
+  locale: string;
+  path: string;
+  uri: string;
+}) => {
   if (!locale || !path) {
     return `/en/${path || ''}/${uri}`;
   }
   const localizedPath = allLinks[path][locale];
 
   return `/${locale}/${localizedPath}/${uri}`;
-}
+};
 
 export const getArticlePaginationInfo = ({
   locale,
@@ -214,10 +226,12 @@ export const getArticlePaginationInfo = ({
   total,
 }) => {
   if (locale === 'en') {
-    return `Showing ${startArticle}-${endArticle + 1} of ${total + 1} articles`
+    return `Showing ${startArticle}-${endArticle + 1} of ${total + 1} articles`;
   } else if (locale === 'fr') {
-    return `Afficher ${startArticle}-${endArticle + 1} sur ${total + 1} articles`;
+    return `Afficher ${startArticle}-${endArticle + 1} sur ${
+      total + 1
+    } articles`;
   } else {
     return `Zeigt ${startArticle}-${endArticle + 1} von ${total + 1} artikeln`;
   }
-}
+};
