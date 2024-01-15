@@ -12,7 +12,7 @@ interface Props {
 }
 
 export const Checkbox: React.FC<Props> = ({
-  disabled,
+  disabled = false,
   required,
   children,
   id,
@@ -23,6 +23,7 @@ export const Checkbox: React.FC<Props> = ({
 }) => {
   return (
     <div
+      id={'checkbox_parent'}
       className={[
         styles.checkboxWrapper,
         disabled ? styles.checkboxWrapper__disabled : '',
@@ -31,6 +32,7 @@ export const Checkbox: React.FC<Props> = ({
     >
       <input
         type="checkbox"
+        aria-checked={isChecked}
         className={styles.checkbox}
         id={id}
         name={name || id}
@@ -40,7 +42,7 @@ export const Checkbox: React.FC<Props> = ({
         onChange={onChange}
         checked={isChecked}
       />
-      <label htmlFor={id} className={styles.checkboxLabel}>
+      <label id={'checkbox_label'} htmlFor={id} className={styles.checkboxLabel}>
         {children}
       </label>
     </div>

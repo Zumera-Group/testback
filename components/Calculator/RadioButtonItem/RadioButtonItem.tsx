@@ -11,6 +11,8 @@ const RadioButton: React.FC<Props> = ({ icon, label, onClick, selected }) => {
   return (
     <>
       <div
+        aria-label={"Radio Button"}
+        id={"radioButton"}
         className={[
           styles.radioButtonWrapper,
           selected ? styles.active : '',
@@ -21,7 +23,7 @@ const RadioButton: React.FC<Props> = ({ icon, label, onClick, selected }) => {
         <span className={styles.label}> {label}</span>
         <span
           className={[styles.button, selected ? styles.active : ''].join(' ')}
-        ></span>
+        />
       </div>
     </>
   );
