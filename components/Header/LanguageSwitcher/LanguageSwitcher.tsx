@@ -38,10 +38,10 @@ export const LanguageSwitcher: React.FC<Props> = ({
       ...dePaths,
       'fragenkatalog',
       'landing',
-      'home',
+      'mitarbeiter',
       'impressum',
       'datenschutzerklarung',
-      'mitarbeiter',
+      'home',
     ],
     fr: [
       ...frPaths,
@@ -86,10 +86,10 @@ export const LanguageSwitcher: React.FC<Props> = ({
   }, [show]);
 
   useEffect(() => {
-    if(show) {
+    if (show) {
       setShow(false);
     }
-  }, [router.asPath])
+  }, [router.asPath]);
 
   return (
     <div
