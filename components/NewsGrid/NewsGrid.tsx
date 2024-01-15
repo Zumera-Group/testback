@@ -127,7 +127,8 @@ export const NewsGrid: React.FC<Props> = ({
         item?.slug?.current !==
           firstHighlightedArticleSection?.highlightedPage?.slug?.current &&
         item?.slug?.current !==
-          secondHighlightedArticleSection?.highlightedPage?.slug?.current
+          secondHighlightedArticleSection?.highlightedPage?.slug?.current &&
+        !item?.hidePage
       );
     })
     .sort((a, b) => {
