@@ -45,17 +45,6 @@ export const NumberInput: React.FC<{
 
   const localeFormat = router.locale === 'en' ? 'en-GB' : 'de-DE';
 
-  const evCalcFields = [
-    'Annual_Revenue_2021__c',
-    'Annual_Revenue_2022__c',
-    'Annual_Revenue_2023__c',
-    'Annual_Revenue_2024__c',
-    'Company_EBIT_2021__c',
-    'Company_EBIT_2022__c',
-    'Company_EBIT_2023__c',
-    'Company_EBIT_2024__c',
-  ];
-
   const formatToSalesforce = (v: number) => {
     const today = new Date();
     if (!salesforceFormat || salesforceFormat === 'number') setAnswer(v);
