@@ -104,7 +104,7 @@
         },
         "checkboxError": "This is required",
         "button": "Send",
-        "successMessage": "Thank you for filling out your information."
+        "successMessage": "Thank you for your enquiry. We will analyse your data and contact you."
       }
     },
     "appointment": {

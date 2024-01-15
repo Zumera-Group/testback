@@ -103,7 +103,7 @@
         },
         "checkboxError": "Ceci est nécessaire",
         "button": "Envoyer",
-        "successMessage": "Merci de remplir vos informations."
+        "successMessage": "Nous vous remercions d'avoir transmis vos informations, nous allons analyser vos données et prendrons contact avec vous."
       }
     },
     "appointment": {
