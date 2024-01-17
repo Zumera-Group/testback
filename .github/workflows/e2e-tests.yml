@@ -3,7 +3,6 @@ name: Cypress Tests
 on:
   pull_request:
     branches: [ main ]
-  workflow_dispatch:
 
 jobs:
   test:
@@ -20,27 +19,17 @@ jobs:
         if: github.event_name == 'pull_request'
         run: yarn install
 
-      # Start server for PRs
-      - name: Start Server for PR
-        if: github.event_name == 'pull_request'
-        run: npm start &
-
-      # Set URL for Production
-      - name: Use Production URL
-        if: github.event_name == 'workflow_dispatch'
-        run: echo "CYPRESS_BASE_URL=https://www.zumera.com" >> $GITHUB_ENV
-
       # Run Cypress tests
       - name: Run Cypress Tests
         uses: cypress-io/github-action@v6
         with:
           browser: chrome
-          config: baseUrl=${{ env.CYPRESS_BASE_URL || 'http://localhost:3000' }}
-          start: npm start
-          wait-on: ${{ env.CYPRESS_BASE_URL || 'http://localhost:3000' }}
+          config: baseUrl=http://localhost:3000
+          start: npm run dev
+          wait-on: 'http://localhost:3000'
           wait-on-timeout: 60
           env:
-            CYPRESS_BASE_URL=${{ env.CYPRESS_BASE_URL || 'http://localhost:3000' }}
+            CYPRESS_BASE_URL='http://localhost:3000'
             NEXT_PUBLIC_SANITY_PROJECT_ID=${{ secrets.SANITY_PROJECT_ID }}
             NEXT_PUBLIC_SALESFORCE_API_BEARER_TOKEN=${{ secrets.NEXT_PUBLIC_SALESFORCE_API_BEARER_TOKEN }}
             NEXT_PUBLIC_SANITY_API_TOKEN_PREVIEW=${{ secrets.SANITY_API_TOKEN_PREVIEW }}
@@ -59,10 +48,10 @@ jobs:
         with:
           name: cypress-screenshots
           path: cypress/screenshots
-          if-no-files-found: ignore # 'warn' or 'error' are also available, defaults to `warn`
+          if-no-files-found: ignore
       - uses: actions/upload-artifact@v4
         if: failure()
         with:
           name: cypress-videos
           path: cypress/videos
-          if-no-files-found: ignore # 'warn' or 'e
+          if-no-files-found: ignore
