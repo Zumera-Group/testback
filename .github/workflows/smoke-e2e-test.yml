@@ -31,6 +31,8 @@ jobs:
           config: baseUrl=https://www.zumera.com
           wait-on: 'https://www.zumera.com'
           wait-on-timeout: 60
+          install: false
+
       - uses: actions/upload-artifact@v4
         if: failure()
         with:
