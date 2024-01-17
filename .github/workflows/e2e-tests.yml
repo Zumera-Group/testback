@@ -14,9 +14,16 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Print Environment Variable
-        run: echo "${{ env.NEXT_PUBLIC_CALENDLY_LINK }} ${{ env.NEXT_PUBLIC_BASE_URL }} ${{ env.NEXT_PUBLIC_SANITY_API_VERSION }}!"
-
+      - name: Print Environment Variables
+        run: |
+          echo "NEXT_PUBLIC_BASE_URL: $NEXT_PUBLIC_BASE_URL"
+          echo "SANITY_DATASET: $SANITY_DATASET"
+          echo "SANITY_API_VERSION: $SANITY_API_VERSION"
+          echo "NEXT_PUBLIC_SALESFORCE_API_BASE_URL: $NEXT_PUBLIC_SALESFORCE_API_BASE_URL"
+          echo "NEXT_PUBLIC_CALENDLY_LINK: $NEXT_PUBLIC_CALENDLY_LINK"
+          echo "NEXT_PUBLIC_MARKETING_QUERY_PARAMS: $NEXT_PUBLIC_MARKETING_QUERY_PARAMS"
+          echo "NEXT_PUBLIC_USE_NO_INDEX_TAG: $NEXT_PUBLIC_USE_NO_INDEX_TAG"
+                
       # Install dependencies
       - name: Install Dependencies
         run: yarn install
