@@ -9,14 +9,15 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - name: Set up Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v4
         with:
-          node-version: '14'
+          node-version: '20'
 
       # Install dependencies
       - name: Install Dependencies
+        if: github.event_name == 'pull_request'
         run: npm install
 
       # Start server for PRs
@@ -27,13 +28,41 @@ jobs:
       # Set URL for Production
       - name: Use Production URL
         if: github.event_name == 'workflow_dispatch'
-        run: echo "CYPRESS_BASE_URL=https://your-production-url.com" >> $GITHUB_ENV
+        run: echo "CYPRESS_BASE_URL=https://www.zumera.com" >> $GITHUB_ENV
 
       # Run Cypress tests
       - name: Run Cypress Tests
-        uses: cypress-io/github-action@v2
+        uses: cypress-io/github-action@v6
         with:
+          browser: chrome
+          config: baseUrl=${{ env.CYPRESS_BASE_URL || 'http://localhost:3000' }}
           start: npm start
-          wait-on: 'http://localhost:3000'
+          wait-on: ${{ env.CYPRESS_BASE_URL || 'http://localhost:3000' }}
           wait-on-timeout: 60
-          env: CYPRESS_BASE_URL=${{ env.CYPRESS_BASE_URL || 'http://localhost:3000' }}
+          env:
+            CYPRESS_BASE_URL=${{ env.CYPRESS_BASE_URL || 'http://localhost:3000' }}
+            NEXT_PUBLIC_SANITY_PROJECT_ID=${{ secrets.SANITY_PROJECT_ID }}
+            NEXT_PUBLIC_SALESFORCE_API_BEARER_TOKEN=${{ secrets.NEXT_PUBLIC_SALESFORCE_API_BEARER_TOKEN }}
+            NEXT_PUBLIC_SANITY_API_TOKEN_PREVIEW=${{ secrets.SANITY_API_TOKEN_PREVIEW }}
+            SANITY_PREVIEW_SECRET=${{ secrets.SANITY_PREVIEW_SECRET }}
+            NEXT_PUBLIC_SANITY_DATASET=${{ env.SANITY_DATASET }}
+            NEXT_PUBLIC_SANITY_API_VERSION=${{ env.SANITY_API_VERSION }}
+            SANITY_API_TOKEN=${{ secrets.SANITY_API_TOKEN }}
+            SANITY_API_VERSION=${{ env.SANITY_API_VERSION }}
+            NEXT_PUBLIC_SALESFORCE_API_BASE_URL=${{ env.NEXT_PUBLIC_SALESFORCE_API_BASE_URL }}
+            NEXT_PUBLIC_CALENDLY_LINK=${{ env.NEXT_PUBLIC_CALENDLY_LINK }}
+            NEXT_PUBLIC_BASE_URL=${{ env.NEXT_PUBLIC_BASE_URL }}
+            NEXT_PUBLIC_MARKETING_QUERY_PARAMS=${{ env.NEXT_PUBLIC_MARKETING_QUERY_PARAMS }}
+            NEXT_PUBLIC_USE_NO_INDEX_TAG=${{ env.NEXT_PUBLIC_USE_NO_INDEX_TAG }}
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: cypress-screenshots
+          path: cypress/screenshots
+          if-no-files-found: ignore # 'warn' or 'error' are also available, defaults to `warn`
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: cypress-videos
+          path: cypress/videos
+          if-no-files-found: ignore # 'warn' or 'e
