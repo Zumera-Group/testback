@@ -18,11 +18,6 @@ jobs:
       - name: Install Dependencies
         run: yarn install
 
-      - name: Print Environment Variable
-        run:
-          echo "NEXT_PUBLIC_BASE_URL: $NEXT_PUBLIC_BASE_URL"
-        env:
-          NEXT_PUBLIC_BASE_URL: ${{ env.NEXT_PUBLIC_BASE_URL }}
       - name: Check Secret Variable Presence
         run: |
           if [ -z "${{ secrets.SANITY_PROJECT_ID }}" ]; then
