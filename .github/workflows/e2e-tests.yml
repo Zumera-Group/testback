@@ -1,0 +1,39 @@
+name: Cypress Tests
+
+on:
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+
+      # Install dependencies
+      - name: Install Dependencies
+        run: npm install
+
+      # Start server for PRs
+      - name: Start Server for PR
+        if: github.event_name == 'pull_request'
+        run: npm start &
+
+      # Set URL for Production
+      - name: Use Production URL
+        if: github.event_name == 'workflow_dispatch'
+        run: echo "CYPRESS_BASE_URL=https://your-production-url.com" >> $GITHUB_ENV
+
+      # Run Cypress tests
+      - name: Run Cypress Tests
+        uses: cypress-io/github-action@v2
+        with:
+          start: npm start
+          wait-on: 'http://localhost:3000'
+          wait-on-timeout: 60
+          env: CYPRESS_BASE_URL=${{ env.CYPRESS_BASE_URL || 'http://localhost:3000' }}
