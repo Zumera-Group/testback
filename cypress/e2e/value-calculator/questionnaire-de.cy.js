@@ -1,9 +1,11 @@
 describe('fills the German calculator', () => {
+  const baseUrl = Cypress.config('baseUrl');
+
   beforeEach(() => {
   });
 
   it('should go through all the steps of the calculator and see the calendly in the end', () => {
-    cy.visit('http://localhost:3000/de/fragenkatalog/unternehmensbewertung/');
+    cy.visit(`${baseUrl}/de/fragenkatalog/unternehmensbewertung/`);
     cy.get('[aria-label="Radio Button"]', { timeout: 10000 }).should('be.visible');
     cy.contains('Question 1 / 35');
     cy.wait(1000);
@@ -199,7 +201,7 @@ describe('fills the German calculator', () => {
   })
 
   it.only('should go through all the steps of the calculator and NOT see the calendly in the end', () => {
-    cy.visit('http://localhost:3000/de/fragenkatalog/unternehmensbewertung/');
+    cy.visit(`${baseUrl}/de/fragenkatalog/unternehmensbewertung/`);
     cy.get('[aria-label="Radio Button"]', { timeout: 10000 }).should('be.visible');
     cy.contains('Question 1 / 35');
     cy.wait(1000);

@@ -1,10 +1,11 @@
 
 describe('fills the English calculator', () => {
+  const baseUrl = Cypress.config('baseUrl');
   beforeEach(() => {
   });
 
   it('should go through all the steps of the calculator and see the calendly in the end', () => {
-    cy.visit('http://localhost:3000/en/questionnaires/companyvaluation/');
+    cy.visit(`${baseUrl}/en/questionnaires/companyvaluation/`);
     cy.get('[aria-label="Radio Button"]', { timeout: 10000 }).should('be.visible');
     cy.contains('Question 1 / 31');
     cy.wait(1000);
@@ -184,7 +185,7 @@ describe('fills the English calculator', () => {
   });
 
   it('should go through all the steps of the calculator and NOT see the calendly in the end', () => {
-    cy.visit('http://localhost:3000/en/questionnaires/companyvaluation/');
+    cy.visit(`${baseUrl}/en/questionnaires/companyvaluation/`);
     cy.get('[aria-label="Radio Button"]', { timeout: 10000 }).should('be.visible');
     cy.contains('Question 1 / 31');
     cy.wait(1000);
