@@ -22,7 +22,13 @@ jobs:
         run: |
           echo "SANITY_PROJECT_ID: $SANITY_PROJECT_ID"
           echo "NEXT_PUBLIC_SANITY_DATASET: $NEXT_PUBLIC_SANITY_DATASET"
-
+      - name: Check Secret Variable Presence
+        run: |
+          if [ -z "${{ secrets.SANITY_PROJECT_ID }}" ]; then
+            echo "SANITY_PROJECT_ID is not set."
+          else
+            echo "SANITY_PROJECT_ID is set."
+          fi
       # Run Cypress tests
       - name: Run Cypress Tests
         uses: cypress-io/github-action@v6
