@@ -1,4 +1,4 @@
-import { Section, Container, Grid, GridColumn } from 'components/Layout';
+import { Container, Grid, GridColumn, Section } from 'components/Layout';
 import { SectionHeading } from 'components/SectionHeading';
 
 import { Description } from './Description';

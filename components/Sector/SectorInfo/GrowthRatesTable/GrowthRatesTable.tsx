@@ -4,6 +4,7 @@ import Trust from 'components/Trust';
 
 import styles from './GrowthRatesTable.module.scss';
 
+
 interface GrowthRatesTableProps {
   title: string;
   growthRatesTable: any;
@@ -15,6 +16,7 @@ export const GrowthRatesTable = ({
   growthRatesTable,
   isResultsCompactOnMobile,
 }: GrowthRatesTableProps) => {
+
   const [formatted, setFormatted] = useState([]);
   const { growthRates } = growthRatesTable;
 

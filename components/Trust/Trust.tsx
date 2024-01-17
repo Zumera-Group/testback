@@ -1,7 +1,10 @@
 import { Container, Grid, GridColumn, Section } from 'components/Layout';
 import { TrustItem } from './TrustItem';
 
-export const Trust = ({ isResultsCompactOnMobile, ...rest }) => {
+export const Trust = ({ isResultsCompactOnMobile, ...rest }: {
+  isResultsCompactOnMobile?: boolean,
+  textElements: any
+}) => {
 
   const { textElements } = rest;
 
