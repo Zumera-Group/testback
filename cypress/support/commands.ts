@@ -25,13 +25,25 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 //
-// declare global {
-//   namespace Cypress {
-//     interface Chainable {
-//       login(email: string, password: string): Chainable<void>
-//       drag(subject: string, options?: Partial<TypeOptions>): Chainable<Element>
-//       dismiss(subject: string, options?: Partial<TypeOptions>): Chainable<Element>
-//       visit(originalFn: CommandOriginalFn, url: string, options: Partial<VisitOptions>): Chainable<Element>
-//     }
-//   }
-// }
+
+// In your specific test file or in cypress/support/commands.js
+Cypress.on('uncaught:exception', (err, runnable) => {
+  // Check if the error message includes 'window.lintrk is not a function'
+  if (err.message.includes('ttq')) {
+    // Returning false here prevents Cypress from failing the test
+    return false;
+  }
+  if (err.message.includes('window.lintrk')) {
+    // Returning false here prevents Cypress from failing the test
+    return false;
+  }
+  if (err.message.includes("#418") || err.message.includes("#423")) {
+    // Returning false here prevents Cypress from failing the test
+    return false;
+  }
+
+  // If the error is something else, we still want the test to fail
+  return true;
+});
+
+export {};

@@ -6,6 +6,7 @@ on:
 jobs:
   # single job that generates and outputs a common id
   prepare:
+    runs-on: ubuntu-latest
     outputs:
       uuid: ${{ steps.uuid.outputs.value }}
     steps:
@@ -18,8 +19,16 @@ jobs:
   smoke-tests:
     needs: [ 'prepare' ]
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false # https://github.com/cypress-io/github-action/issues/48
+      matrix:
+        containers: [ 1, 2 ] # Uses 2 parallel instances
     steps:
       - uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
       # Run Cypress tests
       - name: Run Cypress Tests
         uses: cypress-io/github-action@v6
@@ -31,7 +40,8 @@ jobs:
           config: baseUrl=https://www.zumera.com
           wait-on: 'https://www.zumera.com'
           wait-on-timeout: 60
-          install: false
+        env:
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
 
       - uses: actions/upload-artifact@v4
         if: failure()
