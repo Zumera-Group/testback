@@ -10,7 +10,7 @@ describe('fills the English calculator', () => {
 
     // if the cookie banner is visible, click the button to accept all cookies
     if (!baseUrl.includes('localhost')) {
-      cy.contains('button', 'Ok, continue').click({ force: true });
+      cy.acceptCookiesIfPresent();
     }
   });
 

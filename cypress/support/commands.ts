@@ -46,4 +46,15 @@ Cypress.on('uncaught:exception', (err, runnable) => {
   return true;
 });
 
+// @ts-ignore
+Cypress.Commands.add('acceptCookiesIfPresent', () => {
+  cy.wait(3000);
+  cy.get('body').then((body) => {
+    if (body.find('[aria-label="Ok, continue"]').length > 0) {
+      cy.get('[aria-label="Ok, continue"]').click();
+    }
+  });
+
+});
+
 export {};
