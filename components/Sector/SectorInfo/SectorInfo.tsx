@@ -13,7 +13,7 @@ import { Accordion } from 'components/Accordion';
 export const SectorInfo = ({ sector, sectorTransactions, content }) => {
   const t = (item) => content?.[item];
 
-  const { accordionQuestions } = content;
+  const { accordionQuestions } = content || {};
   const {
     infoSection,
     accordionAnswers,
@@ -45,7 +45,7 @@ export const SectorInfo = ({ sector, sectorTransactions, content }) => {
           <GridColumn sm={12} md={6} lg={6}>
             <Description content={infoSection?.description} />
             <Accordion
-              questions={accordionQuestions}
+              questions={accordionQuestions || []}
               answers={accordionAnswers}
             />
           </GridColumn>

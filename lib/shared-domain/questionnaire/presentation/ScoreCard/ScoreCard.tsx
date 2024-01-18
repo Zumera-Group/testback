@@ -6,12 +6,18 @@ import Image from 'next/image';
 import styles from './ScoreCard.module.scss';
 import * as animationData from './loading-wheel.json';
 import Lottie from 'react-lottie';
-import { Questionnaire } from 'lib/shared-domain/questionnaire/domain';
+import { Questionnaire } from '../../domain';
 
-export const ScoreCard = ({ questionnaire, isResultsCompactOnMobile }: {
-  questionnaire: Questionnaire,
-  isResultsCompactOnMobile: boolean
-}) => {
+interface ScoreCardProps {
+  questionnaire: any;
+  isResultsCompactOnMobile: boolean;
+}
+
+export const ScoreCard = ({
+  questionnaire,
+  isResultsCompactOnMobile,
+}: ScoreCardProps) => {
+
   const tr = getTranslateByScope('result');
 
   const [score, setScore] = React.useState<{
@@ -81,7 +87,11 @@ export const ScoreCard = ({ questionnaire, isResultsCompactOnMobile }: {
             options={defaultOptions}
             width="100%"
             height={'auto'}
-            style={{ width: isResultsCompactOnMobile ? 119 : 192, marginLeft: 'auto', marginTop: 16 }}
+            style={{
+              width: isResultsCompactOnMobile ? 119 : 192,
+              marginLeft: 'auto',
+              marginTop: 16,
+            }}
             isStopped={false}
             isPaused={false}
           />

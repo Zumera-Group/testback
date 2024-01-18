@@ -1,30 +1,27 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
-import { enPaths, dePaths } from 'lib/shared-domain/page/paths';
+import { enPaths, dePaths, frPaths } from 'lib/shared-domain/page/paths';
 
 import styles from './LanguageSwitcher.module.scss';
+import { useEffect, useRef, useState } from 'react';
+import { locales } from 'lib/locale';
+import { allLinks } from 'lib/links';
 
 interface Props {
-  otherLangSlug?: string;
   classes?: string;
+  isLight: boolean;
+  sideBar?: boolean;
 }
 
 export const LanguageSwitcher: React.FC<Props> = ({
-  otherLangSlug,
   classes,
+  isLight,
+  sideBar,
 }) => {
+  const [show, setShow] = useState(false);
   const router = useRouter();
-
-  const getLocale = () => {
-    if (otherLangSlug) return null;
-    if (router.locale === 'en') return 'de';
-    if (router.locale === 'de') return 'en';
-  };
-
-  const localeLabel = () => {
-    return router.locale === 'en' ? 'DE' : 'EN';
-  };
+  const ref: any = useRef();
 
   const pages = {
     en: [
@@ -41,50 +38,92 @@ export const LanguageSwitcher: React.FC<Props> = ({
       ...dePaths,
       'fragenkatalog',
       'landing',
-      'home',
+      'mitarbeiter',
       'impressum',
       'datenschutzerklarung',
-      'mitarbeiter',
+      'home',
+    ],
+    fr: [
+      ...frPaths,
+      'des-questionnaires',
+      'landing',
+      'employes',
+      'terms-and-conditions',
+      'privacy-policy',
+      'home',
     ],
   };
 
-  const getSlug = () => {
-    if (otherLangSlug) {
-      if (otherLangSlug.startsWith('/')) {
-        return otherLangSlug;
-      }
-      return `/${otherLangSlug}`;
-    }
+  const getSlug = (lang: string) => {
     const currentLocale = router.locale;
-    const otherLocale = currentLocale === 'en' ? 'de' : 'en';
     const pathElements = router.asPath.split('/').filter((el) => el !== '');
 
-    if (pathElements) {
-      const pageIndex = pages[currentLocale]?.findIndex(
-        (el) => el === pathElements[0],
-      );
+    const pageIndex = pages[currentLocale]?.findIndex(
+      (el) => el === pathElements[0],
+    );
 
-      if (pageIndex === -1) {
-        return `/${pathElements[0]}`;
-      }
-      const pathOtherLocale = `/${pages[otherLocale][pageIndex]}${
-        pathElements[1] ? '/' + pathElements[1] : ''
-      }`;
-      return pathOtherLocale;
-    } else {
+    if (!pages[lang][pageIndex]) {
       return '/home';
     }
+
+    if (pageIndex === -1) {
+      return `/${pathElements[0]}`;
+    }
+
+    return `/${pages[lang][pageIndex]}${
+      pathElements[1] ? '/' + pathElements[1] : ''
+    }`;
   };
 
+  useEffect(() => {
+    const onClick = ({ target }: any) => {
+      if (!ref.current?.contains(target) && show) {
+        setShow(false);
+      }
+    };
+    document.addEventListener('click', onClick);
+    return () => document.removeEventListener('click', onClick);
+  }, [show]);
+
+  useEffect(() => {
+    if (show) {
+      setShow(false);
+    }
+  }, [router.asPath]);
+
   return (
-    <Link
-      passHref
-      locale={getLocale()}
-      href={getSlug()}
-      className={[styles.link, classes ?? ''].join(' ')}
+    <div
+      className={[
+        styles.switcher,
+        classes ?? '',
+        sideBar ? styles.sidebar : '',
+      ].join(' ')}
+      ref={ref}
     >
-      {localeLabel()}
-    </Link>
+      <button
+        className={[styles.link, isLight ? styles.light : ''].join(' ')}
+        onClick={() => setShow(!show)}
+      >
+        {(router.locale || 'en').toUpperCase()}
+      </button>
+      <div
+        className={[styles.linksWrapper, show ? styles.active : ''].join(' ')}
+      >
+        {locales
+          .filter((lang) => router.locale !== lang)
+          .map((lang) => (
+            <Link
+              passHref
+              locale={lang}
+              href={getSlug(lang)}
+              className={[styles.link, classes ?? ''].join(' ')}
+              key={lang}
+            >
+              {(lang || '').toUpperCase()}
+            </Link>
+          ))}
+      </div>
+    </div>
   );
 };
 

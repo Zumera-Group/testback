@@ -21,12 +21,17 @@ import { SecretKeyLockScreen } from 'components/SecretKeyLockScreen';
 export async function getStaticPaths() {
   const en = await fetchNewsArticles('en');
   const de = await fetchNewsArticles('de');
+  const fr = await fetchNewsArticles('fr');
 
   const mapSlugsEn = en
     .map((data) => data?.slug?.current)
     .filter((data) => data)
     .slice(0, 10);
   const mapSlugsDe = de
+    .map((data) => data?.slug?.current)
+    .filter((data) => data)
+    .slice(0, 10);
+  const mapSlugsFr = fr
     .map((data) => data?.slug?.current)
     .filter((data) => data)
     .slice(0, 10);
@@ -41,8 +46,13 @@ export async function getStaticPaths() {
     locale: 'de',
   }));
 
+  const frPaths = mapSlugsFr.map((slug) => ({
+    params: { slug },
+    locale: 'fr',
+  }));
+
   return {
-    paths: [...enPaths, ...dePaths],
+    paths: [...enPaths, ...dePaths, ...frPaths],
     fallback: true,
   };
 }

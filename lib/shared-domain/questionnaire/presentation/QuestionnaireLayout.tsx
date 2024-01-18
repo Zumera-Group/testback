@@ -38,6 +38,8 @@ function useSetQuestionnaireLocaleToUseFori18n(locale: string) {
     if (!EnvironmentService.isProduction()) return;
     if (locale === 'de') {
       I18n.locale = 'de';
+    } else if (locale === 'fr') {
+      I18n.locale = 'fr';
     } else {
       I18n.locale = 'en';
     }
@@ -136,7 +138,6 @@ const QuestionnaireLayout: React.FC<{
       // setBrowserCookie('_uid', newUuid, 365);
 
       qLogs('getCookie' + uniqueId);
-
     }
   }, [uniqueId]);
 
@@ -157,7 +158,7 @@ const QuestionnaireLayout: React.FC<{
 
     qLogs(
       'Save state for current questionnaire: ' +
-      JSON.stringify(newQuestionnaire),
+        JSON.stringify(newQuestionnaire),
     );
 
     setQuestionnaire(newQuestionnaire);
@@ -230,7 +231,8 @@ const QuestionnaireLayout: React.FC<{
     }
   }, []);
 
-  const isResultsCompactOnMobile = questionnaire?.variantOfTheResultPage === 'compact' && isMobile;
+  const isResultsCompactOnMobile =
+    questionnaire?.variantOfTheResultPage === 'compact' && isMobile;
 
   return (
     <>
@@ -315,15 +317,20 @@ const QuestionnaireLayout: React.FC<{
                         )}
 
                         {isOnResultScreen && (
-                          <ScoreCard questionnaire={selectedQuestionnaire} isResultsCompactOnMobile={isResultsCompactOnMobile}/>
+                          <ScoreCard
+                            questionnaire={selectedQuestionnaire}
+                            isResultsCompactOnMobile={isResultsCompactOnMobile}
+                          />
                         )}
-
                       </aside>
                     </GridColumn>
                   )}
 
                   {renderResultModules && isResultsCompactOnMobile && (
-                    <Checkmarks isResultsCompactOnMobile={isResultsCompactOnMobile} result={result} />
+                    <Checkmarks
+                      isResultsCompactOnMobile={isResultsCompactOnMobile}
+                      result={result}
+                    />
                   )}
 
                   <GridColumn
@@ -349,8 +356,12 @@ const QuestionnaireLayout: React.FC<{
                 </Grid>
               </Container>
             </Section>
-            {renderResultModules &&
-              <ResultModules isResultsCompactOnMobile={isResultsCompactOnMobile} result={result} />}
+            {renderResultModules && (
+              <ResultModules
+                isResultsCompactOnMobile={isResultsCompactOnMobile}
+                result={result}
+              />
+            )}
           </main>
         </div>
       </PageTransition>

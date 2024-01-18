@@ -2,6 +2,7 @@ import { useRouter } from 'next/router';
 import Link from 'next/link';
 
 import styles from './AnnouncementTopBanner.module.scss';
+import { allLinks } from 'lib/links';
 
 export const AnnouncementTopBanner = ({
   announcementTopBanner,
@@ -16,13 +17,12 @@ export const AnnouncementTopBanner = ({
     const pageType = announcementTopBanner.buttonPageLink._type;
 
     const linkTypePart = {
-      sector: router.locale === 'en' ? 'sectors' : 'sektoren',
-      valueCalculator:
-        router.locale === 'en' ? 'questionnaires' : 'fragenkatalog',
-      employee: router.locale === 'en' ? 'employees' : 'mitarbeiter',
-      transaction: router.locale === 'en' ? 'transactions' : 'transaktionen',
+      sector: allLinks.sectors[router.locale],
+      valueCalculator:allLinks.questionnaires[router.locale],
+      employee: allLinks.employees[router.locale],
+      transaction: allLinks.transactions[router.locale],
       newsArticle: 'news',
-      service: router.locale === 'en' ? 'services' : 'leistungsspektrum',
+      service: allLinks.services[router.locale],
       landings: 'landings',
       page: '',
     }[pageType];

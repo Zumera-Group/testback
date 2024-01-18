@@ -16,6 +16,7 @@ import { Button } from 'components/Button';
 
 import styles from './SectorTransactions.module.scss';
 import { useRouter } from 'next/router';
+import { allLinks } from 'lib/links';
 
 export const SectorTransactions = ({ transactions, sector, content }) => {
   const router = useRouter();
@@ -89,10 +90,7 @@ export const SectorTransactions = ({ transactions, sector, content }) => {
                   variant={'secondary'}
                   link={{
                     slug: {
-                      current:
-                        router.locale === 'en'
-                          ? '/transactions'
-                          : '/transaktionen',
+                      current: `/${allLinks.transactions[router.locale]}`,
                     },
                   }}
                   classes={styles.button}

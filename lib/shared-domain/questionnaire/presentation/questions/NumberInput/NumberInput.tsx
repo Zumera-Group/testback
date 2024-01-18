@@ -28,7 +28,7 @@ export const NumberInput: React.FC<{
   const { valueType, placeholder, salesforceFormat, label } =
     question?.answerSelector?.numberInput || DEFAULT_VALUES;
   const { getNumberFormat, sign } = useNumberFormat(valueType);
-  const { getAnswer, setAnswer } = useAnswers(question);
+  const { getAnswer, setAnswer, removeAnswer } = useAnswers(question);
   const isMobile = useMediaQuery(`(max-width: ${SCREEN_SIZE_MD})`);
   const [inputLength, setInputLength] = useState(0);
   const isYear = valueType === 'year';
@@ -127,8 +127,14 @@ export const NumberInput: React.FC<{
                   : getUnformattedAnswer() || ''
               }
               onChange={(e) => {
-                formatToSalesforce(Number(e.target.value.replace(/[.,]/g, '')));
+                formatToSalesforce(
+                  Number(e.target.value.replace(/[.,\s]/g, '')),
+                );
+
                 setInputLength(e.target.value.length);
+                if (e.target.value === '') {
+                  removeAnswer(e.target.value);
+                }
               }}
             />
 

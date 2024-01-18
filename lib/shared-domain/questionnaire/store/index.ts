@@ -15,6 +15,7 @@ interface ValuationState {
   answers: Record<string, any>;
   getAnswers: () => Record<string, any>;
   setAnswer: (params: { value: any; id: string }) => void;
+  removeAnswer: (params: { value: any; id: string }) => void;
   getAnswer: (id: string) => any;
   uniqueId: string | null;
   setUniqueId: (id: string) => void;
@@ -118,6 +119,16 @@ export const useValuationStore = create<ValuationState>(
       },
       getAnswer: (id: string) => {
         return get().answers?.[id];
+      },
+      removeAnswer: (params: { value: any; id: string }) => {
+        qLogs('removeAnswer => ' + JSON.stringify(params));
+        set((state) => {
+          const updatedAnswers = { ...state.answers };
+          if (updatedAnswers.hasOwnProperty(params.id)) {
+            delete updatedAnswers[params.id];
+            set({ answers: updatedAnswers });
+          }
+        });
       },
       answers: {},
       questionnaire: null,

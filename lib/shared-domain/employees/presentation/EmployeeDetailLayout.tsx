@@ -55,7 +55,7 @@ export const EmployeeDetailLayout: React.FC<{
         />
         <EmployeeBackground
           employee={employee}
-          content={employeeDetailContent?.backgroundSectionContent}
+          content={employeeDetailContent?.backgroundSectionContent || {}}
         />
         <EmployeeNews
           employee={employee}

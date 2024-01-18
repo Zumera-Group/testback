@@ -19,6 +19,7 @@ import { BlogArticleLayout } from 'components/BlogArticleLayout';
 export async function getStaticPaths() {
   const en = await fetchBlogArticles('en');
   const de = await fetchBlogArticles('de');
+  const fr = await fetchBlogArticles('fr');
 
   const mapSlugsEn = en
     .map((data) => data?.slug?.current)
@@ -26,6 +27,11 @@ export async function getStaticPaths() {
     .slice(0, 10);
 
   const mapSlugsDe = de
+    .map((data) => data?.slug?.current)
+    .filter((data) => data)
+    .slice(0, 10);
+
+  const mapSlugsFr = fr
     .map((data) => data?.slug?.current)
     .filter((data) => data)
     .slice(0, 10);
@@ -40,8 +46,13 @@ export async function getStaticPaths() {
     locale: 'de',
   }));
 
+  const frPaths = mapSlugsFr.map((slug) => ({
+    params: { slug },
+    locale: 'fr',
+  }));
+
   return {
-    paths: [...enPaths, ...dePaths],
+    paths: [...enPaths, ...dePaths, ...frPaths],
     fallback: true,
   };
 }

@@ -1,0 +1,127 @@
+{
+  "header": {
+    "mobileTitle": "Étape {{current}} de {{max}}",
+    "SaveForLater": "Garder pour plus tard",
+    "quitModal": {
+      "title": "Êtes-vous sûr de vouloir quitter?",
+      "description": "Vous pouvez continuer à remplir le formulaire chaque fois que vous visitez saxenhammer.co ou nous pouvons vous le rappeler par e-mail.",
+      "input": {
+        "placeholder": "Adresse e-mail",
+        "button": "Soumettre"
+      }
+    }
+  },
+  "timeEstimation": {
+    "title": "Il ne faut que 3 minutes pour remplir le formulaire"
+  },
+  "sidebar": {
+    "sectorSpecificCategory": "Spécifique au secteur",
+    "results": "Résultats"
+  },
+  "sectorSpecificEntry": {
+    "questionText": "Vous avez bien travaillé jusqu'à présent, avez-vous encore quelques minutes ?",
+    "subtitle": "Répondez à certaines de nos questions spécifiques au secteur pour obtenir une évaluation plus détaillée.",
+    "step1": "Informations générales",
+    "step2": "Spécificités de l'entreprise",
+    "step3": "Spécificités du secteur",
+    "step4": "Évaluation Zumera",
+    "firstButtonText": "Aller à ({{industrie}})",
+    "secondButtonText": "je finirai ici"
+  },
+  "boxSelector": {
+    "whichSector": "Dans quel secteur votre entreprise est-elle active ?",
+    "whichIndustry": "Dans quel secteur votre entreprise est-elle active ?",
+    "automotive": "Automobile",
+    "chemicals&Polymers": "Produits chimiques et polymères",
+    "food&Beverage": "nourriture et boissons",
+    "healthcare": "Soins de santé",
+    "industrial": "Industriel",
+    "media&Advertising": "Publicité dans les médias",
+    "logistics": "Logistique",
+    "infrastructure": "Infrastructure",
+    "moreIndustries": "Plus de secteurs"
+  },
+  "answerTypes": {
+    "textInput": {
+      "basePlaceholder": "Écrivez ici"
+    },
+    "slider": {
+      "inputLabel": "Sinon, tapez"
+    },
+    "boxSelector": {
+      "buttonText": "Montrer +"
+    }
+  },
+  "question": {
+    "nextBtn": "Suivant",
+    "skipBtn": "Sauter",
+    "required": "Une réponse est nécessaire pour continuer",
+    "backBtn": "Retour",
+    "question": "Question"
+  },
+  "result": {
+    "loading": {
+      "error": "Une erreur s'est produite lors du calcul du score",
+      "title": "Génial, nous avons tous fini. Calcul de la valeur de votre entreprise.",
+      "progress": {
+        "generalInformation": "Informations générales",
+        "companySpecifics": "Spécificités de l'entreprise",
+        "sectorSpecifics": "Spécificités du secteur",
+        "evaluation": "Évaluation Zumera"
+      }
+    },
+    "evaluation": {
+      "title": "Obtenez votre évaluation d'expert gratuite",
+      "description": "Afin de donner une estimation solide de la valeur de l'entreprise, un conseiller vérifiera les entrées et communiquera avec le résultat par e-mail ou par téléphone s'il y a une question ouverte.",
+      "resultBox": {
+        "title": "Votre résultat préliminaire",
+        "points": "{{points}}",
+        "betterThen": "Mieux que {{percentage}}% de nos candidats"
+      },
+      "form": {
+        "name": {
+          "label": "Nom",
+          "placeholder": "Nom",
+          "error": "Le nom est requis"
+        },
+        "email": {
+          "label": "E-Mail",
+          "placeholder": "E-Mail",
+          "requiredError": "L'e-mail est requis",
+          "invalidError": "Le courriel est invalide"
+        },
+        "phoneNumber": {
+          "label": "Numéro de téléphone",
+          "placeholder": "Numéro de téléphone",
+          "error": "Le numéro de téléphone est requis"
+        },
+        "checkbox": {
+          "first": "Je suis d'accord avec le traitement des données ",
+          "second": "données",
+          "third": " pour la création de l'évaluation ainsi que la prise de contact par Zumera.",
+          "link": "/en/privacy-policy/"
+        },
+        "checkboxError": "Ceci est nécessaire",
+        "button": "Envoyer",
+        "successMessage": "Nous vous remercions d'avoir transmis vos informations, nous allons analyser vos données et prendrons contact avec vous."
+      }
+    },
+    "appointment": {
+      "title": "Rien ne remplace une conversation personnelle.",
+      "description": "Merci, vous êtes prêt !",
+      "calendlyCustomAnswers": {
+        "a1": "Zum ausgewählten Termin erreichbar unter:"
+      }
+    },
+    "logoTitle": "A conseillé plus de 20 entreprises du Fortune 500 dans leurs acquisitions"
+  },
+  "VTLanding": {
+    "questionText": "Quelle est l'utilisation prévue de l'évaluation?",
+    "questionSubtitle": "Commencer l'évaluation:",
+    "boxContent": {
+      "1": "Vente de l'entreprise",
+      "2": "Élever Série",
+      "3": "Juste de la curiosité"
+    }
+  }
+}

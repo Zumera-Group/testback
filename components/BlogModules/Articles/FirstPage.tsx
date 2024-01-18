@@ -7,6 +7,7 @@ import ArticleBox from '../ArticleBox';
 
 import styles from './Articles.module.scss';
 import Pagination from './Pagination';
+import { getBuiltLink } from 'lib/links';
 
 interface Props {
   featuredBlog: any;
@@ -72,11 +73,11 @@ const FirstPage: React.FC<Props> = ({
             <GridColumn sm={12} md={4} lg={4}>
               <a
                 className={styles.cta}
-                href={
-                  locale === 'en'
-                    ? `/en/questionnaires/${calculatorPage[0]?.questionnaireSlug?.current}`
-                    : `/de/fragenkatalog/${calculatorPage[0]?.questionnaireSlug?.current}`
-                }
+                href={getBuiltLink({
+                  locale,
+                  path: 'questionnaires',
+                  uri: calculatorPage[0]?.questionnaireSlug?.current,
+                })}
               >
                 <div>
                   <h4>{title}</h4>

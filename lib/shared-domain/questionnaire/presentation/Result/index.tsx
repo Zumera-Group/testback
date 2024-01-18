@@ -101,7 +101,6 @@ const EvaluationScreen: React.FC<{
 
   const formFields = resultScreenCopy.formFields;
   const questionTitle = resultScreenCopy.questionTitle;
-  console.log(questionTitle);
 
   const onSend = async (e) => {
     e.preventDefault();
