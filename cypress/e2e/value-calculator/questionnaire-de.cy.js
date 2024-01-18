@@ -200,7 +200,7 @@ describe('fills the German calculator', () => {
     cy.get('.calendly-inline-widget', { timeout: 10000 }).should('be.visible');
   })
 
-  it.only('should go through all the steps of the calculator and NOT see the calendly in the end', () => {
+  it('should go through all the steps of the calculator and NOT see the calendly in the end', () => {
     cy.visit(`${baseUrl}/de/fragenkatalog/unternehmensbewertung/`);
     cy.get('[aria-label="Radio Button"]', { timeout: 10000 }).should('be.visible');
     cy.contains('Question 1 / 35');
