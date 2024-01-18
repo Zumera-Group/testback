@@ -9,16 +9,7 @@ describe('fills the German calculator', () => {
 
     // if the cookie banner is visible, click the button to accept all cookies
     if (!baseUrl.includes('localhost')) {
-      cy.get('body').then($body => {
-        // Check if the button exists in the body
-        if ($body.find('button:contains("Ok, continue")').length) {
-          // Try to click the button, forcing the click if necessary
-          cy.get('button:contains("Ok, continue")').click({ force: true });
-        } else {
-          // If the button does not exist, log a message and continue
-          cy.log('Button with specific text does not exist');
-        }
-      });
+      cy.contains('button', 'Ok, continue').click({ force: true });
     }
   });
 
