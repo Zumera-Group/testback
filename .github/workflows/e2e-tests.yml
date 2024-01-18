@@ -29,6 +29,7 @@ jobs:
           record: true
         env:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+          COMMIT_INFO_MESSAGE: ${{github.event.pull_request.title}}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SANITY_API_TOKEN: ${{ secrets.SANITY_API_TOKEN }}
           NEXT_PUBLIC_SANITY_PROJECT_ID: ${{ secrets.NEXT_PUBLIC_SANITY_PROJECT_ID }}
@@ -43,6 +44,7 @@ jobs:
           NEXT_PUBLIC_BASE_URL: 'https://www.zumera.com'
           NEXT_PUBLIC_MARKETING_QUERY_PARAMS: 'utm_source,utm_medium,utm_campaign,utm_id,utm_source_platform,utm_term,utm_content,gclid,fbclid,gclsrc,gadevice__c,gakeyword__c,ganetwork__c'
           NEXT_PUBLIC_USE_NO_INDEX_TAG: 'true'
+
 
       # Upload screenshots and videos on failure
       - uses: actions/upload-artifact@v4
