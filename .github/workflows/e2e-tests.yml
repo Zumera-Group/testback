@@ -27,7 +27,6 @@ jobs:
           wait-on: 'http://localhost:3000'
           wait-on-timeout: 60
           record: true
-          group: 'Parallel Calculator'
         env:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
           COMMIT_INFO_MESSAGE: ${{github.event.head_commit.message}}
