@@ -48,7 +48,7 @@ jobs:
           NEXT_PUBLIC_USE_NO_INDEX_TAG: 'true'
 
 
-      # Upload screenshots and videos on failure.
+      # Upload screenshots and videos on failure
       - uses: actions/upload-artifact@v4
         if: failure()
         with:
