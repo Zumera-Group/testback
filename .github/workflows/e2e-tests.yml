@@ -17,10 +17,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-      # Install dependencies
-      - name: Install Dependencies
-        run: yarn install
-
+          
       # Run Cypress tests
       - name: Run Cypress Tests
         uses: cypress-io/github-action@v6
