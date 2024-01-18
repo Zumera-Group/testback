@@ -1,0 +1,47 @@
+name: Smoke Cypress Tests
+
+on:
+  workflow_dispatch:
+
+jobs:
+  # single job that generates and outputs a common id
+  prepare:
+    outputs:
+      uuid: ${{ steps.uuid.outputs.value }}
+    steps:
+      - name: Generate unique ID 💎
+        id: uuid
+        # take the current commit + timestamp together
+        # the typical value would be something like
+        # "sha-5d3fe...35d3-time-1620841214"
+        run: echo "value=sha-$GITHUB_SHA-time-$(date +"%s")" >> $GITHUB_OUTPUT
+  smoke-tests:
+    needs: [ 'prepare' ]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      # Run Cypress tests
+      - name: Run Cypress Tests
+        uses: cypress-io/github-action@v6
+        with:
+          record: true
+          parallel: true
+          ci-build-id: ${{ needs.prepare.outputs.uuid }}
+          browser: chrome
+          config: baseUrl=https://www.zumera.com
+          wait-on: 'https://www.zumera.com'
+          wait-on-timeout: 60
+          install: false
+
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: cypress-screenshots
+          path: cypress/screenshots
+          if-no-files-found: ignore
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: cypress-videos
+          path: cypress/videos
+          if-no-files-found: ignore
