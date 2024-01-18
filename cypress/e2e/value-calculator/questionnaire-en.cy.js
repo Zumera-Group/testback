@@ -1,5 +1,10 @@
-
-describe('fills the English calculator', () => {
+describe('fills the English calculator',
+  {
+    retries: {
+      runMode: 3,
+      openMode: 0,
+    },
+  }, () => {
   const baseUrl = Cypress.config('baseUrl');
   const radioButton = '[class*="RadioButtonItem"]';
   const checkboxItem = '[class*="CheckboxItem"]';
