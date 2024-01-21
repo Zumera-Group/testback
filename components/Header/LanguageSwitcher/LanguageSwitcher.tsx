@@ -6,18 +6,22 @@ import { enPaths, dePaths, frPaths } from 'lib/shared-domain/page/paths';
 import styles from './LanguageSwitcher.module.scss';
 import { useEffect, useRef, useState } from 'react';
 import { locales } from 'lib/locale';
+import {useCallback} from 'react';
 import { allLinks } from 'lib/links';
+import {IAlternateLangHrefs} from '../../../@types/i18n';
 
 interface Props {
   classes?: string;
   isLight: boolean;
   sideBar?: boolean;
+  langAlternates?: IAlternateLangHrefs
 }
 
 export const LanguageSwitcher: React.FC<Props> = ({
   classes,
   isLight,
   sideBar,
+  langAlternates
 }) => {
   const [show, setShow] = useState(false);
   const router = useRouter();
@@ -54,7 +58,16 @@ export const LanguageSwitcher: React.FC<Props> = ({
     ],
   };
 
-  const getSlug = (lang: string) => {
+  const getSlug = useCallback((lang: string) => {
+    if (langAlternates) {
+      console.log('got langAlternates:', langAlternates);
+      if (lang in langAlternates) {
+        return langAlternates[lang];
+      }
+
+      return `/${lang}/home`
+    }
+
     const currentLocale = router.locale;
     const pathElements = router.asPath.split('/').filter((el) => el !== '');
 
@@ -73,7 +86,7 @@ export const LanguageSwitcher: React.FC<Props> = ({
     return `/${pages[lang][pageIndex]}${
       pathElements[1] ? '/' + pathElements[1] : ''
     }`;
-  };
+  }, [pages, langAlternates]);
 
   useEffect(() => {
     const onClick = ({ target }: any) => {
