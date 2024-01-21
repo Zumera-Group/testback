@@ -38,6 +38,7 @@ const PageLayout: React.FC<{
         seoDescription={page.seoDescription}
         seoImage={page.seoImage}
         siteSettings={siteSettings}
+        langAlternates={alternateHrefs}
       />
       <PageTransition slug={page.slug?.current}>
         <PageHeader
@@ -125,6 +126,8 @@ const useMakeAlternateHrefs = ({page}: {page: Page}) => {
 
       return makeAlternates(page._lang, langRefs);
     }
+
+    return {};
   }, [page, makeAlternates]);
 
   return {alternateHrefs}

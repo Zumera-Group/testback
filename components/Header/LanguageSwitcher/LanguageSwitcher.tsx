@@ -60,7 +60,6 @@ export const LanguageSwitcher: React.FC<Props> = ({
 
   const getSlug = useCallback((lang: string) => {
     if (langAlternates) {
-      console.log('got langAlternates:', langAlternates);
       if (lang in langAlternates) {
         return langAlternates[lang];
       }
