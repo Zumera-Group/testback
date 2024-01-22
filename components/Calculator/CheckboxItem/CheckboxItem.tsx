@@ -10,6 +10,7 @@ const Checkbox: React.FC<Props> = ({ icon, label, onClick, selected }) => {
   return (
     <>
       <div
+        aria-label={'Checkbox'}
         className={[styles.checkboxWrapper, selected ? styles.active : ''].join(
           ' ',
         )}
