@@ -1,7 +1,6 @@
 import Head from 'next/head';
 import React from 'react';
 import { SiteSettings } from '../lib/shared-domain/page/domain/index';
-import {IAlternateLangHrefs} from '../@types/i18n';
 
 export const SEO: React.FC<{
   seoTitle: string;
@@ -9,14 +8,12 @@ export const SEO: React.FC<{
   seoImage?: { asset: { url: string } };
   siteSettings: SiteSettings;
   preventIndexing?: boolean;
-  langAlternates?: IAlternateLangHrefs;
 }> = ({
   seoTitle,
   seoImage,
   seoDescription,
   siteSettings,
   preventIndexing,
-  langAlternates
 }) => {
   const title = seoTitle + ' | ' + siteSettings?.siteName;
   const image = seoImage?.asset?.url;
@@ -44,10 +41,6 @@ export const SEO: React.FC<{
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={seoDescription} />
       <meta name="twitter:image" content={image} />
-
-      {langAlternates && Object.entries(langAlternates).map(([lang, url], i) =>
-        <link rel={'alternate'} hrefLang={lang} href={url} key={lang} />
-      )}
     </Head>
   );
 };
