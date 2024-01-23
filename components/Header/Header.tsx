@@ -40,7 +40,6 @@ export const Header = ({
   indicator,
   hideMenu,
   whiteBg,
-  langAlternates
 }) => {
   const [bigMenuOpen, setBigMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -205,7 +204,6 @@ export const Header = ({
               <LanguageSwitcher
                 classes={styles.languageSelector}
                 isLight={isLightPage()}
-                langAlternates={langAlternates}
               />
 
               {!hideMenu ? (

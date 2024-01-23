@@ -2,7 +2,6 @@ import { IAnnouncementTopBanner, SiteSettings } from '../domain/index';
 import { ContentModule } from '../domain/contentModule';
 
 import Header from 'components/Header';
-import {IAlternateLangHrefs} from '../../../../@types/i18n';
 
 interface Props {
   siteSettings: SiteSettings;
@@ -17,7 +16,6 @@ interface Props {
   indicator?: {};
   hideMenu?: boolean;
   announcementTopBanner?: IAnnouncementTopBanner;
-  langAlternates?: IAlternateLangHrefs
 }
 
 export const PageHeader: React.FC<Props> = ({
@@ -32,7 +30,6 @@ export const PageHeader: React.FC<Props> = ({
   indicator,
   hideMenu,
   whiteBg,
-  langAlternates
 }) => {
   return (
     <Header
@@ -46,7 +43,6 @@ export const PageHeader: React.FC<Props> = ({
       indicator={indicator}
       hideMenu={hideMenu}
       whiteBg={whiteBg}
-      langAlternates={langAlternates}
     />
   );
 };

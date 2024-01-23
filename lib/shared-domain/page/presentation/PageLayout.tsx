@@ -1,4 +1,4 @@
-import React, {Suspense, useCallback, useMemo} from 'react';
+import React, { Suspense } from 'react';
 import dynamic from 'next/dynamic';
 
 import { Page, SiteSettings } from '../domain/index';
@@ -8,8 +8,6 @@ import { PageHeader } from './PageHeader';
 import { PageTransition } from 'components/PageTransition';
 import { SEO } from 'components/SEO';
 import { useRouter } from 'next/router';
-import {IAlternateLangHrefs, ILangRef} from '../../../../@types/i18n';
-import {SanityService} from '../../../services/sanity.service';
 const PageFooter = dynamic(() => import('./PageFooter'));
 
 const PageLayout: React.FC<{
@@ -23,7 +21,6 @@ const PageLayout: React.FC<{
     page?.contentModules?.map((c) => ContentModule.create(c)) || [];
 
   const { locale } = useRouter();
-  const {alternateHrefs} = useMakeAlternateHrefs({page});
 
   const otherLangSlug =
     page?.queryOtherLangSlug?.slice(-1)[0]?.slug &&
@@ -38,7 +35,6 @@ const PageLayout: React.FC<{
         seoDescription={page.seoDescription}
         seoImage={page.seoImage}
         siteSettings={siteSettings}
-        langAlternates={alternateHrefs}
       />
       <PageTransition slug={page.slug?.current}>
         <PageHeader
@@ -49,7 +45,6 @@ const PageLayout: React.FC<{
           hideMenu={page.hideNavMenu}
           darkBg={page.darkBg}
           whiteBg={page.whiteBg}
-          langAlternates={alternateHrefs}
         />
         <Suspense fallback={() => <div>loading</div>}>
           <main id="main" className={page.whiteBg && 'white-bg'}>
@@ -86,49 +81,3 @@ const PageLayout: React.FC<{
 };
 
 export default PageLayout;
-
-
-const useMakeAlternateHrefs = ({page}: {page: Page}) => {
-  const makeAlternates = useCallback((lang: string, langRefs: ILangRef[]) => {
-    const alternates: IAlternateLangHrefs = {};
-
-    for (const {_lang, slug} of langRefs) {
-      if (lang != _lang && slug) {
-        const siteLocale = SanityService.getLocaleFromSanityLocale(_lang);
-
-        let href = '';
-        if (page._type == 'landings') {
-          href = `/${siteLocale}/landing/${slug.current}`
-        } else {
-          href = `/${siteLocale}/${slug.current}`
-        }
-
-        Object.assign(alternates, {
-          [siteLocale]: href
-        });
-      }
-    }
-
-    return alternates;
-  }, []);
-
-  const alternateHrefs = useMemo(() => {
-    if (Array.isArray(page._langRefs) && page._langRefs[0] !== null && page._lang) {
-      return makeAlternates(page._lang, page._langRefs);
-    } else if (page.__i18n_base && page._lang) {
-      const langRefs: ILangRef[] = page.__i18n_base._langRefs;
-
-      langRefs.push({
-        _id: page.__i18n_base._id,
-        _lang: page.__i18n_base._lang,
-        slug: page.__i18n_base.slug,
-      });
-
-      return makeAlternates(page._lang, langRefs);
-    }
-
-    return {};
-  }, [page, makeAlternates]);
-
-  return {alternateHrefs}
-};

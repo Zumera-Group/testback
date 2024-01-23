@@ -19,21 +19,6 @@ const queryPage = (
   ...,
   _id,
   _lang,
-  _langRefs[] -> {
-    _id,
-    _lang,
-    slug
-  },
-  __i18n_base -> {
-    _id,
-    _lang,
-    slug,
-    _langRefs[] -> {
-      _id,
-      _lang,
-      slug
-    }
-  },
   slug {
     current
   },

@@ -10,6 +10,7 @@ import { ErrorTrackingBoundary } from 'lib/ErrorTrackingBoundary';
 import { SharedContentContext } from 'lib/shared-domain/page/infrastructure/sharedContentContext';
 import { SharedContentFacade } from 'lib/shared-domain/page/infrastructure/sharedContent.facade';
 import { useRouter } from 'next/router';
+import { filterDataToSingleItem } from '../../lib/shared-domain/page/infrastructure/page.facade';
 import { usePreviewSubscription } from '../../lib/sanity';
 import { links } from 'lib/links';
 import { REVALIDATE_ON_FAILURE_TIME_IN_SECONDS } from '../../lib/shared-domain/page/constants';
@@ -160,7 +161,6 @@ export default function Index({
     links(locale === 'en' ? 'de' : 'en').blogValToolArticle(
       selectedBlogArticle?.queryOtherLangSlug?.slice(-1)[0] as any,
     );
-
 
   return (
     <ErrorTrackingBoundary>
