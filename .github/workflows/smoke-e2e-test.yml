@@ -2,6 +2,8 @@ name: Smoke Cypress Tests
 
 on:
   workflow_dispatch:
+  schedule:
+    - cron: '0 */8 * * *'
 
 jobs:
   # single job that generates and outputs a common id
