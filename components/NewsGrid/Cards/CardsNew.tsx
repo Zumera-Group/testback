@@ -56,10 +56,13 @@ export const CardsNew = ({
         }
         cards.push([item, next]);
       }
+
       return;
     }
     cards.push(item);
   });
+
+  console.log(cardsRow.length >= 2);
 
   return (
     <div className={styles.cardsNew}>
@@ -72,6 +75,7 @@ export const CardsNew = ({
             className={[
               styles.col,
               hasFirstHighlightedCard ? styles.highlighted : '',
+              cardsRow.length >= 2 ? styles.largerCard : '',
             ].join(' ')}
           >
             {getBigCardType(firstCard)}
