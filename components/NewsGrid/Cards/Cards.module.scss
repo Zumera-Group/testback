@@ -12,6 +12,14 @@
         aspect-ratio: initial;
       }
     }
+
+    &.largerCard {
+      article {
+        @include breakpoint-up(md) {
+          aspect-ratio: 1/1;
+        }
+      }
+    }
   }
 
   &.reverse {
