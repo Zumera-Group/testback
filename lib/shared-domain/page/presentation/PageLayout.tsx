@@ -107,6 +107,7 @@ const useMakeAlternateHrefs = ({ page }: { page: Page }) => {
   }, []);
 
   const alternateHrefs = useMemo(() => {
+
     if (
       Array.isArray(page._langRefs) &&
       page._langRefs[0] !== null &&
