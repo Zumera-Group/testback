@@ -50,9 +50,10 @@ const AnimateIn: React.FC = ({ children }) => {
 
 const SALESFORCE_NO_CALENDLY_LINK_IDENTIFIER = 'unqualified';
 
-const AppointmentBookingScreen: React.FC<{ userCalendlyLink?: string }> = ({
-  userCalendlyLink,
-}) => {
+const AppointmentBookingScreen: React.FC<{
+  userCalendlyLink?: string;
+  resultScreenCopy?: any;
+}> = ({ userCalendlyLink, resultScreenCopy }) => {
   const { getAnswer } = useValuationStore();
   const name = getAnswer(NAME_STORE_INDICATOR)?.trim();
   const email = getAnswer(EMAIL_STORE_INDICATOR)?.trim();
@@ -68,7 +69,13 @@ const AppointmentBookingScreen: React.FC<{ userCalendlyLink?: string }> = ({
 
   return (
     <AnimateIn>
-      <QuestionText title={t('appointment.title')} />
+      <QuestionText
+        title={
+          resultScreenCopy.calendlyPrompt
+            ? resultScreenCopy.calendlyPrompt
+            : t('appointment.title')
+        }
+      />
       <InlineWidget url={userCalendlyLink} prefill={prefill} />
     </AnimateIn>
   );
@@ -311,6 +318,7 @@ export const Result: React.FC<{ questionnaire: any }> = (questionnaire) => {
       ) : (
         <AppointmentBookingScreen
           userCalendlyLink={score.calendly ? score.calendly : calendlyFallback}
+          resultScreenCopy={resultScreenCopy}
         />
       )}
     </>
