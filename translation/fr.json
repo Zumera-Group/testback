@@ -107,7 +107,7 @@
       }
     },
     "appointment": {
-      "title": "Rien ne remplace une conversation personnelle.",
+      "title": "Choisissez maintenant votre rendez-vous pour discuter de votre évaluation et répondre à vos questions.",
       "description": "Merci, vous êtes prêt !",
       "calendlyCustomAnswers": {
         "a1": "Zum ausgewählten Termin erreichbar unter:"

@@ -109,7 +109,7 @@
       }
     },
     "appointment": {
-      "title": "Es gibt keinen Ersatz für ein persönliches Gespräch.",
+      "title": "Wählen Sie jetzt Ihren Termin aus, um Ihre Ergebnisse zu besprechen und Ihre Fragen zu beantworten.",
       "description": "Vielen Dank, Sie sind bereit!",
       "calendlyCustomAnswers": {
         "a1": "Zum ausgewählten Termin erreichbar unter:"
