@@ -74,6 +74,7 @@
     "evaluation": {
       "title": "Get your free expert evaluation",
       "description": "In order to give a sound estimation of the company value an adviser will double check the entries and will reach out with the result via email or via phone if there are open question.",
+      "description2": "Why do you need this information?",
       "resultBox": {
         "title": "Your preliminary result",
         "points": "{{points}}",
