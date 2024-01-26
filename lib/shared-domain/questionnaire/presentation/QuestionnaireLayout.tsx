@@ -124,17 +124,15 @@ const QuestionnaireLayout: React.FC<{
       const newUuid = uuid();
       qLogs('Id not found in headers. Generating uuid: ' + newUuid);
 
-      console.log('Id not found in headers. Generating uuid: ' + newUuid);
-
-      if (getBrowserCookie('_uid')) {
-        setUniqueId(getBrowserCookie('_uid'));
-        syncHistory(getBrowserCookie('_uid'));
+      const uidCookie = getBrowserCookie('zumera_uid');
+      if (uidCookie) {
+        //
+        setUniqueId(uidCookie);
+        syncHistory(uidCookie);
       } else {
         setUniqueId(newUuid);
-        setBrowserCookie('_uid', newUuid, 365);
+        setBrowserCookie('zumera_uid', newUuid, 365);
       }
-
-      console.log('getCookie', uniqueId);
       // setBrowserCookie('_uid', newUuid, 365);
 
       qLogs('getCookie' + uniqueId);

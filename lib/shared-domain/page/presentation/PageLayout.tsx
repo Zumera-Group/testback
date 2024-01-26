@@ -81,3 +81,59 @@ const PageLayout: React.FC<{
 };
 
 export default PageLayout;
+
+const useMakeAlternateHrefs = ({ page }: { page: Page }) => {
+  const makeAlternates = useCallback((lang: string, langRefs: ILangRef[]) => {
+    const alternates: IAlternateLangHrefs = {};
+
+    for (const { _lang, slug } of langRefs) {
+      if (lang != _lang && slug) {
+        const siteLocale = SanityService.getLocaleFromSanityLocale(_lang);
+
+        let href = '';
+        if (page._type == 'landings') {
+          href = `/${siteLocale}/landing/${slug.current}`;
+        } else {
+          href = `/${siteLocale}/${slug.current}`;
+        }
+
+        Object.assign(alternates, {
+          [siteLocale]: href,
+        });
+      }
+    }
+
+    return alternates;
+  }, []);
+
+  const alternateHrefs = useMemo(() => {
+    if (
+      Array.isArray(page._langRefs) &&
+      page._langRefs[0] !== null &&
+      page._lang
+    ) {
+      const langRefs = page._langRefs.filter((ref) => ref !== null);
+      return makeAlternates(page._lang, langRefs);
+    } else if (
+      page.__i18n_base &&
+      Array.isArray(page.__i18n_base._langRefs) &&
+      page._lang
+    ) {
+      const langRefs: ILangRef[] = page.__i18n_base._langRefs.filter(
+        (ref) => ref !== null,
+      );
+
+      langRefs.push({
+        _id: page.__i18n_base._id,
+        _lang: page.__i18n_base._lang,
+        slug: page.__i18n_base.slug,
+      });
+
+      return makeAlternates(page._lang, langRefs);
+    }
+
+    return {};
+  }, [page, makeAlternates]);
+
+  return { alternateHrefs };
+};
