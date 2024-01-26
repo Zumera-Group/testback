@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react';
+import React, { Suspense, useCallback, useMemo } from 'react';
 import dynamic from 'next/dynamic';
 
 import { Page, SiteSettings } from '../domain/index';
@@ -8,6 +8,8 @@ import { PageHeader } from './PageHeader';
 import { PageTransition } from 'components/PageTransition';
 import { SEO } from 'components/SEO';
 import { useRouter } from 'next/router';
+import { IAlternateLangHrefs, ILangRef } from '../../../../@types/i18n';
+import { SanityService } from '../../../services/sanity.service';
 const PageFooter = dynamic(() => import('./PageFooter'));
 
 const PageLayout: React.FC<{

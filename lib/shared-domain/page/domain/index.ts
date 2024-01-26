@@ -7,6 +7,7 @@ import {
   IndustryReportSectionModule,
 } from './contentModule';
 import { Questionnaire } from '../../questionnaire/domain/index';
+import { ILangRef } from '../../../../@types/i18n';
 
 export interface Page {
   isHeaderRoutesHidden: boolean;
@@ -20,6 +21,16 @@ export interface Page {
   disallowInRobotsTxt: boolean;
   _id: string;
   _lang: string;
+  _type: string;
+  _langRefs?: ILangRef[];
+  __i18n_base?: {
+    _id: string;
+    _lang: string;
+    slug: {
+      current: string;
+    };
+    _langRefs?: ILangRef[];
+  };
   name: string;
   seoTitle: string;
   seoDescription: string;
