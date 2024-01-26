@@ -1,0 +1,61 @@
+name: Cypress Tests
+
+on:
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false # https://github.com/cypress-io/github-action/issues/48
+      matrix:
+        containers: [ 1, 2 ] # Uses 2 parallel instances
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      # Run Cypress tests
+      - name: Run Cypress Tests
+        uses: cypress-io/github-action@v6
+        with:
+          browser: chrome
+          start: yarn dev
+          wait-on: 'http://localhost:3000'
+          wait-on-timeout: 60
+        env:
+          COMMIT_INFO_MESSAGE: ${{github.event.head_commit.message}}
+          COMMIT_INFO_SHA: ${{github.event.pull_request.head.sha}}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+          SANITY_API_TOKEN: ${{ secrets.SANITY_API_TOKEN }}
+          NEXT_PUBLIC_SANITY_PROJECT_ID: ${{ secrets.NEXT_PUBLIC_SANITY_PROJECT_ID }}
+          SANITY_PREVIEW_SECRET: ${{ secrets.SANITY_PREVIEW_SECRET }}
+          NEXT_PUBLIC_SANITY_API_TOKEN_PREVIEW: ${{ secrets.NEXT_PUBLIC_SANITY_API_TOKEN_PREVIEW }}
+          NEXT_PUBLIC_SALESFORCE_API_BEARER_TOKEN: 'test'
+          NEXT_PUBLIC_SANITY_DATASET: 'production'
+          NEXT_PUBLIC_SANITY_API_VERSION: '2021-07-26'
+          SANITY_API_VERSION: '2021-07-26'
+          NEXT_PUBLIC_SALESFORCE_API_BASE_URL: 'https://zumera-api.herokuapp.com'
+          NEXT_PUBLIC_CALENDLY_LINK: 'https://calendly.com/zumera/unternehmensbewertung'
+          NEXT_PUBLIC_BASE_URL: 'https://www.zumera.com'
+          NEXT_PUBLIC_MARKETING_QUERY_PARAMS: 'utm_source,utm_medium,utm_campaign,utm_id,utm_source_platform,utm_term,utm_content,gclid,fbclid,gclsrc,gadevice__c,gakeyword__c,ganetwork__c'
+          NEXT_PUBLIC_USE_NO_INDEX_TAG: 'true'
+
+
+      # Upload screenshots and videos on failure.
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: cypress-screenshots
+          path: cypress/screenshots
+          if-no-files-found: ignore
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: cypress-videos
+          path: cypress/videos
+          if-no-files-found: ignore
