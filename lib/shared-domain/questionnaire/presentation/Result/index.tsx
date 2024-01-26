@@ -207,7 +207,6 @@ const EvaluationScreen: React.FC<{
               onChange={(e) => setCheckboxIsChecked(e.target.checked)}
               isChecked={checkboxIsChecked}
               id="result_checkBox"
-              name={'Terms and conditions'}
             >
               <div
                 className={[

@@ -73,6 +73,7 @@
     "evaluation": {
       "title": "Obtenez votre évaluation d'expert gratuite",
       "description": "Afin de donner une estimation solide de la valeur de l'entreprise, un conseiller vérifiera les entrées et communiquera avec le résultat par e-mail ou par téléphone s'il y a une question ouverte.",
+      "description2": "Pourquoi as-tu besoin de cette information?",
       "resultBox": {
         "title": "Votre résultat préliminaire",
         "points": "{{points}}",
@@ -107,7 +108,7 @@
       }
     },
     "appointment": {
-      "title": "Rien ne remplace une conversation personnelle.",
+      "title": "Choisissez maintenant votre rendez-vous pour discuter de votre évaluation et répondre à vos questions.",
       "description": "Merci, vous êtes prêt !",
       "calendlyCustomAnswers": {
         "a1": "Zum ausgewählten Termin erreichbar unter:"

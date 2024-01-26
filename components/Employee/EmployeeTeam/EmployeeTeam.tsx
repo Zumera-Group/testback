@@ -33,6 +33,9 @@ export const EmployeeTeam: React.FC<{
     filteredEmployees.length > 3 ? filteredEmployees.length - 3 : 0;
   const randomIndex = Math.floor(Math.random() * maxIndex);
   const display = filteredEmployees.slice(randomIndex, randomIndex + 3);
+  const filteredDisplay = display.filter(
+    (employee) => !employee.hasLeftTheTeam,
+  );
 
   if (!filteredEmployees || filteredEmployees.length === 0) return null;
 
@@ -55,7 +58,7 @@ export const EmployeeTeam: React.FC<{
               }
             />
           </GridColumn>
-          {Array.isArray(display) && display.length > 0 && (
+          {Array.isArray(filteredDisplay) && filteredDisplay.length > 0 && (
             <GridColumn
               xs={12}
               sm={6}
@@ -71,7 +74,7 @@ export const EmployeeTeam: React.FC<{
           )}
         </Grid>
       </Container>
-      {Array.isArray(display) && display.length > 0 && (
+      {Array.isArray(filteredDisplay) && filteredDisplay.length > 0 && (
         <SwiperPeople
           prevButton={swiperPrevRef}
           nextButton={swiperNextRef}
@@ -80,7 +83,7 @@ export const EmployeeTeam: React.FC<{
           lgSlides={2.33}
           xxlSlides={3.33}
         >
-          {display?.map((p, index) => (
+          {filteredDisplay?.map((p, index) => (
             <React.Fragment key={index}>
               <SwiperSlide className={styles.slide}>
                 <Employee article={p} cardLabel={content.linkText} />

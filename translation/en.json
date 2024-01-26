@@ -109,7 +109,7 @@
       }
     },
     "appointment": {
-      "title": "There is no substitute for a personal conversation.",
+      "title": " Choose your appointment now to discuss your results and get your questions answered.",
       "description": "Thank you, you are all set!",
       "calendlyCustomAnswers": {
         "a1": "Zum ausgewählten Termin erreichbar unter:"

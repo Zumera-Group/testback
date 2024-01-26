@@ -9,8 +9,7 @@
     "lint": "next lint",
     "test": "jest --watchAll=false",
     "test:watch": "jest --watch=true",
-    "prettier:fix": "prettier --write  \"{lib, component, pages}/**/*.ts\"",
-    "cypress:open": "cypress open"
+    "prettier:fix": "prettier --write  \"{lib, component, pages}/**/*.ts\""
   },
   "engines": {
     "node": "^20.7.0"
@@ -69,7 +68,6 @@
     "@typescript-eslint/eslint-plugin": "^4.28.3",
     "@typescript-eslint/parser": "^4.28.3",
     "babel-jest": "^27.0.6",
-    "cypress": "^13.6.2",
     "eslint": "^7.31.0",
     "eslint-config-next": "^11.0.1",
     "eslint-config-prettier": "^8.3.0",
