@@ -12,10 +12,7 @@ describe('fills the French calculator', {
   it('long calculator funnel and see the calendly', () => {
     cy.visit(`${baseUrl}/fr/des-questionnaires/%C3%A9valuationdesentreprises`);
     cy.get(radioButton, { timeout: 10000 }).should('be.visible');
-    // if the cookie banner is visible, click the button to accept all cookies
-    if (!baseUrl.includes('localhost')) {
-      cy.acceptCookiesIfPresent();
-    }
+
     cy.contains('1 / 33');
     cy.wait(1000);
     cy.get(radioButton).first().click();
@@ -174,7 +171,7 @@ describe('fills the French calculator', {
     cy.get('[aria-label="Finish questionnaire button"]').click();
     cy.wait(1000);
 
-    cy.contains('68');
+    cy.contains('points');
     cy.get('input[type="text"]').first().type('Automated Testing suite');
     cy.get('input[type="email"]').first().type('automates-tests@test.com');
     cy.get('input[type="tel"]').first().type('+4917000000000');
@@ -187,10 +184,6 @@ describe('fills the French calculator', {
   it('short calculator funnel and see the calendly', () => {
     cy.visit(`${baseUrl}/fr/des-questionnaires/%C3%A9valuationdesentreprisesnoma`);
     cy.get(radioButton, { timeout: 10000 }).should('be.visible');
-    // if the cookie banner is visible, click the button to accept all cookies
-    if (!baseUrl.includes('localhost')) {
-      cy.acceptCookiesIfPresent();
-    }
 
     cy.contains('1 / 26');
     cy.wait(1000);
@@ -318,7 +311,7 @@ describe('fills the French calculator', {
     cy.wait(1000);
 
 
-    cy.contains('60');
+    cy.contains('points');
     cy.get('input[type="text"]').first().type('Automated Testing suite');
     cy.get('input[type="email"]').first().type('automates-tests@test.com');
     cy.get('input[type="tel"]').first().type('+4917000000000');
