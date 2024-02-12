@@ -9,7 +9,8 @@
     "lint": "next lint",
     "test": "jest --watchAll=false",
     "test:watch": "jest --watch=true",
-    "prettier:fix": "prettier --write  \"{lib, component, pages}/**/*.ts\""
+    "prettier:fix": "prettier --write  \"{lib, component, pages}/**/*.ts\"",
+    "cypress:open": "cypress open"
   },
   "engines": {
     "node": "^20.7.0"
@@ -24,6 +25,7 @@
     "@sanity/block-content-to-react": "^3.0.0",
     "@sanity/client": "^2.13.0",
     "@sanity/image-url": "^1.0.1",
+    "@sentry/nextjs": "^7.100.1",
     "axios": "^0.21.1",
     "classnames": "^2.3.2",
     "clsx": "^2.0.0",
@@ -68,6 +70,7 @@
     "@typescript-eslint/eslint-plugin": "^4.28.3",
     "@typescript-eslint/parser": "^4.28.3",
     "babel-jest": "^27.0.6",
+    "cypress": "^13.6.2",
     "eslint": "^7.31.0",
     "eslint-config-next": "^11.0.1",
     "eslint-config-prettier": "^8.3.0",
