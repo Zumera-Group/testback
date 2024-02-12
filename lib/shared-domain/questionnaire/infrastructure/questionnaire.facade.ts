@@ -225,8 +225,7 @@ const querySectorSpecificQuestions = (
 }`;
 
 export class QuestionnaireFacade {
-  constructor(private readonly sanityService = new SanityService()) {
-  }
+  constructor(private readonly sanityService = new SanityService()) {}
 
   async getQuestionnaire(
     lang: Locale,
