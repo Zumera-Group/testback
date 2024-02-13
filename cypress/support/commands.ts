@@ -57,4 +57,41 @@ Cypress.Commands.add('acceptCookiesIfPresent', () => {
 
 });
 
+// @ts-ignore
+Cypress.Commands.add('submitForm', () => {
+  cy.intercept('POST', '/lead_entries').as('postRequest');
+
+  cy.get('button[role="button"][type="submit"]').click();
+  cy.wait('@postRequest').its('request').should((request) => {
+    expect(request.method).to.equal('POST');
+
+    const fields = [
+      'LastName',
+      'email',
+      'phone',
+      'industry_id',
+      'industry_sheet_name',
+      'sector_id',
+      'sector_sheet_name',
+      'Quality_of_Revenue__c',
+      'Annual_Revenue_2021__c',
+      'Annual_Revenue_2022__c',
+      'Annual_Revenue_2023__c',
+      'Company_EBIT_2021__c',
+      'Company_EBIT_2022__c',
+      'Company_EBIT_2023__c',
+      'Impact_Economic_Crises__c',
+    ];
+
+    fields.forEach(field => {
+      expect(request.body.lead_entry.data).to.have.property(field);
+      expect(request.body.lead_entry.data[field]).to.not.be.undefined;
+      expect(request.body.lead_entry.data[field]).to.not.be.null;
+    });
+  });
+
+  // Asserting the response
+  // cy.wait('@postRequest', { timeout: 10000 }).its('response.statusCode').should('eq', 200);
+});
+
 export {};

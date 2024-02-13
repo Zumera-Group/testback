@@ -176,7 +176,8 @@ describe('fills the French calculator', {
     cy.get('input[type="email"]').first().type('automates-tests@test.com');
     cy.get('input[type="tel"]').first().type('+4917000000000');
     cy.get('[class*="Checkbox"] span').first().click();
-    cy.get('button[role="button"][type="submit"]').click();
+
+    cy.submitForm();
 
     cy.get('.calendly-inline-widget', { timeout: 10000 }).should('be.visible');
   })
@@ -316,7 +317,8 @@ describe('fills the French calculator', {
     cy.get('input[type="email"]').first().type('automates-tests@test.com');
     cy.get('input[type="tel"]').first().type('+4917000000000');
     cy.get('[class*="Checkbox"] span').first().click();
-    cy.get('button[role="button"][type="submit"]').click();
+
+    cy.submitForm();
 
     cy.get('.calendly-inline-widget', { timeout: 10000 }).should('be.visible');
   })
