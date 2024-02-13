@@ -348,9 +348,6 @@ const QuestionnaireLayout: React.FC<{
                       />
                     </div>
                   </GridColumn>
-                  {renderResultModules && !isResultsCompactOnMobile && (
-                    <Checkmarks result={result} />
-                  )}
                 </Grid>
               </Container>
             </Section>

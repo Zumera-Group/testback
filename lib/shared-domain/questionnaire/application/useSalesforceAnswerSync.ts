@@ -5,7 +5,7 @@ import { useSendQuestionnaireToAnalytics } from './ueSendQuestionnaireToAnalytic
 export const useSalesforceAnswerSync = () => {
   const facade = new SalesforceFacade();
   const {
-    answers,
+    getAnswers,
     setAnswers,
     industryId,
     sectorId,
@@ -28,9 +28,10 @@ export const useSalesforceAnswerSync = () => {
       currentProgress: number,
       currentQuestionNumber: string,
       currentField: string,
+      mql: boolean = false,
     ) => {
-      sendQuestionnaireToAnalytics(currentSalesforceId);
-
+      sendQuestionnaireToAnalytics(currentSalesforceId, { mql });
+      const answers = getAnswers();
       await facade.createOrUpdateLeadEntry(
         uniqueId,
         currentProgress,

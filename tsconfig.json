@@ -33,7 +33,8 @@
     "./components",
     "./styles",
     "./translation",
-    "./lib"
+    "./lib",
+    "./types/types.d.ts"
   ],
   "exclude": [
     "node_modules"

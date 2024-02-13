@@ -90,8 +90,6 @@ Cypress.Commands.add('submitForm', () => {
     });
   });
 
-  // Asserting the response
-  // cy.wait('@postRequest', { timeout: 10000 }).its('response.statusCode').should('eq', 200);
 });
 
 export {};

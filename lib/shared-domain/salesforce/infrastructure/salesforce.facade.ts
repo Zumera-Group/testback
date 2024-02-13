@@ -1,9 +1,6 @@
 import { trackApplicationError } from 'lib/ErrorTrackingBoundary';
 import { AxiosService } from 'lib/services/axios.service';
-import {
-  qErrorLogs,
-  qLogs,
-} from 'lib/shared-domain/questionnaire/application/log';
+import { qErrorLogs, qLogs } from 'lib/shared-domain/questionnaire/application/log';
 import { MarketingParamsService } from '../application/marketingParamsService';
 
 const BASE_URL = process.env.NEXT_PUBLIC_SALESFORCE_API_BASE_URL;
@@ -186,6 +183,7 @@ export class SalesforceFacade {
           phone: fields.phone,
         },
       };
+
       await this.httpService.put(
         `lead_entries/${uniqueId}/salesforce`,
         leadParams,
