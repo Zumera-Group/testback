@@ -172,7 +172,8 @@ describe('fills the German calculator', {
     cy.get('input[type="email"]').first().type('automates-tests@test.com');
     cy.get('input[type="tel"]').first().type('+4917000000000');
     cy.get('[class*="Checkbox"] span').first().click();
-    cy.get('button[role="button"][type="submit"]').click();
+
+    cy.submitForm();
 
     cy.get('.calendly-inline-widget', { timeout: 10000 }).should('be.visible');
   })
@@ -182,11 +183,6 @@ describe('fills the German calculator', {
   it('short calculator funnel and see the calendly', () => {
     cy.visit(`${baseUrl}/de/fragenkatalog/unternehmensbewertungnoma`);
     cy.get(radioButton, { timeout: 10000 }).should('be.visible');
-
-    // if the cookie banner is visible, click the button to accept all cookies
-    if (!baseUrl.includes('localhost')) {
-      cy.acceptCookiesIfPresent();
-    }
 
     cy.contains('1 / 25');
     cy.wait(1000);
@@ -322,7 +318,7 @@ describe('fills the German calculator', {
     cy.get('input[type="email"]').first().type('automates-tests@test.com');
     cy.get('input[type="tel"]').first().type('+4917000000000');
     cy.get('[class*="Checkbox"] span').first().click();
-    cy.get('button[role="button"][type="submit"]').click();
+    cy.submitForm();
 
     cy.get('.calendly-inline-widget', { timeout: 10000 }).should('be.visible');
   })
