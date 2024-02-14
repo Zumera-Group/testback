@@ -1,7 +1,6 @@
-import { trackApplicationError } from 'lib/ErrorTrackingBoundary';
 import { AxiosService } from 'lib/services/axios.service';
-import { qErrorLogs, qLogs } from 'lib/shared-domain/questionnaire/application/log';
 import { MarketingParamsService } from '../application/marketingParamsService';
+import { logError } from 'lib/logError';
 
 const BASE_URL = process.env.NEXT_PUBLIC_SALESFORCE_API_BASE_URL;
 const unformattedParams =
@@ -80,8 +79,7 @@ export class SalesforceFacade {
           requestsConfig,
       );
     } catch (e) {
-      qErrorLogs('ERRORsetAnswer => updating to' + JSON.stringify(e));
-      trackApplicationError('createLeadHistory', e);
+      logError(e, { where: 'createLeadHistory' });
 
       throw new Error(e);
     }
@@ -149,14 +147,6 @@ export class SalesforceFacade {
         },
       };
 
-      // qLogs(
-      //   'SalesforceFacade.createOrUpdateLeadEntry ' + JSON.stringify(fields),
-      // );
-
-      // qLogs(marketingParams);
-      // qLogs(fields);
-      // qLogs(assessmentPurpose);
-      // qLogs(`lead sf ${leadSourceURL}`);
 
       await this.httpService.post(
         endpoints.createOrUpdateLeadEntry,
@@ -164,8 +154,7 @@ export class SalesforceFacade {
         requestsConfig,
       );
     } catch (e) {
-      qErrorLogs('ERRORsetAnswer => updating to' + JSON.stringify(e));
-      trackApplicationError('createOrUpdateLeadEntry', e);
+      logError(e, { where: 'createOrUpdateLeadEntry' });
 
       throw new Error(e);
     }
@@ -190,7 +179,7 @@ export class SalesforceFacade {
         requestsConfig,
       );
     } catch (e) {
-      trackApplicationError('leadDetailsSubmission', e);
+      logError(e, { where: 'leadDetailsSubmission' });
       return e;
     }
   }
@@ -203,7 +192,7 @@ export class SalesforceFacade {
       );
       return response.data.data;
     } catch (e) {
-      trackApplicationError('getLeadEntry', e);
+      logError(e, { where: 'getLeadEntry' });
     }
   }
 
@@ -221,7 +210,7 @@ export class SalesforceFacade {
         avg: response.data.avg,
       };
     } catch (e) {
-      trackApplicationError('getLeadEntryScore', e);
+      logError(e, { where: 'getLeadEntryScore' });
       return e;
     }
   }
