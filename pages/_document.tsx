@@ -6,7 +6,6 @@ import Document, {
   NextScript,
   DocumentContext,
 } from 'next/document';
-// eslint-disable-next-line @next/next/no-script-in-document
 import Script from 'next/script';
 
 export default class MyDocument extends Document {

@@ -34,7 +34,7 @@
     "./styles",
     "./translation",
     "./lib",
-    "./types/types.d.ts"
+    "./@types/types.d.ts"
   ],
   "exclude": [
     "node_modules"

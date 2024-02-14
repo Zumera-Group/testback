@@ -67,20 +67,21 @@
     "@types/jest": "^26.0.24",
     "@types/node": "^16.3.3",
     "@types/react": "^17.0.14",
-    "@typescript-eslint/eslint-plugin": "^4.28.3",
-    "@typescript-eslint/parser": "^4.28.3",
+    "@typescript-eslint/eslint-plugin": "^6.13.1",
+    "@typescript-eslint/parser": "^7.0.1",
     "babel-jest": "^27.0.6",
     "cypress": "^13.6.2",
-    "eslint": "^7.31.0",
-    "eslint-config-next": "^11.0.1",
-    "eslint-config-prettier": "^8.3.0",
+    "eslint": "^8.56.0",
+    "eslint-config-next": "14.0.2",
+    "eslint-plugin-unused-imports": "^3.0.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-prettier": "^5.0.1",
     "eslint-plugin-import": "^2.23.4",
     "eslint-plugin-jsx-a11y": "^6.4.1",
-    "eslint-plugin-prettier": "^3.4.0",
     "jest": "^27.0.6",
     "jest-dom": "^4.0.0",
     "jira-prepare-commit-msg": "^1.6.2",
-    "prettier": "^2.3.2"
+    "prettier": "^3.2.4"
   },
   "browser": {
     "html-pdf": false
