@@ -8,9 +8,3 @@ export const qLogs = (value) => {
     console.log('📘 [QUESTIONNAIRE]', value);
   }
 };
-// error logs for questionnaire
-export const qErrorLogs = (value) => {
-  if (debugQuestionnaire) {
-    console.log('🔴 [QUESTIONNAIRE]', value);
-  }
-};
