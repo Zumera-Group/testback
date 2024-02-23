@@ -28,6 +28,7 @@ export class SalesforceFacade {
     try {
       const marketingParams = MarketingParamsService.retrieve();
       const cookies = MarketingParamsService.getCookies();
+      const deviceInfo = MarketingParamsService.collectDeviceInfo();
 
       const keyMap = {
         [unformattedParams[0]]: 'UTMSource__c',
@@ -46,8 +47,6 @@ export class SalesforceFacade {
             const newKey = keyMap[key] || key;
             acc[newKey] = marketingParams[key];
 
-            console.log("acc", acc);
-
             return acc;
           },
           {},
@@ -59,19 +58,11 @@ export class SalesforceFacade {
           data: {
             ...formattedMarketingParams,
             ...cookies,
+            ...deviceInfo,
           }
-          // current_progress: currentProgress,
         },
       };
 
-      // qLogs(
-      //   'SalesforceFacade.createOrUpdateLeadEntry ' + JSON.stringify(fields),
-      // );
-
-      // qLogs(marketingParams);
-      // qLogs(fields);
-      // qLogs(assessmentPurpose);
-      // qLogs(`lead sf ${leadSourceURL}`);
 
       await this.httpService.post(
           endpoints.createOrUpdateHistory(uniqueId),
@@ -101,6 +92,7 @@ export class SalesforceFacade {
     try {
       const marketingParams = MarketingParamsService.retrieve();
       const cookies = MarketingParamsService.getCookies();
+      const deviceInfo = MarketingParamsService.collectDeviceInfo();
 
       const keyMap = {
         [unformattedParams[0]]: 'UTMSource__c',
@@ -128,7 +120,6 @@ export class SalesforceFacade {
       const params = {
         lead_entry: {
           unique_id: uniqueId,
-          // current_progress: currentProgress,
           data: {
             Lead_Source_URL__c: leadSourceURL,
             Assessment_Purpose__c: assessmentPurpose,
@@ -139,6 +130,8 @@ export class SalesforceFacade {
             sector_id: sectorId,
             industry_sheet_name: industrySheetName,
             sector_sheet_name: sectorSheetName,
+            ...deviceInfo,
+
           },
           dropped_at: {
             field: currentField,

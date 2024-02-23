@@ -10,8 +10,3 @@ export const DEFAULT_VALUES: {
   label: '',
 };
 
-export enum VALUE_TYPE {
-  EUR = '€',
-  USD = '$',
-  percent = '%',
-}

@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import queryString from 'query-string';
+import { browserName, browserVersion, isDesktop, isMobile, isTablet, osName, osVersion } from 'react-device-detect';
 
 const config = {
   localStoreKey: 'MKT_QP:',
@@ -145,9 +146,18 @@ const getCookies = () => {
   };
 };
 
+const collectDeviceInfo = () => {
+  return {
+    browserName: `${browserName} ${browserVersion}`,
+    osName: `${osName} ${osVersion}`,
+    deviceType: (isMobile ? 'Mobile' : isTablet ? 'Tablet' : isDesktop ? 'Desktop' : 'Unknown'),
+  };
+};
+
 export const MarketingParamsService = {
   useSaveOnMount,
   retrieve,
   renderHiddenInputElements,
   getCookies,
+  collectDeviceInfo,
 };
