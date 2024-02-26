@@ -106,10 +106,8 @@ const QuestionnaireLayout: React.FC<{
     setIsOnResultScreen,
     mainStep,
     subStep,
-    isFirstQuestion,
     setStep,
     uniqueId,
-    industryId,
   } = useValuationStore();
 
   useEffect(() => {

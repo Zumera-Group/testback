@@ -3,11 +3,7 @@ import { useValuationStore } from '../store';
 
 export const useAnswers = (
   question: Question,
-): {
-  setAnswer(value: any): void;
-  getAnswer(): any;
-  removeAnswer(value: any): void;
-} => {
+) => {
   const { getAnswer, setAnswer, removeAnswer } = useValuationStore();
 
   return {
@@ -19,8 +15,9 @@ export const useAnswers = (
       }
     },
     getAnswer: () => {
-      if (getAnswer(question?.salesforceId))
+      if (getAnswer(question?.salesforceId)) {
         return getAnswer(question?.salesforceId);
+      }
       return getAnswer(question?._id);
     },
     removeAnswer: (value: any) => {

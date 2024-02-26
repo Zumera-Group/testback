@@ -3,3 +3,5 @@ export interface IImagesWithHeaderAndTextModuleColumn {
 	image?: Record<string, any>;
 	textBlocks?: Record<string, any>[];
 }
+
+export type SanityNumberValueType = 'number' | 'EUR' | 'USD' | 'currency' | 'year' | 'age' | 'percent';

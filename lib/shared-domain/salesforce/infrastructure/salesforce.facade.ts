@@ -88,6 +88,7 @@ export class SalesforceFacade {
     leadSourceURL: string,
     currentQuestionNumber: string,
     currentField: string,
+    currencyAnswers: Record<string, any>,
   ): Promise<void> {
     try {
       const marketingParams = MarketingParamsService.retrieve();
@@ -126,6 +127,7 @@ export class SalesforceFacade {
             ...fields,
             ...formattedMarketingParams,
             ...cookies,
+            ...currencyAnswers,
             industry_id: industryId,
             sector_id: sectorId,
             industry_sheet_name: industrySheetName,

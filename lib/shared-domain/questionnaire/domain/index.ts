@@ -1,3 +1,5 @@
+import { SanityNumberValueType } from '../../../../@types/modules';
+
 export interface BoxIconImageSize {
   dimensions: {
     height: number;
@@ -45,7 +47,7 @@ export interface Answer {
     answerOptions: { label: string; value: string }[];
   };
   numberInput?: {
-    valueType: 'number' | 'EUR' | 'USD' | 'year' | 'age' | 'percent';
+    valueType: SanityNumberValueType;
     salesforceFormat: 'number' | 'date_year' | 'date_month' | 'date_day';
     placeholder: string;
     label: string;

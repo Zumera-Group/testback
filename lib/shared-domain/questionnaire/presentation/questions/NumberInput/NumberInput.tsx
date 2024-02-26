@@ -1,15 +1,10 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useAnswers } from 'lib/shared-domain/questionnaire/application/useAnswers';
-import { useNumberFormat } from 'lib/shared-domain/questionnaire/application/useNumberFormat';
 import { Question } from '../../../domain/index';
 import { Input } from 'components/Form';
 import styles from './NumberInput.module.scss';
 import { QuestionText } from '../../Question/QuestionText';
-import {
-  differenceInCalendarDays,
-  differenceInCalendarMonths,
-  differenceInCalendarYears,
-} from 'date-fns';
+import { differenceInCalendarDays, differenceInCalendarMonths, differenceInCalendarYears } from 'date-fns';
 import { QuestionButtonsWrapper } from '../../Question/QuestionButtonsWrapper';
 import { QuestionButtons } from '../../Question/QuestionButtons';
 import { QuestionAnimation } from '../../Question/QuestionAnimation';
@@ -18,6 +13,8 @@ import BackButton from 'components/Calculator/BackButton/BackButton';
 import { useMediaQuery } from 'lib/hooks/useMediaQuery';
 import { SCREEN_SIZE_MD } from 'lib/constants';
 import router from 'next/router';
+import { useNumberFormat } from 'lib/shared-domain/questionnaire/application/useNumberFormat';
+
 
 export const NumberInput: React.FC<{
   question: Question;
@@ -25,9 +22,13 @@ export const NumberInput: React.FC<{
   onPrevQuestion: () => void;
   currentPos: any;
 }> = ({ question, onNextQuestion, onPrevQuestion, currentPos }) => {
-  const { valueType, placeholder, salesforceFormat, label } =
-    question?.answerSelector?.numberInput || DEFAULT_VALUES;
-  const { getNumberFormat, sign } = useNumberFormat(valueType);
+  const {
+    valueType,
+    placeholder,
+    salesforceFormat,
+    label,
+  } = question?.answerSelector?.numberInput || DEFAULT_VALUES;
+  const { sign } = useNumberFormat(valueType);
   const { getAnswer, setAnswer, removeAnswer } = useAnswers(question);
   const isMobile = useMediaQuery(`(max-width: ${SCREEN_SIZE_MD})`);
   const [inputLength, setInputLength] = useState(0);
@@ -39,15 +40,17 @@ export const NumberInput: React.FC<{
     valueType !== 'age' &&
     salesforceFormat !== 'date_year' &&
     salesforceFormat !== 'date_month' &&
-    salesforceFormat !== 'date_day'
-      ? true
-      : false;
+    salesforceFormat !== 'date_day';
 
   const localeFormat = router.locale === 'en' ? 'en-GB' : 'de-DE';
 
   const formatToSalesforce = (v: number) => {
     const today = new Date();
-    if (!salesforceFormat || salesforceFormat === 'number') setAnswer(v);
+
+    if (!salesforceFormat || salesforceFormat === 'number') {
+      setAnswer(v);
+    }
+
     if (salesforceFormat === 'date_year') {
       today.setFullYear(today.getFullYear() + v);
       setAnswer(today);

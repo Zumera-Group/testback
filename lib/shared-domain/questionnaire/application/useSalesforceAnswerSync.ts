@@ -17,7 +17,7 @@ export const useSalesforceAnswerSync = () => {
     setSectorSheetName,
     assessmentPurpose,
     leadSourceURL,
-    setAssessmentPurpose,
+    getCurrencyAnswers
   } = useValuationStore();
   const { sendQuestionnaireToAnalytics } = useSendQuestionnaireToAnalytics();
 
@@ -44,6 +44,7 @@ export const useSalesforceAnswerSync = () => {
         leadSourceURL,
         currentQuestionNumber,
         currentField,
+        getCurrencyAnswers()
       );
 
 

@@ -1,21 +1,24 @@
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
+import { useValuationStore } from 'lib/shared-domain/questionnaire/store';
+import { CurrencySymbols } from 'lib/shared-domain/salesforce/application/exchangeRate';
+import { SanityNumberValueType } from '../../../../@types/modules';
 
-export enum VALUE_TYPE {
+export enum SIGNS {
   EUR = '€',
   USD = '$',
   percent = '%',
 }
 
-export const useNumberFormat = (
-  valueType: 'number' | 'EUR' | 'USD' | 'year' | 'age' | 'percent',
-): { sign: VALUE_TYPE; getNumberFormat: (arg: number) => string } => {
-  const [sign, setSign] = useState(VALUE_TYPE[valueType] ?? null);
+export const useNumberFormat = (valueType: SanityNumberValueType) => {
+  const [sign, setSign] = useState(SIGNS[valueType] ?? null);
   const router = useRouter();
   const locale = router?.locale;
+  const { getAnswer } = useValuationStore();
 
+  const isCurrency = valueType === 'EUR' || valueType === 'USD' || valueType === 'currency';
   const getFormatOptions = () => {
-    if (valueType === 'EUR' || valueType === 'USD') {
+    if (isCurrency) {
       return {
         style: 'currency',
         currency: valueType,
@@ -33,6 +36,7 @@ export const useNumberFormat = (
     if (
       valueType !== 'EUR' &&
       valueType !== 'USD' &&
+      valueType !== 'currency' &&
       valueType !== 'percent' &&
       valueType !== 'number'
     ) {
@@ -47,8 +51,15 @@ export const useNumberFormat = (
   };
 
   useEffect(() => {
-    setSign(VALUE_TYPE[valueType] ?? null);
-  }, [valueType]);
+    const currency = getAnswer('Country');
+
+    if (CurrencySymbols[currency] && isCurrency) {
+      setSign(CurrencySymbols[currency]);
+      return;
+    }
+
+    setSign(SIGNS[valueType] ?? null);
+  }, [valueType, getAnswer, isCurrency]);
 
   return {
     getNumberFormat,

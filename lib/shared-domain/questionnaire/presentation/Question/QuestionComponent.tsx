@@ -1,20 +1,14 @@
 import React from 'react';
 import { useValuationStore } from 'lib/shared-domain/questionnaire/store';
 import { useSalesforceAnswerSync } from '../../application/useSalesforceAnswerSync';
-import {
-  INDUSTRY_QUESTION_ID,
-  questions,
-  SECTOR_QUESTION_ID,
-} from '../questions';
+import { INDUSTRY_QUESTION_ID, questions, SECTOR_QUESTION_ID } from '../questions';
 import { Result } from '../Result';
 import { Question } from '../../domain';
 import { SectorSpecificEntry } from './SectorSpecificEntry';
 import { qLogs } from '../../application/log';
-import { useQuestionnaireRouter, t } from './index';
+import { t, useQuestionnaireRouter } from './index';
 import { AnimateSharedLayout } from 'framer-motion';
 import { Sector } from '../../../page/domain/index';
-import { useGetSalesforceScore } from '../../application/useGetQuestionnaireScore';
-import { useRouter } from 'next/router';
 import { useGetURL } from 'lib/hooks/useGetURL';
 
 export const QuestionComponent: React.FC<{
@@ -41,15 +35,17 @@ export const QuestionComponent: React.FC<{
     isOnResultScreen,
     sectorId,
     industryId,
-    leadSourceURL,
     setQuestionnaire,
     setLeadSourceURL,
+    setExchangeRates,
+    setCurrency,
+    currency,
+    getAnswer,
+    setCurrencyAnswers,
   } = useValuationStore();
   const { syncCurrentAnswersToSalesforce } = useSalesforceAnswerSync();
 
   const { pushQuestion } = useQuestionnaireRouter();
-
-  const { getScore } = useGetSalesforceScore();
 
   const currentCategory = questionnaire?.questionsByCategory?.[mainStep];
 
@@ -72,28 +68,6 @@ export const QuestionComponent: React.FC<{
   );
 
   const fullUrl = useGetURL();
-
-  //GETS POSITION OF SELECTED FIELD WHICH IS THE START OF THE EV THRESHOLD
-  const salesforceProperty = 'salesforceId';
-  const evStartField = 'Company_EBIT_2022__c';
-
-  const allQuestions = questionnaire?.questionsByCategory?.reduce(
-    (accumulatedCategory, currentCategory) => {
-      return {
-        categoryName: currentCategory.categoryName,
-        questions: accumulatedCategory.questions.concat(
-          currentCategory.questions,
-        ),
-      };
-    },
-  );
-
-  const getEvStartPos = () => {
-    const elementPos = allQuestions.questions.findIndex(
-      (obj) => obj[salesforceProperty] === evStartField,
-    );
-    return elementPos + 1;
-  };
 
   const buildSectorSpecificQuestions = () => {
     if (!questionnaire.sectorSpecific.hasSectorSpecificQuestions) return;
@@ -149,10 +123,27 @@ export const QuestionComponent: React.FC<{
     }
   };
 
+  const isCurrentQuestionOfValueCurrency =
+    currentQuestion?.answerSelector?.numberInput?.valueType === 'EUR' ||
+    currentQuestion?.answerSelector?.numberInput?.valueType === 'currency';
+
   const onNextQuestion = () => {
     refEl.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
     setLeadSourceURL(fullUrl);
+
+    if (currentQuestion?.salesforceId?.includes('Country') || currentQuestion?.salesforceId?.includes('Currency_c')) {
+      setExchangeRates();
+      const currency = getAnswer(currentQuestion?.salesforceId);
+      setCurrency(currency);
+    }
+    if (isCurrentQuestionOfValueCurrency) {
+      setCurrencyAnswers({
+        id: currentQuestion?.salesforceId,
+        value: getAnswer(currentQuestion?.salesforceId),
+        currency,
+      });
+    }
 
     qLogs('onNextQuestion');
     qLogs('ID ' + currentQuestion?.salesforceId);
@@ -163,6 +154,7 @@ export const QuestionComponent: React.FC<{
       currentProgress,
       `Question: ${currentPos}`,
       currentQuestion?.salesforceId,
+      false,
     );
 
     if (industryId && currentQuestion?.questionId === INDUSTRY_QUESTION_ID) {
