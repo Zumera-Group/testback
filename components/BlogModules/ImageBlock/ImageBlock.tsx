@@ -6,12 +6,17 @@ import Image from 'next/image';
 export const ImageBlock: React.FC<any> = ({ specificContentModule }) => {
   const { image, caption, anchor } = specificContentModule;
 
+  const imageUrl = image?.asset?.url;
+  if (!imageUrl) {
+    return null;
+  }
+
   return (
     <Container classes={styles.imageBlockWrapper} id={anchor}>
       <figure className={styles.figure}>
         <Image
           unoptimized
-          src={sanityImageUrlFor(image?.asset?.url).url()}
+          src={sanityImageUrlFor(imageUrl).url()}
           alt={image?.alt}
           width={955}
           height={538}
