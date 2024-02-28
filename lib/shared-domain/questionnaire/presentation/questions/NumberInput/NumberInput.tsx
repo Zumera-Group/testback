@@ -29,7 +29,7 @@ export const NumberInput: React.FC<{
     label,
   } = question?.answerSelector?.numberInput || DEFAULT_VALUES;
   const { sign } = useNumberFormat(valueType);
-  const { getAnswer, setAnswer, removeAnswer } = useAnswers(question);
+  const { getAnswer, setAnswer, removeAnswer, setCurrencyAnswer } = useAnswers(question);
   const isMobile = useMediaQuery(`(max-width: ${SCREEN_SIZE_MD})`);
   const [inputLength, setInputLength] = useState(0);
   const isYear = valueType === 'year';
@@ -44,9 +44,13 @@ export const NumberInput: React.FC<{
 
   const localeFormat = router.locale === 'en' ? 'en-GB' : 'de-DE';
 
+  const isCurrencyField = valueType === 'EUR' || valueType === 'currency';
   const formatToSalesforce = (v: number) => {
     const today = new Date();
 
+    if (isCurrencyField) {
+      setCurrencyAnswer(v);
+    }
     if (!salesforceFormat || salesforceFormat === 'number') {
       setAnswer(v);
     }

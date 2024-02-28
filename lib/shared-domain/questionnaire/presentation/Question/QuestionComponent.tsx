@@ -123,26 +123,16 @@ export const QuestionComponent: React.FC<{
     }
   };
 
-  const isCurrentQuestionOfValueCurrency =
-    currentQuestion?.answerSelector?.numberInput?.valueType === 'EUR' ||
-    currentQuestion?.answerSelector?.numberInput?.valueType === 'currency';
 
   const onNextQuestion = () => {
     refEl.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
     setLeadSourceURL(fullUrl);
 
-    if (currentQuestion?.salesforceId?.includes('Country') || currentQuestion?.salesforceId?.includes('Currency_c')) {
+    if (currentQuestion?.salesforceId?.includes('Currency__c')) {
       setExchangeRates();
       const currency = getAnswer(currentQuestion?.salesforceId);
       setCurrency(currency);
-    }
-    if (isCurrentQuestionOfValueCurrency) {
-      setCurrencyAnswers({
-        id: currentQuestion?.salesforceId,
-        value: getAnswer(currentQuestion?.salesforceId),
-        currency,
-      });
     }
 
     qLogs('onNextQuestion');
