@@ -1,6 +1,6 @@
 import { Locale } from 'lib/locale';
 import { SanityService } from 'lib/services/sanity.service';
-import { Page } from '../domain';
+import {Page, TPageShortInfo} from '../domain';
 import { querySiteSettings } from './siteSettings.facade';
 import { SiteSettings } from '../domain/index';
 import { querySharedContent } from './sharedContent.facade';
@@ -19,6 +19,21 @@ const queryPage = (
   ...,
   _id,
   _lang,
+  _langRefs[] -> {
+    _id,
+    _lang,
+    slug
+  },
+  __i18n_base -> {
+    _id,
+    _lang,
+    slug,
+    _langRefs[] -> {
+      _id,
+      _lang,
+      slug
+    }
+  },
   slug {
     current
   },
@@ -31,6 +46,19 @@ const queryPage = (
   "queryOtherLangSlug": ${otherLangSlugQuery},
   "querySiteSettings": ${querySiteSettings},
   "querySharedContent": ${querySharedContent},
+}`;
+
+/**
+ * There is a data integrity in Sanity - Blog page has doubles with the same lang and slug - so exclude it from pre-rendering
+ */
+const queryPagesStaticPaths = () => `*[_type == "page" && slug.current != "blog"] {
+  _id,
+  _lang,
+  slug {
+    current
+  },
+  disallowInRobotsTxt,
+  includeInSitemap
 }`;
 
 const queryPages = () => `*[_type == "page"] {
@@ -95,8 +123,14 @@ export class PageFacade {
     return { page, query, siteSettings, sharedContent };
   }
 
-  async getPages(): Promise<Page[]> {
+  async getPages(): Promise<TPageShortInfo[]> {
     const pages = await this.sanityService.fetch(queryPages());
+
+    return pages;
+  }
+
+  async getPagesForStaticPaths(): Promise<TPageShortInfo[]> {
+    const pages = await this.sanityService.fetch(queryPagesStaticPaths());
 
     return pages;
   }
