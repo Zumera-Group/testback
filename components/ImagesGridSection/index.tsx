@@ -47,7 +47,7 @@ export const ImagesGridSection: React.FC<{
                     lg={8}
                     className={styles.imageWrapper}
                   >
-                    <img src={chunkImg[0]?.asset?.url} alt={''} />
+                    <img src={chunkImg[0]?.asset?.url} alt={''} className={styles.image} />
                   </GridColumn>
                   <GridColumn
                     xs={12}
@@ -56,7 +56,7 @@ export const ImagesGridSection: React.FC<{
                     lg={4}
                     className={styles.imageWrapper}
                   >
-                    <img src={chunkImg[1]?.asset?.url} alt={''} />
+                    <img src={chunkImg[1]?.asset?.url} alt={''} className={styles.image} />
                   </GridColumn>
                 </>
               ) : (
@@ -68,7 +68,7 @@ export const ImagesGridSection: React.FC<{
                     lg={4}
                     className={styles.imageWrapper}
                   >
-                    <img src={chunkImg[0]?.asset?.url} alt={''} />
+                    <img src={chunkImg[0]?.asset?.url} alt={''} className={styles.image} />
                   </GridColumn>
                   <GridColumn
                     xs={12}
@@ -77,7 +77,7 @@ export const ImagesGridSection: React.FC<{
                     lg={8}
                     className={styles.imageWrapper}
                   >
-                    <img src={chunkImg[1]?.asset?.url} alt={''} />
+                    <img src={chunkImg[1]?.asset?.url} alt={''} className={styles.image} />
                   </GridColumn>
                 </>
               )}
