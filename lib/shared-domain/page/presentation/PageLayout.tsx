@@ -23,6 +23,7 @@ const PageLayout: React.FC<{
     page?.contentModules?.map((c) => ContentModule.create(c)) || [];
 
   const { locale } = useRouter();
+  const {alternateHrefs} = useMakeAlternateHrefs({page});
 
   const otherLangSlug =
     page?.queryOtherLangSlug?.slice(-1)[0]?.slug &&
@@ -37,6 +38,7 @@ const PageLayout: React.FC<{
         seoDescription={page.seoDescription}
         seoImage={page.seoImage}
         siteSettings={siteSettings}
+        langAlternates={alternateHrefs}
       />
       <PageTransition slug={page.slug?.current}>
         <PageHeader
@@ -47,6 +49,7 @@ const PageLayout: React.FC<{
           hideMenu={page.hideNavMenu}
           darkBg={page.darkBg}
           whiteBg={page.whiteBg}
+          langAlternates={alternateHrefs}
         />
         <Suspense fallback={() => <div>loading</div>}>
           <main id="main" className={page.whiteBg && 'white-bg'}>
@@ -109,19 +112,7 @@ const useMakeAlternateHrefs = ({ page }: { page: Page }) => {
   }, []);
 
   const alternateHrefs = useMemo(() => {
-
-    if (
-      Array.isArray(page._langRefs) &&
-      page._langRefs[0] !== null &&
-      page._lang
-    ) {
-      const langRefs = page._langRefs.filter((ref) => ref !== null);
-      return makeAlternates(page._lang, langRefs);
-    } else if (
-      page.__i18n_base &&
-      Array.isArray(page.__i18n_base._langRefs) &&
-      page._lang
-    ) {
+    if (page.__i18n_base && Array.isArray(page.__i18n_base._langRefs) && page._lang) {
       const langRefs: ILangRef[] = page.__i18n_base._langRefs.filter(
         (ref) => ref !== null,
       );
@@ -132,6 +123,9 @@ const useMakeAlternateHrefs = ({ page }: { page: Page }) => {
         slug: page.__i18n_base.slug,
       });
 
+      return makeAlternates(page._lang, langRefs);
+    } else if (Array.isArray(page._langRefs) && page._langRefs[0] !== null && page._lang) {
+      const langRefs = page._langRefs.filter((ref) => ref !== null);
       return makeAlternates(page._lang, langRefs);
     }
 
