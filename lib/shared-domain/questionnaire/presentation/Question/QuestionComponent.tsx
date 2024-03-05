@@ -129,7 +129,7 @@ export const QuestionComponent: React.FC<{
 
     setLeadSourceURL(fullUrl);
 
-    if (currentQuestion?.salesforceId?.includes('Currency__c')) {
+    if (currentQuestion?.salesforceId?.includes('Currency__c') || currentQuestion?.salesforceId?.includes('Country')) {
       setExchangeRates();
       const currency = getAnswer(currentQuestion?.salesforceId);
       setCurrency(currency);

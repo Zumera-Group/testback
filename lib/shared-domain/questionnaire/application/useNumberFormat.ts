@@ -51,7 +51,7 @@ export const useNumberFormat = (valueType: SanityNumberValueType) => {
   };
 
   useEffect(() => {
-    const currency = getAnswer('Currency__c');
+    const currency = getAnswer('Currency__c') || getAnswer('Country');
 
     if (CurrencySymbols[currency] && isCurrency) {
       setSign(CurrencySymbols[currency]);
