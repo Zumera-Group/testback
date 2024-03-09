@@ -41,7 +41,7 @@ export const SectorSpecificEntry: React.FC<{
 
   return (
     <>
-      {isMobile && (
+      {isMobile && !!onPrevQuestion && (
         <BackButton onPrevQuestion={onPrevQuestion} currentPos={currentPos} />
       )}
       <QuestionAnimation>

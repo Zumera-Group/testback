@@ -10,9 +10,3 @@ export const fetchQuestionnaire = async (
 
   return await facade.getQuestionnaire(locale, slug, preview);
 };
-
-export const useGetQuestionnaire = async (locale: Locale, slug: string) => {
-  const questionnaire = await fetchQuestionnaire(locale, slug);
-
-  return { questionnaire };
-};

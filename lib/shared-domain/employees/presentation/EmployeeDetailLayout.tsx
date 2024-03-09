@@ -48,7 +48,7 @@ export const EmployeeDetailLayout: React.FC<{
         siteSettings={siteSettings}
         otherLangSlug={otherLangSlug}
       />
-      <PageTransition slug={employee._id}>
+      <PageTransition>
         <EmployeeHero
           employee={employee}
           content={employeeDetailContent?.heroSectionContent}

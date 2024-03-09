@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Input from 'components/Form/Input/Input';
 import { getTranslateByScope } from 'translation/i18n';
 import { Question } from '../../../domain/index';
@@ -6,11 +6,9 @@ import { useAnswers } from 'lib/shared-domain/questionnaire/application/useAnswe
 import { QuestionText } from '../../Question/QuestionText';
 import { QuestionButtonsWrapper } from '../../Question/QuestionButtonsWrapper';
 import { QuestionButtons } from '../../Question/QuestionButtons';
-import { useEffect } from 'react';
 import { QuestionAnimation } from '../../Question/QuestionAnimation';
 import styles from './MultiTextInput.module.scss';
 import BackButton from 'components/Calculator/BackButton/BackButton';
-import useBreakpoints from 'lib/utils/useBreakpoints';
 import { useMediaQuery } from 'lib/hooks/useMediaQuery';
 import { SCREEN_SIZE_MD } from 'lib/constants';
 
@@ -49,7 +47,7 @@ export const MultiTextInput: React.FC<{
 
   return (
     <>
-      {isMobile && (
+      {isMobile && !!onPrevQuestion && (
         <BackButton onPrevQuestion={onPrevQuestion} currentPos={currentPos} />
       )}
       <QuestionAnimation>

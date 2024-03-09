@@ -134,7 +134,7 @@ export const ServiceDetailLayout: React.FC<ServiceDetailProps> = ({
         siteSettings={siteSettings}
         otherLangSlug={otherLangSlug}
       />
-      <PageTransition slug={service?._id}>
+      <PageTransition>
         <ServiceHero service={service} />
         {service?.tabs && service?.tabs.length > 1 && (
           <ServiceTabs

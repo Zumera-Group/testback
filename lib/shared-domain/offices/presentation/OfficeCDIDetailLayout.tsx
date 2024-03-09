@@ -27,7 +27,7 @@ export const OfficeCDIDetailLayout: React.FC<{
       />
 
       <PageHeader contentModules={[]} siteSettings={siteSettings} darkBg />
-      <PageTransition slug={office._id}>
+      <PageTransition>
         <OfficeCDIHero office={office} subtitle={content?.subtitle} />
         <OfficeCDINews
           office={office}

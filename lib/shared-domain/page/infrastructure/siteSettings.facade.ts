@@ -1,6 +1,6 @@
 import { Locale } from 'lib/locale';
 import { SanityService } from 'lib/services/sanity.service';
-import { Page } from '../domain';
+import { SiteSettings } from '../domain';
 
 export const querySiteSettings = (
   lang,
@@ -185,7 +185,7 @@ export const querySiteSettings = (
 export class SiteSettingsFacade {
   constructor(private readonly sanityService = new SanityService()) {}
 
-  async getSiteSettings(lang: Locale): Promise<Page> {
+  async getSiteSettings(lang: Locale): Promise<SiteSettings> {
     const page = await this.sanityService.fetch(
       querySiteSettings(this.sanityService.getSanityLocale(lang)),
     );

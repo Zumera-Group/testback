@@ -123,13 +123,13 @@ export const QuestionComponent: React.FC<{
     }
   };
 
-
   const onNextQuestion = () => {
     refEl.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
     setLeadSourceURL(fullUrl);
 
-    if (currentQuestion?.salesforceId?.includes('Currency__c') || currentQuestion?.salesforceId?.includes('Country')) {
+    if (currentQuestion?.salesforceId?.includes('Currency__c') ||
+      currentQuestion?.salesforceId?.includes('Country')) {
       setExchangeRates();
       const currency = getAnswer(currentQuestion?.salesforceId);
       setCurrency(currency);

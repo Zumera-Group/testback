@@ -47,7 +47,7 @@ export const NewsArticleDetailLayout: React.FC<{
         siteSettings={siteSettings}
         otherLangSlug={otherLangSlug}
       />
-      <PageTransition slug={newsArticle._id}>
+      <PageTransition>
         <NewsArticleHero newsArticle={newsArticle} />
         <NewsArticleDescription
           newsArticle={newsArticle}

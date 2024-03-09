@@ -1,36 +1,46 @@
 import { Question } from '../domain';
 import { useValuationStore } from '../store';
+import { usePathname } from 'next/navigation';
+import { useTaxCalculatorStore } from 'lib/shared-domain/tax-calculator/store';
 
 export const useAnswers = (
   question: Question,
 ) => {
+  const pathName = usePathname();
   const { getAnswer, setAnswer, removeAnswer, setCurrencyAnswers, currency } = useValuationStore();
+  const { setTaxAnswer, getTaxAnswer, removeTaxAnswer } = useTaxCalculatorStore();
+  const isOnTaxCalculator = pathName.includes('tax-calculator');
+  const id = question?.salesforceId ?? question?._id;
 
   return {
     setAnswer: (value: any) => {
-      if (question?.salesforceId) {
-        setAnswer({ id: question.salesforceId, value });
-      } else {
-        setAnswer({ id: question?._id, value });
+      if (isOnTaxCalculator) {
+        setTaxAnswer({ id, value });
+        return;
       }
-    },
-    setCurrencyAnswer: (value: any) => {
-      if (question?.salesforceId) {
-        setCurrencyAnswers({ id: question.salesforceId, value, currency });
-      } else {
-        setCurrencyAnswers({ id: question?._id, value, currency });
-      }
+      setAnswer({ id, value });
     },
     getAnswer: () => {
+      if (isOnTaxCalculator) {
+        return getTaxAnswer(id);
+      }
       if (getAnswer(question?.salesforceId)) {
         return getAnswer(question?.salesforceId);
       }
       return getAnswer(question?._id);
     },
     removeAnswer: (value: any) => {
+      if (isOnTaxCalculator) {
+        removeTaxAnswer({ id, value });
+        return;
+      }
+
       if (question?.salesforceId) {
         removeAnswer({ id: question.salesforceId, value });
       }
+    },
+    setCurrencyAnswer: (value: any) => {
+      setCurrencyAnswers({ id, value, currency });
     },
   };
 };

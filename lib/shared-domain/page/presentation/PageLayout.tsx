@@ -40,7 +40,7 @@ const PageLayout: React.FC<{
         siteSettings={siteSettings}
         langAlternates={alternateHrefs}
       />
-      <PageTransition slug={page.slug?.current}>
+      <PageTransition>
         <PageHeader
           contentModules={contentModules}
           siteSettings={siteSettings}

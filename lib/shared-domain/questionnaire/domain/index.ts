@@ -28,13 +28,15 @@ export interface BoxAnswer {
   category?: string;
 }
 
+export type AnswerType =
+  | 'boxSelector'
+  | 'textInput'
+  | 'orbitSelector'
+  | 'multiTextInput'
+  | 'numberInput';
+
 export interface Answer {
-  answerType:
-    | 'boxSelector'
-    | 'textInput'
-    | 'orbitSelector'
-    | 'multiTextInput'
-    | 'numberInput';
+  answerType: AnswerType;
   boxSelector?: BoxAnswer[];
   textInput?: string;
   multiTextInput?: {
@@ -76,7 +78,7 @@ export interface Question {
 
 export interface Category {
   categoryName: string;
-  questions: Question[];
+  questions?: Question[];
   isSectorSpecificCategory?: boolean;
 }
 

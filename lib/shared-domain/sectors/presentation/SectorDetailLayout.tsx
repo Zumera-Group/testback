@@ -54,7 +54,7 @@ export const SectorDetailLayout: React.FC<{
         siteSettings={siteSettings}
         seoImage={sector?.graph?.iconImage}
       />
-      <PageTransition slug={sector._id}>
+      <PageTransition>
         <PageHeader
           contentModules={[]}
           siteSettings={siteSettings}

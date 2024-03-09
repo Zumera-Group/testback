@@ -34,7 +34,7 @@ export const NewsEventDetailLayout: React.FC<{
         siteSettings={siteSettings}
         otherLangSlug={otherLangSlug}
       />
-      <PageTransition slug={newsEvent._id}>
+      <PageTransition>
         <NewsArticleHero newsArticle={newsEvent} />
         <NewsArticleTeam
           employees={newsEvent?.eventRefereesSection}

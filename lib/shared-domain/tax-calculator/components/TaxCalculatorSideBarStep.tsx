@@ -1,39 +1,37 @@
-import { Category, Question } from 'lib/shared-domain/questionnaire/domain';
-import { useValuationStore } from 'lib/shared-domain/questionnaire/store';
 import React, { useEffect, useState } from 'react';
-
-import styles from './SidebarStep.module.scss';
+import styles from 'lib/shared-domain/questionnaire/presentation/Sidebar/SidebarStep/SidebarStep.module.scss';
+import { Category } from 'lib/shared-domain/questionnaire/domain';
+import { useSearchParams } from 'next/navigation';
 
 interface Props {
   category: Category;
-  categoryIndex: number;
   prevCategory: Category;
+  currentCategoryIndex: number;
 }
 
-export const SidebarStep = ({
+export const TaxCalculatorSideBarStep = ({
   category,
-  categoryIndex,
   prevCategory,
+  currentCategoryIndex,
 }: Props): JSX.Element => {
-  const { mainStep, subStep } = useValuationStore();
+  const searchParams = useSearchParams();
+  const programCategoryIndex = Number(searchParams.get('category') ?? 1) - 1;
+  const programStepIndex = Number(searchParams.get('step') ?? 1) - 1;
 
-  const isActive = mainStep === categoryIndex;
+  const isActive = programCategoryIndex === currentCategoryIndex;
   const [isOpen, setIsOpen] = useState(isActive);
 
   useEffect(() => {
     if (isActive && !isOpen) setIsOpen(true);
 
     if (!isActive && isOpen) setIsOpen(false);
-  }, [isActive, isOpen, mainStep]);
+  }, [isActive, isOpen, programCategoryIndex]);
 
-  const isCurrentOrPrevCategory = categoryIndex <= mainStep;
-  const isLastQuestionFromPrevCategory = !prevCategory?.questions[subStep + 1];
-  const isNextCategory = categoryIndex === mainStep + 1;
+  const isCurrentOrPrevCategory = programCategoryIndex <= programCategoryIndex;
+  const isLastQuestionFromPrevCategory = !prevCategory?.questions[programStepIndex + 1];
+  const isNextCategory = currentCategoryIndex >= programCategoryIndex + 1;
 
-  const isClickable =
-    isCurrentOrPrevCategory ||
-    (isLastQuestionFromPrevCategory && isNextCategory);
-
+  const isClickable = isCurrentOrPrevCategory || (isLastQuestionFromPrevCategory && isNextCategory);
   const activeItem = isActive ? styles.active : styles.inactive;
 
   const Tick = () => {
@@ -63,7 +61,7 @@ export const SidebarStep = ({
               <Tick />
             </span>
           ) : (
-            <span className={activeItem}>{`${categoryIndex + 1}.`}</span>
+            <span className={activeItem}>{`${currentCategoryIndex + 1}.`}</span>
           )}
         </p>
 

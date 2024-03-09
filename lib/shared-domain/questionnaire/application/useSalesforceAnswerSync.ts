@@ -21,6 +21,7 @@ export const useSalesforceAnswerSync = () => {
   } = useValuationStore();
   const { sendQuestionnaireToAnalytics } = useSendQuestionnaireToAnalytics();
 
+
   return {
     syncCurrentAnswersToSalesforce: async (
       uniqueId: string,
@@ -59,7 +60,6 @@ export const useSalesforceAnswerSync = () => {
     },
   };
 };
-
 export const useLeadHistory = () => {
   const facade = new SalesforceFacade();
   return {

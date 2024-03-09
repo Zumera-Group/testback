@@ -98,7 +98,7 @@ export const OrbitSelector: React.FC<{
   return (
     <>
       <QuestionAnimation>
-        {isMobile && (
+        {isMobile && !!onPrevQuestion &&(
           <BackButton onPrevQuestion={onPrevQuestion} currentPos={currentPos} />
         )}
 

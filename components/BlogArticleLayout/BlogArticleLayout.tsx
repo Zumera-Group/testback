@@ -48,7 +48,7 @@ export const BlogArticleLayout: React.FC<{
         siteSettings={siteSettings}
         whiteBg
       />
-      <PageTransition slug={blogArticle._id}>
+      <PageTransition>
         <Section
           size={'md'}
           bg={'white'}

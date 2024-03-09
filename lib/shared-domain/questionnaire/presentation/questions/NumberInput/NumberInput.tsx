@@ -104,7 +104,7 @@ export const NumberInput: React.FC<{
   return (
     <>
       <div className={styles.numberInputWrapper}>
-        {isMobile && (
+        {isMobile && !!onPrevQuestion &&(
           <BackButton onPrevQuestion={onPrevQuestion} currentPos={currentPos} />
         )}
         <QuestionAnimation>
@@ -134,9 +134,9 @@ export const NumberInput: React.FC<{
                   : getUnformattedAnswer() || ''
               }
               onChange={(e) => {
-                formatToSalesforce(
-                  Number(e.target.value.replace(/[.,\s]/g, '')),
-                );
+                const result = Number(e.target.value.replace(/[.,\s]/g, ''));
+                const safeResult = isNaN(result) ? '' : result;
+                formatToSalesforce(Number(safeResult));
 
                 setInputLength(e.target.value.length);
                 if (e.target.value === '') {

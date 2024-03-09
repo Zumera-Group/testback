@@ -109,8 +109,6 @@ const retrieve = (): Record<string, any> => {
       return total;
     }, {});
 
-    console.log("data", data);
-
     return data;
   } catch (e) {
     console.log('ERROR: Retrieving Marketing params' + e);
@@ -129,6 +127,8 @@ const renderHiddenInputElements = () => {
 };
 
 function getCookieByName(name) {
+  if (!document) return; // to avoid running on server side.
+
   const value = `; ${document.cookie}`;
   const parts = value.split(`; ${name}=`);
   if (parts.length === 2) return parts.pop().split(';').shift();
@@ -154,10 +154,41 @@ const collectDeviceInfo = () => {
   };
 };
 
+
+const formatMarketingParams = () => {
+  const unformattedParams =
+    process.env.NEXT_PUBLIC_MARKETING_QUERY_PARAMS?.split(',') || [];
+
+  const marketingParams = retrieve();
+
+  const keyMap = {
+    [unformattedParams[0]]: 'UTMSource__c',
+    [unformattedParams[1]]: 'UTMMedium__c',
+    [unformattedParams[2]]: 'UTMCampaign__c',
+    [unformattedParams[3]]: 'UTM_ID__c',
+    [unformattedParams[4]]: 'UTM_Source_Platform__c',
+    [unformattedParams[5]]: 'UTMTerm__c',
+    [unformattedParams[6]]: 'UTM_Content__c',
+    [unformattedParams[7]]: 'gclid__c',
+    [unformattedParams[8]]: 'fbclid__c',
+  };
+
+  return Object.keys(marketingParams).reduce(
+    (acc, key) => {
+      const newKey = keyMap[key] || key;
+      acc[newKey] = marketingParams[key];
+
+      return acc;
+    },
+    {},
+  );
+};
+
 export const MarketingParamsService = {
   useSaveOnMount,
   retrieve,
   renderHiddenInputElements,
   getCookies,
   collectDeviceInfo,
+  formatMarketingParams,
 };

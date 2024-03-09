@@ -42,7 +42,7 @@ export const TransactionDetailLayout: React.FC<{
         siteSettings={siteSettings}
         otherLangSlug={otherLangSlug}
       />
-      <PageTransition slug={transaction._id}>
+      <PageTransition>
         <TransactionHero
           transaction={transaction}
           content={transactionDetailContent.heroSectionContent}

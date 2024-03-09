@@ -131,7 +131,6 @@ const QuestionnaireLayout: React.FC<{
         setUniqueId(newUuid);
         setBrowserCookie('zumera_uid', newUuid, 365);
       }
-      // setBrowserCookie('_uid', newUuid, 365);
 
       qLogs('getCookie' + uniqueId);
     }
@@ -243,7 +242,7 @@ const QuestionnaireLayout: React.FC<{
         preventIndexing={questionnaire?.preventIndexing}
       />
 
-      <PageTransition slug={questionnaire?.questionnaireSlug?.current}>
+      <PageTransition>
         <div
           className={[
             styles.page,

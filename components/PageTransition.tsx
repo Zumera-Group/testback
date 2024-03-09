@@ -1,8 +1,7 @@
 import { ChatButton } from 'components/ChatButton';
 import React from 'react';
 
-export const PageTransition: React.FC<{ slug: string }> = ({
-  slug,
+export const PageTransition = ({
   children,
 }) => {
   return (

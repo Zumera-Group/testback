@@ -6,7 +6,6 @@ import Image from 'next/image';
 import styles from './ScoreCard.module.scss';
 import * as animationData from './loading-wheel.json';
 import Lottie from 'react-lottie';
-import { Questionnaire } from '../../domain';
 
 interface ScoreCardProps {
   questionnaire: any;
@@ -81,7 +80,7 @@ export const ScoreCard = ({
       <div className={styles.scoreCardWrapper}>
         <span className={styles.scoreCardTitle}>{title}</span>
         {score ? (
-          <ProgressBar isPoint progress={points} color="gradient" />
+          <ProgressBar isPoint progress={Number(points)} color="gradient" />
         ) : (
           <Lottie
             options={defaultOptions}

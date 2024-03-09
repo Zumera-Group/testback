@@ -182,7 +182,7 @@ export default function Index({
             // seoImage={blogArticle.heroImage}
           />
           <PageHeader contentModules={[]} siteSettings={siteSettings} whiteBg />
-          <PageTransition slug={'blogArticle._id'}>
+          <PageTransition>
             <Section size={'md'} bg={'white'} color={'primary'} as="article">
               <Articles
                 perPage={PER_PAGE}

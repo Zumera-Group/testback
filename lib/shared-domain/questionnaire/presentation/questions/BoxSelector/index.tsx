@@ -190,7 +190,7 @@ export const BoxSelector = ({
 
   return (
     <>
-      {isMobile && (
+      {isMobile && !!onPrevQuestion && (
         <BackButton onPrevQuestion={onPrevQuestion} currentPos={currentPos} />
       )}
 

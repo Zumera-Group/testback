@@ -62,7 +62,6 @@ const Sidebar = (): JSX.Element => {
       category={category}
       categoryIndex={index}
       prevCategory={array[index - 1]}
-      currentQuestion={currentQuestion}
     />
   );
 

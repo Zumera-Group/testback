@@ -6,9 +6,3 @@ export const fetchSiteSettings = async (locale: Locale) => {
 
   return await facade.getSiteSettings(locale);
 };
-
-export const useGetSiteSettings = async (locale: Locale) => {
-  const siteSettings = await fetchSiteSettings(locale);
-
-  return { siteSettings };
-};
