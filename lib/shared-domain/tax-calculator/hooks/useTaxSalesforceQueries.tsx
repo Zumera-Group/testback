@@ -40,6 +40,7 @@ export const useTaxSalesforceQueries = () => {
           lead_entry: {
             unique_id: uniqueId,
             data: {
+              Calculator_Type__c: 'tax-calculator',
               Lead_Source_URL__c: leadSourceURL,
               ...answers,
               ...formattedMarketingParams,
