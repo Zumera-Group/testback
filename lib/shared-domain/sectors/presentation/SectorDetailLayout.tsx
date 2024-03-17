@@ -14,11 +14,12 @@ import { SEO } from 'components/SEO';
 import { ServiceQuestionnaire } from 'lib/shared-domain/services/presentation/ServiceQuestionnaire';
 import { useFetchNewsArticles } from '../../newsArticle/application/useGetNewsArticles';
 import { useFetchEmployees } from '../../employees/application/useGetEmployees';
-import { links } from 'lib/links';
+import {allLinks, links} from 'lib/links';
 import { useRouter } from 'next/router';
 import ContactUsSection from 'lib/shared-domain/page/presentation/contentModules/ContactUsSection';
 import { useFetchTransactions } from 'components/NewsArticle/NewsArticleMoreNews';
 import { WhitePaperDownload } from 'components/WhitePaperDownload';
+import {useMakeAlternateHrefs} from "../../../hooks/useMakeAlternateHrefs";
 
 export const SectorDetailLayout: React.FC<{
   sector: Sector;
@@ -38,13 +39,17 @@ export const SectorDetailLayout: React.FC<{
     (n) =>
       n.sectors && n.sectors?.map((s) => s?._id).indexOf(sector._id) !== -1,
   );
-  const { locale } = useRouter();
 
-  const otherLangSlug =
-    sector?.queryOtherLangSlug?.slice(-1)[0]?.slug &&
-    links(locale === 'en' ? 'de' : 'en').sectors(
-      sector?.queryOtherLangSlug?.slice(-1)[0] as any,
-    );
+  const {alternateHrefs} = useMakeAlternateHrefs({
+    doc: sector,
+    urlPrefixes: getSectorUrlPrefixes()
+  });
+  // const { locale } = useRouter();
+  // const otherLangSlug =
+  //   sector?.queryOtherLangSlug?.slice(-1)[0]?.slug &&
+  //   links(locale === 'en' ? 'de' : 'en').sectors(
+  //     sector?.queryOtherLangSlug?.slice(-1)[0] as any,
+  //   );
 
   return (
     <>
@@ -53,12 +58,14 @@ export const SectorDetailLayout: React.FC<{
         seoDescription={sector.description}
         siteSettings={siteSettings}
         seoImage={sector?.graph?.iconImage}
+        langAlternates={alternateHrefs}
       />
       <PageTransition>
         <PageHeader
           contentModules={[]}
           siteSettings={siteSettings}
-          otherLangSlug={otherLangSlug}
+          langAlternates={alternateHrefs}
+          // otherLangSlug={otherLangSlug}
         />
         <main id="main">
           <SectorHero sector={sector} content={content?.heroSectionContent} />
@@ -103,4 +110,14 @@ export const SectorDetailLayout: React.FC<{
       <PageFooter siteSettings={siteSettings} />
     </>
   );
+};
+
+const getSectorUrlPrefixes = () => {
+  const out: {[key: string]: string} = {};
+
+  for (const [key, val] of Object.entries(allLinks.sectors)) {
+    out[key] = `/${val}`;
+  }
+
+  return out;
 };

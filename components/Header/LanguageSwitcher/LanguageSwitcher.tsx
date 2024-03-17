@@ -7,7 +7,6 @@ import styles from './LanguageSwitcher.module.scss';
 import { useEffect, useRef, useState } from 'react';
 import { locales } from 'lib/locale';
 import { useCallback } from 'react';
-import { allLinks } from 'lib/links';
 import { IAlternateLangHrefs } from '../../../@types/i18n';
 
 interface Props {
@@ -30,7 +29,6 @@ export const LanguageSwitcher: React.FC<Props> = ({
   const pages = {
     en: [
       ...enPaths,
-
       'questionnaires',
       'landing',
       'employees',
@@ -57,8 +55,9 @@ export const LanguageSwitcher: React.FC<Props> = ({
       'home',
     ],
   };
-
+  // console.log('--- pages:', pages);
   const getSlug = useCallback((lang: string) => {
+    // console.log('---- get Slug ---', lang, langAlternates);
     if (langAlternates) {
       if (lang in langAlternates) {
         return langAlternates[lang];
@@ -67,11 +66,11 @@ export const LanguageSwitcher: React.FC<Props> = ({
       return `/${lang}/home`
     }
 
-    console.log('no langAlternates - legacy way:');
+    // console.log('no langAlternates - legacy way:');
 
     const currentLocale = router.locale;
     const pathElements = router.asPath.split('/').filter((el) => el !== '');
-
+    // console.log(currentLocale, pathElements);
     const pageIndex = pages[currentLocale]?.findIndex(
       (el) => el === pathElements[0],
     );
@@ -87,10 +86,12 @@ export const LanguageSwitcher: React.FC<Props> = ({
     return `/${pages[lang][pageIndex]}${
       pathElements[1] ? '/' + pathElements[1] : ''
     }`;
-  }, [pages, langAlternates]);
+  }, [pages, langAlternates, router]);
 
   useEffect(() => {
+    // console.log('useEffence - bind on click - it is incorrect')
     const onClick = ({ target }: any) => {
+      // console.log('on click handlerr')
       if (!ref.current?.contains(target) && show) {
         setShow(false);
       }

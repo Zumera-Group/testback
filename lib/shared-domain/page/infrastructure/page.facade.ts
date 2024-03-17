@@ -14,7 +14,14 @@ const queryPage = (
   querySiteSettings,
   querySharedContent,
   extraQuery = '',
-) => `*[_type == "page" && _lang == "${lang}" && slug.current == "${slug}"]
+) => {
+  //just for back compatibility
+  let queryOtherLangSlug = '';
+  if (otherLangSlugQuery) {
+    queryOtherLangSlug = `"queryOtherLangSlug": ${otherLangSlugQuery},`
+  }
+
+  let query = `*[_type == "page" && _lang == "${lang}" && slug.current == "${slug}"]
  {
   ...,
   _id,
@@ -43,10 +50,13 @@ const queryPage = (
     }
   },
   ${contentModulesQuery(extraQuery)},
-  "queryOtherLangSlug": ${otherLangSlugQuery},
+  ${queryOtherLangSlug}
   "querySiteSettings": ${querySiteSettings},
   "querySharedContent": ${querySharedContent},
 }`;
+
+  return query;
+}
 
 /**
  * There is a data integrity in Sanity - Blog page has doubles with the same lang and slug - so exclude it from pre-rendering
@@ -101,10 +111,11 @@ export class PageFacade {
     siteSettings: SiteSettings;
     sharedContent: any;
   }> {
+    // getOtherLangSlugQuery(lang, 'page'),
     const query = queryPage(
       this.sanityService.getSanityLocale(lang),
       slug,
-      getOtherLangSlugQuery(lang, 'page'),
+      null,
       querySiteSettings(this.sanityService.getSanityLocale(lang)),
       querySharedContent(this.sanityService.getSanityLocale(lang)),
       extraQuery,

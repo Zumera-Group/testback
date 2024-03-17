@@ -2,12 +2,11 @@ import { Employee } from 'lib/shared-domain/employees/domain';
 import { Transaction } from 'lib/shared-domain/transactions/domain';
 import {
   ContactUsSectionModule,
-  ContentModule,
   ContentModuleType,
   IndustryReportSectionModule,
 } from './contentModule';
 import { Questionnaire } from '../../questionnaire/domain/index';
-import { ILangRef } from '../../../../@types/i18n';
+import {I18nBase, ILangRef} from '../../../../@types/i18n';
 
 export interface Page {
   isHeaderRoutesHidden: boolean;
@@ -23,14 +22,7 @@ export interface Page {
   _lang: string;
   _type: string;
   _langRefs?: ILangRef[];
-  __i18n_base?: {
-    _id: string;
-    _lang: string;
-    slug: {
-      current: string;
-    };
-    _langRefs?: ILangRef[];
-  };
+  __i18n_base?: I18nBase;
   name: string;
   seoTitle: string;
   seoDescription: string;
@@ -44,7 +36,7 @@ export interface Page {
     _key: string;
     _type: ContentModuleType;
   }[];
-  queryOtherLangSlug: {
+  queryOtherLangSlug?: {
     slug: { current: string };
   }[];
 
@@ -232,7 +224,7 @@ export interface Report {
 export interface Sector {
   noahCategory: any;
   isNoah: boolean;
-  queryOtherLangSlug: {
+  queryOtherLangSlug?: {
     slug: { current: string };
   }[];
   detailPageHeroImage: any;
@@ -241,6 +233,8 @@ export interface Sector {
   name: string;
   _id: string;
   _lang: string;
+  _langRefs?: ILangRef[];
+  __i18n_base?: I18nBase;
   description: string;
   hidePage: boolean;
   heroSectionSubtitles: string[];
@@ -476,4 +470,11 @@ export interface LogoBarSection {
       };
     };
   }[];
+}
+
+export interface ISanityDoc {
+  _id: string;
+  _lang: string;
+  _langRefs?: ILangRef[];
+  __i18n_base?: I18nBase;
 }
