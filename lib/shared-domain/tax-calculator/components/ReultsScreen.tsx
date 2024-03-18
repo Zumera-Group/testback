@@ -24,7 +24,7 @@ interface ResultsScreenFormProps {
 }
 
 export const ResultScreen: React.FC<ResultsScreenFormProps> = ({ resultScreenCopy }) => {
-  const { syncTaxCurrentAnswersToSalesforce } = useTaxSalesforceQueries();
+  const { syncTaxCurrentAnswersToSalesforce, leadDetailsSubmission } = useTaxSalesforceQueries();
   const [isFormSubmitted, setIsFormSubmitted] = useState(false);
   const { getTaxAnswer, setTaxAnswer, uniqueId } = useTaxCalculatorStore();
   const [checkboxIsChecked, setCheckboxIsChecked] = React.useState(false);
@@ -54,6 +54,8 @@ export const ResultScreen: React.FC<ResultsScreenFormProps> = ({ resultScreenCop
       currentField: 'resultScreen',
       currentQuestionNumber: '100%',
     });
+
+    await leadDetailsSubmission(uniqueId);
 
     setIsFormSubmitted(true);
   };

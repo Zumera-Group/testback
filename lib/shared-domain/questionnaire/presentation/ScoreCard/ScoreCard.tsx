@@ -5,7 +5,18 @@ import { useGetSalesforceScore } from '../../application/useGetQuestionnaireScor
 import Image from 'next/image';
 import styles from './ScoreCard.module.scss';
 import * as animationData from './loading-wheel.json';
-import Lottie from 'react-lottie';
+import dynamic from 'next/dynamic';
+import { AnimationOptions } from 'react-lottie';
+
+const Lottie: React.ComponentType<{
+  options: AnimationOptions,
+  width: string,
+  height: string,
+  style: React.CSSProperties,
+  isStopped: boolean,
+  isPaused: boolean
+}> = dynamic(() => import('react-lottie'), { ssr: false });
+
 
 interface ScoreCardProps {
   questionnaire: any;
@@ -27,6 +38,7 @@ export const ScoreCard = ({
   }>(null);
   const [hasError, setHasError] = React.useState(false);
   const { getScore } = useGetSalesforceScore();
+
 
   React.useEffect(() => {
     const loadScore = async () => {
@@ -94,6 +106,7 @@ export const ScoreCard = ({
             isStopped={false}
             isPaused={false}
           />
+
         )}
         <h4 className={styles.betterThan}>{betterThan}</h4>
         <div className={styles.booklet}>

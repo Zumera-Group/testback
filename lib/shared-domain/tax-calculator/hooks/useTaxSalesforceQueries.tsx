@@ -65,5 +65,29 @@ export const useTaxSalesforceQueries = () => {
         throw new Error(e);
       }
     },
+    leadDetailsSubmission: async (
+      uniqueId: string,
+    ): Promise<void> => {
+      const answers = getTaxAnswers();
+      console.log(answers);
+      try {
+        const leadParams = {
+          lead_entry: {
+            email: answers.email,
+            last_name: answers.LastName,
+            phone: answers.phone,
+          },
+        };
+
+        await httpService.put(
+          `lead_entries/${uniqueId}/salesforce`,
+          leadParams,
+          requestsConfig,
+        );
+      } catch (e) {
+        logError(e, { where: 'leadDetailsSubmission' });
+        return e;
+      }
+    },
   };
 };
