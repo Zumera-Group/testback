@@ -5,6 +5,7 @@ import { filterDataToSingleItem } from 'lib/shared-domain/page/infrastructure/pa
 import { queryTaxCalculator, queryTaxCalculatorQuestion } from 'lib/shared-domain/tax-calculator/sanityQueries';
 import { SanityService } from 'lib/services/sanity.service';
 import { TaxCalculatorQuestionnaire } from 'lib/shared-domain/tax-calculator/types';
+import { logError } from 'lib/logError';
 
 /**
  * Asynchronously retrieves questions for each category from a Sanity service.
@@ -56,6 +57,7 @@ export const fetchTaxCalculator = async (
   const localizedQuery = queryTaxCalculator(sanityService.getSanityLocale(lang), slug);
   const data: TaxCalculatorQuestionnaire = await sanityService.fetch(localizedQuery, preview);
   if (!data) {
+    logError(`${SERVER_FETCHING_ERROR} at fetchTaxCalculator`);
     throw new Error(SERVER_FETCHING_ERROR);
   }
 

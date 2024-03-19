@@ -28,21 +28,13 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({
-  locale: localeFromRoute,
+  locale,
   params,
   preview = false,
 }) {
   try {
-    const locale = 'en';
     const sharedContent = await new SharedContentFacade().getSharedContentFacade(locale);
     const siteSettings = await fetchSiteSettings(locale);
-    if (localeFromRoute !== locale) {
-      return {
-        redirect: {
-          destination: `/${locale}/404`,
-        },
-      };
-    }
     const { questionnaireWithCategories } = await fetchTaxCalculator(locale, params.slug, preview);
 
     if (!questionnaireWithCategories?.questionsByCategory?.length) {
@@ -77,7 +69,6 @@ export default function Index({
   locale,
 }: Props): JSX.Element {
   const router = useRouter();
-
   const [isSecretOpen, setIsSecretOpen] = useState(
     !siteSettings?.isUnderSecretKey,
   );
