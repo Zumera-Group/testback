@@ -5,6 +5,7 @@ import { QuestionText } from '../Question/QuestionText';
 import { useLoadScore } from 'lib/shared-domain/questionnaire/presentation/Result/hooks';
 import { HighLeadFlow } from 'lib/shared-domain/questionnaire/presentation/Result/components/HighLeadFlow';
 import { LowLeadFlow } from 'lib/shared-domain/questionnaire/presentation/Result/components/LowLeadFlow';
+import { ensureHttps } from 'lib/shared-domain/questionnaire/presentation/Result/helpers';
 
 const t = getTranslateByScope('result');
 
@@ -38,7 +39,7 @@ export const Result: React.FC<{ questionnaire: any }> = (questionnaire) => {
     <>
       {showAppointmentBooking ? (
         <HighLeadFlow
-          userCalendlyLink={score.calendly ? score.calendly : calendlyFallback}
+          userCalendlyLink={score.calendly ? ensureHttps(score.calendly) : calendlyFallback}
         />
       ) : (
         <LowLeadFlow
