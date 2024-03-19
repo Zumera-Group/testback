@@ -17,7 +17,7 @@ export const Result: React.FC<{ questionnaire: any }> = (questionnaire) => {
   const { score, error } = useLoadScore();
 
   useEffect(() => {
-    if (!score || !score.avg || score?.avg < 5000000) {
+    if (!score || !score.avg || score?.avg < 10000000) {
       setShowAppointmentBooking(false);
     } else {
       setShowAppointmentBooking(true);
