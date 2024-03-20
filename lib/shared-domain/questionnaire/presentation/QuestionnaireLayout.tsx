@@ -13,10 +13,7 @@ import Sidebar from './Sidebar';
 import { EnvironmentService } from 'environment.service';
 import { uuid } from 'uuidv4';
 import { qLogs } from '../application/log';
-import {
-  useLeadHistory,
-  useSalesforceAnswerSync,
-} from '../application/useSalesforceAnswerSync';
+import { useLeadHistory, useSalesforceAnswerSync } from '../application/useSalesforceAnswerSync';
 import { useRouter } from 'next/router';
 import PageHeader from 'lib/shared-domain/page/presentation/PageHeader';
 import { SCREEN_SIZE_MD } from 'lib/constants';
@@ -345,6 +342,9 @@ const QuestionnaireLayout: React.FC<{
                       />
                     </div>
                   </GridColumn>
+                  {renderResultModules && !isResultsCompactOnMobile && (
+                    <Checkmarks result={result} />
+                  )}
                 </Grid>
               </Container>
             </Section>
