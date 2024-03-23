@@ -6,25 +6,26 @@ import { useLoadScore } from 'lib/shared-domain/questionnaire/presentation/Resul
 import { HighLeadFlow } from 'lib/shared-domain/questionnaire/presentation/Result/components/HighLeadFlow';
 import { LowLeadFlow } from 'lib/shared-domain/questionnaire/presentation/Result/components/LowLeadFlow';
 import { ensureHttps } from 'lib/shared-domain/questionnaire/presentation/Result/helpers';
+import {Questionnaire, TQuestionnaireResultPageScenario} from '../../domain';
 
 const t = getTranslateByScope('result');
 
 const calendlyFallback = process.env.NEXT_PUBLIC_CALCULATOR_CALENDLY_FALLBACK;
 
-export const Result: React.FC<{ questionnaire: any }> = (questionnaire) => {
-  const resultScreenCopy = questionnaire.questionnaire.resultScreenCopy;
+export const Result: React.FC<{ questionnaire: Questionnaire }> = ({questionnaire}) => {
+  const {resultPageScenario, resultScreenCopy} = questionnaire;
   const [showAppointmentBooking, setShowAppointmentBooking] = useState(false);
   const { score, error } = useLoadScore();
 
   useEffect(() => {
-    if (!score || !score.avg || score?.avg < 10000000) {
-      setShowAppointmentBooking(false);
-    } else {
+    const isHighValueLead = Boolean(score && score.avg && score.avg >= 10000000);
+
+    if (isHighValueLead && (!resultPageScenario || resultPageScenario === TQuestionnaireResultPageScenario.calendyForHighLeadsFormForOthers)) {
       setShowAppointmentBooking(true);
+    } else {
+      setShowAppointmentBooking(false);
     }
-
-
-  }, [score]);
+  }, [score, resultPageScenario]);
 
   if (error) {
     return <QuestionText title={t('loading.error')} />;

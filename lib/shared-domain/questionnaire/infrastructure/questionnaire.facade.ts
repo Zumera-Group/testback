@@ -16,6 +16,7 @@ const queryQuestionnaire = (
   questionnaireName,
   variantOfTheResultPage,
   isNoah,
+  resultPageScenario,
   resultScreenCopy {
     ...,
     sideBar {
