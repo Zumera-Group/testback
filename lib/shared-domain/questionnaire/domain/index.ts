@@ -192,6 +192,10 @@ type PageContent = {
   logoBarSection: LogoBarSection;
 };
 
+export enum TQuestionnaireResultPageScenario {
+  calendyForHighLeadsFormForOthers = 'calendyForHighLeadsFormForOthers',
+  formForAll = 'formForAll'
+}
 
 export interface Questionnaire {
   resultScreenCopy: any;
@@ -220,6 +224,7 @@ export interface Questionnaire {
   };
   preventIndexing?: boolean;
   isNoah: boolean;
+  resultPageScenario: null | TQuestionnaireResultPageScenario;
   questionsByCategory: Category[];
   sectorSpecific: SectorSpecific;
   checkmarkTexts: string[];

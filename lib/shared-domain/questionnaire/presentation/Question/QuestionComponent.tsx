@@ -3,7 +3,7 @@ import { useValuationStore } from 'lib/shared-domain/questionnaire/store';
 import { useSalesforceAnswerSync } from '../../application/useSalesforceAnswerSync';
 import { INDUSTRY_QUESTION_ID, questions, SECTOR_QUESTION_ID } from '../questions';
 import { Result } from '../Result';
-import { Question } from '../../domain';
+import {Question, Questionnaire} from '../../domain';
 import { SectorSpecificEntry } from './SectorSpecificEntry';
 import { qLogs } from '../../application/log';
 import { t, useQuestionnaireRouter } from './index';
@@ -17,7 +17,7 @@ export const QuestionComponent: React.FC<{
   currentPos: number;
   refEl: any;
   isNoah: any;
-  selectedQuestionnaire: any;
+  selectedQuestionnaire: Questionnaire;
 }> = ({
   sectorSpecificQuestions,
   sectors,
