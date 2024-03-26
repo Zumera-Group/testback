@@ -1,8 +1,6 @@
-import ErrorPage from 'next/error';
 import React, { useEffect } from 'react';
 import { fetchSiteSettings } from 'lib/shared-domain/page/application/useGetSiteSettings';
 import { SiteSettings } from 'lib/shared-domain/page/domain';
-import { VTLanding } from '../../lib/shared-domain/valuation-tool/domain/index';
 import { useRouter } from 'next/router';
 import { usePreviewSubscription } from '../../lib/sanity';
 import { filterDataToSingleItem } from '../../lib/shared-domain/page/infrastructure/page.facade';
@@ -11,7 +9,6 @@ import { ErrorTrackingBoundary } from 'lib/ErrorTrackingBoundary';
 import { SharedContentContext } from 'lib/shared-domain/page/infrastructure/sharedContentContext';
 import { SharedContentFacade } from 'lib/shared-domain/page/infrastructure/sharedContent.facade';
 import {
-  REVALIDATE_ON_FAILURE_TIME_IN_SECONDS,
   REVALIDATE_ON_SUCCESS_IN_SECONDS,
 } from '../../lib/shared-domain/page/constants';
 import { fetchLanding } from 'lib/shared-domain/landings/application/useGetVTLanding';

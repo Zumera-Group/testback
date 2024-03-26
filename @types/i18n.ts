@@ -9,3 +9,12 @@ export interface ILangRef {
     current: string
   }
 }
+
+export interface I18nBase {
+  _id: string;
+  _lang: string;
+  slug: {
+    current: string;
+  };
+  _langRefs?: ILangRef[];
+}

@@ -2,8 +2,7 @@ import { Locale } from 'lib/locale';
 import { SanityService } from 'lib/services/sanity.service';
 import { Sector } from '../../page/domain/index';
 import {
-  filterDataToSingleItem,
-  getOtherLangSlugQuery,
+  filterDataToSingleItem
 } from '../../page/infrastructure/page.facade';
 import { SERVER_FETCHING_ERROR } from '../../page/constants';
 
@@ -114,11 +113,33 @@ const querySectorDetailContent = (
 const querySectorDetail = (
   lang,
   slug,
-  otherLangSlugQuery,
-) => `*[_type == "sector" && slug.current == "${slug}" && _lang == "${lang}"] {
+  otherLangSlugQuery = null
+) => {
+  //just for back compatibility
+  let queryOtherLangSlug = '';
+  if (otherLangSlugQuery) {
+    queryOtherLangSlug = `, "queryOtherLangSlug": ${otherLangSlugQuery}`
+  }
+
+  let query = `*[_type == "sector" && slug.current == "${slug}" && _lang == "${lang}"] {
   ...,
   _id,
   _lang,
+  _langRefs[] -> {
+    _id,
+    _lang,
+    slug
+  },
+  __i18n_base -> {
+    _id,
+    _lang,
+    slug,
+    _langRefs[] -> {
+      _id,
+      _lang,
+      slug
+    }
+  },
   name,
   graph->{
     iconImage{
@@ -244,9 +265,11 @@ const querySectorDetail = (
         url
       },
     }
-  },
-  "queryOtherLangSlug": ${otherLangSlugQuery},
+  }${queryOtherLangSlug},
 }`;
+
+  return query;
+};
 
 export class SectorFacade {
   constructor(private readonly sanityService = new SanityService()) {}
@@ -259,7 +282,7 @@ export class SectorFacade {
     const query = querySectorDetail(
       this.sanityService.getSanityLocale(lang),
       slug,
-      getOtherLangSlugQuery(lang, 'sector'),
+      // getOtherLangSlugQuery(lang, 'sector'),
     );
     const data = await this.sanityService.fetch(query, preview);
     if (!data) {
