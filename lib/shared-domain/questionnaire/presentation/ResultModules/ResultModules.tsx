@@ -13,22 +13,6 @@ const ResultModules = ({ result, isResultsCompactOnMobile }) => {
 
   return (
     <div className={styles.root}>
-      {/* <Section bg={'primary'} color={'white'} size="sm">
-       <Grid>
-       {result?.greenCheckmarkTexts?.map((mark) => (
-       <GridColumn
-       sm={12}
-       md={6}
-       lg={3}
-       className={styles.checkmarkItem}
-       key={mark}
-       >
-       <img src="/calculator/checkmark.svg" />
-       <h4>{mark}</h4>
-       </GridColumn>
-       ))}
-       </Grid>
-       </Section> */}
       {result.logoBarSection && (
         <LogoBarSection specificContentModule={result.logoBarSection} />
       )}

@@ -10,7 +10,6 @@ import { SCREEN_SIZE_MD } from 'lib/constants';
 import { useMediaQuery } from 'lib/hooks/useMediaQuery';
 
 import { Container, Grid, GridColumn, Section } from 'components/Layout';
-import { TaxCalculatorQuestionnaire } from 'lib/shared-domain/tax-calculator/types';
 import { ProgressBarLine } from 'components/Calculator/ProgressBarLine';
 import TaxCalculatorSideBar from 'lib/shared-domain/tax-calculator/components/TaxCalculatorSideBar';
 import { useTaxQuestionnaire } from 'lib/shared-domain/tax-calculator/hooks/useTaxQuestionnaire';
@@ -22,6 +21,9 @@ import {
   useSetQuestionnaireLocaleToUseFori18n,
 } from 'lib/shared-domain/tax-calculator/hooks/useSetQuestionnaireLocaleToUseFori18n';
 import { useCookieSetup } from 'lib/shared-domain/tax-calculator/hooks/useCookieSetup';
+import ResultModules from 'lib/shared-domain/questionnaire/presentation/ResultModules';
+import { Checkmarks } from 'lib/shared-domain/questionnaire/presentation/Checkmarks';
+import { TaxCalculatorQuestionnaire } from 'lib/shared-domain/tax-calculator/types';
 
 
 const TaxCalculatorQuestionnaireLayout: React.FC<{
@@ -39,11 +41,13 @@ const TaxCalculatorQuestionnaireLayout: React.FC<{
   const isMobile = useMediaQuery(`(max-width: ${SCREEN_SIZE_MD})`);
   const {
     resultScreenCopy,
+    resultScreenModules,
     questionsByCategory,
     questionnaireName,
     seoDescription,
     seoImage,
     preventIndexing,
+    variantOfTheResultPage,
   } = taxQuestionnaire;
 
   const {
@@ -58,6 +62,9 @@ const TaxCalculatorQuestionnaireLayout: React.FC<{
   } = useTaxQuestionnaire({ questionsByCategory });
 
   const currentCategory = questionsByCategory?.[categoryIndex]?.categoryName ?? '';
+
+  const isResultsCompactOnMobile = variantOfTheResultPage === 'compact' && isMobile;
+
 
   return (
     <>
@@ -151,9 +158,23 @@ const TaxCalculatorQuestionnaireLayout: React.FC<{
                       />
                     }
                   </GridColumn>
+
+                  {isOnResultsScreen && (
+                    <Checkmarks
+                      isResultsCompactOnMobile={isResultsCompactOnMobile}
+                      result={resultScreenModules} />
+                  )}
+
                 </Grid>
               </Container>
             </Section>
+
+            {isOnResultsScreen && (
+              <ResultModules
+                isResultsCompactOnMobile={isResultsCompactOnMobile}
+                result={resultScreenModules} />
+            )}
+
           </main>
         </div>
       </PageTransition>

@@ -1,4 +1,4 @@
-import { Category } from 'lib/shared-domain/questionnaire/domain';
+import { Category, Questionnaire } from 'lib/shared-domain/questionnaire/domain';
 
 export interface TaxCalculatorQuestionnaire {
   _id: string;
@@ -16,6 +16,8 @@ export interface TaxCalculatorQuestionnaire {
   preventIndexing?: boolean;
   questionsByCategory: Category[];
   resultScreenCopy: ResultScreenCopy;
+  resultScreenModules: Questionnaire['result'];
+  variantOfTheResultPage: 'compact' | 'default';
 }
 
 interface ResultScreenCopy {

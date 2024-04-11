@@ -8,7 +8,79 @@ export const queryTaxCalculator = (
   "preventIndexing": preventIndexing,
   "questionnaireSlug": questionnaireSlug.current,
   "navigationCategories": navigationCategories[],
-  "resultScreenCopy": resultScreenCopy
+  "variantOfTheResultPage": variantOfTheResultPage,
+  resultScreenCopy {
+    ...,
+    sideBar {
+      ...,
+      bookletImage {
+        asset->{
+          url,
+          type
+        }
+      }
+    }
+  },
+  resultScreenModules {
+    greenCheckmarkTexts,
+    authors {
+      authorsTitle,
+      author1 -> {
+        jobTitle,
+        firstName,
+        lastName,
+        email,
+        slug,
+        calendlyURL,
+        _id,
+        title,
+        cardPicture {
+          ...
+          picture {
+            asset->{
+              url,
+              type
+            },
+          }
+        },
+      },
+      author2 -> {
+        jobTitle,
+        firstName,
+        lastName,
+        email,
+        slug,
+        calendlyURL,
+        _id,
+        title,
+        cardPicture {
+          ...
+          picture {
+            asset->{
+              url,
+              type
+            },
+          }
+        },
+      }
+    },
+    growthRatesTable,
+    heroSection,
+    logoBarSection{
+      title,
+      logos[]{
+        asset->{
+          url,
+          metadata{
+            dimensions{
+              height,
+              width
+            }
+          }
+        },
+      }
+    }
+  },
 }
 `;
 
