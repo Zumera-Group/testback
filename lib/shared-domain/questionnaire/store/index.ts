@@ -4,6 +4,9 @@ import { persist } from 'zustand/middleware';
 import { getTranslateByScope } from '../../../../translation/i18n';
 import { qLogs } from '../application/log';
 import { ExchangeRateService } from 'lib/shared-domain/salesforce/application/exchangeRate';
+import {IApiField} from "../../../../@types/api";
+import {IGetFieldsFilters} from "../../salesforce/infrastructure/types";
+import {SalesforceFacade} from "../../salesforce/infrastructure/salesforce.facade";
 
 const t = getTranslateByScope('sidebar');
 
@@ -50,6 +53,9 @@ interface ValuationState {
   setIndustrySheetName: (industrySheetName: string) => void;
   isFadingOut: boolean;
   setIsFadingOut: (arg: boolean) => void;
+  salesforceFields: {[name: string]: IApiField},
+  salesforceFieldsAreFetching: boolean,
+  fetchSalesforceFields: (filters?: IGetFieldsFilters) => Promise<void>;
 }
 
 /*
@@ -181,6 +187,30 @@ export const useValuationStore = create<ValuationState>(
       setStep: (mainStep, subStep) => {
         set({ mainStep, subStep });
       },
+      salesforceFields: {},
+      salesforceFieldsAreFetching: false,
+      fetchSalesforceFields: async (filters?: IGetFieldsFilters) => {
+        if (get().salesforceFieldsAreFetching) {
+          return;
+        }
+
+        set({salesforceFieldsAreFetching: true});
+        try {
+          const facade = new SalesforceFacade();
+          const fields = await facade.getFields(filters);
+          const fieldsToSave: {[name: string]: IApiField} = {};
+          fields.forEach((field) => {
+            if (field.name) {
+              fieldsToSave[field.name] = field;
+            }
+          });
+
+          set({salesforceFields: fieldsToSave});
+        } catch (e) {
+          console.error(e);
+        }
+        set({salesforceFieldsAreFetching: false});
+      }
     }),
     {
       name: 'valuation-store',

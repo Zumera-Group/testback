@@ -12,6 +12,7 @@ import styles from './TextInput.module.scss';
 import BackButton from 'components/Calculator/BackButton/BackButton';
 import { useMediaQuery } from 'lib/hooks/useMediaQuery';
 import { SCREEN_SIZE_MD } from 'lib/constants';
+import {useValuationStore} from '../../../store';
 
 const t = getTranslateByScope('answerTypes.textInput');
 
@@ -21,11 +22,12 @@ export const TextInput: React.FC<{
   onPrevQuestion: () => void;
   currentPos: number;
 }> = ({ question, onNextQuestion, onPrevQuestion, currentPos }) => {
+  const { salesforceFields } = useValuationStore();
   const { getAnswer, setAnswer } = useAnswers(question);
   const isMobile = useMediaQuery(`(max-width: ${SCREEN_SIZE_MD})`);
   const placeholder =
     question.answerSelector?.textInput || t('basePlaceholder');
-
+  console.log('---question:', question, salesforceFields)
   return (
     <>
       {isMobile && !!onPrevQuestion && (
