@@ -25,6 +25,7 @@ import { Container, Grid, GridColumn, Section } from 'components/Layout';
 import { INDUSTRY_QUESTION_ID, SECTOR_QUESTION_ID } from './questions';
 import ResultModules from './ResultModules';
 import { Checkmarks } from './Checkmarks';
+import {useFetchFields} from './hooks/useFetchFields';
 
 const t = getTranslateByScope('timeEstimation');
 const tSidebar = getTranslateByScope('sidebar');
@@ -222,6 +223,8 @@ const QuestionnaireLayout: React.FC<{
       setIsLanding(false);
     }
   }, []);
+
+  useFetchFields();
 
   const isResultsCompactOnMobile =
     questionnaire?.variantOfTheResultPage === 'compact' && isMobile;
