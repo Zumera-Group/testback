@@ -12,6 +12,7 @@ interface Props {
   alignItems?: 'stretch' | 'center' | 'start' | 'end';
   fullWidth?: boolean;
   className?: string;
+  style?: object;
 }
 
 export const Grid: React.FC<Props> = ({

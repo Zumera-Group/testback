@@ -89,7 +89,7 @@ const WhitePaperModal: React.FC<{
       >
         <Close />
 
-        <Grid justifyContent={'center'} alignItems={'center'} fullWidth={true}>
+        <Grid justifyContent={'center'} alignItems={'center'} fullWidth={true} style={{height:'85%'}}>
           <GridColumn sm={12} md={12} lg={12}>
             <Grid
               justifyContent={'space-between'}

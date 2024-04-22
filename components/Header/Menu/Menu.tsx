@@ -65,7 +65,6 @@ export const Menu = ({ navigation }: { navigation: HeaderMenuItem[] }) => {
   const router = useRouter();
   const linkWithCurrentLocale = useLinkWithCurrentLocale();
 
-  console.log(navigation);
   const isActive = (slug: string) => {
     return router.query.slug === slug;
   };

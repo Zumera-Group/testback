@@ -24,7 +24,7 @@ import { fetchBlogDetailContent } from 'lib/shared-domain/blogArticle/applicatio
 const PER_PAGE = 19;
 
 export const queryBlogArticles = (lang, pageIndex, perPage) => `{
-  "items": *[_type == "blogValToolArticle" && _lang == "${lang}" || _type == "blogArticle" && _lang == "${lang}"] | order(date desc) [(${pageIndex} * ${perPage})...(${pageIndex} + 1) * ${perPage}] {
+  "items": *[(_type == "blogValToolArticle" && _lang == "${lang}" || _type == "blogArticle" && _lang == "${lang}") && (!defined(isIndexable) || isIndexable)] | order(date desc) [(${pageIndex} * ${perPage})...(${pageIndex} + 1) * ${perPage}] {
     articleTitle,
     date,
     name,
@@ -38,9 +38,10 @@ export const queryBlogArticles = (lang, pageIndex, perPage) => `{
       },
     },
   },
-  "blogTotal": count(*[_type == "blogArticle" && _lang == "${lang}"]),
-  "valToolBlogTotal": count(*[_type == "blogValToolArticle" && _lang == "${lang}"]),
+  "blogTotal": count(*[_type == "blogArticle" && _lang == "${lang}" && (!defined(isIndexable) || isIndexable)]),
+  "valToolBlogTotal": count(*[_type == "blogValToolArticle" && _lang == "${lang}" && (!defined(isIndexable) || isIndexable)]),
 }`;
+
 export async function getStaticProps({ locale, params, preview = false }) {
   const sanrityService = new SanityService();
   const extraQuery = `

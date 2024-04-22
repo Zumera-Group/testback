@@ -6,7 +6,6 @@ import { Icon } from 'components/Icon';
 import ArticleBox from '../ArticleBox';
 
 import styles from './Articles.module.scss';
-import Pagination from './Pagination';
 import { getBuiltLink } from 'lib/links';
 
 interface Props {
