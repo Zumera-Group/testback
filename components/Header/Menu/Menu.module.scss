@@ -21,10 +21,80 @@
 }
 
 .item {
+  position: relative;
   text-align: center;
   margin: 0 $gutter * .85;
   @include breakpoint-up(lg) {
     margin: 0 $gutter * 1.25;
+  }
+
+  .dropdown {
+    position: relative;
+
+    .dropdownToggle {
+      // Styles for the dropdown toggle button
+      background-color: transparent;
+      border: none;
+      color: inherit;
+      cursor: pointer;
+      font-size: inherit;
+      padding: 0;
+      display: flex;
+      align-items: center;
+
+      &:focus {
+        outline: none;
+      }
+
+      .dropdownIcon {
+        // Styles for the dropdown icon
+        margin-left: 5px;
+        font-size: 0.8em;
+      }
+    }
+
+    .dropdownMenu {
+      // Styles for the dropdown menu
+      position: absolute;
+      top: 30px;
+      right: 0;
+      background-color: #e3dfe3;
+      border: 1px solid #ccc;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      list-style: none;
+      margin: 0;
+      min-width: auto;
+      z-index: 1;
+      border-radius: 16px;
+      display: flex;
+      flex-wrap: nowrap;
+      flex-direction: column;
+      gap: 12px;
+      padding: 10px 6px;
+
+      .dropdownItem {
+        // Styles for the dropdown items
+        display: inline-flex;
+        gap: 10px;
+        text-align: left;
+        white-space: nowrap;
+
+        .dropdownLink {
+          // Styles for the dropdown links
+          padding: 6px 10px;
+          color: $secondary;
+          text-decoration: none;
+          display: block;
+          width: 100%;
+          border-radius: 8px;
+
+          &:hover {
+            background-color: $secondary;
+            color: $white;
+          }
+        }
+      }
+    }
   }
 }
 

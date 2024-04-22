@@ -54,6 +54,27 @@ export interface IAnnouncementTopBanner {
   isEnabled: boolean;
 }
 
+export type HeaderMenuItem = {
+  name: string;
+  type: 'direct' | 'dropdown';
+  page?: {
+    slug: {
+      current: string;
+    };
+    _type: string;
+  };
+  dropdownItems?: {
+    name: string;
+    page: {
+      slug: {
+        current: string;
+      };
+      _type: string;
+    };
+  }[];
+};
+
+
 export interface SiteSettings {
   announcementTopBanner: IAnnouncementTopBanner;
   isUnderSecretKey: boolean;
@@ -109,14 +130,7 @@ export interface SiteSettings {
       current: string;
     };
   };
-  headerMenu: {
-    name: string;
-    page: {
-      slug: {
-        current: string;
-      };
-    };
-  }[];
+  headerMenu: HeaderMenuItem[];
   hamburgerMenu: {
     name: string;
     type: 'normal' | 'sectors' | 'services' | 'blogValToolArticle';
@@ -429,6 +443,8 @@ export interface Service {
   calculatorTeaserSection?: ServiceCalculatorTeaserSection;
   _id: string;
   _lang: string;
+  _langRefs?: ILangRef[];
+  __i18n_base?: I18nBase;
   slug: {
     current: string;
   };
