@@ -5,7 +5,6 @@ export const useFetchFields = () => {
   const {questionnaire, fetchSalesforceFields} = useValuationStore();
 
   useEffect(() => {
-    console.log('changed: questionnaire?.questionsByCategory', questionnaire?.questionsByCategory);
     if (Array.isArray(questionnaire?.questionsByCategory)) {
       const fieldNames = [];
       questionnaire?.questionsByCategory.forEach((category) => {
@@ -18,11 +17,7 @@ export const useFetchFields = () => {
         }
       });
 
-      // console.log('fieldNames:', fieldNames);
       fetchSalesforceFields({only_text_fields: '1', fields: fieldNames});
-      // facade.getFields({only_text_fields: '1', fields: fieldNames}).then((fields) => {
-      //   console.log('fields:', fields);
-      // })
     }
   }, [questionnaire?.questionsByCategory, fetchSalesforceFields]);
 };

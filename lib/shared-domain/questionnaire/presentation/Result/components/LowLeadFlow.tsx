@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { AnimateIn } from 'lib/shared-domain/questionnaire/presentation/Result/components/AnimateIn';
 import { getTranslateByScope } from 'translation/i18n';
 import { useRouter } from 'next/router';
@@ -19,6 +19,8 @@ import {
 
 
 const t = getTranslateByScope('result');
+const tForm = getTranslateByScope('form');
+
 export const LowLeadFlow: React.FC<{
   score: { points: string; percentage: string; avg: number };
   resultScreenCopy: any;
@@ -26,10 +28,11 @@ export const LowLeadFlow: React.FC<{
   const { syncCurrentAnswersToSalesforce } = useSalesforceAnswerSync();
   const { syncLeadToSalesforce } = useSalesforceLeadSync();
   const [isFormSubmitted, setIsFormSubmitted] = useState(false);
-  const { getAnswer, setAnswer, uniqueId } = useValuationStore();
-  const [checkboxIsChecked, setCheckboxIsChecked] = React.useState(false);
-  const [pressed, setPressed] = React.useState(false);
+  const { getAnswer, setAnswer, uniqueId, addBgPromise } = useValuationStore();
+  const [checkboxIsChecked, setCheckboxIsChecked] = useState(false);
+  const [pressed, setPressed] = useState(false);
   const { locale } = useRouter();
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
 
   const SEND_IS_ALLOWED =
     checkboxIsChecked &&
@@ -41,24 +44,35 @@ export const LowLeadFlow: React.FC<{
   const formFields = resultScreenCopy.formFields;
   const questionTitle = resultScreenCopy.questionTitle;
 
-  const onSend = async (e) => {
+  const submitData = useCallback(async () => {
+    setIsSubmitting(true);
+    try {
+      await syncCurrentAnswersToSalesforce(
+        uniqueId,
+        'lastQuestion',
+        100,
+        'resultScreen',
+        'lastQuestion',
+      );
+      await syncLeadToSalesforce(uniqueId);
+      setIsFormSubmitted(true);
+    } catch (e) {
+      console.error('Error on form submission:', e);
+    }
+    setIsSubmitting(false);
+  }, [setIsSubmitting, syncCurrentAnswersToSalesforce, syncLeadToSalesforce, setIsFormSubmitted]);
+
+  const onSend = useCallback((e) => {
     e.preventDefault();
     setPressed(true);
 
     if (!SEND_IS_ALLOWED) {
       return;
     }
-    await syncCurrentAnswersToSalesforce(
-      uniqueId,
-      'lastQuestion',
-      100,
-      'resultScreen',
-      'lastQuestion',
-    );
-    await syncLeadToSalesforce(uniqueId);
 
-    setIsFormSubmitted(true);
-  };
+    const promise = submitData();
+    addBgPromise(promise);
+  }, [submitData, setPressed, SEND_IS_ALLOWED]);
 
   const getEmailError = () => {
     if (!pressed) return null;
@@ -176,12 +190,12 @@ export const LowLeadFlow: React.FC<{
               <Button
                 type="submit"
                 variant="primary"
-                disabled={!checkboxIsChecked}
+                disabled={!checkboxIsChecked || isSubmitting}
                 onDark
                 hideIcon
                 classes={styles.submitButton}
               >
-                {formFields.buttonText}
+                {isSubmitting ? tForm('loading') : formFields.buttonText}
               </Button>
               <div
                 className="trustedsite-trustmark"

@@ -4,9 +4,10 @@ import { persist } from 'zustand/middleware';
 import { getTranslateByScope } from '../../../../translation/i18n';
 import { qLogs } from '../application/log';
 import { ExchangeRateService } from 'lib/shared-domain/salesforce/application/exchangeRate';
-import {IApiField} from "../../../../@types/api";
-import {IGetFieldsFilters} from "../../salesforce/infrastructure/types";
-import {SalesforceFacade} from "../../salesforce/infrastructure/salesforce.facade";
+import {IApiField} from '../../../../@types/api';
+import {IGetFieldsFilters} from '../../salesforce/infrastructure/types';
+import {SalesforceFacade} from '../../salesforce/infrastructure/salesforce.facade';
+import {IGlobalAlert} from '../../../../@types/alert';
 
 const t = getTranslateByScope('sidebar');
 
@@ -56,6 +57,11 @@ interface ValuationState {
   salesforceFields: {[name: string]: IApiField},
   salesforceFieldsAreFetching: boolean,
   fetchSalesforceFields: (filters?: IGetFieldsFilters) => Promise<void>;
+  globalAlert: IGlobalAlert | null;
+  setGlobalAlert: (alert: IGlobalAlert | null) => void;
+  bgPromises: Promise<any>[];
+  addBgPromise: (promise: Promise<any>) => void;
+  cleanBgPromises: () => void;
 }
 
 /*
@@ -210,6 +216,19 @@ export const useValuationStore = create<ValuationState>(
           console.error(e);
         }
         set({salesforceFieldsAreFetching: false});
+      },
+      globalAlert: null,
+      setGlobalAlert: (globalAlert: null|IGlobalAlert) => {
+        set({globalAlert});
+      },
+      bgPromises: [],
+      addBgPromise: (promise: Promise<any>) => {
+        const existingBgPromises = get().bgPromises;
+        const bgPromises = [].concat(existingBgPromises, promise);
+        set({bgPromises});
+      },
+      cleanBgPromises: () => {
+        set({bgPromises: []});
       }
     }),
     {
