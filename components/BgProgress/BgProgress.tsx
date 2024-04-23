@@ -2,7 +2,7 @@
 
 import React, {useEffect, useState} from 'react';
 import {useValuationStore} from '../../lib/shared-domain/questionnaire/store';
-import LinearProgress from '@mui/material/LinearProgress';
+// import LinearProgress from '@mui/material/LinearProgress';
 import styles from './BgProgress.module.scss';
 import clsx from 'clsx';
 
@@ -27,7 +27,7 @@ export default function BgProgress() {
     <div className={clsx(styles.wrapper, {
       [styles.hideWrapper]: !showLoading
     })}>
-      <LinearProgress color="secondary" />
+      {/*<LinearProgress color="secondary" />*/}
     </div>
   );
 }

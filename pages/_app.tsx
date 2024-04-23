@@ -11,7 +11,7 @@ import '../styles/globals.scss';
 import localFont from '@next/font/local';
 import { IconSprite } from 'components/Icon';
 import GlobalAlert from '../components/GlobalAlert/GlobalAlert';
-import BgProgress from "../components/BgProgress/BgProgress";
+// import BgProgress from "../components/BgProgress/BgProgress";
 
 const INTERCOM_APP_ID = 'lwrptr1h';
 
@@ -108,7 +108,7 @@ function MyApp({ Component, pageProps, router }) {
         </main>
       </IntercomProvider>
       <GlobalAlert />
-      <BgProgress />
+      {/*<BgProgress />*/}
       <Script
         strategy="lazyOnload"
         src="https://assets.calendly.com/assets/external/widget.js"
