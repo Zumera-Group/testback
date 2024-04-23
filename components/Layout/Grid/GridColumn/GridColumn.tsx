@@ -1,4 +1,5 @@
 import styles from '../Grid.module.scss';
+import {ReactNode} from 'react';
 
 interface Props {
   xs?: number;
@@ -7,6 +8,7 @@ interface Props {
   lg: number;
   xl?: number;
   className?: string;
+  children?: ReactNode|ReactNode[];
 }
 
 export const GridColumn: React.FC<Props> = ({
