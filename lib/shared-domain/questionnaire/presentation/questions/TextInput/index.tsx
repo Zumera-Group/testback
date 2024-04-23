@@ -29,7 +29,7 @@ export const TextInput: React.FC<{
   const { getAnswer, setAnswer } = useAnswers(question);
   const isMobile = useMediaQuery(`(max-width: ${SCREEN_SIZE_MD})`);
   const placeholder = question.answerSelector?.textInput || t('basePlaceholder');
-  console.log('---question:', question)
+
   const {field} = useMemo(() => {
     let field: IApiField|null = null;
     if (question.salesforceId && salesforceFields && question.salesforceId in salesforceFields) {
