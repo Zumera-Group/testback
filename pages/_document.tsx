@@ -31,12 +31,12 @@ export default class MyDocument extends Document {
         <body>
           <Main />
           <NextScript />
-          {/*<Script*/}
-          {/*  // strategy="worker"*/}
-          {/*  strategy="beforeInteractive"*/}
-          {/*  src="https://consent.cookiefirst.com/banner.js"*/}
-          {/*  data-cookiefirst-key="187e6cb5-6683-48db-9a01-a5892c9f29d2"*/}
-          {/*/>*/}
+          <Script
+            // strategy="worker"
+            strategy="beforeInteractive"
+            src="https://consent.cookiefirst.com/banner.js"
+            data-cookiefirst-key="187e6cb5-6683-48db-9a01-a5892c9f29d2"
+          />
         </body>
       </Html>
     );
