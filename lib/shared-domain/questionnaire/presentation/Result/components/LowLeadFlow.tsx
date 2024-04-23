@@ -71,7 +71,7 @@ export const LowLeadFlow: React.FC<{
     }
 
     const promise = submitData();
-    addBgPromise(promise);
+    // addBgPromise(promise);
   }, [submitData, setPressed, SEND_IS_ALLOWED]);
 
   const getEmailError = () => {
