@@ -34,8 +34,6 @@ export const WhitePaperDownloadSection: React.FC<{
           ...specificContentModule.whitePaperFormFields,
           whitePaperForm: {
             ...specificContentModule.whitePaperFormFields,
-            numberLabel:
-              specificContentModule.whitePaperFormFields.phoneNumberLabel,
             submitLabel: sharedContent.downloadButtonContent.buttonCaption,
           },
         },

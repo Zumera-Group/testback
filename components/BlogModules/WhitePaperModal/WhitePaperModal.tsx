@@ -131,7 +131,6 @@ const WhitePaperModal: React.FC<{
                   errorMessage={whitePaperForm?.errorMessage}
                   downloadAgain={whitePaperDownload?.downloadAgain}
                   file={blogArticle?.whitePaperDownload?.pdfURL}
-                  phoneNumber={whitePaperForm?.numberLabel}
                   variant={'blog'}
                   sectorName={''}
                 />

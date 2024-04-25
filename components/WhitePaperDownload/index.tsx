@@ -62,7 +62,6 @@ export const WhitePaperDownload: React.FC<{
                 errorMessage={whitePaperForm?.errorMessage}
                 downloadAgain={whitePaperDownload?.downloadAgain}
                 file={sector?.whitePaperDownload?.pdfURL}
-                phoneNumber={whitePaperForm?.numberLabel}
                 variant={variant}
                 sectorName={sector?.name}
               />
