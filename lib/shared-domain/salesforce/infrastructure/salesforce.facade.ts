@@ -1,6 +1,9 @@
 import { AxiosService } from 'lib/services/axios.service';
 import { MarketingParamsService } from '../application/marketingParamsService';
 import { logError } from 'lib/logError';
+import {IApiField} from '../../../../@types/api';
+import {createGetStr, TGetParams} from '../../../urlHelpers';
+import {IGetFieldsFilters} from './types';
 
 const BASE_URL = process.env.NEXT_PUBLIC_SALESFORCE_API_BASE_URL;
 const unformattedParams =
@@ -13,6 +16,7 @@ const endpoints = {
   createOrUpdateHistory: (id: string) => '/lead_entries/'+ id + '/lead_history',
   getLeadEntry: (id: string) => 'lead_entries/' + id,
   getLeadEntryScore: (id: string) => 'lead_entries/' + id + '/score',
+  getFields: '/salesforce'
 };
 
 const requestsConfig = {
@@ -239,6 +243,21 @@ export class SalesforceFacade {
       );
     } catch (e) {
       throw new Error(e);
+    }
+  }
+
+  async getFields(filters?: IGetFieldsFilters): Promise<IApiField[]> {
+    try {
+      const query = filters ? `?${createGetStr(filters as unknown as TGetParams)}` : '';
+      const result = (
+        await this.httpService.get(`${endpoints.getFields}${query}`, requestsConfig)
+      ) as unknown as {
+        data?: {fields: IApiField[], status: number}
+      };
+
+      return result?.data?.fields || [];
+    } catch (e) {
+      logError(e, { where: 'getFields' });
     }
   }
 }

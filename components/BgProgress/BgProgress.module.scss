@@ -1,0 +1,12 @@
+.wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  z-index: 1200;
+}
+
+.hideWrapper {
+  display: none;
+}

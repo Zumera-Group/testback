@@ -125,5 +125,11 @@
       "2": "Raising Series",
       "3": "Just curiosity"
     }
+  },
+  "form": {
+    "loading": "Loading..."
+  },
+  "validators": {
+    "maxLength": "The maximum length of the field is {{max}} symbols."
   }
 }

@@ -1,4 +1,5 @@
 import styles from './Grid.module.scss';
+import {ReactNode} from 'react';
 
 interface Props {
   as?: '' | 'section' | 'div' | 'article' | 'aside' | 'footer';
@@ -12,6 +13,7 @@ interface Props {
   alignItems?: 'stretch' | 'center' | 'start' | 'end';
   fullWidth?: boolean;
   className?: string;
+  children: ReactNode|ReactNode[];
   style?: object;
 }
 

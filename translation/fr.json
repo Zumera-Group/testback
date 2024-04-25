@@ -124,5 +124,11 @@
       "2": "Élever Série",
       "3": "Juste de la curiosité"
     }
+  },
+  "form": {
+    "loading": "Chargement..."
+  },
+  "validators": {
+    "maxLength": "La longueur maximale du champ est de {{max}} symboles."
   }
 }

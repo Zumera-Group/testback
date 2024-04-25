@@ -126,5 +126,11 @@
       "2": "Kapitalerhöhung",
       "3": "Reine Neugierde"
     }
+  },
+  "form": {
+    "loading": "Laden..."
+  },
+  "validators": {
+    "maxLength": "Die maximale Länge des Feldes beträgt {{max}} Symbole."
   }
 }
