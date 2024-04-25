@@ -9,8 +9,8 @@ import { ServiceTransactions } from './ServiceTransactions';
 import { ServiceSectors } from './ServiceSectors';
 import { ServiceProcess } from 'lib/shared-domain/services/presentation/ServiceProcess';
 import { SEO } from 'components/SEO';
-import { links } from 'lib/links';
-import { useRouter } from 'next/router';
+import {allLinks} from 'lib/links';
+// import { useRouter } from 'next/router';
 import { ServiceTabs } from 'lib/shared-domain/services/presentation/ServiceTabs';
 import {
   ContentModule,
@@ -22,6 +22,7 @@ import { Transaction } from 'lib/shared-domain/transactions/domain';
 import { ServiceTransactionShowcase } from 'lib/shared-domain/services/presentation/ServiceTransactionShowcase';
 import ContactUsSection from 'lib/shared-domain/page/presentation/contentModules/ContactUsSection';
 import { useFetchTransactions } from 'components/NewsArticle/NewsArticleMoreNews';
+import {useMakeAlternateHrefs} from "../../../hooks/useMakeAlternateHrefs";
 
 interface ServiceDetailProps {
   service: Service;
@@ -109,13 +110,18 @@ export const ServiceDetailLayout: React.FC<ServiceDetailProps> = ({
   const filteredTransactions: Transaction[] = transactions.filter(
     (t) => t.typeOfService && t.typeOfService._id === service._id,
   );
-  const { locale } = useRouter();
 
-  const otherLangSlug =
-    service?.queryOtherLangSlug?.slice(-1)[0]?.slug &&
-    links(locale === 'en' ? 'de' : 'en').services(
-      service?.queryOtherLangSlug?.slice(-1)[0] as any,
-    );
+  const {alternateHrefs} = useMakeAlternateHrefs({
+    doc: service,
+    urlPrefixes: getServiceUrlPrefixes()
+  });
+
+  // const { locale } = useRouter();
+  // const otherLangSlug =
+  //   service?.queryOtherLangSlug?.slice(-1)[0]?.slug &&
+  //   links(locale === 'en' ? 'de' : 'en').services(
+  //     service?.queryOtherLangSlug?.slice(-1)[0] as any,
+  //   );
 
   const contentModules =
     selectedTab?.contentModules?.map((c) => ContentModule.create(c)) || [];
@@ -128,11 +134,13 @@ export const ServiceDetailLayout: React.FC<ServiceDetailProps> = ({
         seoTitle={service?.name}
         seoDescription={service?.description}
         siteSettings={siteSettings}
+        langAlternates={alternateHrefs}
       />
       <PageHeader
         contentModules={contentModules}
         siteSettings={siteSettings}
-        otherLangSlug={otherLangSlug}
+        langAlternates={alternateHrefs}
+        // otherLangSlug={otherLangSlug}
       />
       <PageTransition>
         <ServiceHero service={service} />
@@ -160,4 +168,14 @@ export const ServiceDetailLayout: React.FC<ServiceDetailProps> = ({
       <PageFooter siteSettings={siteSettings} />
     </div>
   );
+};
+
+const getServiceUrlPrefixes = () => {
+  const out: {[key: string]: string} = {};
+
+  for (const [key, val] of Object.entries(allLinks.services)) {
+    out[key] = `/${val}`;
+  }
+
+  return out;
 };

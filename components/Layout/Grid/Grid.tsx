@@ -14,6 +14,7 @@ interface Props {
   fullWidth?: boolean;
   className?: string;
   children: ReactNode|ReactNode[];
+  style?: object;
 }
 
 export const Grid: React.FC<Props> = ({

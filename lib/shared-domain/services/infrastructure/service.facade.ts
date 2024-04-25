@@ -2,8 +2,7 @@ import { Locale } from 'lib/locale';
 import { SanityService } from 'lib/services/sanity.service';
 import { Service } from '../../page/domain/index';
 import {
-  filterDataToSingleItem,
-  getOtherLangSlugQuery,
+  filterDataToSingleItem
 } from '../../page/infrastructure/page.facade';
 import {
   contentModulesQuery,
@@ -67,11 +66,32 @@ const queryAll = (lang) => `*[_type == "service" && _lang == "${lang}"] {
 const queryOne = (
   lang,
   slug,
-  otherLangSlugQuery,
-) => `*[_type == "service" && slug.current == "${slug}" &&  _lang == "${lang}"] {
+  otherLangSlugQuery = null
+) => {
+  let queryOtherLangSlug = '';
+  if (otherLangSlugQuery) {
+    queryOtherLangSlug = `, "queryOtherLangSlug": ${otherLangSlugQuery}`
+  }
+
+  let query = `*[_type == "service" && slug.current == "${slug}" &&  _lang == "${lang}"] {
   ...,
   _id,
   _lang,
+  _langRefs[] -> {
+    _id,
+    _lang,
+    slug
+  },
+  __i18n_base -> {
+    _id,
+    _lang,
+    slug,
+    _langRefs[] -> {
+      _id,
+      _lang,
+      slug
+    }
+  },
   name,
   description,
 
@@ -79,9 +99,12 @@ const queryOne = (
     _key,
     title,
     ${contentModulesQuery(serviceDetailSectionsReferencesQuery)}
-  },
-  "queryOtherLangSlug": ${otherLangSlugQuery},
-}`;
+  }${queryOtherLangSlug},
+}
+  `;
+
+  return query;
+};
 // ${serviceDetailSectionsQuery},
 
 export class ServiceFacade {
@@ -103,7 +126,7 @@ export class ServiceFacade {
     const query = queryOne(
       this.sanityService.getSanityLocale(lang),
       slug,
-      getOtherLangSlugQuery(lang, 'service'),
+      // getOtherLangSlugQuery(lang, 'service'),
     );
     const data = await this.sanityService.fetch(query, preview);
     if (!data) {

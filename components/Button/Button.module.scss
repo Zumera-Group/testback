@@ -124,21 +124,21 @@
 
   &__download {
     @include button-variant(
-      rgba($secondary, 0),
       $secondary,
       $secondary,
+      $white,
       $btn-box-shadow,
-      rgba($secondary, 1),
-      $secondary,
+      $primary-alt,
+      $primary-alt,
       $white,
       $btn-hover-box-shadow,
-      darken($secondary, 5%),
-      darken($secondary, 5%),
+      darken($primary-alt, 2.5%),
+      darken($primary-alt, 2.5%),
       $white,
       $btn-active-box-shadow,
-      rgba($black, 0),
       $black,
       $black,
+      $white,
       none
     );
 

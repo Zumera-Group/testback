@@ -84,9 +84,18 @@ export const querySiteSettings = (
   headerMenu[] {
     ...,
     name,
-    page->{
+    type,
+    page -> {
       slug,
-       _type
+      _type
+    },
+    dropdownItems[] {
+      ...,
+      name,
+      page -> {
+        slug,
+        _type
+      }
     }
   },
   hamburgerMenu[] {

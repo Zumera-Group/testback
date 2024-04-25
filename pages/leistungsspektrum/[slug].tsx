@@ -10,7 +10,9 @@ import { useRouter } from 'next/router';
 import { filterDataToSingleItem } from '../../lib/shared-domain/page/infrastructure/page.facade';
 import { usePreviewSubscription } from '../../lib/sanity';
 
-import { REVALIDATE_ON_FAILURE_TIME_IN_SECONDS } from '../../lib/shared-domain/page/constants';
+import {
+  REVALIDATE_ON_SUCCESS_IN_SECONDS
+} from '../../lib/shared-domain/page/constants';
 import { useEffect, useState } from 'react';
 import { SecretKeyLockScreen } from 'components/SecretKeyLockScreen';
 
@@ -71,7 +73,7 @@ export async function getStaticProps({
         siteSettings,
         sharedContent,
       },
-      revalidate: REVALIDATE_ON_FAILURE_TIME_IN_SECONDS,
+      revalidate: REVALIDATE_ON_SUCCESS_IN_SECONDS,
     };
   } catch (e) {
     console.log(e);

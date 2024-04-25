@@ -1,17 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { Button } from 'components/Button';
-import { FormGroup, Input, Checkbox, Label } from 'components/Form';
+import { Checkbox, FormGroup, Input } from 'components/Form';
 import styles from './WhitePaperForm.module.scss';
-import dynamic from 'next/dynamic';
-import { useRouter } from 'next/router';
 import { Icon } from 'components/Icon';
 import Link from 'next/link';
 import { useLinkWithCurrentLocale } from 'lib/shared-domain/useLinkWithCurrentLocale';
 import { MarketingParamsService } from 'lib/shared-domain/salesforce/application/marketingParamsService';
 import { useGetURL } from 'lib/hooks/useGetURL';
-import { getDefaultCountry } from 'lib/links';
 
-const PhoneInput = dynamic(() => import('react-phone-number-input'));
 
 export const WhitePaperForm = ({
   buttonText,
@@ -21,12 +17,10 @@ export const WhitePaperForm = ({
   successMessage,
   errorMessage,
   downloadAgain,
-  phoneNumber,
   file,
   variant,
   sectorName,
 }) => {
-  const router = useRouter();
   const [checkboxIsChecked, setCheckboxIsChecked] = useState(false);
   const [isFormSubmitted, setIsFormSubmitted] = useState(false);
   const linkWithCurrentLocale = useLinkWithCurrentLocale();
@@ -37,14 +31,9 @@ export const WhitePaperForm = ({
     checkboxPrivacyPage,
   } = termsAndConditionsLabel;
 
-  const [phoneValue, setPhoneValue] = useState();
-  const [countryValue, setCountryValue] = useState(
-    router.locale === 'en' ? 'United Kingdom' : router.locale === 'fr' ? 'France' : 'Germany',
-  );
   const [isSuccess, setIsSuccess] = useState(null);
   const [gclid, setGCLID] = useState(null);
   const DOMAIN = process.env.NEXT_PUBLIC_EXTERNAL_PDF_HOST || '';
-  const PhoneInputComponent = PhoneInput as any;
 
   useEffect(() => {
     const marketingParams = MarketingParamsService.retrieve();
@@ -52,13 +41,6 @@ export const WhitePaperForm = ({
     const gclidValue = hasGclid ? marketingParams['gclid'] : '';
     setGCLID(gclidValue);
   }, []);
-
-  const handleCountryChange = () => {
-    const country = document?.getElementsByClassName('PhoneInputCountrySelect');
-    const countrySelect = country[0] as HTMLSelectElement | undefined;
-    const countryContent = countrySelect?.selectedOptions[0]?.textContent;
-    setCountryValue(countryContent);
-  };
 
   const downloadFile = async () => {
     const pdfPath = file.substring(DOMAIN.length);
@@ -82,9 +64,7 @@ export const WhitePaperForm = ({
       company: `${inputs['whitePaperFirstLastName'].value.split(' ')[0]} ${
         inputs['whitePaperFirstLastName'].value.split(' ')[1]
       }`,
-      country: countryValue,
       email: inputs['whitePaperEmail'].value,
-      phone: phoneValue,
       variant: variant,
       sectorName: sectorName,
       gclid: gclid,
@@ -137,18 +117,6 @@ export const WhitePaperForm = ({
               type={'email'}
               required={true}
               placeholder={emailPlaceholder}
-            />
-          </FormGroup>
-          <FormGroup classes={styles.phoneNum}>
-            <Label text={phoneNumber} required={true} />
-            <PhoneInputComponent
-              defaultCountry={getDefaultCountry(router.locale)}
-              international
-              placeholder="Enter phone number"
-              value={phoneValue}
-              countryCallingCodeEditable={false}
-              onChange={setPhoneValue}
-              onCountryChange={handleCountryChange}
             />
           </FormGroup>
           <FormGroup>

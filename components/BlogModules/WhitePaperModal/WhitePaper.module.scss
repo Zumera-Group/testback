@@ -26,6 +26,10 @@
   }
 }
 
+.formWrapper {
+  padding-bottom: $gutter * 2;
+}
+
 .closeBtn {
   background: none;
   border: unset;

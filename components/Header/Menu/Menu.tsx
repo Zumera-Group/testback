@@ -5,8 +5,63 @@ import { useLinkWithCurrentLocale } from 'lib/shared-domain/useLinkWithCurrentLo
 
 import styles from './Menu.module.scss';
 import { getLinksByPageType } from 'lib/utils/getLinksByPageType';
+import { HeaderMenuItem } from 'lib/shared-domain/page/domain';
+import { useEffect, useRef, useState } from 'react';
 
-export const Menu = ({ navigation }) => {
+const Dropdown = ({ items }) => {
+  const router = useRouter();
+
+  const [isOpen, setIsOpen] = useState(false);
+  const linkWithCurrentLocale = useLinkWithCurrentLocale();
+  const dropdownRef = useRef(null);
+  const toggleDropdown = () => {
+    setIsOpen(!isOpen);
+  };
+
+  const handleClickOutside = (event) => {
+    if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+      setIsOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
+  return (
+    <div className={styles.dropdown} ref={dropdownRef}>
+      <button
+        className={`${styles.dropdownToggle} ${isOpen ? styles.dropdownToggleActive : ''}`}
+        onClick={toggleDropdown}
+      >
+        {items[0].name}
+        <span className={styles.dropdownIcon}>&#9660;</span>
+      </button>
+      {isOpen && (
+        <ul className={styles.dropdownMenu}>
+          {items.map(({ name, page }, index) => (
+            <li key={`${index}-${name}`} className={styles.dropdownItem}>
+              <Link
+                passHref
+                href={linkWithCurrentLocale(
+                  getLinksByPageType(router.locale, page._type, page.slug?.current),
+                )}
+                className={styles.dropdownLink}
+              >
+                {name}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  );
+};
+
+export const Menu = ({ navigation }: { navigation: HeaderMenuItem[] }) => {
   const router = useRouter();
   const linkWithCurrentLocale = useLinkWithCurrentLocale();
 
@@ -16,28 +71,34 @@ export const Menu = ({ navigation }) => {
   return (
     <nav className={styles.menu}>
       <ul className={styles.items}>
-        {navigation.map(({ _key, name, page }, index: number) => (
-          <li key={`${_key}-${index}`} className={styles.item}>
-            <Link
-              passHref
-              href={linkWithCurrentLocale(
-                getLinksByPageType(
-                  router.locale,
-                  page._type,
-                  page.slug?.current,
-                ),
-              )}
-              className={[
-                styles.link,
-                isActive(page.slug?.current) ? styles.link__active : '',
-              ].join(' ')}
-              data-title={name}>
+        {navigation.map(({ name, page, type, dropdownItems }, index: number) => {
+          return (
+            <li key={`${index}-${name}`} className={styles.item}>
+              {
+                type !== 'dropdown' &&
+                <Link
+                  passHref
+                  href={linkWithCurrentLocale(
+                    getLinksByPageType(
+                      router.locale,
+                      page._type,
+                      page.slug?.current,
+                    ),
+                  )}
+                  className={[
+                    styles.link,
+                    isActive(page.slug?.current) ? styles.link__active : '',
+                  ].join(' ')}
+                  data-title={name}>{name}</Link>
+              }
 
-              {name}
+              {
+                type === 'dropdown' && <Dropdown items={dropdownItems} />
+              }
 
-            </Link>
-          </li>
-        ))}
+            </li>
+          );
+        })}
       </ul>
     </nav>
   );
