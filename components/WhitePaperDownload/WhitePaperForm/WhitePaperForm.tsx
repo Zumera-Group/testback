@@ -45,10 +45,13 @@ export const WhitePaperForm = ({
   const downloadFile = async () => {
     const pdfPath = file.substring(DOMAIN.length);
     const externalUrl = file.includes(DOMAIN) ? `/whitepaper/${pdfPath}` : file;
-    const timer = setTimeout(() => {
-      window.open(externalUrl, '_blank');
-    }, 2000);
-    return () => clearTimeout(timer);
+
+    window.location.assign(externalUrl);
+    return () => undefined;
+    // const timer = setTimeout(() => {
+    //   window.open(externalUrl, '_blank');
+    // }, 2000);
+    // return () => clearTimeout(timer);
   };
 
   const fullURL = useGetURL();
