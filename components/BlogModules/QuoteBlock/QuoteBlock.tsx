@@ -12,7 +12,7 @@ export const QuoteBlock: React.FC<any> = ({ specificContentModule }) => {
         alignItems={'center'}
         fullWidth={true}
       >
-        <GridColumn sm={12} md={6} lg={9} className={styles.quoteWrapper}>
+        <GridColumn sm={12} md={6} lg={12} className={styles.quoteWrapper}>
           <blockquote>
             <span className={styles.quote}>{quote}</span>
             <cite>

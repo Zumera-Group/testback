@@ -1,9 +1,4 @@
-import {
-  Container,
-  Grid,
-  GridColumn,
-  SwiperNavigationButtons,
-} from 'components/Layout';
+import { Container, Grid, GridColumn, SwiperNavigationButtons } from 'components/Layout';
 import styles from './RelatedArticles.module.scss';
 import React, { useRef } from 'react';
 import { SwiperSlide } from 'swiper/react';
@@ -13,11 +8,13 @@ import { SwiperRelatedArticles } from 'components/Layout/SwiperRelatedArticles';
 import { useFormatDate } from 'lib/shared-domain/useFormatDate';
 import { useRouter } from 'next/router';
 import { getBuiltLink } from 'lib/links';
+import { Icon } from 'components/Icon';
 
 const RelatedArticles: React.FC<{
   relatedArticles: any;
+  relatedCalculators: any;
   blogArticleDetail: any;
-}> = ({ relatedArticles, blogArticleDetail }) => {
+}> = ({ relatedArticles, relatedCalculators = [], blogArticleDetail }) => {
   const swiperPrevRef = useRef();
   const swiperNextRef = useRef();
   const format = useFormatDate();
@@ -26,6 +23,8 @@ const RelatedArticles: React.FC<{
     relatedArticleSection: { raDesc, raTitle },
   } = blogArticleDetail;
 
+  const related = [...(relatedCalculators ?? []), ...relatedArticles];
+
   return (
     <Container classes={styles.relatedArticlesWrapper}>
       <Grid>
@@ -33,35 +32,21 @@ const RelatedArticles: React.FC<{
           <h2>{raTitle}</h2>
           <p className={styles.summary}>{raDesc}</p>
         </GridColumn>
-        {/* <GridColumn
-          xs={12}
-          sm={6}
-          md={6}
-          lg={6}
-          className={styles.navigationColumn}
-        >
-          <div className={styles.swiperButtons}>
-            <SwiperNavigationButtons
-              prev={swiperPrevRef}
-              next={swiperNextRef}
-            />
-          </div>
-        </GridColumn> */}
       </Grid>
 
       <SwiperRelatedArticles
         prevButton={swiperPrevRef}
         nextButton={swiperNextRef}
         classes={styles.carousel}
-        maxSlidesToShow={2.15}
+        maxSlidesToShow={3}
       >
-        {relatedArticles?.map((article, index) => (
+        {related?.map((article, index) => (
           <SwiperSlide
-            key={`relatedArticleCarousel-${article._id}_${index}`}
+            key={`relatedArticleCarousel-${index}`}
             className={styles.slide}
           >
             <article className={styles.articleCard}>
-              {article._type === 'blogArticle' ? (
+              {article?._type === 'blogArticle' ? (
                 <a
                   href={getBuiltLink({
                     locale,
@@ -98,41 +83,26 @@ const RelatedArticles: React.FC<{
                   </div>
                 </a>
               ) : (
-                <a
-                  href={getBuiltLink({
-                    locale,
-                    path: 'valuation-tool',
-                    uri: article?.slug?.current,
-                  })}
-                >
-                  <div className={styles.thumbnail}>
-                    <Image
-                      unoptimized
-                      src={sanityImageUrlFor(
-                        article.heroImage?.asset?.url,
-                      ).url()}
-                      alt={article.heroImage?.alt}
-                      width={410}
-                      height={231}
-                      style={{
-                        maxWidth: '100%',
-                        objectFit: 'cover',
-                      }}
-                    />
+                <GridColumn sm={12} md={6} lg={5} className={styles.rightColumn}>
+                  <div className={styles.relatedCalculators}>
+                    <a
+                      href={getBuiltLink({
+                        locale,
+                        path: 'questionnaires',
+                        uri: article.calculatorPage?.questionnaireSlug?.current,
+                      })}
+                    >
+                      <h4 className={styles.heading}>{article.title}</h4>
+                      <p className={styles.summary}>{article.description}</p>
+                      <Icon
+                        iconName={'arrow-circle'}
+                        viewBox={'0 0 32 32'}
+                        width={24}
+                        height={24}
+                      />
+                    </a>
                   </div>
-                  <span className={styles.date}>
-                    {format(new Date(article?.date))}
-                  </span>
-                  <h5>{article?.articleTitle}</h5>
-                  <p className={styles.summary}>{article?.summary}</p>
-                  <div className={styles.categoryTags}>
-                    {article.categories?.map((category) => (
-                      <div key={category._id} className={styles.categoryTag}>
-                        {category.title}
-                      </div>
-                    ))}
-                  </div>
-                </a>
+                </GridColumn>
               )}
             </article>
           </SwiperSlide>

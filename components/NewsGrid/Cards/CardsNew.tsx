@@ -62,7 +62,6 @@ export const CardsNew = ({
     cards.push(item);
   });
 
-  console.log(cardsRow.length >= 2);
 
   return (
     <div className={styles.cardsNew}>

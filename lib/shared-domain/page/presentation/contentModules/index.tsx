@@ -36,7 +36,6 @@ import {
   WhitePaperDownloadModule,
   LogoBarSectionModule,
   ContentTextBlockModule,
-  TransactionsCarouselSectionModule, 
   ImagesWithHeaderAndTextModule,
 } from '../../domain/contentModule';
 
@@ -81,7 +80,6 @@ import { VTServicesSection } from 'components/VTServicesSection/VTServicesSectio
 import { StepsDownBulletsSection } from 'components/StepsDownBulletsSection';
 import { StickyFooter } from 'components/StickyFooter';
 import { TransactionQuote } from 'components/TransactionQuote';
-import { WhitePaperDownload } from 'components/WhitePaperDownload';
 import { ImagesWithHeaderAndText } from 'components/ImagesWithHeaderAndText';
 
 import dynamic from 'next/dynamic';
@@ -93,7 +91,7 @@ import { PartnerReviewSection } from 'components/PartnerReviewSection';
 import { PartnerVisionSection } from 'components/PartnerVisionSection';
 import InfoSection from 'components/Sector/SectorInfo/InfoSection';
 import GrowthRatesSection from 'components/Sector/SectorInfo/GrowthRatesSection';
-import { SectorHero, SectorTeam, SectorTransactions } from 'components/Sector';
+import { SectorHero, SectorTeam } from 'components/Sector';
 import FutureTrendsSection from 'components/Sector/SectorInfo/FutureTrendsSection';
 import SectorMoreDetails from 'components/SectorMoreDetails/SectorMoreDetails';
 import { WhitePaperDownloadSection } from 'components/WhitePaperDownload/WhitePaperDownloadSection';

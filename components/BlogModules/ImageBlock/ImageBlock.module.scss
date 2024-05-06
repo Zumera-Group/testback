@@ -1,6 +1,6 @@
 .imageBlockWrapper {
   .figure {
-    max-width: 955px;
+    max-width: unset;
     padding-bottom: $blog-mb-mobile;
     margin-bottom: $blog-mb-mobile;
     @include divider('bottom', $primary);

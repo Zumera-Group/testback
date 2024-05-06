@@ -21,6 +21,7 @@ export interface BlogArticle {
   whitePaperDownload: any;
   toc: any[];
   relatedArticles: any[];
+  relatedCalculators: any[];
   blogModules: {
     _key: string;
     _type: ContentModuleType;

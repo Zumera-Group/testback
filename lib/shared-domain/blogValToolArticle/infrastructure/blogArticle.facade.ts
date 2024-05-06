@@ -120,7 +120,7 @@ const queryBlogArticle = (
       asset->{
         url
       },
-    } 
+    }
   },
   "queryOtherLangSlug": ${otherLangSlugQuery},
 }`;
@@ -160,6 +160,12 @@ const queryBlogArticles = (
     slug,
     calendlyURL,
     _id
+  },
+  relatedCalculators[]-> {
+    ...,
+    calculatorPage-> {
+      questionnaireSlug
+    }
   },
   relatedArticles[]-> {
     ...,
@@ -235,7 +241,7 @@ const queryBlogArticles = (
       asset->{
         url
       },
-    } 
+    }
   },
 }
 `;

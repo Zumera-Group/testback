@@ -1,3 +1,4 @@
+
 export abstract class BaseModule {}
 
 export type ContentModuleType =
@@ -7,7 +8,9 @@ export type ContentModuleType =
   | 'quoteBlock'
   | 'textStatsBlock'
   | 'fullWidthImageBlock'
-  | 'videoBlock';
+  | 'videoBlock'
+  | 'whiteInlinePaperFormBlock'
+  | 'downloadPaperStickyFooter';
 
 abstract class ContentModuleTypeFactory {
   static createInstance(type: ContentModuleType, fields: Record<string, any>) {
@@ -20,6 +23,8 @@ abstract class ContentModuleTypeFactory {
     if (type === 'fullWidthImageBlock')
       return new FullWidthImageBlockModule(fields);
     if (type === 'videoBlock') return new VideoBlockModule(fields);
+    if (type === 'downloadPaperStickyFooter') return new DownloadPaperStickyFooterModule(fields);
+    if (type === 'whiteInlinePaperFormBlock') return new WhitePaperInlineFormModule(fields);
   }
 }
 
@@ -141,5 +146,39 @@ export class VideoBlockModule extends BaseModule {
     this.duration = fields.duration;
     this.caption = fields.caption;
     this.anchor = fields.anchor;
+  }
+}
+
+
+export class DownloadPaperStickyFooterModule extends BaseModule {
+  button: any;
+
+  constructor(fields: Record<string, any>) {
+    super();
+    this.button = fields.button;
+  }
+}
+
+export class WhitePaperInlineFormModule extends BaseModule {
+  title: string;
+  subtitle: string;
+  image: any;
+  pdfUrl: any;
+  whitePaperFormFields: {
+    downloadAgain: string;
+    buttonText: string;
+    namePlaceholder: string;
+    emailPlaceholder: string;
+    successMessage: string;
+    errorMessage: string;
+  };
+
+  constructor(fields: Record<string, any>) {
+    super();
+    this.title = fields.title;
+    this.subtitle = fields.subtitle;
+    this.image = fields.image;
+    this.whitePaperFormFields = fields.whitePaperFormFields;
+    this.pdfUrl = fields.pdfUrl;
   }
 }

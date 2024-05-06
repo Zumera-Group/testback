@@ -1,18 +1,17 @@
 import styles from './WhitePaper.module.scss';
 import { WhitePaperForm } from 'components/WhitePaperDownload/WhitePaperForm';
-import { Container, Grid, GridColumn, Section } from 'components/Layout';
+import { Grid, GridColumn } from 'components/Layout';
 import { SectionHeading } from 'components/SectionHeading';
 import Image from 'next/image';
 import { sanityImageUrlFor } from 'lib/sanity';
 import Modal from 'react-modal';
 
 import { Button } from 'components/Button';
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Icon } from 'components/Icon';
 import { BlogArticle } from 'lib/shared-domain/blogArticle/domain';
 import { SiteSettings } from 'lib/shared-domain/page/domain';
 import localFont from '@next/font/local';
-('./..');
 
 const myFont = localFont({
   display: 'swap',
@@ -133,6 +132,7 @@ const WhitePaperModal: React.FC<{
                   file={blogArticle?.whitePaperDownload?.pdfURL}
                   variant={'blog'}
                   sectorName={''}
+                  name={'modal'}
                 />
               </GridColumn>
             </Grid>

@@ -14,7 +14,7 @@ export class SanityService {
     try {
       return await getClient(preview).fetch(query);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   }
 

@@ -6,6 +6,8 @@
 
 > How to start the app locally?
 
+> Environment URLs
+
 > Environment variables
 
 > Deployment
@@ -65,6 +67,14 @@
 - `yarn build` plus `yarn start-local`
 
 you reproduce exactly the production build
+
+## 🌎 Environment URLs
+
+---
+
+You can find the staging environment on the: https://staging.zumera.tech
+The production environment on the: https://zumera.com
+
 
 ## ⚙️ Environment variables
 

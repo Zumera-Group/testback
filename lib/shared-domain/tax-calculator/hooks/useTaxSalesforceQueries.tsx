@@ -69,7 +69,6 @@ export const useTaxSalesforceQueries = () => {
       uniqueId: string,
     ): Promise<void> => {
       const answers = getTaxAnswers();
-      console.log(answers);
       try {
         const leadParams = {
           lead_entry: {

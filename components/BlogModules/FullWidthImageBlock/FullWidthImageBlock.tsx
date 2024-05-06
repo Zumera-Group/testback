@@ -15,8 +15,8 @@ export const FullWidthImageBlock: React.FC<any> = ({
           unoptimized
           src={sanityImageUrlFor(image?.asset?.url).url()}
           alt={image?.alt}
-          width={955}
-          height={538}
+          width={1280}
+          height={549}
           style={{
             maxWidth: '100%',
             objectFit: 'cover',
@@ -30,7 +30,7 @@ export const FullWidthImageBlock: React.FC<any> = ({
             justifyContent={'space-between'}
             className={styles.content}
           >
-            <GridColumn sm={12} md={6} lg={8}>
+            <GridColumn sm={12} md={6} lg={12}>
               {caption && (
                 <figcaption className={styles.caption}>{caption}</figcaption>
               )}

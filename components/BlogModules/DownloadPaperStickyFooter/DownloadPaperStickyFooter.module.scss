@@ -1,0 +1,135 @@
+.stickyFooter {
+  height: 80px;
+  background: rgba($tertiary, 0.9);
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  max-width: 100%;
+  opacity: 0;
+  transform: translateY(100%);
+  transition: opacity $timing-md $ease-out, transform $timing-md $ease-out;
+  z-index: 2;
+  &__show {
+    opacity: 1;
+    transform: translateY(0%);
+  }
+  & > div,
+  .btnWrapper {
+    height: 100%;
+  }
+}
+
+.btnWrapper {
+
+  display: flex;
+  align-items: center;
+  @include push-auto-x();
+  justify-content: flex-end;
+  @include breakpoint-down(xxl) {
+    & > * {
+      margin-right: 10vw;
+    }
+  }
+  @include breakpoint-down(md) {
+    justify-content: flex-start;
+    & > * {
+      width: fit-content;
+
+      max-width: calc(100% - 64px);
+      justify-content: center;
+    }
+  }
+}
+
+.stickyFooter {
+  height: 80px;
+  background: rgba($tertiary, 0.9);
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  max-width: 100%;
+  opacity: 0;
+  transform: translateY(100%);
+  transition: opacity $timing-md $ease-out, transform $timing-md $ease-out;
+  z-index: 2;
+
+  &__show {
+    opacity: 1;
+    transform: translateY(0%);
+  }
+
+  & > div,
+  .btnWrapper {
+    height: 100%;
+  }
+}
+
+.btnWrapper {
+  display: flex;
+  align-items: center;
+  @include push-auto-x();
+  justify-content: flex-end;
+  @include breakpoint-down(xxl) {
+    & > * {
+      margin-right: 10vw;
+    }
+  }
+  @include breakpoint-down(md) {
+    justify-content: flex-start;
+    & > * {
+      width: 100%;
+      max-width: calc(100% - 64px);
+      justify-content: center;
+    }
+  }
+}
+
+.modal {
+  position: absolute;
+  inset: 15px;
+  background: $secondary;
+  overflow: auto;
+  outline: none;
+  padding: $gutter * 2;
+  color: $white;
+  max-width: 1216px;
+  margin: var(--header-height) auto 0 auto;
+
+  @include breakpoint-up(md) {
+    padding: $gutter * 1 $gutter * 2.5;
+    inset: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 600px;
+  }
+}
+
+
+.closeBtn {
+  background: none;
+  border: unset;
+  cursor: pointer;
+  color: $white;
+  position: absolute;
+  right: 1.5rem;
+  top: 1.5rem;
+}
+
+.thumbnail {
+  height: 100%;
+  object-fit: cover;
+  max-width: 100%;
+  margin-top: $gutter * 1.5;
+}
+
+
+.downloadBtn {
+  box-shadow: $btn-box-shadow;
+
+  svg {
+    fill: none;
+  }
+}

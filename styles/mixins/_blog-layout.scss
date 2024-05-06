@@ -1,7 +1,6 @@
 @mixin innerOffset() {
   .innerOffset {
-    max-width: 1100px;
-    margin-left: auto;
+    margin-left: unset;
     margin-right: 0;
   }
 }

@@ -18,7 +18,7 @@ export const TextImageParallaxBlock: React.FC<any> = ({
         alignItems={'start'}
         fullWidth={true}
       >
-        <GridColumn sm={12} md={6} lg={7} className={styles.leftPane}>
+        <GridColumn sm={12} md={6} lg={12} className={styles.leftPane}>
           <h2 className={styles.headline}>{headline}</h2>
           <p className={styles.summary}>{summary}</p>
           <figure className={styles.figure}>

@@ -13,7 +13,7 @@ export const TextBlock: React.FC<any> = ({ specificContentModule }) => {
           justifyContent={'space-between'}
           className={styles.content}
         >
-          <GridColumn sm={12} md={12} lg={8}>
+          <GridColumn sm={12} md={12} lg={12}>
             {subheading && <h4>{subheading}</h4>}
             <RichText content={text} />
           </GridColumn>

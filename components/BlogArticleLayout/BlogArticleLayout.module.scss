@@ -1,3 +1,13 @@
+.socialShareWrapper{
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+
+  @include breakpoint-down(lg) {
+    flex-direction: column;
+  }
+}
+
 .articleContent {
   a {
     border-bottom: solid 2px $accent;

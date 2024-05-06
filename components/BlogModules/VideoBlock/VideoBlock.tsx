@@ -1,4 +1,4 @@
-import { Container, Grid, GridColumn } from 'components/Layout';
+import { Container } from 'components/Layout';
 import React from 'react';
 import ReactPlayer from 'react-player';
 import styles from './VideoBlock.module.scss';

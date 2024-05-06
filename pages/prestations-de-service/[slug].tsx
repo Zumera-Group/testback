@@ -85,7 +85,7 @@ export async function getStaticProps({
       revalidate: REVALIDATE_ON_SUCCESS_IN_SECONDS,
     };
   } catch (e) {
-    console.log(e);
+    console.error(e);
     return { notFound: true, revalidate: 10 };
   }
 }

@@ -18,8 +18,9 @@ export const ImageBlock: React.FC<any> = ({ specificContentModule }) => {
           unoptimized
           src={sanityImageUrlFor(imageUrl).url()}
           alt={image?.alt}
-          width={955}
-          height={538}
+          width={1280}
+          height={549}
+
           style={{
             maxWidth: '100%',
             objectFit: 'cover',

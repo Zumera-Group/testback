@@ -1,3 +1,7 @@
+.modalWrapper {
+  display: flex;
+}
+
 .overlay {
   backdrop-filter: blur(6px);
   position: fixed;

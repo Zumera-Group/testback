@@ -7,7 +7,7 @@ import { ContentModule } from 'lib/shared-domain/blogArticle/domain/blogModule';
 import { getContentForContentModule } from 'lib/shared-domain/blogArticle/presentation/blogModules';
 import { PageTransition } from 'components/PageTransition';
 import { SEO } from 'components/SEO';
-import { getBuiltLink, links } from 'lib/links';
+import { getBuiltLink } from 'lib/links';
 import { useRouter } from 'next/router';
 import { Container, Grid, GridColumn, Section } from 'components/Layout';
 import styles from './BlogArticleLayout.module.scss';
@@ -16,7 +16,6 @@ import { sanityImageUrlFor } from 'lib/sanity';
 
 import { RichText } from 'components/BlogModules/RichText';
 import { SocialShare } from 'components/BlogModules/SocialShare';
-import { AuthorBlock } from 'components/BlogModules/AuthorBlock';
 import RelatedArticles from 'components/BlogModules/RelatedArticles/RelatedArticles';
 import ContactUsSection from 'lib/shared-domain/page/presentation/contentModules/ContactUsSection';
 import useFormatDateLong from 'lib/shared-domain/useFormatDateLong';
@@ -93,28 +92,22 @@ export const BlogArticleLayout: React.FC<{
                     </a>
                   ))}
                 </p>
-                <Grid
-                  justifyContent={'space-between'}
-                  alignItems={'center'}
-                  fullWidth={true}
+                <div
+                  className={styles.socialShareWrapper}
                 >
-                  <GridColumn sm={12} md={6} lg={7}>
-                    <SocialShare
-                      content={blogArticle}
-                      partialSlug="blog"
-                      domain={process.env.NEXT_PUBLIC_BASE_URL}
+                  <SocialShare
+                    content={blogArticle}
+                    partialSlug="blog"
+                    domain={process.env.NEXT_PUBLIC_BASE_URL}
+                  />
+                  {blogArticle?.whitePaperDownload?.pdfURL && (
+                    <WhitePaperModal
+                      blogArticle={blogArticle}
+                      siteSettings={siteSettings}
+                      blogArticleDetail={blogArticleDetail}
                     />
-                  </GridColumn>
-                  <GridColumn sm={12} md={6} lg={5}>
-                    {blogArticle?.whitePaperDownload?.pdfURL && (
-                      <WhitePaperModal
-                        blogArticle={blogArticle}
-                        siteSettings={siteSettings}
-                        blogArticleDetail={blogArticleDetail}
-                      />
-                    )}
-                  </GridColumn>
-                </Grid>
+                  )}
+                </div>
               </GridColumn>
               <GridColumn
                 sm={12}
@@ -159,56 +152,8 @@ export const BlogArticleLayout: React.FC<{
           >
             <div className={styles.innerOffset}>
               <Grid fullWidth={true} justifyContent={'space-between'}>
-                <GridColumn sm={12} md={6} lg={8}>
+                <GridColumn sm={12} md={12} lg={12}>
                   <RichText content={blogArticle.introduction} />
-                </GridColumn>
-                <GridColumn
-                  sm={12}
-                  md={6}
-                  lg={3}
-                  className={styles.relatedListWrapper}
-                >
-                  {/* UPDATE TYPE HERE TO GET THE VALUE CALC ARTICLES */}
-                  {blogArticle.relatedArticles && (
-                    <aside className={styles.relatedListInner}>
-                      <span className={styles.relatedTitle}>
-                        {blogArticleDetail.relatedArticleSection.raTitle}
-                      </span>
-                      <ol>
-                        {blogArticle?.relatedArticles?.map((article) => (
-                          <React.Fragment key={article._id}>
-                            {article._type === 'blogArticle' ? (
-                              <li key={article._id}>
-                                <a
-                                  key={article._id}
-                                  href={getBuiltLink({
-                                    locale,
-                                    path: 'blog',
-                                    uri: article?.slug?.current,
-                                  })}
-                                >
-                                  {article?.articleTitle}
-                                </a>
-                              </li>
-                            ) : (
-                              <li>
-                                <a
-                                  key={article._id}
-                                  href={getBuiltLink({
-                                    locale,
-                                    path: 'valuation-tool',
-                                    uri: article?.slug?.current,
-                                  })}
-                                >
-                                  {article?.articleTitle}
-                                </a>
-                              </li>
-                            )}
-                          </React.Fragment>
-                        ))}
-                      </ol>
-                    </aside>
-                  )}
                 </GridColumn>
               </Grid>
             </div>
@@ -218,19 +163,14 @@ export const BlogArticleLayout: React.FC<{
             blogModules.map((c) => {
               return (
                 <React.Fragment key={c._key}>
-                  {getContentForContentModule(c, blogArticleDetail)}
+                  {getContentForContentModule(c, blogArticleDetail, blogArticle, siteSettings)}
                 </React.Fragment>
               );
             })}
-          <AuthorBlock
-            blogArticle={blogArticle}
-            blogArticleDetail={blogArticleDetail}
-            key={blogArticle._id}
-            siteSettings={siteSettings}
-          />
           {blogArticle.relatedArticles && (
             <RelatedArticles
               relatedArticles={blogArticle.relatedArticles}
+              relatedCalculators={blogArticle.relatedCalculators}
               blogArticleDetail={blogArticleDetail}
             />
           )}

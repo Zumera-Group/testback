@@ -111,7 +111,7 @@ const retrieve = (): Record<string, any> => {
 
     return data;
   } catch (e) {
-    console.log('ERROR: Retrieving Marketing params' + e);
+    console.error('ERROR: Retrieving Marketing params' + e);
     return {};
   }
 };

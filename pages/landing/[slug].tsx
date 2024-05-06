@@ -50,7 +50,7 @@ export async function getStaticProps({ locale, params, preview = false }) {
       revalidate: REVALIDATE_ON_SUCCESS_IN_SECONDS,
     };
   } catch (e) {
-    console.log(e);
+    console.error(e);
     return { notFound: true, revalidate: 10 };
   }
 }

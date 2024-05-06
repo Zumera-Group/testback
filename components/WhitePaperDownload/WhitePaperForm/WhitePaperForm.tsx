@@ -20,6 +20,7 @@ export const WhitePaperForm = ({
   file,
   variant,
   sectorName,
+  name='default'
 }) => {
   const [checkboxIsChecked, setCheckboxIsChecked] = useState(false);
   const [isFormSubmitted, setIsFormSubmitted] = useState(false);
@@ -48,10 +49,6 @@ export const WhitePaperForm = ({
 
     window.location.assign(externalUrl);
     return () => undefined;
-    // const timer = setTimeout(() => {
-    //   window.open(externalUrl, '_blank');
-    // }, 2000);
-    // return () => clearTimeout(timer);
   };
 
   const fullURL = useGetURL();
@@ -59,7 +56,7 @@ export const WhitePaperForm = ({
   const handleSubmit = async (e) => {
     e.preventDefault();
     // @ts-ignore
-    const inputs = document.getElementById('white-paper-form').elements;
+    const inputs = document.getElementById(`white-paper-form-${name}`).elements;
 
     const formData = {
       firstName: inputs['whitePaperFirstLastName'].value.split(' ')[0],
@@ -101,7 +98,7 @@ export const WhitePaperForm = ({
       {!isFormSubmitted && (
         <form
           className={styles.form}
-          id={'white-paper-form'}
+          id={`white-paper-form-${name}`}
           onSubmit={(e) => handleSubmit(e)}
         >
           <FormGroup>
@@ -124,13 +121,14 @@ export const WhitePaperForm = ({
           </FormGroup>
           <FormGroup>
             <Checkbox
-              id={'whitePaperCheckbox'}
+              id={`whitePaperCheckbox-${name}`}
               onChange={(e) => setCheckboxIsChecked(e.target.checked)}
               isChecked={checkboxIsChecked}
               required={true}
             >
               {checkboxPrivacyText1}{' '}
               <Link
+                className={styles.link}
                 passHref
                 href={linkWithCurrentLocale(checkboxPrivacyPage?.slug?.current)}
                 target="_blank"

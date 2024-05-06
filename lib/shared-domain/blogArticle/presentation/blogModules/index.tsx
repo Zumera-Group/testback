@@ -1,25 +1,33 @@
 import { ImageBlock } from 'components/BlogModules/ImageBlock';
 import {
+  ContentModule,
+  DownloadPaperStickyFooterModule,
   FullWidthImageBlockModule,
   ImageBlockModule,
   QuoteBlockModule,
   TextBlockModule,
   TextImageParallaxBlockModule,
   TextStatsBlockModule,
-  VideoBlockModule,
+  VideoBlockModule, WhitePaperInlineFormModule,
 } from '../../domain/blogModule';
-import { ContentModule } from '../../domain/blogModule';
 import { TextBlock } from 'components/BlogModules/TextBlock';
 import { TextImageParallaxBlock } from 'components/BlogModules/TextImageParallaxBlock/TextImageParallaxBlock';
 import { QuoteBlock } from 'components/BlogModules/QuoteBlock';
 import { TextStatsBlock } from 'components/BlogModules/TextStatsBlock';
 import { FullWidthImageBlock } from 'components/BlogModules/FullWidthImageBlock';
 import VideoBlock from 'components/BlogModules/VideoBlock/VideoBlock';
+import { DownloadPaperStickyFooter } from 'components/BlogModules/DownloadPaperStickyFooter';
+import { WhitePaperInlineFormBlock } from 'components/BlogModules/WhitePaperInlineFormBlock';
+import { SiteSettings } from 'lib/shared-domain/page/domain';
+import { BlogArticle } from 'lib/shared-domain/blogArticle/domain';
 
 export const getContentForContentModule = (
   contentModule: ContentModule,
   blogArticleDetail?: any,
+  blogArticle?: BlogArticle,
+  siteSettings?: SiteSettings
 ): JSX.Element => {
+
   if (contentModule.specificContentModule instanceof TextBlockModule) {
     return (
       <TextBlock specificContentModule={contentModule.specificContentModule} />
@@ -65,6 +73,24 @@ export const getContentForContentModule = (
       <VideoBlock
         specificContentModule={contentModule.specificContentModule}
         blogArticleDetail={blogArticleDetail}
+      />
+    );
+  }
+  if (contentModule.specificContentModule instanceof WhitePaperInlineFormModule) {
+    return (
+      <WhitePaperInlineFormBlock
+        specificContentModule={contentModule.specificContentModule}
+        siteSettings={siteSettings}
+      />
+    );
+  }
+  if (contentModule.specificContentModule instanceof DownloadPaperStickyFooterModule) {
+    return (
+      <DownloadPaperStickyFooter
+        specificContentModule={contentModule.specificContentModule}
+        blogArticleDetail={blogArticleDetail}
+        blogArticle={blogArticle}
+        siteSettings={siteSettings}
       />
     );
   }

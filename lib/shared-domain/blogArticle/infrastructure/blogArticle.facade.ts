@@ -2,10 +2,7 @@ import { Locale } from 'lib/locale';
 import { SanityService } from 'lib/services/sanity.service';
 import { BlogArticle } from '../domain';
 
-import {
-  filterDataToSingleItem,
-  getOtherLangSlugQuery,
-} from '../../page/infrastructure/page.facade';
+import { filterDataToSingleItem, getOtherLangSlugQuery } from '../../page/infrastructure/page.facade';
 import { SERVER_FETCHING_ERROR } from '../../page/constants';
 
 const queryBlogArticle = (
@@ -16,18 +13,18 @@ const queryBlogArticle = (
   ...,
   _id,
   _lang,
- seoDescription,
- seoTitle,
- categories[]->{
+  seoDescription,
+  seoTitle,
+  categories[]->{
    ...,
- },
+  },
   heroImage {
     ...,
     asset->{
       url
     },
   },
-    introduction[] {
+  introduction[] {
     ...,
     markDefs[] {
       ...,
@@ -45,6 +42,12 @@ const queryBlogArticle = (
     slug,
     calendlyURL,
     _id,
+  },
+  relatedCalculators[] {
+    ...,
+    calculatorPage->{
+      questionnaireSlug
+    }
   },
   relatedArticles[]-> {
     ...,
@@ -120,7 +123,7 @@ const queryBlogArticle = (
       asset->{
         url
       },
-    } 
+    }
   },
   "queryOtherLangSlug": ${otherLangSlugQuery},
 }`;
@@ -235,7 +238,7 @@ const queryBlogArticles = (
       asset->{
         url
       },
-    } 
+    }
   },
 }
 `;
