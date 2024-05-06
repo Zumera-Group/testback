@@ -6,9 +6,9 @@ import { useLinkWithCurrentLocale } from 'lib/shared-domain/useLinkWithCurrentLo
 import styles from './Menu.module.scss';
 import { getLinksByPageType } from 'lib/utils/getLinksByPageType';
 import { HeaderMenuItem } from 'lib/shared-domain/page/domain';
-import { useEffect, useRef, useState } from 'react';
+import { Fragment, useEffect, useRef, useState } from 'react';
 
-const Dropdown = ({ items }) => {
+const Dropdown = ({ items, name }) => {
   const router = useRouter();
 
   const [isOpen, setIsOpen] = useState(false);
@@ -37,13 +37,14 @@ const Dropdown = ({ items }) => {
         className={`${styles.dropdownToggle} ${isOpen ? styles.dropdownToggleActive : ''}`}
         onClick={toggleDropdown}
       >
-        {items[0].name}
+        {name}
         <span className={styles.dropdownIcon}>&#9660;</span>
       </button>
       {isOpen && (
         <ul className={styles.dropdownMenu}>
           {items.map(({ name, page }, index) => (
-            <li key={`${index}-${name}`} className={styles.dropdownItem}>
+            <Fragment key={`${index}-${name}`}>
+              <li className={styles.dropdownItem}>
               <Link
                 passHref
                 href={linkWithCurrentLocale(
@@ -54,6 +55,8 @@ const Dropdown = ({ items }) => {
                 {name}
               </Link>
             </li>
+              {index !== items.length - 1 && <hr className={styles.dropdownDivider} />}
+            </Fragment>
           ))}
         </ul>
       )}
@@ -93,7 +96,7 @@ export const Menu = ({ navigation }: { navigation: HeaderMenuItem[] }) => {
               }
 
               {
-                type === 'dropdown' && <Dropdown items={dropdownItems} />
+                type === 'dropdown' && <Dropdown items={dropdownItems} name={name} />
               }
 
             </li>
