@@ -1,6 +1,6 @@
-import { useState, useEffect, useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
-import { Section, Container } from 'components/Layout';
+import { Container, Section } from 'components/Layout';
 import { SectionHeading } from 'components/SectionHeading';
 import { LoadMore } from './LoadMore';
 
@@ -76,9 +76,10 @@ export const NewsGrid: React.FC<Props> = ({
   let employees = useMemo(() => {
     return !shouldHidePeopleUpdates
       ? allEmployees
-          ?.map((value) => ({ value, sort: Math.random() }))
-          .sort((a, b) => a.sort - b.sort)
-          .map(({ value }) => value)
+        ?.filter(({ hasLeftTheTeam }) => !hasLeftTheTeam)
+        .map((value) => ({ value, sort: Math.random() }))
+        .sort((a, b) => a.sort - b.sort)
+        .map(({ value }) => value)
       : [];
   }, [allEmployees, shouldHidePeopleUpdates]);
 

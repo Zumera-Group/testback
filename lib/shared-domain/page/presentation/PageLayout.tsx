@@ -22,17 +22,10 @@ const PageLayout: React.FC<{
   const contentModules =
     page?.contentModules?.map((c) => ContentModule.create(c)) || [];
 
-  // const { locale } = useRouter();
   const {alternateHrefs} = useMakeAlternateHrefs({
     doc: page,
     urlPrefixes: page._type == 'landings' ? getAllLandingPrefixes() : null
   });
-
-  // const otherLangSlug =
-  //   page?.queryOtherLangSlug?.slice(-1)[0]?.slug &&
-  //   `/${locale === 'en' ? 'de' : 'en'}/${
-  //     page?.queryOtherLangSlug?.slice(-1)[0]?.slug?.current
-  //   }`;
 
   return (
     <>

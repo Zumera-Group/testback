@@ -19,7 +19,7 @@
   position: relative;
   right: 9vw;
   width: 38vw;
-  @include breakpoint-down(md) {
+  @include breakpoint-down(lg) {
     right: 0;
     margin: $gutter * 3 auto 0;
     width: 100%;
