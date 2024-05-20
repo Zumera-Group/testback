@@ -111,7 +111,7 @@ export const ServiceDetailLayout: React.FC<ServiceDetailProps> = ({
     (t) => t.typeOfService && t.typeOfService._id === service._id,
   );
 
-  const {alternateHrefs} = useMakeAlternateHrefs({
+  const {alternateHrefs, canonicalHref} = useMakeAlternateHrefs({
     doc: service,
     urlPrefixes: getServiceUrlPrefixes()
   });
@@ -135,6 +135,7 @@ export const ServiceDetailLayout: React.FC<ServiceDetailProps> = ({
         seoDescription={service?.description}
         siteSettings={siteSettings}
         langAlternates={alternateHrefs}
+        canonicalHref={canonicalHref}
       />
       <PageHeader
         contentModules={contentModules}

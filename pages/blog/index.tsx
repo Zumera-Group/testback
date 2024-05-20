@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-import { SiteSettings } from 'lib/shared-domain/page/domain';
+import {ISanityDoc, SiteSettings} from 'lib/shared-domain/page/domain';
 import { BlogArticle } from 'lib/shared-domain/blogArticle/domain';
 import { ErrorTrackingBoundary } from 'lib/ErrorTrackingBoundary';
 import { SharedContentContext } from 'lib/shared-domain/page/infrastructure/sharedContentContext';
@@ -20,6 +20,7 @@ import { ContentModuleType } from 'lib/shared-domain/page/domain/contentModule';
 import Articles from 'components/BlogModules/Articles';
 import ContactUsSection from 'lib/shared-domain/page/presentation/contentModules/ContactUsSection';
 import { fetchBlogDetailContent } from 'lib/shared-domain/blogArticle/application/useGetBlogDetailContent';
+import {useMakeAlternateHrefs} from '../../lib/hooks/useMakeAlternateHrefs';
 
 const PER_PAGE = 19;
 
@@ -94,7 +95,7 @@ interface Props {
   selectedBlogArticle: BlogArticle;
   siteSettings: SiteSettings;
   sharedContent: any;
-  blogDetailContent: any;
+  blogDetailContent: ISanityDoc;
   contentModules: ContentModuleType;
   featuredBlog: any;
   blogs: any;
@@ -176,13 +177,11 @@ export default function Index({
     <ErrorTrackingBoundary>
       <SharedContentContext value={sharedContent}>
         <main id="main">
-          <SEO
-            seoTitle={'Blog | Zumera'}
-            seoDescription={'zumera'}
+          {(blogDetailContent && siteSettings) &&
+          <BlogHeader
+            blogDetailContent={blogDetailContent}
             siteSettings={siteSettings}
-            // seoImage={blogArticle.heroImage}
-          />
-          <PageHeader contentModules={[]} siteSettings={siteSettings} whiteBg />
+          />}
           <PageTransition>
             <Section size={'md'} bg={'white'} color={'primary'} as="article">
               <Articles
@@ -216,3 +215,45 @@ export default function Index({
     </ErrorTrackingBoundary>
   );
 }
+
+const BlogHeader = ({blogDetailContent, siteSettings}: {blogDetailContent: ISanityDoc, siteSettings: SiteSettings}) => {
+  const {alternateHrefs, canonicalHref} = useMakeBlogHrefs({blogDetailContent});
+
+  return (
+    <>
+      <SEO
+        seoTitle={'Blog | Zumera'}
+        seoDescription={'zumera'}
+        siteSettings={siteSettings}
+        langAlternates={alternateHrefs}
+        canonicalHref={canonicalHref}
+      />
+      <PageHeader
+        contentModules={[]}
+        siteSettings={siteSettings}
+        whiteBg
+        langAlternates={alternateHrefs}
+      />
+    </>
+  );
+};
+
+const useMakeBlogHrefs = ({blogDetailContent}: {blogDetailContent: ISanityDoc}) => {
+  const slug = {current: 'blog'};
+  const doc = {
+    _id: blogDetailContent._id,
+    _lang: blogDetailContent._lang,
+    slug,
+    _langRefs: [
+      {_id: '', _lang: 'de', slug},
+      {_id: '', _lang: 'fr', slug},
+      {_id: '', _lang: 'en_GB', slug},
+    ]
+  };
+
+  const {alternateHrefs, canonicalHref} = useMakeAlternateHrefs({
+    doc
+  });
+
+  return {alternateHrefs, canonicalHref};
+};

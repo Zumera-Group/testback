@@ -10,13 +10,15 @@ export const SEO: React.FC<{
   siteSettings: SiteSettings;
   preventIndexing?: boolean;
   langAlternates?: IAlternateLangHrefs;
+  canonicalHref?: string | null;
 }> = ({
   seoTitle,
   seoImage,
   seoDescription,
   siteSettings,
   preventIndexing,
-  langAlternates
+  langAlternates,
+  canonicalHref
 }) => {
   const title = seoTitle + ' | ' + siteSettings?.siteName;
   const image = seoImage?.asset?.url;
@@ -48,6 +50,8 @@ export const SEO: React.FC<{
       {langAlternates && Object.entries(langAlternates).map(([lang, url], i) =>
         <link rel={'alternate'} hrefLang={lang} href={url} key={lang} />
       )}
+
+      {canonicalHref && <link rel="canonical" href={canonicalHref} />}
     </Head>
   );
 };

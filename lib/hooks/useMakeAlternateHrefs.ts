@@ -15,7 +15,11 @@ export const useMakeAlternateHrefs = ({ doc, urlPrefixes = null }: { doc: ISanit
         if (urlPrefixes && urlPrefixes[siteLocale]) {
           href += `${urlPrefixes[siteLocale]}`;
         }
-        href += `/${slug.current}`;
+        href += `/${slug.current}/`;
+
+        if (process.env.NEXT_PUBLIC_BASE_URL) {
+          href = `${process.env.NEXT_PUBLIC_BASE_URL}${href}`;
+        }
         // if (page._type == 'landings') {
         //   href = `/${siteLocale}/landing/${slug.current}`;
         // } else {
@@ -52,7 +56,27 @@ export const useMakeAlternateHrefs = ({ doc, urlPrefixes = null }: { doc: ISanit
     return {};
   }, [doc, makeAlternates]);
 
-  return { alternateHrefs };
+  const canonicalHref = useMemo(() => {
+    if (doc.slug?.current) {
+      const siteLocale = SanityService.getLocaleFromSanityLocale(doc._lang);
+
+      let href = `/${siteLocale}`;
+      if (urlPrefixes && urlPrefixes[siteLocale]) {
+        href += `${urlPrefixes[siteLocale]}`;
+      }
+      href += `/${doc.slug?.current}/`;
+
+      if (process.env.NEXT_PUBLIC_BASE_URL) {
+        href = `${process.env.NEXT_PUBLIC_BASE_URL}${href}`;
+      }
+
+      return href;
+    }
+
+    return null;
+  }, [doc, urlPrefixes])
+
+  return { alternateHrefs, canonicalHref };
 };
 
 interface ILangPrefixes {
