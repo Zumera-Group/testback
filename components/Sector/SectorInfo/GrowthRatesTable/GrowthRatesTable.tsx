@@ -18,7 +18,7 @@ export const GrowthRatesTable = ({
 }: GrowthRatesTableProps) => {
 
   const [formatted, setFormatted] = useState([]);
-  const { growthRates } = growthRatesTable;
+  const growthRates = growthRatesTable?.growthRates || null;
 
   // Swap the title + subtitle for correct statistic animation
   useEffect(() => {

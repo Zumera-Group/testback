@@ -48,6 +48,14 @@ export async function getStaticProps({
       preview,
     );
 
+    if (!transactionDetail) {
+      return {
+        redirect: {
+          destination: `/${locale}/404`,
+        },
+      };
+    }
+
     const transactionDetailContent = await fetchTransactionDetailContent(
       locale,
     );
@@ -66,7 +74,7 @@ export async function getStaticProps({
     };
   } catch (e) {
     console.error(e);
-    return { notFound: true, revalidate: 10 };
+    return { notFound: true, revalidate: REVALIDATE_ON_FAILURE_TIME_IN_SECONDS };
   }
 }
 
