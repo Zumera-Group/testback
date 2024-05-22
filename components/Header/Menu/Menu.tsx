@@ -50,12 +50,12 @@ const Dropdown = ({ items, name }) => {
                 href={linkWithCurrentLocale(
                   getLinksByPageType(router.locale, page._type, page.slug?.current),
                 )}
+                onClick={() => setIsOpen(false)}
                 className={styles.dropdownLink}
               >
                 {name}
               </Link>
             </li>
-              {index !== items.length - 1 && <hr className={styles.dropdownDivider} />}
             </Fragment>
           ))}
         </ul>
