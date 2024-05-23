@@ -14,6 +14,7 @@ import { filterDataToSingleItem } from '../../lib/shared-domain/page/infrastruct
 
 import {
   REVALIDATE_ON_SUCCESS_IN_SECONDS,
+  REVALIDATE_ON_FAILURE_TIME_IN_SECONDS
 } from '../../lib/shared-domain/page/constants';
 import { useEffect, useState } from 'react';
 import { SecretKeyLockScreen } from 'components/SecretKeyLockScreen';
@@ -73,7 +74,7 @@ export async function getStaticProps({
     };
   } catch (e) {
     console.error(e);
-    return { notFound: true, revalidate: 10 };
+    return { notFound: true, revalidate: REVALIDATE_ON_FAILURE_TIME_IN_SECONDS };
   }
 }
 
@@ -120,7 +121,7 @@ export default function Index({
     }
   }, [selectedSector?.hidePage, router]);
 
-  if (router.isFallback) {
+  if (router.isFallback || selectedSector?.hidePage === true) {
     return null;
   }
 

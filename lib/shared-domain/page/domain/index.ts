@@ -493,4 +493,7 @@ export interface ISanityDoc {
   _lang: string;
   _langRefs?: ILangRef[];
   __i18n_base?: I18nBase;
+  slug?: {
+    current: string;
+  };
 }

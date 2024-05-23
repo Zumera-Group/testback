@@ -9,13 +9,13 @@ export const TransactionsTable = ({ titles, transactions, transactionsTable }) =
     significantTransactionsTitle
   } = titles || {};
 
+  if (!transactionsTable) return null;
+
   const {
     mostPopularTransaction,
     mAndATransactionsNumber,
     significantTransactions,
   } = transactionsTable;
-
-  if (!transactionsTable) return null;
 
   return (
     <>

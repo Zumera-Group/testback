@@ -1,8 +1,11 @@
 import styles from './TrendsTable.module.scss';
 
 export const TrendsTable = ({ title, trendsTable }) => {
-  const { trends } = trendsTable;
-  if (!trends) return null;
+  const trends = trendsTable?.trends || null;
+  if (!trends) {
+    return null;
+  }
+
   return (
     <>
       {title && <h3 className={styles.title}>{title}</h3>}

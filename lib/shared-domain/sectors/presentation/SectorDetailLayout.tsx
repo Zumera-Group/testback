@@ -40,7 +40,7 @@ export const SectorDetailLayout: React.FC<{
       n.sectors && n.sectors?.map((s) => s?._id).indexOf(sector._id) !== -1,
   );
 
-  const {alternateHrefs} = useMakeAlternateHrefs({
+  const {alternateHrefs, canonicalHref} = useMakeAlternateHrefs({
     doc: sector,
     urlPrefixes: getSectorUrlPrefixes()
   });
@@ -59,6 +59,7 @@ export const SectorDetailLayout: React.FC<{
         siteSettings={siteSettings}
         seoImage={sector?.graph?.iconImage}
         langAlternates={alternateHrefs}
+        canonicalHref={canonicalHref}
       />
       <PageTransition>
         <PageHeader

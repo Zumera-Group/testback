@@ -22,7 +22,7 @@ const PageLayout: React.FC<{
   const contentModules =
     page?.contentModules?.map((c) => ContentModule.create(c)) || [];
 
-  const {alternateHrefs} = useMakeAlternateHrefs({
+  const {alternateHrefs, canonicalHref} = useMakeAlternateHrefs({
     doc: page,
     urlPrefixes: page._type == 'landings' ? getAllLandingPrefixes() : null
   });
@@ -35,6 +35,7 @@ const PageLayout: React.FC<{
         seoImage={page.seoImage}
         siteSettings={siteSettings}
         langAlternates={alternateHrefs}
+        canonicalHref={canonicalHref}
       />
       <PageTransition>
         <PageHeader
