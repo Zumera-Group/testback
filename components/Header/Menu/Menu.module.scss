@@ -68,7 +68,7 @@
       top: 30px;
       right: 0;
       background-color: #e3dfe3;
-      border: 1px solid #300032;;
+      border: 1px solid #300032;
       box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
       list-style: none;
       margin: 0;
@@ -80,7 +80,7 @@
       flex-direction: column;
       gap: 0px;
       overflow: hidden;
-      padding: 6px 0px;
+      padding: 0px 0px;
 
       .dropdownItem {
         // Styles for the dropdown items
@@ -89,9 +89,13 @@
         text-align: left;
         white-space: nowrap;
 
+        &_borderBottom {
+          border-bottom: 1px solid #300032;
+        }
+
         .dropdownLink {
           // Styles for the dropdown links
-          padding: 6px 10px;
+          padding: 10px 10px;
           color: $secondary;
           text-decoration: none;
           display: block;
