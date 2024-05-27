@@ -40,13 +40,13 @@ const RelatedArticles: React.FC<{
         classes={styles.carousel}
         maxSlidesToShow={3}
       >
-        {related?.map((article, index) => (
+        {related?.filter(({ _type }) => _type === 'relatedCalculators' || _type === 'blogArticle').map((article, index) => (
           <SwiperSlide
             key={`relatedArticleCarousel-${index}`}
             className={styles.slide}
           >
             <article className={styles.articleCard}>
-              {article?._type === 'blogArticle' ? (
+              {article?._type === 'blogArticle' && (
                 <a
                   href={getBuiltLink({
                     locale,
@@ -81,9 +81,9 @@ const RelatedArticles: React.FC<{
                       </div>
                     ))}
                   </div>
-                </a>
-              ) : (
-                <GridColumn sm={12} md={6} lg={5} className={styles.rightColumn}>
+                </a>)}
+              {article?._type === 'relatedCalculators' &&
+                (<GridColumn sm={12} md={6} lg={5} className={styles.rightColumn}>
                   <div className={styles.relatedCalculators}>
                     <a
                       href={getBuiltLink({

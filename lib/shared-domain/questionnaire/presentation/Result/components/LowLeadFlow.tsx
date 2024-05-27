@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 import { AnimateIn } from 'lib/shared-domain/questionnaire/presentation/Result/components/AnimateIn';
 import { getTranslateByScope } from 'translation/i18n';
 import { useRouter } from 'next/router';
@@ -12,6 +12,7 @@ import { Checkbox, FormGroup, Input, Message } from 'components/Form';
 import { useSalesforceAnswerSync } from '../../../application/useSalesforceAnswerSync';
 import { useSalesforceLeadSync } from '../../../application/useSaleforceLeadSync';
 import {
+  COMPANY_NAME_STORE_INDICATOR,
   EMAIL_STORE_INDICATOR,
   NAME_STORE_INDICATOR,
   PHONE_NUMBER_STORE_INDICATOR,
@@ -33,15 +34,16 @@ export const LowLeadFlow: React.FC<{
   const [pressed, setPressed] = useState(false);
   const { locale } = useRouter();
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+  const formFields = resultScreenCopy.formFields;
 
-  const SEND_IS_ALLOWED =
+  const isSubmissionAllowed =
     checkboxIsChecked &&
-    getAnswer(NAME_STORE_INDICATOR)?.trim() &&
-    getAnswer(EMAIL_STORE_INDICATOR)?.trim() &&
-    getAnswer(PHONE_NUMBER_STORE_INDICATOR)?.trim() &&
+    !!getAnswer(NAME_STORE_INDICATOR)?.trim() &&
+    !!getAnswer(EMAIL_STORE_INDICATOR)?.trim() &&
+    (!!formFields.isCompanyFieldRequired ? !!getAnswer(COMPANY_NAME_STORE_INDICATOR)?.trim() : true) &&
+    (!!formFields.isPhoneNumberFieldRequired ? !!getAnswer(PHONE_NUMBER_STORE_INDICATOR)?.trim() : true) &&
     EmailValidator.validate(getAnswer(EMAIL_STORE_INDICATOR)?.trim());
 
-  const formFields = resultScreenCopy.formFields;
   const questionTitle = resultScreenCopy.questionTitle;
 
   const submitData = useCallback(async () => {
@@ -60,19 +62,19 @@ export const LowLeadFlow: React.FC<{
       console.error('Error on form submission:', e);
     }
     setIsSubmitting(false);
-  }, [setIsSubmitting, syncCurrentAnswersToSalesforce, syncLeadToSalesforce, setIsFormSubmitted]);
+  }, [uniqueId, setIsSubmitting, syncCurrentAnswersToSalesforce, syncLeadToSalesforce, setIsFormSubmitted]);
 
   const onSend = useCallback((e) => {
     e.preventDefault();
     setPressed(true);
 
-    if (!SEND_IS_ALLOWED) {
+    if (!isSubmissionAllowed) {
       return;
     }
 
     const promise = submitData();
     // addBgPromise(promise);
-  }, [submitData, setPressed, SEND_IS_ALLOWED]);
+  }, [submitData, setPressed, isSubmissionAllowed]);
 
   const getEmailError = () => {
     if (!pressed) return null;
@@ -80,6 +82,24 @@ export const LowLeadFlow: React.FC<{
       return formFields.emailRequiredError;
     if (!EmailValidator.validate(getAnswer(EMAIL_STORE_INDICATOR)?.trim()))
       return formFields.emailInvalidError;
+
+    return null;
+  };
+
+  const getCompanyError = () => {
+    if (!pressed) return null;
+    if (!formFields.isCompanyFieldRequired) return null;
+    if (!getAnswer(COMPANY_NAME_STORE_INDICATOR)?.trim())
+      return formFields.companyRequiredError;
+
+    return null;
+  };
+
+  const getPhoneNumberError = () => {
+    if (!pressed) return null;
+    if (!formFields.isPhoneNumberFieldRequired) return null;
+    if (!getAnswer(PHONE_NUMBER_STORE_INDICATOR)?.trim())
+      return formFields.phoneNumberRequiredError;
 
     return null;
   };
@@ -133,11 +153,31 @@ export const LowLeadFlow: React.FC<{
               />
             </FormGroup>
 
+            {
+              formFields.companyLabel && formFields.companyRequiredError &&
+                <FormGroup>
+                  <Input
+                    id={'resultsFormCompanyName'}
+                    type={'text'}
+                    required={!!formFields.isCompanyFieldRequired}
+                    label={formFields.companyLabel}
+                    description={getCompanyError()}
+                    value={getAnswer(COMPANY_NAME_STORE_INDICATOR)}
+                    onChange={(e) =>
+                      setAnswer({
+                        id: COMPANY_NAME_STORE_INDICATOR,
+                        value: e.target.value,
+                      })
+                    }
+                  />
+                </FormGroup>
+            }
+
             <FormGroup>
               <Input
                 id={'resultsFormPhone'}
                 type={'tel'}
-                required={true}
+                required={!!formFields.isPhoneNumberFieldRequired}
                 label={formFields.phoneNumberLabel}
                 description={
                   pressed &&
@@ -190,7 +230,7 @@ export const LowLeadFlow: React.FC<{
               <Button
                 type="submit"
                 variant="primary"
-                disabled={!checkboxIsChecked || isSubmitting}
+                disabled={!checkboxIsChecked || isSubmitting || !isSubmissionAllowed}
                 onDark
                 hideIcon
                 classes={styles.submitButton}

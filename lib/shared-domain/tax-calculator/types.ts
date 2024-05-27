@@ -33,6 +33,10 @@ interface FormFields {
   emailInvalidError: string;
   phoneNumberLabel: string;
   phoneNumberRequiredError: string;
+  isPhoneNumberFieldRequired: string;
+  companyLabel: string;
+  companyRequiredError: string;
+  isCompanyFieldRequired: string;
   checkBoxfirst?: string;
   checkBoxSecond?: string;
   checkBoxThird?: string;
