@@ -4,7 +4,7 @@ import { SanityBlockContent } from 'components/SanityBlockContent';
 
 import styles from './VTHero.module.scss';
 import { VTHeroModule } from 'lib/shared-domain/page/domain/contentModule';
-import { useEffect, useState } from 'react';
+import {useCallback, useState} from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { getLinksByPageType } from 'lib/utils/getLinksByPageType';
@@ -18,13 +18,24 @@ export const VTHero: React.FC<{
     specificContentModule;
 
   const router = useRouter();
+  const resolveUrlByButton = useCallback((button) => {
+    if (button.externalUrl) {
+      return button.externalUrl;
+    }
 
-  const questionnaire = getLinksByPageType(
-    router.locale,
-    'valueCalculator',
-    buttons[0]?.questionnaire?.questionnaireSlug?.current,
-  );
+    if (button.questionnaire._type && button.questionnaire.questionnaireSlug?.current) {
+      return getLinksByPageType(
+        router.locale,
+        button.questionnaire._type,
+        button.questionnaire.questionnaireSlug?.current,
+      );
+    }
 
+    return null;
+  }, [router.locale]);
+
+
+  const questionnaire = buttons[0] ? resolveUrlByButton(buttons[0]) : null;
   const { setAssessmentPurpose, assessmentPurpose } = useValuationStore();
 
   return (
@@ -50,11 +61,7 @@ export const VTHero: React.FC<{
             <SanityBlockContent text={description} />
             <div className={styles.btnWrapper}>
               {buttons.map((button) => {
-                const qLink = getLinksByPageType(
-                  router.locale,
-                  'valueCalculator',
-                  button?.questionnaire?.questionnaireSlug?.current,
-                );
+                const qLink = resolveUrlByButton(button);
                 if (qLink) {
                   return (
                     <Button
@@ -82,7 +89,7 @@ export const VTHero: React.FC<{
                 {purposes.map((purpose) => (
                   <Link
                     passHref
-                    href={questionnaire}
+                    href={questionnaire || '#'}
                     key={purpose}
                     className={[
                       styles.purpose,

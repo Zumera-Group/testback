@@ -166,6 +166,11 @@ export const allLinks = {
     de: 'impressum',
     fr: 'imprimer',
   },
+  taxCalculator: {
+    en: 'tax-calculator',
+    de: 'tax-calculator',
+    fr: 'tax-calculator',
+  }
 };
 
 export const getArticleBoxLink = (

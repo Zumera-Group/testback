@@ -9,6 +9,7 @@ export const getLinksByPageType = (locale, pageType, slug) => {
     newsArticle: 'news',
     service: allLinks.services[locale],
     landings: 'landing',
+    taxCalculator: allLinks.taxCalculator[locale],
     page: '',
   }[pageType];
 
