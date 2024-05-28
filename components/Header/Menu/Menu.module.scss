@@ -3,7 +3,7 @@
   margin: 0 $gutter * 0.5;
   width: 100%;
   flex: 1;
-  @include breakpoint-down(md) {
+  @include breakpoint-down(lg) {
     display: none;
   }
 }
@@ -29,6 +29,7 @@
   }
 
   .dropdown {
+    display: inline-block;
     position: relative;
 
     .dropdownToggle {
@@ -37,11 +38,18 @@
       border: none;
       color: inherit;
       cursor: pointer;
-      font-size: inherit;
+      @include menu-item-text();
+      font-weight: $font-weight-base;
+      line-height: 1;
       padding: 0;
       display: flex;
       align-items: center;
-      text-transform: uppercase;
+      transition: color $timing-sm $ease-out, opacity $timing-md $ease-out;
+
+      @include hover-state() {
+        color: inherit;
+        opacity: 0.75;
+      }
 
       &:focus {
         outline: none;
@@ -60,35 +68,47 @@
       top: 30px;
       right: 0;
       background-color: #e3dfe3;
-      border: 1px solid #300032;;
+      border: 1px solid #300032;
       box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
       list-style: none;
       margin: 0;
       min-width: auto;
       z-index: 1;
-      border-radius: 4px;
+      border-radius: 5px;
       display: flex;
       flex-wrap: nowrap;
       flex-direction: column;
       gap: 0px;
-      padding: 8px 0px;
+      overflow: hidden;
+      padding: 0px 0px;
 
       .dropdownItem {
         // Styles for the dropdown items
         display: inline-flex;
-        gap: 10px;
+        //gap: 10px;
         text-align: left;
         white-space: nowrap;
 
+        &_borderBottom {
+          border-bottom: 1px solid #300032;
+        }
+
         .dropdownLink {
           // Styles for the dropdown links
-          padding: 6px 10px;
+          padding: 10px 10px;
           color: $secondary;
           text-decoration: none;
           display: block;
           width: 100%;
-          border-radius: 8px;
-          margin: 0 6px;
+          //border-radius: 8px;
+          //margin: 0 6px;
+
+          @include menu-item-text();
+
+          &:hover {
+            color: $secondary;
+            opacity: 0.75;
+          }
         }
       }
 

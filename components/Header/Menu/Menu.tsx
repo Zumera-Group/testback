@@ -7,6 +7,7 @@ import styles from './Menu.module.scss';
 import { getLinksByPageType } from 'lib/utils/getLinksByPageType';
 import { HeaderMenuItem } from 'lib/shared-domain/page/domain';
 import { Fragment, useEffect, useRef, useState } from 'react';
+import clsx from 'clsx';
 
 const Dropdown = ({ items, name }) => {
   const router = useRouter();
@@ -31,6 +32,8 @@ const Dropdown = ({ items, name }) => {
     };
   }, []);
 
+  const lastItemIndex = Array.isArray(items) ? items.length - 1 : 0;
+
   return (
     <div className={styles.dropdown} ref={dropdownRef}>
       <button
@@ -44,18 +47,20 @@ const Dropdown = ({ items, name }) => {
         <ul className={styles.dropdownMenu}>
           {items.map(({ name, page }, index) => (
             <Fragment key={`${index}-${name}`}>
-              <li className={styles.dropdownItem}>
-              <Link
-                passHref
-                href={linkWithCurrentLocale(
-                  getLinksByPageType(router.locale, page._type, page.slug?.current),
-                )}
-                className={styles.dropdownLink}
-              >
-                {name}
-              </Link>
-            </li>
-              {index !== items.length - 1 && <hr className={styles.dropdownDivider} />}
+              <li className={clsx(styles.dropdownItem, {
+                [styles.dropdownItem_borderBottom]: lastItemIndex != index
+              })}>
+                <Link
+                  passHref
+                  href={linkWithCurrentLocale(
+                    getLinksByPageType(router.locale, page._type, page.slug?.current),
+                  )}
+                  onClick={() => setIsOpen(false)}
+                  className={styles.dropdownLink}
+                >
+                  {name}
+                </Link>
+              </li>
             </Fragment>
           ))}
         </ul>
