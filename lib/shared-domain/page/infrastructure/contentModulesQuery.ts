@@ -557,10 +557,11 @@ export const contentModulesQuery = (
     buttons[] {
       ...,
       questionnaire->{
-		  questionnaireSlug {
-			current
-		  },
-		},
+        _type,
+		    questionnaireSlug {
+			    current
+		    }
+		  }
     },
     textBlocks[] {
 		...,
@@ -580,7 +581,7 @@ export const contentModulesQuery = (
 					  url,
 					}
 				}
-			}	
+			}
 		},
 		news->{
 		 ...,
@@ -596,12 +597,12 @@ export const contentModulesQuery = (
 				},
 			  },
 		},
-		customTitleImage { 
+		customTitleImage {
 			asset->{
 				  url
 				},
 		},
-    }, 
+    },
     secondHighlightedArticleSection {
     	...,
 		highlightedPage ->  {
@@ -612,12 +613,12 @@ export const contentModulesQuery = (
 				},
 			  },
 		},
-		customTitleImage { 
+		customTitleImage {
 			asset->{
 				  url
 				},
 		},
-    }, 
+    },
     partnerItem[] {
 		...,
 		image {
@@ -632,7 +633,7 @@ export const contentModulesQuery = (
 			asset->{
 				url,
 			}
-		}    
+		}
 	},
 ${extraQuery || ''}
   }`;
