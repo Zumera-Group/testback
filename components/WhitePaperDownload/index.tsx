@@ -5,7 +5,6 @@ import styles from './WhitePaperDownload.module.scss';
 import { WhitePaperForm } from 'components/WhitePaperDownload/WhitePaperForm';
 import Image from 'next/image';
 import { sanityImageUrlFor } from 'lib/sanity';
-import axios from 'axios';
 import { Sector, SiteSettings } from 'lib/shared-domain/page/domain';
 export const WhitePaperDownload: React.FC<{
   sector: Sector | any;

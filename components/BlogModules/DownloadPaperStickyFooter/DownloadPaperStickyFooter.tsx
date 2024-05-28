@@ -83,7 +83,6 @@ export const DownloadPaperStickyFooter: React.FC<{
 
         <Modal
           className={styles.modal}
-
           isOpen={isOpen}
           overlayClassName={styles.overlay}
           onRequestClose={closeModal}
@@ -134,6 +133,7 @@ export const DownloadPaperStickyFooter: React.FC<{
                     }
                     variant={'blog'}
                     sectorName={''}
+                    name={'sticky-footer'}
                   />
                 </GridColumn>
               </Grid>
