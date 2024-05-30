@@ -1745,9 +1745,13 @@ export class WhitePaperDownloadModule extends BaseModule {
 }
 
 export class ImagesWithHeaderAndTextModule extends BaseModule {
+  header: string|null = null;
+  headerSize: string|null = null;
   columns: IImagesWithHeaderAndTextModuleColumn[];
   constructor(fields: Record<string, any>) {
     super();
+    this.header = fields.header || null;
+    this.headerSize = fields.headerSize || null;
     this.columns = fields.imagesWithHeaderAndTextColumns;
   }
 }

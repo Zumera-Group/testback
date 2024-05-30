@@ -13,11 +13,12 @@ import clsx from 'clsx';
 export const ImagesWithHeaderAndText: React.FC<{
   specificContentModule: ImagesWithHeaderAndTextModule;
 }> = ({specificContentModule}) => {
-  const {columns} = specificContentModule;
+  const {columns, header, headerSize} = specificContentModule;
 
   return (
     <Section size={'md'} bg={'light'} color={'primary'}>
       <Container>
+        {header && <BlockHeader header={header} headerSize={headerSize}/>}
         <div className={clsx(styles.wrapper, styles.wrapper3Col)}>
           {Array.isArray(columns) && columns.map((column, i) =>
             <div key={i} className={clsx(styles.column, styles.column3Col)}>
@@ -46,3 +47,20 @@ export const ImagesWithHeaderAndText: React.FC<{
     </Section>
   );
 }
+
+const BlockHeader = ({header, headerSize}: {header: string, headerSize: string|null}) => {
+  const headerClass = styles.header;
+
+  switch (headerSize) {
+    case 'h1':
+      return <h1 className={headerClass}>{header}</h1>;
+    case 'h3':
+      return <h3 className={headerClass}>{header}</h3>;
+    case 'h4':
+      return <h4 className={headerClass}>{header}</h4>;
+    case 'h5':
+      return <h5 className={headerClass}>{header}</h5>;
+    default:
+      return <h2 className={headerClass}>{header}</h2>;
+  }
+};
