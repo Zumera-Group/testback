@@ -3,9 +3,9 @@ import { PageHeader } from '../lib/shared-domain/page/presentation/PageHeader';
 import { SiteSettings } from '../lib/shared-domain/page/domain/index';
 import { fetchSiteSettings } from '../lib/shared-domain/page/application/useGetSiteSettings';
 import { SharedContentFacade } from '../lib/shared-domain/page/infrastructure/sharedContent.facade';
-import { SharedContentContext } from 'lib/shared-domain/page/infrastructure/sharedContentContext';
 import { FourOFour } from 'components/FourOFour';
 import PageFooter from 'lib/shared-domain/page/presentation/PageFooter';
+import Head from 'next/head';
 
 export async function getStaticProps({ locale }) {
   const siteSettings = await fetchSiteSettings(locale);
@@ -28,6 +28,9 @@ export default function Custom404Page({
 }: PageProps): JSX.Element {
   return (
     <div>
+      <Head>
+        <title>404 - Page not found</title>
+      </Head>
       <PageHeader
         contentModules={[]}
         siteSettings={siteSettings}
