@@ -179,11 +179,7 @@ export const LowLeadFlow: React.FC<{
                 type={'tel'}
                 required={!!formFields.isPhoneNumberFieldRequired}
                 label={formFields.phoneNumberLabel}
-                description={
-                  pressed &&
-                  !getAnswer(PHONE_NUMBER_STORE_INDICATOR)?.trim() &&
-                  formFields.phoneNumberRequiredError
-                }
+                description={getPhoneNumberError()}
                 value={getAnswer(PHONE_NUMBER_STORE_INDICATOR)}
                 onChange={(e) =>
                   setAnswer({
