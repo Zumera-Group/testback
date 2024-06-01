@@ -22,7 +22,7 @@ const queryOffice = (
   }
 }`;
 
-const queryOffices = (lang) => `*[_type == "office" && _lang == "${lang}"] {
+const queryOffices = (lang) => `*[_type == "office" && _lang == "${lang}"  && (hidePage == false || !defined(hidePage))] {
   _id,
   _lang,
   city,

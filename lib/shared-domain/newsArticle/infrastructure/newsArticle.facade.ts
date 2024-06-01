@@ -133,7 +133,7 @@ const queryNewsArticle = (
 
 const queryNewsArticles = (
   lang,
-) => `*[_type == "newsArticle" && _lang == "${lang}"] {
+) => `*[_type == "newsArticle" && _lang == "${lang}" && (hidePage == false || !defined(hidePage))] {
   ...,
   _id,
   _lang,

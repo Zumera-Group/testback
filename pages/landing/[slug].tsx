@@ -9,6 +9,7 @@ import { ErrorTrackingBoundary } from 'lib/ErrorTrackingBoundary';
 import { SharedContentContext } from 'lib/shared-domain/page/infrastructure/sharedContentContext';
 import { SharedContentFacade } from 'lib/shared-domain/page/infrastructure/sharedContent.facade';
 import {
+  REVALIDATE_ON_FAILURE_TIME_IN_SECONDS,
   REVALIDATE_ON_SUCCESS_IN_SECONDS,
 } from '../../lib/shared-domain/page/constants';
 import { fetchLanding } from 'lib/shared-domain/landings/application/useGetVTLanding';
@@ -30,12 +31,8 @@ export async function getStaticProps({ locale, params, preview = false }) {
       locale,
     );
 
-    if (!landing) {
-      return {
-        redirect: {
-          destination: `/${locale}/404`,
-        },
-      };
+    if (!landing || (landing.hidePage === true && !preview)) {
+      return { notFound: true };
     }
 
     return {
@@ -51,7 +48,7 @@ export async function getStaticProps({ locale, params, preview = false }) {
     };
   } catch (e) {
     console.error(e);
-    return { notFound: true, revalidate: 10 };
+    return { notFound: true, revalidate: REVALIDATE_ON_FAILURE_TIME_IN_SECONDS };
   }
 }
 
@@ -84,12 +81,6 @@ export default function Index({
   if (sharedContent) {
     sharedContent.whiteBg = previewPage?.whiteBg || selectedLanding?.whiteBg;
   }
-
-  useEffect(() => {
-    if (selectedLanding?.hidePage) {
-      router.push(`/${router.locale}/home`);
-    }
-  }, [selectedLanding?.hidePage, router]);
 
   useEffect(() => {
     const valueTool = 'valuation-tool';

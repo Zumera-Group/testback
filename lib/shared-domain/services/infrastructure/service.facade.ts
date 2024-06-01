@@ -10,7 +10,7 @@ import {
 } from '../../page/infrastructure/contentModulesQuery';
 import { SERVER_FETCHING_ERROR } from '../../page/constants';
 
-const queryAll = (lang) => `*[_type == "service" && _lang == "${lang}"] {
+const queryAll = (lang) => `*[_type == "service" && _lang == "${lang}" && (hidePage == false || !defined(hidePage))] {
   ...,
   _id,
   _lang,

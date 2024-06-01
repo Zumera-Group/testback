@@ -6,7 +6,7 @@ import {
 } from '../../page/infrastructure/page.facade';
 import { SERVER_FETCHING_ERROR } from '../../page/constants';
 
-const querySectors = (lang) => `*[_type == "sector" && _lang == "${lang}"] {
+const querySectors = (lang) => `*[_type == "sector" && _lang == "${lang}" && (hidePage == false || !defined(hidePage))] {
   ...,
   _id,
   slug,

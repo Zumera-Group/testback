@@ -122,7 +122,7 @@ const queryTransactionDetail = (
 
 const queryTransactions = (
   lang,
-) => `*[_type == "transaction" && _lang == "${lang}"] {
+) => `*[_type == "transaction" && _lang == "${lang}" && (hidePage == false || !defined(hidePage))] {
   ...,
   _id,
   _lang,

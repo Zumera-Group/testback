@@ -46,14 +46,14 @@ export const getServerSideProps = async ({ res }) => {
   const deEmployees = await fetchEmployees('de');
   const frEmployees = await fetchEmployees('fr');
 
-  const enOffices = await fetchOffices('en');
-  const deOffices = await fetchOffices('de');
-  const frOffices = await fetchOffices('fr');
+  // const enOffices = await fetchOffices('en');
+  // const deOffices = await fetchOffices('de');
+  // const frOffices = await fetchOffices('fr');
 
   const questionnaires = await fetchQuestionnaires();
 
   const staticPages = pages
-    ?.filter((page) => page.includeInSitemap)
+    ?.filter((page) => page.includeInSitemap && !page.hidePage)
     ?.map((page) => getPageUrl(page._lang, '/' + page.slug?.current));
 
   const staticQuestionnaires = questionnaires?.map((q) =>
@@ -62,11 +62,13 @@ export const getServerSideProps = async ({ res }) => {
     ),
   );
 
-  const staticTransactions = [...enTransactions, ...deTransactions, ...frTransactions]?.map((t) =>
-    getUrl(
-      links(SanityService.getLocaleFromSanityLocale(t._lang)).transactions(t),
-    ),
-  );
+  const staticTransactions = [...enTransactions, ...deTransactions, ...frTransactions]?.filter((t) => t?.slug?.current)
+    .map((t) =>
+      getUrl(
+        links(SanityService.getLocaleFromSanityLocale(t._lang)).transactions(t),
+      ),
+    )
+  ;
 
   const staticServices = [...enServices, ...deServices, ...frServices]?.map((s) =>
     getUrl(links(SanityService.getLocaleFromSanityLocale(s._lang)).services(s)),
@@ -76,11 +78,13 @@ export const getServerSideProps = async ({ res }) => {
     getUrl(links(SanityService.getLocaleFromSanityLocale(s._lang)).sectors(s)),
   );
 
-  const staticNews = [...enNews, ...deNews, ...frNews]?.map((n) =>
-    getUrl(
-      links(SanityService.getLocaleFromSanityLocale(n._lang)).newsArticles(n),
-    ),
-  );
+  const staticNews = [...enNews, ...deNews, ...frNews]?.filter((n) => n?.slug?.current)
+    .map((n) =>
+      getUrl(
+        links(SanityService.getLocaleFromSanityLocale(n._lang)).newsArticles(n),
+      ),
+    )
+  ;
 
   const staticEmployees = [...enEmployees, ...deEmployees, ...frEmployees]?.map((e) =>
     getUrl(
@@ -88,14 +92,14 @@ export const getServerSideProps = async ({ res }) => {
     ),
   );
 
-  const staticOffices = [...enOffices, ...deOffices, ...frOffices]?.map((o) =>
-    getUrl(
-      '/' +
-        SanityService.getLocaleFromSanityLocale(o._lang) +
-        '/cdi-global/' +
-        slugifyOffice(o.city),
-    ),
-  );
+  // const staticOffices = [...enOffices, ...deOffices, ...frOffices]?.map((o) =>
+  //   getUrl(
+  //     '/' +
+  //       SanityService.getLocaleFromSanityLocale(o._lang) +
+  //       '/cdi-global/' +
+  //       slugifyOffice(o.city),
+  //   ),
+  // );
 
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
     <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
@@ -106,7 +110,7 @@ export const getServerSideProps = async ({ res }) => {
         ...staticSectors,
         ...staticNews,
         ...staticEmployees,
-        ...staticOffices,
+        // ...staticOffices,
         ...staticTransactions,
       ]
         .map((url) => {
