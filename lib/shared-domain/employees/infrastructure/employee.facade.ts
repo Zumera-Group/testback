@@ -7,7 +7,7 @@ import {
 } from '../../page/infrastructure/page.facade';
 import { SERVER_FETCHING_ERROR } from '../../page/constants';
 
-const queryEmployees = (lang) => `*[_type == "employee" && _lang == "${lang}"] {
+const queryEmployees = (lang) => `*[_type == "employee" && _lang == "${lang}" && (hidePage == false || !defined(hidePage))] {
   ...,
   _id,
   _lang,

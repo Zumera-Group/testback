@@ -11,7 +11,10 @@ import {filterDataToSingleItem, PageFacade} from '../lib/shared-domain/page/infr
 //   dePaths as de,
 //   frPaths as fr,
 // } from '../lib/shared-domain/page/paths';
-import { REVALIDATE_ON_SUCCESS_IN_SECONDS } from '../lib/shared-domain/page/constants';
+import {
+  REVALIDATE_ON_FAILURE_TIME_IN_SECONDS,
+  REVALIDATE_ON_SUCCESS_IN_SECONDS
+} from '../lib/shared-domain/page/constants';
 import { useEffect, useState } from 'react';
 import { SecretKeyLockScreen } from 'components/SecretKeyLockScreen';
 import {SanityService} from '../lib/services/sanity.service';
@@ -55,9 +58,10 @@ export async function getStaticProps({ locale, params, preview = false }) {
 
     const { page, query, siteSettings = {}, sharedContent } = data;
 
-    if (!page) {
+    if (!page || (page.hidePage === true && !preview)) {
       return {
         notFound: true,
+        revalidate: REVALIDATE_ON_FAILURE_TIME_IN_SECONDS
       };
     }
 
@@ -74,7 +78,7 @@ export async function getStaticProps({ locale, params, preview = false }) {
     };
   } catch (e) {
     console.error(e);
-    return { notFound: true, revalidate: 10 };
+    return { notFound: true, revalidate: REVALIDATE_ON_FAILURE_TIME_IN_SECONDS };
   }
 }
 
@@ -123,21 +127,6 @@ export default function Index({
       setIsSecretOpen(true);
     }
   }, []);
-
-  // FIXME: this is actually a bug - if a page isn't in cache (isFallback == true) - it leads to 404, but should be resolved with a page.
-  // useEffect(() => {
-  //   if (router.isFallback) {
-  //     console.log(router, 'router.isFallback');
-  //     router.push(`/${router.locale}/404`);
-  //   }
-  // }, [router]);
-
-  useEffect(() => {
-    if (page?.hidePage) {
-      router.push(`/${router.locale}/home`);
-      return;
-    }
-  }, [page, router]);
 
   if (router.isFallback) {
     return null;

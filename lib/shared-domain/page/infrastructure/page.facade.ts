@@ -78,7 +78,8 @@ const queryPages = () => `*[_type == "page"] {
     current
   },
   disallowInRobotsTxt,
-  includeInSitemap
+  includeInSitemap,
+  hidePage
 }`;
 
 export function filterDataToSingleItem(data, preview) {

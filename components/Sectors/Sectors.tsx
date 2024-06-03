@@ -3,6 +3,7 @@ import { SectionHeading } from 'components/SectionHeading';
 import { Sector } from './Sector';
 
 import styles from './Sectors.module.scss';
+import {useMemo} from 'react';
 
 interface Props {
   title?: string;
@@ -12,7 +13,20 @@ interface Props {
 }
 
 export const Sectors: React.FC<Props> = ({ ...rest }) => {
-  const { title, subtitle, description, sectors } = rest;
+  const { title, subtitle, description } = rest;
+  const sectors = useMemo(() => {
+    const sectors = Array.isArray(rest.sectors) ? rest.sectors : [];
+
+    return sectors
+      .filter(({hidePage}) => !hidePage)
+      .sort((a, b) => {
+        if (a.name > b.name) return 1;
+        if (a.name < b.name) return -1;
+        return 0;
+      })
+    ;
+  }, [rest.sectors]);
+
   return (
     <Section size={'md'} bg={'light'} color={'primary'}>
       <Container classes={styles.container}>
@@ -31,11 +45,6 @@ export const Sectors: React.FC<Props> = ({ ...rest }) => {
             className={styles.sectors}
           >
             {sectors
-              ?.sort((a, b) => {
-                if (a.name > b.name) return 1;
-                if (a.name < b.name) return -1;
-                return 0;
-              })
               ?.map((sector, index) => (
                 <GridColumn
                   key={`${sector?._key}-${index}`}

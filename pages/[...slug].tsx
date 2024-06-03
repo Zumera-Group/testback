@@ -7,12 +7,14 @@ export async function getStaticPaths() {
   };
 }
 
-export async function getStaticProps({ locale }) {
-  return {
-    redirect: {
-      destination: `/${locale}/404`,
-    },
-  };
+export async function getStaticProps() {
+  return {notFound: true};
+
+  // return {
+  //   redirect: {
+  //     destination: `/${locale}/404`,
+  //   },
+  // };
 }
 
 const CatchRoutesTo404Page = () => {

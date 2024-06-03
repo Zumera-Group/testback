@@ -45,7 +45,7 @@ export const AllTransactionsCarousel = ({ ...rest }) => {
         setLoading(false);
       });
     }
-  }, [isVisible, router]);
+  }, [isVisible, router.locale]);
 
   const transactionLink = {
     link: {

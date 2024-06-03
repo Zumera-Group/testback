@@ -12,6 +12,7 @@ import { usePreviewSubscription } from '../../lib/sanity';
 import { filterDataToSingleItem } from '../../lib/shared-domain/page/infrastructure/page.facade';
 
 import {
+  REVALIDATE_ON_FAILURE_TIME_IN_SECONDS,
   REVALIDATE_ON_SUCCESS_IN_SECONDS,
 } from '../../lib/shared-domain/page/constants';
 import { SecretKeyLockScreen } from 'components/SecretKeyLockScreen';
@@ -45,11 +46,7 @@ export async function getStaticProps({
     const sharedContent =
       await new SharedContentFacade().getSharedContentFacade(locale);
     if (localeFromRoute !== locale) {
-      return {
-        redirect: {
-          destination: `/${locale}/404`,
-        },
-      };
+      return { notFound: true };
     }
     const { service: serviceDetail, query } = await fetchServiceDetail(
       locale,
@@ -57,21 +54,9 @@ export async function getStaticProps({
       preview,
     );
 
-    if (!serviceDetail) {
-      return {
-        redirect: {
-          destination: `/${locale}/404`,
-        },
-      };
+    if (!serviceDetail || (serviceDetail.hidePage === true && !preview)) {
+      return {notFound: true, revalidate: REVALIDATE_ON_FAILURE_TIME_IN_SECONDS};
     }
-
-    // if (serviceDetail && serviceDetail.hidePage) {
-    //   return {
-    //     redirect: {
-    //       destination: `/${locale}/home`,
-    //     },
-    //   };
-    // }
 
     return {
       props: {
@@ -124,12 +109,6 @@ export default function Index({
       setIsSecretOpen(true);
     }
   }, []);
-
-  useEffect(() => {
-    if (selectedService?.hidePage) {
-      router.push(`/${router.locale}/home`);
-    }
-  }, [selectedService?.hidePage, router]);
 
   if (router.isFallback) {
     return null;

@@ -36,24 +36,26 @@ export async function getStaticProps({
     const siteSettings = await fetchSiteSettings(locale);
     const sharedContent =
       await new SharedContentFacade().getSharedContentFacade(locale);
+
     if (localeFromRoute !== locale) {
-      return {
-        redirect: {
-          destination: `/${locale}/404`,
-        },
-      };
+      // I dont know why do we need it, but redirect looks like a mistake from SEO perspective
+      return { notFound: true };
+      // return {
+      //   redirect: {
+      //     destination: `/${locale}/404`,
+      //   },
+      // };
     }
+
     const { sectorDetail: selectedSector, query } = await fetchSectorDetail(
       locale,
       params.slug,
       preview,
     );
 
-    if (!selectedSector) {
+    if (!selectedSector || (selectedSector.hidePage === true && !preview)) {
       return {
-        redirect: {
-          destination: `/${locale}/404`,
-        },
+        notFound: true, revalidate: REVALIDATE_ON_FAILURE_TIME_IN_SECONDS
       };
     }
 
@@ -102,7 +104,6 @@ export default function Index({
     enabled: preview,
   });
   const previewSector = filterDataToSingleItem(previewData, preview);
-
   const router = useRouter();
 
   const [isSecretOpen, setIsSecretOpen] = useState(
@@ -114,13 +115,7 @@ export default function Index({
     }
   }, []);
 
-  useEffect(() => {
-    if (selectedSector?.hidePage) {
-      router.push(`/${router.locale}/home`);
-    }
-  }, [selectedSector?.hidePage, router]);
-
-  if (router.isFallback || selectedSector?.hidePage === true) {
+  if (router.isFallback) {
     return null;
   }
 

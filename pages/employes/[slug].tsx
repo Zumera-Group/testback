@@ -49,23 +49,18 @@ export async function getStaticProps({
       await new SharedContentFacade().getSharedContentFacade(locale);
     const siteSettings = await fetchSiteSettings(locale);
     if (localeFromRoute !== locale) {
-      return {
-        redirect: {
-          destination: `/${locale}/404`,
-        },
-      };
+      return { notFound: true };
     }
+
     const { employee: employeeDetail, query } = await fetchEmployee(
       locale,
       params.slug,
       preview,
     );
 
-    if (!employeeDetail) {
+    if (!employeeDetail || (employeeDetail.hidePage === true && !preview)) {
       return {
-        redirect: {
-          destination: `/${locale}/404`,
-        },
+        notFound: true, revalidate: REVALIDATE_ON_FAILURE_TIME_IN_SECONDS
       };
     }
 
@@ -85,7 +80,7 @@ export async function getStaticProps({
     };
   } catch (e) {
     console.error(e);
-    return { notFound: true, revalidate: 10 };
+    return { notFound: true, revalidate: REVALIDATE_ON_FAILURE_TIME_IN_SECONDS };
   }
 }
 
@@ -125,12 +120,6 @@ export default function Index({
     }
   }, []);
 
-  useEffect(() => {
-    if (selectedEmployee?.hidePage) {
-      router.push(`/${router.locale}/home`);
-    }
-  }, [selectedEmployee?.hidePage, router]);
-
   if (router.isFallback) {
     return (
       <>
@@ -142,10 +131,6 @@ export default function Index({
         </div>
       </>
     );
-  }
-
-  if (router.isFallback) {
-    return null;
   }
 
   if (siteSettings && siteSettings?.isUnderSecretKey && !isSecretOpen) {

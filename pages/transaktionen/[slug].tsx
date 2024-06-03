@@ -35,24 +35,20 @@ export async function getStaticProps({
     const siteSettings = await fetchSiteSettings(locale);
     const sharedContent =
       await new SharedContentFacade().getSharedContentFacade(locale);
+
     if (localeFromRoute !== locale) {
-      return {
-        redirect: {
-          destination: `/${locale}/404`,
-        },
-      };
+      return { notFound: true };
     }
+
     const { transactionDetail, query } = await fetchTransactionDetail(
       locale,
       params.slug,
       preview,
     );
 
-    if (!transactionDetail) {
+    if (!transactionDetail || (transactionDetail.hidePage === true && !preview)) {
       return {
-        redirect: {
-          destination: `/${locale}/404`,
-        },
+        notFound: true, revalidate: REVALIDATE_ON_FAILURE_TIME_IN_SECONDS
       };
     }
 
@@ -114,12 +110,6 @@ export default function Index({
       setIsSecretOpen(true);
     }
   }, []);
-
-  useEffect(() => {
-    if (selectedTransaction?.hidePage) {
-      router.push(`/${router.locale}/home`);
-    }
-  }, [selectedTransaction?.hidePage, router]);
 
   if (router.isFallback) {
     return null;

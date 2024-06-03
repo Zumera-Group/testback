@@ -15,7 +15,10 @@ import { useRouter } from 'next/router';
 import { filterDataToSingleItem } from '../../lib/shared-domain/page/infrastructure/page.facade';
 import { usePreviewSubscription } from '../../lib/sanity';
 
-import { REVALIDATE_ON_FAILURE_TIME_IN_SECONDS } from '../../lib/shared-domain/page/constants';
+import {
+  REVALIDATE_ON_FAILURE_TIME_IN_SECONDS,
+  REVALIDATE_ON_SUCCESS_IN_SECONDS
+} from '../../lib/shared-domain/page/constants';
 import { SecretKeyLockScreen } from 'components/SecretKeyLockScreen';
 
 export async function getStaticPaths() {
@@ -65,12 +68,8 @@ export async function getStaticProps({ locale, params, preview = false }) {
       preview,
     );
 
-    if (!newsArticle) {
-      return {
-        redirect: {
-          destination: `/${locale}/404`,
-        },
-      };
+    if (!newsArticle || (newsArticle.hidePage === true && !preview)) {
+      return { notFound: true, revalidate: REVALIDATE_ON_FAILURE_TIME_IN_SECONDS };
     }
 
     const siteSettings = await fetchSiteSettings(locale);
@@ -89,11 +88,11 @@ export async function getStaticProps({ locale, params, preview = false }) {
         content,
         sharedContent,
       },
-      revalidate: REVALIDATE_ON_FAILURE_TIME_IN_SECONDS,
+      revalidate: REVALIDATE_ON_SUCCESS_IN_SECONDS,
     };
   } catch (e) {
     console.error(e);
-    return { notFound: true, revalidate: 10 };
+    return { notFound: true, revalidate: REVALIDATE_ON_FAILURE_TIME_IN_SECONDS };
   }
 }
 
@@ -133,12 +132,6 @@ export default function Index({
       setIsSecretOpen(true);
     }
   }, []);
-
-  useEffect(() => {
-    if (selectedNewsArticle?.hidePage) {
-      router.push(`/${router.locale}/home`);
-    }
-  }, [selectedNewsArticle?.hidePage, router]);
 
   if (router.isFallback) {
     return null;

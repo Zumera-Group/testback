@@ -44,7 +44,10 @@ export interface Page {
   whiteBg: boolean;
 }
 
-export type TPageShortInfo = Pick<Page, '_id' | '_lang' | 'slug' | 'disallowInRobotsTxt' | 'includeInSitemap'>;
+export type TPageShortInfo = Pick<
+  Page,
+  '_id' | '_lang' | 'slug' | 'disallowInRobotsTxt' | 'includeInSitemap' | 'hidePage'
+>;
 
 export interface IAnnouncementTopBanner {
   text: string;

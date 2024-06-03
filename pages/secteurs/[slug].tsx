@@ -38,23 +38,18 @@ export async function getStaticProps({
       await new SharedContentFacade().getSharedContentFacade(locale);
 
     if (localeFromRoute !== locale) {
-      return {
-        redirect: {
-          destination: `/${locale}/404`,
-        },
-      };
+      return { notFound: true };
     }
+
     const { sectorDetail: selectedSector, query } = await fetchSectorDetail(
       locale,
       params.slug,
       preview,
     );
 
-    if (!selectedSector) {
+    if (!selectedSector || (selectedSector.hidePage === true && !preview)) {
       return {
-        redirect: {
-          destination: `/${locale}/404`,
-        },
+        notFound: true, revalidate: REVALIDATE_ON_FAILURE_TIME_IN_SECONDS
       };
     }
 
@@ -115,13 +110,7 @@ export default function Index({
     }
   }, []);
 
-  useEffect(() => {
-    if (selectedSector?.hidePage) {
-      router.push(`/${router.locale}/home`);
-    }
-  }, [selectedSector?.hidePage, router]);
-
-  if (router.isFallback || selectedSector?.hidePage === true) {
+  if (router.isFallback) {
     return null;
   }
 

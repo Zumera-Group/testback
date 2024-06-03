@@ -11,6 +11,7 @@ import { filterDataToSingleItem } from '../../lib/shared-domain/page/infrastruct
 import { usePreviewSubscription } from '../../lib/sanity';
 
 import {
+  REVALIDATE_ON_FAILURE_TIME_IN_SECONDS,
   REVALIDATE_ON_SUCCESS_IN_SECONDS
 } from '../../lib/shared-domain/page/constants';
 import { useEffect, useState } from 'react';
@@ -45,23 +46,16 @@ export async function getStaticProps({
     const siteSettings = await fetchSiteSettings(locale);
 
     if (localeFromRoute !== locale) {
-      return {
-        redirect: {
-          destination: `/${locale}/404`,
-        },
-      };
+      return { notFound: true };
     }
+
     const { service: serviceDetail, query } = await fetchServiceDetail(
       locale,
       params.slug,
     );
 
-    if (!serviceDetail) {
-      return {
-        redirect: {
-          destination: `/${locale}/404`,
-        },
-      };
+    if (!serviceDetail || (serviceDetail.hidePage === true && !preview)) {
+      return {notFound: true, revalidate: REVALIDATE_ON_FAILURE_TIME_IN_SECONDS};
     }
 
     return {
@@ -115,12 +109,6 @@ export default function Index({
       setIsSecretOpen(true);
     }
   }, []);
-
-  useEffect(() => {
-    if (selectedService?.hidePage) {
-      router.push(`/${router.locale}/home`);
-    }
-  }, [selectedService?.hidePage, router]);
 
   if (router.isFallback) {
     return null;
