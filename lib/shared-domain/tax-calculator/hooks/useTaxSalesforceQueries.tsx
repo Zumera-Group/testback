@@ -62,7 +62,8 @@ export const useTaxSalesforceQueries = () => {
       } catch (e) {
         logError(e, { where: 'syncTaxCurrentAnswersToSalesforce' });
 
-        throw new Error(e);
+        //do we really need to throw error to user???
+        // throw new Error(e);
       }
     },
     leadDetailsSubmission: async (

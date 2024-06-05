@@ -59,12 +59,12 @@ const TaxCalculatorQuestionnaireLayout: React.FC<{
     currentPositionInTotalNumberOfQuestion,
     currentQuestion,
     totalNumberOfQuestions,
+    programmingCategoryIndex
   } = useTaxQuestionnaire({ questionsByCategory });
 
-  const currentCategory = questionsByCategory?.[categoryIndex]?.categoryName ?? '';
+  const currentCategory = questionsByCategory?.[programmingCategoryIndex]?.categoryName ?? '';
 
   const isResultsCompactOnMobile = variantOfTheResultPage === 'compact' && isMobile;
-
 
   return (
     <>
