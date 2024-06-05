@@ -40,7 +40,10 @@ const RelatedArticles: React.FC<{
         classes={styles.carousel}
         maxSlidesToShow={3}
       >
-        {related?.filter(({ _type }) => _type === 'relatedCalculators' || _type === 'blogArticle').map((article, index) => (
+        {related?.filter(({
+          _type,
+          calculatorPage,
+        }) => !!calculatorPage || _type === 'blogArticle').map((article, index) => (
           <SwiperSlide
             key={`relatedArticleCarousel-${index}`}
             className={styles.slide}
@@ -82,7 +85,7 @@ const RelatedArticles: React.FC<{
                     ))}
                   </div>
                 </a>)}
-              {article?._type === 'relatedCalculators' &&
+              {!!article.calculatorPage &&
                 (<GridColumn sm={12} md={6} lg={5} className={styles.rightColumn}>
                   <div className={styles.relatedCalculators}>
                     <a
