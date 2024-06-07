@@ -1,4 +1,6 @@
-import { useEffect, useState } from 'react';
+'use client';
+
+import {useEffect, useMemo, useState} from 'react';
 import { usePathname, useSearchParams } from 'next/navigation';
 import { useRouter } from 'next/router';
 import { qLogs } from 'lib/shared-domain/questionnaire/application/log';
@@ -6,30 +8,41 @@ import {
   calculateCurrentPosition,
   calculateTotalNumberOfQuestions,
 } from 'lib/shared-domain/tax-calculator/hooks/helpers';
-import { TaxCalculatorQuestionnaire } from 'lib/shared-domain/tax-calculator/types';
 import { useGetURL } from 'lib/hooks/useGetURL';
 import { useTaxCalculatorStore } from 'lib/shared-domain/tax-calculator/store';
 import { useTaxSalesforceQueries } from 'lib/shared-domain/tax-calculator/hooks/useTaxSalesforceQueries';
+import {Category, Question} from '../../questionnaire/domain';
+import _isNil from 'lodash/isNil';
 
+function useProgress({ questionsByCategory, programmingCategoryIndex, programmingStepIndex }: {
+  questionsByCategory: Category[],
+  programmingCategoryIndex?: number,
+  programmingStepIndex?: number
+}) {
+  const [currentPositionInTotalNumberOfQuestion, setCurrentPositionInTotalNumberOfQuestion] = useState<number>(0);
 
-function useProgress({ questionsByCategory }) {
-  const searchParams = useSearchParams();
-  const categoryIndex = Number(searchParams.get('category') ?? 0);
-  const stepIndex = Number(searchParams.get('step') ?? 0);
-  const programmingStepIndex = stepIndex - 1;
-  const programmingCategoryIndex = categoryIndex - 1;
+  const {totalNumberOfQuestions, progress} = useMemo(() => {
+    const totalNumberOfQuestions: number = calculateTotalNumberOfQuestions(questionsByCategory);
+    const progress: number = totalNumberOfQuestions > 0
+      ? (currentPositionInTotalNumberOfQuestion / totalNumberOfQuestions) * 100
+      : 0
+    ;
 
-  const [currentPositionInTotalNumberOfQuestion, setCurrentPositionInTotalNumberOfQuestion] = useState(0);
+    return {totalNumberOfQuestions, progress};
+  }, [questionsByCategory, currentPositionInTotalNumberOfQuestion]);
+
   useEffect(() => {
-    const position = calculateCurrentPosition(questionsByCategory, programmingCategoryIndex, programmingStepIndex);
-    setCurrentPositionInTotalNumberOfQuestion(position);
-  }, [categoryIndex, stepIndex, questionsByCategory]);
+    if (!_isNil(programmingCategoryIndex) && !_isNil(programmingStepIndex)) {
+      const position = calculateCurrentPosition(questionsByCategory, programmingCategoryIndex, programmingStepIndex);
+      setCurrentPositionInTotalNumberOfQuestion(position);
+    }
+  }, [programmingCategoryIndex, programmingStepIndex, questionsByCategory]);
 
-  const totalNumberOfQuestions = calculateTotalNumberOfQuestions(questionsByCategory);
-  const progress = (currentPositionInTotalNumberOfQuestion / totalNumberOfQuestions) * 100;
-
-  const questionsOnCurrentCategory = questionsByCategory[programmingCategoryIndex]?.questions ?? [];
-  const currentQuestion = questionsOnCurrentCategory[programmingStepIndex];
+  const questionsOnCurrentCategory = (!_isNil(programmingCategoryIndex) && Array.isArray(questionsByCategory[programmingCategoryIndex]?.questions))
+    ? questionsByCategory[programmingCategoryIndex]?.questions
+    : []
+  ;
+  const currentQuestion = !_isNil(programmingStepIndex) ? questionsOnCurrentCategory[programmingStepIndex] : null;
 
   return {
     progress,
@@ -37,29 +50,48 @@ function useProgress({ questionsByCategory }) {
     totalNumberOfQuestions,
     currentQuestion,
     questionsOnCurrentCategory,
+  } as {
+    progress: number,
+    currentPositionInTotalNumberOfQuestion: number,
+    totalNumberOfQuestions: number,
+    currentQuestion: Question|null,
+    questionsOnCurrentCategory: Question[]
   };
 }
 
 export function useTaxQuestionnaire({ questionsByCategory }: {
-  questionsByCategory: TaxCalculatorQuestionnaire['questionsByCategory']
+  questionsByCategory: Category[],
 }) {
   const fullUrl = useGetURL();
   const router = useRouter();
 
   const searchParams = useSearchParams();
   const pathname = usePathname();
-  const categoryIndex = Number(searchParams.get('category') ?? 1);
-  const stepIndex = Number(searchParams.get('step') ?? 1);
-  const isOnResultsScreen = searchParams.get('isOnResultsScreen') === 'true';
-  const programmingStepIndex = stepIndex - 1;
-  const programmingCategoryIndex = categoryIndex - 1;
 
-  // set the url params on first render
-  useEffect(() => {
-    if (!categoryIndex || !stepIndex) {
-      router.push(`${pathname}?category=1&step=1`);
+  const {categoryIndex, stepIndex, isOnResultsScreen, programmingCategoryIndex, programmingStepIndex} = useMemo(() => {
+    let categoryIndex = 1;
+    let stepIndex = 1;
+
+    if (searchParams.has('category')) {
+      const category = parseInt(searchParams.get('category'));
+      if (!isNaN(category) && category > 0) {
+        categoryIndex = category;
+      }
     }
-  }, []);
+
+    if (searchParams.has('step')) {
+      const step = parseInt(searchParams.get('step'));
+      if (!isNaN(step) && step > 0) {
+        stepIndex = step;
+      }
+    }
+
+    const isOnResultsScreen = searchParams.get('isOnResultsScreen') === 'true';
+    const programmingCategoryIndex = categoryIndex - 1;
+    const programmingStepIndex = stepIndex - 1;
+
+    return {categoryIndex, stepIndex, isOnResultsScreen, programmingCategoryIndex, programmingStepIndex};
+  }, [searchParams]);
 
   const {
     progress,
@@ -67,11 +99,10 @@ export function useTaxQuestionnaire({ questionsByCategory }: {
     totalNumberOfQuestions,
     currentQuestion,
     questionsOnCurrentCategory,
-  } = useProgress({ questionsByCategory });
+  } = useProgress({ questionsByCategory, programmingCategoryIndex, programmingStepIndex });
 
   const { setLeadSourceURL, uniqueId } = useTaxCalculatorStore();
   const { syncTaxCurrentAnswersToSalesforce } = useTaxSalesforceQueries();
-
 
   // *** helpers ***
   const onNextQuestion = () => {
@@ -84,7 +115,9 @@ export function useTaxQuestionnaire({ questionsByCategory }: {
       uniqueId,
       currentSalesforceId: currentQuestion?.salesforceId,
       currentQuestionNumber: currentPositionInTotalNumberOfQuestion,
-      currentField: currentQuestion?.questionField,
+      //currentField is always undefined in the currentQuestion - Looks like a bug:
+      // currentField: currentQuestion?.questionField || '',
+      currentField: '',
     });
 
     const hasNextQuestion = questionsOnCurrentCategory[programmingStepIndex + 1];
