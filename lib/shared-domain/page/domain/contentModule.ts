@@ -677,6 +677,8 @@ export class ContactUsSectionModule extends BaseModule {
     messagePlaceholder: string;
     successMessage: string;
     errorMessage: string;
+    newsLetterCheckboxText: string;
+    isNewsLetterCheckboxRequired?: boolean;
   };
 
   constructor(fields: Record<string, any>) {

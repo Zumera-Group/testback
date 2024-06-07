@@ -1,14 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import * as EmailValidator from 'email-validator';
 
 import { SalesforceFacade } from '../infrastructure/salesforce.facade';
-import { useRouter } from 'next/router';
 import { useGetURL } from 'lib/hooks/useGetURL';
 
 export const useContactFormSubmit = () => {
   const [nameTouched, setNameTouched] = React.useState(false);
   const [emailTouched, setEmailTouched] = React.useState(false);
   const [phoneTouched, setPhoneTouched] = React.useState(false);
+  const [isNewsletterAccepted, setIsNewsletterAccepted] = React.useState(false);
+  const [isPolicyCheckboxAccepted, setIsPolicyCheckboxAccepted] = useState(false);
   const [email, setEmail] = React.useState('');
   const [name, setName] = React.useState('');
   const [phone, setPhone] = React.useState('');
@@ -33,6 +34,8 @@ export const useContactFormSubmit = () => {
     setNameTouched(false);
     setEmailTouched(false);
     setPhoneTouched(false);
+    setIsPolicyCheckboxAccepted(false)
+    setIsNewsletterAccepted(false)
   };
 
   return {
@@ -68,6 +71,14 @@ export const useContactFormSubmit = () => {
       onChange: (e) => setMessage(e.target.value),
     },
     leadSourceURL: {},
+    policyCheckbox: {
+      isChecked: isPolicyCheckboxAccepted,
+      onChange: (e) => setIsPolicyCheckboxAccepted(e.target.checked),
+    },
+    newsLetterCheckbox: {
+      isChecked: isNewsletterAccepted,
+      onChange: (e) => setIsNewsletterAccepted(e.target.checked),
+    },
     submit: async () => {
       setEmailTouched(true);
       setNameTouched(true);
@@ -82,6 +93,7 @@ export const useContactFormSubmit = () => {
           lastName: lastName || firstName,
           message: message,
           leadSourceURL: fullUrl,
+          isNewsletterAccepted,
         });
         resetForm();
         setIsError(false);

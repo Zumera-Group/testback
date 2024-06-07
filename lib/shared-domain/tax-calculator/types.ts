@@ -41,6 +41,8 @@ interface FormFields {
   checkBoxSecond?: string;
   checkBoxThird?: string;
   checkBoxLink?: string;
+  newsLetterCheckboxText: string;
+  isNewsLetterAccepted?: boolean;
   successMessage: string;
   buttonText: string;
 }

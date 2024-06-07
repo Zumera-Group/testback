@@ -14,7 +14,7 @@ import { useSalesforceLeadSync } from '../../../application/useSaleforceLeadSync
 import {
   COMPANY_NAME_STORE_INDICATOR,
   EMAIL_STORE_INDICATOR,
-  NAME_STORE_INDICATOR,
+  NAME_STORE_INDICATOR, NEWSLETTER_CHECKBOX,
   PHONE_NUMBER_STORE_INDICATOR,
 } from 'lib/shared-domain/questionnaire/presentation/Result/constants';
 
@@ -30,14 +30,15 @@ export const LowLeadFlow: React.FC<{
   const { syncLeadToSalesforce } = useSalesforceLeadSync();
   const [isFormSubmitted, setIsFormSubmitted] = useState(false);
   const { getAnswer, setAnswer, uniqueId, addBgPromise } = useValuationStore();
-  const [checkboxIsChecked, setCheckboxIsChecked] = useState(false);
+  const [isPolicyCheckboxChecked, setIsPolicyCheckboxChecked] = useState(false);
   const [pressed, setPressed] = useState(false);
   const { locale } = useRouter();
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const formFields = resultScreenCopy.formFields;
 
   const isSubmissionAllowed =
-    checkboxIsChecked &&
+    isPolicyCheckboxChecked &&
+    (!!formFields.isNewsLetterCheckboxRequired ? getAnswer(NEWSLETTER_CHECKBOX) : true) &&
     !!getAnswer(NAME_STORE_INDICATOR)?.trim() &&
     !!getAnswer(EMAIL_STORE_INDICATOR)?.trim() &&
     (!!formFields.isCompanyFieldRequired ? !!getAnswer(COMPANY_NAME_STORE_INDICATOR)?.trim() : true) &&
@@ -191,8 +192,8 @@ export const LowLeadFlow: React.FC<{
             </FormGroup>
 
             <Checkbox
-              onChange={(e) => setCheckboxIsChecked(e.target.checked)}
-              isChecked={checkboxIsChecked}
+              onChange={(e) => setIsPolicyCheckboxChecked(e.target.checked)}
+              isChecked={isPolicyCheckboxChecked}
               id="result_checkBox"
             >
               <div
@@ -217,7 +218,29 @@ export const LowLeadFlow: React.FC<{
                 <span> {formFields.checkBoxThird}</span>
               </div>
             </Checkbox>
-            {pressed && !checkboxIsChecked && (
+
+            {
+              !!formFields.newsLetterCheckboxText &&
+              <div style={{ marginTop: '12px' }}>
+                <FormGroup>
+                  <Checkbox
+                    id={'newsLetterCheckbox'}
+                    required={!!formFields.isNewsLetterCheckboxRequired}
+                    isChecked={getAnswer(NEWSLETTER_CHECKBOX)}
+                    onChange={(e) => {
+                      setAnswer({
+                        id: NEWSLETTER_CHECKBOX,
+                        value: e.target.checked,
+                      });
+                    }}
+                  >
+                    {formFields.newsLetterCheckboxText}
+                  </Checkbox>
+                </FormGroup>
+              </div>
+            }
+
+            {pressed && !isPolicyCheckboxChecked && (
               <FormGroup>
                 <Message isError> {t('evaluation.form.checkboxError')}</Message>
               </FormGroup>
@@ -226,7 +249,7 @@ export const LowLeadFlow: React.FC<{
               <Button
                 type="submit"
                 variant="primary"
-                disabled={!checkboxIsChecked || isSubmitting || !isSubmissionAllowed}
+                disabled={isSubmitting || !isSubmissionAllowed}
                 onDark
                 hideIcon
                 classes={styles.submitButton}

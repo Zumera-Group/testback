@@ -1,9 +1,10 @@
 import { AxiosService } from 'lib/services/axios.service';
 import { MarketingParamsService } from '../application/marketingParamsService';
 import { logError } from 'lib/logError';
-import {IApiField} from '../../../../@types/api';
-import {createGetStr, TGetParams} from '../../../urlHelpers';
-import {IGetFieldsFilters} from './types';
+import { IApiField } from '../../../../@types/api';
+import { createGetStr, TGetParams } from '../../../urlHelpers';
+import { IGetFieldsFilters } from './types';
+import { format } from 'date-fns';
 
 const BASE_URL = process.env.NEXT_PUBLIC_SALESFORCE_API_BASE_URL;
 const unformattedParams =
@@ -221,6 +222,7 @@ export class SalesforceFacade {
     lastName: string;
     message: string;
     leadSourceURL: string;
+    isNewsletterAccepted: boolean;
   }): Promise<void> {
     try {
       const cookies = MarketingParamsService.getCookies();
@@ -237,6 +239,8 @@ export class SalesforceFacade {
             company: contact.firstName + ' ' + contact.lastName,
             message: contact.message,
             Lead_Source_URL__c: contact.leadSourceURL,
+            Newsletter_SOI__c: contact.isNewsletterAccepted,
+            SOI_Datum__c: format(new Date(), 'MMMM d, yyyy'),
           },
         },
         requestsConfig,

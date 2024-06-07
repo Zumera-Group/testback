@@ -1,9 +1,7 @@
-import { useState } from 'react';
-
 import Link from 'next/link';
 
 import { Button } from 'components/Button';
-import { FormGroup, Input, Textarea, Checkbox, Message } from 'components/Form';
+import { Checkbox, FormGroup, Input, Message, Textarea } from 'components/Form';
 import { SanityBlockContent } from 'components/SanityBlockContent';
 
 import { useLinkWithCurrentLocale } from 'lib/shared-domain/useLinkWithCurrentLocale';
@@ -12,7 +10,6 @@ import { useContactFormSubmit } from 'lib/shared-domain/salesforce/application/u
 import styles from './ContactForm.module.scss';
 
 export const ContactForm = ({ contactForm }) => {
-  const [checkboxIsChecked, setCheckboxIsChecked] = useState(false);
   const linkWithCurrentLocale = useLinkWithCurrentLocale();
   const form = useContactFormSubmit();
 
@@ -30,6 +27,8 @@ export const ContactForm = ({ contactForm }) => {
     checkboxPrivacyText2,
     checkboxPrivacyText3,
     checkboxPrivacyPage,
+    newsLetterCheckboxText,
+    isNewsLetterCheckboxRequired,
   } = contactForm;
 
   const {
@@ -37,6 +36,8 @@ export const ContactForm = ({ contactForm }) => {
     email: emailProps,
     phone: phoneProps,
     message: messageProps,
+    policyCheckbox,
+    newsLetterCheckbox,
     isSuccess,
     isError,
   } = form;
@@ -99,11 +100,10 @@ export const ContactForm = ({ contactForm }) => {
       <FormGroup>
         <Checkbox
           id={'contactFormTerms'}
-          onChange={(e) => setCheckboxIsChecked(e.target.checked)}
-          isChecked={checkboxIsChecked}
           required={true}
+          {...policyCheckbox}
         >
-          {checkboxPrivacyText1}{' '}
+          {checkboxPrivacyText1}
           <Link
             passHref
             href={linkWithCurrentLocale(checkboxPrivacyPage?.slug?.current)}
@@ -113,6 +113,18 @@ export const ContactForm = ({ contactForm }) => {
           {' ' + checkboxPrivacyText3}
         </Checkbox>
       </FormGroup>
+      {
+        !!newsLetterCheckboxText &&
+        <FormGroup>
+          <Checkbox
+            id={'newsLetterCheckbox'}
+            required={!!isNewsLetterCheckboxRequired}
+            {...newsLetterCheckbox}
+          >
+            {newsLetterCheckboxText}
+          </Checkbox>
+        </FormGroup>
+      }
       <FormGroup>
         <Button
           variant={'primary'}
@@ -120,7 +132,7 @@ export const ContactForm = ({ contactForm }) => {
           type={'submit'}
           title={'Send'}
           classes={styles.submitBtn}
-          disabled={!checkboxIsChecked}
+          disabled={!policyCheckbox.isChecked}
         >
           {buttonText}
         </Button>
