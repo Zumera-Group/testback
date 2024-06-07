@@ -5,6 +5,7 @@ import { TaxCalculatorQuestionnaire } from 'lib/shared-domain/tax-calculator/typ
 import { QuestionText } from 'lib/shared-domain/questionnaire/presentation/Question/QuestionText';
 import { useRouter } from 'next/router';
 import {
+  COMPANY_NAME_STORE_INDICATOR,
   EMAIL_STORE_INDICATOR,
   NAME_STORE_INDICATOR,
   PHONE_NUMBER_STORE_INDICATOR,
@@ -29,21 +30,25 @@ export const ResultScreen: React.FC<ResultsScreenFormProps> = ({ resultScreenCop
   const { getTaxAnswer, setTaxAnswer, uniqueId } = useTaxCalculatorStore();
   const [checkboxIsChecked, setCheckboxIsChecked] = React.useState(false);
   const [pressed, setPressed] = React.useState(false);
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+
   const { locale } = useRouter();
+  const formFields = resultScreenCopy.formFields;
 
   const isSubmissionAllowed =
     checkboxIsChecked &&
-    getTaxAnswer(NAME_STORE_INDICATOR)?.trim() &&
-    getTaxAnswer(EMAIL_STORE_INDICATOR)?.trim() &&
-    getTaxAnswer(PHONE_NUMBER_STORE_INDICATOR)?.trim() &&
+    !!getTaxAnswer(NAME_STORE_INDICATOR)?.trim() &&
+    !!getTaxAnswer(EMAIL_STORE_INDICATOR)?.trim() &&
+    (!!formFields.isCompanyFieldRequired ? !!getTaxAnswer(COMPANY_NAME_STORE_INDICATOR)?.trim() : true) &&
+    (!!formFields.isPhoneNumberFieldRequired ? !!getTaxAnswer(PHONE_NUMBER_STORE_INDICATOR)?.trim() : true) &&
     EmailValidator.validate(getTaxAnswer(EMAIL_STORE_INDICATOR)?.trim());
 
-  const formFields = resultScreenCopy.formFields;
   const questionTitle = resultScreenCopy.questionTitle;
 
   const onSend = async (e) => {
     e.preventDefault();
     setPressed(true);
+    setIsSubmitting(true);
 
     if (!isSubmissionAllowed) {
       return;
@@ -58,6 +63,7 @@ export const ResultScreen: React.FC<ResultsScreenFormProps> = ({ resultScreenCop
     await leadDetailsSubmission(uniqueId);
 
     setIsFormSubmitted(true);
+    setIsSubmitting(false);
   };
 
   const getEmailError = () => {
@@ -66,6 +72,24 @@ export const ResultScreen: React.FC<ResultsScreenFormProps> = ({ resultScreenCop
       return formFields.emailRequiredError;
     if (!EmailValidator.validate(getTaxAnswer(EMAIL_STORE_INDICATOR)?.trim()))
       return formFields.emailInvalidError;
+
+    return null;
+  };
+
+  const getCompanyError = () => {
+    if (!pressed) return null;
+    if (!formFields.isCompanyFieldRequired) return null;
+    if (!getTaxAnswer(COMPANY_NAME_STORE_INDICATOR)?.trim())
+      return formFields.companyRequiredError;
+
+    return null;
+  };
+
+  const getPhoneNumberError = () => {
+    if (!pressed) return null;
+    if (!formFields.isPhoneNumberFieldRequired) return null;
+    if (!getTaxAnswer(PHONE_NUMBER_STORE_INDICATOR)?.trim())
+      return formFields.phoneNumberRequiredError;
 
     return null;
   };
@@ -119,17 +143,33 @@ export const ResultScreen: React.FC<ResultsScreenFormProps> = ({ resultScreenCop
               />
             </FormGroup>
 
+            {
+              formFields.companyLabel && formFields.companyRequiredError &&
+              <FormGroup>
+                <Input
+                  id={'resultsFormCompanyName'}
+                  type={'text'}
+                  required={!!formFields.isCompanyFieldRequired}
+                  label={formFields.companyLabel}
+                  description={getCompanyError()}
+                  value={getTaxAnswer(COMPANY_NAME_STORE_INDICATOR)}
+                  onChange={(e) =>
+                    setTaxAnswer({
+                      id: COMPANY_NAME_STORE_INDICATOR,
+                      value: e.target.value,
+                    })
+                  }
+                />
+              </FormGroup>
+            }
+
             <FormGroup>
               <Input
                 id={'resultsFormPhone'}
                 type={'tel'}
-                required={true}
+                required={!!formFields.isPhoneNumberFieldRequired}
                 label={formFields.phoneNumberLabel}
-                description={
-                  pressed &&
-                  !getTaxAnswer(PHONE_NUMBER_STORE_INDICATOR)?.trim() &&
-                  formFields.phoneNumberRequiredError
-                }
+                description={getPhoneNumberError()}
                 value={getTaxAnswer(PHONE_NUMBER_STORE_INDICATOR)}
                 onChange={(e) =>
                   setTaxAnswer({
@@ -176,7 +216,7 @@ export const ResultScreen: React.FC<ResultsScreenFormProps> = ({ resultScreenCop
               <Button
                 type="submit"
                 variant="primary"
-                disabled={!checkboxIsChecked}
+                disabled={!checkboxIsChecked || isSubmitting || !isSubmissionAllowed}
                 onDark
                 hideIcon
                 classes={styles.submitButton}
