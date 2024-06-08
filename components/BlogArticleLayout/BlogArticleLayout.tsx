@@ -20,6 +20,8 @@ import RelatedArticles from 'components/BlogModules/RelatedArticles/RelatedArtic
 import ContactUsSection from 'lib/shared-domain/page/presentation/contentModules/ContactUsSection';
 import useFormatDateLong from 'lib/shared-domain/useFormatDateLong';
 import WhitePaperModal from 'components/BlogModules/WhitePaperModal/WhitePaperModal';
+import { HiddenAnchor } from 'components/BlogModules/HiddenAnchor/HiddenAnchor';
+import { stripSpacesFromString } from 'lib/stripSpacesFromString';
 
 export const BlogArticleLayout: React.FC<{
   blogArticle: BlogArticle;
@@ -122,13 +124,11 @@ export const BlogArticleLayout: React.FC<{
                     </span>
                     <ol>
                       {blogArticle?.toc?.map((section) => (
-                        <React.Fragment key={section._id}>
-                          <li key={section._id}>
-                            <a key={section._id} href={`#${section.anchor}`}>
-                              {section?.title}
-                            </a>
-                          </li>
-                        </React.Fragment>
+                        <li key={section.anchor}>
+                          <a href={`#${stripSpacesFromString(section.anchor)}`}>
+                            {section?.title}
+                          </a>
+                        </li>
                       ))}
                     </ol>
                   </aside>
@@ -146,18 +146,19 @@ export const BlogArticleLayout: React.FC<{
               className={styles.heroImage}
             />
           </Container>
-          <Container
-            classes={[styles.introContentWrapper].join(' ')}
-            id={blogArticle.introAnchor}
-          >
-            <div className={styles.innerOffset}>
-              <Grid fullWidth={true} justifyContent={'space-between'}>
-                <GridColumn sm={12} md={12} lg={12}>
-                  <RichText content={blogArticle.introduction} />
-                </GridColumn>
-              </Grid>
-            </div>
-          </Container>
+
+          <>
+            <HiddenAnchor id={blogArticle.introAnchor} />
+            <Container classes={[styles.introContentWrapper].join(' ')}>
+              <div className={styles.innerOffset}>
+                <Grid fullWidth={true} justifyContent={'space-between'}>
+                  <GridColumn sm={12} md={12} lg={12}>
+                    <RichText content={blogArticle.introduction} />
+                  </GridColumn>
+                </Grid>
+              </div>
+            </Container>
+          </>
 
           {blogModules &&
             blogModules.map((c) => {

@@ -2,6 +2,7 @@ import { Container } from 'components/Layout';
 import React from 'react';
 import ReactPlayer from 'react-player';
 import styles from './VideoBlock.module.scss';
+import { HiddenAnchor } from 'components/BlogModules/HiddenAnchor/HiddenAnchor';
 
 const PlayButton = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="none">
@@ -26,35 +27,39 @@ export const VideoBlock: React.FC<any> = ({
     specificContentModule;
 
   return (
-    <Container classes={styles.videoBlockWrapper} id={anchor}>
-      <div className={styles.innerWrapper}>
-        <ReactPlayer
-          url={videoUrl}
-          width="100%"
-          height={538}
-          playing
-          playIcon={
-            <div className={styles.overlay}>
-              <div className={styles.overlayInner}>
-                <h3 className={styles.title}>
-                  {blogArticleDetail.videoTitleLabel} {videoTitle}
-                </h3>
-                <div className={styles.durationWrapper}>
-                  <span>{duration}</span>
-                  <button className={styles.playButton}>
-                    <PlayButton />
-                  </button>
+    <>
+      <HiddenAnchor id={anchor}/>
+
+      <Container classes={styles.videoBlockWrapper} >
+        <div className={styles.innerWrapper}>
+          <ReactPlayer
+            url={videoUrl}
+            width="100%"
+            height={538}
+            playing
+            playIcon={
+              <div className={styles.overlay}>
+                <div className={styles.overlayInner}>
+                  <h3 className={styles.title}>
+                    {blogArticleDetail.videoTitleLabel} {videoTitle}
+                  </h3>
+                  <div className={styles.durationWrapper}>
+                    <span>{duration}</span>
+                    <button className={styles.playButton}>
+                      <PlayButton />
+                    </button>
+                  </div>
                 </div>
               </div>
-            </div>
-          }
-          light={thumbnail?.asset?.url}
-        />
-        {caption && (
-          <figcaption className={styles.caption}>{caption}</figcaption>
-        )}
-      </div>
-    </Container>
+            }
+            light={thumbnail?.asset?.url}
+          />
+          {caption && (
+            <figcaption className={styles.caption}>{caption}</figcaption>
+          )}
+        </div>
+      </Container>
+    </>
   );
 };
 

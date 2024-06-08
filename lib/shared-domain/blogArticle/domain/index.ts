@@ -1,5 +1,10 @@
 import { ContentModuleType } from './blogModule';
 
+interface TableOfContentItem {
+  title: string;
+  anchor: string;
+}
+
 export interface BlogArticle {
   queryOtherLangSlug: {
     slug: { current: string };
@@ -19,7 +24,7 @@ export interface BlogArticle {
   introduction: any;
   introAnchor: string;
   whitePaperDownload: any;
-  toc: any[];
+  toc: TableOfContentItem[];
   relatedArticles: any[];
   relatedCalculators: any[];
   blogModules: {

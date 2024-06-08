@@ -1,0 +1,28 @@
+name: builds nextjs
+
+on:
+  pull_request:
+    branches:
+      - main
+
+env:
+  NEXT_PUBLIC_SANITY_PROJECT_ID: ${{ secrets.NEXT_PUBLIC_SANITY_PROJECT_ID }}
+  NEXT_PUBLIC_SANITY_API_VERSION: "2021-07-26"
+  SANITY_API_VERSION: "2021-07-26"
+  NEXT_PUBLIC_SANITY_DATASET: "development"
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 21
+
+      - name: Install yarn
+        run: npm install -g yarn
+
+      - name: Install dependencies
+        run: yarn
+      - name: Build
+        run: yarn build
