@@ -35,7 +35,10 @@ export const getContentForContentModule = (
   }
   if (contentModule.specificContentModule instanceof ImageBlockModule) {
     return (
-      <ImageBlock specificContentModule={contentModule.specificContentModule} />
+      <ImageBlock
+        specificContentModule={contentModule.specificContentModule}
+        defaultAlt={blogArticle?.articleTitle}
+      />
     );
   }
   if (

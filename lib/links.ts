@@ -217,11 +217,11 @@ export const getBuiltLink = ({
   uri: string;
 }) => {
   if (!locale || !path) {
-    return `/en/${path || ''}/${uri}`;
+    return `/en/${path || ''}/${uri}/`;
   }
   const localizedPath = allLinks[path][locale];
 
-  return `/${locale}/${localizedPath}/${uri}`;
+  return `/${locale}/${localizedPath}/${uri}/`;
 };
 
 export const getArticlePaginationInfo = ({

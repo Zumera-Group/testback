@@ -5,6 +5,29 @@ interface TableOfContentItem {
   anchor: string;
 }
 
+export interface IBlogModule {
+  _key: string;
+  _type: ContentModuleType;
+  image?: {
+    _type: string;
+    asset?: {
+      url?: string;
+    }
+  }
+}
+
+export interface IBlogAuthor {
+  _id: string;
+  calendlyURL?: string|null;
+  email?: string|null;
+  firstName?: string|null;
+  lastName?: string|null;
+  slug?: {
+    type?: string;
+    current?: string
+  }
+}
+
 export interface BlogArticle {
   queryOtherLangSlug: {
     slug: { current: string };
@@ -16,7 +39,7 @@ export interface BlogArticle {
   articleTitle: string;
   slug: { current: string };
   categories: any[];
-  authors: any[];
+  authors?: IBlogAuthor[];
   seoDescription: string;
   seoTitle: string;
   heroImage: any;
@@ -27,8 +50,6 @@ export interface BlogArticle {
   toc: TableOfContentItem[];
   relatedArticles: any[];
   relatedCalculators: any[];
-  blogModules: {
-    _key: string;
-    _type: ContentModuleType;
-  }[];
+  blogModules: IBlogModule[];
+  _updatedAt?: string;
 }

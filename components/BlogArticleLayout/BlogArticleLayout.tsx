@@ -22,6 +22,7 @@ import useFormatDateLong from 'lib/shared-domain/useFormatDateLong';
 import WhitePaperModal from 'components/BlogModules/WhitePaperModal/WhitePaperModal';
 import { HiddenAnchor } from 'components/BlogModules/HiddenAnchor/HiddenAnchor';
 import { stripSpacesFromString } from 'lib/stripSpacesFromString';
+import {BlogJsonLd} from '../BlogModules/BlogJsonLd/BlogJsonLd';
 
 export const BlogArticleLayout: React.FC<{
   blogArticle: BlogArticle;
@@ -97,11 +98,7 @@ export const BlogArticleLayout: React.FC<{
                 <div
                   className={styles.socialShareWrapper}
                 >
-                  <SocialShare
-                    content={blogArticle}
-                    partialSlug="blog"
-                    domain={process.env.NEXT_PUBLIC_BASE_URL}
-                  />
+                  <SocialShare blogArticle={blogArticle}/>
                   {blogArticle?.whitePaperDownload?.pdfURL && (
                     <WhitePaperModal
                       blogArticle={blogArticle}
@@ -140,7 +137,7 @@ export const BlogArticleLayout: React.FC<{
             <Image
               unoptimized
               src={sanityImageUrlFor(blogArticle?.heroImage?.asset?.url).url()}
-              alt={blogArticle?.heroImage?.asset?.alt}
+              alt={blogArticle?.heroImage?.asset?.alt || blogArticle.articleTitle}
               width={1280}
               height={549}
               className={styles.heroImage}
@@ -183,8 +180,8 @@ export const BlogArticleLayout: React.FC<{
           content={siteSettings.contactSectionContent}
         />
       </div>
-
       <PageFooter siteSettings={siteSettings} />
+      <BlogJsonLd blogArticle={blogArticle} locale={locale} />
     </main>
   );
 };

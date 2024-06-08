@@ -66,11 +66,7 @@ export async function getStaticProps({ locale, params, preview = false }) {
     );
 
     if (!blogArticle) {
-      return {
-        redirect: {
-          destination: `/${locale}/404`,
-        },
-      };
+      return {notFound: true};
     }
 
     const siteSettings = await fetchSiteSettings(locale);
@@ -96,7 +92,7 @@ export async function getStaticProps({ locale, params, preview = false }) {
     };
   } catch (e) {
     console.error(e);
-    return { notFound: true, revalidate: 10 };
+    return { notFound: true, revalidate: REVALIDATE_ON_FAILURE_TIME_IN_SECONDS };
   }
 }
 
