@@ -126,8 +126,6 @@ export default function Index({
 
   const router = useRouter();
 
-  const { locale } = useRouter();
-
   const [isSecretOpen, setIsSecretOpen] = useState(
     !siteSettings?.isUnderSecretKey,
   );
@@ -145,12 +143,6 @@ export default function Index({
     return <SecretKeyLockScreen siteSettings={siteSettings} />;
   }
 
-  const otherLangSlug =
-    selectedBlogArticle?.queryOtherLangSlug?.slice(-1)[0]?.slug &&
-    links(locale === 'en' ? 'de' : 'en').blogArticles(
-      selectedBlogArticle?.queryOtherLangSlug?.slice(-1)[0] as any,
-    );
-
   return (
     <ErrorTrackingBoundary>
       <SharedContentContext value={sharedContent}>
@@ -158,7 +150,6 @@ export default function Index({
           siteSettings={siteSettings}
           blogArticle={selectedBlogArticle}
           blogArticleDetail={blogDetailContent}
-          querySlug={otherLangSlug}
         />
       </SharedContentContext>
     </ErrorTrackingBoundary>

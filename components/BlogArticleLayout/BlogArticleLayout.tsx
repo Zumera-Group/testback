@@ -1,5 +1,5 @@
 import React from 'react';
-import { BlogArticle } from 'lib/shared-domain/blogArticle/domain';
+import {BlogArticle, TBlogArticleType} from 'lib/shared-domain/blogArticle/domain';
 import { SiteSettings } from 'lib/shared-domain/page/domain';
 import { PageFooter } from 'lib/shared-domain/page/presentation/PageFooter';
 import { PageHeader } from 'lib/shared-domain/page/presentation/PageHeader';
@@ -7,7 +7,7 @@ import { ContentModule } from 'lib/shared-domain/blogArticle/domain/blogModule';
 import { getContentForContentModule } from 'lib/shared-domain/blogArticle/presentation/blogModules';
 import { PageTransition } from 'components/PageTransition';
 import { SEO } from 'components/SEO';
-import { getBuiltLink } from 'lib/links';
+import {allLinks, getBuiltLink} from 'lib/links';
 import { useRouter } from 'next/router';
 import { Container, Grid, GridColumn, Section } from 'components/Layout';
 import styles from './BlogArticleLayout.module.scss';
@@ -22,13 +22,13 @@ import useFormatDateLong from 'lib/shared-domain/useFormatDateLong';
 import WhitePaperModal from 'components/BlogModules/WhitePaperModal/WhitePaperModal';
 import { HiddenAnchor } from 'components/BlogModules/HiddenAnchor/HiddenAnchor';
 import { stripSpacesFromString } from 'lib/stripSpacesFromString';
-import {BlogJsonLd} from '../BlogModules/BlogJsonLd/BlogJsonLd';
+import { BlogJsonLd } from '../BlogModules/BlogJsonLd/BlogJsonLd';
+import { useMakeAlternateHrefs } from "../../lib/hooks/useMakeAlternateHrefs";
 
 export const BlogArticleLayout: React.FC<{
   blogArticle: BlogArticle;
   siteSettings: SiteSettings;
   blogArticleDetail: any;
-  querySlug: any;
 }> = ({ blogArticle, siteSettings, blogArticleDetail }) => {
   const { locale } = useRouter();
 
@@ -36,6 +36,10 @@ export const BlogArticleLayout: React.FC<{
     blogArticle?.blogModules?.map((c) => ContentModule.create(c)) || [];
 
   const dateFormatted = useFormatDateLong(blogArticle?.date);
+  const {alternateHrefs, canonicalHref} = useMakeAlternateHrefs({
+    doc: blogArticle,
+    urlPrefixes: getBlogUrlPrefixes(blogArticle._type)
+  });
 
   return (
     <main id="main" className={styles.blogArticle}>
@@ -44,11 +48,14 @@ export const BlogArticleLayout: React.FC<{
         seoDescription={blogArticle.seoDescription}
         siteSettings={siteSettings}
         seoImage={blogArticle.heroImage}
+        langAlternates={alternateHrefs}
+        canonicalHref={canonicalHref}
       />
       <PageHeader
         contentModules={[]}
         siteSettings={siteSettings}
         whiteBg
+        langAlternates={alternateHrefs}
       />
       <PageTransition>
         <Section
@@ -185,4 +192,18 @@ export const BlogArticleLayout: React.FC<{
     </main>
   );
 };
-export default BlogArticleLayout;
+
+const getBlogUrlPrefixes = (type: TBlogArticleType) => {
+  const out: {[key: string]: string} = {};
+
+  let links = allLinks.blog;
+  if (type == TBlogArticleType.blogValToolArticle) {
+    links = allLinks['valuation-tool'];
+  }
+
+  for (const [key, val] of Object.entries(links)) {
+    out[key] = `/${val}`;
+  }
+
+  return out;
+};

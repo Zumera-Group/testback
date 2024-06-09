@@ -1,4 +1,5 @@
 import { ContentModuleType } from './blogModule';
+import {I18nBase, ILangRef} from "../../../../@types/i18n";
 
 interface TableOfContentItem {
   title: string;
@@ -28,12 +29,20 @@ export interface IBlogAuthor {
   }
 }
 
+export enum TBlogArticleType {
+  blogArticle = 'blogArticle',
+  blogValToolArticle = 'blogValToolArticle',
+}
+
 export interface BlogArticle {
   queryOtherLangSlug: {
     slug: { current: string };
   }[];
   _id: string;
   _lang: string;
+  _langRefs?: ILangRef[];
+  __i18n_base?: I18nBase;
+  _type: TBlogArticleType;
   name: string;
   date: any;
   articleTitle: string;
@@ -50,6 +59,6 @@ export interface BlogArticle {
   toc: TableOfContentItem[];
   relatedArticles: any[];
   relatedCalculators: any[];
-  blogModules: IBlogModule[];
+  blogModules?: IBlogModule[]|null;
   _updatedAt?: string;
 }

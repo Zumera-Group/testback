@@ -30,9 +30,8 @@ export const useBlogJsonLd = ({blogArticle, locale}: {blogArticle: BlogArticle, 
     }
 
     images = images.concat(
-      blogArticle.blogModules
-        .filter(({_type, image}) => _type === 'imageBlock' && image?.asset?.url)
-        .map(({image}) => sanityImageUrlFor(image.asset.url).url())
+      blogArticle.blogModules?.filter(({_type, image}) => _type === 'imageBlock' && image?.asset?.url)
+        .map(({image}) => sanityImageUrlFor(image.asset.url).url()) ?? []
     )
 
     if (images.length) {
@@ -54,7 +53,7 @@ export const useBlogJsonLd = ({blogArticle, locale}: {blogArticle: BlogArticle, 
               uri: slug?.current
             })
           };
-        })
+        }) ?? []
     ;
 
     if (authors.length) {

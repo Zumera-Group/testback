@@ -5,7 +5,7 @@ import { Twitter } from 'components/Icons/Twitter';
 import { Facebook } from 'components/Icons/Facebook';
 import { Linkedin } from 'components/Icons/Linkedin';
 import { Clipboard } from 'components/Icons/Clipboard';
-import { BlogArticle } from '../../../lib/shared-domain/blogArticle/domain';
+import {BlogArticle, TBlogArticleType} from '../../../lib/shared-domain/blogArticle/domain';
 import { getBuiltLink } from '../../../lib/links';
 import _trimEnd from 'lodash/trimEnd';
 
@@ -17,9 +17,14 @@ export const SocialShare: React.FC<{
   const iframe = 'width=500,height=400';
 
   const {shareUrl, twitterUrl, facebookUrl, linkedIn} = useMemo(() => {
+    let pagePath = 'blog';
+    if (blogArticle._type == TBlogArticleType.blogValToolArticle) {
+      pagePath = 'valuation-tool';
+    }
+
     const shareUrl = `${_trimEnd(process.env.NEXT_PUBLIC_BASE_URL, '/')}${getBuiltLink({
       locale,
-      path: 'blog',
+      path: pagePath,
       uri: blogArticle.slug?.current
     })}`;
 

@@ -11,7 +11,6 @@ import { SharedContentContext } from 'lib/shared-domain/page/infrastructure/shar
 import { SharedContentFacade } from 'lib/shared-domain/page/infrastructure/sharedContent.facade';
 import { useRouter } from 'next/router';
 import { usePreviewSubscription } from '../../lib/sanity';
-import { links } from 'lib/links';
 import { REVALIDATE_ON_FAILURE_TIME_IN_SECONDS } from '../../lib/shared-domain/page/constants';
 import { SecretKeyLockScreen } from 'components/SecretKeyLockScreen';
 import { BlogArticleLayout } from 'components/BlogArticleLayout';
@@ -66,11 +65,7 @@ export async function getStaticProps({ locale, params, preview = false }) {
     );
 
     if (!blogArticle) {
-      return {
-        redirect: {
-          destination: `/${locale}/404`,
-        },
-      };
+      return {notFound: true};
     }
 
     const siteSettings = await fetchSiteSettings(locale);
@@ -96,7 +91,7 @@ export async function getStaticProps({ locale, params, preview = false }) {
     };
   } catch (e) {
     console.error(e);
-    return { notFound: true, revalidate: 10 };
+    return { notFound: true, revalidate: REVALIDATE_ON_FAILURE_TIME_IN_SECONDS };
   }
 }
 
@@ -130,8 +125,6 @@ export default function Index({
 
   const router = useRouter();
 
-  const { locale } = useRouter();
-
   const [isSecretOpen, setIsSecretOpen] = useState(
     !siteSettings?.isUnderSecretKey,
   );
@@ -155,12 +148,6 @@ export default function Index({
     return <SecretKeyLockScreen siteSettings={siteSettings} />;
   }
 
-  const otherLangSlug =
-    selectedBlogArticle?.queryOtherLangSlug?.slice(-1)[0]?.slug &&
-    links(locale === 'en' ? 'de' : 'en').blogValToolArticle(
-      selectedBlogArticle?.queryOtherLangSlug?.slice(-1)[0] as any,
-    );
-
   return (
     <ErrorTrackingBoundary>
       <SharedContentContext value={sharedContent}>
@@ -168,7 +155,6 @@ export default function Index({
           siteSettings={siteSettings}
           blogArticle={selectedBlogArticle}
           blogArticleDetail={blogDetailContent}
-          querySlug={otherLangSlug}
         />
       </SharedContentContext>
     </ErrorTrackingBoundary>
