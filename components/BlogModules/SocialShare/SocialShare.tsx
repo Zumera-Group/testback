@@ -37,19 +37,10 @@ export const SocialShare: React.FC<{
     };
   }, [blogArticle, getBuiltLink]);
 
-  const handleTwitterClick = useCallback(() => {
-    window.open(twitterUrl, '_blank', iframe);
-  }, [twitterUrl, iframe]);
-
-  const handleFacebookClick = useCallback(() => {
-    window.open(facebookUrl, '_blank', iframe);
-  }, [facebookUrl, iframe]);
-
-  const handleLinkedinClick = useCallback(() => {
-    window.open(linkedIn, '_blank', iframe);
-  }, [linkedIn, iframe]);
-
-  const handleClipboardClick = useCallback(() => {
+  const handleTwitterClick = () => window.open(twitterUrl, '_blank', iframe);
+  const handleFacebookClick = () => window.open(facebookUrl, '_blank', iframe);
+  const handleLinkedinClick = () => window.open(linkedIn, '_blank', iframe);
+  const handleClipboardClick = () => {
     navigator.clipboard
       .writeText(shareUrl)
       .then(() => {
@@ -58,7 +49,7 @@ export const SocialShare: React.FC<{
           setCopied(false);
         }, 2000);
       });
-  }, [setCopied, shareUrl]);
+  };
 
   return (
     <div className={styles.socialIcons}>
