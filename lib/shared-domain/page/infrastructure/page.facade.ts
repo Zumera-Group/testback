@@ -1,6 +1,6 @@
 import { Locale } from 'lib/locale';
 import { SanityService } from 'lib/services/sanity.service';
-import {Page, TPageShortInfo} from '../domain';
+import {ISanityDoc, Page, TPageShortInfo} from '../domain';
 import { querySiteSettings } from './siteSettings.facade';
 import { SiteSettings } from '../domain/index';
 import { querySharedContent } from './sharedContent.facade';
@@ -71,9 +71,30 @@ const queryPagesStaticPaths = () => `*[_type == "page" && slug.current != "blog"
   includeInSitemap
 }`;
 
-const queryPages = () => `*[_type == "page"] {
+const queryPages = (excludeHiddenPages: boolean = false): string => {
+  let filter = '';
+  if (excludeHiddenPages) {
+    filter = '&& (hidePage == false || !defined(hidePage))';
+  }
+
+  return `*[_type == "page" ${filter}] {
   _id,
   _lang,
+  _langRefs[] -> {
+    _id,
+    _lang,
+    slug
+  },
+  __i18n_base -> {
+    _id,
+    _lang,
+    slug,
+    _langRefs[] -> {
+      _id,
+      _lang,
+      slug
+    }
+  },
   slug {
     current
   },
@@ -81,6 +102,42 @@ const queryPages = () => `*[_type == "page"] {
   includeInSitemap,
   hidePage
 }`;
+}
+
+const queryPagesWithLandingsForSitemap = (): string => {
+  return `
+*[
+  _type in ["page", "landings"]
+  && (hidePage == false || !defined(hidePage))
+  && includeInSitemap == true
+  && (defined(slug.current) && slug.current != '')
+] {
+  _id,
+  _lang,
+  _type,
+  _langRefs[] -> {
+    _id,
+    _lang,
+    slug
+  },
+  __i18n_base -> {
+    _id,
+    _lang,
+    slug,
+    _langRefs[] -> {
+      _id,
+      _lang,
+      slug
+    }
+  },
+  slug {
+    current
+  },
+  _createdAt,
+  _updatedAt
+}
+  `;
+}
 
 export function filterDataToSingleItem(data, preview) {
   if (!Array.isArray(data)) return data;
@@ -135,9 +192,8 @@ export class PageFacade {
     return { page, query, siteSettings, sharedContent };
   }
 
-  async getPages(): Promise<TPageShortInfo[]> {
-    const pages = await this.sanityService.fetch(queryPages());
-
+  async getPages(excludeHiddenPages: boolean = false): Promise<TPageShortInfo[]> {
+    const pages = await this.sanityService.fetch(queryPages(excludeHiddenPages));
     return pages;
   }
 
@@ -145,5 +201,9 @@ export class PageFacade {
     const pages = await this.sanityService.fetch(queryPagesStaticPaths());
 
     return pages;
+  }
+
+  async getPagesWithLandingsForSitemap(): Promise<ISanityDoc[]> {
+    return this.sanityService.fetch(queryPagesWithLandingsForSitemap());
   }
 }

@@ -151,6 +151,9 @@ export const allLinks = {
     de: 'ueber-uns',
     fr: 'propos-de-nous',
   },
+  /**
+   * @deprecated - we dont have these pages.
+   */
   'cdi-global': {
     en: 'cdi-global',
     de: 'cdi-global',
@@ -239,4 +242,43 @@ export const getArticlePaginationInfo = ({
   } else {
     return `Zeigt ${startArticle}-${endArticle + 1} von ${total + 1} artikeln`;
   }
+};
+
+export const getPagePrefixByType = (type: string, locale: string): string => {
+  const out: string[] = [locale];
+
+  const linkTypePart = {
+    sector: allLinks.sectors[locale],
+    valueCalculator: allLinks.questionnaires[locale],
+    employee: allLinks.employees[locale],
+    transaction: allLinks.transactions[locale],
+    newsArticle: allLinks.news[locale],
+    service: allLinks.services[locale],
+    landings: allLinks.landing[locale],
+    taxCalculator: allLinks.taxCalculator[locale],
+  };
+
+  if (type in linkTypePart) {
+    out.push(linkTypePart[type]);
+  }
+
+  return `/${out.join('/')}`;
+}
+
+export const createUrl = ({type, locale, slug, isAbsolute = false}: {
+  type: string,
+  locale: string,
+  slug: string,
+  isAbsolute?: boolean
+}): string => {
+  let url: string = '';
+
+  if (isAbsolute) {
+    url += process.env.NEXT_PUBLIC_BASE_URL;
+  }
+
+  url += getPagePrefixByType(type, locale);
+  url += `/${slug}/`;
+
+  return url;
 };

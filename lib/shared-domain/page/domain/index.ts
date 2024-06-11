@@ -46,7 +46,7 @@ export interface Page {
 
 export type TPageShortInfo = Pick<
   Page,
-  '_id' | '_lang' | 'slug' | 'disallowInRobotsTxt' | 'includeInSitemap' | 'hidePage'
+  '_id' | '_lang' | 'slug' | 'disallowInRobotsTxt' | 'includeInSitemap' | 'hidePage' | '_langRefs' | '__i18n_base'
 >;
 
 export interface IAnnouncementTopBanner {
@@ -491,12 +491,22 @@ export interface LogoBarSection {
   }[];
 }
 
+export enum TDocType {
+  page = 'page',
+  landings = 'landings'
+}
+
 export interface ISanityDoc {
   _id: string;
   _lang: string;
+  // _type?: TDocType;
+  //need to keep type as string for back campatibility:
+  _type?: string;
   _langRefs?: ILangRef[];
   __i18n_base?: I18nBase;
   slug?: {
     current: string;
   };
+  _createdAt?: string;
+  _updatedAt?: string;
 }

@@ -1,5 +1,8 @@
-import { allLinks } from "lib/links";
+import { allLinks } from 'lib/links';
 
+/**
+ * @deprecated Please use createUrl or getPagePrefixByType functions.
+ */
 export const getLinksByPageType = (locale, pageType, slug) => {
   const linkTypePart = {
     sector: allLinks.sectors[locale],
