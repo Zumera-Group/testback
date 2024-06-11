@@ -11,10 +11,32 @@ const queryTransactionDetail = (
   lang,
   slug,
   otherLangSlugQuery,
-) => `*[_type == "transaction" && slug.current == "${slug}" && _lang == "${lang}"] {
+) => {
+  //just for back compatibility
+  let queryOtherLangSlug = '';
+  if (otherLangSlugQuery) {
+    queryOtherLangSlug = `"queryOtherLangSlug": ${otherLangSlugQuery},`
+  }
+
+  return `*[_type == "transaction" && slug.current == "${slug}" && _lang == "${lang}"] {
   ...,
   _id,
   _lang,
+  _langRefs[] -> {
+    _id,
+    _lang,
+    slug
+  },
+  __i18n_base -> {
+    _id,
+    _lang,
+    slug,
+    _langRefs[] -> {
+      _id,
+      _lang,
+      slug
+    }
+  },
   location-> {
     ...,
   },
@@ -117,8 +139,9 @@ const queryTransactionDetail = (
       current
     }
   },
-  "queryOtherLangSlug": ${otherLangSlugQuery},
+  ${queryOtherLangSlug}
 }`;
+}
 
 const queryTransactions = (
   lang,
@@ -200,7 +223,7 @@ export class TransactionFacade {
     const query = queryTransactionDetail(
       this.sanityService.getSanityLocale(lang),
       slug,
-      getOtherLangSlugQuery(lang, 'transaction'),
+      null
     );
     const data = await this.sanityService.fetch(query, preview);
     if (!data) {

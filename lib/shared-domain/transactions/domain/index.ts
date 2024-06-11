@@ -2,6 +2,7 @@ import { Sector } from '../../page/domain/index';
 import { Employee } from '../../employees/domain/index';
 import { Office } from 'lib/shared-domain/offices/domain';
 import { NewsArticle } from '../../newsArticle/domain/index';
+import {I18nBase, ILangRef} from '../../../../@types/i18n';
 
 export interface TransactionInvolvedParty {
   name: string;
@@ -38,6 +39,9 @@ export interface Transaction {
     current: string;
   };
   _lang: string;
+  _type: string;
+  _langRefs?: ILangRef[];
+  __i18n_base?: I18nBase;
   hidePage: boolean;
   optionalUI?: optionalUI;
   sectors?: Sector[];
