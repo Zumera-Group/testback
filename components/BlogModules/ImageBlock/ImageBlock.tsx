@@ -3,8 +3,12 @@ import styles from './ImageBlock.module.scss';
 import { sanityImageUrlFor } from 'lib/sanity';
 import Image from 'next/image';
 import { HiddenAnchor } from 'components/BlogModules/HiddenAnchor/HiddenAnchor';
+import { IImageBlockModule } from '../../../lib/shared-domain/blogArticle/domain/blogModule';
 
-export const ImageBlock: React.FC<any> = ({ specificContentModule }) => {
+export const ImageBlock: React.FC<{specificContentModule: IImageBlockModule, defaultAlt?: string}> = ({
+  specificContentModule,
+  defaultAlt
+}) => {
   const { image, caption, anchor } = specificContentModule;
 
   const imageUrl = image?.asset?.url;
@@ -21,7 +25,7 @@ export const ImageBlock: React.FC<any> = ({ specificContentModule }) => {
           <Image
             unoptimized
             src={sanityImageUrlFor(imageUrl).url()}
-            alt={image?.alt}
+            alt={image?.alt || defaultAlt}
             width={1280}
             height={549}
 

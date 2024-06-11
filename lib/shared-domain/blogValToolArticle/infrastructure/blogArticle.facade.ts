@@ -12,10 +12,32 @@ const queryBlogArticle = (
   lang,
   slug,
   otherLangSlugQuery,
-) => `*[_type == "blogValToolArticle" && slug.current == "${slug}" && _lang == "${lang}"] {
+) => {
+  //just for back compatibility
+  let queryOtherLangSlug = '';
+  if (otherLangSlugQuery) {
+    queryOtherLangSlug = `"queryOtherLangSlug": ${otherLangSlugQuery},`
+  }
+
+  return `*[_type == "blogValToolArticle" && slug.current == "${slug}" && _lang == "${lang}"] {
   ...,
   _id,
   _lang,
+  _langRefs[] -> {
+    _id,
+    _lang,
+    slug
+  },
+  __i18n_base -> {
+    _id,
+    _lang,
+    slug,
+    _langRefs[] -> {
+      _id,
+      _lang,
+      slug
+    }
+  },
  seoDescription,
  seoTitle,
  categories[]->{
@@ -122,8 +144,9 @@ const queryBlogArticle = (
       },
     }
   },
-  "queryOtherLangSlug": ${otherLangSlugQuery},
+  ${queryOtherLangSlug}
 }`;
+}
 
 const queryBlogArticles = (
   lang,
@@ -269,8 +292,9 @@ export class BlogArticleFacade {
     const query = queryBlogArticle(
       this.sanityService.getSanityLocale(lang),
       slug,
-      getOtherLangSlugQuery(lang, 'blogValToolArticle'),
+      null
     );
+    // getOtherLangSlugQuery(lang, 'blogValToolArticle'),
     const data = await this.sanityService.fetch(query, preview);
     if (!data) {
       throw new Error(SERVER_FETCHING_ERROR);

@@ -1,49 +1,48 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo, useCallback } from 'react';
 import { useRouter } from 'next/router';
 import styles from './SocialShare.module.scss';
 import { Twitter } from 'components/Icons/Twitter';
 import { Facebook } from 'components/Icons/Facebook';
 import { Linkedin } from 'components/Icons/Linkedin';
 import { Clipboard } from 'components/Icons/Clipboard';
+import {BlogArticle, TBlogArticleType} from '../../../lib/shared-domain/blogArticle/domain';
+import { getBuiltLink } from '../../../lib/links';
+import _trimEnd from 'lodash/trimEnd';
 
 export const SocialShare: React.FC<{
-  content: any;
-  partialSlug: string;
-  domain: string;
-}> = ({ content, partialSlug, domain }) => {
+  blogArticle: BlogArticle;
+}> = ({ blogArticle}) => {
   const { locale } = useRouter();
   const [copied, setCopied] = useState(false);
-  const protoDomain = domain;
   const iframe = 'width=500,height=400';
 
-  const handleTwitterClick = () => {
-    const shareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(
-      content?.articleTitle,
-    )}&url=${encodeURIComponent(
-      `${protoDomain}/${locale}/${partialSlug}/${content?.slug?.current}`,
-    )}`;
-    window.open(shareUrl, '_blank', iframe);
-  };
+  const {shareUrl, twitterUrl, facebookUrl, linkedIn} = useMemo(() => {
+    let pagePath = 'blog';
+    if (blogArticle._type == TBlogArticleType.blogValToolArticle) {
+      pagePath = 'valuation-tool';
+    }
 
-  const handleFacebookClick = () => {
-    const shareUrl = `https://www.facebook.com/sharer.php?u=${encodeURIComponent(
-      `${protoDomain}/${locale}/${partialSlug}/${content?.slug?.current}`,
-    )}`;
-    window.open(shareUrl, '_blank', iframe);
-  };
+    const shareUrl = `${_trimEnd(process.env.NEXT_PUBLIC_BASE_URL, '/')}${getBuiltLink({
+      locale,
+      path: pagePath,
+      uri: blogArticle.slug?.current
+    })}`;
 
-  const handleLinkedinClick = () => {
-    const shareUrl = `https://www.linkedin.com/shareArticle?url=${encodeURIComponent(
-      `${protoDomain}/${locale}/${partialSlug}/${content?.slug?.current}`,
-    )}&title=${encodeURIComponent(content?.articleTitle)}`;
-    window.open(shareUrl, '_blank', iframe);
-  };
+    const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(blogArticle.articleTitle)}&url=${encodeURIComponent(shareUrl)}`
+    const facebookUrl = `https://www.facebook.com/sharer.php?u=${encodeURIComponent(shareUrl)}`;
+    const linkedIn = `https://www.linkedin.com/shareArticle?url=${encodeURIComponent(shareUrl)}&title=${encodeURIComponent(blogArticle.articleTitle)}`
 
+    return {
+      shareUrl, twitterUrl, facebookUrl, linkedIn
+    };
+  }, [blogArticle, getBuiltLink]);
+
+  const handleTwitterClick = () => window.open(twitterUrl, '_blank', iframe);
+  const handleFacebookClick = () => window.open(facebookUrl, '_blank', iframe);
+  const handleLinkedinClick = () => window.open(linkedIn, '_blank', iframe);
   const handleClipboardClick = () => {
     navigator.clipboard
-      .writeText(
-        `${protoDomain}/${locale}/${partialSlug}/${content?.slug?.current}`,
-      )
+      .writeText(shareUrl)
       .then(() => {
         setCopied(true);
         setTimeout(() => {
@@ -51,6 +50,7 @@ export const SocialShare: React.FC<{
         }, 2000);
       });
   };
+
   return (
     <div className={styles.socialIcons}>
       <button
@@ -86,4 +86,3 @@ export const SocialShare: React.FC<{
   );
 };
 
-export default SocialShare;

@@ -74,6 +74,18 @@ export class ImageBlockModule extends BaseModule {
   }
 }
 
+export interface IImageBlockModule {
+  image?: {
+    _type: string;
+    asset?: {
+      url?: string;
+    },
+    alt?: string;
+  };
+  caption?: string;
+  anchor?: string;
+}
+
 export class TextImageParallaxBlockModule extends BaseModule {
   imageSection: {};
   textSection: any[];
