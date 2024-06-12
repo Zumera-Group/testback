@@ -7,12 +7,15 @@ import { fetchSectors } from '../lib/shared-domain/sectors/application/useGetSec
 import { fetchNewsArticles } from '../lib/shared-domain/newsArticle/application/useGetNewsArticles';
 import { fetchEmployees } from '../lib/shared-domain/employees/application/useGetEmployees';
 import { fetchTransactions } from 'lib/shared-domain/transactions/application/useGetTransactions';
-import { links } from '../lib/links';
+import {createUrl, links} from '../lib/links';
 import { fetchQuestionnaires } from '../lib/shared-domain/questionnaire/application/useGetQuestionnaires';
-import {PageFacade} from "../lib/shared-domain/page/infrastructure/page.facade";
-import {ISanityDoc} from "../lib/shared-domain/page/domain";
+import {PageFacade} from '../lib/shared-domain/page/infrastructure/page.facade';
+import {ISanityDoc} from '../lib/shared-domain/page/domain';
 // import { fetchOffices } from '../lib/shared-domain/offices/application/useGetOffices';
 // import { slugifyOffice } from 'lib/shared-domain/offices/application/slugifyOffice';
+import {parse, formatISO, parseISO} from 'date-fns';
+import {ILangRef} from "../@types/i18n";
+import {SitemapFacade} from "../lib/shared-domain/sitemapFacade";
 
 const Sitemap = () => {};
 
@@ -130,9 +133,9 @@ export const getServerSideProps = async ({ res }) => {
   // res.setHeader('Content-Type', 'text/xml');
   // res.write(sitemap);
 
-  await generateSitemap();
+  const sitemap = await generateSitemap();
 
-  res.write('coming soon :)');
+  res.write(sitemap);
   res.end();
 
   return {
@@ -149,14 +152,130 @@ async function generateSitemap(): Promise<string> {
   });
 
   await appendPages(xmlRoot);
+  await appendTransactionsServicesSectors(xmlRoot);
+  await appendNewsAndEmployees(xmlRoot);
 
-  return '';
+  const sitemap = `<?xml version="1.0" encoding="UTF-8"?>${xmlRoot.end({pretty: true})}`;
+  // console.log(sitemap);
+  return sitemap;
 }
 
+async function appendNewsAndEmployees(xmlRoot: XMLElement) {
+  const sitemapFacade = new SitemapFacade();
+  const rows = await sitemapFacade.getNewsAndEmployees();
+
+  for (const doc of rows) {
+    appendSanityDoc(xmlRoot, doc);
+  }
+}
+
+async function appendTransactionsServicesSectors(xmlRoot: XMLElement) {
+  const sitemapFacade = new SitemapFacade();
+  const rows = await sitemapFacade.getTransactionsServicesSectors();
+
+  for (const doc of rows) {
+    appendSanityDoc(xmlRoot, doc);
+  }
+}
 async function appendPages(xmlRoot: XMLElement) {
-  const pages = await (new PageFacade()).getPagesWithLandingsForSitemap();
+  const sitemapFacade = new SitemapFacade();
+  const pages = await sitemapFacade.getPagesWithLandings();
+
+  for (const page of pages) {
+    appendSanityDoc(xmlRoot, page);
+  }
 }
 
-function appendSanityDoc(xmlRoot: XMLElement, doc: ISanityDoc) {
+function appendSanityDoc(xmlParent: XMLElement, doc: ISanityDoc) {
+  if (!doc._lang) {
+    return;
+  }
 
+  const locale = SanityService.getLocaleFromSanityLocale(doc._lang);
+  const url = createUrl({type: doc._type, locale, slug: doc.slug!.current, isAbsolute: true});
+
+  const xmlUrl = xmlParent.ele('url');
+  xmlUrl.ele('loc', url);
+  xmlUrl.ele('changefreq', 'monthly');
+  xmlUrl.ele('priority', '0.5');
+
+  if (doc._updatedAt) {
+    const updatedAt = parseAndFormatUpdatedAt(doc._updatedAt);
+    if (updatedAt) {
+      xmlUrl.ele('lastmod', updatedAt);
+    }
+  }
+
+  const alternates = makeAlternates(doc);
+  if (alternates.length > 1) {
+    for (const {url, lang} of alternates) {
+      xmlUrl.ele('xhtml:link', {
+        rel: 'alternate',
+        hreflang: lang,
+        href: url
+      });
+    }
+  }
+}
+
+const parseAndFormatUpdatedAt = (date: string): null|string => {
+  if (date) {
+    try {
+      return formatISO(parseISO(date));
+    } catch (e) {
+      console.error(`err for parseAndFormatUpdatedAt:`, e);
+    }
+  }
+
+  return null;
+};
+
+
+
+const makeAlternates = (doc: ISanityDoc): IAlternateHref[] => {
+  let langRefs: ILangRef[] = [];
+
+  if (doc.__i18n_base && Array.isArray(doc.__i18n_base._langRefs)) {
+    langRefs = doc.__i18n_base._langRefs.filter(
+      (ref) => ref !== null,
+    );
+
+    langRefs.push({
+      _id: doc.__i18n_base._id,
+      _lang: doc.__i18n_base._lang,
+      slug: doc.__i18n_base.slug,
+    });
+  } else if (Array.isArray(doc._langRefs) && doc._langRefs[0] !== null) {
+    langRefs = doc._langRefs.filter((ref) => ref !== null);
+
+    //we also need to add link to the doc itself to have links in all langs - including the current one:
+    //https://developers.google.com/search/docs/specialty/international/localized-versions?hl=en#language-codes
+    langRefs.push({
+      _id: doc._id,
+      _lang: doc._lang,
+      slug: doc.slug
+    });
+  }
+
+  const out: IAlternateHref[] = [];
+  for (const { _lang, slug } of langRefs) {
+    if (_lang && slug) {
+      const lang = SanityService.getLocaleFromSanityLocale(_lang);
+      const url = createUrl({
+        type: doc._type,
+        locale: lang,
+        slug: slug.current,
+        isAbsolute: true
+      });
+
+      out.push({url, lang});
+    }
+  }
+
+  return out;
+};
+
+interface IAlternateHref {
+  url: string,
+  lang: string
 }

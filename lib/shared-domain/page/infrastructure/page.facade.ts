@@ -1,6 +1,6 @@
 import { Locale } from 'lib/locale';
 import { SanityService } from 'lib/services/sanity.service';
-import {ISanityDoc, Page, TPageShortInfo} from '../domain';
+import { Page, TPageShortInfo } from '../domain';
 import { querySiteSettings } from './siteSettings.facade';
 import { SiteSettings } from '../domain/index';
 import { querySharedContent } from './sharedContent.facade';
@@ -104,41 +104,6 @@ const queryPages = (excludeHiddenPages: boolean = false): string => {
 }`;
 }
 
-const queryPagesWithLandingsForSitemap = (): string => {
-  return `
-*[
-  _type in ["page", "landings"]
-  && (hidePage == false || !defined(hidePage))
-  && includeInSitemap == true
-  && (defined(slug.current) && slug.current != '')
-] {
-  _id,
-  _lang,
-  _type,
-  _langRefs[] -> {
-    _id,
-    _lang,
-    slug
-  },
-  __i18n_base -> {
-    _id,
-    _lang,
-    slug,
-    _langRefs[] -> {
-      _id,
-      _lang,
-      slug
-    }
-  },
-  slug {
-    current
-  },
-  _createdAt,
-  _updatedAt
-}
-  `;
-}
-
 export function filterDataToSingleItem(data, preview) {
   if (!Array.isArray(data)) return data;
   return data?.length > 1 && preview
@@ -201,9 +166,5 @@ export class PageFacade {
     const pages = await this.sanityService.fetch(queryPagesStaticPaths());
 
     return pages;
-  }
-
-  async getPagesWithLandingsForSitemap(): Promise<ISanityDoc[]> {
-    return this.sanityService.fetch(queryPagesWithLandingsForSitemap());
   }
 }
