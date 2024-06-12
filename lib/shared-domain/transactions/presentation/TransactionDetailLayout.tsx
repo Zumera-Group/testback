@@ -12,23 +12,21 @@ import { TransactionSector } from './TransactionSector';
 import { TransactionTeam } from './TransactionTeam';
 import { PageTransition } from 'components/PageTransition';
 import { SEO } from 'components/SEO';
-import { links } from 'lib/links';
-import { useRouter } from 'next/router';
+import { allLinks } from 'lib/links';
 import { TransactionInvolvedParties } from './TransactionInvolvedParties';
 import ContactUsSection from 'lib/shared-domain/page/presentation/contentModules/ContactUsSection';
+import { useMakeAlternateHrefs } from '../../../hooks/useMakeAlternateHrefs';
 
 export const TransactionDetailLayout: React.FC<{
   transaction: Transaction;
   siteSettings: SiteSettings;
   transactionDetailContent: any;
 }> = ({ transaction, siteSettings, transactionDetailContent }) => {
-  const { locale } = useRouter();
+  const {alternateHrefs, canonicalHref} = useMakeAlternateHrefs({
+    doc: transaction,
+    urlPrefixes: getTransactionsUrlPrefixes()
+  });
 
-  const otherLangSlug =
-    transaction?.queryOtherLangSlug?.slice(-1)[0]?.slug &&
-    links(locale === 'en' ? 'de' : 'en').transactions(
-      transaction?.queryOtherLangSlug?.slice(-1)[0] as any,
-    );
   return (
     <div>
       <SEO
@@ -36,11 +34,14 @@ export const TransactionDetailLayout: React.FC<{
         seoDescription={transaction.description}
         seoImage={transaction.companyLogo1}
         siteSettings={siteSettings}
+        langAlternates={alternateHrefs}
+        canonicalHref={canonicalHref}
       />
       <PageHeader
         contentModules={[]}
         siteSettings={siteSettings}
-        otherLangSlug={otherLangSlug}
+        langAlternates={alternateHrefs}
+        // otherLangSlug={otherLangSlug}
       />
       <PageTransition>
         <TransactionHero
@@ -84,4 +85,14 @@ export const TransactionDetailLayout: React.FC<{
       <PageFooter siteSettings={siteSettings} />
     </div>
   );
+};
+
+const getTransactionsUrlPrefixes = () => {
+  const out: {[key: string]: string} = {};
+
+  for (const [key, val] of Object.entries(allLinks.transactions)) {
+    out[key] = `/${val}`;
+  }
+
+  return out;
 };
