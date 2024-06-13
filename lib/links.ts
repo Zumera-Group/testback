@@ -256,6 +256,7 @@ export const getPagePrefixByType = (type: string, locale: string): string => {
     service: allLinks.services[locale],
     landings: allLinks.landing[locale],
     taxCalculator: allLinks.taxCalculator[locale],
+    blogArticle: allLinks.blog[locale],
   };
 
   if (type in linkTypePart) {
