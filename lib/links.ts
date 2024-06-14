@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import { Service, Sector } from './shared-domain/page/domain/index';
+import { Sector, Service } from './shared-domain/page/domain/index';
 import { NewsArticle } from './shared-domain/newsArticle/domain/index';
 import { Transaction } from './shared-domain/transactions/domain';
 import { Employee } from './shared-domain/employees/domain/index';
@@ -31,7 +31,7 @@ export const links = (l?: string) => {
       sectors: (s: Sector): string => `/en/sectors/${s?.slug?.current || ''}`,
       employees: (e: Employee): string =>
         `/en/employees/${e?.slug?.current || ''}`,
-      questionnaires: (q: Questionnaire): string =>
+      questionnaires: (q: Questionnaire | CalculatorPage): string =>
         `/en/questionnaires/${q?.questionnaireSlug?.current || ''}`,
       landings: (l: VTLanding): string =>
         `/en/landing/${l?.landingSlug?.current || ''}`,

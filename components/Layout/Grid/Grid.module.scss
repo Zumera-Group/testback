@@ -17,6 +17,7 @@
 .row {
   --column: calc(100% / 12);
 
+  width: inherit;
   display: flex;
   flex-wrap: wrap;
   margin-left: calc(var(--gutter) * -1);
@@ -27,7 +28,6 @@
   position: relative;
   padding-left: var(--gutter);
   padding-right: var(--gutter);
-
   flex: 0 0 calc(var(--column) * 12);
   max-width: calc(var(--column) * 12);
 

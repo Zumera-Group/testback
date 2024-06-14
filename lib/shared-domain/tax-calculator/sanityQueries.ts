@@ -142,3 +142,55 @@ export const queryTaxCalculatorQuestion = (
     }
   },
 }`;
+
+export const queryPreQuestionnaire: QueryPreQuestionnaire = (
+  lang,
+  slug,
+) => `*[_type == "preCalculator" && _lang == "${lang}" && preCalculatorSlug.current == "${slug}"] {
+  _id,
+  _lang,
+  preCalculatorName,
+  seoDescription,
+  seoImage{
+    asset->{
+      url,
+      metadata{
+        dimensions{
+          height,
+          width
+        }
+      }
+    }
+  },
+  preventIndexing,
+  question{
+    ...
+  },
+  boxSelector[]{
+    _key,
+    boxContent,
+    label,
+    boxIcon->{
+      name,
+      iconImage{
+        asset->{
+          url,
+          metadata{
+            dimensions{
+              height,
+              width
+            }
+          }
+        }
+      }
+    },
+    calculatorPage->{
+      _id,
+      _lang,
+      _type,
+      questionnaireName,
+      questionnaireSlug,
+    },
+  },
+  nextButtonText
+}`;

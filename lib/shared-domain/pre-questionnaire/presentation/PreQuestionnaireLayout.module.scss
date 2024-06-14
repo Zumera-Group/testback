@@ -1,0 +1,63 @@
+$main-layout-chat-button-offset: 48px;
+$main-layout-height: calc(
+  85vh - var(--header-height) - calc(var(--section-size) * 2) - #{$main-layout-chat-button-offset}
+);
+
+.page {
+  width: 100%;
+  max-width: 100%;
+  min-height: 100vh;
+  background-color: $primary;
+
+  --grid-gap: 0;
+
+  @include breakpoint-up(md) {
+    --grid-gap: #{$gutter * 3};
+  }
+
+  @include breakpoint-up(lg) {
+    --grid-gap: #{$gutter * 4};
+  }
+
+  header {
+    position: relative !important;
+    background-color: transparent !important;
+    color: $white !important;
+
+    svg {
+      fill: $white !important;
+    }
+  }
+}
+
+.grid {
+  padding-top: 48px;
+}
+
+.gridCol {
+  width: inherit;
+}
+
+.questionWrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  gap: $container-padding-x;
+  margin-top: 24px;
+}
+
+.boxRow {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  gap: $container-padding-x;
+}
+
+.nextButtonRow {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 16px;
+  margin-bottom: 16px;
+}

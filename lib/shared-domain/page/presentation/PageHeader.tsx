@@ -2,11 +2,11 @@ import { IAnnouncementTopBanner, SiteSettings } from '../domain/index';
 import { ContentModule } from '../domain/contentModule';
 
 import Header from 'components/Header';
-import {IAlternateLangHrefs} from '../../../../@types/i18n';
+import { IAlternateLangHrefs } from '../../../../@types/i18n';
 
 interface Props {
   siteSettings: SiteSettings;
-  contentModules: ContentModule[];
+  contentModules?: ContentModule[];
   darkBg?: boolean;
   whiteBg?: boolean;
   otherLangSlug?: string;
@@ -22,7 +22,7 @@ interface Props {
 
 export const PageHeader: React.FC<Props> = ({
   siteSettings,
-  contentModules,
+  contentModules = [],
   darkBg,
   hideHeader,
   isLightHeader,
