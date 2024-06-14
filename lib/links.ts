@@ -17,6 +17,9 @@ const getLocale = () => {
   }
 };
 
+/**
+ * @deprecated - please use createUrl instead
+ */
 export const links = (l?: string) => {
   const locale = l || getLocale();
 
@@ -176,30 +179,6 @@ export const allLinks = {
   }
 };
 
-export const getArticleBoxLink = (
-  locale: string,
-  path: string,
-  type: string,
-) => {
-  if (!type) {
-    return `/${locale}/blog/${path}`;
-  }
-  const urls = {
-    blogArticle: {
-      en: `/en/blog/${path}`,
-      de: `/de/blog/${path}`,
-      fr: `/fr/blog/${path}`,
-    },
-    blogValToolArticle: {
-      en: `/en/valuation-tool/${path}`,
-      de: `/de/unternehmenswert-rechner/${path}`,
-      fr: `/de/outil-de-valorisation/${path}`,
-    },
-  };
-
-  return urls[type][locale];
-};
-
 export const getDefaultCountry = (locale: string) => {
   const countriesMap = {
     en: 'GB',
@@ -257,6 +236,7 @@ export const getPagePrefixByType = (type: string, locale: string): string => {
     landings: allLinks.landing[locale],
     taxCalculator: allLinks.taxCalculator[locale],
     blogArticle: allLinks.blog[locale],
+    blogValToolArticle: allLinks['valuation-tool'][locale]
   };
 
   if (type in linkTypePart) {

@@ -122,7 +122,7 @@ export class SitemapFacade {
   async getBlogArticles(): Promise<ISanityDoc[]> {
     return this.sanityService.fetch(`
 *[
-  _type in ["blogArticle"]
+  _type in ["blogArticle", "blogValToolArticle"]
   && (defined(slug.current) && slug.current != '')
 ] {
   _id,
