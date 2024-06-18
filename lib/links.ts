@@ -17,6 +17,9 @@ const getLocale = () => {
   }
 };
 
+/**
+ * @deprecated - please use createUrl instead
+ */
 export const links = (l?: string) => {
   const locale = l || getLocale();
 
@@ -151,6 +154,9 @@ export const allLinks = {
     de: 'ueber-uns',
     fr: 'propos-de-nous',
   },
+  /**
+   * @deprecated - we dont have these pages.
+   */
   'cdi-global': {
     en: 'cdi-global',
     de: 'cdi-global',
@@ -171,30 +177,6 @@ export const allLinks = {
     de: 'tax-calculator',
     fr: 'tax-calculator',
   }
-};
-
-export const getArticleBoxLink = (
-  locale: string,
-  path: string,
-  type: string,
-) => {
-  if (!type) {
-    return `/${locale}/blog/${path}`;
-  }
-  const urls = {
-    blogArticle: {
-      en: `/en/blog/${path}`,
-      de: `/de/blog/${path}`,
-      fr: `/fr/blog/${path}`,
-    },
-    blogValToolArticle: {
-      en: `/en/valuation-tool/${path}`,
-      de: `/de/unternehmenswert-rechner/${path}`,
-      fr: `/de/outil-de-valorisation/${path}`,
-    },
-  };
-
-  return urls[type][locale];
 };
 
 export const getDefaultCountry = (locale: string) => {
@@ -239,4 +221,45 @@ export const getArticlePaginationInfo = ({
   } else {
     return `Zeigt ${startArticle}-${endArticle + 1} von ${total + 1} artikeln`;
   }
+};
+
+export const getPagePrefixByType = (type: string, locale: string): string => {
+  const out: string[] = [locale];
+
+  const linkTypePart = {
+    sector: allLinks.sectors[locale],
+    valueCalculator: allLinks.questionnaires[locale],
+    employee: allLinks.employees[locale],
+    transaction: allLinks.transactions[locale],
+    newsArticle: allLinks.news[locale],
+    service: allLinks.services[locale],
+    landings: allLinks.landing[locale],
+    taxCalculator: allLinks.taxCalculator[locale],
+    blogArticle: allLinks.blog[locale],
+    blogValToolArticle: allLinks['valuation-tool'][locale]
+  };
+
+  if (type in linkTypePart) {
+    out.push(linkTypePart[type]);
+  }
+
+  return `/${out.join('/')}`;
+}
+
+export const createUrl = ({type, locale, slug, isAbsolute = false}: {
+  type: string,
+  locale: string,
+  slug: string,
+  isAbsolute?: boolean
+}): string => {
+  let url: string = '';
+
+  if (isAbsolute) {
+    url += process.env.NEXT_PUBLIC_BASE_URL;
+  }
+
+  url += getPagePrefixByType(type, locale);
+  url += `/${slug}/`;
+
+  return url;
 };

@@ -7,7 +7,8 @@ export interface ILangRef {
   _lang: string;
   slug: {
     current: string
-  }
+  },
+  hidePage?: boolean;
 }
 
 export interface I18nBase {
@@ -17,4 +18,5 @@ export interface I18nBase {
     current: string;
   };
   _langRefs?: ILangRef[];
+  hidePage?: boolean;
 }

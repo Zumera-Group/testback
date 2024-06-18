@@ -7,7 +7,7 @@ import { sanityImageUrlFor } from 'lib/sanity';
 import styles from './ArticleBox.module.scss';
 import Link from 'next/link';
 import useFormatDateLong from 'lib/shared-domain/useFormatDateLong';
-import { getArticleBoxLink } from 'lib/links';
+import { createUrl } from 'lib/links';
 
 interface Props {
   titleEl: any;
@@ -73,7 +73,11 @@ const ArticleBox: React.FC<Props> = ({
   const noImage = isLatest;
   const noSummary = isLatest || isSmallVertical;
 
-  const href = getArticleBoxLink(locale, item?.slug?.current, item._type) || '/en/home';
+  const href = item?.slug?.current ? createUrl({
+    type: item._type,
+    locale,
+    slug: item?.slug?.current
+  }) : '#';
 
   return (
     <div className={classNames}>
