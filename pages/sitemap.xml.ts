@@ -35,7 +35,7 @@ async function generateSitemap(): Promise<string> {
   await appendQuestionnaires(xmlRoot);
 
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>${xmlRoot.end({pretty: true})}`;
-  // console.log(sitemap);
+
   return sitemap;
 }
 
