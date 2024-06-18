@@ -11,6 +11,7 @@ const Sitemap = () => {};
 export const getServerSideProps = async ({ res }) => {
   const sitemap = await generateSitemap();
 
+  res.setHeader('Content-Type', 'text/xml');
   res.write(sitemap);
   res.end();
 
