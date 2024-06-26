@@ -22,6 +22,12 @@
   }
 }
 
+.heading {
+  @include breakpoint-down(md) {
+    padding-top: $gutter;
+  }
+}
+
 .imageCol {
   align-self: stretch;
   aspect-ratio: 3/2;
@@ -35,6 +41,9 @@
 }
 
 .grid {
+  @include breakpoint-down(md) {
+    --gutter: 0;
+  }
   & > div {
     min-height: 45vh;
   }

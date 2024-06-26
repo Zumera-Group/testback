@@ -33,7 +33,6 @@ export const TextWithImageGrid: React.FC<{
     <Section size={'lg'} bg={'light'} color={'white'} classes={styles.section} id={'text-image-grid'}>
       <Container classes={sectionStyles}>
         <Grid
-          fullWidth={true}
           justifyContent={'start'}
           alignItems={'center'}
           className={styles.grid}
@@ -44,6 +43,7 @@ export const TextWithImageGrid: React.FC<{
               subtitle={subtitle}
               description={description}
               headingType={'h3'}
+              classes={styles.heading}
               align={'left'}
             />
             {button.title ? (
