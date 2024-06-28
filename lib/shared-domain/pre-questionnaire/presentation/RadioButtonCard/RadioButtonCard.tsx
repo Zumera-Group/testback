@@ -1,5 +1,4 @@
 import React from 'react';
-import styles from 'lib/shared-domain/pre-questionnaire/presentation/RadioButtonCard/RadioButtonCard.module.scss';
 import Image from 'next/image';
 import RadioButton from 'components/Calculator/RadioButtonItem/RadioButtonItem';
 
@@ -10,6 +9,7 @@ interface Props {
   label: string,
   boxIcon: BoxSelector['boxIcon'],
   boxContent: string
+  extraInfo: unknown[]
 }
 
 const Icon = ({ boxIcon }: { boxIcon: BoxSelector['boxIcon'] }) => {
@@ -34,17 +34,17 @@ export const RadioButtonCard: React.FC<Props> = ({
   label,
   boxIcon,
   boxContent,
+  extraInfo,
 }) => {
 
   return (
-    <div className={styles.checkboxCard}>
-      <RadioButton
-        icon={<Icon boxIcon={boxIcon} />}
-        label={label || boxContent}
-        onClick={handleSelection}
-        selected={isSelected}
-      />
-    </div>
+    <RadioButton
+      icon={<Icon boxIcon={boxIcon} />}
+      label={label || boxContent}
+      onClick={handleSelection}
+      selected={isSelected}
+      extraInfo={extraInfo}
+    />
   );
 };
 

@@ -32,6 +32,7 @@ interface BoxSelector {
   label: string;
   boxIcon: Icon;
   calculatorPage: CalculatorPage;
+  extraInfo: unknown[];
 }
 
 interface PreQuestionnaireData {

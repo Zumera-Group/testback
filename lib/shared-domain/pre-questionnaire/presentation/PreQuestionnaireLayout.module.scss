@@ -41,10 +41,11 @@ $main-layout-height: calc(
 .questionWrapper {
   display: flex;
   flex-direction: row;
-  align-items: center;
-  width: 100%;
+  justify-content: center;
+  max-width: $container-max-width / 2;
   gap: $container-padding-x;
   margin-top: 24px;
+  align-items: stretch;
 }
 
 .boxRow {

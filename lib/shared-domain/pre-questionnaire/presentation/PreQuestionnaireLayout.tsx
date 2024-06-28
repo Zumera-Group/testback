@@ -66,11 +66,12 @@ const PreQuestionnaireLayout: React.FC<{
 
               <div className={styles.questionWrapper}>
                 {
-                  data.boxSelector.map(({ label, boxContent, boxIcon, calculatorPage, _key }) =>
+                  data.boxSelector.map(({ label, boxContent, boxIcon, calculatorPage, extraInfo, _key }) =>
                     <RadioButtonCard
                       key={_key}
                       boxIcon={boxIcon}
                       label={label}
+                      extraInfo={extraInfo}
                       boxContent={boxContent}
                       handleSelection={() => {
                         handleOnSelect(calculatorPage, _key);

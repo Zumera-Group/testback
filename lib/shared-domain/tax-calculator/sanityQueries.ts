@@ -170,6 +170,7 @@ export const queryPreQuestionnaire: QueryPreQuestionnaire = (
     _key,
     boxContent,
     label,
+    extraInfo,
     boxIcon->{
       name,
       iconImage{
