@@ -1,9 +1,9 @@
 import React from 'react';
 import { useRouter } from 'next/router';
 import { ErrorTrackingBoundary } from 'lib/ErrorTrackingBoundary';
-import { fetchPreQuestionnaire } from 'lib/shared-domain/pre-questionnaire/service';
+import { fetchPreCalculator } from 'lib/shared-domain/pre-calculator/service';
 import { fetchSiteSettings } from 'lib/shared-domain/page/application/useGetSiteSettings';
-import PreQuestionnaireLayout from 'lib/shared-domain/pre-questionnaire/presentation/PreQuestionnaireLayout';
+import PreCalculatorLayout from 'lib/shared-domain/pre-calculator/presentation/PreCalculatorLayout';
 import { SiteSettings } from 'lib/shared-domain/page/domain';
 
 
@@ -22,7 +22,7 @@ export async function getStaticProps({
   try {
     const siteSettings = await fetchSiteSettings(locale);
 
-    const { data } = await fetchPreQuestionnaire(locale, params.slug, preview);
+    const { data } = await fetchPreCalculator(locale, params.slug, preview);
 
     return {
       props: {
@@ -56,7 +56,7 @@ export default function Index({
 
   return (
     <ErrorTrackingBoundary>
-      <PreQuestionnaireLayout locale={locale} siteSettings={siteSettings} data={data[0]} />
+      <PreCalculatorLayout locale={locale} siteSettings={siteSettings} data={data[0]} />
     </ErrorTrackingBoundary>
   );
 }

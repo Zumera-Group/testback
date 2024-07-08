@@ -90,8 +90,6 @@ export const Header = ({
     (h) => h.type === 'blogValToolArticle',
   )?.blogMenuItems;
 
-  // console.log(blogArticles);
-
   useEffect(() => {
     const handleScroll = () => {
       const positionY = window.pageYOffset;

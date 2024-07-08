@@ -176,6 +176,11 @@ export const allLinks = {
     en: 'tax-calculator',
     de: 'tax-calculator',
     fr: 'tax-calculator',
+  },
+  preCalculator: {
+    en: 'pre-calculator',
+    de: 'pre-calculator',
+    fr: 'pre-calculator',
   }
 };
 
@@ -236,7 +241,8 @@ export const getPagePrefixByType = (type: string, locale: string): string => {
     landings: allLinks.landing[locale],
     taxCalculator: allLinks.taxCalculator[locale],
     blogArticle: allLinks.blog[locale],
-    blogValToolArticle: allLinks['valuation-tool'][locale]
+    blogValToolArticle: allLinks['valuation-tool'][locale],
+    preCalculator: allLinks.preCalculator[locale],
   };
 
   if (type in linkTypePart) {

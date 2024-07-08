@@ -68,6 +68,7 @@ const queryBlogArticle = (
   relatedCalculators[] {
     ...,
     calculatorPage->{
+      _type,
       questionnaireSlug
     }
   },

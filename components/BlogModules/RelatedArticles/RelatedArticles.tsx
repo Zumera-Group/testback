@@ -7,7 +7,7 @@ import { sanityImageUrlFor } from 'lib/sanity';
 import { SwiperRelatedArticles } from 'components/Layout/SwiperRelatedArticles';
 import { useFormatDate } from 'lib/shared-domain/useFormatDate';
 import { useRouter } from 'next/router';
-import { getBuiltLink } from 'lib/links';
+import { createUrl, getBuiltLink } from 'lib/links';
 import { Icon } from 'components/Icon';
 
 const RelatedArticles: React.FC<{
@@ -43,6 +43,7 @@ const RelatedArticles: React.FC<{
         {related?.filter(({
           _type,
           calculatorPage,
+
         }) => !!calculatorPage || _type === 'blogArticle').map((article, index) => (
           <SwiperSlide
             key={`relatedArticleCarousel-${index}`}
@@ -89,11 +90,12 @@ const RelatedArticles: React.FC<{
                 (<GridColumn sm={12} md={6} lg={5} className={styles.rightColumn}>
                   <div className={styles.relatedCalculators}>
                     <a
-                      href={getBuiltLink({
-                        locale,
-                        path: 'questionnaires',
-                        uri: article.calculatorPage?.questionnaireSlug?.current,
-                      })}
+                      href={
+                        createUrl({
+                          type: article.calculatorPage._type,
+                          locale,
+                          slug: article.calculatorPage?.questionnaireSlug?.current,
+                        })}
                     >
                       <h4 className={styles.heading}>{article.title}</h4>
                       <p className={styles.summary}>{article.description}</p>
@@ -105,8 +107,7 @@ const RelatedArticles: React.FC<{
                       />
                     </a>
                   </div>
-                </GridColumn>
-              )}
+                </GridColumn>)}
             </article>
           </SwiperSlide>
         ))}

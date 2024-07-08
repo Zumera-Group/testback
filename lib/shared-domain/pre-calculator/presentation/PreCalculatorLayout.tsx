@@ -3,15 +3,15 @@ import { SEO } from 'components/SEO';
 import { SiteSettings } from '../../page/domain/index';
 import { useRouter } from 'next/router';
 import PageHeader from 'lib/shared-domain/page/presentation/PageHeader';
-import styles from 'lib/shared-domain/pre-questionnaire/presentation/PreQuestionnaireLayout.module.scss';
+import styles from 'lib/shared-domain/pre-calculator/presentation/PreCalculatorLayout.module.scss';
 import { Container, Grid, GridColumn } from 'components/Layout';
 import QuestionButtonsWrapper from 'lib/shared-domain/questionnaire/presentation/Question/QuestionButtonsWrapper';
 import { Button } from 'components/Button';
-import { QuestionTitle } from 'lib/shared-domain/pre-questionnaire/presentation/QuestionTitle/QuestionTitle';
-import { RadioButtonCard } from 'lib/shared-domain/pre-questionnaire/presentation/RadioButtonCard/RadioButtonCard';
+import { QuestionTitle } from 'lib/shared-domain/pre-calculator/presentation/QuestionTitle/QuestionTitle';
+import { RadioButtonCard } from 'lib/shared-domain/pre-calculator/presentation/RadioButtonCard/RadioButtonCard';
 import { links } from 'lib/links';
 
-const PreQuestionnaireLayout: React.FC<{
+const PreCalculatorLayout: React.FC<{
   data: PreQuestionnaireData;
   siteSettings: SiteSettings;
   locale: string;
@@ -101,4 +101,4 @@ const PreQuestionnaireLayout: React.FC<{
   );
 };
 
-export default PreQuestionnaireLayout;
+export default PreCalculatorLayout;
