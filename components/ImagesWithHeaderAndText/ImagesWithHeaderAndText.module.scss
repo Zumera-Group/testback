@@ -70,7 +70,19 @@ $col-3-gaps: (
 }
 
 .columnHeader {
-  font-size: 1.5rem;
+  font-size: 1.125rem;
+
+  @include breakpoint-up(sm) {
+    font-size: 1.125rem;
+  }
+
+  @include breakpoint-up(md) {
+    font-size: 1.3rem;
+  }
+
+  @include breakpoint-up(lg) {
+    font-size: 1.5rem;
+  }
 }
 
 .columnText {
