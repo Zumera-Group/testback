@@ -3,8 +3,7 @@ import { SanityService } from 'lib/services/sanity.service';
 import { BlogArticle } from './../../blogArticle/domain';
 
 import {
-  filterDataToSingleItem,
-  getOtherLangSlugQuery,
+  filterDataToSingleItem
 } from '../../page/infrastructure/page.facade';
 import { SERVER_FETCHING_ERROR } from '../../page/constants';
 
@@ -67,6 +66,15 @@ const queryBlogArticle = (
     slug,
     calendlyURL,
     _id,
+  },
+  relatedCalculators[] {
+    ...,
+    calculatorPage->{
+      _id,
+      _lang,
+      _type,
+      questionnaireSlug
+    }
   },
   relatedArticles[]-> {
     ...,

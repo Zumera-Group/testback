@@ -6,9 +6,9 @@ import Image from 'next/image';
 import { sanityImageUrlFor } from 'lib/sanity';
 import { SwiperRelatedArticles } from 'components/Layout/SwiperRelatedArticles';
 import { useFormatDate } from 'lib/shared-domain/useFormatDate';
-import { useRouter } from 'next/router';
-import { createUrl, getBuiltLink } from 'lib/links';
+import { createUrl } from 'lib/links';
 import { Icon } from 'components/Icon';
+import { SanityService } from '../../../lib/services/sanity.service';
 
 const RelatedArticles: React.FC<{
   relatedArticles: any;
@@ -18,7 +18,7 @@ const RelatedArticles: React.FC<{
   const swiperPrevRef = useRef();
   const swiperNextRef = useRef();
   const format = useFormatDate();
-  const { locale } = useRouter();
+
   const {
     relatedArticleSection: { raDesc, raTitle },
   } = blogArticleDetail;
@@ -52,10 +52,10 @@ const RelatedArticles: React.FC<{
             <article className={styles.articleCard}>
               {article?._type === 'blogArticle' && (
                 <a
-                  href={getBuiltLink({
-                    locale,
-                    path: 'blog',
-                    uri: article?.slug?.current,
+                  href={createUrl({
+                    type: article._type,
+                    locale: SanityService.getLocaleFromSanityLocale(article._lang),
+                    slug: article.slug?.current
                   })}
                 >
                   <div className={styles.thumbnail}>
@@ -93,7 +93,7 @@ const RelatedArticles: React.FC<{
                       href={
                         createUrl({
                           type: article.calculatorPage._type,
-                          locale,
+                          locale: SanityService.getLocaleFromSanityLocale(article.calculatorPage._lang),
                           slug: article.calculatorPage?.questionnaireSlug?.current,
                         })}
                     >
