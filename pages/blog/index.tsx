@@ -47,6 +47,8 @@ export async function getStaticProps({ locale, params, preview = false }) {
   const sanrityService = new SanityService();
   const extraQuery = `
   featuredBlog->{
+    _id,
+    _type,
     heroImage {
       asset->{
         url
