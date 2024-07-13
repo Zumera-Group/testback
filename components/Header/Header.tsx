@@ -233,6 +233,7 @@ export const Header = ({
               blogArticles={blogArticles}
               logo={<Logo slug={homeSlug} title={siteName} isAnimated={true} />}
               closeBigMenu={() => setBigMenuOpen(false)}
+              langAlternates={langAlternates}
             />
           )}
         </AnimatePresence>
