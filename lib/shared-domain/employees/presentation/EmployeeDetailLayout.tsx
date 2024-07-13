@@ -15,9 +15,9 @@ import { EmployeeContact } from './EmployeeContact';
 import { SEO } from 'components/SEO';
 import { useFetchEmployees } from '../application/useGetEmployees';
 import { useFetchNewsArticles } from '../../newsArticle/application/useGetNewsArticles';
-import { links } from 'lib/links';
-import { useRouter } from 'next/router';
+import { allLinks } from 'lib/links';
 import { useFetchTransactions } from 'components/NewsArticle/NewsArticleMoreNews';
+import { useMakeAlternateHrefs } from '../../../hooks/useMakeAlternateHrefs';
 
 export const EmployeeDetailLayout: React.FC<{
   employee: Employee;
@@ -27,13 +27,17 @@ export const EmployeeDetailLayout: React.FC<{
   const employees = useFetchEmployees();
   const transactions = useFetchTransactions();
   const newsArticles = useFetchNewsArticles();
-  const { locale } = useRouter();
 
-  const otherLangSlug =
-    employee?.queryOtherLangSlug?.slice(-1)[0]?.slug &&
-    links(locale === 'en' ? 'de' : 'en').employees(
-      employee?.queryOtherLangSlug?.slice(-1)[0] as any,
-    );
+  const {alternateHrefs, canonicalHref} = useMakeAlternateHrefs({
+    doc: employee,
+    urlPrefixes: getEmployeeUrlPrefixes()
+  });
+
+  // const otherLangSlug =
+  //   employee?.queryOtherLangSlug?.slice(-1)[0]?.slug &&
+  //   links(locale === 'en' ? 'de' : 'en').employees(
+  //     employee?.queryOtherLangSlug?.slice(-1)[0] as any,
+  //   );
 
   return (
     <div>
@@ -42,11 +46,14 @@ export const EmployeeDetailLayout: React.FC<{
         seoDescription={employee.jobTitle}
         siteSettings={siteSettings}
         seoImage={employee.detailPagePicture?.picture}
+        langAlternates={alternateHrefs}
+        canonicalHref={canonicalHref}
       />
       <PageHeader
         contentModules={[]}
         siteSettings={siteSettings}
-        otherLangSlug={otherLangSlug}
+        langAlternates={alternateHrefs}
+        // otherLangSlug={otherLangSlug}
       />
       <PageTransition>
         <EmployeeHero
@@ -73,4 +80,14 @@ export const EmployeeDetailLayout: React.FC<{
       <PageFooter siteSettings={siteSettings} />
     </div>
   );
+};
+
+const getEmployeeUrlPrefixes = () => {
+  const out: {[key: string]: string} = {};
+
+  for (const [key, val] of Object.entries(allLinks.employees)) {
+    out[key] = `/${val}`;
+  }
+
+  return out;
 };

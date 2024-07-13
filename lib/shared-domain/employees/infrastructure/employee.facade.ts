@@ -2,8 +2,7 @@ import { Locale } from 'lib/locale';
 import { SanityService } from 'lib/services/sanity.service';
 import { Employee } from '../domain';
 import {
-  filterDataToSingleItem,
-  getOtherLangSlugQuery,
+  filterDataToSingleItem
 } from '../../page/infrastructure/page.facade';
 import { SERVER_FETCHING_ERROR } from '../../page/constants';
 
@@ -54,10 +53,32 @@ const queryEmployee = (
   lang,
   slug,
   otherLangSlugQuery,
-) => `*[_type == "employee" && slug.current == "${slug}" && _lang == "${lang}"] {
+) => {
+  //just for back compatibility
+  let queryOtherLangSlug = '';
+  if (otherLangSlugQuery) {
+    queryOtherLangSlug = `"queryOtherLangSlug": ${otherLangSlugQuery},`
+  }
+
+  return `*[_type == "employee" && slug.current == "${slug}" && _lang == "${lang}"] {
   ...,
   _id,
   _lang,
+  _langRefs[] -> {
+    _id,
+    _lang,
+    slug
+  },
+  __i18n_base -> {
+    _id,
+    _lang,
+    slug,
+    _langRefs[] -> {
+      _id,
+      _lang,
+      slug
+    }
+  },
   detailPagePicture {
     ...,
     picture {
@@ -97,8 +118,9 @@ const queryEmployee = (
   office->{
     ...,
   },
-  "queryOtherLangSlug": ${otherLangSlugQuery},
+  ${queryOtherLangSlug}
 }`;
+}
 
 const queryEmployeeDetailContent = (
   lang,
@@ -123,7 +145,7 @@ export class EmployeeFacade {
     const query = queryEmployee(
       this.sanityService.getSanityLocale(lang),
       slug,
-      getOtherLangSlugQuery(lang, 'employee'),
+      null
     );
     const data = await this.sanityService.fetch(query, preview);
     if (!data) {

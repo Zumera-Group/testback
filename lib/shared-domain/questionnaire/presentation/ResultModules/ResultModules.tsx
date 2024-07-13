@@ -13,10 +13,10 @@ const ResultModules = ({ result, isResultsCompactOnMobile }) => {
 
   return (
     <div className={styles.root}>
-      {result.logoBarSection && (
+      {result?.logoBarSection && (
         <LogoBarSection specificContentModule={result.logoBarSection} />
       )}
-      {result.authors && (
+      {result?.authors && (
         <Section
           bg={'secondary'}
           color={'white'}
@@ -65,14 +65,14 @@ const ResultModules = ({ result, isResultsCompactOnMobile }) => {
           </Container>
         </Section>
       )}
-      {result.growthRatesTable && (
+      {result?.growthRatesTable && (
         <GrowthRatesTable
           title={''}
           isResultsCompactOnMobile={isResultsCompactOnMobile}
           growthRatesTable={result?.growthRatesTable || []}
         />
       )}
-      {result.heroSection.heroTitle && (
+      {result?.heroSection?.heroTitle && (
         <div className={styles.hero}>
           <Hero
             type="transaction"

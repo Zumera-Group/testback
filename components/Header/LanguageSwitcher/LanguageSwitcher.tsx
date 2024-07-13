@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
-import { enPaths, dePaths, frPaths } from 'lib/shared-domain/page/paths';
+// import { enPaths, dePaths, frPaths } from 'lib/shared-domain/page/paths';
 
 import styles from './LanguageSwitcher.module.scss';
 import { useEffect, useRef, useState } from 'react';
@@ -26,35 +26,36 @@ export const LanguageSwitcher: React.FC<Props> = ({
   const router = useRouter();
   const ref: any = useRef();
 
-  const pages = {
-    en: [
-      ...enPaths,
-      'questionnaires',
-      'landing',
-      'employees',
-      'terms-and-conditions',
-      'privacy-policy',
-      'home',
-    ],
-    de: [
-      ...dePaths,
-      'fragenkatalog',
-      'landing',
-      'mitarbeiter',
-      'impressum',
-      'datenschutzerklarung',
-      'home',
-    ],
-    fr: [
-      ...frPaths,
-      'des-questionnaires',
-      'landing',
-      'employes',
-      'terms-and-conditions',
-      'privacy-policy',
-      'home',
-    ],
-  };
+  // const pages = {
+  //   en: [
+  //     ...enPaths,
+  //     'questionnaires',
+  //     'landing',
+  //     'employees',
+  //     'terms-and-conditions',
+  //     'privacy-policy',
+  //     'home',
+  //   ],
+  //   de: [
+  //     ...dePaths,
+  //     'fragenkatalog',
+  //     'landing',
+  //     'mitarbeiter',
+  //     'impressum',
+  //     'datenschutzerklarung',
+  //     'home',
+  //   ],
+  //   fr: [
+  //     ...frPaths,
+  //     'des-questionnaires',
+  //     'landing',
+  //     'employes',
+  //     'terms-and-conditions',
+  //     'privacy-policy',
+  //     'home',
+  //   ],
+  // };
+
   // console.log('--- pages:', pages);
   const getSlug = useCallback((lang: string) => {
     // console.log('---- get Slug ---', lang, langAlternates);
@@ -66,8 +67,12 @@ export const LanguageSwitcher: React.FC<Props> = ({
       return `/${lang}/home`
     }
 
-    // console.log('no langAlternates - legacy way:');
+    //the legacy way often leads to 404 - since almost all pages pass  langAlternates -
+    // lets just point to the home page to avoid 404 page:
+    return `/${lang}/home`
 
+    // console.log('no langAlternates - legacy way:');
+/*
     const currentLocale = router.locale;
     const pathElements = router.asPath.split('/').filter((el) => el !== '');
     // console.log(currentLocale, pathElements);
@@ -85,8 +90,8 @@ export const LanguageSwitcher: React.FC<Props> = ({
 
     return `/${pages[lang][pageIndex]}${
       pathElements[1] ? '/' + pathElements[1] : ''
-    }`;
-  }, [pages, langAlternates, router]);
+    }`;*/
+  }, [langAlternates, router]);
 
   useEffect(() => {
     // console.log('useEffence - bind on click - it is incorrect')
