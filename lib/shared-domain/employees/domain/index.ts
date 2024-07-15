@@ -1,6 +1,7 @@
 import { Office } from 'lib/shared-domain/offices/domain';
 import { Report, Sector } from 'lib/shared-domain/page/domain';
 import { Description } from '../../page/domain/index';
+import { ILangRef } from '../../../../@types/i18n';
 
 interface Picture {
   asset?: {
@@ -15,17 +16,25 @@ interface Picture {
 }
 
 export interface Employee {
+  _id: string;
+  _lang: string;
+  _langRefs?: ILangRef[],
+  __i18n_base?: {
+    _id: string;
+    _lang: string;
+    slug: {
+      current: string;
+    },
+    _langRefs?: ILangRef[];
+  },
   queryOtherLangSlug: {
     slug: { current: string };
   }[];
   leadershipListIndex: number;
-  _id: string;
-  _lang: string;
   slug: {
     current: string;
   };
   hidePage: boolean;
-  _createdAt: Date;
   title: string;
   firstName: string;
   lastName: string;
@@ -61,4 +70,6 @@ export interface Employee {
     description: string;
     report: Report;
   };
+  _createdAt?: string;
+  _updatedAt?: string;
 }

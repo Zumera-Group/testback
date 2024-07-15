@@ -13,7 +13,7 @@ import styles from './SideBar.module.scss';
 import { getLinksByPageType } from 'lib/utils/getLinksByPageType';
 import { useRouter } from 'next/router';
 
-export const SideBar = ({ logo, menu, showMode, setShowMode, close }) => {
+export const SideBar = ({ logo, menu, showMode, setShowMode, close, langAlternates }) => {
   const router = useRouter();
   const linkWithCurrentLocale = useLinkWithCurrentLocale();
 
@@ -67,6 +67,7 @@ export const SideBar = ({ logo, menu, showMode, setShowMode, close }) => {
           <LanguageSwitcher
             classes={[styles.link, styles.link__languageSelector].join(' ')}
             isLight={false}
+            langAlternates={langAlternates}
             sideBar
           />
         </li>

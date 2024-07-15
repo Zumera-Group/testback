@@ -25,7 +25,7 @@ export const AnimatedHeroImage: React.FC<IProps> = () => {
   const setShowPlayerCallback = () => {
     setIsFadeIn(true);
     setTimeout(() => {
-      ref.current.play();
+      ref.current?.play();
     }, 500);
   };
 
