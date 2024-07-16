@@ -74,7 +74,16 @@ export const useMakeAlternateHrefs = ({ doc, urlPrefixes = null }: { doc: ISanit
     }
 
     return null;
-  }, [doc, urlPrefixes])
+  }, [doc, urlPrefixes]);
+
+  //we need to add self-referencing hreflang accroding to SemRush
+  if (canonicalHref && doc._lang) {
+    const siteLocale = SanityService.getLocaleFromSanityLocale(doc._lang);
+
+    Object.assign(alternateHrefs, {
+      [siteLocale]: canonicalHref
+    });
+  }
 
   return { alternateHrefs, canonicalHref };
 };
