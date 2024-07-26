@@ -77,6 +77,20 @@ export const LowLeadFlow: React.FC<{
     // addBgPromise(promise);
   }, [submitData, setPressed, isSubmissionAllowed]);
 
+  const successMessageRef = useCallback((node) => {
+    if (node) {
+      let top = node.getBoundingClientRect().top + window.scrollY - 30;
+      if (top < 0) {
+        top = 0;
+      }
+
+      window.scrollTo({
+        top,
+        behavior: 'smooth'
+      });
+    }
+  }, []);
+
   const getEmailError = () => {
     if (!pressed) return null;
     if (!getAnswer(EMAIL_STORE_INDICATOR)?.trim())
@@ -266,7 +280,7 @@ export const LowLeadFlow: React.FC<{
           </form>
         </>
       ) : (
-        <h3 className={styles.successMessage}>{formFields.successMessage}</h3>
+        <h3 className={styles.successMessage} ref={successMessageRef}>{formFields.successMessage}</h3>
       )}
     </AnimateIn>
   );
