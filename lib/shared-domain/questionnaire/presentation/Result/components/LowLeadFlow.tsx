@@ -17,6 +17,8 @@ import {
   NAME_STORE_INDICATOR, NEWSLETTER_CHECKBOX,
   PHONE_NUMBER_STORE_INDICATOR,
 } from 'lib/shared-domain/questionnaire/presentation/Result/constants';
+import {useMediaQuery} from '../../../../../hooks/useMediaQuery';
+import {SCREEN_SIZE_MD} from '../../../../../constants';
 
 
 const t = getTranslateByScope('result');
@@ -35,6 +37,7 @@ export const LowLeadFlow: React.FC<{
   const { locale } = useRouter();
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const formFields = resultScreenCopy.formFields;
+  const isMobile = useMediaQuery(`(max-width: ${SCREEN_SIZE_MD})`);
 
   const isSubmissionAllowed =
     isPolicyCheckboxChecked &&
@@ -76,6 +79,23 @@ export const LowLeadFlow: React.FC<{
     const promise = submitData();
     // addBgPromise(promise);
   }, [submitData, setPressed, isSubmissionAllowed]);
+
+  const successMessageRef = useCallback((node) => {
+    if (node) {
+      let top = 0;
+      if (isMobile) {
+        top = node.getBoundingClientRect().top + window.scrollY - 30;
+        if (top < 0) {
+          top = 0;
+        }
+      }
+
+      window.scrollTo({
+        top,
+        behavior: 'smooth'
+      });
+    }
+  }, [isMobile]);
 
   const getEmailError = () => {
     if (!pressed) return null;
@@ -266,7 +286,7 @@ export const LowLeadFlow: React.FC<{
           </form>
         </>
       ) : (
-        <h3 className={styles.successMessage}>{formFields.successMessage}</h3>
+        <h3 className={styles.successMessage} ref={successMessageRef}>{formFields.successMessage}</h3>
       )}
     </AnimateIn>
   );

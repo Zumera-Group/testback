@@ -64,6 +64,11 @@ export const ResultScreen: React.FC<ResultsScreenFormProps> = ({ resultScreenCop
 
     setIsFormSubmitted(true);
     setIsSubmitting(false);
+
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
   };
 
   const getEmailError = () => {
