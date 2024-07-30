@@ -31,12 +31,14 @@ export default class MyDocument extends Document {
         <body>
           <Main />
           <NextScript />
+          {process.env.NEXT_PUBLIC_COOKIE_FIRST_KEY &&
           <Script
             // strategy="worker"
             strategy="beforeInteractive"
             src="https://consent.cookiefirst.com/banner.js"
-            data-cookiefirst-key="187e6cb5-6683-48db-9a01-a5892c9f29d2"
+            data-cookiefirst-key={process.env.NEXT_PUBLIC_COOKIE_FIRST_KEY}
           />
+          }
         </body>
       </Html>
     );
