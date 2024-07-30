@@ -49,7 +49,9 @@ export async function getStaticProps({
       await fetchQuestionnaire(locale, params.slug, preview);
 
     const sectorSpecificQuestions = await fetchSectorSpecificQuestions(locale);
-    const sectors = await fetchSectors(locale);
+
+    const isNoah = Boolean(questionnaire.isNoah);
+    const sectors = await fetchSectors(locale, isNoah);
 
     if (
       !questionnaire ||
