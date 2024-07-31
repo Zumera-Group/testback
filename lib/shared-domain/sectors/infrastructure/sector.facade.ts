@@ -6,7 +6,9 @@ import {
 } from '../../page/infrastructure/page.facade';
 import { SERVER_FETCHING_ERROR } from '../../page/constants';
 
-const querySectors = (lang) => `*[_type == "sector" && _lang == "${lang}" && (hidePage == false || !defined(hidePage))] {
+const querySectors = (lang, isNoah = false) => {
+  const filters = isNoah ? '&& isNoah == true' : '&& (hidePage == false || !defined(hidePage))';
+  const query = `*[_type == "sector" && _lang == "${lang}" ${filters}] {
   ...,
   _id,
   slug,
@@ -103,6 +105,9 @@ const querySectors = (lang) => `*[_type == "sector" && _lang == "${lang}" && (hi
       }
     },
 }`;
+
+  return query;
+};
 
 const querySectorDetailContent = (
   lang,
@@ -293,9 +298,9 @@ export class SectorFacade {
     return { sectorDetail, query };
   }
 
-  async getSectors(lang: Locale): Promise<Sector[]> {
+  async getSectors(lang: Locale, isNoah: boolean = false): Promise<Sector[]> {
     const sector = await this.sanityService.fetch(
-      querySectors(this.sanityService.getSanityLocale(lang)),
+      querySectors(this.sanityService.getSanityLocale(lang), isNoah),
     );
 
     return sector;
