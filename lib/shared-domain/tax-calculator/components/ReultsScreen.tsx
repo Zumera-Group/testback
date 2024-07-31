@@ -7,7 +7,7 @@ import { useRouter } from 'next/router';
 import {
   COMPANY_NAME_STORE_INDICATOR,
   EMAIL_STORE_INDICATOR,
-  NAME_STORE_INDICATOR,
+  NAME_STORE_INDICATOR, NEWSLETTER_CHECKBOX,
   PHONE_NUMBER_STORE_INDICATOR,
 } from 'lib/shared-domain/questionnaire/presentation/Result/constants';
 import * as EmailValidator from 'email-validator';
@@ -37,6 +37,11 @@ export const ResultScreen: React.FC<ResultsScreenFormProps> = ({ resultScreenCop
 
   const isSubmissionAllowed =
     checkboxIsChecked &&
+    (
+      (!!formFields.isNewsLetterCheckboxRequired && !!formFields.newsLetterCheckboxText)
+        ? getTaxAnswer(NEWSLETTER_CHECKBOX)
+        : true
+    ) &&
     !!getTaxAnswer(NAME_STORE_INDICATOR)?.trim() &&
     !!getTaxAnswer(EMAIL_STORE_INDICATOR)?.trim() &&
     (!!formFields.isCompanyFieldRequired ? !!getTaxAnswer(COMPANY_NAME_STORE_INDICATOR)?.trim() : true) &&
@@ -212,6 +217,28 @@ export const ResultScreen: React.FC<ResultsScreenFormProps> = ({ resultScreenCop
                 <span> {formFields.checkBoxThird}</span>
               </div>
             </Checkbox>
+
+            {
+              !!formFields.newsLetterCheckboxText &&
+              <div style={{ marginTop: '12px' }}>
+                <FormGroup>
+                  <Checkbox
+                    id={'newsLetterCheckbox'}
+                    required={!!formFields.isNewsLetterCheckboxRequired}
+                    isChecked={getTaxAnswer(NEWSLETTER_CHECKBOX)}
+                    onChange={(e) => {
+                      setTaxAnswer({
+                        id: NEWSLETTER_CHECKBOX,
+                        value: e.target.checked,
+                      });
+                    }}
+                  >
+                    {formFields.newsLetterCheckboxText}
+                  </Checkbox>
+                </FormGroup>
+              </div>
+            }
+
             {pressed && !checkboxIsChecked && (
               <FormGroup>
                 <Message isError> {t('evaluation.form.checkboxError')}</Message>
