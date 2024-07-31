@@ -49,8 +49,8 @@ function MyApp({ Component, pageProps, router }) {
 
   // Initialise Google tag manager
   useEffect(() => {
-    if (process.browser && EnvironmentService.isProduction()) {
-      TagManager.initialize({ gtmId: 'GTM-PXQZLHF' });
+    if (process.browser && process.env.NEXT_PUBLIC_TAG_MANAGER_ID) {
+      TagManager.initialize({ gtmId: process.env.NEXT_PUBLIC_TAG_MANAGER_ID });
     }
   }, []);
 
