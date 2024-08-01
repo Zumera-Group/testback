@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useMemo, useState} from 'react';
 import { Button } from 'components/Button';
 import { Checkbox, FormGroup, Input } from 'components/Form';
 import styles from './WhitePaperForm.module.scss';
@@ -7,6 +7,7 @@ import Link from 'next/link';
 import { useLinkWithCurrentLocale } from 'lib/shared-domain/useLinkWithCurrentLocale';
 import { MarketingParamsService } from 'lib/shared-domain/salesforce/application/marketingParamsService';
 import { useGetURL } from 'lib/hooks/useGetURL';
+import { NEWSLETTER_CHECKBOX } from '../../../lib/shared-domain/questionnaire/presentation/Result/constants';
 
 
 export const WhitePaperForm = ({
@@ -20,11 +21,42 @@ export const WhitePaperForm = ({
   file,
   variant,
   sectorName,
-  name='default'
+  newsLetterCheckboxText,
+  isNewsLetterCheckboxRequired,
+  name = 'default'
+}: {
+  buttonText?: string;
+  namePlaceholder?: string;
+  emailPlaceholder?: string;
+  termsAndConditionsLabel: any;
+  successMessage?: string;
+  errorMessage?: string;
+  downloadAgain?: string;
+  file?: string;
+  variant?: string;
+  sectorName?: string;
+  newsLetterCheckboxText?: string;
+  isNewsLetterCheckboxRequired?: boolean;
+  name?: string;
 }) => {
   const [checkboxIsChecked, setCheckboxIsChecked] = useState(false);
+  const [newsLetterCheckboxIsChecked, setNewsLetterCheckboxIsChecked] = useState(false);
   const [isFormSubmitted, setIsFormSubmitted] = useState(false);
   const linkWithCurrentLocale = useLinkWithCurrentLocale();
+
+  const showNewsLetterCheckbox = !!newsLetterCheckboxText;
+  const isAllowSubmit = useMemo(() => {
+    if (!checkboxIsChecked) {
+      return false;
+    }
+
+    if (showNewsLetterCheckbox && isNewsLetterCheckboxRequired && !newsLetterCheckboxIsChecked) {
+      return false;
+    }
+
+    return true;
+  }, [checkboxIsChecked, showNewsLetterCheckbox, isNewsLetterCheckboxRequired, newsLetterCheckboxIsChecked]);
+
   const {
     checkboxPrivacyText1,
     checkboxPrivacyText2,
@@ -70,6 +102,12 @@ export const WhitePaperForm = ({
       gclid: gclid,
       leadSourceURL: fullURL,
     };
+
+    if (showNewsLetterCheckbox) {
+      Object.assign(formData, {
+        [NEWSLETTER_CHECKBOX]: newsLetterCheckboxIsChecked
+      });
+    }
 
     try {
       const response = await fetch('/api/whitepaperForms/', {
@@ -138,6 +176,17 @@ export const WhitePaperForm = ({
               {' ' + checkboxPrivacyText3}
             </Checkbox>
           </FormGroup>
+          {showNewsLetterCheckbox &&
+          <FormGroup>
+            <Checkbox
+              id={`newsLetterCheckbox-${name}`}
+              required={Boolean(isNewsLetterCheckboxRequired)}
+              isChecked={newsLetterCheckboxIsChecked}
+              onChange={(e) => setNewsLetterCheckboxIsChecked(e.target.checked)}
+            >
+              {newsLetterCheckboxText}
+            </Checkbox>
+          </FormGroup>}
           <FormGroup>
             <Button
               variant={'primary'}
@@ -145,7 +194,7 @@ export const WhitePaperForm = ({
               type={'submit'}
               title={'Send'}
               classes={styles.submitBtn}
-              disabled={!checkboxIsChecked}
+              disabled={!isAllowSubmit}
             >
               {buttonText}
             </Button>

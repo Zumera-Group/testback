@@ -12,6 +12,7 @@ import { Icon } from 'components/Icon';
 import { BlogArticle } from 'lib/shared-domain/blogArticle/domain';
 import { SiteSettings } from 'lib/shared-domain/page/domain';
 import localFont from '@next/font/local';
+import { IBlogDetailContent } from '../../../@types/blogDetailContent';
 
 const myFont = localFont({
   display: 'swap',
@@ -37,7 +38,7 @@ const myFont = localFont({
 const WhitePaperModal: React.FC<{
   blogArticle: BlogArticle;
   siteSettings: SiteSettings;
-  blogArticleDetail: any;
+  blogArticleDetail: IBlogDetailContent;
 }> = ({ blogArticle, blogArticleDetail, siteSettings }) => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -133,6 +134,8 @@ const WhitePaperModal: React.FC<{
                   variant={'blog'}
                   sectorName={''}
                   name={'modal'}
+                  newsLetterCheckboxText={whitePaperForm?.newsLetterCheckboxText}
+                  isNewsLetterCheckboxRequired={whitePaperForm?.isNewsLetterCheckboxRequired}
                 />
               </GridColumn>
             </Grid>
