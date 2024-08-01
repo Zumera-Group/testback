@@ -1,4 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
+import { NEWSLETTER_CHECKBOX } from '../../lib/shared-domain/questionnaire/presentation/Result/constants';
 
 export default async function handler(
   req: NextApiRequest,
@@ -32,6 +33,12 @@ export default async function handler(
     leadSourceURL: leadSourceURL,
     gclid: gclid,
   };
+
+  if (NEWSLETTER_CHECKBOX in req.body) {
+    Object.assign(coreFields, {
+      [NEWSLETTER_CHECKBOX]: req.body[NEWSLETTER_CHECKBOX]
+    })
+  }
 
   const request =
     variant === 'blog'
@@ -72,7 +79,7 @@ export default async function handler(
         .status(500)
         .json({ message: 'Form submission failed', response: responseData });
     } else {
-      res.status(200).json({ message: 'Success' });
+      res.status(200).json({ message: 'Success', responseData });
     }
   } catch (error) {
     res.status(500).json({ message: 'An error occurred' });

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useMemo, useState} from 'react';
 import { Button } from 'components/Button';
 import { Checkbox, FormGroup, Input } from 'components/Form';
 import styles from './WhitePaperForm.module.scss';
@@ -7,6 +7,7 @@ import Link from 'next/link';
 import { useLinkWithCurrentLocale } from 'lib/shared-domain/useLinkWithCurrentLocale';
 import { MarketingParamsService } from 'lib/shared-domain/salesforce/application/marketingParamsService';
 import { useGetURL } from 'lib/hooks/useGetURL';
+import { NEWSLETTER_CHECKBOX } from '../../../lib/shared-domain/questionnaire/presentation/Result/constants';
 
 
 export const WhitePaperForm = ({
@@ -44,6 +45,17 @@ export const WhitePaperForm = ({
   const linkWithCurrentLocale = useLinkWithCurrentLocale();
 
   const showNewsLetterCheckbox = !!newsLetterCheckboxText;
+  const isAllowSubmit = useMemo(() => {
+    if (!checkboxIsChecked) {
+      return false;
+    }
+
+    if (showNewsLetterCheckbox && isNewsLetterCheckboxRequired && !newsLetterCheckboxIsChecked) {
+      return false;
+    }
+
+    return true;
+  }, [checkboxIsChecked, showNewsLetterCheckbox, isNewsLetterCheckboxRequired, newsLetterCheckboxIsChecked]);
 
   const {
     checkboxPrivacyText1,
@@ -90,6 +102,12 @@ export const WhitePaperForm = ({
       gclid: gclid,
       leadSourceURL: fullURL,
     };
+
+    if (showNewsLetterCheckbox) {
+      Object.assign(formData, {
+        [NEWSLETTER_CHECKBOX]: newsLetterCheckboxIsChecked
+      });
+    }
 
     try {
       const response = await fetch('/api/whitepaperForms/', {
@@ -176,7 +194,7 @@ export const WhitePaperForm = ({
               type={'submit'}
               title={'Send'}
               classes={styles.submitBtn}
-              disabled={!checkboxIsChecked}
+              disabled={!isAllowSubmit}
             >
               {buttonText}
             </Button>
