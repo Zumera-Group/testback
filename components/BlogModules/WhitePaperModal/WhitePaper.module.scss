@@ -7,31 +7,50 @@
   position: fixed;
   inset: 0px;
   z-index: 999999;
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  outline: 0;
 }
 
 .modal {
-  position: absolute;
-  inset: 15px;
+  position: relative;
+  //inset: 15px;
   background: $secondary;
-  overflow: auto;
+  //overflow: auto;
   outline: none;
   padding: $gutter * 2;
   color: $white;
-  max-width: 1216px;
-  margin: var(--header-height) auto 0 auto;
+
+  margin: 20px 20px;
+
+  @include breakpoint-up(sm) {
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+  }
 
   @include breakpoint-up(md) {
-    padding: $gutter * 1 $gutter * 2.5;
-    inset: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 600px;
+    max-width: 600px;
+    padding: $gutter * 2.5 $gutter * 2.5;
+  }
+
+  @include breakpoint-up(lg) {
+    max-width: 700px;
+    margin-top: var(--header-height);
+    margin-bottom: var(--header-height);
   }
 }
 
 .formWrapper {
   padding-bottom: $gutter * 2;
+}
+
+.modalHeader {
+  position: relative;
+  padding: 0 40px 0 0;
+  margin-bottom: 3rem;
 }
 
 .closeBtn {
@@ -40,8 +59,12 @@
   cursor: pointer;
   color: $white;
   position: absolute;
-  right: 1.5rem;
-  top: 1.5rem;
+  right: 0;
+  top: 10px;
+
+  &:active {
+    color: $accent;
+  }
 }
 
 .downloadBtn {

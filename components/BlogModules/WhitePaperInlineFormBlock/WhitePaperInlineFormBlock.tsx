@@ -8,7 +8,7 @@ import { SectionHeading } from 'components/SectionHeading';
 
 export const WhitePaperInlineFormBlock: React.FC<{
   specificContentModule: WhitePaperInlineFormModule;
-  siteSettings: SiteSettings
+  siteSettings?: SiteSettings
 }> = ({ specificContentModule, siteSettings }) => {
 
   const { whitePaperFormFields, pdfUrl, image, title, subtitle } = specificContentModule;
@@ -42,7 +42,7 @@ export const WhitePaperInlineFormBlock: React.FC<{
               namePlaceholder={whitePaperFormFields?.namePlaceholder}
               emailPlaceholder={whitePaperFormFields?.emailPlaceholder}
               termsAndConditionsLabel={
-                siteSettings?.contactSectionContent?.contactForm
+                siteSettings?.contactSectionContent?.contactForm || {}
               }
               successMessage={whitePaperFormFields?.successMessage}
               errorMessage={whitePaperFormFields?.errorMessage}
@@ -50,6 +50,8 @@ export const WhitePaperInlineFormBlock: React.FC<{
               file={pdfUrl}
               variant={'blog'}
               sectorName={''}
+              newsLetterCheckboxText={whitePaperFormFields?.newsLetterCheckboxText}
+              isNewsLetterCheckboxRequired={whitePaperFormFields?.isNewsLetterCheckboxRequired}
             />
           </GridColumn>
         </Grid>

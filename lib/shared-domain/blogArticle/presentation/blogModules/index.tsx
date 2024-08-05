@@ -25,7 +25,8 @@ export const getContentForContentModule = (
   contentModule: ContentModule,
   blogArticleDetail?: any,
   blogArticle?: BlogArticle,
-  siteSettings?: SiteSettings
+  siteSettings?: SiteSettings,
+  whitePaperInline?: WhitePaperInlineFormModule
 ): JSX.Element => {
 
   if (contentModule.specificContentModule instanceof TextBlockModule) {
@@ -91,9 +92,8 @@ export const getContentForContentModule = (
     return (
       <DownloadPaperStickyFooter
         specificContentModule={contentModule.specificContentModule}
-        blogArticleDetail={blogArticleDetail}
-        blogArticle={blogArticle}
         siteSettings={siteSettings}
+        whitePaperInline={whitePaperInline}
       />
     );
   }

@@ -1,9 +1,9 @@
-import React from 'react';
+import React, {useMemo} from 'react';
 import {BlogArticle, TBlogArticleType} from 'lib/shared-domain/blogArticle/domain';
 import { SiteSettings } from 'lib/shared-domain/page/domain';
 import { PageFooter } from 'lib/shared-domain/page/presentation/PageFooter';
 import { PageHeader } from 'lib/shared-domain/page/presentation/PageHeader';
-import { ContentModule } from 'lib/shared-domain/blogArticle/domain/blogModule';
+import { ContentModule, WhitePaperInlineFormModule } from 'lib/shared-domain/blogArticle/domain/blogModule';
 import { getContentForContentModule } from 'lib/shared-domain/blogArticle/presentation/blogModules';
 import { PageTransition } from 'components/PageTransition';
 import { SEO } from 'components/SEO';
@@ -34,6 +34,12 @@ export const BlogArticleLayout: React.FC<{
 
   const blogModules =
     blogArticle?.blogModules?.map((c) => ContentModule.create(c)) || [];
+
+  const whitePaperInlineForm = useMemo<WhitePaperInlineFormModule|null>(() => {
+    const foundModule = blogModules
+      .find((contentModule) => contentModule.specificContentModule instanceof WhitePaperInlineFormModule);
+    return foundModule ? (foundModule.specificContentModule as unknown as WhitePaperInlineFormModule) : null;
+  }, [blogArticle]);
 
   const dateFormatted = useFormatDateLong(blogArticle?.date);
   const {alternateHrefs, canonicalHref} = useMakeAlternateHrefs({
@@ -106,13 +112,12 @@ export const BlogArticleLayout: React.FC<{
                   className={styles.socialShareWrapper}
                 >
                   <SocialShare blogArticle={blogArticle}/>
-                  {blogArticle?.whitePaperDownload?.pdfURL && (
+                  {whitePaperInlineForm &&
                     <WhitePaperModal
-                      blogArticle={blogArticle}
                       siteSettings={siteSettings}
-                      blogArticleDetail={blogArticleDetail}
+                      whitePaperInline={whitePaperInlineForm}
                     />
-                  )}
+                  }
                 </div>
               </GridColumn>
               <GridColumn
@@ -168,7 +173,7 @@ export const BlogArticleLayout: React.FC<{
             blogModules.map((c) => {
               return (
                 <React.Fragment key={c._key}>
-                  {getContentForContentModule(c, blogArticleDetail, blogArticle, siteSettings)}
+                  {getContentForContentModule(c, blogArticleDetail, blogArticle, siteSettings, whitePaperInlineForm)}
                 </React.Fragment>
               );
             })}

@@ -174,8 +174,13 @@ export class DownloadPaperStickyFooterModule extends BaseModule {
 export class WhitePaperInlineFormModule extends BaseModule {
   title: string;
   subtitle: string;
-  image: any;
-  pdfUrl: any;
+  image?: {
+    _type: string;
+    asset: {
+      url: string;
+    }
+  };
+  pdfUrl?: string;
   whitePaperFormFields: {
     downloadAgain: string;
     buttonText: string;
@@ -183,6 +188,8 @@ export class WhitePaperInlineFormModule extends BaseModule {
     emailPlaceholder: string;
     successMessage: string;
     errorMessage: string;
+    newsLetterCheckboxText?: string;
+    isNewsLetterCheckboxRequired?: boolean;
   };
 
   constructor(fields: Record<string, any>) {
