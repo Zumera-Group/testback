@@ -1,12 +1,12 @@
 import Modal from 'react-modal';
-import localFont from "@next/font/local";
+import localFont from '@next/font/local';
 import styles from './WhitePaper.module.scss';
 import {SectionHeading} from '../../SectionHeading';
 import {Icon} from '../../Icon';
 import {WhitePaperForm} from '../../WhitePaperDownload/WhitePaperForm';
 import {WhitePaperInlineFormModule} from "../../../lib/shared-domain/blogArticle/domain/blogModule";
 import {SiteSettings} from '../../../lib/shared-domain/page/domain';
-import {useEffect} from "react";
+import {useEffect} from 'react';
 
 const myFont = localFont({
   display: 'swap',
@@ -69,7 +69,9 @@ export default function ModalWithForm({isOpen, onClose, whitePaperInline, siteSe
         <WhitePaperForm
           buttonText={whitePaperInline.whitePaperFormFields?.buttonText}
           namePlaceholder={whitePaperInline.whitePaperFormFields?.namePlaceholder}
+          nameLabel={whitePaperInline.whitePaperFormFields?.nameLabel}
           emailPlaceholder={whitePaperInline.whitePaperFormFields?.emailPlaceholder}
+          emailLabel={whitePaperInline.whitePaperFormFields?.emailLabel}
           termsAndConditionsLabel={
             siteSettings?.contactSectionContent?.contactForm || {}
           }

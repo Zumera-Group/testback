@@ -184,7 +184,9 @@ export class WhitePaperInlineFormModule extends BaseModule {
   whitePaperFormFields: {
     downloadAgain: string;
     buttonText: string;
+    nameLabel?: string;
     namePlaceholder: string;
+    emailLabel?: string;
     emailPlaceholder: string;
     successMessage: string;
     errorMessage: string;

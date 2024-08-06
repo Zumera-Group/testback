@@ -13,7 +13,9 @@ import { NEWSLETTER_CHECKBOX } from '../../../lib/shared-domain/questionnaire/pr
 export const WhitePaperForm = ({
   buttonText,
   namePlaceholder,
+  nameLabel,
   emailPlaceholder,
+  emailLabel,
   termsAndConditionsLabel,
   successMessage,
   errorMessage,
@@ -27,7 +29,9 @@ export const WhitePaperForm = ({
 }: {
   buttonText?: string;
   namePlaceholder?: string;
+  nameLabel?: string;
   emailPlaceholder?: string;
+  emailLabel?: string;
   termsAndConditionsLabel: any;
   successMessage?: string;
   errorMessage?: string;
@@ -145,6 +149,7 @@ export const WhitePaperForm = ({
               type={'text'}
               required={true}
               placeholder={namePlaceholder}
+              label={nameLabel}
               value={fullName}
               onChange={(e) => setFullName(e.target.value)}
             />
@@ -156,6 +161,7 @@ export const WhitePaperForm = ({
               type={'email'}
               required={true}
               placeholder={emailPlaceholder}
+              label={emailLabel}
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />

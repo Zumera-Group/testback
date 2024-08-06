@@ -40,7 +40,9 @@ export const WhitePaperInlineFormBlock: React.FC<{
             <WhitePaperForm
               buttonText={whitePaperFormFields?.buttonText}
               namePlaceholder={whitePaperFormFields?.namePlaceholder}
+              nameLabel={whitePaperFormFields?.nameLabel}
               emailPlaceholder={whitePaperFormFields?.emailPlaceholder}
+              emailLabel={whitePaperFormFields?.emailLabel}
               termsAndConditionsLabel={
                 siteSettings?.contactSectionContent?.contactForm || {}
               }
