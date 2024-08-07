@@ -13,7 +13,9 @@ import { NEWSLETTER_CHECKBOX } from '../../../lib/shared-domain/questionnaire/pr
 export const WhitePaperForm = ({
   buttonText,
   namePlaceholder,
+  nameLabel,
   emailPlaceholder,
+  emailLabel,
   termsAndConditionsLabel,
   successMessage,
   errorMessage,
@@ -27,7 +29,9 @@ export const WhitePaperForm = ({
 }: {
   buttonText?: string;
   namePlaceholder?: string;
+  nameLabel?: string;
   emailPlaceholder?: string;
+  emailLabel?: string;
   termsAndConditionsLabel: any;
   successMessage?: string;
   errorMessage?: string;
@@ -43,6 +47,8 @@ export const WhitePaperForm = ({
   const [newsLetterCheckboxIsChecked, setNewsLetterCheckboxIsChecked] = useState(false);
   const [isFormSubmitted, setIsFormSubmitted] = useState(false);
   const linkWithCurrentLocale = useLinkWithCurrentLocale();
+  const [fullName, setFullName] = useState<string>('');
+  const [email, setEmail] = useState<string>('');
 
   const showNewsLetterCheckbox = !!newsLetterCheckboxText;
   const isAllowSubmit = useMemo(() => {
@@ -87,16 +93,13 @@ export const WhitePaperForm = ({
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // @ts-ignore
-    const inputs = document.getElementById(`white-paper-form-${name}`).elements;
 
+    const splitName = String(fullName).split(' ');
     const formData = {
-      firstName: inputs['whitePaperFirstLastName'].value.split(' ')[0],
-      lastName: inputs['whitePaperFirstLastName'].value.split(' ')[1],
-      company: `${inputs['whitePaperFirstLastName'].value.split(' ')[0]} ${
-        inputs['whitePaperFirstLastName'].value.split(' ')[1]
-      }`,
-      email: inputs['whitePaperEmail'].value,
+      firstName: splitName[0],
+      lastName: splitName[1],
+      company: fullName,
+      email: email,
       variant: variant,
       sectorName: sectorName,
       gclid: gclid,
@@ -141,20 +144,26 @@ export const WhitePaperForm = ({
         >
           <FormGroup>
             <Input
-              id={'whitePaperFirstLastName'}
+              id={`whitePaperFirstLastName-${name}`}
               name={'whitePaperFirstLastName'}
               type={'text'}
               required={true}
               placeholder={namePlaceholder}
+              label={nameLabel}
+              value={fullName}
+              onChange={(e) => setFullName(e.target.value)}
             />
           </FormGroup>
           <FormGroup>
             <Input
-              id={'whitePaperEmail'}
+              id={`whitePaperEmail-${name}`}
               name={'whitePaperEmail'}
               type={'email'}
               required={true}
               placeholder={emailPlaceholder}
+              label={emailLabel}
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
           </FormGroup>
           <FormGroup>
@@ -202,7 +211,7 @@ export const WhitePaperForm = ({
         </form>
       )}
 
-      {isFormSubmitted && isSuccess && (
+      {(isFormSubmitted && isSuccess) && (
         <div className={styles.successMessage}>
           <Icon
             iconName={'tick'}
@@ -227,7 +236,7 @@ export const WhitePaperForm = ({
         </div>
       )}
 
-      {isFormSubmitted && !isSuccess && (
+      {(isFormSubmitted && !isSuccess) && (
         <div className={styles.successMessage}>
           <p>{errorMessage}</p>
           <Button
@@ -248,4 +257,3 @@ export const WhitePaperForm = ({
   );
 };
 
-export default WhitePaperForm;

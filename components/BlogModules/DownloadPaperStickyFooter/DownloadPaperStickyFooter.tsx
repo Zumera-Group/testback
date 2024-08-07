@@ -1,31 +1,22 @@
 import styles from 'components/BlogModules/DownloadPaperStickyFooter/DownloadPaperStickyFooter.module.scss';
-import { Container, Grid, GridColumn } from 'components/Layout';
+import { Container } from 'components/Layout';
 import { Button } from 'components/Button';
 import { useEffect, useState } from 'react';
-import { DownloadPaperStickyFooterModule } from 'lib/shared-domain/blogArticle/domain/blogModule';
-import { SectionHeading } from 'components/SectionHeading';
-import Image from 'next/image';
-import { sanityImageUrlFor } from 'lib/sanity';
-import { WhitePaperForm } from 'components/WhitePaperDownload/WhitePaperForm';
-import Modal from 'react-modal';
-import { Icon } from 'components/Icon';
-import { BlogArticle } from 'lib/shared-domain/blogArticle/domain';
+import {
+  DownloadPaperStickyFooterModule,
+  WhitePaperInlineFormModule
+} from 'lib/shared-domain/blogArticle/domain/blogModule';
 import { SiteSettings } from 'lib/shared-domain/page/domain';
+import ModalWithForm from '../WhitePaperModal/ModalWithForm';
 
 export const DownloadPaperStickyFooter: React.FC<{
   specificContentModule: DownloadPaperStickyFooterModule;
-  blogArticleDetail: any,
-  blogArticle: BlogArticle,
-  siteSettings: SiteSettings
-}> = ({ specificContentModule, blogArticleDetail, blogArticle, siteSettings }) => {
+  siteSettings?: SiteSettings;
+  whitePaperInline?: WhitePaperInlineFormModule;
+}> = ({ specificContentModule, siteSettings , whitePaperInline}) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const { button } = specificContentModule;
-  const {
-    whitePaperDownload,
-    whitePaperDownload: { whitePaperForm },
-  } = blogArticleDetail;
-
 
   useEffect(() => {
     const handleScroll = () => {
@@ -42,29 +33,13 @@ export const DownloadPaperStickyFooter: React.FC<{
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  if (!button?.title) {
+  if (!button?.title || !whitePaperInline) {
     return null;
   }
 
+  const openModal = () => setIsOpen(true);
 
-  const openModal = () => {
-    setIsOpen(true);
-  };
-
-  const closeModal = () => {
-    setIsOpen(false);
-  };
-
-  const Close = () => (
-    <button
-      onClick={closeModal}
-      title={'Close'}
-      aria-label={'Close'}
-      className={styles.closeBtn}
-    >
-      <Icon iconName="cross" viewBox="0 0 24 21" width={24} height={21} />
-    </button>
-  );
+  const closeModal = () => setIsOpen(false);
 
   return (
     <div
@@ -80,69 +55,14 @@ export const DownloadPaperStickyFooter: React.FC<{
             {button?.title}
           </Button>
         </div>
-
-        <Modal
-          className={styles.modal}
+        <ModalWithForm
           isOpen={isOpen}
-          overlayClassName={styles.overlay}
-          onRequestClose={closeModal}
-        >
-          <Close />
-
-          <Grid justifyContent={'center'} alignItems={'center'} fullWidth={true} style={{ height: '85%' }}>
-            <GridColumn sm={12} md={12} lg={12}>
-              <Grid
-                justifyContent={'space-between'}
-                alignItems={'stretch'}
-                fullWidth={true}
-              >
-                <GridColumn sm={12} md={6} lg={6}>
-                  <SectionHeading
-                    title={whitePaperDownload?.title}
-                    description={whitePaperDownload?.description}
-                    headingType={'h3'}
-                    align={'left'}
-                  />
-
-                  <div className={styles.image}>
-                    <Image
-                      unoptimized={true}
-                      src={sanityImageUrlFor(
-                        blogArticle?.whitePaperDownload?.pdfThumbnail?.asset?.url,
-                      )?.url()}
-                      alt={
-                        blogArticle?.whitePaperDownload?.pdfThumbnail?.asset?.alt
-                      }
-                      width={545}
-                      height={280}
-                      className={styles.thumbnail}
-                    />
-                  </div>
-                </GridColumn>
-                <GridColumn sm={12} md={6} lg={6} className={styles.formWrapper}>
-                  <WhitePaperForm
-                    buttonText={whitePaperForm?.submitLabel}
-                    namePlaceholder={whitePaperForm?.nameLabel}
-                    emailPlaceholder={whitePaperForm?.emailLabel}
-                    successMessage={whitePaperForm?.successMessage}
-                    errorMessage={whitePaperForm?.errorMessage}
-                    downloadAgain={whitePaperDownload?.downloadAgain}
-                    file={blogArticle?.whitePaperDownload?.pdfURL}
-                    termsAndConditionsLabel={
-                      siteSettings?.contactSectionContent?.contactForm
-                    }
-                    variant={'blog'}
-                    sectorName={''}
-                    name={'sticky-footer'}
-                  />
-                </GridColumn>
-              </Grid>
-            </GridColumn>
-          </Grid>
-        </Modal>
+          onClose={closeModal}
+          whitePaperInline={whitePaperInline}
+          siteSettings={siteSettings}
+          ariaAppSelector={'#sticky-footer'}
+        />
       </Container>
-
-
     </div>
   );
 };

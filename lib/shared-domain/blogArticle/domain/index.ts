@@ -55,7 +55,7 @@ export interface BlogArticle {
   summary: string;
   introduction: any;
   introAnchor: string;
-  whitePaperDownload: any;
+  // whitePaperDownload: any;
   toc: TableOfContentItem[];
   relatedArticles: any[];
   relatedCalculators: any[];
