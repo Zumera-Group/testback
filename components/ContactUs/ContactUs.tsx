@@ -1,7 +1,9 @@
 import { Section, Container, Grid, GridColumn } from 'components/Layout';
 import { SectionHeading } from 'components/SectionHeading';
-import { Offices } from './Offices';
-import { ContactForm } from './ContactForm';
+
+import dynamic from 'next/dynamic';
+const ContactForm = dynamic(import('./ContactForm/ContactForm'), {ssr: false});
+const Offices = dynamic(import('./Offices/Offices'), {ssr: false});
 
 import styles from './ContactUs.module.scss';
 

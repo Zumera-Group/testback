@@ -21,7 +21,7 @@ export default function BgProgress() {
     } else {
       setShowLoading(false);
     }
-  }, [bgPromises, setShowLoading]);
+  }, [bgPromises, setShowLoading, cleanBgPromises]);
 
   return (
     <div className={clsx(styles.wrapper, {

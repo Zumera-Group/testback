@@ -1,5 +1,7 @@
 import { Container, Grid, GridColumn, Section } from 'components/Layout';
-import { TrustItem } from './TrustItem';
+
+import dynamic from 'next/dynamic';
+const TrustItem = dynamic(() => import('./TrustItem/TrustItem'), {ssr: false});
 
 export const Trust = ({ isResultsCompactOnMobile, ...rest }: {
   isResultsCompactOnMobile?: boolean,

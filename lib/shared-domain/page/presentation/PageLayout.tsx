@@ -8,7 +8,6 @@ import { PageHeader } from './PageHeader';
 import { PageTransition } from 'components/PageTransition';
 import { SEO } from 'components/SEO';
 import {useMakeAlternateHrefs} from "../../../hooks/useMakeAlternateHrefs";
-import {locales} from "../../../locale";
 import {allLinks} from "../../../links";
 const PageFooter = dynamic(() => import('./PageFooter'));
 

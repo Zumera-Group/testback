@@ -23,8 +23,8 @@ export default class MyDocument extends Document {
           {process.env.NEXT_PUBLIC_USE_NO_INDEX_TAG === 'true' && (
             <meta name="robots" content="noindex" />
           )}
-          {/*<link rel="preconnect" href="https://cdn.sanity.io" />*/}
-          {/*<link rel="dns-prefetch" href="https://cdn.sanity.io" />*/}
+          <link rel="preconnect" href="https://cdn.sanity.io" />
+          <link rel="dns-prefetch" href="https://cdn.sanity.io" />
           {/*<link rel="dns-prefetch" href="https://consent.cookiefirst.com" />*/}
           <link rel="shortcut icon" href="/favicon.ico" />
         </Head>
@@ -33,8 +33,7 @@ export default class MyDocument extends Document {
           <NextScript />
           {process.env.NEXT_PUBLIC_COOKIE_FIRST_KEY &&
           <Script
-            // strategy="worker"
-            strategy="beforeInteractive"
+            strategy="lazyOnload"
             src="https://consent.cookiefirst.com/banner.js"
             data-cookiefirst-key={process.env.NEXT_PUBLIC_COOKIE_FIRST_KEY}
           />

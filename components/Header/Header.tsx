@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
 
-import { AnimatePresence } from 'framer-motion';
-
 import { useRouter } from 'next/router';
 
 import { Logo } from 'components/Logo';
@@ -9,7 +7,6 @@ import { Container } from 'components/Layout';
 import {
   Hamburger,
   Menu,
-  BigMenu,
   LanguageSwitcher,
   AnnouncementTopBanner,
 } from 'components/Header';
@@ -26,6 +23,9 @@ import { LogoExtended } from 'components/Icons/LogoExtended';
 import styles from './Header.module.scss';
 import { getTranslateByScope } from 'translation/i18n';
 import { allLinks } from 'lib/links';
+
+import dynamic from 'next/dynamic';
+const BigMenuWrapper = dynamic(() => import('./BigMenu/BigMenuWrapper'), {ssr: false})
 
 const t = getTranslateByScope('question');
 
@@ -224,19 +224,17 @@ export const Header = ({
             </div>
           )}
         </Container>
-        <AnimatePresence exitBeforeEnter>
-          {bigMenuOpen && (
-            <BigMenu
-              siteSettings={siteSettings}
-              services={services}
-              sectors={sectors}
-              blogArticles={blogArticles}
-              logo={<Logo slug={homeSlug} title={siteName} isAnimated={true} />}
-              closeBigMenu={() => setBigMenuOpen(false)}
-              langAlternates={langAlternates}
-            />
-          )}
-        </AnimatePresence>
+        <BigMenuWrapper
+          bigMenuOpen={bigMenuOpen}
+          setBigMenuOpen={setBigMenuOpen}
+          siteSettings={siteSettings}
+          services={services}
+          sectors={sectors}
+          blogArticles={blogArticles}
+          homeSlug={homeSlug}
+          langAlternates={langAlternates}
+          siteName={siteName}
+        />
       </header>
     </>
   );
