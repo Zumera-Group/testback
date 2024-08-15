@@ -265,7 +265,7 @@ export const ResultScreen: React.FC<ResultsScreenFormProps> = ({ resultScreenCop
           </form>
         </>
       ) : (
-        <h3 className={styles.successMessage}>{formFields.successMessage}</h3>
+        <h3 id="result-message" className={styles.successMessage}>{formFields.successMessage}</h3>
       )}
     </AnimateIn>
   );

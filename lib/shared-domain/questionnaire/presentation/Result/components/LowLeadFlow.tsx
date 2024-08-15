@@ -286,7 +286,7 @@ export const LowLeadFlow: React.FC<{
           </form>
         </>
       ) : (
-        <h3 className={styles.successMessage} ref={successMessageRef}>{formFields.successMessage}</h3>
+        <h3 id="result-message" className={styles.successMessage} ref={successMessageRef}>{formFields.successMessage}</h3>
       )}
     </AnimateIn>
   );
