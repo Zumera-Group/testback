@@ -30,7 +30,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '21'
       # Run Cypress tests
       - name: Run Cypress Tests
         uses: cypress-io/github-action@v6
