@@ -57,39 +57,51 @@ Cypress.Commands.add('acceptCookiesIfPresent', () => {
 
 });
 
-// @ts-ignore
-Cypress.Commands.add('submitForm', () => {
-  cy.intercept('POST', '/lead_entries').as('postRequest');
+declare global {
+  namespace Cypress {
+    interface Chainable {
+      submitForm(fields: string[]): Chainable<Element>;
+    }
+  }
+}
+
+
+const FIELDS = [
+  'LastName',
+  'email',
+  'phone',
+  'industry_id',
+  'industry_sheet_name',
+  'sector_id',
+  'sector_sheet_name',
+  'Quality_of_Revenue__c',
+  'Annual_Revenue_2021__c',
+  'Annual_Revenue_2022__c',
+  'Annual_Revenue_2023__c',
+  'Company_EBIT_2021__c',
+  'Company_EBIT_2022__c',
+  'Company_EBIT_2023__c',
+  'Impact_Economic_Crises__c',
+];
+
+Cypress.Commands.add('submitForm', (fields = FIELDS) => {
+  cy.intercept('POST', '/lead_entries').as('postLeadEntries');
 
   cy.get('button[role="button"][type="submit"]').click();
-  cy.wait('@postRequest').its('request').should((request) => {
-    expect(request.method).to.equal('POST');
 
-    const fields = [
-      'LastName',
-      'email',
-      'phone',
-      'industry_id',
-      'industry_sheet_name',
-      'sector_id',
-      'sector_sheet_name',
-      'Quality_of_Revenue__c',
-      'Annual_Revenue_2021__c',
-      'Annual_Revenue_2022__c',
-      'Annual_Revenue_2023__c',
-      'Company_EBIT_2021__c',
-      'Company_EBIT_2022__c',
-      'Company_EBIT_2023__c',
-      'Impact_Economic_Crises__c',
-    ];
+  cy.wait('@postLeadEntries').then((interception) => {
+    // Check request
+    expect(interception.request.method).to.equal('POST');
 
     fields.forEach(field => {
-      expect(request.body.lead_entry.data).to.have.property(field);
-      expect(request.body.lead_entry.data[field]).to.not.be.undefined;
-      expect(request.body.lead_entry.data[field]).to.not.be.null;
+      expect(interception.request.body.lead_entry.data).to.have.property(field);
+      expect(interception.request.body.lead_entry.data[field]).to.not.be.undefined;
+      expect(interception.request.body.lead_entry.data[field]).to.not.be.null;
     });
-  });
 
+    // Check response status code
+    expect(interception.response.statusCode).to.equal(200);
+  });
 });
 
 export {};

@@ -2,7 +2,7 @@ name: Cypress Tests
 
 on:
   pull_request:
-    branches: [ not_main ] # tests are failing so till we fix them we dont need this
+    branches: [ main ]
 
 jobs:
   test:
@@ -16,7 +16,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '21'
 
       # Run Cypress tests
       - name: Run Cypress Tests
