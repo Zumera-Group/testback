@@ -1,4 +1,3 @@
-import { ChatButton } from 'components/ChatButton';
 import React from 'react';
 
 export const PageTransition = ({
@@ -7,7 +6,6 @@ export const PageTransition = ({
   return (
     <>
       {children}
-      <ChatButton />
     </>
   );
 };

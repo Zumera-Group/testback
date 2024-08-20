@@ -1,7 +1,6 @@
 import { useRef, useEffect, useState } from 'react';
 
 import { motion } from 'framer-motion';
-
 import styles from './Marquee.module.scss';
 
 export const Marquee = ({ items }) => {

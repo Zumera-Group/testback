@@ -12,14 +12,18 @@
   position: relative;
   width: 100%;
   overflow: hidden;
-  h1,
-  p {
+
+  h1, p {
     margin: 0;
   }
+
   p {
     margin-top: $headings-margin-bottom;
     width: 100%;
   }
+}
+
+.heroLoaded {
   & > div {
     animation: fadeIn 1s;
   }

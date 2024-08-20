@@ -47,7 +47,11 @@ export const DividerImage: React.FC<Props> = ({ ...rest }) => {
   if (!dividerImage) return null;
 
   const getImageComponent = () => (
-    <div className={styles.dividerImage} ref={ref}>
+    <div
+      style={{position: 'relative'}}
+      className={styles.dividerImage}
+      ref={ref}
+    >
       <div
         className={styles.dividerImage_inner}
         ref={imageRef}

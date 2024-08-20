@@ -1,9 +1,14 @@
 import { Section } from 'components/Layout';
 import { SectionHeading } from 'components/SectionHeading';
 import { Button } from 'components/Button';
-import { Marquee } from './Marquee';
-import { GlobeAnimation } from './GlobeAnimation';
 
+import dynamic from 'next/dynamic';
+const GlobeAnimation = dynamic(() => import('./GlobeAnimation/GlobeAnimation'), {
+  ssr: false
+});
+const Marquee = dynamic(() => import('./Marquee/Marquee'), {
+  ssr: false
+});
 import styles from './CDIGlobal.module.scss';
 
 interface Props {

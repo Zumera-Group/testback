@@ -6,7 +6,7 @@ const sassOptions = {
   includePaths: [join(__dirname, 'src', 'styles')],
 };
 
-module.exports = {
+const config = {
   // Remove this object
   i18n: {
     locales: ['en', 'de', 'fr', 'catchAll'],
@@ -1175,3 +1175,10 @@ module.exports = withSentryConfig(
     automaticVercelMonitors: true,
   }
 );
+
+module.exports = config;
+
+// const withBundleAnalyzer = require('@next/bundle-analyzer')({
+//   enabled: true,
+// });
+// module.exports = withBundleAnalyzer(config);

@@ -7,10 +7,10 @@ import { getTiltPosition } from 'lib/utils/getTiltPosition';
 
 import styles from './Home.module.scss';
 
-export const Gradient = ({ parent }) => {
+const Gradient = ({ parent }) => {
   const [heroIsInteractive, setHeroIsInteractive] = useState(false);
   const [mousePosition, setMousePosition] = useState({x: 100, y: 0});
-  
+
   // Gradient styles
   const gradientSize = 'var(--gradient-size)';
   const gradientColors = {
