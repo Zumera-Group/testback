@@ -31,3 +31,15 @@ export interface IApiFieldPickItem {
   label: string;
   value: string;
 }
+
+export interface ILeadEntryScore {
+  points: number,
+  percentage: number,
+  calendly: string,
+  avg: number,
+  company_ev: {
+    avg: number|null,
+    max: number|null,
+    min: number|null,
+  }
+}

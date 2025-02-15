@@ -127,6 +127,15 @@
       "3": "Reine Neugierde"
     }
   },
+  "companyEVTable": {
+    "results": "ERGEBNISSE",
+    "scenario": "Szenario",
+    "value": "Unternehmenswert",
+    "evaluation": "Auswertung",
+    "worst": "Am schlimmsten",
+    "average": "Durchschnitt",
+    "best": "Am besten"
+  },
   "form": {
     "loading": "Laden..."
   },

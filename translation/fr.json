@@ -125,6 +125,15 @@
       "3": "Juste de la curiosité"
     }
   },
+  "companyEVTable": {
+    "results": "RÉSULTATS",
+    "scenario": "Scénario",
+    "value": "Valeur d'entreprise",
+    "evaluation": "Évaluation",
+    "worst": "Pire",
+    "average": "Moyenne",
+    "best": "Meilleure"
+  },
   "form": {
     "loading": "Chargement..."
   },

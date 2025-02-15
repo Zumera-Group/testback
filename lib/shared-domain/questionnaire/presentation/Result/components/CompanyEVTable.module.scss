@@ -1,0 +1,56 @@
+$ev-blocks-gap: 10px;
+
+.wrapper {
+  margin: 0 0 40px 0;
+}
+
+.table {}
+.header {
+  display: flex;
+  align-items: stretch;
+  gap: $ev-blocks-gap;
+  background: #610067;
+  font-weight: 700;
+  font-size: $h5-font-size;
+  margin: 0 0 10px 0;
+}
+
+.headerCol {
+  padding: 5px;
+}
+
+.scenarioCol {
+  width: 30%;
+}
+
+.valueCol {
+  width: 40%;
+}
+
+.evaluationCol {
+  width: 30%;
+  text-align: center;
+}
+
+.bodyRow {
+  display: flex;
+  align-items: stretch;
+  gap: $ev-blocks-gap;
+  border-bottom: 1px solid #fff;
+  padding: 0 0 10px 0;
+  margin: 0 0 10px 0;
+  font-size: $h5-font-size;
+}
+
+.bodyEvaluationCol {
+  //text-align: center;
+}
+
+.percentageBlock {
+  background: #988099;
+  text-align: center;
+}
+
+.resultsLabel {
+  margin: 0 0 20px 0;
+}

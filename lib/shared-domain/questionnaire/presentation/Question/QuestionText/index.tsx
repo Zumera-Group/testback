@@ -5,6 +5,7 @@ interface Props {
   title: string;
   description?: string;
   toolTipPromptText?: string;
+  hideCategory?: boolean
 }
 
 export const QuestionText: React.FC<Props> = ({
@@ -12,6 +13,7 @@ export const QuestionText: React.FC<Props> = ({
   description,
   toolTipPromptText,
   children,
+  hideCategory = false
 }): JSX.Element => {
   return (
     <>
@@ -19,6 +21,7 @@ export const QuestionText: React.FC<Props> = ({
         title={title}
         description={description}
         toolTipPromptText={toolTipPromptText}
+        hideCategory={hideCategory}
       />
       {children}
     </>

@@ -126,6 +126,15 @@
       "3": "Just curiosity"
     }
   },
+  "companyEVTable": {
+    "results": "RESULTS",
+    "scenario": "Scenario",
+    "value": "Enterprise Value",
+    "evaluation": "Evaluation",
+    "worst": "Worst",
+    "average": "Average",
+    "best": "Best"
+  },
   "form": {
     "loading": "Loading..."
   },

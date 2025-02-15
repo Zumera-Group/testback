@@ -19,13 +19,15 @@ import {
 } from 'lib/shared-domain/questionnaire/presentation/Result/constants';
 import {useMediaQuery} from '../../../../../hooks/useMediaQuery';
 import {SCREEN_SIZE_MD} from '../../../../../constants';
+import {ILeadEntryScore} from '../../../../../../@types/api';
+import CompanyEVTable from './CompanyEVTable';
 
 
 const t = getTranslateByScope('result');
 const tForm = getTranslateByScope('form');
 
 export const LowLeadFlow: React.FC<{
-  score: { points: string; percentage: string; avg: number };
+  score: ILeadEntryScore;
   resultScreenCopy: any;
 }> = ({ score, resultScreenCopy }) => {
   const { syncCurrentAnswersToSalesforce } = useSalesforceAnswerSync();
@@ -129,10 +131,12 @@ export const LowLeadFlow: React.FC<{
     <AnimateIn>
       {!isFormSubmitted ? (
         <>
+          <CompanyEVTable score={score} />
           <QuestionText
             title={questionTitle.title}
             description={questionTitle.tooltipDescription}
             toolTipPromptText={questionTitle.tooltipPrompt}
+            hideCategory={true}
           />
 
           <form className={styles.resultForm} onSubmit={(e) => onSend(e)}>

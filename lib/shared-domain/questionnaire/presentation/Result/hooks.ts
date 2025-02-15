@@ -1,17 +1,12 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { qLogs } from 'lib/shared-domain/questionnaire/application/log';
 import { useGetSalesforceScore } from 'lib/shared-domain/questionnaire/application/useGetQuestionnaireScore';
+import {ILeadEntryScore} from '../../../../../@types/api';
 
 export const useLoadScore = () => {
-  const [hasError, setHasError] = React.useState(false);
+  const [hasError, setHasError] = useState(false);
   const { getScore } = useGetSalesforceScore();
-
-  const [score, setScore] = React.useState<{
-    points: string;
-    percentage: string;
-    calendly: string;
-    avg: number;
-  }>(null);
+  const [score, setScore] = useState<ILeadEntryScore|null>(null);
 
   React.useEffect(() => {
     const loadScore = async () => {
