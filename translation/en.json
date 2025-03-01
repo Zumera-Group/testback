@@ -115,7 +115,11 @@
         "a1": "Zum ausgewählten Termin erreichbar unter:"
       }
     },
-    "logoTitle": "Advised over 20 Fortune 500 companies in their acquisitions"
+    "logoTitle": "Advised over 20 Fortune 500 companies in their acquisitions",
+    "leftCol": {
+      "getValuationNow": "Get the complete company valuation now",
+      "ourRecentExpertise": "Our recent expertise:"
+    }
   },
   "VTLanding": {
     "questionText": "What is the intended use of evaluation?",
@@ -128,12 +132,14 @@
   },
   "companyEVTable": {
     "results": "RESULTS",
+    "scenariosEvaluations": "Scenarios Evaluations",
     "scenario": "Scenario",
     "value": "Enterprise Value",
     "evaluation": "Evaluation",
     "worst": "Worst",
     "average": "Average",
-    "best": "Best"
+    "best": "Best",
+    "submitFormToSeeResults": "Scenarios evaluations have been calculated - fill out the form to see the result!"
   },
   "form": {
     "loading": "Loading..."

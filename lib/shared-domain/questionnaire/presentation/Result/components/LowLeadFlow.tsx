@@ -25,6 +25,7 @@ import CompanyEVTable from './CompanyEVTable';
 
 const t = getTranslateByScope('result');
 const tForm = getTranslateByScope('form');
+const tEVTable = getTranslateByScope('companyEVTable');
 
 export const LowLeadFlow: React.FC<{
   score: ILeadEntryScore;
@@ -131,7 +132,9 @@ export const LowLeadFlow: React.FC<{
     <AnimateIn>
       {!isFormSubmitted ? (
         <>
-          <CompanyEVTable score={score} />
+          <div className={styles.evTableResultsTitle}>{tEVTable('results')}</div>
+          <div className={styles.evTableResultsSubTitle}>{tEVTable('submitFormToSeeResults')}</div>
+          <CompanyEVTable blurred={true} />
           <QuestionText
             title={questionTitle.title}
             description={questionTitle.tooltipDescription}
@@ -290,7 +293,11 @@ export const LowLeadFlow: React.FC<{
           </form>
         </>
       ) : (
-        <h3 id="result-message" className={styles.successMessage} ref={successMessageRef}>{formFields.successMessage}</h3>
+        <div>
+          <h3 id="result-message" className={styles.successMessage} ref={successMessageRef}>{formFields.successMessage}</h3>
+          <div className={styles.evTableResultsTitle} style={{margin: '2rem 0'}}>{tEVTable('scenariosEvaluations')}</div>
+          <CompanyEVTable score={score} />
+        </div>
       )}
     </AnimateIn>
   );

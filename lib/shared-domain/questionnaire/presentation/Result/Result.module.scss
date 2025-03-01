@@ -39,3 +39,17 @@
     align-self: center;
   }
 }
+
+.evTableResultsTitle {
+  font-size: $h4-font-size;
+  line-height: $line-height-base;
+  margin-bottom: $paragraphs-margin-bottom;
+  letter-spacing: $letter-spacing-heading;
+  font-weight: $font-weight-base;
+}
+
+.evTableResultsSubTitle {
+  font-size: $h5-font-size;
+  font-weight: $font-weight-semibold;
+  margin-bottom: $paragraphs-margin-bottom;
+}

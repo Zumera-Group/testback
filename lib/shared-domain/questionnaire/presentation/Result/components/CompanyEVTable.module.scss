@@ -51,6 +51,6 @@ $ev-blocks-gap: 10px;
   text-align: center;
 }
 
-.resultsLabel {
-  margin: 0 0 20px 0;
+.bodyBlurredCol {
+  filter: blur(4px);
 }

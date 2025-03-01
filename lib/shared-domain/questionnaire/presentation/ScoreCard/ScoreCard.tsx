@@ -1,22 +1,23 @@
-import { ProgressBar } from 'components/Calculator/ProgressBar';
+// import { ProgressBar } from 'components/Calculator/ProgressBar';
 import React from 'react';
 import { getTranslateByScope } from 'translation/i18n';
 import { useGetSalesforceScore } from '../../application/useGetQuestionnaireScore';
 import Image from 'next/image';
 import styles from './ScoreCard.module.scss';
 import * as animationData from './loading-wheel.json';
-import dynamic from 'next/dynamic';
-import { AnimationOptions } from 'react-lottie';
+// import dynamic from 'next/dynamic';
+// import { AnimationOptions } from 'react-lottie';
 import {ILeadEntryScore} from '../../../../../@types/api';
+import LatestTransactions from './LatestTransactions';
 
-const Lottie: React.ComponentType<{
-  options: AnimationOptions,
-  width: string,
-  height: string,
-  style: React.CSSProperties,
-  isStopped: boolean,
-  isPaused: boolean
-}> = dynamic(() => import('react-lottie'), { ssr: false });
+// const Lottie: React.ComponentType<{
+//   options: AnimationOptions,
+//   width: string,
+//   height: string,
+//   style: React.CSSProperties,
+//   isStopped: boolean,
+//   isPaused: boolean
+// }> = dynamic(() => import('react-lottie'), { ssr: false });
 
 
 interface ScoreCardProps {
@@ -102,9 +103,9 @@ export const ScoreCard = ({
         {/*    isStopped={false}*/}
         {/*    isPaused={false}*/}
         {/*  />*/}
-
         {/*)}*/}
         {/*<h4 className={styles.betterThan}>{betterThan}</h4>*/}
+        <span className={styles.scoreCardTitle}>{tr('leftCol.getValuationNow')}</span>
         <div className={styles.booklet}>
           <Image
             unoptimized
@@ -118,6 +119,7 @@ export const ScoreCard = ({
             }}
           />
         </div>
+        <LatestTransactions />
       </div>
     </>
   );

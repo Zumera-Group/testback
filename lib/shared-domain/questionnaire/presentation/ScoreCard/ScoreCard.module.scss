@@ -1,6 +1,7 @@
 .scoreCardWrapper {
   display: flex;
-  justify-content: space-between;
+  //justify-content: space-between;
+  justify-content: flex-start;
   flex-direction: column;
   min-height: 18rem;
   @include breakpoint-up(md) {
@@ -24,6 +25,7 @@
 .scoreCardTitle {
   color: $white;
   text-transform: uppercase;
+  margin-bottom: 1.5rem;
 }
 
 .betterThan {

@@ -6,3 +6,8 @@ export const fetchTransactions = async (locale: Locale) => {
 
   return await facade.getTransactions(locale);
 };
+
+export const fetchTransactionsBySectorId = async (locale: Locale, sectorIId: string) => {
+  const facade = new TransactionFacade();
+  return await facade.getTransactionsBySectorId(locale, sectorIId);
+};

@@ -115,7 +115,11 @@
         "a1": "Zum ausgewählten Termin erreichbar unter:"
       }
     },
-    "logoTitle": "Beratung beim Verkauf, Kauf oder Finanzierung von über 270 Unternehmen im europäischen Mittelstand."
+    "logoTitle": "Beratung beim Verkauf, Kauf oder Finanzierung von über 270 Unternehmen im europäischen Mittelstand.",
+    "leftCol": {
+      "getValuationNow": "Jetzt die komplette Unternehmensbewertung erhalten",
+      "ourRecentExpertise": "Unsere aktuellen Expertisen:"
+    }
   },
   "VTLanding": {
     "questionText": "Welchen Zweck soll die Bewertung erfüllen?",
@@ -129,12 +133,14 @@
   },
   "companyEVTable": {
     "results": "ERGEBNISSE",
+    "scenariosEvaluations": "Szenarien-Auswertungen",
     "scenario": "Szenario",
     "value": "Unternehmenswert",
     "evaluation": "Auswertung",
     "worst": "Am schlimmsten",
     "average": "Durchschnitt",
-    "best": "Am besten"
+    "best": "Am besten",
+    "submitFormToSeeResults": "Szenarienbewertungen wurden berechnet – füllen Sie das Formular aus, um das Ergebnis anzuzeigen!"
   },
   "form": {
     "loading": "Laden..."
