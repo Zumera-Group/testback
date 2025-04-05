@@ -4,13 +4,15 @@ import Image from 'next/image';
 import { Beam } from 'components/Beam';
 import { Icon } from 'components/Icon';
 
-import { links } from 'lib/links';
+import {createUrl} from 'lib/links';
 import { useFormatDate } from 'lib/shared-domain/useFormatDate';
 
 import styles from './TransactionCard.module.scss';
 import { sanityImageUrlFor } from 'lib/sanity';
+import {Transaction} from '../../../lib/shared-domain/transactions/domain';
+import {SanityService} from '../../../lib/services/sanity.service';
 
-export const TransactionCard = ({ transaction }) => {
+export const TransactionCard = ({ transaction, showCoverBlock = true }: {transaction: Transaction, showCoverBlock?: boolean}) => {
   const format = useFormatDate();
 
   if (!transaction) return null;
@@ -28,26 +30,12 @@ export const TransactionCard = ({ transaction }) => {
   } = transaction;
 
   const dateFormatted = date ? format(new Date(date)) : null;
-  const href = links().transactions(transaction);
 
-  const TransactionLogo = ({ url, name }) => {
-    return !url ? (
-      <p className={styles.transactionLogoFallback}>{name}</p>
-    ) : (
-      <div className={styles.transactionLogo}>
-        <Image
-          unoptimized
-          alt={`${name} logo`}
-          src={sanityImageUrlFor(url).url()}
-          fill
-          style={{
-            maxWidth: '100%',
-            objectFit: 'contain',
-          }}
-        />
-      </div>
-    );
-  };
+  const href = createUrl({
+    type: transaction._type,
+    locale: SanityService.getLocaleFromSanityLocale(transaction._lang),
+    slug: transaction?.slug?.current
+  });
 
   return (
     <article className={styles.transaction}>
@@ -64,44 +52,45 @@ export const TransactionCard = ({ transaction }) => {
               name={companyName2}
             />
           </div>
-          <div className={styles.cover}>
-            {coverImage?.asset?.url && (
-              <div className={styles.imageWrapper}>
-                <div className={styles.imageWrapper_inner}>
-                  <Image
-                    unoptimized
-                    src={sanityImageUrlFor(coverImage?.asset?.url).url()}
-                    alt={coverImage?.asset?.altText || ''}
-                    className={styles.image}
-                    fill
-                    sizes="100vw"
-                  />
+          {showCoverBlock && <div className={styles.cover}>
+              {coverImage?.asset?.url && (
+                <div className={styles.imageWrapper}>
+                  <div className={styles.imageWrapper_inner}>
+                    <Image
+                      unoptimized
+                      src={sanityImageUrlFor(coverImage?.asset?.url).url()}
+                      alt={coverImage?.asset?.altText || ''}
+                      className={styles.image}
+                      fill
+                      sizes="100vw"
+                    />
+                  </div>
                 </div>
-              </div>
-            )}
-            <div className={styles.body}>
-              {date && (
-                <time dateTime={date} className={styles.date}>
-                  {dateFormatted}
-                </time>
               )}
-              {headline && <p className={styles.title}>{headline}</p>}
-              <p className={styles.excerpt}>
-                {highlightSellers?.length ? (
-                  <>
-                    <strong>{highlightSellersTitle} </strong>
-                    {highlightSellers.filter((val) => !val.length).join(', ')}
-                  </>
-                ) : null}
-              </p>
-              <Icon
-                iconName={'arrow-circle'}
-                viewBox={'0 0 32 32'}
-                width={32}
-                height={32}
-              />
+              <div className={styles.body}>
+                {date && (
+                  <time dateTime={date as unknown as string} className={styles.date}>
+                    {dateFormatted}
+                  </time>
+                )}
+                {headline && <p className={styles.title}>{headline}</p>}
+                <p className={styles.excerpt}>
+                  {highlightSellers?.length ? (
+                    <>
+                      <strong>{highlightSellersTitle} </strong>
+                      {highlightSellers.filter((val) => !val.length).join(', ')}
+                    </>
+                  ) : null}
+                </p>
+                <Icon
+                  iconName={'arrow-circle'}
+                  viewBox={'0 0 32 32'}
+                  width={32}
+                  height={32}
+                />
+              </div>
             </div>
-          </div>
+          }
         </a>
       </Link>
     </article>
@@ -109,3 +98,22 @@ export const TransactionCard = ({ transaction }) => {
 };
 
 export default TransactionCard;
+
+const TransactionLogo = ({ url, name }) => {
+  return !url ? (
+    <p className={styles.transactionLogoFallback}>{name}</p>
+  ) : (
+    <div className={styles.transactionLogo}>
+      <Image
+        unoptimized
+        alt={`${name} logo`}
+        src={sanityImageUrlFor(url).url()}
+        fill
+        style={{
+          maxWidth: '100%',
+          objectFit: 'contain',
+        }}
+      />
+    </div>
+  );
+};

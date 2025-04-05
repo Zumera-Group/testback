@@ -19,6 +19,13 @@ $ev-blocks-gap: 10px;
   padding: 5px;
 }
 
+.headerColHideOnXs {
+  display: none;
+  @include breakpoint-up(sm) {
+    display: block;
+  }
+}
+
 .scenarioCol {
   width: 30%;
 }
@@ -40,6 +47,11 @@ $ev-blocks-gap: 10px;
   padding: 0 0 10px 0;
   margin: 0 0 10px 0;
   font-size: $h5-font-size;
+  flex-wrap: wrap;
+
+  @include breakpoint-up(sm) {
+    flex-wrap: nowrap;
+  }
 }
 
 .bodyEvaluationCol {

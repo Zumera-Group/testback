@@ -48,8 +48,8 @@ export default function CompanyEVTable({score, className, blurred = false}: {
       <div className={styles.table}>
         <div className={styles.header}>
           <div className={clsx(styles.scenarioCol, styles.headerCol)}>{t('scenario')}</div>
-          <div className={clsx(styles.valueCol, styles.headerCol)}>{t('value')}</div>
-          <div className={clsx(styles.evaluationCol, styles.headerCol)}>{t('evaluation')}</div>
+          <div className={clsx(styles.valueCol, styles.headerCol, styles.headerColHideOnXs)}>{t('value')}</div>
+          <div className={clsx(styles.evaluationCol, styles.headerCol, styles.headerColHideOnXs)}>{t('evaluation')}</div>
         </div>
         <Row title={t('best')} value={max} percentage={maxPercentage} blurred={blurred} />
         <Row title={t('average')} value={avg} percentage={avgPercentage} blurred={blurred} />

@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {useValuationStore} from '../../store';
 import { useRouter } from 'next/router';
 import { Locale } from 'lib/locale';
-import {fetchTransactionsBySectorId} from '../../../transactions/application/useGetTransactions';
+import {fetchTransactionsBySectorId, fetchLastTransactions} from '../../../transactions/application/useGetTransactions';
 import {Transaction} from '../../../transactions/domain';
 import {getTranslateByScope} from '../../../../../translation/i18n';
 import styles from './LatestTransactions.module.scss';
@@ -18,7 +18,7 @@ export default function LatestTransactions() {
   useEffect(() => {
     const sectorId = store.getAnswer('sector_id');
     if (sectorId) {
-      fetchTransactionsBySectorId(router.locale as unknown as Locale, sectorId)
+      fetchTransactions(router.locale as unknown as Locale, sectorId)
         .then((val) => {
           setTransactions(val);
         })
@@ -41,10 +41,19 @@ export default function LatestTransactions() {
             {[styles.transactionWrapperFirst]: i == 0},
             {[styles.transactionWrapperRest]: i > 0},
           )}>
-            <TransactionCard transaction={transaction} />
+            <TransactionCard transaction={transaction} showCoverBlock={false} />
           </div>
         )}
       </div>
     </div>
   );
 }
+
+const fetchTransactions = async (locale: Locale, sectorId: string): Promise<Transaction[]> => {
+  const transactionsBySector = await fetchTransactionsBySectorId(locale, sectorId);
+  if (transactionsBySector?.length > 0) {
+    return transactionsBySector;
+  }
+
+  return await fetchLastTransactions(locale);
+};

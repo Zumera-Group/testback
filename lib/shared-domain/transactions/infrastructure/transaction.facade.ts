@@ -252,6 +252,15 @@ export class TransactionFacade {
     return transactions;
   }
 
+  async getLastTransactions(lang: Locale, limitIndex: number = 2): Promise<Transaction[]> {
+    const sanityLang = this.sanityService.getSanityLocale(lang);
+
+    const query = queryTransactions(sanityLang, null, `| order(date desc)[0..${limitIndex}]`);
+    const transactions = await this.sanityService.fetch(query);
+
+    return transactions;
+  }
+
   async getTransactionsBySectorId(lang: Locale, sectorId: string): Promise<Transaction[]> {
     const sanityLang = this.sanityService.getSanityLocale(lang);
     const sectors = `"sectors": *[_type == "sector" && _lang == "${sanityLang}" && _id in ^.sectors[]._ref && id == "${sectorId}"] {

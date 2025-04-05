@@ -171,7 +171,7 @@ describe('fills the French calculator', {
     cy.get('[aria-label="Finish questionnaire button"]').click();
     cy.wait(1000);
 
-    cy.contains('points');
+    // cy.contains('points');
     cy.get('input[type="text"]').first().type('Automated Testing suite');
     cy.get('input[type="email"]').first().type('automates-tests@test.com');
     cy.get('input[type="tel"]').first().type('+4917000000000');

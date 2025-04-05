@@ -20,6 +20,7 @@ import { SCREEN_SIZE_MD } from 'lib/constants';
 import { useMediaQuery } from 'lib/hooks/useMediaQuery';
 import { ScoreCard } from './ScoreCard';
 import { ProgressBarLine } from '../../../../components/Calculator/ProgressBarLine/ProgressBarLine';
+import clsx from 'clsx';
 
 import { Container, Grid, GridColumn, Section } from 'components/Layout';
 import { INDUSTRY_QUESTION_ID, SECTOR_QUESTION_ID } from './questions';
@@ -298,10 +299,10 @@ const QuestionnaireLayout: React.FC<{
                       sm={12}
                       md={4}
                       lg={3}
-                      className={[
-                        styles.sidebarCol,
-                        isOnResultScreen && styles.nonStick,
-                      ].join(' ')}
+                      className={clsx(styles.sidebarCol, {
+                        [styles.nonStick]: isOnResultScreen,
+                        [styles.scoreSidebar]: isOnResultScreen,
+                      })}
                     >
                       <aside className={styles.sidebarWrapper}>
                         {questionnaire && !isOnResultScreen && !isMobile && (
