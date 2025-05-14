@@ -136,9 +136,9 @@
     "scenario": "Scenario",
     "value": "Enterprise Value",
     "evaluation": "Evaluation",
-    "worst": "Worst",
+    "worst": "Bad",
     "average": "Average",
-    "best": "Best",
+    "best": "Good",
     "submitFormToSeeResults": "Scenarios evaluations have been calculated - fill out the form to see the result!"
   },
   "form": {

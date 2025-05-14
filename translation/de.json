@@ -137,9 +137,9 @@
     "scenario": "Szenario",
     "value": "Unternehmenswert",
     "evaluation": "Auswertung",
-    "worst": "Am schlimmsten",
+    "worst": "Schlecht",
     "average": "Durchschnitt",
-    "best": "Am besten",
+    "best": "Gut",
     "submitFormToSeeResults": "Szenarienbewertungen wurden berechnet – füllen Sie das Formular aus, um das Ergebnis anzuzeigen!"
   },
   "form": {

@@ -48,8 +48,8 @@ export default function CompanyEVTable({score, className, blurred = false}: {
       <div className={styles.table}>
         <div className={styles.header}>
           <div className={clsx(styles.scenarioCol, styles.headerCol)}>{t('scenario')}</div>
-          <div className={clsx(styles.valueCol, styles.headerCol, styles.headerColHideOnXs)}>{t('value')}</div>
-          <div className={clsx(styles.evaluationCol, styles.headerCol, styles.headerColHideOnXs)}>{t('evaluation')}</div>
+          <div className={clsx(styles.valueCol, styles.headerCol, styles.headerColHideOnXs)} style={{textAlign: 'center'}}>{t('evaluation')}</div>
+          {/*<div className={clsx(styles.evaluationCol, styles.headerCol, styles.headerColHideOnXs)}>{t('evaluation')}</div>*/}
         </div>
         <Row title={t('best')} value={max} percentage={maxPercentage} blurred={blurred} />
         <Row title={t('average')} value={avg} percentage={avgPercentage} blurred={blurred} />
@@ -70,30 +70,51 @@ const Row = ({title, percentage, blurred = false, value = null}: {
       <div className={styles.scenarioCol}>{title}</div>
       <div className={clsx(styles.valueCol, {[styles.bodyBlurredCol]: blurred})}>
         <div className={styles.percentageBlock} style={{width: `${percentage}%`}}>
-          {percentage}%
+          {/*{percentage}%*/}
+          {value !== null && <>&gt; {formatMoney(value)}</>}
         </div>
       </div>
-      <div className={clsx(styles.evaluationCol, styles.bodyEvaluationCol, {[styles.bodyBlurredCol]: blurred})}>
-        {value !== null && formatMoney(value)}
-        {blurred && '€ 0000000'}
-      </div>
+      {/*<div className={clsx(styles.evaluationCol, styles.bodyEvaluationCol, {[styles.bodyBlurredCol]: blurred})}>*/}
+      {/*  {value !== null && formatMoney(value)}*/}
+      {/*  {blurred && '€ 0000000'}*/}
+      {/*</div>*/}
     </div>
   );
 };
 
 const formatMoney = (value: number) => {
-  let locale = 'en';
-  if (globalTranslate.locale == 'de') {
-    locale = 'de';
-  } else if (globalTranslate.locale == 'fr') {
-    locale = 'fr';
+  const locale = 'de';
+  // if (globalTranslate.locale == 'de') {
+  //   locale = 'de';
+  // } else if (globalTranslate.locale == 'fr') {
+  //   locale = 'fr';
+  // }
+
+  value = Math.round(value);
+
+  let suffix = '';
+  if (value > 1000000) {
+    suffix = 'M';
+    value = value / 1000000;
+  } else if (value > 1000) {
+    suffix = 'K';
+    value = value / 1000;
   }
 
-  return new Intl.NumberFormat(locale, {
-    style: 'currency',
-    currency: 'EUR',
+  const formattedValue = new Intl.NumberFormat(locale, {
+    // style: 'currency',
+    // currency: 'EUR',
     minimumFractionDigits: 0,
-    maximumFractionDigits: 0
+    maximumFractionDigits: 3
   })
-    .format(Math.round(value));
+    .format(value);
+
+  return `${formattedValue}${suffix} €`;
+  // return new Intl.NumberFormat(locale, {
+  //   style: 'currency',
+  //   currency: 'EUR',
+  //   minimumFractionDigits: 0,
+  //   maximumFractionDigits: 0
+  // })
+  //   .format(Math.round(value));
 };
