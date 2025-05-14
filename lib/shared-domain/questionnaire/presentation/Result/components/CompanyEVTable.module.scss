@@ -33,6 +33,7 @@ $ev-blocks-gap: 10px;
 .valueCol {
   //width: 40%;
   width: 70%;
+  display: flex;
 }
 
 .evaluationCol {
@@ -62,6 +63,22 @@ $ev-blocks-gap: 10px;
 .percentageBlock {
   background: #988099;
   text-align: center;
+  width: 40%;
+}
+
+.percentageBlockMax {
+  //justify-self: flex-end;
+  margin-left: 60%;
+}
+
+.percentageBlockAvg {
+  margin-left: auto;
+  margin-right: auto;
+  //justify-self: center;
+}
+
+.percentageBlockMin {
+
 }
 
 .bodyBlurredCol {

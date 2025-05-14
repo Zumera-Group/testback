@@ -48,20 +48,28 @@ export default function CompanyEVTable({score, className, blurred = false}: {
       <div className={styles.table}>
         <div className={styles.header}>
           <div className={clsx(styles.scenarioCol, styles.headerCol)}>{t('scenario')}</div>
-          <div className={clsx(styles.valueCol, styles.headerCol, styles.headerColHideOnXs)} style={{textAlign: 'center'}}>{t('evaluation')}</div>
+          <div className={clsx(styles.valueCol, styles.headerCol, styles.headerColHideOnXs)} style={{justifyContent: 'center'}}>{t('evaluation')}</div>
           {/*<div className={clsx(styles.evaluationCol, styles.headerCol, styles.headerColHideOnXs)}>{t('evaluation')}</div>*/}
         </div>
-        <Row title={t('best')} value={max} percentage={maxPercentage} blurred={blurred} />
-        <Row title={t('average')} value={avg} percentage={avgPercentage} blurred={blurred} />
-        <Row title={t('worst')} value={min} percentage={minPercentage} blurred={blurred} />
+        <Row title={t('best')} value={max} percentage={maxPercentage} blurred={blurred} mode={TRowMode.max}/>
+        <Row title={t('average')} value={avg} percentage={avgPercentage} blurred={blurred} mode={TRowMode.avg}/>
+        <Row title={t('worst')} value={min} percentage={minPercentage} blurred={blurred} mode={TRowMode.min}/>
       </div>
     </div>
   );
 }
 
-const Row = ({title, percentage, blurred = false, value = null}: {
+
+enum TRowMode {
+  max = 'max',
+  min = 'min',
+  avg = 'avg'
+}
+
+const Row = ({title, percentage, mode, blurred = false, value = null}: {
   title: string,
   percentage: number,
+  mode: TRowMode,
   value?: number|null,
   blurred?: boolean
 }) => {
@@ -69,9 +77,19 @@ const Row = ({title, percentage, blurred = false, value = null}: {
     <div className={styles.bodyRow}>
       <div className={styles.scenarioCol}>{title}</div>
       <div className={clsx(styles.valueCol, {[styles.bodyBlurredCol]: blurred})}>
-        <div className={styles.percentageBlock} style={{width: `${percentage}%`}}>
+        {/*style={{width: `${percentage}%`}}*/}
+        <div className={clsx(styles.percentageBlock, {
+          [styles.percentageBlockMax]: mode == TRowMode.max,
+          [styles.percentageBlockAvg]: mode == TRowMode.avg,
+          [styles.percentageBlockMin]: mode == TRowMode.min
+        })}>
           {/*{percentage}%*/}
-          {value !== null && <>&gt; {formatMoney(value)}</>}
+          {value !== null &&
+          <>
+            {mode == TRowMode.max && <>&gt; </>}
+            {mode == TRowMode.min && <>&lt; </>}
+            {formatMoney(value)}
+          </>}
         </div>
       </div>
       {/*<div className={clsx(styles.evaluationCol, styles.bodyEvaluationCol, {[styles.bodyBlurredCol]: blurred})}>*/}
@@ -93,7 +111,9 @@ const formatMoney = (value: number) => {
   value = Math.round(value);
 
   let suffix = '';
-  if (value > 1000000) {
+  if (value > 1000000000) {
+    suffix = 'B';
+  } else if (value > 1000000) {
     suffix = 'M';
     value = value / 1000000;
   } else if (value > 1000) {
