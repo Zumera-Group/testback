@@ -40,7 +40,7 @@ export const TextInput: React.FC<{
 
   const onChange = useCallback((e: ChangeEvent<HTMLTextAreaElement>) => {
     let value = String(e.target.value);
-    if (field.length > 0 && value.length > field.length) {
+    if (field?.length > 0 && value.length > field.length) {
       value = value.substring(0, field.length);
       setGlobalAlert({
         type: TGlobalAlertType.warning,

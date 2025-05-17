@@ -19,13 +19,16 @@ import {
 } from 'lib/shared-domain/questionnaire/presentation/Result/constants';
 import {useMediaQuery} from '../../../../../hooks/useMediaQuery';
 import {SCREEN_SIZE_MD} from '../../../../../constants';
+import {ILeadEntryScore} from '../../../../../../@types/api';
+import CompanyEVTable from './CompanyEVTable';
 
 
 const t = getTranslateByScope('result');
 const tForm = getTranslateByScope('form');
+const tEVTable = getTranslateByScope('companyEVTable');
 
 export const LowLeadFlow: React.FC<{
-  score: { points: string; percentage: string; avg: number };
+  score: ILeadEntryScore;
   resultScreenCopy: any;
 }> = ({ score, resultScreenCopy }) => {
   const { syncCurrentAnswersToSalesforce } = useSalesforceAnswerSync();
@@ -129,10 +132,14 @@ export const LowLeadFlow: React.FC<{
     <AnimateIn>
       {!isFormSubmitted ? (
         <>
+          <div className={styles.evTableResultsTitle}>{tEVTable('results')}</div>
+          <div className={styles.evTableResultsSubTitle}>{tEVTable('submitFormToSeeResults')}</div>
+          <CompanyEVTable blurred={true} />
           <QuestionText
             title={questionTitle.title}
             description={questionTitle.tooltipDescription}
             toolTipPromptText={questionTitle.tooltipPrompt}
+            hideCategory={true}
           />
 
           <form className={styles.resultForm} onSubmit={(e) => onSend(e)}>
@@ -286,7 +293,11 @@ export const LowLeadFlow: React.FC<{
           </form>
         </>
       ) : (
-        <h3 id="result-message" className={styles.successMessage} ref={successMessageRef}>{formFields.successMessage}</h3>
+        <div>
+          <h3 id="result-message" className={styles.successMessage} ref={successMessageRef}>{formFields.successMessage}</h3>
+          <div className={styles.evTableResultsTitle} style={{margin: '2rem 0'}}>{tEVTable('scenariosEvaluations')}</div>
+          <CompanyEVTable score={score} />
+        </div>
       )}
     </AnimateIn>
   );

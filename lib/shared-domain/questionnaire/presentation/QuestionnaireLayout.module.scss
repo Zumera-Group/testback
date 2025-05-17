@@ -90,6 +90,15 @@ $main-layout-height: calc(
   }
 }
 
+.scoreSidebar {
+  order: 2;
+
+  @include breakpoint-up(md) {
+    order: initial;
+    margin-top: initial;
+  }
+}
+
 .sidebarWrapper {
   & > * {
     width: 100%;

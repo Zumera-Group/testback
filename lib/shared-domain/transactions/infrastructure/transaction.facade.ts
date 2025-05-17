@@ -145,66 +145,75 @@ const queryTransactionDetail = (
 
 const queryTransactions = (
   lang,
-) => `*[_type == "transaction" && _lang == "${lang}" && (hidePage == false || !defined(hidePage))] {
-  ...,
-  _id,
-  _lang,
-  optionalUI {
-    hasAchievedTransactionMultiples,
-    achievedTransactionMultiple,
-    sectorMultipleAverage
-  },
-  peopleInvolved[]-> {
-    ...,
-    firstName,
-    lastName,
-    picture {
-      asset->{
-        url
-      },
-    }
-  },
-  companyLogo1 {
-    asset->{
-      url
-    },
-  },
-  companyLogo2 {
-    asset->{
-      url
-    },
-  },
-  typeOfService-> {
-    ...,
-    name
-  },
-  sectors[]-> {
-    ...,
-    name,
-    graph->{
-      iconImage{
-        asset->{
-          url,
-          metadata{
-            dimensions{
-              height,
-              width
+  sectors: null|string = null,
+  orderBy: string = ''
+): string => {
+  if (!sectors) {
+    sectors = `sectors[]-> {
+      ...,
+      name,
+      graph->{
+        iconImage{
+          asset->{
+            url,
+            metadata{
+              dimensions{
+                height,
+                width
+              }
             }
           }
         }
       }
-    }
-  },
-  location-> {
-    ...,
-  },
-  newsPressRelease-> {
-    ...,
-    slug {
-      current
-    }
+    },`
   }
-}`;
+
+  return `*[_type == "transaction" && _lang == "${lang}" && (hidePage == false || !defined(hidePage))] {
+    ...,
+    _id,
+    _lang,
+    optionalUI {
+      hasAchievedTransactionMultiples,
+      achievedTransactionMultiple,
+      sectorMultipleAverage
+    },
+    peopleInvolved[]-> {
+      ...,
+      firstName,
+      lastName,
+      picture {
+        asset->{
+          url
+        },
+      }
+    },
+    companyLogo1 {
+      asset->{
+        url
+      },
+    },
+    companyLogo2 {
+      asset->{
+        url
+      },
+    },
+    typeOfService-> {
+      ...,
+      name
+    },
+    ${sectors}
+    location-> {
+      ...,
+    },
+    newsPressRelease-> {
+      ...,
+      slug {
+        current
+      }
+    }
+  }${orderBy}
+  `;
+}
 
 const queryTransactionDetailContent = (
   lang,
@@ -239,6 +248,41 @@ export class TransactionFacade {
     const transactions = await this.sanityService.fetch(
       queryTransactions(this.sanityService.getSanityLocale(lang)),
     );
+
+    return transactions;
+  }
+
+  async getLastTransactions(lang: Locale, limitIndex: number = 2): Promise<Transaction[]> {
+    const sanityLang = this.sanityService.getSanityLocale(lang);
+
+    const query = queryTransactions(sanityLang, null, `| order(date desc)[0..${limitIndex}]`);
+    const transactions = await this.sanityService.fetch(query);
+
+    return transactions;
+  }
+
+  async getTransactionsBySectorId(lang: Locale, sectorId: string): Promise<Transaction[]> {
+    const sanityLang = this.sanityService.getSanityLocale(lang);
+    const sectors = `"sectors": *[_type == "sector" && _lang == "${sanityLang}" && _id in ^.sectors[]._ref && id == "${sectorId}"] {
+      ...,
+      name,
+      graph->{
+        iconImage{
+          asset->{
+            url,
+            metadata{
+              dimensions{
+                height,
+                width
+              }
+            }
+          }
+        }
+      }
+    },`;
+
+    const query = queryTransactions(sanityLang, sectors, '[count(sectors) > 0 ] | order(date desc)[0..2]');
+    const transactions = await this.sanityService.fetch(query);
 
     return transactions;
   }

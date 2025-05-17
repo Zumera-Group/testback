@@ -114,7 +114,11 @@
         "a1": "Zum ausgewählten Termin erreichbar unter:"
       }
     },
-    "logoTitle": "A conseillé plus de 20 entreprises du Fortune 500 dans leurs acquisitions"
+    "logoTitle": "A conseillé plus de 20 entreprises du Fortune 500 dans leurs acquisitions",
+    "leftCol": {
+      "getValuationNow": "Obtenez maintenant l'évaluation complète de l'entreprise",
+      "ourRecentExpertise": "Notre expertise récente:"
+    }
   },
   "VTLanding": {
     "questionText": "Quelle est l'utilisation prévue de l'évaluation?",
@@ -124,6 +128,17 @@
       "2": "Élever Série",
       "3": "Juste de la curiosité"
     }
+  },
+  "companyEVTable": {
+    "results": "RÉSULTATS",
+    "scenariosEvaluations": "Évaluations des scénarios",
+    "scenario": "Scénario",
+    "value": "Valeur d'entreprise",
+    "evaluation": "Évaluation",
+    "worst": "Mauvaise",
+    "average": "Moyenne",
+    "best": "Bien",
+    "submitFormToSeeResults": "Les évaluations des scénarios ont été calculées - remplissez le formulaire pour voir le résultat!"
   },
   "form": {
     "loading": "Chargement..."

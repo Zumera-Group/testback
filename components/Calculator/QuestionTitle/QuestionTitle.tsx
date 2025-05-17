@@ -10,12 +10,14 @@ interface Props {
   title?: string;
   description?: string;
   toolTipPromptText?: string;
+  hideCategory?: boolean;
 }
 
 const QuestionTitle: React.FC<Props> = ({
   title,
   description,
   toolTipPromptText,
+  hideCategory = false
 }) => {
   const { questionnaire, mainStep } = useValuationStore();
   const currentCategory =
@@ -36,7 +38,9 @@ const QuestionTitle: React.FC<Props> = ({
 
   return (
     <div className={styles.questionTitleWrapper}>
-      <span className={styles.category}>{currentCategory}</span>
+      {!hideCategory &&
+      <span className={styles.category}>{currentCategory}</span>}
+
       <h3 className={styles.title}>{title}</h3>
       {isDesc && (
         <div className={styles.tooltipWrapper}>

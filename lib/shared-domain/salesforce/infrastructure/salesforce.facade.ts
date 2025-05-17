@@ -1,7 +1,7 @@
 import { AxiosService } from 'lib/services/axios.service';
 import { MarketingParamsService } from '../application/marketingParamsService';
 import { logError } from 'lib/logError';
-import { IApiField } from '../../../../@types/api';
+import {IApiField, ILeadEntryScore} from '../../../../@types/api';
 import { createGetStr, TGetParams } from '../../../urlHelpers';
 import { IGetFieldsFilters } from './types';
 import { format } from 'date-fns';
@@ -156,7 +156,7 @@ export class SalesforceFacade {
     } catch (e) {
       logError(e, { where: 'createOrUpdateLeadEntry' });
 
-      throw new Error(e);
+      // throw new Error(e);
     }
   }
 
@@ -196,7 +196,7 @@ export class SalesforceFacade {
     }
   }
 
-  async getLeadEntryScore(uniqueId: string) {
+  async getLeadEntryScore(uniqueId: string): Promise<ILeadEntryScore|null> {
     try {
       const response = await this.httpService.get(
         endpoints.getLeadEntryScore(uniqueId),
@@ -208,10 +208,11 @@ export class SalesforceFacade {
         percentage: response.data.comparison,
         calendly: response.data.calendly,
         avg: response.data.avg,
+        company_ev: response.data.company_ev
       };
     } catch (e) {
       logError(e, { where: 'getLeadEntryScore' });
-      return e;
+      return null;
     }
   }
 

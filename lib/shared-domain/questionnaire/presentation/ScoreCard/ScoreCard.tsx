@@ -1,21 +1,23 @@
-import { ProgressBar } from 'components/Calculator/ProgressBar';
+// import { ProgressBar } from 'components/Calculator/ProgressBar';
 import React from 'react';
 import { getTranslateByScope } from 'translation/i18n';
 import { useGetSalesforceScore } from '../../application/useGetQuestionnaireScore';
 import Image from 'next/image';
 import styles from './ScoreCard.module.scss';
 import * as animationData from './loading-wheel.json';
-import dynamic from 'next/dynamic';
-import { AnimationOptions } from 'react-lottie';
+// import dynamic from 'next/dynamic';
+// import { AnimationOptions } from 'react-lottie';
+import {ILeadEntryScore} from '../../../../../@types/api';
+import LatestTransactions from './LatestTransactions';
 
-const Lottie: React.ComponentType<{
-  options: AnimationOptions,
-  width: string,
-  height: string,
-  style: React.CSSProperties,
-  isStopped: boolean,
-  isPaused: boolean
-}> = dynamic(() => import('react-lottie'), { ssr: false });
+// const Lottie: React.ComponentType<{
+//   options: AnimationOptions,
+//   width: string,
+//   height: string,
+//   style: React.CSSProperties,
+//   isStopped: boolean,
+//   isPaused: boolean
+// }> = dynamic(() => import('react-lottie'), { ssr: false });
 
 
 interface ScoreCardProps {
@@ -30,12 +32,7 @@ export const ScoreCard = ({
 
   const tr = getTranslateByScope('result');
 
-  const [score, setScore] = React.useState<{
-    points: string;
-    percentage: string;
-    calendly: string;
-    avg: number;
-  }>(null);
+  const [score, setScore] = React.useState<ILeadEntryScore|null>(null);
   const [hasError, setHasError] = React.useState(false);
   const { getScore } = useGetSalesforceScore();
 
@@ -90,25 +87,25 @@ export const ScoreCard = ({
   return (
     <>
       <div className={styles.scoreCardWrapper}>
-        <span className={styles.scoreCardTitle}>{title}</span>
-        {score ? (
-          <ProgressBar isPoint progress={Number(points)} color="gradient" />
-        ) : (
-          <Lottie
-            options={defaultOptions}
-            width="100%"
-            height={'auto'}
-            style={{
-              width: isResultsCompactOnMobile ? 119 : 192,
-              marginLeft: 'auto',
-              marginTop: 16,
-            }}
-            isStopped={false}
-            isPaused={false}
-          />
-
-        )}
-        <h4 className={styles.betterThan}>{betterThan}</h4>
+        {/*<span className={styles.scoreCardTitle}>{title}</span>*/}
+        {/*{score ? (*/}
+        {/*  <ProgressBar isPoint progress={Number(points)} color="gradient" />*/}
+        {/*) : (*/}
+        {/*  <Lottie*/}
+        {/*    options={defaultOptions}*/}
+        {/*    width="100%"*/}
+        {/*    height={'auto'}*/}
+        {/*    style={{*/}
+        {/*      width: isResultsCompactOnMobile ? 119 : 192,*/}
+        {/*      marginLeft: 'auto',*/}
+        {/*      marginTop: 16,*/}
+        {/*    }}*/}
+        {/*    isStopped={false}*/}
+        {/*    isPaused={false}*/}
+        {/*  />*/}
+        {/*)}*/}
+        {/*<h4 className={styles.betterThan}>{betterThan}</h4>*/}
+        <span className={styles.scoreCardTitle}>{tr('leftCol.getValuationNow')}</span>
         <div className={styles.booklet}>
           <Image
             unoptimized
@@ -122,9 +119,8 @@ export const ScoreCard = ({
             }}
           />
         </div>
+        <LatestTransactions />
       </div>
     </>
   );
 };
-
-export default ScoreCard;

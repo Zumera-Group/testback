@@ -60,6 +60,12 @@ export interface Transaction {
       url: string;
     };
   };
+  coverImage?: {
+    asset?: {
+      url: string,
+      altText?: string
+    }
+  };
   companyName1: string;
   companyName2: string;
   companySubHeadline1: string;

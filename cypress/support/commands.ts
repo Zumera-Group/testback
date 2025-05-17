@@ -75,11 +75,7 @@ const FIELDS = [
   'sector_id',
   'sector_sheet_name',
   'Quality_of_Revenue__c',
-  'Annual_Revenue_2021__c',
-  'Annual_Revenue_2022__c',
   'Annual_Revenue_2023__c',
-  'Company_EBIT_2021__c',
-  'Company_EBIT_2022__c',
   'Company_EBIT_2023__c',
   'Impact_Economic_Crises__c',
 ];
