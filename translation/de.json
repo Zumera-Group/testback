@@ -140,7 +140,7 @@
     "worst": "Schlecht",
     "average": "Durchschnitt",
     "best": "Gut",
-    "submitFormToSeeResults": "Szenarienbewertungen wurden berechnet – füllen Sie das Formular aus, um das Ergebnis anzuzeigen!"
+    "submitFormToSeeResults": "Die Szenariobewertungen wurden berechnet - füllen Sie das Formular aus, um das Ergebnis zu sehen!"
   },
   "form": {
     "loading": "Laden..."

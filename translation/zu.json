@@ -139,7 +139,7 @@
     "worst": "Bad",
     "average": "Average",
     "best": "Good",
-    "submitFormToSeeResults": "Scenarios evaluations have been calculated - fill out the form to see the result!"
+    "submitFormToSeeResults": "Scenario evaluations have been calculated - fill out the form to see the result!"
   },
   "form": {
     "loading": "Loading..."
