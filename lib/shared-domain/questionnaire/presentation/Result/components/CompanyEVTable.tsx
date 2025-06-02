@@ -1,12 +1,11 @@
 import React, {useMemo} from 'react';
 import {ILeadEntryScore} from '../../../../../../@types/api';
-import {getTranslateByScope, globalTranslate} from '../../../../../../translation/i18n';
 import styles from './CompanyEVTable.module.scss';
 import clsx from 'clsx';
+import {IResultScreenCopy} from '../../../domain';
 
-const t = getTranslateByScope('companyEVTable');
-
-export default function CompanyEVTable({score, className, blurred = false}: {
+export default function CompanyEVTable({resultScreenCopy, score, className, blurred = false}: {
+  resultScreenCopy: IResultScreenCopy;
   score?: ILeadEntryScore,
   blurred?: boolean,
   className?: string
@@ -43,17 +42,21 @@ export default function CompanyEVTable({score, className, blurred = false}: {
     return null;
   }
 
+  const labels = resultScreenCopy.scenarioEvaluationLabels || null;
+
   return (
     <div className={clsx(styles.wrapper, className)}>
       <div className={styles.table}>
         <div className={styles.header}>
-          <div className={clsx(styles.scenarioCol, styles.headerCol)}>{t('scenario')}</div>
-          <div className={clsx(styles.valueCol, styles.headerCol, styles.headerColHideOnXs)} style={{justifyContent: 'center'}}>{t('evaluation')}</div>
+          <div className={clsx(styles.scenarioCol, styles.headerCol)}>{labels?.scenario || 'Scenario'}</div>
+          <div className={clsx(styles.valueCol, styles.headerCol, styles.headerColHideOnXs)} style={{justifyContent: 'center'}}>
+            {labels?.evaluation || 'Evaluation'}
+          </div>
           {/*<div className={clsx(styles.evaluationCol, styles.headerCol, styles.headerColHideOnXs)}>{t('evaluation')}</div>*/}
         </div>
-        <Row title={t('best')} value={max} percentage={maxPercentage} blurred={blurred} mode={TRowMode.max}/>
-        <Row title={t('average')} value={avg} percentage={avgPercentage} blurred={blurred} mode={TRowMode.avg}/>
-        <Row title={t('worst')} value={min} percentage={minPercentage} blurred={blurred} mode={TRowMode.min}/>
+        <Row title={labels?.good || 'Good'} value={max} percentage={maxPercentage} blurred={blurred} mode={TRowMode.max}/>
+        <Row title={labels?.average || 'Average'} value={avg} percentage={avgPercentage} blurred={blurred} mode={TRowMode.avg}/>
+        <Row title={labels?.worst || 'Worst'} value={min} percentage={minPercentage} blurred={blurred} mode={TRowMode.min}/>
       </div>
     </div>
   );

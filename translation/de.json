@@ -131,17 +131,6 @@
       "3": "Reine Neugierde"
     }
   },
-  "companyEVTable": {
-    "results": "ERGEBNISSE",
-    "scenariosEvaluations": "Szenario-Bewertungen",
-    "scenario": "Szenario",
-    "value": "Unternehmenswert",
-    "evaluation": "Auswertung",
-    "worst": "Schlecht",
-    "average": "Durchschnitt",
-    "best": "Gut",
-    "submitFormToSeeResults": "Die Szenariobewertungen wurden berechnet - füllen Sie das Formular aus, um das Ergebnis zu sehen!"
-  },
   "form": {
     "loading": "Laden..."
   },

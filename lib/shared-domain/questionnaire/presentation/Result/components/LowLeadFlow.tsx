@@ -21,15 +21,15 @@ import {useMediaQuery} from '../../../../../hooks/useMediaQuery';
 import {SCREEN_SIZE_MD} from '../../../../../constants';
 import {ILeadEntryScore} from '../../../../../../@types/api';
 import CompanyEVTable from './CompanyEVTable';
+import {IResultScreenCopy} from "../../../domain";
 
 
 const t = getTranslateByScope('result');
 const tForm = getTranslateByScope('form');
-const tEVTable = getTranslateByScope('companyEVTable');
 
 export const LowLeadFlow: React.FC<{
   score: ILeadEntryScore;
-  resultScreenCopy: any;
+  resultScreenCopy: IResultScreenCopy;
 }> = ({ score, resultScreenCopy }) => {
   const { syncCurrentAnswersToSalesforce } = useSalesforceAnswerSync();
   const { syncLeadToSalesforce } = useSalesforceLeadSync();
@@ -132,9 +132,13 @@ export const LowLeadFlow: React.FC<{
     <AnimateIn>
       {!isFormSubmitted ? (
         <>
-          <div className={styles.evTableResultsTitle}>{tEVTable('results')}</div>
-          <div className={styles.evTableResultsSubTitle}>{tEVTable('submitFormToSeeResults')}</div>
-          <CompanyEVTable blurred={true} />
+          <div className={styles.evTableResultsTitle}>
+            {resultScreenCopy.scenarioEvaluationLabels?.results || 'Results'}
+          </div>
+          <div className={styles.evTableResultsSubTitle}>
+            {resultScreenCopy.scenarioEvaluationLabels?.submitFormToSeeResults || 'Fill out the form to see the result'}
+          </div>
+          <CompanyEVTable blurred={true} resultScreenCopy={resultScreenCopy} />
           <QuestionText
             title={questionTitle.title}
             description={questionTitle.tooltipDescription}
@@ -295,8 +299,10 @@ export const LowLeadFlow: React.FC<{
       ) : (
         <div>
           <h3 id="result-message" className={styles.successMessage} ref={successMessageRef}>{formFields.successMessage}</h3>
-          <div className={styles.evTableResultsTitle} style={{margin: '2rem 0'}}>{tEVTable('scenariosEvaluations')}</div>
-          <CompanyEVTable score={score} />
+          <div className={styles.evTableResultsTitle} style={{margin: '2rem 0'}}>
+            {resultScreenCopy.scenarioEvaluationLabels?.scenariosEvaluations}
+          </div>
+          <CompanyEVTable score={score} resultScreenCopy={resultScreenCopy}/>
         </div>
       )}
     </AnimateIn>
