@@ -130,17 +130,6 @@
       "3": "Just curiosity"
     }
   },
-  "companyEVTable": {
-    "results": "RESULTS",
-    "scenariosEvaluations": "Scenario Evaluations",
-    "scenario": "Scenario",
-    "value": "Enterprise Value",
-    "evaluation": "Evaluation",
-    "worst": "Bad",
-    "average": "Average",
-    "best": "Good",
-    "submitFormToSeeResults": "Scenario evaluations have been calculated - fill out the form to see the result!"
-  },
   "form": {
     "loading": "Loading..."
   },

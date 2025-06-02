@@ -198,7 +198,7 @@ export enum TQuestionnaireResultPageScenario {
 }
 
 export interface Questionnaire {
-  resultScreenCopy: any;
+  resultScreenCopy?: IResultScreenCopy;
   result?: {
     greenCheckmarkTexts?: string[];
     authors?: Authors,
@@ -231,4 +231,48 @@ export interface Questionnaire {
   _id: string;
   _lang: string;
   variantOfTheResultPage: 'compact' | 'default';
+}
+
+export interface IResultScreenCopy {
+  formFields: {
+    buttonText?: string;
+    checkBoxLink?: string;
+    checkBoxSecond?: string;
+    checkBoxThird?: string;
+    checkBoxfirst?: string;
+    companyLabel?: string;
+    companyRequiredError?: string;
+    emailInvalidError?: string;
+    emailLabel?: string;
+    emailRequiredError?: string;
+    nameLabel?: string;
+    nameRequiredError?: string;
+    phoneNumberLabel?: string;
+    phoneNumberRequiredError?: string;
+    successMessage?: string;
+    isNewsLetterCheckboxRequired: boolean;
+    isCompanyFieldRequired: boolean;
+    isPhoneNumberFieldRequired: boolean;
+    newsLetterCheckboxText?: string;
+  };
+  calendlyPrompt?: string;
+  questionTitle: {
+    category?: string;
+    title?: string;
+    tooltipDescription?: string;
+    tooltipPrompt?: string;
+  };
+  scenarioEvaluationLabels?: IScenarioEvaluationLabels;
+}
+
+export interface IScenarioEvaluationLabels {
+  results?: string;
+  scenariosEvaluations?: string;
+  scenario?: string;
+  value?: string;
+  evaluation?: string;
+  worst?: string;
+  average?: string;
+  good?: string;
+  submitFormToSeeResults?: string;
 }
