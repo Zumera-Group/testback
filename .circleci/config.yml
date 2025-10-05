@@ -28,7 +28,7 @@ jobs:
       - run:
           name: Deploy Staging
           command: |
-            git push https://heroku:$HEROKU_API_KEY@git.heroku.com/zumera-frontend-staging.git master
+            git push https://heroku:$HEROKU_API_KEY@git.heroku.com/zumera-frontend-staging.git main:master
   deploy-production:
     machine:
       enabled: true
@@ -38,7 +38,7 @@ jobs:
       - run:
           name: Deploy Production
           command: |
-            git push https://heroku:$HEROKU_API_KEY@git.heroku.com/zumera-frontend-prod.git master
+            git push https://heroku:$HEROKU_API_KEY@git.heroku.com/zumera-frontend-prod.git main:master
 
 workflows:
   version: 2
@@ -50,7 +50,7 @@ workflows:
             - build
           filters:
             branches:
-              only: master
+              only: main
       - production-approval:
           type: approval
           requires:
@@ -60,4 +60,4 @@ workflows:
             - production-approval
           filters:
             branches:
-              only: master
+              only: main
