@@ -261,3 +261,4 @@ Important: Follow the naming consistency.
 
 4. Map class module to component her elib/shared-domain/page/presentation/contentModules/index.tsx
 5. Create the component
+# new
